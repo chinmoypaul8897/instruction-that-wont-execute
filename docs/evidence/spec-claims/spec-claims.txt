@@ -1,0 +1,107 @@
+============================================================================================
+CONTEXT.md - EVERY NUMERAL, WITH AN EVIDENCE PATH OR AN HONEST ABSENCE
+============================================================================================
+
+  hard rule 14: a claim from data ships its generating script AND its output.
+  This inventory sorts CONTEXT.md's own measurements into three piles.
+
+  REPRODUCES      25
+  DIFFERS          2
+  NOT-IN-REPO     18
+
+============================================================================================
+DIFFERS  (2)  -  THESE DO NOT MATCH THE COMMITTED DATA. Each is a finding.
+============================================================================================
+
+  sec           claim                                                   CONTEXT.md    re-derived
+  §8 CH-01      **distinct FR DOCUMENTS** - section 8 labels this               78            70
+                   ^ MISLABELLED IN THE SPEC. 78 is the number of distinct CITATION STRINGS; the 85 citations resolve to 70 distinct FR documents. Section 8 says the figure 'bounds the count-matched pair yield', and the real bound is 70. QUESTIONS.md Q18
+  §8 v1.1       "only ~42% of AMDPARs name a section"                         0.42        0.2964
+                   ^ Q14(b): stale in three ways. v11 measures 0.2964
+
+============================================================================================
+REPRODUCES  (25)  -  Re-derived here from committed artefacts, and they match.
+============================================================================================
+
+  sec           claim                                                   CONTEXT.md    re-derived
+  §8 CH-01      `<EDNOTE>` extracted                                          2428          2428
+  §8 CH-01      codification-defect notes                                      107           107
+  §8 CH-01      ... section-level                                               86            86
+  §8 CH-01      ... with a resolvable FR citation (the pool gate)               85            85
+  §8 CH-01      spread over titles (of the 85-item pool)                        25            25
+                   ^ the first version of this script counted titles over all 107 defect notes and got 28, and reported CONTEXT.md as wrong. The SCRIPT was wrong: the row sits in the pool block and 25 is right for the pool
+  §8 CH-01      distinct FR CITATION STRINGS in the pool                        78            78
+  §8 reference  total EDNOTEs over 9 reference titles                          903           903
+  §8 reference  codification-defect notes                                       44            44
+  §8 reference  carry their own FR citation                                     44            44
+  §8 reference  section-level (notes that NAME a section)                       38            38
+  §8 reference  section-level (notes that SIT INSIDE one)                       36            36
+  §8 gate       completeness, spec-literal                                   0.508         0.508
+  §8 gate       completeness, extended                                      0.6643        0.6643
+  §8 gate       attribution, spec-literal                                   0.7613        0.7613
+  §8 gate       attribution, extended                                       0.9865        0.9865
+  §8 gate       total AMDPAR elements                                         8752          8752
+  §8 gate       attributed elements, extended (the 6,663 control b            6663          6663
+  §8 v1.1       `part_mismatch` elements, case-insensitive                     699           699
+  §8 v1.1       `part_mismatch` under v1.1 (CH-03 re-measurement)              115           115
+                   ^ not in CONTEXT.md; published by CH-03
+  §8 leakage    `<EDNOTE>` in CFR-2024-title40-vol5                             28            28
+  §8 leakage    ... of which inside a `<SECTION>`                               26            26
+  §8 leakage    `<EFFDNOTP>` inside a `<SECTION>`                                2             2
+  §8 leakage    `<CITA>` total                                                 255           255
+  §8 leakage    ... of which inside a `<SECTION>`                              252           252
+  §8 leakage    volume size in bytes                                       5524321       5524321
+
+============================================================================================
+NOT-IN-REPO  (18)  -  Cannot be re-derived from anything committed. Recorded, not hidden.
+============================================================================================
+
+  sec           claim                                                   CONTEXT.md    re-derived
+  §8 v1.1       part-consistent attribution 0.9066                          0.9066             -
+                   ^ computed at SPEC-FIX-1 under the case-INsensitive detector; that script's output is committed but the figure is not recomputed here
+  §3            pilot accuracy 0.545                                         0.545             -
+                   ^ pre-competition pilot, n=11
+  §3            pilot accuracy 0.5855                                       0.5855             -
+                   ^ pre-competition pilot, n=11
+  §3            pilot accuracy 0.52                                           0.52             -
+                   ^ pre-competition pilot, n=11
+  §3            retrieval gain +27.3 pp                                       27.3             -
+                   ^ pilot figure; CH-08 re-derives it
+  §6            state-carry sensitivity 833/1,984 = 42.0%                     0.42             -
+                   ^ pilot pool; the 1,984-item corpus is not committed
+  §6            state-carry on the pilot pool 31/82                             31             -
+                   ^ pilot pool, not committed
+  §6            26/33 and 35/42 items with no extractable anchor                26             -
+                   ^ pilot pool, not committed
+  §7            n_instructions pinned at 0.5000                                0.5             -
+                   ^ pilot trivial-attack measurement; CH-04 re-derives on the real pool
+  §7            best of 26 features 0.5934 at p = 0.185                     0.5934             -
+                   ^ pilot; CH-04 measured 0.6098 at within-pair p = 0.2355 on the real pool
+  §9            16 defective items in the 82-item pilot pool                    16             -
+                   ^ pilot pool
+  §10           redesignation collision 26/1,984 = 1.31%                    0.0131             -
+                   ^ pilot; CONTEXT.md already flags it as PROVISIONAL and non-reproducing
+  §10           independent naive recount 61/1,984 = 3.07%                  0.0307             -
+                   ^ ditto
+  §10           0/68 labelled items contain a redesignation instru               0             -
+                   ^ pilot pool
+  §11           IETF errata Rejected recall +12.0 pp                          12.0             -
+                   ^ second corpus, not in this repository
+  §11           IETF errata Verified recall -4.0 pp                           -4.0             -
+                   ^ ditto
+  §11           IETF three-class policy -16.7 pp                             -16.7             -
+                   ^ ditto
+  §11           IETF net +4.0 pp at p = 0.64                                  0.64             -
+                   ^ ditto
+
+============================================================================================
+HOW TO READ THE NOT-IN-REPO PILE
+============================================================================================
+
+  It is not a list of things that are wrong. It is a list of things a reader
+  cannot check from this repository, which is a different and more useful
+  statement than silence. CONTEXT.md section 3 already warns that its pilot
+  figures 'trace to no committed artifact on this machine' and must not appear
+  in the README, the Description or the video until CH-08 re-derives them.
+  This turns that warning into a per-number inventory.
+

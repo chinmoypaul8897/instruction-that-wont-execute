@@ -1,0 +1,369 @@
+{
+  "claims": [
+    {
+      "claim": "`<EDNOTE>` extracted",
+      "note": "",
+      "rederived": 2428,
+      "section": "\u00a78 CH-01",
+      "spec_value": 2428,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "codification-defect notes",
+      "note": "",
+      "rederived": 107,
+      "section": "\u00a78 CH-01",
+      "spec_value": 107,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "... section-level",
+      "note": "",
+      "rederived": 86,
+      "section": "\u00a78 CH-01",
+      "spec_value": 86,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "... with a resolvable FR citation (the pool gate)",
+      "note": "",
+      "rederived": 85,
+      "section": "\u00a78 CH-01",
+      "spec_value": 85,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "spread over titles (of the 85-item pool)",
+      "note": "the first version of this script counted titles over all 107 defect notes and got 28, and reported CONTEXT.md as wrong. The SCRIPT was wrong: the row sits in the pool block and 25 is right for the pool",
+      "rederived": 25,
+      "section": "\u00a78 CH-01",
+      "spec_value": 25,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "distinct FR CITATION STRINGS in the pool",
+      "note": "",
+      "rederived": 78,
+      "section": "\u00a78 CH-01",
+      "spec_value": 78,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "**distinct FR DOCUMENTS** - section 8 labels this 78",
+      "note": "MISLABELLED IN THE SPEC. 78 is the number of distinct CITATION STRINGS; the 85 citations resolve to 70 distinct FR documents. Section 8 says the figure 'bounds the count-matched pair yield', and the real bound is 70. QUESTIONS.md Q18",
+      "rederived": 70,
+      "section": "\u00a78 CH-01",
+      "spec_value": 78,
+      "status": "DIFFERS"
+    },
+    {
+      "claim": "total EDNOTEs over 9 reference titles",
+      "note": "",
+      "rederived": 903,
+      "section": "\u00a78 reference",
+      "spec_value": 903,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "codification-defect notes",
+      "note": "",
+      "rederived": 44,
+      "section": "\u00a78 reference",
+      "spec_value": 44,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "carry their own FR citation",
+      "note": "",
+      "rederived": 44,
+      "section": "\u00a78 reference",
+      "spec_value": 44,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "section-level (notes that NAME a section)",
+      "note": "",
+      "rederived": 38,
+      "section": "\u00a78 reference",
+      "spec_value": 38,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "section-level (notes that SIT INSIDE one)",
+      "note": "",
+      "rederived": 36,
+      "section": "\u00a78 reference",
+      "spec_value": 36,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "completeness, spec-literal",
+      "note": "",
+      "rederived": 0.508,
+      "section": "\u00a78 gate",
+      "spec_value": 0.508,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "completeness, extended",
+      "note": "",
+      "rederived": 0.6643,
+      "section": "\u00a78 gate",
+      "spec_value": 0.6643,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "attribution, spec-literal",
+      "note": "",
+      "rederived": 0.7613,
+      "section": "\u00a78 gate",
+      "spec_value": 0.7613,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "attribution, extended",
+      "note": "",
+      "rederived": 0.9865,
+      "section": "\u00a78 gate",
+      "spec_value": 0.9865,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "total AMDPAR elements",
+      "note": "",
+      "rederived": 8752,
+      "section": "\u00a78 gate",
+      "spec_value": 8752,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "attributed elements, extended (the 6,663 control base)",
+      "note": "",
+      "rederived": 6663,
+      "section": "\u00a78 gate",
+      "spec_value": 6663,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "part-consistent attribution 0.9066",
+      "note": "computed at SPEC-FIX-1 under the case-INsensitive detector; that script's output is committed but the figure is not recomputed here",
+      "rederived": null,
+      "section": "\u00a78 v1.1",
+      "spec_value": 0.9066,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "`part_mismatch` elements, case-insensitive",
+      "note": "",
+      "rederived": 699,
+      "section": "\u00a78 v1.1",
+      "spec_value": 699,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "`part_mismatch` under v1.1 (CH-03 re-measurement)",
+      "note": "not in CONTEXT.md; published by CH-03",
+      "rederived": 115,
+      "section": "\u00a78 v1.1",
+      "spec_value": 115,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "\"only ~42% of AMDPARs name a section\"",
+      "note": "Q14(b): stale in three ways. v11 measures 0.2964",
+      "rederived": 0.2964,
+      "section": "\u00a78 v1.1",
+      "spec_value": 0.42,
+      "status": "DIFFERS"
+    },
+    {
+      "claim": "`<EDNOTE>` in CFR-2024-title40-vol5",
+      "note": "",
+      "rederived": 28,
+      "section": "\u00a78 leakage",
+      "spec_value": 28,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "... of which inside a `<SECTION>`",
+      "note": "",
+      "rederived": 26,
+      "section": "\u00a78 leakage",
+      "spec_value": 26,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "`<EFFDNOTP>` inside a `<SECTION>`",
+      "note": "",
+      "rederived": 2,
+      "section": "\u00a78 leakage",
+      "spec_value": 2,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "`<CITA>` total",
+      "note": "",
+      "rederived": 255,
+      "section": "\u00a78 leakage",
+      "spec_value": 255,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "... of which inside a `<SECTION>`",
+      "note": "",
+      "rederived": 252,
+      "section": "\u00a78 leakage",
+      "spec_value": 252,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "volume size in bytes",
+      "note": "",
+      "rederived": 5524321,
+      "section": "\u00a78 leakage",
+      "spec_value": 5524321,
+      "status": "REPRODUCES"
+    },
+    {
+      "claim": "pilot accuracy 0.545",
+      "note": "pre-competition pilot, n=11",
+      "rederived": null,
+      "section": "\u00a73",
+      "spec_value": 0.545,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "pilot accuracy 0.5855",
+      "note": "pre-competition pilot, n=11",
+      "rederived": null,
+      "section": "\u00a73",
+      "spec_value": 0.5855,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "pilot accuracy 0.52",
+      "note": "pre-competition pilot, n=11",
+      "rederived": null,
+      "section": "\u00a73",
+      "spec_value": 0.52,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "retrieval gain +27.3 pp",
+      "note": "pilot figure; CH-08 re-derives it",
+      "rederived": null,
+      "section": "\u00a73",
+      "spec_value": 27.3,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "state-carry sensitivity 833/1,984 = 42.0%",
+      "note": "pilot pool; the 1,984-item corpus is not committed",
+      "rederived": null,
+      "section": "\u00a76",
+      "spec_value": 0.42,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "state-carry on the pilot pool 31/82",
+      "note": "pilot pool, not committed",
+      "rederived": null,
+      "section": "\u00a76",
+      "spec_value": 31,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "26/33 and 35/42 items with no extractable anchor",
+      "note": "pilot pool, not committed",
+      "rederived": null,
+      "section": "\u00a76",
+      "spec_value": 26,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "n_instructions pinned at 0.5000",
+      "note": "pilot trivial-attack measurement; CH-04 re-derives on the real pool",
+      "rederived": null,
+      "section": "\u00a77",
+      "spec_value": 0.5,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "best of 26 features 0.5934 at p = 0.185",
+      "note": "pilot; CH-04 measured 0.6098 at within-pair p = 0.2355 on the real pool",
+      "rederived": null,
+      "section": "\u00a77",
+      "spec_value": 0.5934,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "16 defective items in the 82-item pilot pool",
+      "note": "pilot pool",
+      "rederived": null,
+      "section": "\u00a79",
+      "spec_value": 16,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "redesignation collision 26/1,984 = 1.31%",
+      "note": "pilot; CONTEXT.md already flags it as PROVISIONAL and non-reproducing",
+      "rederived": null,
+      "section": "\u00a710",
+      "spec_value": 0.0131,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "independent naive recount 61/1,984 = 3.07%",
+      "note": "ditto",
+      "rederived": null,
+      "section": "\u00a710",
+      "spec_value": 0.0307,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "0/68 labelled items contain a redesignation instruction",
+      "note": "pilot pool",
+      "rederived": null,
+      "section": "\u00a710",
+      "spec_value": 0,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "IETF errata Rejected recall +12.0 pp",
+      "note": "second corpus, not in this repository",
+      "rederived": null,
+      "section": "\u00a711",
+      "spec_value": 12.0,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "IETF errata Verified recall -4.0 pp",
+      "note": "ditto",
+      "rederived": null,
+      "section": "\u00a711",
+      "spec_value": -4.0,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "IETF three-class policy -16.7 pp",
+      "note": "ditto",
+      "rederived": null,
+      "section": "\u00a711",
+      "spec_value": -16.7,
+      "status": "NOT-IN-REPO"
+    },
+    {
+      "claim": "IETF net +4.0 pp at p = 0.64",
+      "note": "ditto",
+      "rederived": null,
+      "section": "\u00a711",
+      "spec_value": 0.64,
+      "status": "NOT-IN-REPO"
+    }
+  ],
+  "tally": {
+    "DIFFERS": 2,
+    "NOT-IN-REPO": 18,
+    "REPRODUCES": 25
+  }
+}

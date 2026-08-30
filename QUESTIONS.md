@@ -924,3 +924,56 @@ above is the evidence. It is recorded here rather than done. If it is adopted, C
 re-runs and n moves from 76 to 80; **the two excluded pairs are named in
 `data/evalset/leakage.json` so the delta is checkable rather than asserted**:
 `2015-01571 / 1942.5` and `2020-07837 / 3.111`.
+
+---
+
+## Q18 - CONTEXT.md section 8's "Distinct FR documents | 78" is a count of CITATIONS, not documents, and the row says it bounds the pair yield
+Raised: CH-03 backlog (evidence migration), 2026-08-31. Status: **CLASS A - recorded,
+NOT acted on.** `CONTEXT.md` is LAW and protected. Evidence:
+`docs/evidence/spec-claims/spec-claims.txt`, script beside it.
+
+`CONTEXT.md` section 8's MEASURED table reads:
+
+> | Distinct FR documents | **78 - this bounds the count-matched pair yield** |
+
+**Re-derived from the committed artefacts, both readings:**
+
+| reading | value |
+|---|---:|
+| distinct **FR citation strings** in the 85-item pool | **78** |
+| distinct **FR documents** the 85 citations resolve to (`data/amdpars/documents.json`) | **70** |
+
+**78 is the citation count.** Eight of the 85 citations share an FR document with
+another citation - two editorial notes on different sections of the same rule cite the
+same document at different page numbers, so they are distinct citation *strings* and
+one document.
+
+**Why this is worth a Class A entry rather than a footnote.** The row does not merely
+report a number, it makes a claim about what the number *does*: it *"bounds the
+count-matched pair yield"*. A negative must come from **the same FR document** as its
+positive, so the quantity that bounds the yield is the **document** count, **70**, not
+the citation count, 78. The sentence attaches the right claim to the wrong number.
+
+**It changed no outcome.** CH-02's pair-yield measurement and CH-03's eval set were
+both built from `documents.json` - i.e. from the correct 70 - so no downstream figure
+inherits the error. The defect is in the spec's prose, not in the pipeline.
+
+**What is wanted from the architect:** correct the row to `70` and either drop `78` or
+relabel it as *distinct FR citation strings*. Both numbers are worth keeping - the gap
+between them is exactly the "two notes, one rule" case, which is a real property of
+the corpus.
+
+**Method note, because it is the reason this was found at all.** The
+`verify_spec_claims.py` inventory re-derives every numeral in `CONTEXT.md` that can be
+re-derived and sorts the rest into an explicit NOT-IN-REPO pile. Its **first run
+reported a second discrepancy that turned out to be the script's own fault** - it
+counted "spread over titles" across all 107 defect notes and got 28 against the spec's
+25, when the row sits in the pool block and 25 is right for the 85-item pool. That is
+recorded in the script rather than quietly deleted: **an inventory that flags the spec
+as wrong is itself a claim, and it needs checking in both directions.**
+
+**Current tally: 25 REPRODUCES, 2 DIFFERS (this and Q14(b)'s stale "~42%"), 18
+NOT-IN-REPO.** The NOT-IN-REPO pile is not a list of errors; it is a list of figures a
+reader cannot check from this repository - almost all of them the pre-competition
+pilot numbers that section 3 already marks *provenance-unverified*. Publishing the
+inventory turns that warning into something a judge can audit line by line.
