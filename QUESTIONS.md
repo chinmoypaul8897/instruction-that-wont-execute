@@ -382,8 +382,10 @@ silently repair them. Resetting at a part boundary is a one-line change and woul
 improvement, but it is a change to a pre-registered rule after the measurement, so it is
 the architect's call, not a build session's.
 ## Q11 - SPEC-FIX-1's metric correction is REFUSED; what would make it legitimate
-Raised: SPEC-FIX-1, 2026-08-31. Status: REFUSED BY THE JUDGING SESSION, which the prompt
-authorised. **A decision is wanted: re-issue with the four changes below, or overrule.**
+Raised: SPEC-FIX-1, 2026-08-31. Status: **RULED BY THE ARCHITECT, and the refusal is
+ACCEPTED IN FULL.** The ruling is recorded verbatim at the end of this entry and the
+consequent spec edits were applied by SPEC-FIX-2. Nothing below this line was rewritten
+after the ruling: the case as the refusing session put it stands exactly as it stood.
 Full reasoning and evidence: `docs/evidence/spec-fix-1/verdict.md`, committed at `72b95e1`
 **before** any other work in the chunk, so the order is provable from git.
 
@@ -460,6 +462,74 @@ has produced for its own thesis that a green number is not evidence of correctne
 **What was NOT done, so the state is unambiguous:** `CONTEXT.md` is untouched - no 2a, no
 2b, no 2c, no v1.1 bump, no section 13 row. `data/` was read-only. The attributor was not
 re-run. `src/` and `tests/` were not opened.
+
+### THE RULING - recorded verbatim by SPEC-FIX-2, 2026-08-31
+
+Transcribed character-for-character from `prompts/SPEC-FIX-2.md` (now tracked, so the
+transcription is checkable against its source). The date inside the block is the
+architect's own and is reproduced unaltered; the transcription was made on 2026-08-31.
+
+```
+Q11 - RULED by ARCHITECT, 2026-08-30.
+
+The refusal is ACCEPTED IN FULL. The proposed metric was not adopted and will
+not be re-proposed. SPEC-FIX-1's sabotage control is decisive: an attributor
+that places 6,395 of 6,663 attributed elements on a DIFFERENT section scores
+the identical 0.7613, so attributed/total cannot distinguish a correct
+attributor from a 96%-wrong one. The architect's claim that it "answers the
+question the gate exists to answer" was factually false, and was disproved by
+running code rather than argued down.
+
+Three further findings are accepted without qualification:
+  (a) the proposed pass required BOTH post-hoc edits - 2a alone 0.7613, 2c
+      alone 0.6643, together 0.9865. That is the shape of a rescue.
+  (b) golden G1, chosen by CH-02 BECAUSE it demonstrates mis-attribution,
+      passes the proposed gate at 0.9286.
+  (c) the proposal adopted the +22.5pt correction and omitted the -8.0pt one
+      that CH-02 had already called an improvement. Selecting the fix that
+      helps and omitting the fix that hurts is the defect this project exists
+      to detect, and the architect committed it.
+
+On "would this have been raised at 0.92" - no. The diagnosis pre-existed the
+number (goldens.md P6, committed 25 minutes before the attributor). The metric
+change did not. Nothing was learned between the spec and the correction except
+the number.
+
+WHAT SURVIVES: only 46 of 2,913 unparsed elements (1.6%) are our defect. Parse
+shape is a property of Federal Register drafting, not of our attributor, and
+does not belong in an attributor's gate. That half of the diagnosis stands and
+is recorded - but it does NOT license a metric change now, because no metric
+that discriminates was available at a passing threshold. The gate stays as it
+is and stays FAILED.
+
+CONSEQUENCE: CH-02 remains in the "< 0.80 - documented failure" branch. The
+failure is published in the README, not absorbed. CH-03 proceeds on the
+per-document restriction that was pre-registered BEFORE any of this - see
+plan.md CH-02's fallback - which is a rescue by nobody's definition because it
+was written before the number existed.
+```
+
+**What SPEC-FIX-2 applied under it, 2026-08-31 - and no number moved.**
+
+1. `CONTEXT.md` section 8 now **records the failure instead of fixing it**: global
+   completeness 0.5080 spec-literal and 0.6643 extended against a 0.90 gate, and the
+   0.7613 / 0.9865 attribution figure named as **tested and rejected** as a replacement
+   gate, with the sabotage control as the reason. The definition, the threshold and the
+   metric are untouched.
+2. Section 8 step 3's detector now recognises the **word form** (`Section 1.907 is
+   amended by`) beside the sign form, matched **case-sensitively** per Q12(c). Adopted
+   because it is justified independently of any number: under the sign-only detector ten
+   documents - **1,910 elements**, including the two largest FAR rules in the corpus -
+   attribute to nothing at all.
+3. Section 8 now **resets `current_section` at a `REGTEXT` part boundary**. Adopted
+   although it **costs 8 points**, because the fix that raises the number and the fix
+   that lowers it are ruled on together or the ruling is made with the scoreboard
+   visible.
+4. Q13's housekeeping is done; see Q13.
+
+Changes 2 and 3 alter the spec **for CH-03 onward**. The attributor was **not** re-run,
+no committed measurement changed, and CH-02 stays in the `< 0.80` documented-failure
+branch.
 
 ## Q12 - Q9's and Q10's own numbers overstate the attributor's error; and the word-form detector over-detects
 Raised: SPEC-FIX-1, 2026-08-31. Status: MEASURED AND RECORDED, NOT CORRECTED IN PLACE.
