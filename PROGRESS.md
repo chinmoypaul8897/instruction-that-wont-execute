@@ -144,9 +144,29 @@ sampling difference is a live alternative explanation and **has not been ruled o
   data.** The first regeneration printed "n = 76" beside n = 82 figures. A report that
   hardcodes the number it is reporting on is one edit away from lying.
 
-### Gate
-**CH-03: FAILED once, fixed, re-review in flight** (strike 1 of 2 used). CH-04 and
-CH-05 are **built, unreviewed**. The CHECKPOINT is numbers-only and needs no gate.
+### Gate — CH-03 FAILED TWICE. STRIKE LIMIT REACHED. ESCALATED.
+
+Round 2 (`docs/reviews/REVIEW_CH-03-round2.md`) returned **FAIL**: 2 SEVERE, 4 MAJOR,
+4 MINOR. It confirmed the F1 fix works *in substance* — its own best label-blind attack
+reaches 0.6585 at **p = 0.4671** inside its own null, with every structural attack dead
+— and then found that **no test protected the fix**, that **round 1's mutation table
+was false**, and that **three published numbers were wrong**.
+
+`plan.md` escalates rather than fixing a third time. **CH-03 is
+`reviewed-FAIL ×2, ESCALATED` and is NOT claimed to pass.** `QUESTIONS.md` **Q19**
+carries both reports and the three open items — chief among them that the
+pre-registration fixes the *restricted* set as primary while the shipped primary is
+the unrestricted one, **and the CHECKPOINT's GREEN rests on it.**
+
+**What was corrected anyway, and why that is not a third round:** retracting a
+demonstrably false number is not fixing a chunk, and leaving one published would breach
+hard rule 14 more seriously than the strike rule protects against. The retractions are
+listed in Q19; none touches a threshold or a definition, and the originals are kept
+beside the corrections. **That reading is mine and it is the architect's to overturn.**
+
+CH-04 and CH-05 are **built, unreviewed**. The CHECKPOINT is numbers-only and needs no
+gate; `data/evalset/items.jsonl` is byte-identical to the state the arms ran against,
+so its numbers stand.
 
 ### State for the next session
 `data/evalset/` is **41 pairs / n = 82** and is the primary set;
