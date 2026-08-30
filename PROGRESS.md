@@ -11,6 +11,134 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## CH-03 · 2026-08-31 · NIGHT RUN (unattended) · Claude Code, `claude-opus-5` · GATE: **FULL + mutation** · **BUILT, review pending**
+
+### Scope
+Point-in-time CFR text, the leakage strips, the eval set, the freeze — plus 1a, the
+re-measurement of the AMDPAR attributor under `CONTEXT.md` **v1.1** that `QUESTIONS.md`
+Q14 deferred to this chunk.
+
+**The pre-registration and the goldens were committed BEFORE the code** — `c685e80`
+(G-A..G-F) and `f2e8a37` (G-G). `src/attribute_v11.py`, `src/cfr_pit.py`,
+`src/eval_set.py`, `src/score.py` and `src/bscript.py` exist at neither SHA.
+
+### Result
+
+**38 pairs, n = 76**, against a target of 42. That is the pre-registered **[30, 42)**
+branch: proceed, report the real n, state the effect size the sample can and cannot
+detect. At n = 76 the smallest all-one-way discordant count clearing α = 0.05 on an
+exact McNemar is **6** — a **floor of 7.9 pp**, not a power calculation.
+
+### The thing this chunk exists to do, and it fired
+
+**The leakage test FAILS on unstripped input**, on real govinfo bytes, before it is
+accepted on stripped input. `40 CFR 52.2320` unstripped fires rule (b) on its own
+citation `89 FR 54360` and rule (c) on `Effective Date Note` and `set forth as
+follows`; stripped, zero violations. Both states are committed and both are tests.
+
+The stripper was also made **falsifiable**: point it at ECFR element names and the
+known-positive assertion RAISES. Without that, a zero from the strip counter would be
+an untested assertion rather than a measurement.
+
+**8 of 76 items (10.5%) would have contained the answer in their UNSTRIPPED text.**
+`CONTEXT.md` §8 says *"the per-item rate is UNKNOWN and measuring it is part of the
+fix."* It is now measured. `plan.md` CH-04 calls this "itself a publishable result
+about the corpus".
+
+### Q8's trap fired for real — and a one-rule test would have missed it
+
+`CONTEXT.md` §8 names `<EFFDNOTP>`. The corpus **also** uses `<EFFDNOT>`. In
+`CFR-2015-title7-vol13.xml` the strip counter printed `EFFDNOTP: 0` — **true for the
+tag, false for the corpus**: `<EFFDNOTP>` occurs zero times there and `<EFFDNOT>`
+occurs four, carrying the FR citation, the designations, *"set forth as follows"* and
+a `<REVTXT>` reprint of the pending amendment. Census over 68 volumes: **379
+`<EFFDNOT>` in 26 volumes**.
+
+`plan.md`'s leakage test has three rules and not one. Rule (a) — element names — is
+blind to `<EFFDNOT>`. Rule (c) — the literals — is not, and all 379 carry one. **The
+test caught it and excluded two pairs.** That is the reason the test was specified with
+three rules, and it is the first time in this project that the redundancy has paid.
+
+**The stripper was NOT extended.** It is a five-character edit that would have taken n
+from 76 to 80. Class A, `QUESTIONS.md` Q17, and the direction is the point: a post-hoc
+change that raises n is the one this project refuses.
+
+### Decisions
+
+- **Class A — none taken. Three raised.**
+  - **Q15.** v1.1's case-**sensitive** word form re-creates the failure it was adopted
+    to fix: §8 justifies the word form because ten documents / 1,910 elements attribute
+    to nothing, and under v1.1 five documents / **1,655** elements attribute to nothing
+    — including **both FAR rules §8 names by number**. §8 quotes *"Section 52.204-8 is
+    amended"*; that string occurs **zero** times in the corpus, and the real bytes are
+    *"Amend section 52.204-8 by—"*, lowercase. Of Q12(c)'s 683 lowercase-only namers,
+    **617 (90.3%)** are in the two FAR rules where lowercase detection is **correct**.
+    **The spec was followed, not corrected.** 6 positives drop on a named rung.
+  - **Q16.** `plan.md` scopes the ≥ 0.90 per-document floor to the **[0.80, 0.90)**
+    branch; CH-02 is below 0.80; Q11's ruling points at it anyway. Applied, it leaves
+    **2 of 70 documents and ONE pair**. Reading (ii) is primary; reading (i) is **built
+    and committed** at `data/evalset-restricted/` so the architect flips it with one
+    flag. Q16 states plainly that the option taken is also the one with the larger n,
+    and puts the three arguments against that in the entry rather than burying them.
+  - **Q17.** `<EFFDNOT>`, above.
+- **Class B — the eval set is built on `v11` and on nothing else.** `CONTEXT.md` §13
+  says v1.1's changes bind "for CH-03 onward". Four detector configurations are
+  measured so a reader can see which change moved what, but only `v11` builds the set.
+- **Class B — each negative is consumed on first use.** Golden G-D, fixed before any
+  count existed. Reusing a sibling would put the same section in the set twice.
+- **Class B — `_get` sends `Accept: application/json`.** Without it govinfo's bulkdata
+  JSON endpoint serves an HTML error page. The first build failed on this — **loudly,
+  as 50 items on a named ladder rung**, not as an empty corpus. The rung is why it
+  took one run to find rather than a review.
+- **Class C — the `.gitignore` scratch patterns are anchored to the repo root.**
+  Unanchored, `probe/` also matched `docs/trajectories/probe/`, so a directory of
+  **required** agent trajectories was silently untrackable. An ignore rule that
+  quietly swallows evidence is the same failure as a strip counter looking for the
+  wrong tag.
+
+### The v1.1 re-measurement — Q14 closed
+
+| config | completeness | attribution | unattributable | part_mismatch |
+|---|---:|---:|---:|---:|
+| `spec_literal` | 0.5080 | 0.7613 | 2,089 | 671 |
+| `extended_ci` | 0.6643 | 0.9865 | 118 | 699 |
+| `extended_cs` | 0.5385 | 0.8010 | 1,742 | 622 |
+| **`v11`** | **0.5340** | **0.7428** | **2,251** | **115** |
+
+**The pre-registered control passes:** `spec_literal` and `extended_ci` reproduce
+CH-02's committed figures on every field, not merely to four decimals. Case-sensitivity
+alone costs **12.58 points**; the part reset costs a further **0.45** — not the 8.0
+measured case-insensitively. v1.1 predicted that cost would differ; it differs by
+**17×**. `part_mismatch` falls **699 → 115**.
+
+**Q14(b):** §8's "~42% of AMDPARs name a section" measures **0.2503 / 0.3744 / 0.2964**
+under the three readings. The architect has a measured replacement for the estimate.
+
+**CH-02's gate outcome is unchanged and could not have changed.** 0.5340 < 0.80.
+
+### Tests
+121 → **232 green**. New: `test_attribute_v11.py` (17), `test_cfr_pit.py` (35),
+`test_eval_set.py` (21), `test_score.py` (38). Every expected value transcribed from a
+goldens file committed before the module existed.
+
+**ERRATA E-1** in `docs/evidence/ch04-scorer/goldens.md`: one test asserted `p = 1.0`
+for the within-pair null where the hand trace gives `0.5`. **The test was wrong and the
+code was right.** The test was corrected, the implementation was not touched, and the
+old golden was not edited out.
+
+### Gate
+**FULL + mutation. Not self-certified.** An independent reviewer with zero shared
+context was spawned at `067a9d9` and its verdict lands in
+`docs/reviews/REVIEW_CH-03.md`.
+
+### State for the next session
+`data/evalset/` is the primary set (38 pairs / n = 76) and `data/evalset-restricted/`
+is Q16 reading (i) (1 pair / n = 2). Both verify from their manifests;
+`refetch.py --verify-only` needs no network. **Read Q15, Q16 and Q17 before quoting any
+CH-03 number** — all three are open Class A items for the architect.
+
+---
+
 ## SPEC-FIX-2 · 2026-08-31 · BUILD (spec-edit scope) · Claude Code, `claude-opus-5` · GATE: none · **APPLIED**
 
 ### Scope
