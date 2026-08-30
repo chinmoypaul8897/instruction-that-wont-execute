@@ -79,29 +79,32 @@ Newest first. Every build session appends one row here **and** exports its trans
 - **Scope:** repository initialisation, canonical files, `src/runlog.py`,
   `tools/export_session.py`, `.githooks/pre-commit`.
 - **Trajectory:** `docs/trajectories/build/CH-00.jsonl`
-- **Measured usage** (from the session transcript's own `usage` records, 113
-  assistant turns — not estimated):
+- **Measured usage** (from the session transcript's own `usage` records,
+  144 assistant turns — measured, not estimated from character counts).
+  **Snapshot taken at export time**; the session necessarily continues for the
+  final commit and push, so the true totals are marginally higher. Regenerate with
+  `python docs/evidence/ch00_session_cost.py`:
 
   | | tokens |
   |---|---|
-  | output | 250,950 |
-  | input, uncached | 226 |
-  | input, cache write | 601,321 |
-  | input, cache read | 13,954,622 |
-  | **total input** | **14,556,169** |
+  | output | 315,403 |
+  | input, uncached | 288 |
+  | input, cache write | 654,586 |
+  | input, cache read | 21,069,904 |
+  | **total input** | **21,724,778** |
 
 - **Imputed cost — the build subscription is flat-cost to the operator, so this is
-  an imputation and is labelled as one (never `$0`):**
+  an imputation and is labelled one (never `$0`):**
 
   | Basis | USD |
   |---|---|
-  | Upper bound — all input at full list, no cache discount | **79.05** |
-  | Cache-adjusted — cache write at 1.25x, cache read at 0.10x input list | **~17.01** |
+  | Upper bound — all input at full list, no cache discount | **116.508965** |
+  | Cache-adjusted — cache write at 1.25x, cache read at 0.10x input list | **22.512630** |
 
   Both are reported because the second depends on cache-tier multipliers that were
   **not** re-verified against the published table in this session, and an unverified
-  multiplier is a claim, not a measurement (hard rule 15). The upper bound needs no
-  assumption. Working: `docs/evidence/ch00-session-cost.txt`.
+  multiplier is a claim, not a measurement (hard rule 15). The upper bound rests on
+  no assumption at all. Working: `docs/evidence/ch00-session-cost.txt`.
 
 - **Note:** this session's spend is *not* charged against the USD 18 ceiling in
   `src/runlog.py`. That ceiling governs the **paid API** used by the evaluation arms

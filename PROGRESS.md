@@ -59,6 +59,11 @@ Anthropic key, AWS key id, a 26 MB blob, and a missing pattern source (fail
 closed). Plus a clean-file case so a guard that always fails cannot pass, and a
 negative control proving ordinary prose survives untouched.
 
+The hook's first live act was to refuse a commit of the probe's own source: it
+found an AKIA-shaped token there and was right to. The literal is now assembled
+from two halves at runtime so the probe still tests the identical string. Adding
+an allowlist would have been weakening a guard to get it green (hard rule 5).
+
 ### Decisions
 **Class B — implementation choices inside spec, recorded for review:**
 
@@ -144,8 +149,8 @@ reviewed this chunk, and this entry does not pretend otherwise.
 which is **not built** by ruling R-01 as pre-declared counted removal #3.
 
 Repository `chinmoypaul8897/instruction-that-wont-execute`, **private**; anonymous
-`curl` returns **404**, verified. Tree 430.2 MB / 7,460 files; **40 tracked**,
-largest tracked blob 400 KB.
+`curl` returns **404**, verified. Tree 430.2 MB / 7,460 files; **53 tracked**,
+largest tracked blob 1.05 MB (the exported CH-00 transcript).
 
 ### State for next session (CH-01)
 - `git config core.hooksPath .githooks` is set **on this machine only**. A fresh
