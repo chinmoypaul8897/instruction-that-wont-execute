@@ -1,0 +1,23 @@
+CH-02 BUILD SESSION COST - measured from the session transcript
+======================================================================
+transcript          : 50cc446c-9e84-43d2-be94-da74bc7545b7.jsonl
+assistant turns     : 241
+models              : claude-opus-5
+
+output tokens         :      515,671
+input, uncached       :          482
+input, cache write    :      627,283
+input, cache read     :   41,584,976
+TOTAL INPUT           :   42,212,741
+
+IMPUTED COST (flat-cost subscription - imputed, never reported as $0)
+  upper bound, no cache discount        USD 223.955480
+  cache-adjusted (1.25x / 0.10x)        USD 37.607192
+
+  The cache multipliers are ASSUMED and were not re-verified against the
+  published table in this session. The upper bound rests on no assumption
+  at all, which is why both are printed. Hard rule 15.
+
+  This session's spend is NOT charged against the USD 18 ceiling in
+  src/runlog.py. That ceiling governs the paid API used by the evaluation
+  arms (QUESTIONS.md Q1). Conflating the two would misstate both.

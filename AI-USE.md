@@ -74,6 +74,70 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-02 · 2026-08-30 · Claude Code · `claude-opus-5` · BUILD
+
+- **Scope:** govinfo FR `<AMDPAR>` carry-forward attributor and the count-matched pair
+  yield — `src/attribute_amdpars.py`, `tests/test_attribute_amdpars.py`, `refetch.py`,
+  the `data/amdpars/` freeze and `docs/evidence/ch02-attributor/`.
+- **Trajectory:** `docs/trajectories/build/CH-02.jsonl` (644 lines, 1,574,519 B;
+  660 home-path substitutions, every other scrub category an explicit 0).
+- **Wall-clock:** first turn 14:43:18 UTC → last 15:30:55 UTC = **47.6 min**, against
+  the ~3 h unattended window `prompts/CH-02.md` allowed.
+- **Measured usage** (239 assistant turns, read from the transcript's own `usage`
+  records — measured, not estimated). Snapshot taken at the export; the commits that
+  land these numbers are necessarily not in them, so the true totals are marginally
+  higher — the same structural caveat CH-00 and CH-01 recorded. Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id 50cc446c-9e84-43d2-be94-da74bc7545b7`;
+  committed output: `docs/evidence/ch02-attributor/ch02-session-cost.txt`.
+
+  | | tokens |
+  |---|---|
+  | output | 514,051 |
+  | input, uncached | 478 |
+  | input, cache write | 626,057 |
+  | input, cache read | 40,957,406 |
+  | **total input** | **41,583,941** |
+
+- **Imputed cost** — same two bases as CH-00 and CH-01, and for the same reason: the
+  cache multipliers are assumed and were not re-verified this session, so the
+  assumption-free upper bound is printed beside them, never instead.
+
+  | Basis | USD |
+  |---|---|
+  | Upper bound — all input at full list, no cache discount | **220.770980** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **37.245224** |
+
+- **Against the economy instruction — a miss, and smaller than CH-01's but still a
+  miss.** `prompts/CH-02.md` said *"this chunk downloads far less data than CH-01 did.
+  Do not re-parse the whole corpus."* The download was indeed far smaller — 272 MB of
+  FR issues against CH-01's 824 MB — but input tokens came out at **41.6 M** against
+  CH-01's 41.1 M, i.e. **1.2% higher**, not lower. Attributable causes, in order of
+  size and stated plainly rather than rounded away:
+
+  1. **Hand-computing 97 golden AMDPAR elements** (hard rule 4) required dumping three
+     whole documents' instruction text into the session and reasoning over every line.
+     That is the single largest block of tokens in the run and it is **inherent to the
+     chunk** — a golden read by the parser is not a golden.
+  2. **Four full corpus extracts** rather than one: the first measurement, then the
+     citation-resolution fix, then the determinism fix, then the fixed-point round.
+     Each re-parse is cheap in wall-clock (11 s) but each printed a report.
+  3. **Two `cat > file <<'EOF'` heredocs failed** on command length with an unhelpful
+     `unexpected EOF` and had to be re-issued through the Write tool. Self-inflicted,
+     ~2 turns, and the lesson is recorded here rather than in the next session's
+     surprise.
+  4. **The stdout of both evidence scripts was captured under the Windows console
+     codepage** on the first attempt, producing a cp1252 em-dash and CRLF endings in a
+     `* -text` repository. Caught before the first commit that touched those files, so
+     unlike CH-01 the history carries no CRLF — but it cost a regeneration cycle.
+
+  Causes 3 and 4 are self-inflicted and are recorded as such in `PROGRESS.md` too.
+  Cause 1 is the chunk doing what it was asked to do.
+
+- **No model was invoked by the code.** CH-02 is a deterministic parser: no arm ran, no
+  `src/runlog.py` row was written, and nothing was charged against the USD 18 API
+  ceiling in `QUESTIONS.md` Q1. The only model in this chunk is the coding agent whose
+  transcript is exported above.
+
 ### CH-01 · 2026-08-30 · Claude Code · `claude-opus-5` · BUILD
 
 - **Scope:** govinfo ECFR `<EDNOTE>` harvest — `src/harvest_ednotes.py`,
