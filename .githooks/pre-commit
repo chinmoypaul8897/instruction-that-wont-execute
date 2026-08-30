@@ -1,0 +1,139 @@
+#!/bin/sh
+# CH-00 pre-commit guard.
+#
+# The one-off assertions in CH-00 protect the tree as it stood on 2026-08-30.
+# THIS protects the tree every later chunk creates -- which is where the 50 MB
+# HackerEarth cap actually gets broken, and where a corpus download or an
+# exported transcript quietly walks into the index.
+#
+# Install (once per clone):  git config core.hooksPath .githooks
+#
+# Refuses a commit when ANY of:
+#   1. a staged blob exceeds 25 MB
+#   2. the resulting tracked file count exceeds 300
+#   3. a staged file carries the operator's phone or personal email
+#   4. a staged file carries a credential-shaped token
+#   5. no PII pattern source can be found  <- fail CLOSED
+#
+# (5) is deliberate. A sweep that cannot find its patterns and passes anyway is
+# the exact failure this project is built to expose: an empty result that reads
+# as a clean result. Bypass for a genuine emergency is `git commit --no-verify`,
+# which at least leaves a visible choice in the reflog.
+
+python - "$@" <<'PYEOF'
+import re, subprocess, sys, os
+from pathlib import Path
+
+MAX_BLOB_BYTES = 25 * 1024 * 1024
+MAX_TRACKED    = 300
+FAIL = []
+
+def sh(*args):
+    return subprocess.run(args, capture_output=True, text=True).stdout
+
+repo = Path(sh("git", "rev-parse", "--show-toplevel").strip())
+
+staged = [p for p in sh("git", "diff", "--cached", "--name-only", "-z",
+                        "--diff-filter=ACMR").split("\0") if p]
+
+# ---------------------------------------------------------------- 1. blob size
+for path in staged:
+    oid = sh("git", "rev-parse", f":{path}").strip()
+    if not oid:
+        continue
+    try:
+        size = int(sh("git", "cat-file", "-s", oid).strip())
+    except ValueError:
+        continue
+    if size > MAX_BLOB_BYTES:
+        FAIL.append(f"file over 25 MB: {path} ({size:,} B). "
+                    "data/ freezes EXTRACTED blocks, never whole title XMLs.")
+
+# ------------------------------------------------------------ 2. tracked count
+tracked = [p for p in sh("git", "ls-files", "-z").split("\0") if p]
+if len(tracked) > MAX_TRACKED:
+    FAIL.append(f"tracked file count {len(tracked)} exceeds {MAX_TRACKED}.")
+
+# ------------------------------------------------ 3. PII literals, fail closed
+def pii_sources():
+    out = []
+    env = os.environ.get("MICRO1_PII_PATTERNS")
+    if env:
+        out.append(Path(env))
+    out.append(Path.home() / ".config" / "micro1" / "pii_patterns.txt")
+    out.append(repo / "context" / "02-ABOUT-ME.md")
+    return out
+
+email_re = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+phone_re = re.compile(r"(?:\+\d{1,3}[\s\-]?)?(?:\d[\s\-()]?){9,13}\d")
+
+pii, pii_src = [], None
+for src in pii_sources():
+    if not src.exists():
+        continue
+    text = src.read_text(encoding="utf-8", errors="replace")
+    pats = [re.compile(re.escape(e), re.IGNORECASE)
+            for e in sorted(set(email_re.findall(text)))]
+    for raw in sorted({re.sub(r"\D", "", m) for m in phone_re.findall(text)}):
+        if 10 <= len(raw) <= 13:
+            pats.append(re.compile(r"\+?\s*" + r"[\s\-()]*".join(raw)))
+    if pats:
+        pii, pii_src = pats, src
+        break
+
+if not pii:
+    FAIL.append(
+        "no PII pattern source found, so the sweep could not run. Checked: "
+        + ", ".join(str(p) for p in pii_sources())
+        + ". Refusing to pass a sweep that scanned nothing -- an empty result "
+          "is not a clean result. Create ~/.config/micro1/pii_patterns.txt "
+          "(git-ignored, one literal per line) or set MICRO1_PII_PATTERNS.")
+
+# ------------------------------------------------------ 4. credential shapes
+CREDS = [
+    ("anthropic key", re.compile(r"sk-ant-[A-Za-z0-9_\-]{16,}")),
+    ("openai key",    re.compile(r"sk-(?:proj-)?[A-Za-z0-9]{32,}")),
+    ("google key",    re.compile(r"AIza[0-9A-Za-z_\-]{35}")),
+    ("github token",  re.compile(r"gh[pousr]_[A-Za-z0-9]{20,}")),
+    ("aws key id",    re.compile(r"AKIA[0-9A-Z]{16}")),
+    ("slack token",   re.compile(r"xox[abprs]-[A-Za-z0-9-]{10,}")),
+    ("private key",   re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
+]
+
+scanned = 0
+for path in staged:
+    oid = sh("git", "rev-parse", f":{path}").strip()
+    if not oid:
+        continue
+    blob = subprocess.run(["git", "cat-file", "blob", oid],
+                          capture_output=True).stdout
+    try:
+        text = blob.decode("utf-8")
+    except UnicodeDecodeError:
+        continue
+    scanned += 1
+    for pat in pii:
+        if pat.search(text):
+            FAIL.append(f"operator contact detail in staged file: {path} "
+                        "(ground rule 08). Redact it, then re-stage.")
+            break
+    for label, pat in CREDS:
+        if pat.search(text):
+            FAIL.append(f"{label}-shaped token in staged file: {path} "
+                        "(hard rule 12). Secrets live in .env only.")
+
+if staged and scanned == 0 and pii:
+    FAIL.append(f"{len(staged)} files staged but 0 were scanned -- the sweep is "
+                "broken. Refusing rather than reporting a vacuous pass.")
+
+# ----------------------------------------------------------------- verdict
+if FAIL:
+    print("\nPRE-COMMIT REFUSED:\n", file=sys.stderr)
+    for f in FAIL:
+        print(f"  * {f}", file=sys.stderr)
+    print("", file=sys.stderr)
+    sys.exit(1)
+
+print(f"pre-commit ok: {len(staged)} staged, {scanned} swept for PII+credentials "
+      f"(patterns from {pii_src}), {len(tracked)} tracked, largest blob under 25 MB.")
+PYEOF

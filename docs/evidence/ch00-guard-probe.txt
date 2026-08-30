@@ -1,0 +1,30 @@
+CH-00 GUARD PROBE - every case feeds the guard something it must refuse
+==============================================================================
+case                              expected              result
+------------------------------------------------------------------------------
+A. clean file                     ACCEPT                PASS
+                                  pre-commit ok: 2 staged, 2 swept for PII+credentials (patterns from C:\Users\chinm\AppData
+B. operator phone staged          REFUSE                PASS
+                                  * operator contact detail in staged file: leak1.md (ground rule 08). Redact it, then re-stage.
+C. operator email staged          REFUSE                PASS
+                                  * operator contact detail in staged file: leak2.md (ground rule 08). Redact it, then re-stage.
+D. anthropic key staged           REFUSE                PASS
+                                  * anthropic key-shaped token in staged file: cfg.py (hard rule 12). Secrets live in .env only.
+E. aws key id staged              REFUSE                PASS
+                                  * aws key id-shaped token in staged file: aws.txt (hard rule 12). Secrets live in .env only.
+F. 26 MB blob staged              REFUSE                PASS
+                                  * file over 25 MB: corpus.bin (27,262,976 B). data/ freezes EXTRACTED blocks, never whole title XMLs.
+G. no PII pattern source          REFUSE (fail closed)  PASS
+                                  * no PII pattern source found, so the sweep could not run. Checked: C:\Users\chinm\AppData\Local\Temp\ch00-gua
+H. home path -> ~                 REDACT                PASS
+I. anthropic key                  REDACT                PASS
+J. aws key id                     REDACT                PASS
+K. bearer token                   REDACT                PASS
+L. KEY=value                      REDACT                PASS
+M. json KEY                       REDACT                PASS
+N. operator contact               REDACT                PASS
+O. scrubbed output still JSONL    VALID                 PASS
+P. ordinary text left alone       NO CHANGE             PASS
+------------------------------------------------------------------------------
+16/16 guard probes behaved as required
+success + failure == n : True
