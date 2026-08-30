@@ -1,0 +1,24 @@
+ANTHROPIC_API_KEY : present(len=108)
+(the key itself is never printed, logged or committed - hard rule 12)
+
+--- claude-haiku-4-5 @ temperature=0.0   (the ALIAS QUESTIONS.md Q1 names)
+    OK  reply='ok'  in=14 out=4 usd=0.000034
+
+--- claude-haiku-4-5-20251001 @ temperature=0.0   (the DATED form prompts/NIGHT-RUN.md pre-registers)
+    OK  reply='ok'  in=14 out=4 usd=0.000034
+
+--- claude-sonnet-5 @ temperature=0.0   (the model-sensitivity arm, temperature=0)
+    REFUSED: HTTP 400 from the Messages API: {"type":"error","error":{"type":"invalid_request_error","message":"`temperature` is deprecated for this model."},"request_id":"req_011CeZaTKZnuyWLRa8cGCn8m"}
+
+--- claude-sonnet-5 @ temperature=None   (the model-sensitivity arm, temperature OMITTED)
+    OK  reply='ok'  in=18 out=4 usd=0.000076
+
+========================================================================
+VERDICT
+========================================================================
+  OK          claude-haiku-4-5 @ temperature=0.0           ok
+  OK          claude-haiku-4-5-20251001 @ temperature=0.0  ok
+  REFUSED     claude-sonnet-5 @ temperature=0.0            HTTP 400 from the Messages API: {"type":"error","error":{"type":"invalid_request_error","message":"`temperature` is depr
+  OK          claude-sonnet-5 @ temperature=None           ok
+
+  working ids: ['claude-haiku-4-5 @ temperature=0.0', 'claude-haiku-4-5-20251001 @ temperature=0.0', 'claude-sonnet-5 @ temperature=None']

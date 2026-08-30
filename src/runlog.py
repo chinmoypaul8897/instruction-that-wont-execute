@@ -61,6 +61,11 @@ PRICES: dict[str, tuple[Decimal, Decimal]] = {
     "claude-sonnet-5":   (Decimal("2.00"),  Decimal("10.00")),
     "claude-sonnet-4-6": (Decimal("3.00"),  Decimal("15.00")),
     "claude-haiku-4-5":  (Decimal("1.00"),  Decimal("5.00")),
+    # DATED model ids. `QUESTIONS.md` Q1 named the alias `claude-haiku-4-5`; that
+    # alias is not on this account and returns 404, so every arm calls the dated
+    # form and the ledger must be able to price it. Same published list price as
+    # the alias it dates - this adds no new price, only a second spelling of one.
+    "claude-haiku-4-5-20251001": (Decimal("1.00"), Decimal("5.00")),
 }
 
 # Message Batches API bills at 50% of list, both directions (QUESTIONS.md Q1

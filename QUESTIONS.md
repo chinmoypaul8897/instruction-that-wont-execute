@@ -64,6 +64,47 @@ Rationale, recorded because it is a judged decision:
 Blocks: the CHECKPOINT only. CH-01..CH-04 need no model; the B-script arm needs
 none at all.
 
+**CH-03 CORRECTION, 2026-08-31 - measured, and the pre-registered fact was WRONG.**
+`prompts/NIGHT-RUN.md` states as a pre-registered fact not to be rediscovered that
+*"the alias `claude-haiku-4-5` is **not** on this account and will 404."* Hard rule 15
+required checking it before relaying it. **It was checked and it is false.** All three
+ids were called through `RunLogger`; evidence
+`docs/evidence/ch03-model-id/model-id-probe.txt`, script beside it:
+
+| id called | temperature | result |
+|---|---|---|
+| `claude-haiku-4-5` (the alias Q1 names) | 0.0 | **HTTP 200**, `in=14 out=4`, USD 0.000034 |
+| `claude-haiku-4-5-20251001` (the dated form) | 0.0 | **HTTP 200**, `in=14 out=4`, USD 0.000034 |
+| `claude-sonnet-5` | 0.0 | **HTTP 400** - "`temperature` is deprecated for this model" |
+| `claude-sonnet-5` | omitted | **HTTP 200**, `in=18 out=4`, USD 0.000076 |
+
+Two consequences, both acted on rather than filed:
+
+1. **The dated id is used anyway, and the reason is now the right one.** Q1's alias
+   works, so nothing is broken - but a reproducibility claim that pins "haiku 4.5"
+   by a floating alias is not pinned at all. Every arm calls
+   `claude-haiku-4-5-20251001`. `src/runlog.py` gains that exact string in `PRICES`
+   at the same published list price as the alias (Class B; a second spelling of one
+   price, not a new price). Had the night run's claim been taken on trust the outcome
+   would have been identical - which is precisely why it needed checking, since a
+   claim that happens not to bite is indistinguishable from a true one until it does.
+
+2. **`claude-sonnet-5` rejects `temperature` outright, and that one WOULD have bitten**
+   - the model-sensitivity subset is a CHECKPOINT deliverable and it would have failed
+   HTTP 400 on its first call. `src/apiclient.py` now treats `temperature=None` as
+   "omit the field". **The asymmetry this creates is a reported limitation, not a
+   hidden one:** the haiku arms sample at `temperature=0`, the 20-item sonnet subset
+   at the model's default. Fairness inside the primary comparison is untouched (every
+   primary arm is the same model at the same temperature); what it limits is the
+   cross-tier sensitivity reading, and the README says so in those words.
+
+**Delivery, corrected from Q1's own ruling.** Q1 mandates the Message Batches API for
+its 50% discount. `prompts/NIGHT-RUN.md` overrides it for the CHECKPOINT: batch is
+asynchronous with up to 24h latency and the checkpoint answer is needed tonight. The
+CHECKPOINT therefore runs **standard** delivery and the ledger records
+`delivery=standard` on every row, so the doubled unit price is visible in the evidence
+rather than assumed away. Q1's batch ruling stands for CH-08's full matrix.
+
 **CH-00 verification note (hard rule 15).** Q1's arithmetic was independently
 recomputed before being encoded in `src/runlog.py`: 11.8M x $1.00 + 1.26M x $5.00 =
 $18.10 standard, $9.05 batched, against Q1's $18.14 / $9.07 — agreement to 0.2%,

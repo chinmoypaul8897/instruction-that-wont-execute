@@ -19,15 +19,20 @@ context/raw/
 context/02-ABOUT-ME.md
 context/me/
 
-# research scratch from prior sessions - large, superseded, not part of the build
-aec/
-bip/
-killtest/
-probe/
-replay/
-scraper/
-hz.html
-wl.html
+# research scratch from prior sessions - large, superseded, not part of the build.
+# ANCHORED to the repo root with a leading slash, and the reason is a real near-miss:
+# the unanchored `probe/` also matched `docs/trajectories/probe/`, so a directory of
+# REQUIRED agent trajectories (hard rule 10) was silently untrackable. An ignore rule
+# that quietly swallows evidence is the same failure mode as a strip counter that
+# prints zero because it is looking for the wrong tag. Anchor them.
+/aec/
+/bip/
+/killtest/
+/probe/
+/replay/
+/scraper/
+/hz.html
+/wl.html
 
 # bulk corpus downloads - NEVER tracked. data/ holds only extracted, frozen artifacts.
 *.xml
