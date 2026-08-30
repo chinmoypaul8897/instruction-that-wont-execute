@@ -288,3 +288,74 @@ format-dependent and neither file says so.
 Not escalated as Class A because it changes no result, no threshold and no count. If
 the architect prefers the spec text corrected rather than annotated, that is a
 `CONTEXT.md` edit and `CONTEXT.md` is protected read-only for build sessions.
+
+## Q9 - CONTEXT.md section 8's section-citation regex misses a whole drafting style, and the miss MIS-ATTRIBUTES rather than under-detects
+Raised: CH-02, 2026-08-30. Status: BOTH READINGS COMPUTED AND SHIPPED; the gate is
+taken on the spec-literal one. **An architect decision is wanted, but nothing was
+blocked and nothing was substituted silently.**
+
+`CONTEXT.md` section 8 specifies the detector as *"matches a `§\s*[\d.]+[a-z]?`
+citation in its own text"*. A large minority of the Federal Register writes the same
+thing without the sign:
+
+    2. Section 1.907 is amended by revising the definition of "covered geographic
+       licenses" to read as follows:
+
+**Why this is not merely an under-detection.** Carry-forward means an element that
+fails to be recognised as naming a section inherits the previous one. On FR Doc
+2020-11897 (golden G1, an FCC rule) 24 of 28 elements use the word form, so under the
+sign-only detector `current_section` stays pinned at `1.9005` - set by the single
+element that used a sign - and **20 elements are attributed to a section they do not
+amend.** A silent wrong answer, not a silent gap.
+
+Measured over all 70 FR documents / 8,752 AMDPAR elements:
+
+| detector | completeness | attribution rate | unattributable |
+|---|---:|---:|---:|
+| `spec_literal` - section 8's own regex | 0.5080 | 0.7613 | 2,089 |
+| `extended` - adds the word form | 0.6643 | 0.9865 | 118 |
+
+**What CH-02 did.** Implemented **both**, recorded both in every frozen record
+(`section_spec_literal` / `section_extended`, and `detector_disagrees`), reported both
+everywhere, and **took the pre-registered gate branch on `spec_literal`**, because
+`prompts/CH-02.md` says *"implement that, not your own reading"* and because it is the
+lower of the two. Both land in the same `< 0.80` branch, so the choice of detector does
+not decide this chunk's outcome - but it will decide which sections CH-03's eval set is
+built from, which is why it is written down rather than settled here.
+
+**The decision wanted:** whether `CONTEXT.md` section 8's regex should be corrected to
+recognise the word form. That is an edit to a protected file, so it is **Class A** and
+belongs to the architect. Also note section 8's regex truncates every title-26 section
+number (`§ 1.367(a)-8` -> `1.367`), which CH-02 fixed under goldens rule P2 and which is
+the same class of defect section 8 itself blames for a predecessor's 0.46.
+
+Not escalated as blocking, because both readings are computed and the deliverable
+numbers are reported under each.
+
+## Q10 - Two more section-citation spellings, found AFTER the measurement and deliberately not fixed
+Raised: CH-02, 2026-08-30. Status: RECORDED, COUNTED, NOT ACTED ON. For the architect
+to adopt at CH-03 or decline.
+
+`docs/evidence/ch02-attributor/goldens.md` section 6 states, before any number existed,
+that *"no rule in section 2 may be changed after section 7 is measured."* Two further
+spellings turned up once the corpus ran. **The detectors were not changed**, and the
+findings are published with their counts instead (goldens section 9):
+
+| finding | elements | documents | effect |
+|---|---:|---:|---|
+| a section cited as `46 CFR 356.3` - no sign, and not the word *Section* either | 9 | 1 (`2026-11267`) | all 27 AMDPARs of that document are unattributable; it is the only document in the corpus with zero attributed sections |
+| a table-driven amendment - *"For each section and paragraph indicated in the left column of the following table..."* - where the sections live in a `<GPOTABLE>` and never appear in the AMDPAR text | 26 | 1 (`2024-18445`) | 4 defect sections in that document have no AMDPAR attributed to them |
+
+Adding a `NN CFR X.Y` detector would recover at most 27 elements of 8,752 - **under
+0.31 percentage points**, and nowhere near the 0.80 branch boundary. It is declined
+anyway: the value of a pre-registration is precisely that it is not revised once the
+number is in view. Both numbers are on the table for the architect.
+
+**A third diagnostic, in the same family.** `current_section` is not reset at a
+`<REGTEXT>` `PART` boundary, because section 8 specifies no such reset (goldens rule
+P7). Measured consequence: **699 of 8,752 elements** are attributed to a section whose
+part differs from the part of the `<REGTEXT>` they sit in, and every one of those is
+wrong. The record carries `part_mismatch` so CH-03 can exclude them; the parser does not
+silently repair them. Resetting at a part boundary is a one-line change and would be an
+improvement, but it is a change to a pre-registered rule after the measurement, so it is
+the architect's call, not a build session's.
