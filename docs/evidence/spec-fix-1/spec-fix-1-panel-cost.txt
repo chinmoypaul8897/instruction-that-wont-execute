@@ -1,0 +1,43 @@
+==============================================================================
+SPEC-FIX-1 ADVERSARIAL PANEL COST - measured per agent (hard rule 10)
+==============================================================================
+transcript dir : C:/Users/chinm/.claude/projects/c--Users-chinm-micro1-engineering-challenge/18eb2b78-55e3-46e0-85af-928de9245d32/subagents/workflows/wf_5260a72c-01a
+agent runs     : 10
+
+   agent                   turns     output  total input      USD upper
+   recount:sampling           60     13,659    4,028,775      20.485350
+   recount:fields             51     19,332    3,582,091      18.393755
+   judge:process              41     10,868    2,633,846      13.440930
+   harder:correctness         42     10,861    2,466,366      12.603355
+   judge:gate-integrity       36      8,519    2,058,150      10.503725
+   recount:regex              33     18,703    1,837,765       9.656400
+   judge:counterfactual       31      1,599    1,835,563       9.217790
+   judge:defender             30     14,500    1,626,195       8.493475
+   harder:per-doc             31     10,139    1,647,183       8.489390
+   judge:prosecutor           29      3,169    1,538,585       7.772150
+
+   TOTAL                     384    111,349   23,254,519     119.056320
+
+models         : claude-opus-5
+
+output tokens         :      111,349
+input, uncached       :          768
+input, cache write    :    1,744,297
+input, cache read     :   21,509,454
+TOTAL INPUT           :   23,254,519
+
+IMPUTED COST (flat-cost subscription - imputed, never reported as $0)
+  upper bound, no cache discount        USD 119.056320
+  cache-adjusted (1.25x / 0.10x)        USD 24.444148
+
+  The cache multipliers are ASSUMED and were not re-verified against the
+  published table in this session. The upper bound rests on no assumption
+  at all, which is why both are printed. Hard rule 15.
+
+  This is the PANEL only. The main coding session is measured separately by
+  docs/evidence/ch00_session_cost.py, which cannot see subagent transcripts;
+  AI-USE.md carries both and their sum, so neither is quoted alone.
+
+  Not charged against the USD 18 ceiling in src/runlog.py - that ceiling
+  governs the paid API used by the evaluation arms (QUESTIONS.md Q1).
+==============================================================================

@@ -10,12 +10,13 @@ are what makes it checkable rather than asserted.
 
 ---
 
-## Agent classes — three, all evidenced
+## Agent classes — four, all evidenced
 
 | Class | What it is | Count | Trajectories live at |
 |---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects | ~90 | `context/*-raw.json` (committed) |
-| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | 2 so far | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
+| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **4** — CH-00, CH-01, CH-02, SPEC-FIX-1 | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
+| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. First used at SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached | **10** | the run's own transcript dir (outside the repo); per-agent tokens and USD in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
 | **Solution** | the evaluation arms — the thing being measured | 0 so far | `docs/trajectories/<run_id>.jsonl` + `docs/evidence/runs/cost_ledger.csv` |
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
@@ -73,6 +74,86 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 ## Session log
 
 Newest first. Every build session appends one row here **and** exports its transcript.
+
+### SPEC-FIX-1 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD (spec-edit scope) · **REFUSED**
+
+- **Scope:** judge whether `prompts/SPEC-FIX-1.md`'s correction to `CONTEXT.md` §8's
+  completeness definition is a legitimate spec fix or goalpost-moving, and apply it **only
+  if legitimate**. **Verdict: GOALPOST-MOVING. No spec edit was made.** Written:
+  `docs/evidence/spec-fix-1/` (verdict, recompute, four scripts and their committed
+  output) and `QUESTIONS.md` Q11–Q13.
+- **Trajectory:** `docs/trajectories/build/SPEC-FIX-1.jsonl`.
+- **Wall-clock:** first turn 18:18:57 UTC → last 19:01:16 UTC = **42.3 min**.
+
+- **⚠️ THIS SESSION USED SUBAGENTS — the first chunk in the project to do so, and they are
+  logged here because hard rule 10 admits no exceptions.** An adversarial panel of **ten**
+  `claude-opus-5` subagents was run as a single workflow (run `wf_5260a72c-01a`,
+  **24.9 min** wall-clock, 384 assistant turns, 206 tool calls, 0 errors):
+
+  | role | n | what it was asked for |
+  |---|---:|---|
+  | `recount:{regex,fields,sampling}` | 3 | independently count the three claimed classes by three different methods, and name every class the architect omitted |
+  | `judge:{prosecutor,defender,counterfactual,gate-integrity,process}` | 5 | judge the correction through five distinct lenses; the prosecutor was instructed to default to GOALPOST-MOVING under uncertainty |
+  | `harder:{per-doc,correctness}` | 2 | design gate metrics that are *strictly harder* than the proposal and compute them |
+
+  **Panel tally: 4 LEGITIMATE / 1 GOALPOST-MOVING. The majority was not adopted.** The
+  decisive artefact — the sabotage control — came from the lone dissenter, and **no panel
+  number reached the verdict without being rebuilt in-repo first** (hard rule 15):
+  `spec_fix_1_sabotage.py` asserts its own replay of `CONTEXT.md` §8 reproduces the frozen
+  record with 0 mismatches of 8,752 *before* it draws any comparison. Where the panel's
+  class counts differ from this session's, both are published in `verdict.md` §Q1.
+
+- **Measured usage — reported in three rows, because the coding session and the panel are
+  measured by different scripts and neither total is quoted alone.** Main session read
+  from its own transcript's `usage` records; panel read from the ten subagent transcripts.
+  Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id 18eb2b78-55e3-46e0-85af-928de9245d32`
+  and
+  `python docs/evidence/spec-fix-1/spec_fix_1_agent_cost.py --dir <workflow transcript dir>`;
+  committed output: `docs/evidence/spec-fix-1/spec-fix-1-session-cost.txt` and
+  `spec-fix-1-panel-cost.txt`.
+
+  | | output | total input | assistant turns |
+  |---|---:|---:|---:|
+  | coding session | 248,015 | 19,152,452 | 136 |
+  | **adversarial panel (10 agents)** | **111,349** | **23,254,519** | **384** |
+  | **combined** | **359,364** | **42,406,971** | **520** |
+
+  Snapshot taken before the closing commits, so the true totals are marginally higher —
+  the same structural caveat CH-00, CH-01 and CH-02 recorded.
+
+- **Imputed cost** — same two bases as every prior chunk, and for the same reason: the
+  cache multipliers are assumed and were not re-verified this session, so the
+  assumption-free upper bound is printed beside them, never instead.
+
+  | Basis | coding session | panel | **combined** |
+  |---|---:|---:|---:|
+  | Upper bound — all input at full list, no cache discount | 101.962635 | 119.056320 | **USD 221.018955** |
+  | Cache-adjusted — cache write 1.25×, cache read 0.10× | 18.254045 | 24.444148 | **USD 42.698193** |
+
+- **The panel cost more than the coding session did, and that is the honest headline.**
+  23.3 M input tokens against 19.2 M — **55% of this chunk's total spend bought a second
+  opinion this session then overruled 4–1.** It is recorded rather than netted away
+  because the alternative reading — that ten agents agreeing would have made the verdict
+  right — is exactly the failure this project exists to expose. What the panel actually
+  bought was **one** idea: the prosecutor's sabotage control. That single control is what
+  turned an arguable judgement call into a disproof, and on that basis the spend was worth
+  it — but a cheaper panel would have bought it too, and a future chunk should say so
+  before spending.
+
+- **Two known measurement caveats, both stated rather than smoothed:**
+  1. `docs/evidence/ch00_session_cost.py` hardcodes the header string `CH-00 BUILD SESSION
+     COST`; the committed output therefore carries that header even though it was run
+     against this session. **The `transcript` line is the discriminator.** The script lives
+     outside this chunk's scope fence and was not edited.
+  2. That script writes **CRLF** under Windows, in a repository whose `.gitattributes` is
+     `* -text`. The committed output was normalised to LF before staging. CH-02 recorded
+     the same defect; it is still unfixed, and it is a one-line fix for whichever chunk
+     owns `docs/evidence/ch00_session_cost.py`.
+
+- **No model was invoked by the code.** SPEC-FIX-1 ran no arm, wrote no `src/runlog.py`
+  row, and charged nothing against the USD 18 API ceiling in `QUESTIONS.md` Q1. The only
+  models in this chunk are the coding agent and the ten panel agents, all disclosed above.
 
 ### CH-02 · 2026-08-30 · Claude Code · `claude-opus-5` · BUILD
 

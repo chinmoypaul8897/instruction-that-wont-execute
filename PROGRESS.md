@@ -11,6 +11,137 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## SPEC-FIX-1 · 2026-08-31 · BUILD (spec-edit scope) · Claude Code, `claude-opus-5` · GATE: none · **REFUSED**
+
+### Scope
+Judge whether `prompts/SPEC-FIX-1.md`'s correction to `CONTEXT.md` §8 — replacing the
+failing combined completeness definition with a split `attribution_completeness` (gated)
+and `parse_completeness` (reported) — is a legitimate spec correction or goalpost-moving
+under hard rule 5, and apply it **only if legitimate**. The prompt authorised a refusal in
+terms: *"A session that refuses this correction has done its job correctly."*
+
+**Verdict: GOALPOST-MOVING. Nothing in `CONTEXT.md` was edited.** No §2a, no §2b, no §2c,
+no v1.1 bump, no §13 change-log row, and §2d's housekeeping left untouched because §2 is
+conditioned *"if and only if the verdict is LEGITIMATE."* The attributor was not re-run,
+`data/` was read-only, `src/` and `tests/` were never opened.
+
+### The verdict, and the one artefact that decides it
+
+`docs/evidence/spec-fix-1/verdict.md`, committed at **`72b95e1` before anything else in
+the chunk**, so the order is provable from git.
+
+§2a asserts of the proposed gate metric: *"It answers the question the gate exists to
+answer"* — *"did carry-forward put each instruction on the **right** section?"*
+**That is a factual claim, and it is false.** `spec_fix_1_sabotage.py` builds a control
+attributor identical to the shipped one except for one line — carry the **first**-named
+section of a document forward instead of the **last** — and scores it:
+
+| detector | real | sabotaged | Δ | placed differently |
+|---|---:|---:|---:|---:|
+| `extended` | **0.9865** | **0.9865** | **0.000000** | **8,417 / 8,634 = 97.5%** |
+| `spec_literal` | 0.7613 | 0.7613 | 0.000000 | 6,395 / 6,663 = 96.0% |
+
+The script asserts its replay of §8 reproduces the frozen record with **0 mismatches of
+8,752** before drawing the comparison, so the control is a valid one. The result is
+structural: an element is attributed iff some section was named at or before it — true of
+both rules — so `attributed ÷ total` measures only *where the first citation appears*.
+
+**Stated fairly, because it is the strongest point for §2a:** the metric is not vacuous in
+general. It catches the silent-DROP mode that killed the predecessor pilot at 0.46 — a
+lead-ins-only extractor scores 0.2503 / 0.3744 and fails hard. It is blind specifically to
+the silent-WRONG mode CH-02 found in this corpus (Q9), which is the mode the correction was
+written in response to.
+
+### Three findings behind the verdict, each measured here
+
+1. **The pass needs both post-hoc edits.** §2a alone **0.7613 FAIL**; §2c alone **0.6643
+   FAIL**; together **0.9865 PASS**. CH-02 gated on `spec_literal`, and the prompt's fact
+   table quotes only the `extended` figure without saying so.
+2. **Strictly harder metrics were free from already-frozen booleans, and none was taken:**
+   attributed AND part-consistent **0.9066** (still passes, margin 8.65 pts → 0.66);
+   attributed AND part-consistent AND no rival conflict **0.8579 FAIL**; the per-document
+   floor §8 *already mandates* **57/70 = 0.8143 FAIL**.
+3. **Golden G1 passes the proposed gate.** The document CH-02 chose *because* it
+   demonstrates mis-attribution — Q9 records 20 of its 28 elements pinned to a section they
+   do not amend — scores **26/28 = 0.9286, PASS**.
+
+Also weighed: Q9's fix is worth **+22.5 pts** and was adopted, while the part-boundary
+reset is worth **−8.0 pts**, was called *"a one-line change and would be an improvement"* by
+CH-02, and is not mentioned in the prompt at all.
+
+### What survives the refusal — the diagnosis is right, and it is half the correction
+
+Verified independently rather than taken from the prompt: **0 of 2,913** unparsed elements
+carry both an operation and an anchor-or-designation, and only **46 (1.6%)** are recoverable
+parser gaps (20 backtick-apostrophe anchors, 1 dotted paragraph path, 25 out-of-vocabulary
+verbs such as *"Stay the section indefinitely"*). **Parse failure genuinely is Federal
+Register drafting, not our attributor**, so removing it from an attributor's gate is real
+specification work and should be re-issued. `QUESTIONS.md` Q11 carries the four-step path
+back.
+
+### Class counts — counted, not taken on trust
+
+| class | n | share of the 2,913 unparsed |
+|---|---:|---:|
+| authority citations | **591** | 0.2029 |
+| lead-ins, CFR section named | **548** | 0.1881 |
+| whole-section operations | **436** | 0.1497 |
+| **the architect's three as named** | **1,575** | **0.5407** |
+| residue the architect did not name | 1,338 | 0.4593 |
+
+Read as families (part-level lead-ins, continuation fragments and part-level operations are
+the same drafting devices one level out) the account reaches **2,449 = 84.1%**. Four
+independent counts — mine plus three panel recounts — land at 54.1 / 55.4 / 58.5 / 59.7%;
+the spread is definitional, and every one agrees the residue is large and the residue is
+not our bug.
+
+### Decisions
+- **Class A, escalated not taken:** the whole correction. Refused and returned to the
+  architect with a specified path back (Q11).
+- **Class B:** produced `recomputed.md` even under a refusal, because the report block asks
+  for it unconditionally and the numbers are evidence *for* the verdict. It states on its
+  first line that the definition was not adopted.
+- **Class B:** ran an adversarial panel of ten subagents before deciding. Disclosed in
+  `AI-USE.md` with per-agent tokens and USD. **It returned 4–1 the other way and was
+  overruled**; only its sabotage control survived, and only after being rebuilt here.
+- **Class C:** normalised the session-cost output to LF before staging — `ch00_session_cost.py`
+  still emits CRLF into a `* -text` repository, the same defect CH-02 logged, and it is
+  outside this chunk's fence to fix.
+
+### Questions
+- **Q11** — the refusal, the sabotage control, and the four changes that would make the
+  correction legitimate. **An architect ruling is wanted.**
+- **Q12** — two numbers already in `QUESTIONS.md` overstate the attributor's error: Q10's
+  *"every one of those [699] is wrong"* is wrong for **126** of them (they name their own
+  section; the `REGTEXT` part tag is what disagrees), and Q9's `detector_disagrees = 2,459`
+  is **488** genuine rival-section conflicts plus 1,971 elements `spec_literal` never
+  attributed. Plus a new finding: the shipped `extended` detector is **case-insensitive**
+  and reads appendix-internal numbering (*"section 1.1"* of Appendix A) as a CFR section.
+  Recorded in a new entry, never edited into the old ones.
+- **Q13** — §2d's housekeeping is fenced behind the LEGITIMATE verdict, so the uncommitted
+  `CONTEXT.md` edit and the untracked `prompts/CH-02.md` and `prompts/SPEC-FIX-1.md` were
+  left alone. **One line from the architect unblocks all three.**
+
+### Gate
+None. This chunk is not gated — but it is the first in the project whose *whole output is a
+refusal*, and the refusal was reached against a 4–1 advisory majority on the strength of a
+control the session built and ran itself.
+
+### Status ledger
+`STATUS.md` — SPEC-FIX-1 row added above CH-03, state **refused**. CH-02's row is
+unchanged: no spec edit was made, so nothing about its gate result moves. It remains
+**built**, in the `< 0.80` documented-failure branch.
+
+### State for the next session
+`CONTEXT.md` §8 is **exactly as CH-02 found it** — the combined definition still stands and
+CH-02 still fails it at 0.5080 / 0.6643. Nothing downstream has been unblocked. **CH-03
+must not start until Q11 is ruled on**, because the ruling decides which detector builds the
+eval set and therefore which sections the pairs are drawn from. The working tree is dirty in
+exactly the way it was found (Q13). Every number quoted anywhere in this entry regenerates
+from `docs/evidence/spec-fix-1/`'s four scripts.
+
+---
+
 ## CH-02 · 2026-08-30 · BUILD · Claude Code, `claude-opus-5` · GATE: FULL (domain + code)
 
 ### Scope
