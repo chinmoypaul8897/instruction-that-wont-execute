@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codification worksheet — SHELL against a synthetic fixture</title>
+<style>
+  :root{
+    --bg:#fbfaf7; --ink:#1b1a17; --muted:#6b675f; --rule:#ddd8cd; --card:#fff;
+    --fail:#a3271f; --fail-bg:#fbeceb; --exec:#1f6b3f; --exec-bg:#eaf4ee;
+    --warn:#8a6100; --warn-bg:#fdf3dd; --hl:#ffe89a; --accent:#2a4d7a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16151300; --bg:#151412; --ink:#eceae4; --muted:#a6a099; --rule:#34322d;
+      --card:#1d1c19; --fail:#ff8a7d; --fail-bg:#2e1a18; --exec:#77d39b;
+      --exec-bg:#152720; --warn:#e8bf6a; --warn-bg:#2b2313; --hl:#6a5410;
+      --accent:#8fb6e8;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+  code,kbd,.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em}
+  header{padding:28px 24px 18px;border-bottom:1px solid var(--rule)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1{margin:0 0 6px;font-size:1.5rem;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0}
+  .band{background:var(--warn-bg);border:1px solid var(--warn);color:var(--warn);
+    border-radius:8px;padding:12px 14px;margin:18px 0;font-size:.92rem}
+  .band b{color:var(--warn)}
+  table{width:100%;border-collapse:collapse;margin:10px 0 4px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);
+    vertical-align:top}
+  th{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    font-weight:600}
+  .item{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+    padding:16px 18px;margin:16px 0}
+  .item > h3{margin:0 0 2px;font-size:1.05rem}
+  .verdict{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;
+    letter-spacing:.05em;font-weight:700;font-family:ui-monospace,monospace}
+  .WILL_FAIL{background:var(--fail-bg);color:var(--fail);border:1px solid var(--fail)}
+  .WILL_EXECUTE{background:var(--exec-bg);color:var(--exec);border:1px solid var(--exec)}
+  .lvl{font-family:ui-monospace,monospace;font-size:.76rem;padding:1px 6px;
+    border-radius:4px;border:1px solid var(--rule);color:var(--muted)}
+  .lvl.exact{color:var(--exec);border-color:var(--exec)}
+  .lvl.none{color:var(--fail);border-color:var(--fail)}
+  .txt{background:var(--bg);border:1px solid var(--rule);border-radius:8px;
+    padding:12px 14px;white-space:pre-wrap;font-family:ui-monospace,monospace;
+    font-size:.82rem;max-height:230px;overflow:auto;margin:8px 0 0}
+  mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
+  .absent{color:var(--fail);font-weight:700}
+  .queue li{margin-bottom:10px}
+  .scroll{overflow-x:auto}
+  footer{border-top:1px solid var(--rule);margin-top:34px;padding:18px 0 40px;
+    color:var(--muted);font-size:.85rem}
+  .k{color:var(--muted)}
+  .pill{font-size:.72rem;color:var(--muted);border:1px solid var(--rule);
+    border-radius:999px;padding:1px 8px;margin-left:6px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Codification worksheet</h1>
+  <p class="sub">One row per amendatory instruction: anchor, resolution level,
+     designation state, the section text with the anchor highlighted or its absence
+     marked, and the human-checkpoint queue.</p>
+</div></header>
+
+<div class="wrap">
+
+  <div class="band">
+    <b>THIS IS A SHELL, AND EVERY NUMBER ON THIS PAGE IS SYNTHETIC.</b><br>
+    It is built against a fabricated fixture so the layout, the highlighting and the
+    checkpoint queue can be reviewed before the real corpus is wired in at CH-10. No
+    row below is a measurement, no verdict is a result, and nothing here may be quoted.
+    The real worksheet renders from <code class="mono">data/evalset/items.jsonl</code>
+    and the <code class="mono">resolution_trace</code> in
+    <code class="mono">CONTEXT.md</code> §5.<br>
+    <span class="k">Self-contained: no script, no network, no fonts, no build step.
+    Opens from a clean clone with the network off.</span>
+  </div>
+
+  <h2>Item <span class="mono">SYNTHETIC-0001 | 40 CFR 52.999</span></h2>
+  <table class="scroll"><tbody>
+    <tr><th>rule</th><td class="mono">FR Doc SYNTH-0001, published 2021-03-04</td></tr>
+    <tr><th>as-of text</th><td class="mono">2020 annual edition, revised 2020-07-01
+      <span class="pill">strictly before publication</span></td></tr>
+    <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+      <span class="k">— NARA published a live codification-defect note</span></td></tr>
+    <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+      <span class="k">— derived from the trace below, never asserted directly</span></td></tr>
+    <tr><th>failing designation</th><td class="mono">(c)(2)</td></tr>
+    <tr><th>failure class</th><td class="mono">target-does-not-exist</td></tr>
+  </tbody></table>
+
+  <div class="item">
+    <h3>Instruction 1 <span class="pill">operation: revise</span></h3>
+    <p class="mono k">“Amend § 52.999 by revising paragraph (b)(1).”</p>
+    <table><tbody>
+      <tr><th>anchor</th><td class="mono">“The Administrator shall review the plan.”</td></tr>
+      <tr><th>resolution level</th><td><span class="lvl exact">exact</span>
+        <span class="k">at char_offset 141 — an index into the section text as
+        supplied, not into a normalised copy</span></td></tr>
+      <tr><th>designation</th><td class="mono">(b)(1) — <b style="color:var(--exec)">exists</b></td></tr>
+      <tr><th>siblings</th><td class="mono">(b)(1), (b)(2)</td></tr>
+    </tbody></table>
+    <div class="txt">(a) Scope. This section applies to all designated sources.
+
+(b) Review.
+(b)(1) <mark>The Administrator shall review the plan.</mark>
+(b)(2) Review may occur more often at the Administrator's discretion.</div>
+  </div>
+
+  <div class="item">
+    <h3>Instruction 2 <span class="pill">operation: revise</span></h3>
+    <p class="mono k">“Further amend § 52.999 by revising paragraph (c)(2) to read as follows:”</p>
+    <table><tbody>
+      <tr><th>anchor</th><td class="k">none extractable — the instruction names a
+        target without quoting it</td></tr>
+      <tr><th>resolution level</th><td><span class="lvl none">none</span>
+        <span class="k">all three levels tried: exact, whitespace-collapsed,
+        alphanumeric-only</span></td></tr>
+      <tr><th>designation</th><td class="mono">(c)(2) —
+        <span class="absent">DOES NOT EXIST</span></td></tr>
+      <tr><th>siblings</th><td class="mono">(c)(1) — the deepest level on the path
+        to the target that does exist</td></tr>
+    </tbody></table>
+    <div class="txt">(c) Reporting.
+(c)(1) Each source shall report annually.
+<span class="absent">      ← (c)(2) is absent. The instruction revises a paragraph that was never codified.</span></div>
+    <p class="k" style="margin:10px 0 0">This is the row the whole tool exists for.
+      A pure quoted-string matcher no-ops here — there is no quoted anchor to match —
+      and the answer is a <b>designation-state fact</b>. That measurement is why
+      <code class="mono">CONTEXT.md</code> §6 puts designation resolution
+      <b>first</b>.</p>
+  </div>
+
+  <h2>Human-checkpoint queue</h2>
+  <p class="k">Unresolved cases route here with <b>both readings</b> and the paragraph
+     trace, rather than being decided by the tool. Ground rules 04 and 05.</p>
+  <ol class="queue">
+    <li><b class="mono">SYNTHETIC-0002 | 26 CFR 1.999-1</b> — the anchor resolves only
+      at <span class="lvl">alphanumeric-only</span>. The tool reports the level and
+      does <b>not</b> rule: a match that needed punctuation and whitespace dropped is
+      a match a drafter should see.
+      <span class="k">Both readings: (a) execute — the text is present modulo
+      formatting; (b) fail — the quoted string is not present as quoted.</span></li>
+    <li><b class="mono">SYNTHETIC-0003 | 12 CFR 702.999</b> — instructions 3 and 5 both
+      touch <span class="mono">(d)(1)</span>, and instruction 4 redesignates it.
+      Order-sensitive. <span class="k">The ordered-state ledger that would resolve this
+      is <b>counted removal #3</b> — declared not built, with its measured
+      justification, in <code class="mono">CHANGELOG.md</code>.</span></li>
+  </ol>
+
+  <h2>What the real worksheet adds</h2>
+  <table class="scroll">
+    <thead><tr><th>column</th><th>source</th><th>state</th></tr></thead>
+    <tbody>
+      <tr><td>anchor, operation, designation</td>
+        <td class="mono">data/evalset/items.jsonl → instructions[]</td>
+        <td>frozen, 41 pairs / n = 82</td></tr>
+      <tr><td>resolution level, char_offset, siblings</td>
+        <td class="mono">src/cfr_resolve.py</td><td>built, 41 goldens</td></tr>
+      <tr><td>section text with the anchor highlighted</td>
+        <td class="mono">items.jsonl → section_text</td>
+        <td>frozen, stripped, leakage-tested</td></tr>
+      <tr><td>collision trace</td><td class="mono">—</td>
+        <td>counted removal #3; the card ships, the code does not</td></tr>
+      <tr><td>human-checkpoint queue</td>
+        <td class="mono">runlog human_checkpoint records</td><td>logger built at CH-00</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <b>Provenance.</b> Shell built during the CH-03 → CHECKPOINT night run as CH-10
+    preparation. Synthetic fixture only. The disclaimer band above is a required
+    element of the shipped worksheet, not a placeholder — the real page keeps a band
+    in the same position naming the corpus, the as-of edition and the strip counts.
+  </footer>
+</div>
+</body>
+</html>
