@@ -15,7 +15,7 @@ are what makes it checkable rather than asserted.
 | Class | What it is | Count | Trajectories live at |
 |---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects | ~90 | `context/*-raw.json` (committed) |
-| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | 1 so far | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
+| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | 2 so far | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
 | **Solution** | the evaluation arms — the thing being measured | 0 so far | `docs/trajectories/<run_id>.jsonl` + `docs/evidence/runs/cost_ledger.csv` |
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
@@ -73,6 +73,48 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 ## Session log
 
 Newest first. Every build session appends one row here **and** exports its transcript.
+
+### CH-01 · 2026-08-30 · Claude Code · `claude-opus-5` · BUILD
+
+- **Scope:** govinfo ECFR `<EDNOTE>` harvest — `src/harvest_ednotes.py`,
+  `tests/test_harvest_ednotes.py`, `refetch.py`, the `data/ednotes/` freeze and
+  `docs/evidence/ch01-pool/`.
+- **Trajectory:** `docs/trajectories/build/CH-01.jsonl` (603 lines, 1,312,113 B;
+  686 home-path substitutions, every other scrub category an explicit 0).
+- **Wall-clock:** first turn 13:51:08 UTC → last 14:27:16 UTC = **36.1 min**.
+- **Measured usage** (216 assistant turns, read from the transcript's own `usage`
+  records — measured, not estimated). Snapshot taken before the final commit and
+  push, so true totals are marginally higher. Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id 577b7ed1-d9e2-49ed-aaf2-53f1454e71ce`;
+  committed output: `docs/evidence/ch01-pool/ch01-session-cost.txt`.
+
+  | | tokens |
+  |---|---|
+  | output | 325,400 |
+  | input, uncached | 432 |
+  | input, cache write | 518,495 |
+  | input, cache read | 34,786,003 |
+  | **total input** | **35,304,930** |
+
+- **Imputed cost** — same two bases as CH-00, and for the same reason: the
+  cache multipliers are assumed and were not re-verified this session, so the
+  assumption-free upper bound is printed beside them, never instead.
+
+  | Basis | USD |
+  |---|---|
+  | Upper bound — all input at full list, no cache discount | **184.659650** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **28.770755** |
+
+- **Against the economy instruction — a miss, stated plainly.** `prompts/CH-01.md`
+  asked for *"a fraction of"* CH-00's ~26 M input tokens. This session used
+  **35.3 M**, about **1.36×** CH-00 rather than a fraction, and 28.77 against 22.51
+  cache-adjusted. Attributable causes, in order of size: a 824 MB download and two
+  full-corpus re-parses (the extraction plus the determinism proof) that produced
+  long tool outputs across many turns; a `sed -i` that converted every `\n` escape
+  in the test file to a real newline and cost a restore-and-reapply cycle; and a
+  CRLF-on-a-`* -text`-repo mistake that had to be found and normalised. The first
+  was inherent to the task; the second and third were self-inflicted and are
+  recorded as such in `PROGRESS.md`.
 
 ### CH-00 · 2026-08-30 · Claude Code · `claude-opus-5` · BUILD
 
