@@ -11,6 +11,142 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## CH-03 REVIEW → FIX → ★ CHECKPOINT · 2026-08-31 · NIGHT RUN · Claude Code, `claude-opus-5` · **CH-03 FAILED, FIXED; CHECKPOINT GREEN**
+
+### The one thing worth reading
+
+**The gate caught a defect that would have invalidated the entire submission, and it
+caught it in this project's own work.**
+
+`src/eval_set.py` chose each negative as the **sorted-first** count-matched sibling.
+The positive is a *given* section; the negative is *chosen*. So negatives sat
+systematically earlier in section order, and **a six-line script reading only `frdoc`
+and `section` — no model, no CFR text, no instruction text — scored 0.8158 on the
+primary metric.** That beat `B0-agent` (0.6447) by 17 pp and cleared `GOOD.md`'s A1
+absolute bar of 0.80.
+
+`CONTEXT.md` §8 says exact instruction-count matching is non-negotiable because
+*"unmatched, a hardcoded threshold on instruction count beats the agent, and that is
+precisely how an earlier candidate died."* **The count was matched. The selection was
+not.** The guard was built against exactly this failure and it arrived through the
+neighbouring door.
+
+### What the review found
+
+| | severity | status |
+|---|---|---|
+| **F1** negative-selection leaks the label through section order | 🔴 SEVERE | **fixed** |
+| **F2** a volume with no `<PARTS>` header excludes its whole title silently | 🟠 MAJOR | **fixed** |
+| **F3** from-spec reimplementation differs on 545/8,752 elements (title-26 long forms) | 🟡 MINOR | recorded; known at Q9 / goldens P2 |
+
+**Mutations: 9 designed, 9 caught.** Including M7 — flipping the rule from
+sorted-**first** to sorted-**last**. So the suite pinned the declared rule exactly, and
+**no test asserted the rule was unbiased.** That is the lesson: *a test that pins a
+rule is not a test that the rule is correct.* New golden **G-D2** closes it.
+
+### The probe flips — hard rule 6, on the most important defect found so far
+
+| | before | after |
+|---|---:|---:|
+| label-blind sort-order attack | **0.8158** | **0.5610** |
+| negatives sorting before their positive | **32 / 38** | **21 / 41** |
+| exact two-sided binomial | **p = 0.000024** | **p = 1.0000** |
+| pairs / n | 38 / 76 | **41 / 82** |
+
+The reviewer's two RED tests are kept forever in `tests/test_review_ch03_findings.py`.
+
+### Is the fix a violation of hard rule 5?
+
+It changed a **pre-registered** rule after a number was seen, so the question has to be
+answered rather than waved away. Four things say no, and each is checkable:
+
+1. **No threshold moved.** Tolerance is still 0, the guards are still ≤ 0.25, `GOOD.md`
+   is untouched.
+2. **The change made the benchmark HARDER** — it removed a signal worth 0.8158 for free.
+3. **The stated justification was falsified empirically.** §3 called the rule
+   *"independent of any label"*. It is independent of the label and **correlated with it
+   through the selection asymmetry**, which is the property that mattered.
+4. **It was forced by an independent review**, whose FAIL verdict is committed at
+   `028c06a` **before** the fix.
+
+Recorded as ERRATA E-1/E-2 in the pre-registration; the original §3 text is untouched.
+
+### ★ CHECKPOINT — GREEN
+
+| | |
+|---|---|
+| **B0** | **0.4756** (predicted ≈ 0.50) · CI [0.4146, 0.5357] |
+| **B0-agent** | **0.6585** (predicted ≈ 0.75 — **9 pp below**) · CI [0.5385, 0.7703] |
+| **gap** | **+18.3 pp** |
+| **McNemar** | exact two-sided **p = 0.0059** (b=21, c=6, 27 discordant) |
+| **branch** | **GREEN** — Phase 2 proceeds |
+| B-script | 0.6098, within-pair permutation **p = 0.2355** |
+| spend | USD 1.936 of the 18.00 ceiling, 492 logged calls, 0 errors |
+
+STEP 0 did not fire (B0 = 0.4756 < 0.70), so the instruction text is not leaking
+executability and the branch table was evaluated on the as-run numbers.
+
+**The awkward fact, stated first: the corrected run is BETTER than the withdrawn one —
+AMBER became GREEN.** That is the shape of a result someone tuned for. What makes it
+not that is above: the change was forced by a review, it made the benchmark harder,
+`GOOD.md` was untouched, and the withdrawn figures are **committed, not deleted**, at
+`docs/evidence/checkpoint/withdrawn/` with a README saying why they are wrong. **B0
+went down** (0.5263 → 0.4756); the eval set changed, so the two runs are not comparable
+item-for-item and no causal story is offered beyond that.
+
+**`GOOD.md`'s success criterion is still not satisfiable.** It requires n ≥ 84; the
+corpus yields 82. 84 was not moved to 82, and A1 will fail on the n clause alone
+whatever it scores.
+
+### Model sensitivity — a flag, not a finding
+
+On the **same 20 items**: haiku **+20.0 pp** from the CFR text, `claude-sonnet-5`
+**−30.0 pp**. The gap reverses across tiers, and it widened from the first run's −15.0.
+
+`QUESTIONS.md` Q1 anticipated the *opposite* failure — a cheap model unable to use the
+text. Three reasons not to over-read it, printed with the result: n = 20 and one rep;
+**one rep gives no interval at all**; and **`claude-sonnet-5` rejects `temperature`**
+(HTTP 400, measured), so it ran at the model default while every haiku arm ran at 0. A
+sampling difference is a live alternative explanation and **has not been ruled out**.
+
+### Also built
+
+- **CH-05 `cfr_resolve`** — designation state FIRST and unconditionally, then the
+  anchor; `found` and `designation_exists` independent, the latter **NULL** when nothing
+  was asked; three declared levels tried in order with **alphanumeric-only not folding
+  case**; `char_offset` indexes the caller's string at every level and is asserted
+  before return. 41 goldens. ERRATA E-1 records that its first run failed six ways and
+  **none of the six was the golden's fault** — five were the code being incomplete
+  against its own docstring, one was a transcription error in the test.
+- **496 per-item trajectories bundled** into 8 JSONL, one per arm-rep, matching the
+  existing `docs/trajectories/build/` convention. Every record survives; the per-item
+  directory is git-ignored because 496 tracked files would blow the pre-commit guard,
+  and the guard is right — the 50 MB cap is the one limit that must not move.
+
+### Decisions
+
+- **Class A — none taken. Three raised earlier tonight (Q15, Q16, Q17) remain open.**
+- **Class B — the negative-selection rule**, above. Recorded as ERRATA rather than an
+  edit to the pre-registration's original text.
+- **Class B — a volume with no `<PARTS>` header covers the whole title.** Searching it
+  and finding nothing is a real answer; refusing to search it and reporting absence is
+  a fabricated one.
+- **Class C — every hardcoded `n` in the checkpoint report is now derived from the
+  data.** The first regeneration printed "n = 76" beside n = 82 figures. A report that
+  hardcodes the number it is reporting on is one edit away from lying.
+
+### Gate
+**CH-03: FAILED once, fixed, re-review in flight** (strike 1 of 2 used). CH-04 and
+CH-05 are **built, unreviewed**. The CHECKPOINT is numbers-only and needs no gate.
+
+### State for the next session
+`data/evalset/` is **41 pairs / n = 82** and is the primary set;
+`data/evalset-restricted/` is Q16 reading (i) at 1 pair. The CHECKPOINT is **GREEN** on
+the corrected set. **Read Q15, Q16 and Q17 before quoting any CH-03 number**, and read
+`docs/reviews/REVIEW_CH-03.md` before quoting any eval-set number at all.
+
+---
+
 ## CH-03 · 2026-08-31 · NIGHT RUN (unattended) · Claude Code, `claude-opus-5` · GATE: **FULL + mutation** · **BUILT, review pending**
 
 ### Scope
