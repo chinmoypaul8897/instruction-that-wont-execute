@@ -79,22 +79,23 @@ Newest first. Every build session appends one row here **and** exports its trans
 - **Scope:** govinfo ECFR `<EDNOTE>` harvest — `src/harvest_ednotes.py`,
   `tests/test_harvest_ednotes.py`, `refetch.py`, the `data/ednotes/` freeze and
   `docs/evidence/ch01-pool/`.
-- **Trajectory:** `docs/trajectories/build/CH-01.jsonl` (603 lines, 1,312,113 B;
-  686 home-path substitutions, every other scrub category an explicit 0).
-- **Wall-clock:** first turn 13:51:08 UTC → last 14:27:16 UTC = **36.1 min**.
-- **Measured usage** (216 assistant turns, read from the transcript's own `usage`
-  records — measured, not estimated). Snapshot taken before the final commit and
-  push, so true totals are marginally higher. Regenerate with
+- **Trajectory:** `docs/trajectories/build/CH-01.jsonl` (672 lines, 1,433,689 B;
+  772 home-path substitutions, every other scrub category an explicit 0).
+- **Wall-clock:** first turn 13:51:08 UTC → last 14:30:36 UTC = **39.5 min**.
+- **Measured usage** (237 assistant turns, read from the transcript's own `usage`
+  records — measured, not estimated). Snapshot taken at the final export; the commit
+  that lands these numbers is necessarily not in them, so the true totals are
+  marginally higher — the same structural caveat CH-00 recorded. Regenerate with
   `python docs/evidence/ch00_session_cost.py --session-id 577b7ed1-d9e2-49ed-aaf2-53f1454e71ce`;
   committed output: `docs/evidence/ch01-pool/ch01-session-cost.txt`.
 
   | | tokens |
   |---|---|
-  | output | 325,400 |
-  | input, uncached | 432 |
-  | input, cache write | 518,495 |
-  | input, cache read | 34,786,003 |
-  | **total input** | **35,304,930** |
+  | output | 348,831 |
+  | input, uncached | 474 |
+  | input, cache write | 546,507 |
+  | input, cache read | 40,546,204 |
+  | **total input** | **41,093,185** |
 
 - **Imputed cost** — same two bases as CH-00, and for the same reason: the
   cache multipliers are assumed and were not re-verified this session, so the
@@ -102,12 +103,12 @@ Newest first. Every build session appends one row here **and** exports its trans
 
   | Basis | USD |
   |---|---|
-  | Upper bound — all input at full list, no cache discount | **184.659650** |
-  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **28.770755** |
+  | Upper bound — all input at full list, no cache discount | **214.186700** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **32.411916** |
 
 - **Against the economy instruction — a miss, stated plainly.** `prompts/CH-01.md`
   asked for *"a fraction of"* CH-00's ~26 M input tokens. This session used
-  **35.3 M**, about **1.36×** CH-00 rather than a fraction, and 28.77 against 22.51
+  **41.1 M**, about **1.6×** CH-00 rather than a fraction, and 32.41 against 22.51
   cache-adjusted. Attributable causes, in order of size: a 824 MB download and two
   full-corpus re-parses (the extraction plus the determinism proof) that produced
   long tool outputs across many turns; a `sed -i` that converted every `\n` escape
