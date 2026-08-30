@@ -19,8 +19,8 @@ quietly succeeded.
 
 | STAGE | WHAT YOU TRIED AND WHY | EVIDENCE | DECISION / LEARNING |
 |---|---|---|---|
-| Baseline | *(pending — CHECKPOINT)* | | |
-| Iteration 1 | *(pending — CH-05 `cfr_resolve`)* | | |
+| Baseline | **B0** (one prompt, instruction only) vs **B0-agent** (same model + point-in-time CFR text). The project's headline claim is that an amendatory instruction carries no evidence of its own executability; B0 is that sentence turned into an experiment. | **B0 0.5263 · B0-agent 0.6447 · gap +11.8 pp · McNemar exact p = 0.1221 (b=18 c=9, 27 discordant) · n = 76, 38 pairs, 3 reps, `claude-haiku-4-5-20251001` @ t=0.** Also **B-script 0.5921, within-pair permutation p = 0.5230** — sitting exactly on its own null median. `docs/evidence/checkpoint/`, `docs/evidence/ch04-scorer/` | **AMBER.** Phase 2 proceeds. B0 landed on its predicted 0.50; B0-agent came in **10.5 pp below** its predicted 0.75. The gap clears the 8 pp threshold and the p-value does not, and at n = 76 that was foreseeable: `GOOD.md` fixed the detectable floor at 7.9 pp before the run. **This design needs n ≈ 104 (52 pairs) for power at the observed discordance** — we have 76. The agent is built to move the gap, not to rescue the p-value. |
+| Iteration 1 | **CH-05 `cfr_resolve`** — deterministic designation-state and quoted-anchor resolution, designation FIRST. **Observed failure it targets:** B0-agent's missed-defect rate is **0.4737** — it reads the text and still misses nearly half the defects, because reading is not checking. | *(card committed at `cb65539`, before the capability is wired into an arm; the measured result belongs to CH-08)* | **Prediction, fixed now: A1 moves the missed-defect rate below 0.25 and the gap above 20 pp.** If it does not, the card stays and says so. |
 | Iteration 2 | *(pending — CH-06 `SKILL.md` + note-emission contract)* | | |
 | Iteration 3 | *(pending — CH-07 ordered-state ledger, **pre-declared as not built**)* | | |
 | Final | *(pending — CH-08)* | | |

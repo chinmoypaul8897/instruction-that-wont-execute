@@ -1,0 +1,34 @@
+{
+  "arm": "B0-sonnet",
+  "errors": [],
+  "model": "claude-sonnet-5",
+  "n_items": 20,
+  "n_predicted": 20,
+  "predictions": {
+    "05-8447|60.52a": "",
+    "05-8447|75.6": "WILL_EXECUTE",
+    "2011-27587|2.1093": "WILL_EXECUTE",
+    "2011-27587|80.905": "WILL_EXECUTE",
+    "2015-01571|1806.1": "WILL_EXECUTE",
+    "2015-01571|1942.8": "WILL_EXECUTE",
+    "2015-15249|1.924": "WILL_EXECUTE",
+    "2015-15249|87.475": "",
+    "2016-03298|1011.7": "WILL_EXECUTE",
+    "2016-03298|1150.35": "",
+    "2016-08827|520.100": "WILL_EXECUTE",
+    "2016-08827|522.1193": "WILL_EXECUTE",
+    "2016-09949|1436.3": "WILL_EXECUTE",
+    "2016-09949|1436.8": "WILL_EXECUTE",
+    "2016-13651|425.604": "WILL_EXECUTE",
+    "2016-13651|425.610": "WILL_EXECUTE",
+    "2016-13983|165.502": "WILL_EXECUTE",
+    "2016-13983|165.518": "WILL_EXECUTE",
+    "2016-18075|765.252": "WILL_EXECUTE",
+    "2016-18075|766.102": "WILL_EXECUTE"
+  },
+  "rep": 1,
+  "usage": {
+    "in": 11514,
+    "out": 252
+  }
+}

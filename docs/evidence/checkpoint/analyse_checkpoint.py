@@ -41,6 +41,7 @@ from score import (  # noqa: E402
     bootstrap_ci_clustered,
     detectable_effect,
     mcnemar,
+    n_needed_for_power,
     normalise_verdict,
     paired_accuracy_vectors,
     score,
@@ -241,6 +242,20 @@ def main() -> int:
     p(f"  n = {len(items)}. THE CRITERION IS NOT SATISFIABLE ON THIS CORPUS and 84")
     p(f"  was not moved to {len(items)}.")
     p("")
+    need = n_needed_for_power(used["mcnemar"]["b_only_a_correct"],
+                             used["mcnemar"]["c_only_b_correct"], len(items))
+    if verdict == "AMBER":
+        p("  plan.md's AMBER branch: \"the README leads with effect size, its")
+        p("  confidence interval, and THE n THIS DESIGN WOULD NEED FOR POWER.\"")
+        p("")
+        p(f"    observed discordance      b={need['observed_b']} c={need['observed_c']}"
+          f"  ({need['observed_discordant']} of {need['n_items']}, rate "
+          f"{need['discordant_rate']:.3f})")
+        p(f"    discordant pairs needed   {need['discordant_needed']}")
+        p(f"    n NEEDED FOR POWER        {need['n_needed']}"
+          f"   ({need['pairs_needed']} pairs)  vs the {len(items)} we have")
+        p(f"    {need['note']}")
+        p("")
 
     # sensitivity subset, if present
     sb0, sb0a = load_arm("B0", tag="-sonnet"), load_arm("B0-agent", tag="-sonnet")
@@ -249,22 +264,55 @@ def main() -> int:
         sub_ids = set(sb0[0]["predictions"]) | {e["item_id"] for e in sb0[0]["errors"]}
         sub = [i for i in items if i["item_id"] in sub_ids]
         s0, s0a = evaluate(sub, sb0), evaluate(sub, sb0a)
+        # The ONLY fair comparison is haiku on the SAME 20 items. Comparing a
+        # 20-item sonnet gap against a 76-item haiku gap would be comparing two
+        # different item sets and calling the difference a model effect.
+        h0, h0a = evaluate(sub, b0_reps), evaluate(sub, b0a_reps)
         sens = {"n": len(sub),
                 "b0": s0["score"]["accuracy"], "b0_agent": s0a["score"]["accuracy"],
-                "gap_pp": 100.0 * (s0a["score"]["accuracy"] - s0["score"]["accuracy"])}
+                "gap_pp": 100.0 * (s0a["score"]["accuracy"] - s0["score"]["accuracy"]),
+                "haiku_same_items_b0": h0["score"]["accuracy"],
+                "haiku_same_items_b0_agent": h0a["score"]["accuracy"],
+                "haiku_same_items_gap_pp": 100.0 * (h0a["score"]["accuracy"]
+                                                    - h0["score"]["accuracy"]),
+                "haiku_full_corpus_gap_pp": first["gap_pp"]}
         p("=" * 78)
         p("MODEL-SENSITIVITY CHECK - claude-sonnet-5, 1 rep, the pre-registered subset")
         p("=" * 78)
         p("")
-        p(f"  n = {sens['n']}   B0 {sens['b0']:.4f}   B0-agent {sens['b0_agent']:.4f}"
-          f"   gap {sens['gap_pp']:+.1f} pp")
-        p(f"  haiku gap on the same items would need the subset restriction; the")
-        p(f"  full-corpus haiku gap is {first['gap_pp']:+.1f} pp.")
-        p("  QUESTIONS.md Q1: if haiku shows no gap and sonnet does, that is a")
-        p("  FINDING, not a failure, and the RED branch is not taken on cheap")
-        p("  inference alone.")
-        p("  LIMITATION: sonnet-5 rejects `temperature`, so this subset ran at the")
-        p("  model default while every haiku arm ran at 0. Reported, not hidden.")
+        p(f"  {'arm':<26}{'B0':>10}{'B0-agent':>12}{'gap':>10}")
+        p(f"  {'claude-sonnet-5, n=20':<26}{sens['b0']:>10.4f}"
+          f"{sens['b0_agent']:>12.4f}{sens['gap_pp']:>+9.1f} pp")
+        p(f"  {'haiku, THE SAME 20 items':<26}{sens['haiku_same_items_b0']:>10.4f}"
+          f"{sens['haiku_same_items_b0_agent']:>12.4f}"
+          f"{sens['haiku_same_items_gap_pp']:>+9.1f} pp")
+        p(f"  {'haiku, full corpus n=76':<26}{b0['score']['accuracy']:>10.4f}"
+          f"{b0a['score']['accuracy']:>12.4f}{first['gap_pp']:>+9.1f} pp")
+        p("")
+        p("  The haiku row on the SAME 20 items is the only fair comparison. A")
+        p("  20-item sonnet gap set against a 76-item haiku gap would be two")
+        p("  different item sets with the difference called a model effect.")
+        p("")
+        p("  QUESTIONS.md Q1 anticipated the OPPOSITE failure - that a cheap model")
+        p("  would fail to use the text and we would kill a sound project on weak")
+        p("  inference. What was measured is the reverse: the CHEAPER model gains")
+        p("  from the text and the STRONGER one loses. The RED branch was not taken")
+        p("  and this does not rescue or threaten the AMBER branch either way, which")
+        p("  is decided on the full-corpus haiku arms alone.")
+        p("")
+        p("  THREE REASONS NOT TO OVER-READ THIS, stated before anyone else says them:")
+        p("   1. n = 20, ONE rep. The haiku arms are n = 76 and three reps.")
+        p("   2. A CONFOUND, not merely a limitation: sonnet-5 REJECTS `temperature`")
+        p("      (HTTP 400, measured), so this subset ran at the model default while")
+        p("      every haiku arm ran at 0. A sampling difference is a live")
+        p("      alternative explanation for a reversal of this size and it has not")
+        p("      been ruled out.")
+        p("   3. One rep gives no variance estimate at all, so the -15.0 pp has no")
+        p("      interval around it.")
+        p("")
+        p("  It is reported because it was pre-registered and run, not because it is")
+        p("  a result this project wanted. CH-08 can settle it with reps at a")
+        p("  matched sampling setting; tonight it is a flag, not a finding.")
         p("")
 
     text = w.getvalue()
@@ -284,6 +332,9 @@ def main() -> int:
         "b0_agent_per_rep": b0a["per_rep_accuracy"],
         "usage": {"b0": b0["usage"], "b0_agent": b0a["usage"]},
         "detectable_effect": power,
+        "n_needed_for_power": n_needed_for_power(
+            used["mcnemar"]["b_only_a_correct"],
+            used["mcnemar"]["c_only_b_correct"], len(items)),
         "sensitivity": sens,
         "n": len(items),
     }, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")

@@ -35,7 +35,15 @@ from runlog import RunLogger, SpendCeilingExceeded  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_EVALSET = REPO / "data/evalset/items.jsonl"
-DEFAULT_TRAJ = REPO / "docs/trajectories/arms"
+# RunLogger writes one file per run. That is its contract and it is not changed -
+# but 76 items x 3 reps x 2 arms is 496 files, and the pre-commit guard caps the
+# tracked tree at 300 because the 50 MB submission cap is the one limit that must not
+# move. So the per-item files land in a git-ignored subdirectory and `bundle()`
+# concatenates them into one JSONL per arm-rep, which is the convention
+# docs/trajectories/build/ already uses. EVERY RECORD SURVIVES - nothing is sampled,
+# summarised or dropped.
+DEFAULT_TRAJ = REPO / "docs/trajectories/arms/per-item"
+BUNDLE_DIR = REPO / "docs/trajectories/arms"
 DEFAULT_LEDGER = REPO / "docs/evidence/runs/cost_ledger.csv"
 DEFAULT_OUT = REPO / "docs/evidence/checkpoint"
 
@@ -252,6 +260,26 @@ def run_arm(key, items, model, rep, temperature, traj_dir, ledger_path,
             "n_items": len(items), "n_predicted": len(preds)}
 
 
+def bundle(arm_label: str, rep: int) -> int:
+    """Concatenate one arm-rep's per-item trajectories into a single committed JSONL.
+
+    Sorted by filename so the bundle is byte-reproducible (hard rule 9). Every record
+    is copied verbatim - this is a container change, not a summary, and a trajectory
+    that had been sampled or trimmed would stop being evidence.
+    """
+    BUNDLE_DIR.mkdir(parents=True, exist_ok=True)
+    files = sorted(DEFAULT_TRAJ.glob(f"{arm_label}__*__rep{rep}.jsonl"))
+    out = BUNDLE_DIR / f"{arm_label}-rep{rep}.jsonl"
+    n = 0
+    with open(out, "w", encoding="utf-8", newline="\n") as fh:
+        for f in files:
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    fh.write(line + "\n")
+                    n += 1
+    return n
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("cmd", choices=["run", "sensitivity", "check"])
@@ -297,6 +325,10 @@ def main(argv=None) -> int:
                 json.dumps(r, indent=2, sort_keys=True) + "\n",
                 encoding="utf-8", newline="\n")
     print(f"  wrote {len(results)} run file(s) to {out}")
+    for arm in arms:
+        for rep in range(1, reps + 1):
+            n = bundle(f"{arm}{tag}", rep)
+            print(f"  bundled {arm}{tag}-rep{rep}.jsonl  {n} records")
     return 0
 
 

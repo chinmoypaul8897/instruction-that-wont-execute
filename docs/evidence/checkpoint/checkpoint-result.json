@@ -1,0 +1,123 @@
+{
+  "as_run": {
+    "b0_accuracy": 0.5263157894736842,
+    "b0_agent_accuracy": 0.6447368421052632,
+    "gap_pp": 11.842105263157897,
+    "mcnemar": {
+      "b_only_a_correct": 18,
+      "c_only_b_correct": 9,
+      "n_discordant": 27,
+      "p_value": 0.12207812070846558,
+      "test": "exact two-sided binomial (McNemar)"
+    }
+  },
+  "b0": {
+    "accuracy": 0.5263157894736842,
+    "failure": 36,
+    "false_defect_count": 2,
+    "false_defect_rate": 0.05263157894736842,
+    "guard_false_defect_max": 0.25,
+    "guard_false_defect_pass": true,
+    "guard_missed_defect_max": 0.25,
+    "guard_missed_defect_pass": false,
+    "missed_defect_count": 34,
+    "missed_defect_rate": 0.8947368421052632,
+    "n": 76,
+    "n_negatives": 38,
+    "n_positives": 38,
+    "success": 40,
+    "unparseable_or_absent": 2
+  },
+  "b0_agent": {
+    "accuracy": 0.6447368421052632,
+    "failure": 27,
+    "false_defect_count": 9,
+    "false_defect_rate": 0.23684210526315788,
+    "guard_false_defect_max": 0.25,
+    "guard_false_defect_pass": true,
+    "guard_missed_defect_max": 0.25,
+    "guard_missed_defect_pass": false,
+    "missed_defect_count": 18,
+    "missed_defect_rate": 0.47368421052631576,
+    "n": 76,
+    "n_negatives": 38,
+    "n_positives": 38,
+    "success": 49,
+    "unparseable_or_absent": 1
+  },
+  "b0_agent_ci": {
+    "alpha": 0.05,
+    "ci_high": 0.7567567567567568,
+    "ci_low": 0.5285714285714286,
+    "n_clusters": 34,
+    "note": "percentile bootstrap over FR documents, not over items",
+    "reps": 2000,
+    "seed": 20260831
+  },
+  "b0_agent_per_rep": [
+    0.6447368421052632,
+    0.6447368421052632,
+    0.6447368421052632
+  ],
+  "b0_ci": {
+    "alpha": 0.05,
+    "ci_high": 0.5882352941176471,
+    "ci_low": 0.4625,
+    "n_clusters": 34,
+    "note": "percentile bootstrap over FR documents, not over items",
+    "reps": 2000,
+    "seed": 20260831
+  },
+  "b0_per_rep": [
+    0.5263157894736842,
+    0.5131578947368421,
+    0.5263157894736842
+  ],
+  "because": "gap 11.8 pp >= 8.0 and p 0.1221 >= 0.05",
+  "branch": "AMBER",
+  "detectable_effect": {
+    "alpha": 0.05,
+    "min_detectable_gap_pp": 7.894736842105263,
+    "min_discordant_all_one_way": 6,
+    "n_items": 76,
+    "n_pairs": 38,
+    "note": "the smallest ALL-ONE-WAY discordant count that clears alpha; a mixed split needs more. This is a floor on the detectable effect, not a power calculation.",
+    "target_power": 0.8
+  },
+  "evaluated_on": "as-run",
+  "n": 76,
+  "n_needed_for_power": {
+    "alpha": 0.05,
+    "discordant_needed": 37,
+    "discordant_rate": 0.35526315789473684,
+    "n_items": 76,
+    "n_needed": 104,
+    "note": "projection holding the OBSERVED b:c ratio and discordant rate fixed. It is an extrapolation from one measurement, not a power calculation from an assumed effect size.",
+    "observed_b": 18,
+    "observed_c": 9,
+    "observed_discordant": 27,
+    "pairs_needed": 52
+  },
+  "sensitivity": {
+    "b0": 0.45,
+    "b0_agent": 0.3,
+    "gap_pp": -15.000000000000002,
+    "haiku_full_corpus_gap_pp": 11.842105263157897,
+    "haiku_same_items_b0": 0.5,
+    "haiku_same_items_b0_agent": 0.7,
+    "haiku_same_items_gap_pp": 19.999999999999996,
+    "n": 20
+  },
+  "step0_fired": false,
+  "step0_rerun": null,
+  "usage": {
+    "b0": {
+      "in": 89157,
+      "out": 1888
+    },
+    "b0_agent": {
+      "in": 765162,
+      "out": 1848
+    }
+  }
+}

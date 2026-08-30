@@ -49,3 +49,10 @@ dist/
 
 # Windows/Cygwin crash dumps - these land in the repo root unannounced
 *.stackdump
+
+# Per-item agent trajectories. Hard rule 10 requires every run logged, and every
+# record survives - in the BUNDLED docs/trajectories/arms/<arm>-rep<N>.jsonl, one
+# file per arm-rep, which is the same convention docs/trajectories/build/ already
+# uses. 496 individual files would blow the pre-commit tracked-file guard, and the
+# guard is right: the 50 MB submission cap is the one limit that must not move.
+docs/trajectories/*/per-item/
