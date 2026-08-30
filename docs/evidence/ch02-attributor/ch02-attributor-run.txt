@@ -1,0 +1,97 @@
+==============================================================================
+CH-02 - AMDPAR CARRY-FORWARD ATTRIBUTOR: THE MEASUREMENT
+==============================================================================
+
+EXCLUSION LADDER - CH-01 defect note -> FR document
+  section-level defect notes with an FR citation (CH-01)    85
+  minus no date                                            0
+  minus no issue file                                      0
+  minus volume mismatch                                    0
+  minus unresolved page                                    0
+  RESOLVED                                                85
+  kept + removed == received                              OK
+  distinct FR documents retrieved                         70
+  AMDPAR elements in them                               8752
+
+  resolution route taken, per citation:
+    neighbour-day:2020-07-16                1
+    neighbour-day:2022-05-24                1
+    page-unique                            10
+    section-match-disambiguated            16
+    section-match-sole                     57
+
+==============================================================================
+COMPLETENESS - CONTEXT.md section 8's definition, verbatim
+==============================================================================
+  (attributed to a section AND parsed into at least one complete
+   (operation, anchor OR designation) triple) / (total AMDPAR elements)
+
+  spec_literal
+    completeness      0.5080   (4446 / 8752)
+    attribution rate  0.7613   attributed=6663  unattributable=2089
+    parse rate        0.6672   parsed=5839
+    part_mismatch     699   unclosed_quote=5
+    by operation      {"add": 548, "amend": 880, "none": 1074, "redesignate": 179, "remove": 4060, "revise": 2011}
+
+  extended
+    completeness      0.6643   (5814 / 8752)
+    attribution rate  0.9865   attributed=8634  unattributable=118
+    parse rate        0.6672   parsed=5839
+    part_mismatch     699   unclosed_quote=5
+    by operation      {"add": 548, "amend": 880, "none": 1074, "redesignate": 179, "remove": 4060, "revise": 2011}
+
+  WHICH PRE-REGISTERED BRANCH (plan.md CH-02 / prompts/CH-02.md section 4)
+    spec_literal  0.5080  ->  DOCUMENTED FAILURE
+    extended      0.6643  ->  DOCUMENTED FAILURE
+    The gate is taken on spec_literal, which is CONTEXT.md section 8's own
+    detector. Both figures land in the same branch, so the choice of
+    detector does not decide the outcome.
+
+==============================================================================
+PER-DOCUMENT DISTRIBUTION
+==============================================================================
+  spec_literal: n=70 docs   min=0.000  p25=0.417  median=0.610  p75=0.737  max=0.900
+    documents >= 0.90 :   1  (10 AMDPARs)
+    documents >= 0.80 :   9
+    documents == 0.00 :  11
+  extended: n=70 docs   min=0.000  p25=0.562  median=0.661  p75=0.759  max=0.950
+    documents >= 0.90 :   2  (110 AMDPARs)
+    documents >= 0.80 :  12
+    documents == 0.00 :   2
+
+  The global figure is dominated by a handful of very large rules, so the
+  per-document spread above is the more honest reading of the parser:
+    2015-01571    2177 AMDPARs (24.9% of the corpus)  Rural Development Regulations—Update t
+    2014-08744     838 AMDPARs ( 9.6% of the corpus)  Federal Acquisition Regulation; Positi
+    2021-22144     649 AMDPARs ( 7.4% of the corpus)  Federal Acquisition Regulation: Revisi
+    2024-17239     379 AMDPARs ( 4.3% of the corpus)  Education Department General Administr
+    2024-07002     338 AMDPARs ( 3.9% of the corpus)  New Source Performance Standards for t
+    top 1 = 24.9% of every AMDPAR measured; top 5 = 50.1%
+
+==============================================================================
+PAIR YIELD - the project's largest unknown, now measured
+==============================================================================
+  A PAIR is one defect section plus a count-matched sibling: another section
+  amended by the SAME FR document, with the SAME number of amendatory
+  instructions, carrying no defect note.
+
+  defect sections                                   85
+  ... with >= 1 EXACT count-matched sibling         51
+  ... without                                       34
+      of which the document amends only it            4
+      of which siblings exist but no count match     20
+      of which no AMDPAR attributes to it at all     10
+
+  YIELD (exact)          = 0.6000
+  PROJECTED PAIRS        = 85 x 0.6000 = 51
+  TARGET                 = 42
+  VERDICT                = CLEARS at 1.21x
+
+  +/-1 instruction matching: yield=0.6824  pairs=58   ** NOT ADOPTED **
+  Reported only so the architect can see the headroom. CONTEXT.md section 8:
+  negatives are matched EXACTLY on instruction count, 'non-negotiable -
+  unmatched, a hardcoded threshold on instruction count beats the agent'.
+  The exact rule clears the target on its own, so there is not even a
+  temptation to relax it.
+
+wrote completeness.md and pair-yield.md beside this script

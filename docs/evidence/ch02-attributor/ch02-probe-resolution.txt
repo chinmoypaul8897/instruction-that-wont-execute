@@ -1,0 +1,40 @@
+==============================================================================
+PROBE 1 - the contents route indexes a circular over the rule that amends
+==============================================================================
+
+FR-2014-04-29.xml  citation page 24198  cited section 6.302-1
+  OLD  resolve_page      2014-08743   amdpars=   0  pages=24191-24192  route=both-disagree
+                 subject: Federal Acquisition Regulation; Federal Acquisition Circular 200
+  NEW  resolve_citation  2014-08744   amdpars= 838  pages=24192-24253  route=section-match-disambiguated
+                 subject: Federal Acquisition Regulation; Positive Law Codification of Tit
+  does the OLD document amend the cited section? False
+  does the NEW document amend the cited section? True
+
+FR-2025-11-24.xml  citation page 52865  cited section 887.11
+  OLD  resolve_page      2025-20827   amdpars=   2  pages=52858-52860  route=both-disagree
+                 subject: Prior Balance Replacement Funds
+  NEW  resolve_citation  2025-20831   amdpars=  16  pages=52862-52865  route=section-match-disambiguated
+                 subject: Prior Balance Replacement Funds
+  does the OLD document amend the cited section? False
+  does the NEW document amend the cited section? True
+
+==============================================================================
+PROBE 2 - the note's date is the FILING date, and drifts a day either way
+==============================================================================
+
+cited as 2020-07-15, published 2020-07-16  page 43138  section 90.209
+  OLD  in the noted issue      NOTHING RESOLVED           route=unresolved
+  NEW  in the neighbour issue  2020-11897   amdpars=  28  pages=43124-43141  route=section-match-sole
+                 subject: Review of the Commission's Rules Governing 896-901/935-940 MHz B
+
+cited as 2022-05-25, published 2022-05-24  page 31688  section 1653.2
+  OLD  in the noted issue      NOTHING RESOLVED           route=unresolved
+  NEW  in the neighbour issue  2022-10875   amdpars= 211  pages=31669-31696  route=section-match-sole
+                 subject: Transition to a New Recordkeeping System
+
+==============================================================================
+VERDICT
+==============================================================================
+  Both states reproduce: the old rule fails on all four citations, the new
+  rule resolves all four to a document that actually amends the cited
+  section. Kept forever (hard rule 6).
