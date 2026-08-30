@@ -1,0 +1,76 @@
+==========================================================================
+SPEC-FIX-2 - CONTEXT.md v1.1 EDIT VERIFICATION
+==========================================================================
+base (pre-edit) commit : 0613d54
+no measurement was taken in this chunk; the attributor was not re-run.
+
+-- 1. THE THREE CHANGES ARE PRESENT --------------------------------------
+  [PASS] change 1 - the failure is recorded  -- 1 occurrence(s)
+  [PASS] change 1 - the rejected metric is named as rejected  -- 1 occurrence(s)
+  [PASS] change 1 - the sabotage control is cited as the reason  -- 1 occurrence(s)
+  [PASS] change 1 - Q10's two unfixed spellings recorded  -- 1 occurrence(s)
+  [PASS] change 2 - word form in the detector  -- 1 occurrence(s)
+  [PASS] change 2 - case-sensitivity stated explicitly  -- 1 occurrence(s)
+  [PASS] change 2 - justified independently of the number  -- 1 occurrence(s)
+  [PASS] change 2 - the 0.9865 over-count declared  -- 1 occurrence(s)
+  [PASS] change 3 - the part-boundary reset  -- 1 occurrence(s)
+  [PASS] change 3 - the 8-point cost stated, not hidden  -- 1 occurrence(s)
+  [PASS] change 3 - Q12(a)'s correction to the 699  -- 1 occurrence(s)
+  [PASS] change 4 - version bumped  -- 1 occurrence(s)
+  [PASS] change 4 - change-log row  -- 1 occurrence(s)
+
+-- 2. THE REPLACED TEXT IS GONE (hard rule 16) ---------------------------
+  [PASS] v1.0 sign-only detector step 3 - the v1.0 LINE is gone  -- as a substring it appears 0 time(s)
+  [PASS] v1.0 bare `current_section` step 2 (no reset) - the v1.0 LINE is gone  -- as a substring it appears 1 time(s) (it is a prefix of its own v1.1 replacement)
+  [PASS] v1.0 version header - the v1.0 LINE is gone  -- as a substring it appears 0 time(s)
+
+-- 3. NOTHING ELSE IN CONTEXT.md CHANGED ---------------------------------
+  [PASS] exactly 3 non-blank lines removed  -- removed 3
+       removed[0]: **Version:** v1.0 · 2026-08-30 03:20 UTC
+       removed[1]: 2. Maintain `current_section`, initially null.
+       removed[2]: 3. If the element names a section (matches a `§\s*[\d.]+[a-z]?` citation in its own text...
+  [PASS] every removed line is one of the three declared edit targets
+       added   : 15 non-blank lines (all new v1.1 text)
+
+-- 4. THE GATE ITSELF IS BYTE-IDENTICAL ----------------------------------
+  [PASS] the completeness definition is unchanged and present once
+  [PASS] the definition was NOT replaced by attribution/total  -- the refused metric must not appear as a definition in CONTEXT.md
+  [PASS] 'attribution alone is not the bar' still stands
+  [PASS] the count of 0.90 occurrences did not fall  -- before=1 after=4
+
+-- 5. DID ANY CHANGE MAKE A FAILING NUMBER PASS? -------------------------
+  [PASS] CH-02's committed completeness figures still read 0.5080 / 0.6643
+  [PASS] spec_literal 0.5080 is still below the 0.90 gate
+  [PASS] spec_literal 0.5080 is still in the '< 0.80 documented failure' branch
+  [PASS] extended 0.6643 is still below the 0.90 gate
+  [PASS] extended 0.6643 is still in the '< 0.80 documented failure' branch
+       The v1.1 detector change can at most move the gated figure from the
+       sign-only 0.5080 toward the extended 0.6643. 0.6643 < 0.80, so the
+       branch CH-02 lands in is UNCHANGED. The part-boundary reset moves the
+       figure DOWN. Neither change, nor both together, reaches 0.80 - let
+       alone 0.90. Case-sensitivity can only REMOVE detections, never add.
+  [PASS] therefore: no change in this chunk makes a failing number pass
+
+-- 6. THE READ-ONLY AND PROTECTED PATHS WERE NOT TOUCHED -----------------
+       paths changed since 0613d54:
+         CONTEXT.md
+         QUESTIONS.md
+         prompts/CH-02.md
+         prompts/SPEC-FIX-1.md
+         prompts/SPEC-FIX-2.md
+  [PASS] no read-only path changed  -- data/ src/ tests/ and prior chunks' evidence are read-only here
+  [PASS] no protected file changed  -- plan.md PROCESS.md CLAUDE.md PROVENANCE.md GOOD.md
+  [PASS] every changed path is inside the scope fence
+
+-- 7. FILE HYGIENE -------------------------------------------------------
+  [PASS] CONTEXT.md line endings still uniformly CRLF, as they were at v1.0  -- CRLF=331 LF=331
+  [PASS] QUESTIONS.md line endings still uniformly LF
+  [PASS] the Q11 ruling is recorded verbatim
+  [PASS] Q11 ruling appears exactly once
+  [PASS] the ruling is byte-identical to its source in prompts/SPEC-FIX-2.md
+  [PASS] all 9 chunk prompts are tracked  -- 9 tracked
+  [PASS] no untracked file remains under prompts/
+
+==========================================================================
+RESULT: ALL CHECKS PASS
+==========================================================================

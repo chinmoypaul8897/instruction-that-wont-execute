@@ -1,7 +1,7 @@
 # CONTEXT.md — THIS FILE IS LAW
 
 **Project:** The Instruction That Won't Execute
-**Version:** v1.0 · 2026-08-30 03:20 UTC
+**Version:** v1.1 · 2026-08-31 · amended at SPEC-FIX-2 under the `QUESTIONS.md` Q11 ruling; see §13
 **Author:** ARCHITECT only. No build session edits this file.
 **Precedence:** the official hackathon PDF (`context/01-PROBLEM-PDF.md`) outranks this file. This file outranks `plan.md`, the code, the tests, and anyone's memory. Any conflict between code and this file is a defect in the code.
 
@@ -202,16 +202,36 @@ Reference measurements from 9 titles (12, 20, 21, 24, 26, 40, 42, 45, 49) — sa
 
 **The algorithm — carry-forward:**
 1. Iterate `<AMDPAR>` elements in **document order**. Order is the whole mechanism; any reordering breaks it.
-2. Maintain `current_section`, initially null.
-3. If the element names a section (matches a `§\s*[\d.]+[a-z]?` citation in its own text), set `current_section` to it and attribute the element there.
+2. Maintain `current_section`, initially null. **Reset `current_section` to null at every `<REGTEXT>` part boundary** — an instruction cannot inherit a section from a different CFR part. *(v1.1)*
+3. If the element names a section in its own text, set `current_section` to it and attribute the element there. **A section is named in either of two forms and both count** *(v1.1)*:
+   - the **sign form** — `§\s*[\d.]+[a-z]?`, as in *“§ 1.907 is amended”*;
+   - the **word form** — `Section` or `Sections` followed by the number, as in *“Section 1.907 is amended by revising…”*. **The word form is matched CASE-SENSITIVELY: `Section`, never `section`.**
 4. Otherwise attribute the element to `current_section`. If `current_section` is null, the element is **unattributable** — count it, never guess.
 5. Parse each attributed element into `(operation, anchor, designation)` where `operation` is one of `revise · add · remove · redesignate · amend`, `anchor` is the quoted text if present, `designation` is the paragraph path such as `(b)(4)(i)(A)`.
+
+> **Why the word form is in the detector — and the reason is not the number** *(v1.1; `QUESTIONS.md` Q9, ruled at Q11).* The sign-only detector of v1.0 does not merely under-detect, it **mis-attributes**: an element not recognised as naming a section inherits the previous one, so a miss produces a confident wrong answer rather than a gap. Measured over all 70 FR documents / 8,752 elements: under the sign-only reading **ten documents attribute NOTHING — 1,910 elements**, among them two of the five largest rules in the corpus (`2014-08744` at 838 elements, `2021-22144` at 649), because FAR-family rules write *“Section 52.204-8 is amended”* without the sign. On golden G1 (FR Doc 2020-11897) CH-02 measured **20 of 28 elements pinned to a section they do not amend**. **This correction is adopted because it is justified independently of its effect on any number** — a detector that leaves 1,910 elements attributed to nothing is wrong at any completeness figure. Evidence: `docs/evidence/spec-fix-1/recomputed.md`.
+
+> **Case-sensitivity is part of the specification, not an implementation choice** *(v1.1; `QUESTIONS.md` Q12(c)).* CH-02's shipped detector was case-**in**sensitive, and it therefore read appendix-internal numbering as CFR sections: of 684 elements whose only word-form citation is lowercase, **683** were treated as naming a section and **44 of those carry `part_mismatch`** — *“Appendix A to part 75 is amended by revising the title of section 1.1”* pins `current_section` to `1.1` inside a part-75 `<REGTEXT>`. **Every 0.9865 figure in this repository is the case-INsensitive one and is therefore an over-count.** The case-sensitive figure is **not yet measured** — SPEC-FIX-2 changed the specification and deliberately re-ran nothing; measuring it belongs to CH-03. No number here has been restated to match this rule.
+
+> **The part-boundary reset is adopted although it makes the number worse** *(v1.1; `QUESTIONS.md` Q10 and Q12(a), ruled at Q11).* It costs **8.0 points** — attribution 0.9865 → 0.9066, both endpoints measured under the case-**in**sensitive detector CH-02 shipped, so the cost under the case-sensitive rule specified above is itself unmeasured and is expected to differ. CH-02 identified **699 of 8,752** elements attributed to a section whose part differs from the part of the `<REGTEXT>` containing them, and called the reset *“a one-line change and would be an improvement”*; the correction proposed at SPEC-FIX-1 adopted the +22.5-point word-form fix and never mentioned this one. **It is in this file for precisely that reason: if the fix that helps is adopted, the fix that hurts is adopted in the same edit — or the ruling is made with the scoreboard visible.**
+
+> **The 699 is not all attributor error and must not be quoted as though it were** *(Q12(a)).* **126** of those elements **name their own section correctly in their own text** — the `REGTEXT/@PART` tag is the thing that disagrees — so they are evidence of a separate and previously unlogged `regtext_part` extraction defect, not of mis-attribution. The figure for genuine carry-forward part mismatches is **573**. Both numbers ship; neither is quoted alone.
 
 **Completeness — the definition the gate asserts on:**
 
 > **completeness = (number of AMDPAR elements attributed to a section AND parsed into at least one complete `(operation, anchor OR designation)` triple) ÷ (total AMDPAR elements in the document)**
 
 Reported **globally** and **per FR document**; the per-document figure is what CH-02's pre-registered fallback restricts on. An element attributed but unparsed counts as **incomplete**, not complete — attribution alone is not the bar.
+
+#### THE GATE FAILED, AND THE FAILURE IS PUBLISHED — it was not fixed *(v1.1)*
+
+**The attributor gate FAILED.** CH-02 measured global completeness at **0.5080** under this file's v1.0 sign-only detector and **0.6643** under an extended one. The gate required **0.90**. CH-02 therefore sits in its pre-registered *“< 0.80 — documented failure”* branch, and the failure is **published in the README, not absorbed**.
+
+**Attribution alone measured 0.7613 / 0.9865 — and that figure was tested and REJECTED as a gate.** A control attributor identical to the shipped one but for a single line — it carries the *first*-named section of a document forward instead of the *last* — places **6,395 of 6,663** attributed elements on a **different** section and scores **the identical 0.7613**, to six decimal places. `attributed ÷ total` therefore cannot distinguish a correct attributor from a 96%-wrong one, and cannot be this gate. Stated fairly, it is **not** vacuous: it does catch the silent-**drop** mode that reported 0.46 and poisoned a predecessor pilot's eval set — a lead-ins-only extractor scores **0.2503**. It is blind to the silent-**wrong** mode, which is the mode this corpus actually exhibits. Evidence, control script included: `docs/evidence/spec-fix-1/`.
+
+**The definition was NOT rewritten after it failed.** A correction to it was proposed by the architect, put to an independent session that was authorised to refuse, and **refused** — `docs/evidence/spec-fix-1/verdict.md`. The architect accepted the refusal in full; the ruling is `QUESTIONS.md` Q11. The threshold is unmoved, the definition above is unaltered, no replacement metric was introduced, and **no number in this repository was changed by that ruling or by the v1.1 edits it authorised.**
+
+**Known, counted, and deliberately unfixed** (`QUESTIONS.md` Q10; total recovery **< 0.31 percentage points**): the `46 CFR 356.3` citation form, which names neither a sign nor the word *Section* (9 elements, and it is why one document in the corpus is unattributable in full); and table-driven amendments — *“For each section and paragraph indicated in the left column of the following table…”* — whose sections live inside a `<GPOTABLE>` and never appear in the AMDPAR text (26 elements). Both were found **after** the measurement, and the pre-registered tokenisation rules forbid revising a rule once the number is in view. They stay recorded and unfixed for that reason, not because they are cheap.
 
 ### Leakage strips — mandatory, counted, and published
 
@@ -308,3 +328,4 @@ Not citing known prior art on a submission staked on integrity is an unforced er
 | Version | Date | Change |
 |---|---|---|
 | v1.0 | 2026-08-30 03:20 UTC | Initial. Assembled from `08-FINAL-CALL.md` §5 over `07-KILL-TEST.md` §7. |
+| v1.1 | 2026-08-31 | **§8, under the `QUESTIONS.md` Q11 ruling, which ACCEPTED IN FULL SPEC-FIX-1's refusal of the proposed metric.** (1) The failed gate is **recorded, not fixed** — 0.5080 / 0.6643 against 0.90, and `attributed ÷ total` named as tested and rejected because a 96%-wrong control attributor scores the identical 0.7613. The definition, the threshold and the metric are **unchanged**. (2) The section-citation detector now recognises the **word form** beside the sign form, matched **case-sensitively** (Q9, Q12(c)) — adopted because ten documents / 1,910 elements attribute to nothing without it, independently of any number. (3) `current_section` now **resets at a `<REGTEXT>` part boundary** (Q10, Q12(a)) — adopted **although it costs 8.0 points**, because the fix that helps and the fix that hurts are ruled on together. Nothing was re-run and no measurement moved. |

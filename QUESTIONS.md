@@ -569,7 +569,15 @@ diagnostic CH-02 shipped already flags it - which is that diagnostic doing exact
 it was built for.
 
 ## Q13 - SPEC-FIX-1's housekeeping is fenced behind a verdict it did not get
-Raised: SPEC-FIX-1, 2026-08-31. Status: BLOCKED, NOTHING DONE, ONE LINE UNBLOCKS IT.
+Raised: SPEC-FIX-1, 2026-08-31. Status: **AUTHORISED AND DONE at SPEC-FIX-2, 2026-08-31.**
+`prompts/SPEC-FIX-2.md` section 4 gave the one line, explicitly *"unblocked and independent
+of all the above"*, so none of it waited on the Q11 ruling. All three items are closed:
+the CH-01 working-tree edit is committed in a commit of its own that says it is an
+architect edit and not a SPEC-FIX-2 change; `prompts/CH-02.md`, `prompts/SPEC-FIX-1.md`
+and `prompts/SPEC-FIX-2.md` are tracked, so all 9 chunk prompts are now in the
+repository and `git ls-files --others --exclude-standard prompts/` returns nothing; and
+`CONTEXT.md` is at v1.1 with a section 13 change-log row that names the refusal.
+**The original text below is left exactly as SPEC-FIX-1 wrote it.**
 
 `prompts/SPEC-FIX-1.md` section 2d asks for three items of pure housekeeping - commit the
 uncommitted `CONTEXT.md` working-tree edit from CH-01, commit the untracked
@@ -592,3 +600,43 @@ shape each agent*, and every other chunk prompt is tracked. **Requested: a one-l
 authorisation to commit all three, independent of how Q11 is ruled.** Recorded rather than
 assumed, because the whole point of this chunk was that a session may not decide the parts
 it was told it does not decide.
+
+## Q14 - v1.1 specifies a detector whose corpus figures do not exist yet, and leaves one stale number in force
+Raised: SPEC-FIX-2, 2026-08-31. Status: RECORDED, NOT FIXED - and not fixable in this
+chunk, because `prompts/SPEC-FIX-2.md` forbids re-running the attributor in terms:
+*"Do not re-run the attributor. No number changes in this chunk."* For CH-03.
+
+`CONTEXT.md` v1.1 adopted the word-form detector **case-sensitively** (Q12(c)). That is
+the right rule and it is not in dispute. But it creates a divergence between the
+specification and every measurement in the repository, and the divergence is written
+down here rather than papered over, because a reader of section 8 would otherwise take
+its numbers as figures for the detector section 8 now describes. They are not.
+
+**(a) Every `extended` figure in this repository was computed case-INsensitively.** That
+includes 0.6643 completeness, 0.9865 attribution, 0.9066 part-consistent, the 57/70
+per-document count, `detector_disagrees` = 2,459, the 1,086 word-form-only namers and the
+699 / 573 / 126 part-mismatch decomposition. Q12(c) measured the exposure: 683 of 684
+lowercase-only elements are treated as naming a section, and 676 of the 1,086
+extended-only namers are lowercase. **The case-sensitive figures are unknown**, and they
+are not reconstructible by arithmetic from the case-insensitive ones - 44 of the 683
+carry `part_mismatch` and the rest are mostly correct, so the delta is neither the whole
+683 nor zero. **CH-03 must re-measure rather than adjust.** This does not change the
+gate outcome: CH-02 failed at 0.5080 / 0.6643 against 0.90, and a stricter detector
+cannot raise either figure.
+
+**(b) Section 8 still says "only ~42% of AMDPARs name a section", and that number is now
+stale in a third way.** Q9 already recorded that it matches neither the sign-only reading
+(25.0%) nor the case-insensitive extended one (37.4%). Under v1.1's case-sensitive
+extended detector it matches a third figure that has not been measured. **It was left
+untouched deliberately.** `prompts/SPEC-FIX-2.md`'s scope fence says *"anything else ->
+STOP"*, and the ruling authorised three specific changes; editing a fourth number would
+have been a build session widening its own mandate, which is the exact failure SPEC-FIX-1
+was praised for refusing. The sentence is prose framing rather than a gate input, so
+leaving it does not affect any threshold - but it is in a file that is LAW and a CH-03
+session will read it, so it is flagged rather than left to be discovered.
+
+**What is wanted:** nothing from the architect now. CH-03 re-measures under the v1.1
+detector, publishes the case-sensitive figures beside the case-insensitive ones (the
+ERRATA convention: a wrong number is corrected in a new entry, never edited out of the
+old one), and at that point the architect can retire the "~42%" sentence with a measured
+replacement instead of an estimate.
