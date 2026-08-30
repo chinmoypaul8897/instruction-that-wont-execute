@@ -1,0 +1,23 @@
+resolved citations           : 85
+distinct (frdoc, section)    : 85   <- the ladder TOP
+
+rungs re-derived independently of src/:
+  positive-has-no-attributed-instructions : 13
+  no-count-matched-sibling                : 22
+  no-free-count-matched-sibling (approx)  : 0
+  reach the pairing stage                 : 50
+
+exact re-run:
+  positive-has-no-attributed-instructions    : 13
+  no-count-matched-sibling                   : 22
+  no-free-count-matched-sibling              : 0
+  pairs reaching text resolution             : 50
+  closure: 50 + 35 = 85 (pool 85)
+
+committed vs re-derived:
+  pool-citations-resolved                    committed  85   re-derived  85   OK
+  positive-has-no-attributed-instructions    committed  13   re-derived  13   OK
+  no-count-matched-sibling                   committed  22   re-derived  22   OK
+  no-free-count-matched-sibling              committed   0   re-derived   0   OK
+  pairs reaching text resolution 50, kept 41, dropped by the text rungs 9
+  committed text rungs: section-not-in-as-of-edition 7 pairs, leakage-test-failed-after-strip 2 pairs

@@ -1,0 +1,20 @@
+frozen items: 82   pairs: 41
+
+RE-DERIVED strip counts over the frozen corpus:
+   EDNOTE    3   (committed see leakage.json)
+   EFFDNOTP  0   (committed see leakage.json)
+   CITA      65   (committed see leakage.json)
+   EAR       0   (committed see leakage.json)
+   total     68
+
+items whose UNSTRIPPED text would have leaked: 3 / 82
+sections resolving to != 1 eligible <SECTION>: 0 []
+frozen section_text differing from my own strip (token stream): 0
+
+MISMATCHES: 0
+
+committed strip_counts_over_the_frozen_corpus: {'CITA': 65, 'EAR': 0, 'EDNOTE': 3, 'EFFDNOTP': 0, 'total': 68}
+committed items_whose_UNSTRIPPED_text_would_have_leaked: 5
+committed items_total: 82
+
+EXACT INSTRUCTION-COUNT MATCH violations: 0 []

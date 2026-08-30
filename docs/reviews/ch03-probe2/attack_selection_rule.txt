@@ -1,0 +1,14 @@
+attacker-recovered pairs: 41 over 82 items
+  exclude_pair=False A-is-positive-when-B-is-nearer   accuracy 42/82 = 0.5122   (pairs where the ranks differed: 4)
+  exclude_pair=False reverse                          accuracy 40/82 = 0.4878   (pairs where the ranks differed: 4)
+  exclude_pair=True  A-is-positive-when-B-is-nearer   accuracy 42/82 = 0.5122   (pairs where the ranks differed: 4)
+  exclude_pair=True  reverse                          accuracy 40/82 = 0.4878   (pairs where the ranks differed: 4)
+
+secondary structural probes (block halving on a doc-structure feature):
+   min_dist_to_any_sibling      0.5366
+   n_count_matched_siblings     0.5610
+   n_siblings_higher            0.5122
+   n_siblings_lower             0.5122
+   rank_frac_in_doc             0.5122
+   rank_in_doc                  0.5122
+   sections_in_doc              0.5610

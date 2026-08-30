@@ -1,0 +1,29 @@
+BASELINE (unmutated source, pairing rebuilt from the real corpus):
+   50 pairs, 25 negatives sort before, p = 1.000000
+
+  NOT CAUGHT  MA revert the negative-selection rule to `free[0]` (the F1 defect)
+              suite: 275 passed in 13.01s
+              rebuilt pairing: pairs 50, before 36, p = 0.002602
+  NOT CAUGHT  MB the balance counter ALWAYS picks the higher side
+              suite: 275 passed in 10.45s
+              rebuilt pairing: pairs 50, before 11, p = 0.000090
+  NOT CAUGHT  MC the balance counter ALWAYS picks the lower side
+              suite: 275 passed in 11.48s
+              rebuilt pairing: pairs 50, before 38, p = 0.000306
+  CAUGHT      MD revert the <PARTS> fix - a volume with no declared range is skipped again
+              suite: 1 failed, 274 passed in 10.30s
+              rebuilt pairing: pairs 50, before 25, p = 1.000000
+  NOT CAUGHT  ME the nearest-candidate tie-break becomes the farthest
+              suite: 275 passed in 12.16s
+              rebuilt pairing: pairs 50, before 25, p = 1.000000
+  NOT CAUGHT  MF the balance counter is never updated (it stays at 0 forever)
+              suite: 275 passed in 16.83s
+              rebuilt pairing: pairs 50, before 11, p = 0.000090
+
+==============================================================================
+NOT CAUGHT  MA revert the negative-selection rule to `free[0]` (the F1 defect)
+NOT CAUGHT  MB the balance counter ALWAYS picks the higher side
+NOT CAUGHT  MC the balance counter ALWAYS picks the lower side
+CAUGHT      MD revert the <PARTS> fix - a volume with no declared range is skipped again
+NOT CAUGHT  ME the nearest-candidate tie-break becomes the farthest
+NOT CAUGHT  MF the balance counter is never updated (it stays at 0 forever)

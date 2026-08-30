@@ -1,0 +1,60 @@
+case-INSENSITIVE literal probes over section_text, split by label:
+   incorporat               WILL_FAIL  6   WILL_EXECUTE  5
+   cannot be                WILL_FAIL  2   WILL_EXECUTE  4
+   reserved                 WILL_FAIL  5   WILL_EXECUTE  4
+   note:                    WILL_FAIL  1   WILL_EXECUTE  1
+
+FR-citation shaped strings in section_text:
+   NN FR NNNN             0 []
+   NN F.R. NNNN           0 []
+   Fed. Reg.              0 []
+   bracketed date credit  0 []
+
+longest shared word-run between note_text and section_text (positives):
+    8 words  2015-01571|1942.8          'or its successor agency under Public Law 103-354'
+    5 words  2016-18075|766.102         'G of 7 CFR part'
+    4 words  2026-06808|60.5417b        'a portion of the'
+    2 words  E6-15282|180.209           '§ 180.209'
+    2 words  2026-11140|149.510         '§ 149.510'
+    2 words  2026-08556|682.405         '§ 682.405'
+
+residual element-name census in the frozen sections, BY LABEL:
+   APPRO        WILL_FAIL    1   WILL_EXECUTE    1
+   BOXHD        WILL_FAIL   10   WILL_EXECUTE    3
+   CHED         WILL_FAIL   33   WILL_EXECUTE   26
+   E            WILL_FAIL  734   WILL_EXECUTE  503
+   ENT          WILL_FAIL  940   WILL_EXECUTE   48
+   EXTRACT      WILL_FAIL    7   WILL_EXECUTE    1
+   FP           WILL_FAIL   18   WILL_EXECUTE    4
+   FR           WILL_FAIL    2   WILL_EXECUTE    0  <-- one-sided
+   FTNT         WILL_FAIL    7   WILL_EXECUTE    0  <-- one-sided
+   FTREF        WILL_FAIL    7   WILL_EXECUTE    0  <-- one-sided
+   GID          WILL_FAIL    3   WILL_EXECUTE    1
+   GPH          WILL_FAIL    3   WILL_EXECUTE    1
+   GPOTABLE     WILL_FAIL   10   WILL_EXECUTE    3
+   HD           WILL_FAIL   14   WILL_EXECUTE   13
+   LI           WILL_FAIL   45   WILL_EXECUTE    0  <-- one-sided
+   NOTE         WILL_FAIL    8   WILL_EXECUTE   13
+   P            WILL_FAIL 1759   WILL_EXECUTE 1206
+   PRTPAGE      WILL_FAIL  115   WILL_EXECUTE   82
+   RESERVED     WILL_FAIL    0   WILL_EXECUTE    1  <-- one-sided
+   ROW          WILL_FAIL  329   WILL_EXECUTE    6
+   SCOL2        WILL_FAIL    1   WILL_EXECUTE    0  <-- one-sided
+   SECAUTH      WILL_FAIL    2   WILL_EXECUTE    2
+   SECTION      WILL_FAIL   41   WILL_EXECUTE   41
+   SECTNO       WILL_FAIL   41   WILL_EXECUTE   41
+   SU           WILL_FAIL   84   WILL_EXECUTE   35
+   SUBJECT      WILL_FAIL   41   WILL_EXECUTE   40
+   TDESC        WILL_FAIL    2   WILL_EXECUTE    0  <-- one-sided
+   TNOTE        WILL_FAIL   30   WILL_EXECUTE    8
+   TTITLE       WILL_FAIL    6   WILL_EXECUTE    2
+
+one-sided METADATA in items.jsonl (a channel outside section_text):
+   strip_counts.EDNOTE      = nonzero          WILL_FAIL  3  WILL_EXECUTE  0   <-- PERFECT ONE-SIDED INDICATOR
+   strip_counts.EDNOTE      = zero             WILL_FAIL 38  WILL_EXECUTE 41
+   strip_counts.EFFDNOTP    = zero             WILL_FAIL 41  WILL_EXECUTE 41
+   strip_counts.CITA        = nonzero          WILL_FAIL 35  WILL_EXECUTE 30
+   strip_counts.CITA        = zero             WILL_FAIL  6  WILL_EXECUTE 11
+   strip_counts.EAR         = zero             WILL_FAIL 41  WILL_EXECUTE 41
+   volume_route             = range-match      WILL_FAIL 40  WILL_EXECUTE 40
+   volume_route             = same-part-fallback WILL_FAIL  1  WILL_EXECUTE  1

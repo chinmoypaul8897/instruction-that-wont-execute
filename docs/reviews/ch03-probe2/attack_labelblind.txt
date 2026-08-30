@@ -1,0 +1,48 @@
+blocks recoverable label-free and balanced : True
+items 82  count-blocks 38  frdoc-blocks 37
+
+feature                     block(cnt)  block(doc)  threshold     BEST
+instr_n_anchor                  0.6585      0.6585     0.5854   0.6585
+instr_chars_mean                0.6341      0.6585     0.6463   0.6585
+instr_chars_total               0.6341      0.6585     0.6098   0.6585
+chars_unstripped                0.6341      0.6341     0.6585   0.6585
+chars_stripped                  0.6341      0.6341     0.6585   0.6585
+instr_chars_max                 0.6098      0.6098     0.6463   0.6463
+chars_delta                     0.5854      0.5854     0.6341   0.6341
+instr_desig_depth               0.6098      0.6098     0.5610   0.6098
+instr_n_add                     0.6098      0.5854     0.5244   0.6098
+instr_n_revise                  0.5854      0.6098     0.5244   0.6098
+ord_min                         0.5366      0.5366     0.5976   0.5976
+strip_total                     0.5854      0.5854     0.5610   0.5854
+instr_n_desig                   0.5854      0.5854     0.5610   0.5854
+strip_EDNOTE                    0.5854      0.5854     0.5366   0.5854
+vol_num                         0.5854      0.5854     0.5122   0.5854
+sec_len_chars                   0.5854      0.5854     0.5122   0.5854
+instr_n_remove                  0.5610      0.5854     0.5366   0.5854
+ord_mean                        0.5366      0.5366     0.5732   0.5732
+ord_max                         0.5366      0.5366     0.5732   0.5732
+chars_ratio                     0.5122      0.5122     0.5732   0.5732
+strip_CITA                      0.5610      0.5610     0.5610   0.5610
+part_num                        0.5610      0.5610     0.5122   0.5610
+instr_n_redesig                 0.5610      0.5610     0.5122   0.5610
+vol_route_fallback              0.5610      0.5610     0.5000   0.5610
+vol_header_len                  0.5610      0.5610     0.5000   0.5610
+title_num                       0.5610      0.5610     0.5000   0.5610
+strip_EFFDNOTP                  0.5610      0.5610     0.5000   0.5610
+strip_EAR                       0.5610      0.5610     0.5000   0.5610
+sec_has_letter                  0.5610      0.5610     0.5000   0.5610
+sec_has_dash                    0.5610      0.5610     0.5000   0.5610
+ord_span                        0.5610      0.5610     0.5000   0.5610
+instr_n                         0.5610      0.5610     0.5000   0.5610
+doc_completeness                0.5610      0.5610     0.5000   0.5610
+doc_amdpar_count                0.5610      0.5610     0.5000   0.5610
+as_of_edition                   0.5610      0.5610     0.5000   0.5610
+suffix_num                      0.5122      0.5122     0.5610   0.5610
+section_lex                     0.5366      0.5366     0.5366   0.5366
+section_num                     0.5122      0.5122     0.5244   0.5244
+
+REVIEWER ROUND-1 ATTACK (frdoc block, lexicographic section sort): 46/82 = 0.5610
+
+BEST-OF-38 OBSERVED = 0.6585
+within-block permutation null over the SAME bank: mean 0.6482  p95 0.7073  max 0.8049
+p(best-of-bank >= observed) = 0.4671   [233/500]

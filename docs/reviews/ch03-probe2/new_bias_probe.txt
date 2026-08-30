@@ -1,0 +1,28 @@
+build_pairs on the unrestricted pool: 50 pairs, 35 unmatched, total 85
+of those, 41 pairs survive to the freeze (expected 41)
+
+BUILD ORDER over all 50 matched pairs (1 = negative sorts BEFORE):
+  01001110011000100111010101010101010101010011100101
+  forced (one-sided, structural):
+  ...F..F.FFF..FFFF..F...F.F..F...F...F.F.FFFFF...F.
+  before 25 / after 25   exact two-sided binomial p = 1.0000
+
+FROZEN 41 PAIRS (1 = negative sorts BEFORE):
+  00111001100010110101010110110101001100101
+  ....F.FFF..FFF.....F.F........F.FFFF...F.
+  before 21 / after 20   exact two-sided binomial p = 1.0000
+  FREE (both sides available) subset: 26 pairs, before 13, p = 1.0000
+  FORCED subset: 15 pairs, before 8, p = 1.0000
+
+  alternations inside the FREE subsequence: 13 of 25 adjacent gaps
+  attacker-recovered adjacent pairs: 41 (true pairs 41)
+  ALTERNATING-PHASE ATTACK best accuracy: 0.5122
+
+  choice vs document and block properties (frozen pairs):
+    pearson r(doc amdpar count    , negative-sorts-before) = +0.1979
+    pearson r(doc completeness    , negative-sorts-before) = +0.0128
+    pearson r(free candidates     , negative-sorts-before) = +0.0981
+    pearson r(count-matched cands , negative-sorts-before) = +0.0963
+    pearson r(instruction count   , negative-sorts-before) = +0.0177
+
+  COUNTERFACTUAL - the OLD `free[0]` rule on the same pool: 36/50 negatives sort before, p = 0.002602
