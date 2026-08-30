@@ -1,0 +1,27 @@
+PROBE - test_div1_N_is_the_volume_index_and_is_not_the_title_number
+==============================================================================
+assertion: a record's three independent statements of its CFR title -
+           the container NODE prefix, the enclosing TYPE="TITLE" div,
+           and the filename - must all read "11" for a title-11 note.
+
+OLD CODE  7d56f26  (doc_title = el.get("N"))
+  
+    title_sources    {'node': '11', 'div_title_n': '1', 'filename': '11'}
+    distinct values  ['1', '11']
+    all three agree  False
+    ASSERTION        FAILS
+
+NEW CODE  9cde11c  (doc_title = _title_from_node(el.get("NODE")))
+  
+    title_sources    {'node': '11', 'div1_node': '11', 'filename': '11'}
+    distinct values  ['11']
+    all three agree  True
+    ASSERTION        PASSES
+
+==============================================================================
+FLIP: fails on old = True   passes on new = True   -> PROBE FLIPS
+
+Corpus-wide effect, measured on all 49 titles:
+  title-source disagreements BEFORE the fix   2428  (every record)
+  title-source disagreements AFTER the fix       0
+  see data/ednotes/counts.json -> total.title_source_disagreements
