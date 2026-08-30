@@ -14,7 +14,7 @@ fresh session with zero shared context (hard rule 2).
 | Chunk | Gate | State | One line |
 |---|---|---|---|
 | CH-00 · repo, canonical files, run logger | none | **built** | repo initialised private; 53 tracked of a 430 MB / 7,460-file tree; `src/runlog.py` + ledger + USD 18 ceiling; suite 22 green; guard probe 16/16 |
-| CH-01 · govinfo EDNOTE harvest | none | todo | merged with CH-01b per ruling R-01 |
+| CH-01 · govinfo EDNOTE harvest | none | **built** | 49 titles / 824 MB → 2,428 EDNOTEs → 107 defect → 86 section-level → **85 with an FR citation**; pool gate ≥ 60 **CLEARS** at 1.42×; the 9-title reference 903 / 44 / 44-of-44 reproduces **exactly**; suite 61 green |
 | CH-02 · AMDPAR carry-forward attributor | **FULL** | todo | completeness ≥ 0.90 measured and printed |
 | CH-03 · point-in-time text + eval set | **FULL** + mutation | todo | ≥ 42 pairs, exact instruction-count match, leakage-strip test |
 | CH-04 · scorer + `GOOD.md` | **FULL** + mutation | todo | `GOOD.md` committed before any model arm runs |
