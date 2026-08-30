@@ -125,3 +125,39 @@ and RNG-free; the permutation null uses `random.Random(20260831)`, the seed is a
 constant, it is printed in the output, and the whole run is byte-reproducible. Where
 the number of permutations is smaller than the exhaustive count the test is run
 **exhaustively instead**, and the output says which was used.
+
+---
+
+## ERRATA
+
+The CH-02 convention: **a wrong entry is corrected in a new entry, never edited out of
+the old one.** S-A..S-G above stand exactly as committed at `8dae806`.
+
+### E-1 · S-D is the FREE null. The within-pair null over the same fixture is 2/4, not 2/6.
+
+S-D is headed *"The permutation null"* without saying **which**, and its table
+enumerates all C(4,2) = 6 free label assignments. That is the **free** null, and
+`p = 2/6` is right for it.
+
+The first test written against S-D applied it to `permutation_null`, which is the
+**within-pair** null, and asserted `p = 1.0`. **The test failed.** The expectation was
+wrong; the code was right. Hand-traced over the same fixture, 2 pairs give 2² = **4**
+draws:
+
+| draw | labels | best accuracy |
+|---|---|---|
+| keep, keep | a,b positive | **1.0** — separates |
+| swap, swap | c,d positive | **1.0** — the mirror rule separates it |
+| keep, swap | a,d positive | 0.5 — a 2 and a 1 in each class |
+| swap, keep | b,c positive | 0.5 |
+
+**p = 2/4 = 0.5.** Neither 1.0 (the wrong guess) nor 2/6 (the free null's answer).
+
+S-E already said these are different tests whose p-values are not interchangeable;
+E-1 is that sentence turned into two tests, both of which now run:
+`test_SD_free_permutation_exhaustive_is_2_of_6` enumerates the six assignments **in
+the test itself**, so the golden checks `cv_accuracy` against a hand count rather than
+checking the null against itself; `test_SD_within_pair_null_over_two_pairs_is_2_of_4`
+pins 0.5.
+
+**Nothing in the implementation was changed to make either pass.**

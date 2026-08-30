@@ -23,8 +23,9 @@ manifest records what it looked like when this project measured it. The mismatch
 report below prints both sides rather than exiting on the first difference.
 
 Chunks add to this file as they freeze more of `data/`. CH-01 freezes
-`data/ednotes/`; CH-02 adds `data/amdpars/`; CH-03 adds the point-in-time
-section text.
+`data/ednotes/`; CH-02 adds `data/amdpars/`; CH-03 adds the v1.1 re-measurement in
+`data/attribution-v11/` and the stripped point-in-time section text and eval set in
+`data/evalset/` and `data/evalset-restricted/`.
 """
 from __future__ import annotations
 
@@ -44,6 +45,9 @@ from harvest_ednotes import (  # noqa: E402
     sha256_file,
 )
 import attribute_amdpars as amdpar  # noqa: E402
+import attribute_v11 as v11  # noqa: E402
+import cfr_pit  # noqa: E402
+import eval_set as evalset  # noqa: E402
 
 # Every frozen artefact set, in the order a fresh clone should rebuild them.
 FREEZES = [
@@ -58,6 +62,26 @@ FREEZES = [
         "dir": amdpar.DEFAULT_OUT_DIR,
         "raw": amdpar.DEFAULT_RAW_DIR,
         "what": "govinfo FR <AMDPAR> instructions attributed to sections",
+    },
+    {
+        "chunk": "CH-03/1a",
+        "dir": v11.DEFAULT_OUT_DIR,
+        "raw": amdpar.DEFAULT_RAW_DIR,
+        "what": "AMDPAR attribution re-measured under CONTEXT.md v1.1 (4 detectors)",
+    },
+    {
+        "chunk": "CH-03",
+        "dir": evalset.DEFAULT_OUT,
+        "raw": cfr_pit.DEFAULT_RAW_DIR,
+        "what": "point-in-time CFR section text, stripped, and the eval set",
+    },
+    {
+        # QUESTIONS.md Q16 reading (i). Committed so the architect can flip the eval
+        # set with one flag instead of a rebuild, and so a reviewer can run either.
+        "chunk": "CH-03/restricted",
+        "dir": Path("data/evalset-restricted"),
+        "raw": cfr_pit.DEFAULT_RAW_DIR,
+        "what": "the same build with the >= 0.90 per-document completeness floor applied",
     },
 ]
 
@@ -154,6 +178,27 @@ def main(argv=None) -> int:
             print(f"  round {round_no}: fetching neighbour-day issues {wanted}")
             for r in amdpar.fetch_issues(REPO / amdpar.DEFAULT_RAW_DIR, wanted):
                 print(f"    {r['date']}  {r['bytes']:>12,} B  {r['status']}")
+
+        print()
+        print("=" * 72)
+        print("RE-MEASURE  AMDPAR attribution under CONTEXT.md v1.1  (pure)")
+        print("=" * 72)
+        rc = v11.main(["remeasure", "--raw", str(REPO / amdpar.DEFAULT_RAW_DIR),
+                       "--out", str(REPO / v11.DEFAULT_OUT_DIR)])
+        if rc != 0:
+            failures.append("the v1.1 re-measurement control FAILED to reproduce CH-02")
+
+        print()
+        print("=" * 72)
+        print("BUILD  point-in-time CFR text + eval set   (fetches annual editions)")
+        print("=" * 72)
+        for out_dir, floor in ((evalset.DEFAULT_OUT, 0.0),
+                               (Path("data/evalset-restricted"), 0.90)):
+            rc = evalset.main(["build", "--out", str(REPO / out_dir),
+                               "--raw", str(REPO / cfr_pit.DEFAULT_RAW_DIR),
+                               "--floor", str(floor)])
+            if rc != 0:
+                failures.append(f"eval set build (floor={floor}) returned non-zero")
 
     print()
     print("=" * 72)

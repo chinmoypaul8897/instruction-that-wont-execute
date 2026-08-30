@@ -1,0 +1,32 @@
+==============================================================================
+Q16 - WHAT THE >= 0.90 PER-DOCUMENT COMPLETENESS FLOOR ACTUALLY SELECTS ON
+==============================================================================
+
+  documents total                     : 70
+  pass the >= 0.90 completeness floor : 2
+  excluded by it                      : 68
+
+  PASSING   median completeness 0.9250   attribution 0.9450   parse 0.9250
+  EXCLUDED  median completeness 0.6165   attribution 0.9122   parse 0.6614
+
+  Of the EXCLUDED documents:
+    bound by the PARSE half (parse_rate < attribution_rate) : 59 / 68
+    attribution >= 0.90 and yet excluded                    : 36
+    attribution >= 0.80 and yet excluded                    : 49
+    parse_rate < 0.90                                       : 68 / 68
+    attribution == 1.0000 and yet excluded                  : 4
+
+  Excluded documents with PERFECT attribution:
+    2024-31513     completeness 0.0000  attribution 1.0000  parse 0.0000  elements 3
+    2024-30575     completeness 0.2500  attribution 1.0000  parse 0.2500  elements 8
+    2011-12279     completeness 0.4167  attribution 1.0000  parse 0.4167  elements 12
+    2020-17549     completeness 0.6111  attribution 1.0000  parse 0.6111  elements 36
+
+  Q11's ruling, verbatim: "only 46 of 2,913 unparsed elements (1.6%) are our
+  defect. Parse shape is a property of Federal Register drafting, not of our
+  attributor, and does not belong in an attributor's gate."
+
+  A floor on COMPLETENESS therefore selects mostly on FR drafting style.
+  This is a measurement, not a proposal: no metric was changed, no threshold
+  moved, and the >= 0.90 set is BUILT AND COMMITTED at data/evalset-restricted/.
+

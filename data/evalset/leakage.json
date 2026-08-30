@@ -1,0 +1,93 @@
+{
+  "items_total": 76,
+  "items_whose_UNSTRIPPED_text_would_have_leaked": 8,
+  "known_positive_assertion": {
+    "counts": {
+      "CITA": 3,
+      "EAR": 1,
+      "EDNOTE": 2,
+      "EFFDNOTP": 1,
+      "total": 7
+    },
+    "violations_after_stripping": [],
+    "violations_before_stripping": [
+      {
+        "detail": "90 FR 1",
+        "kind": "own-fr-citation",
+        "rule": "b"
+      },
+      {
+        "detail": "Editorial Note",
+        "kind": "literal",
+        "rule": "c"
+      },
+      {
+        "detail": "Effective Date Note",
+        "kind": "literal",
+        "rule": "c"
+      },
+      {
+        "detail": "set forth as follows",
+        "kind": "literal",
+        "rule": "c"
+      }
+    ]
+  },
+  "leakage_test_failures_after_strip": [
+    {
+      "detail": [
+        {
+          "role": "positive",
+          "section": "1942.5",
+          "violations": [
+            {
+              "detail": "Effective Date Note",
+              "kind": "literal",
+              "rule": "c"
+            },
+            {
+              "detail": "set forth as follows",
+              "kind": "literal",
+              "rule": "c"
+            }
+          ]
+        }
+      ],
+      "frdoc": "2015-01571"
+    },
+    {
+      "detail": [
+        {
+          "role": "positive",
+          "section": "3.111",
+          "violations": [
+            {
+              "detail": "Effective Date Note",
+              "kind": "literal",
+              "rule": "c"
+            }
+          ]
+        },
+        {
+          "role": "negative",
+          "section": "1.1",
+          "violations": [
+            {
+              "detail": "Effective Date Note",
+              "kind": "literal",
+              "rule": "c"
+            }
+          ]
+        }
+      ],
+      "frdoc": "2020-07837"
+    }
+  ],
+  "strip_counts_over_the_frozen_corpus": {
+    "CITA": 64,
+    "EAR": 0,
+    "EDNOTE": 5,
+    "EFFDNOTP": 1,
+    "total": 70
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "chunk": "CH-03",
+  "files": {
+    "exclusion_ladder.json": {
+      "bytes": 2849,
+      "sha256": "091d19cc7e6ec4a418163b7f9637cc5c9ebd53d70f249b40c344ef066da1e45c"
+    },
+    "items.jsonl": {
+      "bytes": 111261,
+      "sha256": "aee64c3bf5afd6bed0f40253825da2a1a2973872382cc900fb7ecfe291bbb98e"
+    },
+    "leakage.json": {
+      "bytes": 890,
+      "sha256": "62a0897edf4b1aa6da9ecffdeaa658f0b9d0e75cff546e350a82ec00e3db164e"
+    }
+  },
+  "normalisation": "whitespace-collapsed",
+  "raw_inputs": {
+    "CFR-2025-title40-vol7.xml": {
+      "bytes": 5240865,
+      "sha256": "ac562a8f30576876c2af78f2b5159ac4dafbdb72e83ebd2258eb71e5fdd51c00"
+    },
+    "CFR-2025-title40-vol8.xml": {
+      "bytes": 8095227,
+      "sha256": "02943c25fba889eb2c8ab2a66d731712ccdf83224f24f7fef472342ffb661342"
+    }
+  },
+  "what": "point-in-time CFR text and the eval set"
+}

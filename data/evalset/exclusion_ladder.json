@@ -1,0 +1,442 @@
+{
+  "diagnostics_never_used_as_the_eval_set": {
+    "pairs_at_tolerance_1": 56,
+    "pairs_under_the_0_90_reference_floor": 1,
+    "pairs_without_any_completeness_floor": 50
+  },
+  "documents_excluded_by_floor": 0,
+  "documents_kept": 70,
+  "floor_applied": 0.0,
+  "ladder": {
+    "order": [
+      "pool-citations-resolved",
+      "document-completeness-below-floor",
+      "positive-has-no-attributed-instructions",
+      "no-count-matched-sibling",
+      "no-free-count-matched-sibling",
+      "no-title-for-section",
+      "as-of-edition-unavailable",
+      "section-not-in-as-of-edition",
+      "leakage-test-failed-after-strip",
+      "kept"
+    ],
+    "rungs": {
+      "as-of-edition-unavailable": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "document-completeness-below-floor": {
+        "detail": [
+          {
+            "documents_excluded": 0,
+            "documents_kept": 70,
+            "floor_applied": 0.0,
+            "reference_floor_0_90_would_keep_documents": 2,
+            "reference_floor_0_90_would_keep_positives": 3
+          }
+        ],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "kept": {
+        "detail": [],
+        "items": 76,
+        "negatives": 38,
+        "positives": 38
+      },
+      "leakage-test-failed-after-strip": {
+        "detail": [
+          {
+            "bad": [
+              {
+                "role": "positive",
+                "section": "1942.5",
+                "violations": [
+                  {
+                    "detail": "Effective Date Note",
+                    "kind": "literal",
+                    "rule": "c"
+                  },
+                  {
+                    "detail": "set forth as follows",
+                    "kind": "literal",
+                    "rule": "c"
+                  }
+                ]
+              }
+            ],
+            "frdoc": "2015-01571"
+          },
+          {
+            "bad": [
+              {
+                "role": "positive",
+                "section": "3.111",
+                "violations": [
+                  {
+                    "detail": "Effective Date Note",
+                    "kind": "literal",
+                    "rule": "c"
+                  }
+                ]
+              },
+              {
+                "role": "negative",
+                "section": "1.1",
+                "violations": [
+                  {
+                    "detail": "Effective Date Note",
+                    "kind": "literal",
+                    "rule": "c"
+                  }
+                ]
+              }
+            ],
+            "frdoc": "2020-07837"
+          }
+        ],
+        "items": 4,
+        "negatives": 2,
+        "positives": 2
+      },
+      "no-count-matched-sibling": {
+        "detail": [
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2017-00727",
+            "instruction_count": 8,
+            "reason": "no-count-matched-sibling",
+            "section": "3163.2"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2017-26532",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "25.151"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2019-18241",
+            "instruction_count": 3,
+            "reason": "no-count-matched-sibling",
+            "section": "52.1170"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2019-19810",
+            "instruction_count": 6,
+            "reason": "no-count-matched-sibling",
+            "section": "25.115"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-03841",
+            "instruction_count": 13,
+            "reason": "no-count-matched-sibling",
+            "section": "1416.302"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-04103",
+            "instruction_count": 10,
+            "reason": "no-count-matched-sibling",
+            "section": "1437.10"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-07013",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1400Z2(b)-1"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-07013",
+            "instruction_count": 10,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1400Z2(d)-1"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-17549",
+            "instruction_count": 12,
+            "reason": "no-count-matched-sibling",
+            "section": "1.367(a)-8"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-22974",
+            "instruction_count": 53,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1502-47"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-22974",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1503(d)-4"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2021-02268",
+            "instruction_count": 8,
+            "reason": "no-count-matched-sibling",
+            "section": "1468.3"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2021-09097",
+            "instruction_count": 5,
+            "reason": "no-count-matched-sibling",
+            "section": "510.305"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2022-05512",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "525.1"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2022-06949",
+            "instruction_count": 7,
+            "reason": "no-count-matched-sibling",
+            "section": "433.2"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2022-23329",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "102.20"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2022-23329",
+            "instruction_count": 10,
+            "reason": "no-count-matched-sibling",
+            "section": "102.21"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2023-25797",
+            "instruction_count": 29,
+            "reason": "no-count-matched-sibling",
+            "section": "25.12"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2023-25797",
+            "instruction_count": 38,
+            "reason": "no-count-matched-sibling",
+            "section": "25.51"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2024-28372",
+            "instruction_count": 5,
+            "reason": "no-count-matched-sibling",
+            "section": "1.988-1"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2025-13289",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "180.578"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2026-11140",
+            "instruction_count": 20,
+            "reason": "no-count-matched-sibling",
+            "section": "2590.716-8"
+          }
+        ],
+        "items": 22,
+        "negatives": 0,
+        "positives": 22
+      },
+      "no-free-count-matched-sibling": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "no-title-for-section": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "pool-citations-resolved": {
+        "detail": [],
+        "items": 85,
+        "negatives": 0,
+        "positives": 85
+      },
+      "positive-has-no-attributed-instructions": {
+        "detail": [
+          {
+            "frdoc": "2014-08744",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "6.302-1"
+          },
+          {
+            "frdoc": "2018-27472",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "702.304"
+          },
+          {
+            "frdoc": "2020-16986",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "1831.205-70"
+          },
+          {
+            "frdoc": "2021-22144",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "15.601"
+          },
+          {
+            "frdoc": "2024-14542",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "1.401(a)(31)-1"
+          },
+          {
+            "frdoc": "2024-18445",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "140.11"
+          },
+          {
+            "frdoc": "2024-18445",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "140.75"
+          },
+          {
+            "frdoc": "2024-18445",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "45.14"
+          },
+          {
+            "frdoc": "2024-18445",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "45.15"
+          },
+          {
+            "frdoc": "2024-29226",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "252.227-7014"
+          },
+          {
+            "frdoc": "2024-31513",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "1.45V-3"
+          },
+          {
+            "frdoc": "2026-11267",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "356.3"
+          },
+          {
+            "frdoc": "2026-11267",
+            "instruction_count": null,
+            "reason": "positive-has-no-attributed-instructions",
+            "section": "356.51"
+          }
+        ],
+        "items": 13,
+        "negatives": 0,
+        "positives": 13
+      },
+      "section-not-in-as-of-edition": {
+        "detail": [
+          {
+            "frdoc": "2011-12279",
+            "negative": "1.367(a)-3T",
+            "positive": "1.367(b)-0",
+            "why": "positive: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2016-16399",
+            "negative": "121.1001",
+            "positive": "125.6",
+            "why": "positive: no-volume-covers-this-part"
+          },
+          {
+            "frdoc": "2018-25443",
+            "negative": "2.42",
+            "positive": "2.22",
+            "why": "positive: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2021-04453",
+            "negative": "516.812",
+            "positive": "556.360",
+            "why": "negative: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2021-27643",
+            "negative": "702.401",
+            "positive": "702.2",
+            "why": "negative: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2023-25797",
+            "negative": "228.22",
+            "positive": "25.13",
+            "why": "positive: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2024-23195",
+            "negative": "476.71",
+            "positive": "405.1210",
+            "why": "positive: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2024-27310",
+            "negative": "800.104",
+            "positive": "802.104",
+            "why": "positive: section-not-in-as-of-edition"
+          },
+          {
+            "frdoc": "2025-24232",
+            "negative": "107.1140",
+            "positive": "107.1820",
+            "why": "positive: volume-index-failed: <HTTPError 404: 'Not Found'>"
+          },
+          {
+            "frdoc": "2026-08556",
+            "negative": "674.39",
+            "positive": "682.405",
+            "why": "negative: section-not-in-as-of-edition"
+          }
+        ],
+        "items": 20,
+        "negatives": 10,
+        "positives": 10
+      }
+    }
+  },
+  "n_items": 76,
+  "n_pairs": 38,
+  "per_document_completeness_floor": 0.9,
+  "target_pairs": 42
+}

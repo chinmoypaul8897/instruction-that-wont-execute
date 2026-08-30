@@ -1,0 +1,48 @@
+==============================================================================
+Q15 - WHAT CONTEXT.md v1.1's CASE-SENSITIVE WORD FORM COSTS
+==============================================================================
+
+CONTEXT.md section 8 adopts the word form because, under the sign-only reading,
+"ten documents attribute NOTHING - 1,910 elements", naming 2014-08744 (838) and
+2021-22144 (649). Measured below: v1.1 as SPECIFIED puts most of that back.
+
+  detector          docs attributing NOTHING    elements
+  spec_literal                            10        1910
+  extended_ci                              1          27
+  extended_cs                              5        1655
+  v11                                      5        1655
+
+  documents attributing NOTHING under v11:
+    2014-08744       838 elements
+    2020-16986         5 elements
+    2021-22144       649 elements
+    2024-29226       136 elements
+    2026-11267        27 elements
+
+  CONTEXT.md section 8 quotes the FAR style as "Section 52.204-8 is amended".
+    occurrences with a CAPITAL S in the corpus : 0
+    occurrences with a lowercase s             : 2
+    the actual bytes                           : '336. Amend section 52.204-8 by—'
+
+  Q12(c)'s 683 lowercase-only namers, DECOMPOSED BY DOCUMENT:
+    lowercase-only namers, total          : 683
+    ... in the two FAR rules (CORRECT)    : 617   (90.3%)
+    ... elsewhere                         : 66
+    ... carrying part_mismatch (Q12(c)'s own harm figure): 44   (6.4%)
+    by document:
+      2014-08744      389
+      2021-22144      228
+      05-8447          31
+      2024-29226       30
+      2020-16986        3
+      2024-17239        1
+      2025-20831        1
+
+  pool positives in v11-zero-attribution documents: 6 of 85
+    2014-08744     6.302-1
+    2020-16986     1831.205-70
+    2021-22144     15.601
+    2024-29226     252.227-7014
+    2026-11267     356.3
+    2026-11267     356.51
+

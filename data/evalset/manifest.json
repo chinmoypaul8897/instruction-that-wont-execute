@@ -1,0 +1,201 @@
+{
+  "chunk": "CH-03",
+  "files": {
+    "exclusion_ladder.json": {
+      "bytes": 13109,
+      "sha256": "1bce10f8da8d9ee342765dff994911ab9f73ee2d690680105256e8046e1593b4"
+    },
+    "items.jsonl": {
+      "bytes": 976820,
+      "sha256": "da28c592710fb813269ae11cdebff1800d6d9c7ce329a00372c465db32125404"
+    },
+    "leakage.json": {
+      "bytes": 1923,
+      "sha256": "10bd22412188c8d752dec4768d506dd6f2a42aa4b87d6c9593f4b93133c22d0e"
+    }
+  },
+  "normalisation": "whitespace-collapsed",
+  "raw_inputs": {
+    "CFR-2004-title40-vol15.xml": {
+      "bytes": 4822576,
+      "sha256": "195e20f6bd9339496c5f491096e6c01a9e04b912afc59b28b32e5b7745e0ffa4"
+    },
+    "CFR-2004-title40-vol6.xml": {
+      "bytes": 3917644,
+      "sha256": "0fc0183829a00a7d25949489cb1a310bf7175d1ff91d6c899683f4ff643e76f1"
+    },
+    "CFR-2005-title49-vol2.xml": {
+      "bytes": 8092952,
+      "sha256": "ec889a7afe9bb7a0842562a4d3ab5ae2b6738adf5c8391705cb9b3fb1bb36a95"
+    },
+    "CFR-2011-title47-vol1.xml": {
+      "bytes": 4738085,
+      "sha256": "67ce5263eb8bd1814f62655e5f325365820cce73fed9ecc1d2636e233f65f314"
+    },
+    "CFR-2011-title47-vol5.xml": {
+      "bytes": 6309833,
+      "sha256": "26e860f98612090e41bf2b1bb162a5f6c19baf358ff4b9c5bef7a6c46bcf3794"
+    },
+    "CFR-2014-title47-vol1.xml": {
+      "bytes": 4936387,
+      "sha256": "f3374fece6d19e823ea6fbb81e7697f0a48f2aaadd01da2c58e13672dd403b81"
+    },
+    "CFR-2014-title47-vol5.xml": {
+      "bytes": 6240212,
+      "sha256": "9c1f68c98529aac7497acca333e731d8483077e4bf610d192dfe1c8b6a505b18"
+    },
+    "CFR-2015-title33-vol2.xml": {
+      "bytes": 6206246,
+      "sha256": "da9d844f621b1e16505f441824e197149fab71b50433784f42644e3573ce7980"
+    },
+    "CFR-2015-title42-vol3.xml": {
+      "bytes": 4255619,
+      "sha256": "757525484075000d332c3dd8205863f13593b256a62eeb6212b047a9c428060b"
+    },
+    "CFR-2015-title49-vol8.xml": {
+      "bytes": 1831878,
+      "sha256": "320226f854e6903b4847a330a2f5530b10d5f55007006ee2f6ecd686116464eb"
+    },
+    "CFR-2015-title7-vol12.xml": {
+      "bytes": 3520386,
+      "sha256": "1ae4caa97e3719d5517a555de750634b49a78d57e8186a9b14e6b7f1b75ce938"
+    },
+    "CFR-2015-title7-vol13.xml": {
+      "bytes": 1813125,
+      "sha256": "4832b099176d312d7460b47fd2f00d62f908f1e2f20d79aced03d658a69d3a9c"
+    },
+    "CFR-2016-title21-vol6.xml": {
+      "bytes": 3307021,
+      "sha256": "2b8febd5a98804f56fdb3f41b456cda4d81aff99ba9c2ec3265f8128b270865e"
+    },
+    "CFR-2016-title32-vol2.xml": {
+      "bytes": 6157121,
+      "sha256": "e0a78407f978b3cf5e71f1811fa993877c2ba1499b9f33d2e20242cbd0f3e5bd"
+    },
+    "CFR-2016-title7-vol10.xml": {
+      "bytes": 6123691,
+      "sha256": "ab3bec19d7a3bf4817af445ad0fa5debec45ce29c5cd843d35cba16ac1d00d41"
+    },
+    "CFR-2016-title7-vol7.xml": {
+      "bytes": 3100643,
+      "sha256": "84fe7b6d3170a0fe7d7240f87476a224401695d371b877c81ed63732e43e860f"
+    },
+    "CFR-2017-title42-vol3.xml": {
+      "bytes": 4615034,
+      "sha256": "c5047c648eed155b25517c2cd1de10deadfc1ad94f8bbd4459bdd33f93bc767c"
+    },
+    "CFR-2019-title12-vol2.xml": {
+      "bytes": 3177584,
+      "sha256": "3bdd041a89f842a2bd9046f827eef7aa7e3a4ffd61bfbb2c063a1dcd49c94d44"
+    },
+    "CFR-2019-title26-vol4.xml": {
+      "bytes": 5711855,
+      "sha256": "3ec0c641361d35ac963960892d8a8dc5ff1b1e8bea0f0b61a288adbf494a1051"
+    },
+    "CFR-2019-title42-vol1.xml": {
+      "bytes": 4862693,
+      "sha256": "1989fc2b2f65f42f5b1104add2a54e67beab59150b5c4c7f2dddc08762945522"
+    },
+    "CFR-2019-title47-vol1.xml": {
+      "bytes": 5033215,
+      "sha256": "9fac0dc2bd8268c5007ebbc102204e65e8edeefdfcccdf782220089b06a9a6a7"
+    },
+    "CFR-2019-title47-vol2.xml": {
+      "bytes": 2985956,
+      "sha256": "a8dc7b642495c722835cd99a025ac0d2c286e1a25c1a79fd2f8d8726a3850ac6"
+    },
+    "CFR-2019-title47-vol5.xml": {
+      "bytes": 6018315,
+      "sha256": "5143d6cc129dbdbbd0836c1d07c7431076b72d961d2095901bbdadeb729a5d0c"
+    },
+    "CFR-2020-title17-vol3.xml": {
+      "bytes": 4646138,
+      "sha256": "489b13ec7c7a6979c42235379738a203c549be7fa3b0b3ed6d1173355dc93cad"
+    },
+    "CFR-2020-title40-vol11.xml": {
+      "bytes": 5689617,
+      "sha256": "a7fcd092ca649da0b9bbda512bdf1a428961fb7ef88e18221eeb976573aefedb"
+    },
+    "CFR-2020-title40-vol15.xml": {
+      "bytes": 3355384,
+      "sha256": "9c62d10e36d9e6cab68b0716949b69d150c421f25073a24dc64dd861f8bd4232"
+    },
+    "CFR-2020-title45-vol5.xml": {
+      "bytes": 5196064,
+      "sha256": "d12c7bee8445d25cd619a45ea251237870780ae9b7e61063d5324374c33ad760"
+    },
+    "CFR-2020-title49-vol4.xml": {
+      "bytes": 6963611,
+      "sha256": "9e1a6fd8cb12b44d2d12198f2ab06c844ad3a3f84d48fdd514d09b6c7528421a"
+    },
+    "CFR-2022-title5-vol3.xml": {
+      "bytes": 6050661,
+      "sha256": "e66fc1d15e87ff800e0c57047d7e20058ef7a4e8890b1960c0d0614f8982879d"
+    },
+    "CFR-2023-title40-vol11.xml": {
+      "bytes": 5727595,
+      "sha256": "09df731acd54c69a75f2152f705c90fa2255fe2d775d235c616ae7facccff637"
+    },
+    "CFR-2023-title40-vol7.xml": {
+      "bytes": 4706751,
+      "sha256": "3987a3edc005c10aa5911500f7f3d9f328020fe1f114259420c49bdb95b2e570"
+    },
+    "CFR-2023-title7-vol8.xml": {
+      "bytes": 4657223,
+      "sha256": "39ddf657b67f97e0d4253277686b11591210d68c390f54afb5423b4fa1e98578"
+    },
+    "CFR-2024-title34-vol1.xml": {
+      "bytes": 3501459,
+      "sha256": "6ea00ea64d6217710e64d2c4d5edcb0a8f7f97c14685baa7eac8db8b796c38c7"
+    },
+    "CFR-2024-title45-vol4.xml": {
+      "bytes": 3224740,
+      "sha256": "c11257490ae375a5814d0ff51ff332ae6bbf07b3767a55c65912a7e0d8cfdcc3"
+    },
+    "CFR-2024-title45-vol5.xml": {
+      "bytes": 5345881,
+      "sha256": "1f04cf217cd56db64a85f7a0c1ed8807a5f4a26ef2bc2e8ff54dfc3e967827dc"
+    },
+    "CFR-2024-title7-vol4.xml": {
+      "bytes": 7097697,
+      "sha256": "42eea9eb57125ccc3ead32bc457f381c05d662f3f9abfac39415435d44147b86"
+    },
+    "CFR-2025-title15-vol2.xml": {
+      "bytes": 6963316,
+      "sha256": "88e91b89031935043d9d81e3bbf26bdcd33351f9e83fa62c5e428cf96b8b391d"
+    },
+    "CFR-2025-title15-vol3.xml": {
+      "bytes": 6731104,
+      "sha256": "0db7193a523409530ffa3b09f4ec5ec6bde24889865a5d0209fb86ee625a20ca"
+    },
+    "CFR-2025-title19-vol1.xml": {
+      "bytes": 6833422,
+      "sha256": "eed5037ba83c83c1fb534b8e4bb03fdb74cb67de0f9d134d3ceaf2bdcebf43d1"
+    },
+    "CFR-2025-title30-vol2.xml": {
+      "bytes": 4282112,
+      "sha256": "fc2160cee766893e0ce68ddde6e76435f16d7a6e371a6f8ee5e076c6a1152410"
+    },
+    "CFR-2025-title30-vol3.xml": {
+      "bytes": 5891948,
+      "sha256": "2eb0b2c8833ae102d764c56d6a73c8111b886210ef59bf8f95f783bfd19c8dd2"
+    },
+    "CFR-2025-title40-vol36.xml": {
+      "bytes": 6019788,
+      "sha256": "f2ff680fe2d9473beb791d35d23f4ebeed075e7fbf5fe3341d71c58b2e1b8c1e"
+    },
+    "CFR-2025-title40-vol7.xml": {
+      "bytes": 5240865,
+      "sha256": "ac562a8f30576876c2af78f2b5159ac4dafbdb72e83ebd2258eb71e5fdd51c00"
+    },
+    "CFR-2025-title40-vol8.xml": {
+      "bytes": 8095227,
+      "sha256": "02943c25fba889eb2c8ab2a66d731712ccdf83224f24f7fef472342ffb661342"
+    },
+    "CFR-2025-title45-vol2.xml": {
+      "bytes": 5463720,
+      "sha256": "5fb58263c7533af259dacbc0d72e097158b995551a0fb241c4f997d4ef856b52"
+    }
+  },
+  "what": "point-in-time CFR text and the eval set"
+}

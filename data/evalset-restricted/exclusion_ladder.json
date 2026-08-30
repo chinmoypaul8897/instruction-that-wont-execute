@@ -1,0 +1,113 @@
+{
+  "diagnostics_never_used_as_the_eval_set": {
+    "pairs_at_tolerance_1": 1,
+    "pairs_under_the_0_90_reference_floor": 1,
+    "pairs_without_any_completeness_floor": 50
+  },
+  "documents_excluded_by_floor": 68,
+  "documents_kept": 2,
+  "floor_applied": 0.9,
+  "ladder": {
+    "order": [
+      "pool-citations-resolved",
+      "document-completeness-below-floor",
+      "positive-has-no-attributed-instructions",
+      "no-count-matched-sibling",
+      "no-free-count-matched-sibling",
+      "no-title-for-section",
+      "as-of-edition-unavailable",
+      "section-not-in-as-of-edition",
+      "leakage-test-failed-after-strip",
+      "kept"
+    ],
+    "rungs": {
+      "as-of-edition-unavailable": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "document-completeness-below-floor": {
+        "detail": [
+          {
+            "documents_excluded": 68,
+            "documents_kept": 2,
+            "floor_applied": 0.9,
+            "reference_floor_0_90_would_keep_documents": 2,
+            "reference_floor_0_90_would_keep_positives": 3
+          }
+        ],
+        "items": 82,
+        "negatives": 0,
+        "positives": 82
+      },
+      "kept": {
+        "detail": [],
+        "items": 2,
+        "negatives": 1,
+        "positives": 1
+      },
+      "leakage-test-failed-after-strip": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "no-count-matched-sibling": {
+        "detail": [
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-22974",
+            "instruction_count": 53,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1502-47"
+          },
+          {
+            "count_matched_but_taken": 0,
+            "frdoc": "2020-22974",
+            "instruction_count": 4,
+            "reason": "no-count-matched-sibling",
+            "section": "1.1503(d)-4"
+          }
+        ],
+        "items": 2,
+        "negatives": 0,
+        "positives": 2
+      },
+      "no-free-count-matched-sibling": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "no-title-for-section": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "pool-citations-resolved": {
+        "detail": [],
+        "items": 85,
+        "negatives": 0,
+        "positives": 85
+      },
+      "positive-has-no-attributed-instructions": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      },
+      "section-not-in-as-of-edition": {
+        "detail": [],
+        "items": 0,
+        "negatives": 0,
+        "positives": 0
+      }
+    }
+  },
+  "n_items": 2,
+  "n_pairs": 1,
+  "per_document_completeness_floor": 0.9,
+  "target_pairs": 42
+}

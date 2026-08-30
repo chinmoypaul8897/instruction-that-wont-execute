@@ -681,3 +681,246 @@ detector, publishes the case-sensitive figures beside the case-insensitive ones 
 ERRATA convention: a wrong number is corrected in a new entry, never edited out of the
 old one), and at that point the architect can retire the "~42%" sentence with a measured
 replacement instead of an estimate.
+
+---
+
+## Q15 - CONTEXT.md v1.1's case-sensitive word form RE-CREATES the failure it was adopted to fix, and section 8's own quoted example does not occur in the corpus
+Raised: CH-03, 2026-08-31. Status: **CLASS A - recorded, NOT acted on. The spec was
+FOLLOWED, not corrected.** `CONTEXT.md` is LAW and protected; a build session does not
+edit it. The eval set is built on v1.1 as written. Evidence:
+`docs/evidence/ch03-evalset/remeasure-v11.txt` and `case-sensitivity-cost.txt`.
+
+**The justification section 8 gives for the word form.** v1.1, verbatim:
+
+> *"under the sign-only reading **ten documents attribute NOTHING - 1,910 elements**,
+> among them two of the five largest rules in the corpus (`2014-08744` at 838 elements,
+> `2021-22144` at 649), because FAR-family rules write "Section 52.204-8 is amended"
+> without the sign."*
+
+**Measured under v1.1 as specified** (word form, case-SENSITIVE, part reset):
+
+| detector | documents attributing NOTHING | elements |
+|---|---:|---:|
+| `spec_literal` - sign only | 10 | 1,910 |
+| `extended_ci` - what CH-02 shipped | **1** | **27** |
+| `extended_cs` - case-sensitive | 5 | **1,655** |
+| **`v11` - CONTEXT.md v1.1** | **5** | **1,655** |
+
+**87% of the harm the word form was adopted to remove is back**, and the two documents
+section 8 names by number are among the five. `2014-08744`: 838 elements, **0
+attributed**. `2021-22144`: 649 elements, **0 attributed**.
+
+**Why: section 8's quoted example is not what the corpus says.**
+
+| string | occurrences in the corpus |
+|---|---:|
+| `Section 52.204-8` (capital S, as section 8 quotes it) | **0** |
+| `section 52.204-8` (lowercase, the actual bytes) | **2** |
+
+The real text is `"336. Amend section 52.204-8 by-"`. FAR-family rules do not write
+*"Section X is amended"*; they write *"Amend section X by..."*, with the word
+mid-sentence and therefore lowercase. **The illustrative quotation in section 8 was
+reconstructed rather than transcribed**, and the case rule was written to fit the
+reconstruction.
+
+**Q12(c)'s over-detection evidence, decomposed.** Q12(c) justified case-sensitivity on
+*"684 elements whose only word-form citation is lowercase, 683 treated as naming a
+section, 44 of those carry `part_mismatch`"*. Measured here, of the **683**
+lowercase-only namers:
+
+| | elements | share |
+|---|---:|---:|
+| in `2014-08744` and `2021-22144`, where lowercase detection is **CORRECT** | **617** | **90.3%** |
+| in the other five documents | 66 | 9.7% |
+| carrying `part_mismatch` (Q12(c)'s harm case, its own figure) | 44 | 6.4% |
+
+So the rule trades **617 correct detections for at most 44 suspect ones**, and Q12(c)
+did not decompose its own 683 by document. Nothing in Q12(c) was wrong; it measured
+the over-detection and never measured the under-detection the fix would cause.
+
+**Direct cost to this chunk:** 6 of the 85 pool positives sit in documents that
+attribute nothing under v11 - `2014-08744/6.302-1`, `2020-16986/1831.205-70`,
+`2021-22144/15.601`, `2024-29226/252.227-7014`, and both of `2026-11267`'s (the last
+document is Q10's already-recorded `46 CFR 356.3` case, not a case-rule casualty).
+They drop on the `positive-has-no-attributed-instructions` rung.
+
+**What CH-03 did: followed the spec.** The eval set is built on v11, case-sensitive,
+and the affected positives are excluded on a named ladder rung with their count. **No
+detector was substituted, no rule was relaxed, and no number was adjusted.** Hard rule
+3: this is Class A - it changes meaning and results - so it stops here and goes to the
+architect rather than being fixed by the session that found it.
+
+**The options, for the architect, with their measured consequences:**
+
+- **(a) Leave v1.1 as written.** 1,655 elements and 5 documents attribute to nothing;
+  4 pool positives are lost to the case rule specifically. Defensible: the rule is at
+  least *stated*, and Q12(c)'s appendix-numbering harm is real.
+- **(b) Case-INsensitive word form** (revert Q12(c)). Recovers 617 correct detections,
+  re-admits ~44 `part_mismatch` elements. **The part-boundary reset already catches
+  most of that harm**: `part_mismatch` falls 699 -> 115 under v11, and the reset was
+  adopted in the same edit. The two fixes overlap, and Q12(c) was ruled before that
+  overlap was measured.
+- **(c) Case-sensitive EXCEPT after an amendatory verb** - `Amend/amend section X`.
+  Fits the corpus, but it is a new rule invented after seeing the number, which is
+  precisely the shape SPEC-FIX-1 refused. **Recorded and NOT recommended.**
+
+**This session recommends nothing and adopted nothing.** The measurement is the
+deliverable; the ruling is the architect's.
+
+---
+
+## Q16 - the per-document completeness floor the Q11 ruling points at leaves 1 pair, and it selects on Federal Register drafting style rather than on attribution
+Raised: CH-03, 2026-08-31. Status: **CONTRADICTION RECORDED; the option taken is named,
+with the count it produces AND the count the other option produces.** Evidence:
+`docs/evidence/ch03-evalset/floor-decomposition.txt`.
+
+**The contradiction.** Two binding documents point in different directions.
+
+- **`plan.md` CH-02's pre-registered fallback** scopes the restriction to one branch:
+  *"If global attributor completeness lands in **[0.80, 0.90)**, restrict the eval set
+  to FR documents with per-document completeness >= 0.90 ... **Below 0.80** the
+  attributor is a documented failure and the headline is withdrawn."* CH-02 measured
+  0.5080 / 0.6643, i.e. the **< 0.80** branch, whose stated consequence is the
+  withdrawal - which has already happened and is published in `CONTEXT.md` section 8.
+  **The >= 0.90 restriction is the remedy for a branch this project is not in.**
+- **`QUESTIONS.md` Q11's ruling** says *"CH-03 proceeds on the per-document restriction
+  that was pre-registered BEFORE any of this - see plan.md CH-02's fallback."* It
+  points at the fallback, and the fallback scopes the restriction away from us.
+
+**Measured consequence of each reading:**
+
+| reading | documents kept | pairs | n |
+|---|---:|---:|---:|
+| (i) apply the >= 0.90 floor - Q11's sentence read literally | **2 / 70** | **1** | **2** |
+| (ii) plan.md's fallback as scoped - no floor in the < 0.80 branch | 70 / 70 | **50** | **100** |
+
+**A number-INDEPENDENT reason the floor is the wrong instrument here**, and it is the
+reason this entry does not rest on n. Per-document *completeness* is
+`attributed AND parsed / total`. Decomposed over the 68 documents the floor excludes:
+
+| | documents |
+|---|---:|
+| bound by the **parse** half, not the attribution half (`parse_rate < attribution_rate`) | **59 / 68** |
+| **attribution >= 0.90** and yet excluded by the completeness floor | **36** |
+| `parse_rate < 0.90` | 68 / 68 |
+
+Three excluded documents have attribution **1.0000** - perfect - and fail purely on
+parse rate (`2011-12279` 0.4167, `2020-17549` 0.6111, `2024-30575` 0.2500).
+
+**And the ruling that created this situation says the parse half does not belong here.**
+Q11, verbatim: *"only 46 of 2,913 unparsed elements (1.6%) are our defect. Parse shape
+is a property of Federal Register drafting, not of our attributor, and does not belong
+in an attributor's gate."* A per-document floor on *completeness* therefore selects
+overwhelmingly on FR drafting style. It is not a validity filter for an eval item.
+
+**WHAT WAS DONE, stated plainly including the part that looks bad.**
+
+**Reading (ii) is the frozen primary: 50 pairs, n = 100.** Reading (i) is **also built
+and committed**, at `data/evalset-restricted/`, so the architect can flip the choice
+with one command and a reviewer can run either without rebuilding anything.
+
+**The uncomfortable fact, stated rather than buried: the option taken is also the one
+with the larger n.** That is exactly the shape SPEC-FIX-1 refused and Q11 condemned -
+*"Selecting the fix that helps and omitting the fix that hurts is the defect this
+project exists to detect."* Three things are offered against it, and the reader is
+invited to weigh them rather than take them:
+
+1. The reason is a **scope mismatch in `plan.md` that is checkable without any
+   number** - the fallback names the [0.80, 0.90) branch and we are below 0.80.
+2. The decomposition above is **also number-independent** - 59 of 68 exclusions are
+   parse-bound, and Q11's own ruling says parse shape does not belong in this gate.
+3. **Both sets ship.** Nothing is hidden; the floor is a named ladder rung carrying
+   its exact cost; and the choice is one flag.
+
+**A mitigation that is a new MEASUREMENT and not a metric change.** Every frozen item
+carries its document's `completeness_v11`, `attribution_rate_v11` and `parse_rate_v11`.
+The scorer can therefore report accuracy **stratified by document completeness**, and
+if the arms behave differently on low-completeness documents that is a measured fact
+rather than an assumption. **No threshold was introduced and no definition was
+altered.**
+
+**What is wanted from the architect:** a ruling on whether (i) or (ii) is the eval set,
+and, if (i), an instruction on what CH-04 and the CHECKPOINT are supposed to measure at
+n = 2. Nothing was blocked; the queue continued.
+
+---
+
+## Q17 - CONTEXT.md section 8 names `<EFFDNOTP>`; the corpus also uses `<EFFDNOT>`, and Q8's trap fired for real
+Raised: CH-03, 2026-08-31. Status: **CLASS A - recorded, NOT acted on. The stripper was
+NOT extended.** The affected items were excluded on a named ladder rung, which makes
+the eval set smaller. Evidence: `docs/evidence/ch03-evalset/alt-element-census.txt`,
+script beside it.
+
+**Q8 predicted this in the abstract at CH-01 and it happened in the concrete at CH-03.**
+Q8's words: *"a strip counter that reports zero may simply be looking for the wrong
+element name ... A silent zero here is the leakage defect returning by a different
+door."* It did, and the door was one letter wide.
+
+**What happened.** `CONTEXT.md` section 8 requires `<EFFDNOTP>` stripped. In
+`CFR-2015-title7-vol13.xml`, section 1942.5, the strip counter reported
+
+    EDNOTE 0   EFFDNOTP 0   CITA 1   EAR 0
+
+and **every one of those zeros was true for its tag.** The section nonetheless carried
+a complete effective-date note - the FR citation, the section, the designations, *"For
+the convenience of the user, the revised text is set forth as follows"*, and a
+`<REVTXT><SECTION>` reprint of the pending amendment - inside an element spelled
+**`<EFFDNOT>`**, with no trailing `P`. `<EFFDNOTP>` occurs **zero** times in that
+volume; `<EFFDNOT>` occurs four.
+
+**Census over all 68 annual-edition volumes CH-03 downloaded:**
+
+| element | occurrences | volumes | named by section 8 |
+|---|---:|---:|---|
+| `EDNOTE` | 857 | 67 | YES |
+| `EFFDNOTP` | 446 | 31 | YES |
+| `CITA` | 31,943 | 68 | YES |
+| `EAR` | 3,303 | 68 | YES |
+| **`EFFDNOT`** | **379** | **26** | **no** |
+| `NOTE` | 3,051 | 46 | no |
+| `SOURCE` | 3,140 | 66 | no |
+| `SECAUTH` | 2,322 | 50 | no |
+| `APPRO` | 964 | 32 | no |
+| `REVTXT` | 200 | 27 | no |
+| `EFFDNOTE`, `NOTES`, `NOTE1`, `CREDIT`, `AMDNOTE` | 0 | 0 | no |
+
+**The pre-registered defence held, and it held for the reason it was designed.**
+`plan.md`'s leakage test has three rules, not one: element names **(a)**, the item's own
+FR citation **(b)**, and four literal strings **(c)**. All **379** `<EFFDNOT>` elements
+carry one of the literals, so **rule (c) is a complete backstop for this element**. The
+test fired, two pairs were excluded on `leakage-test-failed-after-strip`, and nothing
+leaked into the frozen corpus. **A single-rule test keyed on element names alone would
+have passed silently.**
+
+**Residual exposure, measured on the FROZEN corpus rather than argued about:**
+
+| unnamed element | surviving in the 76 frozen items | items affected |
+|---|---:|---:|
+| `EFFDNOT` | **0** | 0 |
+| `REVTXT` | **0** | 0 |
+| `SOURCE` | **0** | 0 |
+| `NOTE` | 14 | 6 |
+| `APPRO` | 1 | 1 |
+| `SECAUTH` | 1 | 1 |
+
+And the strongest single figure: **0 of 76 frozen items contain any `NN FR NNNN`
+citation at all** - not merely none of their own, which is all rule (b) requires, but
+none whatsoever. The source-credit channel is empty in the frozen corpus.
+
+**Why the stripper was NOT extended, stated so the choice can be judged.** Adding
+`<EFFDNOT>` would be a five-character edit that recovers 2 pairs, taking n from 76 to
+80. It was not made, for two reasons:
+
+1. **`CONTEXT.md` is LAW and protected.** Its section 8 names four elements. A fifth is
+   a Class A change and belongs to the architect, not to the build session that found
+   it. This is the same discipline SPEC-FIX-1 was praised for.
+2. **The direction matters.** Excluding makes the eval set **smaller** and the result
+   **harder**. Extending the stripper after the number was in view would have made it
+   **larger**. When a post-hoc change would raise n, the answer is no.
+
+**For the architect.** Adding `<EFFDNOT>` to section 8's list is almost certainly
+correct on the merits - it is the same content under a variant spelling, and the census
+above is the evidence. It is recorded here rather than done. If it is adopted, CH-03
+re-runs and n moves from 76 to 80; **the two excluded pairs are named in
+`data/evalset/leakage.json` so the delta is checkable rather than asserted**:
+`2015-01571 / 1942.5` and `2020-07837 / 3.111`.

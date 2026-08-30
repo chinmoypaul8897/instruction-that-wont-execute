@@ -1,0 +1,44 @@
+{
+  "items_total": 2,
+  "items_whose_UNSTRIPPED_text_would_have_leaked": 1,
+  "known_positive_assertion": {
+    "counts": {
+      "CITA": 3,
+      "EAR": 1,
+      "EDNOTE": 2,
+      "EFFDNOTP": 1,
+      "total": 7
+    },
+    "violations_after_stripping": [],
+    "violations_before_stripping": [
+      {
+        "detail": "90 FR 1",
+        "kind": "own-fr-citation",
+        "rule": "b"
+      },
+      {
+        "detail": "Editorial Note",
+        "kind": "literal",
+        "rule": "c"
+      },
+      {
+        "detail": "Effective Date Note",
+        "kind": "literal",
+        "rule": "c"
+      },
+      {
+        "detail": "set forth as follows",
+        "kind": "literal",
+        "rule": "c"
+      }
+    ]
+  },
+  "leakage_test_failures_after_strip": [],
+  "strip_counts_over_the_frozen_corpus": {
+    "CITA": 2,
+    "EAR": 0,
+    "EDNOTE": 1,
+    "EFFDNOTP": 1,
+    "total": 4
+  }
+}

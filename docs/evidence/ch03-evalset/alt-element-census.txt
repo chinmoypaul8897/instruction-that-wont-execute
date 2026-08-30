@@ -1,0 +1,93 @@
+==============================================================================
+ALTERNATE NOTE-ELEMENT CENSUS - QUESTIONS.md Q8's trap, measured
+==============================================================================
+
+  volumes scanned: 68
+
+  element       occurrences   volumes   named by CONTEXT 8
+  EDNOTE                857        67                  YES
+  EFFDNOTP              446        31                  YES
+  CITA                31943        68                  YES
+  EAR                  3303        68                  YES
+  EFFDNOT               379        26                   no
+  EFFDNOTE                0         0                   no
+  NOTE                 3051        46                   no
+  NOTES                   0         0                   no
+  NOTE1                   0         0                   no
+  REVTXT                200        27                   no
+  APPRO                 964        32                   no
+  SECAUTH              2322        50                   no
+  SOURCE               3140        66                   no
+  CREDIT                  0         0                   no
+  AMDNOTE                 0         0                   no
+
+  Zero-occurrence rows are printed above, not omitted (hard rule 14).
+
+==============================================================================
+IS plan.md's LITERAL TEST (rule c) A COMPLETE BACKSTOP FOR THE UNNAMED ONES?
+==============================================================================
+
+  element       carries a literal   carries NONE    backstop
+  EDNOTE                      856              1 n/a (named)
+  EFFDNOTP                    446              0 n/a (named)
+  CITA                          0          31943 n/a (named)
+  EAR                           0           3303 n/a (named)
+  EFFDNOT                     379              0    COMPLETE
+  NOTE                          0           3051  INCOMPLETE
+  REVTXT                        5            195  INCOMPLETE
+  APPRO                         0            964  INCOMPLETE
+  SECAUTH                       0           2322  INCOMPLETE
+  SOURCE                        0           3140  INCOMPLETE
+
+  UNNAMED elements carrying NO literal, i.e. residual exposure: 9672
+
+  A sample <EFFDNOT>, the element CONTEXT.md section 8 does not name:
+    from CFR-2004-title40-vol15.xml
+    'Effective Date Note: At 59 FR 7716, Feb. 16, 1994, EPA published amendments to part 80 containing information collection and recordkeeping requirements, which w'
+
+==============================================================================
+RESIDUAL EXPOSURE ON THE FROZEN CORPUS ITSELF - the number that decides
+==============================================================================
+
+  The whole-volume census above is an upper bound over material we never
+  freeze. What matters is what SURVIVES stripping inside the 76 frozen items.
+
+  frozen items inspected: 76
+
+  element        surviving   items affected
+  EFFDNOT                0                0
+  EFFDNOTE               0                0
+  NOTE                  14                6
+  NOTES                  0                0
+  NOTE1                  0                0
+  REVTXT                 0                0
+  APPRO                  1                1
+  SECAUTH                1                1
+  SOURCE                 0                0
+  CREDIT                 0                0
+  AMDNOTE                0                0
+
+  frozen items whose STRIPPED text still contains ANY 'NN FR NNNN'
+  citation (not necessarily their own - rule (b) already excludes that):
+    0 of 76
+
+  This figure is REPORTED, not remedied. CONTEXT.md section 8's honest
+  bounding already says prior notes on the same section are
+  label-correlated; this is that statement turned into a count.
+
+==============================================================================
+WHAT WAS DONE ABOUT IT
+==============================================================================
+
+  NOTHING was added to the stripper. CONTEXT.md section 8 names four elements
+  and adding a fifth is a Class A spec change, which belongs to the architect
+  and not to the session that found it (QUESTIONS.md Q17).
+
+  The affected items were EXCLUDED on the named ladder rung
+  `leakage-test-failed-after-strip`. That makes the eval set SMALLER, which is
+  the conservative direction; extending the stripper would have made it larger
+  after the number was in view, which is the direction this project refuses.
+
+  The defence that caught it was pre-registered: plan.md's leakage test checks
+  LITERALS as well as element names, so it fires on content the element list
+  misses. That is the reason the test has three rules and not one.
