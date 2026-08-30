@@ -1,0 +1,28 @@
+==============================================================================
+CH-03 1a - ATTRIBUTOR RE-MEASURED UNDER CONTEXT.md v1.1
+==============================================================================
+  documents=70  AMDPAR elements=8752
+
+  config          complete  completeness  attributed  attribution  unattrib  part_mism
+  spec_literal        4446        0.5080        6663       0.7613      2089        671
+  extended_ci         5814        0.6643        8634       0.9865       118        699
+  extended_cs         4713        0.5385        7010       0.8010      1742        622
+  v11                 4674        0.5340        6501       0.7428      2251        115
+
+  CONTROL - spec_literal and extended_ci must reproduce CH-02 exactly
+    OK   spec_literal   CH-02 0.5080  re-measured 0.5080
+    OK   extended_ci    CH-02 0.6643  re-measured 0.6643
+
+  Q14(b) - CONTEXT.md section 8's "only ~42% of AMDPARs name a section"
+    spec_literal    2191 / 8752  = 0.2503
+    extended_ci     3277 / 8752  = 0.3744
+    extended_cs     2594 / 8752  = 0.2964
+    v11             2594 / 8752  = 0.2964
+
+  elements whose attribution CASE-SENSITIVITY alone changes : 1669
+  elements whose attribution v1.1 as a whole changes         : 2177
+  part-boundary resets fired                                 : 584
+
+  NOTE: a stricter detector cannot RAISE a failing figure. CH-02's gate
+  outcome is not revisited by this re-measurement - it stays FAILED and
+  in its pre-registered '< 0.80 documented failure' branch.

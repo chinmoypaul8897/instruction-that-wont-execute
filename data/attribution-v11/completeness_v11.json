@@ -1,0 +1,6210 @@
+{
+  "configs": {
+    "extended_ci": {
+      "case_sensitive": false,
+      "part_reset": false,
+      "word_form": true
+    },
+    "extended_cs": {
+      "case_sensitive": true,
+      "part_reset": false,
+      "word_form": true
+    },
+    "spec_literal": {
+      "case_sensitive": false,
+      "part_reset": false,
+      "word_form": false
+    },
+    "v11": {
+      "case_sensitive": true,
+      "part_reset": true,
+      "word_form": true
+    }
+  },
+  "control_vs_ch02": {
+    "extended_ci": {
+      "ch02_completeness": 0.6643053016453382,
+      "fields": {
+        "attributed": {
+          "ch02": 8634,
+          "remeasured": 8634
+        },
+        "complete": {
+          "ch02": 5814,
+          "remeasured": 5814
+        },
+        "parsed": {
+          "ch02": 5839,
+          "remeasured": 5839
+        },
+        "total": {
+          "ch02": 8752,
+          "remeasured": 8752
+        },
+        "unattributable": {
+          "ch02": 118,
+          "remeasured": 118
+        }
+      },
+      "remeasured_completeness": 0.6643053016453382,
+      "reproduces": true
+    },
+    "spec_literal": {
+      "ch02_completeness": 0.5079981718464351,
+      "fields": {
+        "attributed": {
+          "ch02": 6663,
+          "remeasured": 6663
+        },
+        "complete": {
+          "ch02": 4446,
+          "remeasured": 4446
+        },
+        "parsed": {
+          "ch02": 5839,
+          "remeasured": 5839
+        },
+        "total": {
+          "ch02": 8752,
+          "remeasured": 8752
+        },
+        "unattributable": {
+          "ch02": 2089,
+          "remeasured": 2089
+        }
+      },
+      "remeasured_completeness": 0.5079981718464351,
+      "reproduces": true
+    }
+  },
+  "global": {
+    "extended_ci": {
+      "attributed": 8634,
+      "attribution_rate": 0.9865173674588665,
+      "by_operation": {
+        "add": 548,
+        "amend": 880,
+        "none": 1074,
+        "redesignate": 179,
+        "remove": 4060,
+        "revise": 2011
+      },
+      "complete": 5814,
+      "completeness": 0.6643053016453382,
+      "incomplete": 2938,
+      "parse_rate": 0.6671617915904936,
+      "parsed": 5839,
+      "part_mismatch": 699,
+      "total": 8752,
+      "unattributable": 118,
+      "unclosed_quote": 5
+    },
+    "extended_cs": {
+      "attributed": 7010,
+      "attribution_rate": 0.8009597806215722,
+      "by_operation": {
+        "add": 548,
+        "amend": 880,
+        "none": 1074,
+        "redesignate": 179,
+        "remove": 4060,
+        "revise": 2011
+      },
+      "complete": 4713,
+      "completeness": 0.5385054844606947,
+      "incomplete": 4039,
+      "parse_rate": 0.6671617915904936,
+      "parsed": 5839,
+      "part_mismatch": 622,
+      "total": 8752,
+      "unattributable": 1742,
+      "unclosed_quote": 5
+    },
+    "spec_literal": {
+      "attributed": 6663,
+      "attribution_rate": 0.7613117001828154,
+      "by_operation": {
+        "add": 548,
+        "amend": 880,
+        "none": 1074,
+        "redesignate": 179,
+        "remove": 4060,
+        "revise": 2011
+      },
+      "complete": 4446,
+      "completeness": 0.5079981718464351,
+      "incomplete": 4306,
+      "parse_rate": 0.6671617915904936,
+      "parsed": 5839,
+      "part_mismatch": 671,
+      "total": 8752,
+      "unattributable": 2089,
+      "unclosed_quote": 5
+    },
+    "v11": {
+      "attributed": 6501,
+      "attribution_rate": 0.7428016453382084,
+      "by_operation": {
+        "add": 548,
+        "amend": 880,
+        "none": 1074,
+        "redesignate": 179,
+        "remove": 4060,
+        "revise": 2011
+      },
+      "complete": 4674,
+      "completeness": 0.5340493601462523,
+      "incomplete": 4078,
+      "parse_rate": 0.6671617915904936,
+      "parsed": 5839,
+      "part_mismatch": 115,
+      "total": 8752,
+      "unattributable": 2251,
+      "unclosed_quote": 5
+    }
+  },
+  "names_section_rate": {
+    "extended_ci": {
+      "names_section": 3277,
+      "rate": 0.3744287020109689,
+      "total": 8752
+    },
+    "extended_cs": {
+      "names_section": 2594,
+      "rate": 0.29638939670932357,
+      "total": 8752
+    },
+    "spec_literal": {
+      "names_section": 2191,
+      "rate": 0.25034277879341865,
+      "total": 8752
+    },
+    "v11": {
+      "names_section": 2594,
+      "rate": 0.29638939670932357,
+      "total": 8752
+    }
+  },
+  "per_document": {
+    "05-8447": {
+      "extended_ci": {
+        "attributed": 129,
+        "attribution_rate": 0.9847328244274809,
+        "by_operation": {
+          "add": 32,
+          "amend": 14,
+          "none": 3,
+          "redesignate": 12,
+          "remove": 1,
+          "revise": 69
+        },
+        "complete": 76,
+        "completeness": 0.5801526717557252,
+        "incomplete": 55,
+        "parse_rate": 0.5801526717557252,
+        "parsed": 76,
+        "part_mismatch": 46,
+        "total": 131,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 129,
+        "attribution_rate": 0.9847328244274809,
+        "by_operation": {
+          "add": 32,
+          "amend": 14,
+          "none": 3,
+          "redesignate": 12,
+          "remove": 1,
+          "revise": 69
+        },
+        "complete": 76,
+        "completeness": 0.5801526717557252,
+        "incomplete": 55,
+        "parse_rate": 0.5801526717557252,
+        "parsed": 76,
+        "part_mismatch": 6,
+        "total": 131,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 126,
+        "attribution_rate": 0.9618320610687023,
+        "by_operation": {
+          "add": 32,
+          "amend": 14,
+          "none": 3,
+          "redesignate": 12,
+          "remove": 1,
+          "revise": 69
+        },
+        "complete": 74,
+        "completeness": 0.5648854961832062,
+        "incomplete": 57,
+        "parse_rate": 0.5801526717557252,
+        "parsed": 76,
+        "part_mismatch": 26,
+        "total": 131,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 126,
+        "attribution_rate": 0.9618320610687023,
+        "by_operation": {
+          "add": 32,
+          "amend": 14,
+          "none": 3,
+          "redesignate": 12,
+          "remove": 1,
+          "revise": 69
+        },
+        "complete": 75,
+        "completeness": 0.5725190839694656,
+        "incomplete": 56,
+        "parse_rate": 0.5801526717557252,
+        "parsed": 76,
+        "part_mismatch": 3,
+        "total": 131,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2011-12279": {
+      "extended_ci": {
+        "attributed": 12,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 4
+        },
+        "complete": 5,
+        "completeness": 0.4166666666666667,
+        "incomplete": 7,
+        "parse_rate": 0.4166666666666667,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 12,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 12,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 4
+        },
+        "complete": 5,
+        "completeness": 0.4166666666666667,
+        "incomplete": 7,
+        "parse_rate": 0.4166666666666667,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 12,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 12,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 4
+        },
+        "complete": 5,
+        "completeness": 0.4166666666666667,
+        "incomplete": 7,
+        "parse_rate": 0.4166666666666667,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 12,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 12,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 4
+        },
+        "complete": 5,
+        "completeness": 0.4166666666666667,
+        "incomplete": 7,
+        "parse_rate": 0.4166666666666667,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 12,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      }
+    },
+    "2011-27587": {
+      "extended_ci": {
+        "attributed": 54,
+        "attribution_rate": 0.9818181818181818,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 10,
+          "revise": 41
+        },
+        "complete": 44,
+        "completeness": 0.8,
+        "incomplete": 11,
+        "parse_rate": 0.8,
+        "parsed": 44,
+        "part_mismatch": 3,
+        "total": 55,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 54,
+        "attribution_rate": 0.9818181818181818,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 10,
+          "revise": 41
+        },
+        "complete": 44,
+        "completeness": 0.8,
+        "incomplete": 11,
+        "parse_rate": 0.8,
+        "parsed": 44,
+        "part_mismatch": 3,
+        "total": 55,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 51,
+        "attribution_rate": 0.9272727272727272,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 10,
+          "revise": 41
+        },
+        "complete": 42,
+        "completeness": 0.7636363636363637,
+        "incomplete": 13,
+        "parse_rate": 0.8,
+        "parsed": 44,
+        "part_mismatch": 1,
+        "total": 55,
+        "unattributable": 4,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 53,
+        "attribution_rate": 0.9636363636363636,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 10,
+          "revise": 41
+        },
+        "complete": 44,
+        "completeness": 0.8,
+        "incomplete": 11,
+        "parse_rate": 0.8,
+        "parsed": 44,
+        "part_mismatch": 2,
+        "total": 55,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2014-08744": {
+      "extended_ci": {
+        "attributed": 837,
+        "attribution_rate": 0.9988066825775657,
+        "by_operation": {
+          "add": 3,
+          "amend": 122,
+          "none": 9,
+          "redesignate": 2,
+          "remove": 455,
+          "revise": 247
+        },
+        "complete": 558,
+        "completeness": 0.665871121718377,
+        "incomplete": 280,
+        "parse_rate": 0.665871121718377,
+        "parsed": 558,
+        "part_mismatch": 30,
+        "total": 838,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 122,
+          "none": 9,
+          "redesignate": 2,
+          "remove": 455,
+          "revise": 247
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 838,
+        "parse_rate": 0.665871121718377,
+        "parsed": 558,
+        "part_mismatch": 0,
+        "total": 838,
+        "unattributable": 838,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 122,
+          "none": 9,
+          "redesignate": 2,
+          "remove": 455,
+          "revise": 247
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 838,
+        "parse_rate": 0.665871121718377,
+        "parsed": 558,
+        "part_mismatch": 0,
+        "total": 838,
+        "unattributable": 838,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 122,
+          "none": 9,
+          "redesignate": 2,
+          "remove": 455,
+          "revise": 247
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 838,
+        "parse_rate": 0.665871121718377,
+        "parsed": 558,
+        "part_mismatch": 0,
+        "total": 838,
+        "unattributable": 838,
+        "unclosed_quote": 0
+      }
+    },
+    "2015-01571": {
+      "extended_ci": {
+        "attributed": 2176,
+        "attribution_rate": 0.9995406522737712,
+        "by_operation": {
+          "add": 13,
+          "amend": 181,
+          "none": 453,
+          "redesignate": 0,
+          "remove": 1466,
+          "revise": 64
+        },
+        "complete": 1530,
+        "completeness": 0.7028020211299955,
+        "incomplete": 647,
+        "parse_rate": 0.7028020211299955,
+        "parsed": 1530,
+        "part_mismatch": 58,
+        "total": 2177,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "extended_cs": {
+        "attributed": 2176,
+        "attribution_rate": 0.9995406522737712,
+        "by_operation": {
+          "add": 13,
+          "amend": 181,
+          "none": 453,
+          "redesignate": 0,
+          "remove": 1466,
+          "revise": 64
+        },
+        "complete": 1530,
+        "completeness": 0.7028020211299955,
+        "incomplete": 647,
+        "parse_rate": 0.7028020211299955,
+        "parsed": 1530,
+        "part_mismatch": 58,
+        "total": 2177,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "spec_literal": {
+        "attributed": 2176,
+        "attribution_rate": 0.9995406522737712,
+        "by_operation": {
+          "add": 13,
+          "amend": 181,
+          "none": 453,
+          "redesignate": 0,
+          "remove": 1466,
+          "revise": 64
+        },
+        "complete": 1530,
+        "completeness": 0.7028020211299955,
+        "incomplete": 647,
+        "parse_rate": 0.7028020211299955,
+        "parsed": 1530,
+        "part_mismatch": 59,
+        "total": 2177,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "v11": {
+        "attributed": 2130,
+        "attribution_rate": 0.9784106568672485,
+        "by_operation": {
+          "add": 13,
+          "amend": 181,
+          "none": 453,
+          "redesignate": 0,
+          "remove": 1466,
+          "revise": 64
+        },
+        "complete": 1530,
+        "completeness": 0.7028020211299955,
+        "incomplete": 647,
+        "parse_rate": 0.7028020211299955,
+        "parsed": 1530,
+        "part_mismatch": 12,
+        "total": 2177,
+        "unattributable": 47,
+        "unclosed_quote": 1
+      }
+    },
+    "2015-15249": {
+      "extended_ci": {
+        "attributed": 43,
+        "attribution_rate": 0.9772727272727273,
+        "by_operation": {
+          "add": 6,
+          "amend": 2,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 20
+        },
+        "complete": 25,
+        "completeness": 0.5681818181818182,
+        "incomplete": 19,
+        "parse_rate": 0.5681818181818182,
+        "parsed": 25,
+        "part_mismatch": 11,
+        "total": 44,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 43,
+        "attribution_rate": 0.9772727272727273,
+        "by_operation": {
+          "add": 6,
+          "amend": 2,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 20
+        },
+        "complete": 25,
+        "completeness": 0.5681818181818182,
+        "incomplete": 19,
+        "parse_rate": 0.5681818181818182,
+        "parsed": 25,
+        "part_mismatch": 11,
+        "total": 44,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 6,
+          "amend": 2,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 20
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 44,
+        "parse_rate": 0.5681818181818182,
+        "parsed": 25,
+        "part_mismatch": 0,
+        "total": 44,
+        "unattributable": 44,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 33,
+        "attribution_rate": 0.75,
+        "by_operation": {
+          "add": 6,
+          "amend": 2,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 20
+        },
+        "complete": 25,
+        "completeness": 0.5681818181818182,
+        "incomplete": 19,
+        "parse_rate": 0.5681818181818182,
+        "parsed": 25,
+        "part_mismatch": 1,
+        "total": 44,
+        "unattributable": 11,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-03298": {
+      "extended_ci": {
+        "attributed": 234,
+        "attribution_rate": 0.9957446808510638,
+        "by_operation": {
+          "add": 8,
+          "amend": 2,
+          "none": 67,
+          "redesignate": 6,
+          "remove": 114,
+          "revise": 38
+        },
+        "complete": 139,
+        "completeness": 0.5914893617021276,
+        "incomplete": 96,
+        "parse_rate": 0.5914893617021276,
+        "parsed": 139,
+        "part_mismatch": 56,
+        "total": 235,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 234,
+        "attribution_rate": 0.9957446808510638,
+        "by_operation": {
+          "add": 8,
+          "amend": 2,
+          "none": 67,
+          "redesignate": 6,
+          "remove": 114,
+          "revise": 38
+        },
+        "complete": 139,
+        "completeness": 0.5914893617021276,
+        "incomplete": 96,
+        "parse_rate": 0.5914893617021276,
+        "parsed": 139,
+        "part_mismatch": 56,
+        "total": 235,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 234,
+        "attribution_rate": 0.9957446808510638,
+        "by_operation": {
+          "add": 8,
+          "amend": 2,
+          "none": 67,
+          "redesignate": 6,
+          "remove": 114,
+          "revise": 38
+        },
+        "complete": 139,
+        "completeness": 0.5914893617021276,
+        "incomplete": 96,
+        "parse_rate": 0.5914893617021276,
+        "parsed": 139,
+        "part_mismatch": 56,
+        "total": 235,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 182,
+        "attribution_rate": 0.774468085106383,
+        "by_operation": {
+          "add": 8,
+          "amend": 2,
+          "none": 67,
+          "redesignate": 6,
+          "remove": 114,
+          "revise": 38
+        },
+        "complete": 137,
+        "completeness": 0.5829787234042553,
+        "incomplete": 98,
+        "parse_rate": 0.5914893617021276,
+        "parsed": 139,
+        "part_mismatch": 4,
+        "total": 235,
+        "unattributable": 53,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-08827": {
+      "extended_ci": {
+        "attributed": 58,
+        "attribution_rate": 0.9830508474576272,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 41,
+          "revise": 5
+        },
+        "complete": 46,
+        "completeness": 0.7796610169491526,
+        "incomplete": 13,
+        "parse_rate": 0.7796610169491526,
+        "parsed": 46,
+        "part_mismatch": 7,
+        "total": 59,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 58,
+        "attribution_rate": 0.9830508474576272,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 41,
+          "revise": 5
+        },
+        "complete": 46,
+        "completeness": 0.7796610169491526,
+        "incomplete": 13,
+        "parse_rate": 0.7796610169491526,
+        "parsed": 46,
+        "part_mismatch": 7,
+        "total": 59,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 58,
+        "attribution_rate": 0.9830508474576272,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 41,
+          "revise": 5
+        },
+        "complete": 46,
+        "completeness": 0.7796610169491526,
+        "incomplete": 13,
+        "parse_rate": 0.7796610169491526,
+        "parsed": 46,
+        "part_mismatch": 7,
+        "total": 59,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 53,
+        "attribution_rate": 0.8983050847457628,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 41,
+          "revise": 5
+        },
+        "complete": 46,
+        "completeness": 0.7796610169491526,
+        "incomplete": 13,
+        "parse_rate": 0.7796610169491526,
+        "parsed": 46,
+        "part_mismatch": 2,
+        "total": 59,
+        "unattributable": 6,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-09949": {
+      "extended_ci": {
+        "attributed": 57,
+        "attribution_rate": 0.9827586206896551,
+        "by_operation": {
+          "add": 8,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 5,
+          "remove": 23,
+          "revise": 15
+        },
+        "complete": 51,
+        "completeness": 0.8793103448275862,
+        "incomplete": 7,
+        "parse_rate": 0.8793103448275862,
+        "parsed": 51,
+        "part_mismatch": 0,
+        "total": 58,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 57,
+        "attribution_rate": 0.9827586206896551,
+        "by_operation": {
+          "add": 8,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 5,
+          "remove": 23,
+          "revise": 15
+        },
+        "complete": 51,
+        "completeness": 0.8793103448275862,
+        "incomplete": 7,
+        "parse_rate": 0.8793103448275862,
+        "parsed": 51,
+        "part_mismatch": 0,
+        "total": 58,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 57,
+        "attribution_rate": 0.9827586206896551,
+        "by_operation": {
+          "add": 8,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 5,
+          "remove": 23,
+          "revise": 15
+        },
+        "complete": 51,
+        "completeness": 0.8793103448275862,
+        "incomplete": 7,
+        "parse_rate": 0.8793103448275862,
+        "parsed": 51,
+        "part_mismatch": 0,
+        "total": 58,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 57,
+        "attribution_rate": 0.9827586206896551,
+        "by_operation": {
+          "add": 8,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 5,
+          "remove": 23,
+          "revise": 15
+        },
+        "complete": 51,
+        "completeness": 0.8793103448275862,
+        "incomplete": 7,
+        "parse_rate": 0.8793103448275862,
+        "parsed": 51,
+        "part_mismatch": 0,
+        "total": 58,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-13651": {
+      "extended_ci": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 9,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 6,
+          "remove": 13,
+          "revise": 4
+        },
+        "complete": 28,
+        "completeness": 0.717948717948718,
+        "incomplete": 11,
+        "parse_rate": 0.717948717948718,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 9,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 6,
+          "remove": 13,
+          "revise": 4
+        },
+        "complete": 28,
+        "completeness": 0.717948717948718,
+        "incomplete": 11,
+        "parse_rate": 0.717948717948718,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 9,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 6,
+          "remove": 13,
+          "revise": 4
+        },
+        "complete": 28,
+        "completeness": 0.717948717948718,
+        "incomplete": 11,
+        "parse_rate": 0.717948717948718,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 9,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 6,
+          "remove": 13,
+          "revise": 4
+        },
+        "complete": 28,
+        "completeness": 0.717948717948718,
+        "incomplete": 11,
+        "parse_rate": 0.717948717948718,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-13983": {
+      "extended_ci": {
+        "attributed": 29,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 10,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 0
+        },
+        "complete": 19,
+        "completeness": 0.6333333333333333,
+        "incomplete": 11,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 19,
+        "part_mismatch": 3,
+        "total": 30,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 29,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 10,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 0
+        },
+        "complete": 19,
+        "completeness": 0.6333333333333333,
+        "incomplete": 11,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 19,
+        "part_mismatch": 3,
+        "total": 30,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 29,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 10,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 0
+        },
+        "complete": 19,
+        "completeness": 0.6333333333333333,
+        "incomplete": 11,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 19,
+        "part_mismatch": 3,
+        "total": 30,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 26,
+        "attribution_rate": 0.8666666666666667,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 10,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 0
+        },
+        "complete": 19,
+        "completeness": 0.6333333333333333,
+        "incomplete": 11,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 19,
+        "part_mismatch": 0,
+        "total": 30,
+        "unattributable": 4,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-16399": {
+      "extended_ci": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 26,
+          "amend": 6,
+          "none": 8,
+          "redesignate": 11,
+          "remove": 11,
+          "revise": 38
+        },
+        "complete": 74,
+        "completeness": 0.74,
+        "incomplete": 26,
+        "parse_rate": 0.74,
+        "parsed": 74,
+        "part_mismatch": 6,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 26,
+          "amend": 6,
+          "none": 8,
+          "redesignate": 11,
+          "remove": 11,
+          "revise": 38
+        },
+        "complete": 74,
+        "completeness": 0.74,
+        "incomplete": 26,
+        "parse_rate": 0.74,
+        "parsed": 74,
+        "part_mismatch": 6,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 26,
+          "amend": 6,
+          "none": 8,
+          "redesignate": 11,
+          "remove": 11,
+          "revise": 38
+        },
+        "complete": 74,
+        "completeness": 0.74,
+        "incomplete": 26,
+        "parse_rate": 0.74,
+        "parsed": 74,
+        "part_mismatch": 6,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 95,
+        "attribution_rate": 0.95,
+        "by_operation": {
+          "add": 26,
+          "amend": 6,
+          "none": 8,
+          "redesignate": 11,
+          "remove": 11,
+          "revise": 38
+        },
+        "complete": 74,
+        "completeness": 0.74,
+        "incomplete": 26,
+        "parse_rate": 0.74,
+        "parsed": 74,
+        "part_mismatch": 2,
+        "total": 100,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-18075": {
+      "extended_ci": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 13,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 5
+        },
+        "complete": 16,
+        "completeness": 0.4,
+        "incomplete": 24,
+        "parse_rate": 0.4,
+        "parsed": 16,
+        "part_mismatch": 12,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 13,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 5
+        },
+        "complete": 16,
+        "completeness": 0.4,
+        "incomplete": 24,
+        "parse_rate": 0.4,
+        "parsed": 16,
+        "part_mismatch": 12,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 13,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 5
+        },
+        "complete": 16,
+        "completeness": 0.4,
+        "incomplete": 24,
+        "parse_rate": 0.4,
+        "parsed": 16,
+        "part_mismatch": 12,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 27,
+        "attribution_rate": 0.675,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 13,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 5
+        },
+        "complete": 16,
+        "completeness": 0.4,
+        "incomplete": 24,
+        "parse_rate": 0.4,
+        "parsed": 16,
+        "part_mismatch": 0,
+        "total": 40,
+        "unattributable": 13,
+        "unclosed_quote": 0
+      }
+    },
+    "2016-23968": {
+      "extended_ci": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 2,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 19,
+          "revise": 10
+        },
+        "complete": 28,
+        "completeness": 0.7,
+        "incomplete": 12,
+        "parse_rate": 0.7,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 2,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 19,
+          "revise": 10
+        },
+        "complete": 28,
+        "completeness": 0.7,
+        "incomplete": 12,
+        "parse_rate": 0.7,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 2,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 19,
+          "revise": 10
+        },
+        "complete": 28,
+        "completeness": 0.7,
+        "incomplete": 12,
+        "parse_rate": 0.7,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 39,
+        "attribution_rate": 0.975,
+        "by_operation": {
+          "add": 2,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 19,
+          "revise": 10
+        },
+        "complete": 28,
+        "completeness": 0.7,
+        "incomplete": 12,
+        "parse_rate": 0.7,
+        "parsed": 28,
+        "part_mismatch": 0,
+        "total": 40,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2017-00727": {
+      "extended_ci": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 7,
+          "revise": 1
+        },
+        "complete": 7,
+        "completeness": 0.7777777777777778,
+        "incomplete": 2,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 7,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 7,
+          "revise": 1
+        },
+        "complete": 7,
+        "completeness": 0.7777777777777778,
+        "incomplete": 2,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 7,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 7,
+          "revise": 1
+        },
+        "complete": 7,
+        "completeness": 0.7777777777777778,
+        "incomplete": 2,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 7,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 7,
+          "revise": 1
+        },
+        "complete": 7,
+        "completeness": 0.7777777777777778,
+        "incomplete": 2,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 7,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2017-23953": {
+      "extended_ci": {
+        "attributed": 61,
+        "attribution_rate": 0.9838709677419355,
+        "by_operation": {
+          "add": 16,
+          "amend": 5,
+          "none": 5,
+          "redesignate": 1,
+          "remove": 12,
+          "revise": 23
+        },
+        "complete": 48,
+        "completeness": 0.7741935483870968,
+        "incomplete": 14,
+        "parse_rate": 0.7741935483870968,
+        "parsed": 48,
+        "part_mismatch": 4,
+        "total": 62,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 61,
+        "attribution_rate": 0.9838709677419355,
+        "by_operation": {
+          "add": 16,
+          "amend": 5,
+          "none": 5,
+          "redesignate": 1,
+          "remove": 12,
+          "revise": 23
+        },
+        "complete": 48,
+        "completeness": 0.7741935483870968,
+        "incomplete": 14,
+        "parse_rate": 0.7741935483870968,
+        "parsed": 48,
+        "part_mismatch": 4,
+        "total": 62,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 31,
+        "attribution_rate": 0.5,
+        "by_operation": {
+          "add": 16,
+          "amend": 5,
+          "none": 5,
+          "redesignate": 1,
+          "remove": 12,
+          "revise": 23
+        },
+        "complete": 24,
+        "completeness": 0.3870967741935484,
+        "incomplete": 38,
+        "parse_rate": 0.7741935483870968,
+        "parsed": 48,
+        "part_mismatch": 26,
+        "total": 62,
+        "unattributable": 31,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 57,
+        "attribution_rate": 0.9193548387096774,
+        "by_operation": {
+          "add": 16,
+          "amend": 5,
+          "none": 5,
+          "redesignate": 1,
+          "remove": 12,
+          "revise": 23
+        },
+        "complete": 48,
+        "completeness": 0.7741935483870968,
+        "incomplete": 14,
+        "parse_rate": 0.7741935483870968,
+        "parsed": 48,
+        "part_mismatch": 0,
+        "total": 62,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2017-26532": {
+      "extended_ci": {
+        "attributed": 32,
+        "attribution_rate": 0.9696969696969697,
+        "by_operation": {
+          "add": 5,
+          "amend": 1,
+          "none": 4,
+          "redesignate": 0,
+          "remove": 9,
+          "revise": 14
+        },
+        "complete": 22,
+        "completeness": 0.6666666666666666,
+        "incomplete": 11,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 33,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 32,
+        "attribution_rate": 0.9696969696969697,
+        "by_operation": {
+          "add": 5,
+          "amend": 1,
+          "none": 4,
+          "redesignate": 0,
+          "remove": 9,
+          "revise": 14
+        },
+        "complete": 22,
+        "completeness": 0.6666666666666666,
+        "incomplete": 11,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 33,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 32,
+        "attribution_rate": 0.9696969696969697,
+        "by_operation": {
+          "add": 5,
+          "amend": 1,
+          "none": 4,
+          "redesignate": 0,
+          "remove": 9,
+          "revise": 14
+        },
+        "complete": 22,
+        "completeness": 0.6666666666666666,
+        "incomplete": 11,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 33,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 31,
+        "attribution_rate": 0.9393939393939394,
+        "by_operation": {
+          "add": 5,
+          "amend": 1,
+          "none": 4,
+          "redesignate": 0,
+          "remove": 9,
+          "revise": 14
+        },
+        "complete": 22,
+        "completeness": 0.6666666666666666,
+        "incomplete": 11,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 33,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2018-25443": {
+      "extended_ci": {
+        "attributed": 50,
+        "attribution_rate": 0.9615384615384616,
+        "by_operation": {
+          "add": 11,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 14
+        },
+        "complete": 33,
+        "completeness": 0.6346153846153846,
+        "incomplete": 19,
+        "parse_rate": 0.6538461538461539,
+        "parsed": 34,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 50,
+        "attribution_rate": 0.9615384615384616,
+        "by_operation": {
+          "add": 11,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 14
+        },
+        "complete": 33,
+        "completeness": 0.6346153846153846,
+        "incomplete": 19,
+        "parse_rate": 0.6538461538461539,
+        "parsed": 34,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 49,
+        "attribution_rate": 0.9423076923076923,
+        "by_operation": {
+          "add": 11,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 14
+        },
+        "complete": 33,
+        "completeness": 0.6346153846153846,
+        "incomplete": 19,
+        "parse_rate": 0.6538461538461539,
+        "parsed": 34,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 50,
+        "attribution_rate": 0.9615384615384616,
+        "by_operation": {
+          "add": 11,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 20,
+          "revise": 14
+        },
+        "complete": 33,
+        "completeness": 0.6346153846153846,
+        "incomplete": 19,
+        "parse_rate": 0.6538461538461539,
+        "parsed": 34,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2018-27472": {
+      "extended_ci": {
+        "attributed": 155,
+        "attribution_rate": 0.9935897435897436,
+        "by_operation": {
+          "add": 3,
+          "amend": 6,
+          "none": 26,
+          "redesignate": 0,
+          "remove": 48,
+          "revise": 73
+        },
+        "complete": 113,
+        "completeness": 0.7243589743589743,
+        "incomplete": 43,
+        "parse_rate": 0.7243589743589743,
+        "parsed": 113,
+        "part_mismatch": 47,
+        "total": 156,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 155,
+        "attribution_rate": 0.9935897435897436,
+        "by_operation": {
+          "add": 3,
+          "amend": 6,
+          "none": 26,
+          "redesignate": 0,
+          "remove": 48,
+          "revise": 73
+        },
+        "complete": 113,
+        "completeness": 0.7243589743589743,
+        "incomplete": 43,
+        "parse_rate": 0.7243589743589743,
+        "parsed": 113,
+        "part_mismatch": 47,
+        "total": 156,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 155,
+        "attribution_rate": 0.9935897435897436,
+        "by_operation": {
+          "add": 3,
+          "amend": 6,
+          "none": 26,
+          "redesignate": 0,
+          "remove": 48,
+          "revise": 73
+        },
+        "complete": 113,
+        "completeness": 0.7243589743589743,
+        "incomplete": 43,
+        "parse_rate": 0.7243589743589743,
+        "parsed": 113,
+        "part_mismatch": 47,
+        "total": 156,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 108,
+        "attribution_rate": 0.6923076923076923,
+        "by_operation": {
+          "add": 3,
+          "amend": 6,
+          "none": 26,
+          "redesignate": 0,
+          "remove": 48,
+          "revise": 73
+        },
+        "complete": 95,
+        "completeness": 0.6089743589743589,
+        "incomplete": 61,
+        "parse_rate": 0.7243589743589743,
+        "parsed": 113,
+        "part_mismatch": 0,
+        "total": 156,
+        "unattributable": 48,
+        "unclosed_quote": 0
+      }
+    },
+    "2019-07652": {
+      "extended_ci": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 5,
+        "completeness": 0.8333333333333334,
+        "incomplete": 1,
+        "parse_rate": 0.8333333333333334,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 5,
+        "completeness": 0.8333333333333334,
+        "incomplete": 1,
+        "parse_rate": 0.8333333333333334,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 5,
+        "completeness": 0.8333333333333334,
+        "incomplete": 1,
+        "parse_rate": 0.8333333333333334,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 5,
+        "completeness": 0.8333333333333334,
+        "incomplete": 1,
+        "parse_rate": 0.8333333333333334,
+        "parsed": 5,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2019-15131": {
+      "extended_ci": {
+        "attributed": 74,
+        "attribution_rate": 0.9866666666666667,
+        "by_operation": {
+          "add": 1,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 3,
+          "revise": 65
+        },
+        "complete": 61,
+        "completeness": 0.8133333333333334,
+        "incomplete": 14,
+        "parse_rate": 0.8133333333333334,
+        "parsed": 61,
+        "part_mismatch": 2,
+        "total": 75,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 74,
+        "attribution_rate": 0.9866666666666667,
+        "by_operation": {
+          "add": 1,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 3,
+          "revise": 65
+        },
+        "complete": 61,
+        "completeness": 0.8133333333333334,
+        "incomplete": 14,
+        "parse_rate": 0.8133333333333334,
+        "parsed": 61,
+        "part_mismatch": 2,
+        "total": 75,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 74,
+        "attribution_rate": 0.9866666666666667,
+        "by_operation": {
+          "add": 1,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 3,
+          "revise": 65
+        },
+        "complete": 61,
+        "completeness": 0.8133333333333334,
+        "incomplete": 14,
+        "parse_rate": 0.8133333333333334,
+        "parsed": 61,
+        "part_mismatch": 2,
+        "total": 75,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 72,
+        "attribution_rate": 0.96,
+        "by_operation": {
+          "add": 1,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 3,
+          "revise": 65
+        },
+        "complete": 61,
+        "completeness": 0.8133333333333334,
+        "incomplete": 14,
+        "parse_rate": 0.8133333333333334,
+        "parsed": 61,
+        "part_mismatch": 0,
+        "total": 75,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      }
+    },
+    "2019-18241": {
+      "extended_ci": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.8,
+        "incomplete": 1,
+        "parse_rate": 0.8,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.8,
+        "incomplete": 1,
+        "parse_rate": 0.8,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.8,
+        "incomplete": 1,
+        "parse_rate": 0.8,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.8,
+        "incomplete": 1,
+        "parse_rate": 0.8,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2019-19810": {
+      "extended_ci": {
+        "attributed": 41,
+        "attribution_rate": 0.9761904761904762,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 11,
+          "revise": 18
+        },
+        "complete": 22,
+        "completeness": 0.5238095238095238,
+        "incomplete": 20,
+        "parse_rate": 0.5238095238095238,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 42,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 41,
+        "attribution_rate": 0.9761904761904762,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 11,
+          "revise": 18
+        },
+        "complete": 22,
+        "completeness": 0.5238095238095238,
+        "incomplete": 20,
+        "parse_rate": 0.5238095238095238,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 42,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 41,
+        "attribution_rate": 0.9761904761904762,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 11,
+          "revise": 18
+        },
+        "complete": 22,
+        "completeness": 0.5238095238095238,
+        "incomplete": 20,
+        "parse_rate": 0.5238095238095238,
+        "parsed": 22,
+        "part_mismatch": 1,
+        "total": 42,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 40,
+        "attribution_rate": 0.9523809523809523,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 11,
+          "revise": 18
+        },
+        "complete": 22,
+        "completeness": 0.5238095238095238,
+        "incomplete": 20,
+        "parse_rate": 0.5238095238095238,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 42,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-03841": {
+      "extended_ci": {
+        "attributed": 148,
+        "attribution_rate": 0.9932885906040269,
+        "by_operation": {
+          "add": 32,
+          "amend": 17,
+          "none": 3,
+          "redesignate": 14,
+          "remove": 59,
+          "revise": 24
+        },
+        "complete": 128,
+        "completeness": 0.8590604026845637,
+        "incomplete": 21,
+        "parse_rate": 0.8590604026845637,
+        "parsed": 128,
+        "part_mismatch": 0,
+        "total": 149,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "extended_cs": {
+        "attributed": 148,
+        "attribution_rate": 0.9932885906040269,
+        "by_operation": {
+          "add": 32,
+          "amend": 17,
+          "none": 3,
+          "redesignate": 14,
+          "remove": 59,
+          "revise": 24
+        },
+        "complete": 128,
+        "completeness": 0.8590604026845637,
+        "incomplete": 21,
+        "parse_rate": 0.8590604026845637,
+        "parsed": 128,
+        "part_mismatch": 0,
+        "total": 149,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "spec_literal": {
+        "attributed": 148,
+        "attribution_rate": 0.9932885906040269,
+        "by_operation": {
+          "add": 32,
+          "amend": 17,
+          "none": 3,
+          "redesignate": 14,
+          "remove": 59,
+          "revise": 24
+        },
+        "complete": 128,
+        "completeness": 0.8590604026845637,
+        "incomplete": 21,
+        "parse_rate": 0.8590604026845637,
+        "parsed": 128,
+        "part_mismatch": 0,
+        "total": 149,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "v11": {
+        "attributed": 148,
+        "attribution_rate": 0.9932885906040269,
+        "by_operation": {
+          "add": 32,
+          "amend": 17,
+          "none": 3,
+          "redesignate": 14,
+          "remove": 59,
+          "revise": 24
+        },
+        "complete": 128,
+        "completeness": 0.8590604026845637,
+        "incomplete": 21,
+        "parse_rate": 0.8590604026845637,
+        "parsed": 128,
+        "part_mismatch": 0,
+        "total": 149,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      }
+    },
+    "2020-04103": {
+      "extended_ci": {
+        "attributed": 65,
+        "attribution_rate": 0.9848484848484849,
+        "by_operation": {
+          "add": 11,
+          "amend": 12,
+          "none": 1,
+          "redesignate": 7,
+          "remove": 27,
+          "revise": 8
+        },
+        "complete": 52,
+        "completeness": 0.7878787878787878,
+        "incomplete": 14,
+        "parse_rate": 0.7878787878787878,
+        "parsed": 52,
+        "part_mismatch": 0,
+        "total": 66,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 65,
+        "attribution_rate": 0.9848484848484849,
+        "by_operation": {
+          "add": 11,
+          "amend": 12,
+          "none": 1,
+          "redesignate": 7,
+          "remove": 27,
+          "revise": 8
+        },
+        "complete": 52,
+        "completeness": 0.7878787878787878,
+        "incomplete": 14,
+        "parse_rate": 0.7878787878787878,
+        "parsed": 52,
+        "part_mismatch": 0,
+        "total": 66,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 65,
+        "attribution_rate": 0.9848484848484849,
+        "by_operation": {
+          "add": 11,
+          "amend": 12,
+          "none": 1,
+          "redesignate": 7,
+          "remove": 27,
+          "revise": 8
+        },
+        "complete": 52,
+        "completeness": 0.7878787878787878,
+        "incomplete": 14,
+        "parse_rate": 0.7878787878787878,
+        "parsed": 52,
+        "part_mismatch": 0,
+        "total": 66,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 65,
+        "attribution_rate": 0.9848484848484849,
+        "by_operation": {
+          "add": 11,
+          "amend": 12,
+          "none": 1,
+          "redesignate": 7,
+          "remove": 27,
+          "revise": 8
+        },
+        "complete": 52,
+        "completeness": 0.7878787878787878,
+        "incomplete": 14,
+        "parse_rate": 0.7878787878787878,
+        "parsed": 52,
+        "part_mismatch": 0,
+        "total": 66,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-04776": {
+      "extended_ci": {
+        "attributed": 34,
+        "attribution_rate": 0.9714285714285714,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 7,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 18
+        },
+        "complete": 17,
+        "completeness": 0.4857142857142857,
+        "incomplete": 18,
+        "parse_rate": 0.4857142857142857,
+        "parsed": 17,
+        "part_mismatch": 5,
+        "total": 35,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 34,
+        "attribution_rate": 0.9714285714285714,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 7,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 18
+        },
+        "complete": 17,
+        "completeness": 0.4857142857142857,
+        "incomplete": 18,
+        "parse_rate": 0.4857142857142857,
+        "parsed": 17,
+        "part_mismatch": 5,
+        "total": 35,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 34,
+        "attribution_rate": 0.9714285714285714,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 7,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 18
+        },
+        "complete": 17,
+        "completeness": 0.4857142857142857,
+        "incomplete": 18,
+        "parse_rate": 0.4857142857142857,
+        "parsed": 17,
+        "part_mismatch": 5,
+        "total": 35,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 29,
+        "attribution_rate": 0.8285714285714286,
+        "by_operation": {
+          "add": 7,
+          "amend": 3,
+          "none": 7,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 18
+        },
+        "complete": 17,
+        "completeness": 0.4857142857142857,
+        "incomplete": 18,
+        "parse_rate": 0.4857142857142857,
+        "parsed": 17,
+        "part_mismatch": 0,
+        "total": 35,
+        "unattributable": 6,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-07013": {
+      "extended_ci": {
+        "attributed": 51,
+        "attribution_rate": 0.9622641509433962,
+        "by_operation": {
+          "add": 2,
+          "amend": 8,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 28,
+          "revise": 13
+        },
+        "complete": 44,
+        "completeness": 0.8301886792452831,
+        "incomplete": 9,
+        "parse_rate": 0.8301886792452831,
+        "parsed": 44,
+        "part_mismatch": 0,
+        "total": 53,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 51,
+        "attribution_rate": 0.9622641509433962,
+        "by_operation": {
+          "add": 2,
+          "amend": 8,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 28,
+          "revise": 13
+        },
+        "complete": 44,
+        "completeness": 0.8301886792452831,
+        "incomplete": 9,
+        "parse_rate": 0.8301886792452831,
+        "parsed": 44,
+        "part_mismatch": 0,
+        "total": 53,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 51,
+        "attribution_rate": 0.9622641509433962,
+        "by_operation": {
+          "add": 2,
+          "amend": 8,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 28,
+          "revise": 13
+        },
+        "complete": 44,
+        "completeness": 0.8301886792452831,
+        "incomplete": 9,
+        "parse_rate": 0.8301886792452831,
+        "parsed": 44,
+        "part_mismatch": 0,
+        "total": 53,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 51,
+        "attribution_rate": 0.9622641509433962,
+        "by_operation": {
+          "add": 2,
+          "amend": 8,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 28,
+          "revise": 13
+        },
+        "complete": 44,
+        "completeness": 0.8301886792452831,
+        "incomplete": 9,
+        "parse_rate": 0.8301886792452831,
+        "parsed": 44,
+        "part_mismatch": 0,
+        "total": 53,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-07837": {
+      "extended_ci": {
+        "attributed": 73,
+        "attribution_rate": 0.9864864864864865,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 4,
+          "redesignate": 7,
+          "remove": 37,
+          "revise": 13
+        },
+        "complete": 46,
+        "completeness": 0.6216216216216216,
+        "incomplete": 28,
+        "parse_rate": 0.6216216216216216,
+        "parsed": 46,
+        "part_mismatch": 2,
+        "total": 74,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 73,
+        "attribution_rate": 0.9864864864864865,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 4,
+          "redesignate": 7,
+          "remove": 37,
+          "revise": 13
+        },
+        "complete": 46,
+        "completeness": 0.6216216216216216,
+        "incomplete": 28,
+        "parse_rate": 0.6216216216216216,
+        "parsed": 46,
+        "part_mismatch": 2,
+        "total": 74,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 58,
+        "attribution_rate": 0.7837837837837838,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 4,
+          "redesignate": 7,
+          "remove": 37,
+          "revise": 13
+        },
+        "complete": 43,
+        "completeness": 0.581081081081081,
+        "incomplete": 31,
+        "parse_rate": 0.6216216216216216,
+        "parsed": 46,
+        "part_mismatch": 1,
+        "total": 74,
+        "unattributable": 16,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 71,
+        "attribution_rate": 0.9594594594594594,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 4,
+          "redesignate": 7,
+          "remove": 37,
+          "revise": 13
+        },
+        "complete": 46,
+        "completeness": 0.6216216216216216,
+        "incomplete": 28,
+        "parse_rate": 0.6216216216216216,
+        "parsed": 46,
+        "part_mismatch": 0,
+        "total": 74,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-11897": {
+      "extended_ci": {
+        "attributed": 27,
+        "attribution_rate": 0.9642857142857143,
+        "by_operation": {
+          "add": 7,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 15
+        },
+        "complete": 15,
+        "completeness": 0.5357142857142857,
+        "incomplete": 13,
+        "parse_rate": 0.5357142857142857,
+        "parsed": 15,
+        "part_mismatch": 4,
+        "total": 28,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 27,
+        "attribution_rate": 0.9642857142857143,
+        "by_operation": {
+          "add": 7,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 15
+        },
+        "complete": 15,
+        "completeness": 0.5357142857142857,
+        "incomplete": 13,
+        "parse_rate": 0.5357142857142857,
+        "parsed": 15,
+        "part_mismatch": 4,
+        "total": 28,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 26,
+        "attribution_rate": 0.9285714285714286,
+        "by_operation": {
+          "add": 7,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 15
+        },
+        "complete": 14,
+        "completeness": 0.5,
+        "incomplete": 14,
+        "parse_rate": 0.5357142857142857,
+        "parsed": 15,
+        "part_mismatch": 21,
+        "total": 28,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 23,
+        "attribution_rate": 0.8214285714285714,
+        "by_operation": {
+          "add": 7,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 15
+        },
+        "complete": 15,
+        "completeness": 0.5357142857142857,
+        "incomplete": 13,
+        "parse_rate": 0.5357142857142857,
+        "parsed": 15,
+        "part_mismatch": 0,
+        "total": 28,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-12588": {
+      "extended_ci": {
+        "attributed": 44,
+        "attribution_rate": 0.9777777777777777,
+        "by_operation": {
+          "add": 9,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 4,
+          "remove": 0,
+          "revise": 27
+        },
+        "complete": 30,
+        "completeness": 0.6666666666666666,
+        "incomplete": 15,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 30,
+        "part_mismatch": 0,
+        "total": 45,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 44,
+        "attribution_rate": 0.9777777777777777,
+        "by_operation": {
+          "add": 9,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 4,
+          "remove": 0,
+          "revise": 27
+        },
+        "complete": 30,
+        "completeness": 0.6666666666666666,
+        "incomplete": 15,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 30,
+        "part_mismatch": 0,
+        "total": 45,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 1,
+        "attribution_rate": 0.022222222222222223,
+        "by_operation": {
+          "add": 9,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 4,
+          "remove": 0,
+          "revise": 27
+        },
+        "complete": 1,
+        "completeness": 0.022222222222222223,
+        "incomplete": 44,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 30,
+        "part_mismatch": 0,
+        "total": 45,
+        "unattributable": 44,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 44,
+        "attribution_rate": 0.9777777777777777,
+        "by_operation": {
+          "add": 9,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 4,
+          "remove": 0,
+          "revise": 27
+        },
+        "complete": 30,
+        "completeness": 0.6666666666666666,
+        "incomplete": 15,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 30,
+        "part_mismatch": 0,
+        "total": 45,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-16986": {
+      "extended_ci": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 1,
+        "completeness": 0.2,
+        "incomplete": 4,
+        "parse_rate": 0.2,
+        "parsed": 1,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 5,
+        "parse_rate": 0.2,
+        "parsed": 1,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 5,
+        "parse_rate": 0.2,
+        "parsed": 1,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 5,
+        "parse_rate": 0.2,
+        "parsed": 1,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-17090": {
+      "extended_ci": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 0,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 14,
+          "revise": 0
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 0,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 14,
+          "revise": 0
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 0,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 14,
+          "revise": 0
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 0,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 14,
+          "revise": 0
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-17549": {
+      "extended_ci": {
+        "attributed": 36,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 5,
+          "none": 3,
+          "redesignate": 4,
+          "remove": 6,
+          "revise": 15
+        },
+        "complete": 22,
+        "completeness": 0.6111111111111112,
+        "incomplete": 14,
+        "parse_rate": 0.6111111111111112,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 36,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 36,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 5,
+          "none": 3,
+          "redesignate": 4,
+          "remove": 6,
+          "revise": 15
+        },
+        "complete": 22,
+        "completeness": 0.6111111111111112,
+        "incomplete": 14,
+        "parse_rate": 0.6111111111111112,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 36,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 36,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 5,
+          "none": 3,
+          "redesignate": 4,
+          "remove": 6,
+          "revise": 15
+        },
+        "complete": 22,
+        "completeness": 0.6111111111111112,
+        "incomplete": 14,
+        "parse_rate": 0.6111111111111112,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 36,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 36,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 5,
+          "none": 3,
+          "redesignate": 4,
+          "remove": 6,
+          "revise": 15
+        },
+        "complete": 22,
+        "completeness": 0.6111111111111112,
+        "incomplete": 14,
+        "parse_rate": 0.6111111111111112,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 36,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-21774": {
+      "extended_ci": {
+        "attributed": 150,
+        "attribution_rate": 0.9933774834437086,
+        "by_operation": {
+          "add": 0,
+          "amend": 11,
+          "none": 48,
+          "redesignate": 0,
+          "remove": 78,
+          "revise": 14
+        },
+        "complete": 85,
+        "completeness": 0.5629139072847682,
+        "incomplete": 66,
+        "parse_rate": 0.5629139072847682,
+        "parsed": 85,
+        "part_mismatch": 51,
+        "total": 151,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 150,
+        "attribution_rate": 0.9933774834437086,
+        "by_operation": {
+          "add": 0,
+          "amend": 11,
+          "none": 48,
+          "redesignate": 0,
+          "remove": 78,
+          "revise": 14
+        },
+        "complete": 85,
+        "completeness": 0.5629139072847682,
+        "incomplete": 66,
+        "parse_rate": 0.5629139072847682,
+        "parsed": 85,
+        "part_mismatch": 51,
+        "total": 151,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 150,
+        "attribution_rate": 0.9933774834437086,
+        "by_operation": {
+          "add": 0,
+          "amend": 11,
+          "none": 48,
+          "redesignate": 0,
+          "remove": 78,
+          "revise": 14
+        },
+        "complete": 85,
+        "completeness": 0.5629139072847682,
+        "incomplete": 66,
+        "parse_rate": 0.5629139072847682,
+        "parsed": 85,
+        "part_mismatch": 51,
+        "total": 151,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 104,
+        "attribution_rate": 0.6887417218543046,
+        "by_operation": {
+          "add": 0,
+          "amend": 11,
+          "none": 48,
+          "redesignate": 0,
+          "remove": 78,
+          "revise": 14
+        },
+        "complete": 85,
+        "completeness": 0.5629139072847682,
+        "incomplete": 66,
+        "parse_rate": 0.5629139072847682,
+        "parsed": 85,
+        "part_mismatch": 5,
+        "total": 151,
+        "unattributable": 47,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-22974": {
+      "extended_ci": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 13,
+          "amend": 3,
+          "none": 1,
+          "redesignate": 33,
+          "remove": 23,
+          "revise": 27
+        },
+        "complete": 95,
+        "completeness": 0.95,
+        "incomplete": 5,
+        "parse_rate": 0.95,
+        "parsed": 95,
+        "part_mismatch": 0,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 13,
+          "amend": 3,
+          "none": 1,
+          "redesignate": 33,
+          "remove": 23,
+          "revise": 27
+        },
+        "complete": 95,
+        "completeness": 0.95,
+        "incomplete": 5,
+        "parse_rate": 0.95,
+        "parsed": 95,
+        "part_mismatch": 0,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 13,
+          "amend": 3,
+          "none": 1,
+          "redesignate": 33,
+          "remove": 23,
+          "revise": 27
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 100,
+        "parse_rate": 0.95,
+        "parsed": 95,
+        "part_mismatch": 0,
+        "total": 100,
+        "unattributable": 100,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 99,
+        "attribution_rate": 0.99,
+        "by_operation": {
+          "add": 13,
+          "amend": 3,
+          "none": 1,
+          "redesignate": 33,
+          "remove": 23,
+          "revise": 27
+        },
+        "complete": 95,
+        "completeness": 0.95,
+        "incomplete": 5,
+        "parse_rate": 0.95,
+        "parsed": 95,
+        "part_mismatch": 0,
+        "total": 100,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2020-25236": {
+      "extended_ci": {
+        "attributed": 203,
+        "attribution_rate": 0.9950980392156863,
+        "by_operation": {
+          "add": 2,
+          "amend": 35,
+          "none": 42,
+          "redesignate": 0,
+          "remove": 103,
+          "revise": 22
+        },
+        "complete": 134,
+        "completeness": 0.6568627450980392,
+        "incomplete": 70,
+        "parse_rate": 0.6568627450980392,
+        "parsed": 134,
+        "part_mismatch": 47,
+        "total": 204,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 203,
+        "attribution_rate": 0.9950980392156863,
+        "by_operation": {
+          "add": 2,
+          "amend": 35,
+          "none": 42,
+          "redesignate": 0,
+          "remove": 103,
+          "revise": 22
+        },
+        "complete": 134,
+        "completeness": 0.6568627450980392,
+        "incomplete": 70,
+        "parse_rate": 0.6568627450980392,
+        "parsed": 134,
+        "part_mismatch": 47,
+        "total": 204,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 203,
+        "attribution_rate": 0.9950980392156863,
+        "by_operation": {
+          "add": 2,
+          "amend": 35,
+          "none": 42,
+          "redesignate": 0,
+          "remove": 103,
+          "revise": 22
+        },
+        "complete": 134,
+        "completeness": 0.6568627450980392,
+        "incomplete": 70,
+        "parse_rate": 0.6568627450980392,
+        "parsed": 134,
+        "part_mismatch": 53,
+        "total": 204,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 156,
+        "attribution_rate": 0.7647058823529411,
+        "by_operation": {
+          "add": 2,
+          "amend": 35,
+          "none": 42,
+          "redesignate": 0,
+          "remove": 103,
+          "revise": 22
+        },
+        "complete": 133,
+        "completeness": 0.6519607843137255,
+        "incomplete": 71,
+        "parse_rate": 0.6568627450980392,
+        "parsed": 134,
+        "part_mismatch": 0,
+        "total": 204,
+        "unattributable": 48,
+        "unclosed_quote": 0
+      }
+    },
+    "2021-02268": {
+      "extended_ci": {
+        "attributed": 28,
+        "attribution_rate": 0.9655172413793104,
+        "by_operation": {
+          "add": 10,
+          "amend": 5,
+          "none": 2,
+          "redesignate": 1,
+          "remove": 7,
+          "revise": 4
+        },
+        "complete": 22,
+        "completeness": 0.7586206896551724,
+        "incomplete": 7,
+        "parse_rate": 0.7586206896551724,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 29,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 28,
+        "attribution_rate": 0.9655172413793104,
+        "by_operation": {
+          "add": 10,
+          "amend": 5,
+          "none": 2,
+          "redesignate": 1,
+          "remove": 7,
+          "revise": 4
+        },
+        "complete": 22,
+        "completeness": 0.7586206896551724,
+        "incomplete": 7,
+        "parse_rate": 0.7586206896551724,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 29,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 28,
+        "attribution_rate": 0.9655172413793104,
+        "by_operation": {
+          "add": 10,
+          "amend": 5,
+          "none": 2,
+          "redesignate": 1,
+          "remove": 7,
+          "revise": 4
+        },
+        "complete": 22,
+        "completeness": 0.7586206896551724,
+        "incomplete": 7,
+        "parse_rate": 0.7586206896551724,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 29,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 28,
+        "attribution_rate": 0.9655172413793104,
+        "by_operation": {
+          "add": 10,
+          "amend": 5,
+          "none": 2,
+          "redesignate": 1,
+          "remove": 7,
+          "revise": 4
+        },
+        "complete": 22,
+        "completeness": 0.7586206896551724,
+        "incomplete": 7,
+        "parse_rate": 0.7586206896551724,
+        "parsed": 22,
+        "part_mismatch": 0,
+        "total": 29,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2021-04453": {
+      "extended_ci": {
+        "attributed": 71,
+        "attribution_rate": 0.9861111111111112,
+        "by_operation": {
+          "add": 8,
+          "amend": 0,
+          "none": 13,
+          "redesignate": 6,
+          "remove": 24,
+          "revise": 21
+        },
+        "complete": 48,
+        "completeness": 0.6666666666666666,
+        "incomplete": 24,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 48,
+        "part_mismatch": 14,
+        "total": 72,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 71,
+        "attribution_rate": 0.9861111111111112,
+        "by_operation": {
+          "add": 8,
+          "amend": 0,
+          "none": 13,
+          "redesignate": 6,
+          "remove": 24,
+          "revise": 21
+        },
+        "complete": 48,
+        "completeness": 0.6666666666666666,
+        "incomplete": 24,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 48,
+        "part_mismatch": 14,
+        "total": 72,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 71,
+        "attribution_rate": 0.9861111111111112,
+        "by_operation": {
+          "add": 8,
+          "amend": 0,
+          "none": 13,
+          "redesignate": 6,
+          "remove": 24,
+          "revise": 21
+        },
+        "complete": 48,
+        "completeness": 0.6666666666666666,
+        "incomplete": 24,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 48,
+        "part_mismatch": 14,
+        "total": 72,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 63,
+        "attribution_rate": 0.875,
+        "by_operation": {
+          "add": 8,
+          "amend": 0,
+          "none": 13,
+          "redesignate": 6,
+          "remove": 24,
+          "revise": 21
+        },
+        "complete": 48,
+        "completeness": 0.6666666666666666,
+        "incomplete": 24,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 48,
+        "part_mismatch": 6,
+        "total": 72,
+        "unattributable": 9,
+        "unclosed_quote": 0
+      }
+    },
+    "2021-09097": {
+      "extended_ci": {
+        "attributed": 51,
+        "attribution_rate": 0.9807692307692307,
+        "by_operation": {
+          "add": 12,
+          "amend": 7,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 6,
+          "revise": 24
+        },
+        "complete": 42,
+        "completeness": 0.8076923076923077,
+        "incomplete": 10,
+        "parse_rate": 0.8076923076923077,
+        "parsed": 42,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 51,
+        "attribution_rate": 0.9807692307692307,
+        "by_operation": {
+          "add": 12,
+          "amend": 7,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 6,
+          "revise": 24
+        },
+        "complete": 42,
+        "completeness": 0.8076923076923077,
+        "incomplete": 10,
+        "parse_rate": 0.8076923076923077,
+        "parsed": 42,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 12,
+          "amend": 7,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 6,
+          "revise": 24
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 52,
+        "parse_rate": 0.8076923076923077,
+        "parsed": 42,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 52,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 51,
+        "attribution_rate": 0.9807692307692307,
+        "by_operation": {
+          "add": 12,
+          "amend": 7,
+          "none": 1,
+          "redesignate": 2,
+          "remove": 6,
+          "revise": 24
+        },
+        "complete": 42,
+        "completeness": 0.8076923076923077,
+        "incomplete": 10,
+        "parse_rate": 0.8076923076923077,
+        "parsed": 42,
+        "part_mismatch": 0,
+        "total": 52,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2021-22144": {
+      "extended_ci": {
+        "attributed": 648,
+        "attribution_rate": 0.9984591679506933,
+        "by_operation": {
+          "add": 6,
+          "amend": 97,
+          "none": 22,
+          "redesignate": 1,
+          "remove": 402,
+          "revise": 121
+        },
+        "complete": 444,
+        "completeness": 0.6841294298921418,
+        "incomplete": 205,
+        "parse_rate": 0.6841294298921418,
+        "parsed": 444,
+        "part_mismatch": 1,
+        "total": 649,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 6,
+          "amend": 97,
+          "none": 22,
+          "redesignate": 1,
+          "remove": 402,
+          "revise": 121
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 649,
+        "parse_rate": 0.6841294298921418,
+        "parsed": 444,
+        "part_mismatch": 0,
+        "total": 649,
+        "unattributable": 649,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 6,
+          "amend": 97,
+          "none": 22,
+          "redesignate": 1,
+          "remove": 402,
+          "revise": 121
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 649,
+        "parse_rate": 0.6841294298921418,
+        "parsed": 444,
+        "part_mismatch": 0,
+        "total": 649,
+        "unattributable": 649,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 6,
+          "amend": 97,
+          "none": 22,
+          "redesignate": 1,
+          "remove": 402,
+          "revise": 121
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 649,
+        "parse_rate": 0.6841294298921418,
+        "parsed": 444,
+        "part_mismatch": 0,
+        "total": 649,
+        "unattributable": 649,
+        "unclosed_quote": 0
+      }
+    },
+    "2021-27643": {
+      "extended_ci": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 4,
+        "completeness": 0.5714285714285714,
+        "incomplete": 3,
+        "parse_rate": 0.5714285714285714,
+        "parsed": 4,
+        "part_mismatch": 1,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 4,
+        "completeness": 0.5714285714285714,
+        "incomplete": 3,
+        "parse_rate": 0.5714285714285714,
+        "parsed": 4,
+        "part_mismatch": 1,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 4,
+        "completeness": 0.5714285714285714,
+        "incomplete": 3,
+        "parse_rate": 0.5714285714285714,
+        "parsed": 4,
+        "part_mismatch": 1,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 5,
+        "attribution_rate": 0.7142857142857143,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 5
+        },
+        "complete": 4,
+        "completeness": 0.5714285714285714,
+        "incomplete": 3,
+        "parse_rate": 0.5714285714285714,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 7,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2022-05512": {
+      "extended_ci": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 1,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 4,
+        "completeness": 0.6666666666666666,
+        "incomplete": 2,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 1,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 4,
+        "completeness": 0.6666666666666666,
+        "incomplete": 2,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 1,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 4,
+        "completeness": 0.6666666666666666,
+        "incomplete": 2,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 5,
+        "attribution_rate": 0.8333333333333334,
+        "by_operation": {
+          "add": 1,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 4,
+        "completeness": 0.6666666666666666,
+        "incomplete": 2,
+        "parse_rate": 0.6666666666666666,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 6,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2022-06949": {
+      "extended_ci": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 2,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 5,
+          "revise": 6
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 2,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 5,
+          "revise": 6
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 2,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 5,
+          "revise": 6
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 18,
+        "attribution_rate": 0.9473684210526315,
+        "by_operation": {
+          "add": 2,
+          "amend": 4,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 5,
+          "revise": 6
+        },
+        "complete": 14,
+        "completeness": 0.7368421052631579,
+        "incomplete": 5,
+        "parse_rate": 0.7368421052631579,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2022-10875": {
+      "extended_ci": {
+        "attributed": 209,
+        "attribution_rate": 0.990521327014218,
+        "by_operation": {
+          "add": 11,
+          "amend": 23,
+          "none": 12,
+          "redesignate": 0,
+          "remove": 79,
+          "revise": 86
+        },
+        "complete": 129,
+        "completeness": 0.6113744075829384,
+        "incomplete": 82,
+        "parse_rate": 0.6113744075829384,
+        "parsed": 129,
+        "part_mismatch": 11,
+        "total": 211,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 209,
+        "attribution_rate": 0.990521327014218,
+        "by_operation": {
+          "add": 11,
+          "amend": 23,
+          "none": 12,
+          "redesignate": 0,
+          "remove": 79,
+          "revise": 86
+        },
+        "complete": 129,
+        "completeness": 0.6113744075829384,
+        "incomplete": 82,
+        "parse_rate": 0.6113744075829384,
+        "parsed": 129,
+        "part_mismatch": 11,
+        "total": 211,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 209,
+        "attribution_rate": 0.990521327014218,
+        "by_operation": {
+          "add": 11,
+          "amend": 23,
+          "none": 12,
+          "redesignate": 0,
+          "remove": 79,
+          "revise": 86
+        },
+        "complete": 129,
+        "completeness": 0.6113744075829384,
+        "incomplete": 82,
+        "parse_rate": 0.6113744075829384,
+        "parsed": 129,
+        "part_mismatch": 11,
+        "total": 211,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 198,
+        "attribution_rate": 0.9383886255924171,
+        "by_operation": {
+          "add": 11,
+          "amend": 23,
+          "none": 12,
+          "redesignate": 0,
+          "remove": 79,
+          "revise": 86
+        },
+        "complete": 129,
+        "completeness": 0.6113744075829384,
+        "incomplete": 82,
+        "parse_rate": 0.6113744075829384,
+        "parsed": 129,
+        "part_mismatch": 0,
+        "total": 211,
+        "unattributable": 13,
+        "unclosed_quote": 0
+      }
+    },
+    "2022-23329": {
+      "extended_ci": {
+        "attributed": 14,
+        "attribution_rate": 0.9333333333333333,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 2,
+          "revise": 5
+        },
+        "complete": 12,
+        "completeness": 0.8,
+        "incomplete": 3,
+        "parse_rate": 0.8,
+        "parsed": 12,
+        "part_mismatch": 0,
+        "total": 15,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 14,
+        "attribution_rate": 0.9333333333333333,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 2,
+          "revise": 5
+        },
+        "complete": 12,
+        "completeness": 0.8,
+        "incomplete": 3,
+        "parse_rate": 0.8,
+        "parsed": 12,
+        "part_mismatch": 0,
+        "total": 15,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 14,
+        "attribution_rate": 0.9333333333333333,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 2,
+          "revise": 5
+        },
+        "complete": 12,
+        "completeness": 0.8,
+        "incomplete": 3,
+        "parse_rate": 0.8,
+        "parsed": 12,
+        "part_mismatch": 0,
+        "total": 15,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 14,
+        "attribution_rate": 0.9333333333333333,
+        "by_operation": {
+          "add": 4,
+          "amend": 2,
+          "none": 2,
+          "redesignate": 0,
+          "remove": 2,
+          "revise": 5
+        },
+        "complete": 12,
+        "completeness": 0.8,
+        "incomplete": 3,
+        "parse_rate": 0.8,
+        "parsed": 12,
+        "part_mismatch": 0,
+        "total": 15,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2023-25238": {
+      "extended_ci": {
+        "attributed": 195,
+        "attribution_rate": 0.9948979591836735,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 72,
+          "redesignate": 0,
+          "remove": 115,
+          "revise": 9
+        },
+        "complete": 120,
+        "completeness": 0.6122448979591837,
+        "incomplete": 76,
+        "parse_rate": 0.6122448979591837,
+        "parsed": 120,
+        "part_mismatch": 27,
+        "total": 196,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 195,
+        "attribution_rate": 0.9948979591836735,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 72,
+          "redesignate": 0,
+          "remove": 115,
+          "revise": 9
+        },
+        "complete": 120,
+        "completeness": 0.6122448979591837,
+        "incomplete": 76,
+        "parse_rate": 0.6122448979591837,
+        "parsed": 120,
+        "part_mismatch": 27,
+        "total": 196,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 195,
+        "attribution_rate": 0.9948979591836735,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 72,
+          "redesignate": 0,
+          "remove": 115,
+          "revise": 9
+        },
+        "complete": 120,
+        "completeness": 0.6122448979591837,
+        "incomplete": 76,
+        "parse_rate": 0.6122448979591837,
+        "parsed": 120,
+        "part_mismatch": 27,
+        "total": 196,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 168,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 72,
+          "redesignate": 0,
+          "remove": 115,
+          "revise": 9
+        },
+        "complete": 118,
+        "completeness": 0.6020408163265306,
+        "incomplete": 78,
+        "parse_rate": 0.6122448979591837,
+        "parsed": 120,
+        "part_mismatch": 0,
+        "total": 196,
+        "unattributable": 28,
+        "unclosed_quote": 0
+      }
+    },
+    "2023-25797": {
+      "extended_ci": {
+        "attributed": 245,
+        "attribution_rate": 0.9683794466403162,
+        "by_operation": {
+          "add": 32,
+          "amend": 39,
+          "none": 10,
+          "redesignate": 1,
+          "remove": 119,
+          "revise": 52
+        },
+        "complete": 158,
+        "completeness": 0.6245059288537549,
+        "incomplete": 95,
+        "parse_rate": 0.6324110671936759,
+        "parsed": 160,
+        "part_mismatch": 16,
+        "total": 253,
+        "unattributable": 8,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 245,
+        "attribution_rate": 0.9683794466403162,
+        "by_operation": {
+          "add": 32,
+          "amend": 39,
+          "none": 10,
+          "redesignate": 1,
+          "remove": 119,
+          "revise": 52
+        },
+        "complete": 158,
+        "completeness": 0.6245059288537549,
+        "incomplete": 95,
+        "parse_rate": 0.6324110671936759,
+        "parsed": 160,
+        "part_mismatch": 16,
+        "total": 253,
+        "unattributable": 8,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 245,
+        "attribution_rate": 0.9683794466403162,
+        "by_operation": {
+          "add": 32,
+          "amend": 39,
+          "none": 10,
+          "redesignate": 1,
+          "remove": 119,
+          "revise": 52
+        },
+        "complete": 158,
+        "completeness": 0.6245059288537549,
+        "incomplete": 95,
+        "parse_rate": 0.6324110671936759,
+        "parsed": 160,
+        "part_mismatch": 16,
+        "total": 253,
+        "unattributable": 8,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 229,
+        "attribution_rate": 0.9051383399209486,
+        "by_operation": {
+          "add": 32,
+          "amend": 39,
+          "none": 10,
+          "redesignate": 1,
+          "remove": 119,
+          "revise": 52
+        },
+        "complete": 148,
+        "completeness": 0.5849802371541502,
+        "incomplete": 105,
+        "parse_rate": 0.6324110671936759,
+        "parsed": 160,
+        "part_mismatch": 0,
+        "total": 253,
+        "unattributable": 24,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-07002": {
+      "extended_ci": {
+        "attributed": 337,
+        "attribution_rate": 0.9970414201183432,
+        "by_operation": {
+          "add": 72,
+          "amend": 38,
+          "none": 3,
+          "redesignate": 2,
+          "remove": 10,
+          "revise": 213
+        },
+        "complete": 251,
+        "completeness": 0.742603550295858,
+        "incomplete": 87,
+        "parse_rate": 0.742603550295858,
+        "parsed": 251,
+        "part_mismatch": 1,
+        "total": 338,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "extended_cs": {
+        "attributed": 337,
+        "attribution_rate": 0.9970414201183432,
+        "by_operation": {
+          "add": 72,
+          "amend": 38,
+          "none": 3,
+          "redesignate": 2,
+          "remove": 10,
+          "revise": 213
+        },
+        "complete": 251,
+        "completeness": 0.742603550295858,
+        "incomplete": 87,
+        "parse_rate": 0.742603550295858,
+        "parsed": 251,
+        "part_mismatch": 1,
+        "total": 338,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "spec_literal": {
+        "attributed": 337,
+        "attribution_rate": 0.9970414201183432,
+        "by_operation": {
+          "add": 72,
+          "amend": 38,
+          "none": 3,
+          "redesignate": 2,
+          "remove": 10,
+          "revise": 213
+        },
+        "complete": 251,
+        "completeness": 0.742603550295858,
+        "incomplete": 87,
+        "parse_rate": 0.742603550295858,
+        "parsed": 251,
+        "part_mismatch": 1,
+        "total": 338,
+        "unattributable": 1,
+        "unclosed_quote": 1
+      },
+      "v11": {
+        "attributed": 336,
+        "attribution_rate": 0.9940828402366864,
+        "by_operation": {
+          "add": 72,
+          "amend": 38,
+          "none": 3,
+          "redesignate": 2,
+          "remove": 10,
+          "revise": 213
+        },
+        "complete": 251,
+        "completeness": 0.742603550295858,
+        "incomplete": 87,
+        "parse_rate": 0.742603550295858,
+        "parsed": 251,
+        "part_mismatch": 0,
+        "total": 338,
+        "unattributable": 2,
+        "unclosed_quote": 1
+      }
+    },
+    "2024-14542": {
+      "extended_ci": {
+        "attributed": 17,
+        "attribution_rate": 0.8947368421052632,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.47368421052631576,
+        "incomplete": 10,
+        "parse_rate": 0.5263157894736842,
+        "parsed": 10,
+        "part_mismatch": 3,
+        "total": 19,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 17,
+        "attribution_rate": 0.8947368421052632,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.47368421052631576,
+        "incomplete": 10,
+        "parse_rate": 0.5263157894736842,
+        "parsed": 10,
+        "part_mismatch": 3,
+        "total": 19,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 17,
+        "attribution_rate": 0.8947368421052632,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.47368421052631576,
+        "incomplete": 10,
+        "parse_rate": 0.5263157894736842,
+        "parsed": 10,
+        "part_mismatch": 3,
+        "total": 19,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 14,
+        "attribution_rate": 0.7368421052631579,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 5,
+          "revise": 10
+        },
+        "complete": 8,
+        "completeness": 0.42105263157894735,
+        "incomplete": 11,
+        "parse_rate": 0.5263157894736842,
+        "parsed": 10,
+        "part_mismatch": 0,
+        "total": 19,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-17239": {
+      "extended_ci": {
+        "attributed": 378,
+        "attribution_rate": 0.9973614775725593,
+        "by_operation": {
+          "add": 39,
+          "amend": 62,
+          "none": 2,
+          "redesignate": 6,
+          "remove": 181,
+          "revise": 89
+        },
+        "complete": 174,
+        "completeness": 0.45910290237467016,
+        "incomplete": 205,
+        "parse_rate": 0.45910290237467016,
+        "parsed": 174,
+        "part_mismatch": 7,
+        "total": 379,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 378,
+        "attribution_rate": 0.9973614775725593,
+        "by_operation": {
+          "add": 39,
+          "amend": 62,
+          "none": 2,
+          "redesignate": 6,
+          "remove": 181,
+          "revise": 89
+        },
+        "complete": 174,
+        "completeness": 0.45910290237467016,
+        "incomplete": 205,
+        "parse_rate": 0.45910290237467016,
+        "parsed": 174,
+        "part_mismatch": 7,
+        "total": 379,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 378,
+        "attribution_rate": 0.9973614775725593,
+        "by_operation": {
+          "add": 39,
+          "amend": 62,
+          "none": 2,
+          "redesignate": 6,
+          "remove": 181,
+          "revise": 89
+        },
+        "complete": 174,
+        "completeness": 0.45910290237467016,
+        "incomplete": 205,
+        "parse_rate": 0.45910290237467016,
+        "parsed": 174,
+        "part_mismatch": 7,
+        "total": 379,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 372,
+        "attribution_rate": 0.9815303430079155,
+        "by_operation": {
+          "add": 39,
+          "amend": 62,
+          "none": 2,
+          "redesignate": 6,
+          "remove": 181,
+          "revise": 89
+        },
+        "complete": 173,
+        "completeness": 0.45646437994722955,
+        "incomplete": 206,
+        "parse_rate": 0.45910290237467016,
+        "parsed": 174,
+        "part_mismatch": 1,
+        "total": 379,
+        "unattributable": 7,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-18445": {
+      "extended_ci": {
+        "attributed": 75,
+        "attribution_rate": 0.8426966292134831,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 38,
+          "redesignate": 0,
+          "remove": 35,
+          "revise": 15
+        },
+        "complete": 23,
+        "completeness": 0.25842696629213485,
+        "incomplete": 66,
+        "parse_rate": 0.25842696629213485,
+        "parsed": 23,
+        "part_mismatch": 47,
+        "total": 89,
+        "unattributable": 14,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 75,
+        "attribution_rate": 0.8426966292134831,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 38,
+          "redesignate": 0,
+          "remove": 35,
+          "revise": 15
+        },
+        "complete": 23,
+        "completeness": 0.25842696629213485,
+        "incomplete": 66,
+        "parse_rate": 0.25842696629213485,
+        "parsed": 23,
+        "part_mismatch": 47,
+        "total": 89,
+        "unattributable": 14,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 74,
+        "attribution_rate": 0.8314606741573034,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 38,
+          "redesignate": 0,
+          "remove": 35,
+          "revise": 15
+        },
+        "complete": 22,
+        "completeness": 0.24719101123595505,
+        "incomplete": 67,
+        "parse_rate": 0.25842696629213485,
+        "parsed": 23,
+        "part_mismatch": 48,
+        "total": 89,
+        "unattributable": 15,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 30,
+        "attribution_rate": 0.33707865168539325,
+        "by_operation": {
+          "add": 0,
+          "amend": 1,
+          "none": 38,
+          "redesignate": 0,
+          "remove": 35,
+          "revise": 15
+        },
+        "complete": 23,
+        "completeness": 0.25842696629213485,
+        "incomplete": 66,
+        "parse_rate": 0.25842696629213485,
+        "parsed": 23,
+        "part_mismatch": 2,
+        "total": 89,
+        "unattributable": 59,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-21984": {
+      "extended_ci": {
+        "attributed": 298,
+        "attribution_rate": 0.9966555183946488,
+        "by_operation": {
+          "add": 26,
+          "amend": 34,
+          "none": 66,
+          "redesignate": 6,
+          "remove": 160,
+          "revise": 7
+        },
+        "complete": 173,
+        "completeness": 0.5785953177257525,
+        "incomplete": 126,
+        "parse_rate": 0.5785953177257525,
+        "parsed": 173,
+        "part_mismatch": 69,
+        "total": 299,
+        "unattributable": 1,
+        "unclosed_quote": 2
+      },
+      "extended_cs": {
+        "attributed": 298,
+        "attribution_rate": 0.9966555183946488,
+        "by_operation": {
+          "add": 26,
+          "amend": 34,
+          "none": 66,
+          "redesignate": 6,
+          "remove": 160,
+          "revise": 7
+        },
+        "complete": 173,
+        "completeness": 0.5785953177257525,
+        "incomplete": 126,
+        "parse_rate": 0.5785953177257525,
+        "parsed": 173,
+        "part_mismatch": 69,
+        "total": 299,
+        "unattributable": 1,
+        "unclosed_quote": 2
+      },
+      "spec_literal": {
+        "attributed": 298,
+        "attribution_rate": 0.9966555183946488,
+        "by_operation": {
+          "add": 26,
+          "amend": 34,
+          "none": 66,
+          "redesignate": 6,
+          "remove": 160,
+          "revise": 7
+        },
+        "complete": 173,
+        "completeness": 0.5785953177257525,
+        "incomplete": 126,
+        "parse_rate": 0.5785953177257525,
+        "parsed": 173,
+        "part_mismatch": 69,
+        "total": 299,
+        "unattributable": 1,
+        "unclosed_quote": 2
+      },
+      "v11": {
+        "attributed": 235,
+        "attribution_rate": 0.7859531772575251,
+        "by_operation": {
+          "add": 26,
+          "amend": 34,
+          "none": 66,
+          "redesignate": 6,
+          "remove": 160,
+          "revise": 7
+        },
+        "complete": 173,
+        "completeness": 0.5785953177257525,
+        "incomplete": 126,
+        "parse_rate": 0.5785953177257525,
+        "parsed": 173,
+        "part_mismatch": 6,
+        "total": 299,
+        "unattributable": 64,
+        "unclosed_quote": 2
+      }
+    },
+    "2024-23195": {
+      "extended_ci": {
+        "attributed": 7,
+        "attribution_rate": 0.875,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 2,
+        "total": 8,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 7,
+        "attribution_rate": 0.875,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 2,
+        "total": 8,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 7,
+        "attribution_rate": 0.875,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 4,
+        "total": 8,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 5,
+        "attribution_rate": 0.625,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 2
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 0,
+        "total": 8,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-27310": {
+      "extended_ci": {
+        "attributed": 26,
+        "attribution_rate": 0.9629629629629629,
+        "by_operation": {
+          "add": 4,
+          "amend": 3,
+          "none": 2,
+          "redesignate": 2,
+          "remove": 7,
+          "revise": 9
+        },
+        "complete": 22,
+        "completeness": 0.8148148148148148,
+        "incomplete": 5,
+        "parse_rate": 0.8148148148148148,
+        "parsed": 22,
+        "part_mismatch": 3,
+        "total": 27,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 26,
+        "attribution_rate": 0.9629629629629629,
+        "by_operation": {
+          "add": 4,
+          "amend": 3,
+          "none": 2,
+          "redesignate": 2,
+          "remove": 7,
+          "revise": 9
+        },
+        "complete": 22,
+        "completeness": 0.8148148148148148,
+        "incomplete": 5,
+        "parse_rate": 0.8148148148148148,
+        "parsed": 22,
+        "part_mismatch": 3,
+        "total": 27,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 26,
+        "attribution_rate": 0.9629629629629629,
+        "by_operation": {
+          "add": 4,
+          "amend": 3,
+          "none": 2,
+          "redesignate": 2,
+          "remove": 7,
+          "revise": 9
+        },
+        "complete": 22,
+        "completeness": 0.8148148148148148,
+        "incomplete": 5,
+        "parse_rate": 0.8148148148148148,
+        "parsed": 22,
+        "part_mismatch": 3,
+        "total": 27,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 25,
+        "attribution_rate": 0.9259259259259259,
+        "by_operation": {
+          "add": 4,
+          "amend": 3,
+          "none": 2,
+          "redesignate": 2,
+          "remove": 7,
+          "revise": 9
+        },
+        "complete": 22,
+        "completeness": 0.8148148148148148,
+        "incomplete": 5,
+        "parse_rate": 0.8148148148148148,
+        "parsed": 22,
+        "part_mismatch": 2,
+        "total": 27,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-28372": {
+      "extended_ci": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 12,
+          "revise": 13
+        },
+        "complete": 20,
+        "completeness": 0.5128205128205128,
+        "incomplete": 19,
+        "parse_rate": 0.5128205128205128,
+        "parsed": 20,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 12,
+          "revise": 13
+        },
+        "complete": 20,
+        "completeness": 0.5128205128205128,
+        "incomplete": 19,
+        "parse_rate": 0.5128205128205128,
+        "parsed": 20,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 12,
+          "revise": 13
+        },
+        "complete": 20,
+        "completeness": 0.5128205128205128,
+        "incomplete": 19,
+        "parse_rate": 0.5128205128205128,
+        "parsed": 20,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 38,
+        "attribution_rate": 0.9743589743589743,
+        "by_operation": {
+          "add": 7,
+          "amend": 6,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 12,
+          "revise": 13
+        },
+        "complete": 20,
+        "completeness": 0.5128205128205128,
+        "incomplete": 19,
+        "parse_rate": 0.5128205128205128,
+        "parsed": 20,
+        "part_mismatch": 0,
+        "total": 39,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-29226": {
+      "extended_ci": {
+        "attributed": 135,
+        "attribution_rate": 0.9926470588235294,
+        "by_operation": {
+          "add": 9,
+          "amend": 14,
+          "none": 5,
+          "redesignate": 26,
+          "remove": 24,
+          "revise": 58
+        },
+        "complete": 98,
+        "completeness": 0.7205882352941176,
+        "incomplete": 38,
+        "parse_rate": 0.7205882352941176,
+        "parsed": 98,
+        "part_mismatch": 6,
+        "total": 136,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 9,
+          "amend": 14,
+          "none": 5,
+          "redesignate": 26,
+          "remove": 24,
+          "revise": 58
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 136,
+        "parse_rate": 0.7205882352941176,
+        "parsed": 98,
+        "part_mismatch": 0,
+        "total": 136,
+        "unattributable": 136,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 9,
+          "amend": 14,
+          "none": 5,
+          "redesignate": 26,
+          "remove": 24,
+          "revise": 58
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 136,
+        "parse_rate": 0.7205882352941176,
+        "parsed": 98,
+        "part_mismatch": 0,
+        "total": 136,
+        "unattributable": 136,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 9,
+          "amend": 14,
+          "none": 5,
+          "redesignate": 26,
+          "remove": 24,
+          "revise": 58
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 136,
+        "parse_rate": 0.7205882352941176,
+        "parsed": 98,
+        "part_mismatch": 0,
+        "total": 136,
+        "unattributable": 136,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-30575": {
+      "extended_ci": {
+        "attributed": 8,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 0,
+        "total": 8,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 8,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 0,
+        "total": 8,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 8,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 0,
+        "total": 8,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 8,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 0,
+          "amend": 2,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 2,
+        "completeness": 0.25,
+        "incomplete": 6,
+        "parse_rate": 0.25,
+        "parsed": 2,
+        "part_mismatch": 0,
+        "total": 8,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      }
+    },
+    "2024-31513": {
+      "extended_ci": {
+        "attributed": 3,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 3,
+        "parse_rate": 0.0,
+        "parsed": 0,
+        "part_mismatch": 0,
+        "total": 3,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 3,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 3,
+        "parse_rate": 0.0,
+        "parsed": 0,
+        "part_mismatch": 0,
+        "total": 3,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 3,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 3,
+        "parse_rate": 0.0,
+        "parsed": 0,
+        "part_mismatch": 0,
+        "total": 3,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 3,
+        "attribution_rate": 1.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 3,
+        "parse_rate": 0.0,
+        "parsed": 0,
+        "part_mismatch": 0,
+        "total": 3,
+        "unattributable": 0,
+        "unclosed_quote": 0
+      }
+    },
+    "2025-00723": {
+      "extended_ci": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.4444444444444444,
+        "incomplete": 5,
+        "parse_rate": 0.4444444444444444,
+        "parsed": 4,
+        "part_mismatch": 4,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 8,
+        "attribution_rate": 0.8888888888888888,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.4444444444444444,
+        "incomplete": 5,
+        "parse_rate": 0.4444444444444444,
+        "parsed": 4,
+        "part_mismatch": 4,
+        "total": 9,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 9,
+        "parse_rate": 0.4444444444444444,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 9,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 4,
+        "attribution_rate": 0.4444444444444444,
+        "by_operation": {
+          "add": 3,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 3
+        },
+        "complete": 4,
+        "completeness": 0.4444444444444444,
+        "incomplete": 5,
+        "parse_rate": 0.4444444444444444,
+        "parsed": 4,
+        "part_mismatch": 0,
+        "total": 9,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2025-13289": {
+      "extended_ci": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 3,
+        "completeness": 0.6,
+        "incomplete": 2,
+        "parse_rate": 0.6,
+        "parsed": 3,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 3,
+        "completeness": 0.6,
+        "incomplete": 2,
+        "parse_rate": 0.6,
+        "parsed": 3,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 3,
+        "completeness": 0.6,
+        "incomplete": 2,
+        "parse_rate": 0.6,
+        "parsed": 3,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 4,
+        "attribution_rate": 0.8,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 0
+        },
+        "complete": 3,
+        "completeness": 0.6,
+        "incomplete": 2,
+        "parse_rate": 0.6,
+        "parsed": 3,
+        "part_mismatch": 0,
+        "total": 5,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2025-17122": {
+      "extended_ci": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 1,
+          "revise": 1
+        },
+        "complete": 3,
+        "completeness": 0.42857142857142855,
+        "incomplete": 4,
+        "parse_rate": 0.42857142857142855,
+        "parsed": 3,
+        "part_mismatch": 3,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 1,
+          "revise": 1
+        },
+        "complete": 3,
+        "completeness": 0.42857142857142855,
+        "incomplete": 4,
+        "parse_rate": 0.42857142857142855,
+        "parsed": 3,
+        "part_mismatch": 3,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 6,
+        "attribution_rate": 0.8571428571428571,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 1,
+          "revise": 1
+        },
+        "complete": 3,
+        "completeness": 0.42857142857142855,
+        "incomplete": 4,
+        "parse_rate": 0.42857142857142855,
+        "parsed": 3,
+        "part_mismatch": 3,
+        "total": 7,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 4,
+        "attribution_rate": 0.5714285714285714,
+        "by_operation": {
+          "add": 2,
+          "amend": 0,
+          "none": 3,
+          "redesignate": 0,
+          "remove": 1,
+          "revise": 1
+        },
+        "complete": 3,
+        "completeness": 0.42857142857142855,
+        "incomplete": 4,
+        "parse_rate": 0.42857142857142855,
+        "parsed": 3,
+        "part_mismatch": 1,
+        "total": 7,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      }
+    },
+    "2025-20831": {
+      "extended_ci": {
+        "attributed": 15,
+        "attribution_rate": 0.9375,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.5625,
+        "incomplete": 7,
+        "parse_rate": 0.5625,
+        "parsed": 9,
+        "part_mismatch": 5,
+        "total": 16,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 15,
+        "attribution_rate": 0.9375,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.5625,
+        "incomplete": 7,
+        "parse_rate": 0.5625,
+        "parsed": 9,
+        "part_mismatch": 5,
+        "total": 16,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 15,
+        "attribution_rate": 0.9375,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.5625,
+        "incomplete": 7,
+        "parse_rate": 0.5625,
+        "parsed": 9,
+        "part_mismatch": 5,
+        "total": 16,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 10,
+        "attribution_rate": 0.625,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 10
+        },
+        "complete": 9,
+        "completeness": 0.5625,
+        "incomplete": 7,
+        "parse_rate": 0.5625,
+        "parsed": 9,
+        "part_mismatch": 0,
+        "total": 16,
+        "unattributable": 6,
+        "unclosed_quote": 0
+      }
+    },
+    "2025-24232": {
+      "extended_ci": {
+        "attributed": 40,
+        "attribution_rate": 0.975609756097561,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 23,
+          "revise": 12
+        },
+        "complete": 18,
+        "completeness": 0.43902439024390244,
+        "incomplete": 23,
+        "parse_rate": 0.43902439024390244,
+        "parsed": 18,
+        "part_mismatch": 0,
+        "total": 41,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 40,
+        "attribution_rate": 0.975609756097561,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 23,
+          "revise": 12
+        },
+        "complete": 18,
+        "completeness": 0.43902439024390244,
+        "incomplete": 23,
+        "parse_rate": 0.43902439024390244,
+        "parsed": 18,
+        "part_mismatch": 0,
+        "total": 41,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 40,
+        "attribution_rate": 0.975609756097561,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 23,
+          "revise": 12
+        },
+        "complete": 18,
+        "completeness": 0.43902439024390244,
+        "incomplete": 23,
+        "parse_rate": 0.43902439024390244,
+        "parsed": 18,
+        "part_mismatch": 0,
+        "total": 41,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 39,
+        "attribution_rate": 0.9512195121951219,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 1,
+          "redesignate": 1,
+          "remove": 23,
+          "revise": 12
+        },
+        "complete": 17,
+        "completeness": 0.4146341463414634,
+        "incomplete": 24,
+        "parse_rate": 0.43902439024390244,
+        "parsed": 18,
+        "part_mismatch": 0,
+        "total": 41,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-03157": {
+      "extended_ci": {
+        "attributed": 248,
+        "attribution_rate": 0.9959839357429718,
+        "by_operation": {
+          "add": 7,
+          "amend": 27,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 69,
+          "revise": 140
+        },
+        "complete": 168,
+        "completeness": 0.6746987951807228,
+        "incomplete": 81,
+        "parse_rate": 0.6746987951807228,
+        "parsed": 168,
+        "part_mismatch": 69,
+        "total": 249,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 248,
+        "attribution_rate": 0.9959839357429718,
+        "by_operation": {
+          "add": 7,
+          "amend": 27,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 69,
+          "revise": 140
+        },
+        "complete": 168,
+        "completeness": 0.6746987951807228,
+        "incomplete": 81,
+        "parse_rate": 0.6746987951807228,
+        "parsed": 168,
+        "part_mismatch": 69,
+        "total": 249,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 248,
+        "attribution_rate": 0.9959839357429718,
+        "by_operation": {
+          "add": 7,
+          "amend": 27,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 69,
+          "revise": 140
+        },
+        "complete": 168,
+        "completeness": 0.6746987951807228,
+        "incomplete": 81,
+        "parse_rate": 0.6746987951807228,
+        "parsed": 168,
+        "part_mismatch": 69,
+        "total": 249,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 243,
+        "attribution_rate": 0.9759036144578314,
+        "by_operation": {
+          "add": 7,
+          "amend": 27,
+          "none": 6,
+          "redesignate": 0,
+          "remove": 69,
+          "revise": 140
+        },
+        "complete": 168,
+        "completeness": 0.6746987951807228,
+        "incomplete": 81,
+        "parse_rate": 0.6746987951807228,
+        "parsed": 168,
+        "part_mismatch": 65,
+        "total": 249,
+        "unattributable": 6,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-06808": {
+      "extended_ci": {
+        "attributed": 9,
+        "attribution_rate": 0.9,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 9
+        },
+        "complete": 9,
+        "completeness": 0.9,
+        "incomplete": 1,
+        "parse_rate": 0.9,
+        "parsed": 9,
+        "part_mismatch": 0,
+        "total": 10,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 9,
+        "attribution_rate": 0.9,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 9
+        },
+        "complete": 9,
+        "completeness": 0.9,
+        "incomplete": 1,
+        "parse_rate": 0.9,
+        "parsed": 9,
+        "part_mismatch": 0,
+        "total": 10,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 9,
+        "attribution_rate": 0.9,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 9
+        },
+        "complete": 9,
+        "completeness": 0.9,
+        "incomplete": 1,
+        "parse_rate": 0.9,
+        "parsed": 9,
+        "part_mismatch": 0,
+        "total": 10,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 9,
+        "attribution_rate": 0.9,
+        "by_operation": {
+          "add": 0,
+          "amend": 0,
+          "none": 1,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 9
+        },
+        "complete": 9,
+        "completeness": 0.9,
+        "incomplete": 1,
+        "parse_rate": 0.9,
+        "parsed": 9,
+        "part_mismatch": 0,
+        "total": 10,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-08556": {
+      "extended_ci": {
+        "attributed": 22,
+        "attribution_rate": 0.9565217391304348,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 19
+        },
+        "complete": 14,
+        "completeness": 0.6086956521739131,
+        "incomplete": 9,
+        "parse_rate": 0.6086956521739131,
+        "parsed": 14,
+        "part_mismatch": 2,
+        "total": 23,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 22,
+        "attribution_rate": 0.9565217391304348,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 19
+        },
+        "complete": 14,
+        "completeness": 0.6086956521739131,
+        "incomplete": 9,
+        "parse_rate": 0.6086956521739131,
+        "parsed": 14,
+        "part_mismatch": 2,
+        "total": 23,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 22,
+        "attribution_rate": 0.9565217391304348,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 19
+        },
+        "complete": 14,
+        "completeness": 0.6086956521739131,
+        "incomplete": 9,
+        "parse_rate": 0.6086956521739131,
+        "parsed": 14,
+        "part_mismatch": 4,
+        "total": 23,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 20,
+        "attribution_rate": 0.8695652173913043,
+        "by_operation": {
+          "add": 2,
+          "amend": 2,
+          "none": 0,
+          "redesignate": 0,
+          "remove": 0,
+          "revise": 19
+        },
+        "complete": 14,
+        "completeness": 0.6086956521739131,
+        "incomplete": 9,
+        "parse_rate": 0.6086956521739131,
+        "parsed": 14,
+        "part_mismatch": 0,
+        "total": 23,
+        "unattributable": 3,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-11140": {
+      "extended_ci": {
+        "attributed": 49,
+        "attribution_rate": 0.98,
+        "by_operation": {
+          "add": 19,
+          "amend": 4,
+          "none": 3,
+          "redesignate": 5,
+          "remove": 4,
+          "revise": 15
+        },
+        "complete": 39,
+        "completeness": 0.78,
+        "incomplete": 11,
+        "parse_rate": 0.78,
+        "parsed": 39,
+        "part_mismatch": 4,
+        "total": 50,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 49,
+        "attribution_rate": 0.98,
+        "by_operation": {
+          "add": 19,
+          "amend": 4,
+          "none": 3,
+          "redesignate": 5,
+          "remove": 4,
+          "revise": 15
+        },
+        "complete": 39,
+        "completeness": 0.78,
+        "incomplete": 11,
+        "parse_rate": 0.78,
+        "parsed": 39,
+        "part_mismatch": 4,
+        "total": 50,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 19,
+          "amend": 4,
+          "none": 3,
+          "redesignate": 5,
+          "remove": 4,
+          "revise": 15
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 50,
+        "parse_rate": 0.78,
+        "parsed": 39,
+        "part_mismatch": 0,
+        "total": 50,
+        "unattributable": 50,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 45,
+        "attribution_rate": 0.9,
+        "by_operation": {
+          "add": 19,
+          "amend": 4,
+          "none": 3,
+          "redesignate": 5,
+          "remove": 4,
+          "revise": 15
+        },
+        "complete": 37,
+        "completeness": 0.74,
+        "incomplete": 13,
+        "parse_rate": 0.78,
+        "parsed": 39,
+        "part_mismatch": 0,
+        "total": 50,
+        "unattributable": 5,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-11267": {
+      "extended_ci": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 1,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 16,
+          "revise": 3
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 27,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 21,
+        "part_mismatch": 0,
+        "total": 27,
+        "unattributable": 27,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 1,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 16,
+          "revise": 3
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 27,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 21,
+        "part_mismatch": 0,
+        "total": 27,
+        "unattributable": 27,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 1,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 16,
+          "revise": 3
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 27,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 21,
+        "part_mismatch": 0,
+        "total": 27,
+        "unattributable": 27,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 0,
+        "attribution_rate": 0.0,
+        "by_operation": {
+          "add": 1,
+          "amend": 0,
+          "none": 6,
+          "redesignate": 1,
+          "remove": 16,
+          "revise": 3
+        },
+        "complete": 0,
+        "completeness": 0.0,
+        "incomplete": 27,
+        "parse_rate": 0.7777777777777778,
+        "parsed": 21,
+        "part_mismatch": 0,
+        "total": 27,
+        "unattributable": 27,
+        "unclosed_quote": 0
+      }
+    },
+    "2026-11648": {
+      "extended_ci": {
+        "attributed": 137,
+        "attribution_rate": 0.9927536231884058,
+        "by_operation": {
+          "add": 2,
+          "amend": 21,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 63,
+          "revise": 41
+        },
+        "complete": 101,
+        "completeness": 0.7318840579710145,
+        "incomplete": 37,
+        "parse_rate": 0.7318840579710145,
+        "parsed": 101,
+        "part_mismatch": 0,
+        "total": 138,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 137,
+        "attribution_rate": 0.9927536231884058,
+        "by_operation": {
+          "add": 2,
+          "amend": 21,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 63,
+          "revise": 41
+        },
+        "complete": 101,
+        "completeness": 0.7318840579710145,
+        "incomplete": 37,
+        "parse_rate": 0.7318840579710145,
+        "parsed": 101,
+        "part_mismatch": 0,
+        "total": 138,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 137,
+        "attribution_rate": 0.9927536231884058,
+        "by_operation": {
+          "add": 2,
+          "amend": 21,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 63,
+          "revise": 41
+        },
+        "complete": 101,
+        "completeness": 0.7318840579710145,
+        "incomplete": 37,
+        "parse_rate": 0.7318840579710145,
+        "parsed": 101,
+        "part_mismatch": 0,
+        "total": 138,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 137,
+        "attribution_rate": 0.9927536231884058,
+        "by_operation": {
+          "add": 2,
+          "amend": 21,
+          "none": 11,
+          "redesignate": 0,
+          "remove": 63,
+          "revise": 41
+        },
+        "complete": 101,
+        "completeness": 0.7318840579710145,
+        "incomplete": 37,
+        "parse_rate": 0.7318840579710145,
+        "parsed": 101,
+        "part_mismatch": 0,
+        "total": 138,
+        "unattributable": 1,
+        "unclosed_quote": 0
+      }
+    },
+    "E6-15282": {
+      "extended_ci": {
+        "attributed": 58,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 17,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 35
+        },
+        "complete": 38,
+        "completeness": 0.6333333333333333,
+        "incomplete": 22,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 38,
+        "part_mismatch": 8,
+        "total": 60,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "extended_cs": {
+        "attributed": 58,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 17,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 35
+        },
+        "complete": 38,
+        "completeness": 0.6333333333333333,
+        "incomplete": 22,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 38,
+        "part_mismatch": 8,
+        "total": 60,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "spec_literal": {
+        "attributed": 58,
+        "attribution_rate": 0.9666666666666667,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 17,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 35
+        },
+        "complete": 38,
+        "completeness": 0.6333333333333333,
+        "incomplete": 22,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 38,
+        "part_mismatch": 8,
+        "total": 60,
+        "unattributable": 2,
+        "unclosed_quote": 0
+      },
+      "v11": {
+        "attributed": 51,
+        "attribution_rate": 0.85,
+        "by_operation": {
+          "add": 3,
+          "amend": 1,
+          "none": 17,
+          "redesignate": 0,
+          "remove": 4,
+          "revise": 35
+        },
+        "complete": 38,
+        "completeness": 0.6333333333333333,
+        "incomplete": 22,
+        "parse_rate": 0.6333333333333333,
+        "parsed": 38,
+        "part_mismatch": 1,
+        "total": 60,
+        "unattributable": 9,
+        "unclosed_quote": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "chunk": "CH-03/1a",
+  "files": {
+    "amdpars_v11.jsonl": {
+      "bytes": 7575757,
+      "sha256": "6cf0f40d74fccd1a17cdf60ed57d5cdb707c0f4dcdc4714baca0dae5c08ad201"
+    },
+    "completeness_v11.json": {
+      "bytes": 155206,
+      "sha256": "96102b9ec829f1bb6289dce5b7ab2d8b369c1c6a5286127101b780ba1013d7a3"
+    }
+  },
+  "what": "AMDPAR attribution re-measured under CONTEXT.md v1.1"
+}
