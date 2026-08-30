@@ -1,0 +1,288 @@
+# CONTEXT.md — THIS FILE IS LAW
+
+**Project:** The Instruction That Won't Execute
+**Version:** v1.0 · 2026-08-30 03:20 UTC
+**Author:** ARCHITECT only. No build session edits this file.
+**Precedence:** the official hackathon PDF (`context/01-PROBLEM-PDF.md`) outranks this file. This file outranks `plan.md`, the code, the tests, and anyone's memory. Any conflict between code and this file is a defect in the code.
+
+**Provenance:** assembled from `context/08-FINAL-CALL.md` §5 (deltas, authoritative) applied over `context/07-KILL-TEST.md` §7 (base spec). Both survived adversarial review by 13 and 15 independent agents respectively.
+
+---
+
+## 1. Goal, non-goals, precision-critical domain
+
+### Goal
+Build an agent that reads a US federal final rule's **amendatory instructions** together with the CFR text **as it stood on the publication date**, and predicts whether the Office of the Federal Register will be able to **execute** each instruction — emitting the editorial note NARA would have to publish if it cannot.
+
+### Non-goals — state these in the README
+- Not a legal-advice tool. Output is an input to a drafter's judgement, never a filing.
+- Not a classification-accuracy benchmark. We do not measure whether the *substance* of a rule is right.
+- Not a general CFR question-answering system.
+
+### Precision-critical domain
+**Paragraph designations and quoted anchor text.** `(b)(4)(i)(A)` and the exact characters of a quoted string are the objects the whole result rests on.
+- No normalisation may silently alter either.
+- Matching is attempted at three **declared** levels — `exact` / `whitespace-collapsed` / `alphanumeric-only` — and the level achieved is **reported in the output**, never applied invisibly.
+- No lossy encoding, no unicode folding, no smart-quote substitution anywhere in the pipeline.
+
+---
+
+## 2. The user, the bottleneck, the value
+
+**User.** A regulations drafter or Office of the Federal Register liaison clearing a final rule for publication.
+**Decision.** Per section: *will this amendatory instruction codify?*
+**Clock.** The rule's statutory or court-ordered effective date.
+**Exposure.** If the instruction is defective, OFR cannot incorporate it, the CFR text never changes, and NARA publishes a permanent, citable editorial note recording that the agency's rule did not take effect as written. The remedy is a correcting document — another Federal Register cycle.
+
+**The bottleneck.** An amendatory instruction is an **anchor plus an operation**. It executes if and only if the anchor is present in the CFR exactly as quoted, and the target designation resolves at the right level of a nested hierarchy. The drafter writes against the text she believes is codified; OFR executes against the text that actually is. **The instruction carries no evidence of its own executability.**
+
+**The generalisation — lead the README with this.** The underlying shape is *a batch of edits, each individually valid, that fail when applied to the real target.* Database migrations, refactors, config rollouts, infrastructure-as-code. The Federal Register is not the point; it is the one domain where this problem has **public, government-authored ground truth**.
+
+---
+
+## 3. The headline claim
+
+> An amendatory instruction carries no evidence of its own executability. Three systems that each know part of the answer — a model, a ~150-line script, and the tool's raw signal, each near chance alone — **compose** into one that reconstructs NARA's own editorial note.
+
+> ⚠️ **Provenance of the pilot figures 0.545 / 0.5855 / 0.52.** These come from `context/07-KILL-TEST.md` §7.3 and **trace to no committed artifact on this machine.** They are pre-competition pilot numbers at n=11 and **must not appear in the README, the Description or the video** until CH-08 re-derives them on the real pool with an evidence path. Until then this file carries them as *provenance-unverified*, and the headline is stated qualitatively as above. **A number without an evidence path violates hard rule 14.**
+
+**The retrieval gain is reported as the baseline it is.** The **+27.3 pp** from giving the model the CFR text belongs to `B0-agent`, a PDF-sanctioned baseline. *(Pilot figure, pre-competition, n=11 — labelled as such everywhere it appears. The shipped number is CH-08's, measured on the real pool. An earlier draft of this file also quoted “+32 pp” for the same intervention; that figure is withdrawn.)* It appears in the results table one row above the agent, labelled as a baseline. This honesty is not optional: it is already conceded in the spec's own §7.3 and a judge will find it.
+
+**Pitch sentence.**
+> I built the agent that reads a Federal Register amendatory instruction the way the Office of the Federal Register does — and made it write the editorial note NARA will have to publish if the rule ships as drafted.
+
+---
+
+## 4. Arms
+
+| Arm | PDF baseline type | Gets | Predicted |
+|---|---|---|---|
+| **B-script** | type 3 (simple script) | best model-free attack: threshold on any of ~26 cheap features, honest 5-fold CV, **reported with its permutation null** | ~0.59, p ≈ 0.185 |
+| **B0** | type 1 (one direct prompt) | one model, one prompt, the amendatory instruction only — **no CFR text** | ~0.50 (chance) |
+| **B0-agent** | type 2 (general agent, basic tools) | same model **with** point-in-time section text and search tools; no skill, no memory | **~0.75** |
+| **B0′** | compute-matched control | B0-agent at A1's exact token budget, spent on best-of-3 self-consistency with a published tie-break | — |
+| **A1** | the solution | B0-agent + the two built capabilities in §6 | ~0.85 |
+
+**Fairness rules.** All arms get the same task, the same items, the same model, and the same frozen corpus. Any difference in resources is stated in the results table. Token counts for every arm are published side by side.
+
+---
+
+## 5. Output contract — the load-bearing design decision
+
+Per `(rule, section)` item the agent emits:
+
+```json
+{
+  "verdict": "WILL_FAIL | WILL_EXECUTE",
+  "failing_designation": "(b)(4)(i)(A) | null",
+  "failure_class": "target-does-not-exist | target-already-exists | quoted-text-not-present | incomplete-set-out-text | incorrect-citation-or-designation | null",
+  "resolution_trace": [
+    { "instruction_index": 1, "operation": "...", "anchor": "...", "designation": "...",
+      "found": true, "level": "exact|whitespace|alphanumeric|none",
+      "designation_exists": true, "siblings": ["..."], "char_offset": 1234 }
+  ]
+}
+```
+
+**`verdict` is a DERIVED field of `resolution_trace`, not the primary output.** This is the change that earns the 30-point row: every capability becomes directly readable in the artifact rather than inferable from an average.
+
+`failure_class` values are **read off NARA's own note vocabulary**, not invented.
+
+---
+
+## 6. Capabilities — two built, one pre-declared as a counted removal
+
+> **Ruling R-01 (2026-08-30):** capability 3, the ordered-state ledger, is **NOT BUILT**. It is declared in advance as **counted removal #3**, with its measured justification published alongside the reason it was cut. Two capabilities each traced to a numbered failure is a stronger answer to *"which design choices helped the agent solve the problem?"* than three where the third was rushed. See `plan.md` ruling R-01.
+
+**1. Tool — `cfr_resolve(title, part, section, as_of_date, quoted_text, designation)`**
+Deterministic. **Designation-hierarchy resolution FIRST, quoted-anchor matching second.**
+Returns `{found, level, designation_exists, siblings, char_offset}`.
+*Fixes F1: B0 cannot check the anchor at all.*
+*Ordering is forced by measurement:* 26/33 and 35/42 labelled items have **no extractable quoted anchor**, and NARA's dominant note mechanisms (`did-not-exist`, `already-exists`) are designation-**state** facts. A pure quoted-string matcher no-ops on ~80% of the pool.
+
+**2. Skill — `SKILL.md`, the OFR execution procedure**
+Parse each AMDPAR into `(operation, anchor, designation)` triples, in order; resolve each against the as-of text; check intra-rule interactions; only then rule. Also specifies the **note-emission contract**: name the designation, name the class, cite the offset.
+*Fixes F2: given the tool, the agent checks the first anchor and rules from it. Both clean-item errors in the pilot were premature rulings on a partial read.*
+
+**3. Memory — the ordered-state ledger — NOT BUILT (ruling R-01), shipped as a counted removal**
+Carry `designation → state after each executed instruction` across the rule, so instruction *k+1* is read against the state instructions *1..k* left.
+*Fixes F3: this is the actual OFR execution model.*
+*Justified by measurement, not by the collision story:* **state-carry sensitivity** — instruction *k+1* reads the state instructions *1..k* left — fires on **833/1,984 = 42.0%** of items (also 31/82 on the pilot pool; two independent counts, **not** label-correlated — 16 defective / 15 executable). *This is a different measurement from the redesignation-collision rate in §10; the two are not comparable and were conflated in an earlier draft.*
+
+**Cap is two built.** *"Purposeful choices matter more than the number of components"* — the PDF, verbatim. A third built capability is a spec change requiring an architect ruling that supersedes R-01.
+
+---
+
+## 7. Metrics
+
+### Primary — execution-prediction accuracy
+Fraction of exact-instruction-count-matched `(rule, section)` items where the emitted `verdict` equals whether NARA published a live editorial note for that section.
+**Scorer:** stdlib only, no model, no network, string equality against a NARA-authored fact.
+**Do not change this metric.** It is pre-registered, piloted, and the only metric in the packet whose trivial-attack surface has been measured (`n_instructions` pinned at 0.5000; best of 26 features 0.5934 inside its own null at p = 0.185). Every rival that changed its primary died to the first script someone wrote.
+
+### Secondary — reported beside, **never blended**
+1. **Defect-localisation accuracy** on NARA's localised subset (~13.6% of notes). A constant scores **0.000**.
+2. **Failure-class recall** against NARA's five-way vocabulary on the mechanism subset (~22.7%). A constant scores **0.000**.
+3. **Instruction-level resolution-claim correctness** against a deterministic oracle — *is this string / designation present in the point-in-time text?* Computable, zero authored labels, ~1,000 records. **DIAGNOSTIC ONLY, never the primary** — a script scores 1.0 on it because it *is* the script. Its purpose is statistical power for the per-capability ablations.
+
+### Guards — pre-registered numbers
+| Guard | Threshold |
+|---|---|
+| False-defect rate (called WILL_FAIL on an executable section) | ≤ 0.25 |
+| Missed-defect rate | ≤ 0.25 |
+| **Attributor completeness** | **≥ 0.90 — blocks any headline number** |
+
+### Success — committed to `GOOD.md` before A1 exists
+**A1 ≥ B0-agent + 8 pp, McNemar p < 0.05, at n ≥ 84, and A1 ≥ 0.80 absolute.**
+Predictions written before the run: B0 ≈ 0.50 · B0-agent ≈ 0.75 · A1 ≈ 0.85.
+**Do not chase 1.00.** A saturating metric reads as a rigged baseline.
+
+---
+
+## 8. The corpus
+
+### Operational constraint — binding
+**`www.ecfr.gov` and `www.federalregister.gov` return HTTP 403 from this machine.** Verified 2026-08-30 02:17 UTC; they worked nine hours earlier. Sustained automated traffic got us blocked. **Do not build on them. Do not attempt to work around it.**
+
+**`www.govinfo.gov` returns 200, needs no key, and is the sole harvest channel.**
+
+| Source | URL | Provides |
+|---|---|---|
+| ECFR bulk XML | `https://www.govinfo.gov/bulkdata/ECFR` | `<EDNOTE>` elements — **the labels** |
+| CFR annual editions | `https://www.govinfo.gov/bulkdata/CFR` | point-in-time section text (back to 1996) |
+| FR bulk | `https://www.govinfo.gov/bulkdata/FR` | `<AMDPAR>` elements — **the instructions** |
+
+### Labels
+Extract `<EDNOTE>` structurally; filter to codification-defect notes containing `"could not be incorporated"`.
+Reference measurements from 9 titles (12, 20, 21, 24, 26, 40, 42, 45, 49) — sanity-check against these, do not substitute them:
+
+| Measure | Value |
+|---|---|
+| Total EDNOTEs | 903 |
+| Codification-defect notes | 44 |
+| Carry their own FR citation | **44/44** — FR resolution is deterministic, no search step |
+| Section-level | 38/44 |
+| Localise below section level | 6/44 (13.6%) |
+| State an explicit mechanism | 10/44 (22.7%) |
+
+**Expected full pool across 50 titles: 150–250 defect notes, ~130–210 section-level.** The eCFR search API previously reported 92 — it undercounts by ~2.3×.
+
+### AMDPAR attribution — the algorithm, specified here so a reviewer can reimplement it
+
+`PROCESS.md` §6 requires a gated chunk's reviewer to **reimplement the load-bearing logic from this file alone, importing nothing from the project.** CH-02's logic was described only in `plan.md`'s card, which a reviewer is not told to reimplement from — so its FULL gate could not have caught a defect in it. That is the identical failure that let the leakage defect through. Specified here instead.
+
+**The problem.** A Federal Register final rule contains `<AMDPAR>` elements — amendatory instructions. Only some name their section; the rest are lettered sub-instructions belonging to the last-named one:
+
+```
+6. Amend § 1468.23 as follows:          <- names the section
+   a. Revise paragraph (b)(2);          <- belongs to 1468.23
+   b. Remove paragraph (c).             <- belongs to 1468.23
+7. Amend § 1468.25 by ...               <- names a new section
+```
+
+**Measured:** only ~42% of AMDPARs name a section. An extractor that reads lead-ins alone attributes 42% and silently drops the rest — which is exactly how a predecessor pilot reported 0.46 completeness and poisoned its own eval set.
+
+**The algorithm — carry-forward:**
+1. Iterate `<AMDPAR>` elements in **document order**. Order is the whole mechanism; any reordering breaks it.
+2. Maintain `current_section`, initially null.
+3. If the element names a section (matches a `§\s*[\d.]+[a-z]?` citation in its own text), set `current_section` to it and attribute the element there.
+4. Otherwise attribute the element to `current_section`. If `current_section` is null, the element is **unattributable** — count it, never guess.
+5. Parse each attributed element into `(operation, anchor, designation)` where `operation` is one of `revise · add · remove · redesignate · amend`, `anchor` is the quoted text if present, `designation` is the paragraph path such as `(b)(4)(i)(A)`.
+
+**Completeness — the definition the gate asserts on:**
+
+> **completeness = (number of AMDPAR elements attributed to a section AND parsed into at least one complete `(operation, anchor OR designation)` triple) ÷ (total AMDPAR elements in the document)**
+
+Reported **globally** and **per FR document**; the per-document figure is what CH-02's pre-registered fallback restricts on. An element attributed but unparsed counts as **incomplete**, not complete — attribution alone is not the bar.
+
+### Leakage strips — mandatory, counted, and published
+
+**The label and the input come from the same XML tree.** Measured on a real govinfo annual-edition volume (`CFR-2024-title40-vol5`, 5,524,321 B): of 28 `<EDNOTE>` elements, **26 sit inside a `<SECTION>` block**; both `<EFFDNOTP>` elements do; 252 of 255 `<CITA>` elements do. `<EDNOTE>` is where the gold label lives.
+
+`<EFFDNOTP>` prints amendments pending at compile time **verbatim**. One observed block names the FR citation, the section, every designation touched, and then says *"For the convenience of the user, the revised and added text is set forth as follows."*
+
+**Therefore, before any section text is frozen or shown to any arm, strip and count:**
+
+| Element | Why |
+|---|---|
+| `<EDNOTE>` | carries the editorial note that **is** the label |
+| `<EFFDNOTP>` | prints the pending amendment — the rule under test — verbatim |
+| `<CITA>` | source credit naming the amending rule |
+| `<EAR>` | editorial amendment record |
+
+Per-element strip counts go in the freeze manifest **and** in the README as a named design decision. The stripper is pure (hard rule 8) and lives in shipped code, so `refetch.py` reproduces the stripped corpus byte-for-byte and the manifest verifies from a clean clone.
+
+**Honest bounding.** The as-of edition is chosen at (effective year − 1), so the note for the rule under test normally lands in the *next* edition — the leak is not guaranteed per item. It fires anyway in three non-hypothetical ways: off-by-one edition selection for any mid-year effective date; `<EFFDNOTP>`, which by design prints the pending rule; and prior `<EDNOTE>`s on the same section, which are label-correlated even when the specific note is absent. **Structural containment is measured; the per-item rate is UNKNOWN and measuring it is part of the fix.**
+
+**Why this is gate-class: it fails silently and in the flattering direction.** Accuracy goes *up*. Every guard in §7 still passes. `GOOD.md`'s thresholds are cleared. And a FULL adversarial review of CH-03 could not have caught it, because this file — the only document the reviewer reimplements from — did not mention it. It was lost in transcription from `08-FINAL-CALL.md` §5.
+
+*(The eCFR "Link to an amendment published at NN FR …" annotation needs no strip: it is an eCFR artifact and appears 0 times in the govinfo annual editions, which are our only source.)*
+
+### Eval set
+- **Positives:** `(rule, section)` pairs carrying a live codification-defect note.
+- **Negatives:** sibling sections amended by the same rule with no note, **matched EXACTLY on instruction count.** Non-negotiable — unmatched, a hardcoded threshold on instruction count beats the agent, and that is precisely how an earlier candidate died.
+- Publish the **full exclusion ladder** with counts at every step.
+- **Target ≥ 42 pairs (n ≥ 84).** Report the real number.
+
+### Freeze
+Everything under `data/` with a SHA-256 manifest and `refetch.py`. `.gitattributes` = `* -text` on line one. Sealed read-only after CH-03.
+
+### Licence — clean, and the only candidate with no caveat
+All three sources are OFR/GPO properties, **public domain under 17 U.S.C. §105**. eCFR does not contain standards incorporated by reference, so the ASTM/NFPA copyright problem does not touch the corpus.
+
+---
+
+## 9. The hard case
+
+**The defect that is not the first instruction** — a section where instructions 1..k−1 all execute and instruction k fails, so a partial read rules correctly for the wrong reason. **Measured n = 16 defective items in the 82-item pilot pool.**
+
+Three verified NARA-authored exemplars, ascending in sharpness:
+1. **12 CFR 702.2** — revising a definition that *did not exist*. Target named, not quoted — only the widened tool form catches it.
+2. **26 CFR 1.199A-0** — adding an entry that *already exists*. The pure designation-state check.
+3. **12 CFR 702.504 → 702.304** — revising a citation, after redesignation, that did not exist in the section. The collision case, honestly counted, kept as the sharpest single instance and **named as rare**.
+
+Unresolved cases route to a named human checkpoint with both readings and the paragraph trace. This satisfies ground rules 04 and 05 concretely.
+
+---
+
+## 10. Removed experiments — two, both planned
+
+**1. Current CFR text instead of point-in-time text.**
+Pre-registered prediction, committed before it runs: **accuracy collapses toward a trivial oracle**, because after a failed amendment the current text still lacks the change and after a successful one it contains it — the current text *leaks the label*. **If the number goes up, that is proof of leakage, not capability, and must be reported as such.**
+
+**2. The intra-rule collision detector**, built on the ledger, **removed with its measured class size as the stated reason.** Measured five ways: 0/68 labelled items contain a redesignation instruction; 3/82 have any collision (2 positive); **redesignation-collision sensitivity** is **~1.3–3.1%** of corpus items (the pilot reported 26/1,984 = 1.31%; an independent naive recount returned 61/1,984 = 3.07%. **The figure does not reproduce and is therefore provisional — CH-09 recomputes it in-repo and publishes whichever number the shipped script yields, with the discrepancy stated.** Either value supports the removal decision; neither is quoted as settled), and 15 of those 26 are *correct drafting*; **NARA never publishes a note naming an intra-rule conflict** — live probe for `"conflicting amendments"` returned 0.
+A removed capability with a **counted** hard-case class is worth more than a kept one with an uncounted class.
+
+---
+
+## 11. The hot take
+
+> **A verification agent's grounding corpus is a precision instrument, not a recall instrument — and if you hand it the document, measure *which class* got better, because the average will lie to you.**
+
+Measured across two corpora, not asserted:
+- **IETF errata:** giving the agent the specification moved Rejected recall **+12.0 pp** and Verified recall **−4.0 pp** — net +4.0, statistically nothing (p = 0.64). In the three-class variant the same access moved the policy class **−16.7 pp** and made the arm *worse overall*.
+- **Amendatory instructions:** giving the agent the CFR text moved accuracy **+27.3 pp**, because the baseline was at chance and the corpus supplies the only fact that decides the answer.
+
+The difference is not the model and not corpus quality. It is whether the answer is **in** the document or merely **argued about** by it. Evidence tells you when a claim is false; it rarely tells you a claim is true, because the claim was written to look true.
+
+**The transferable rule:** before building retrieval into an adjudication pipeline, measure the baseline's per-class recall. If the negative class is already strong, retrieval buys an average that flatters and a decision boundary that does not move.
+
+Generalises without modification to fact-checking, code review, security triage, and RAG over any corpus of contested claims.
+
+---
+
+## 12. Prior art — cite, do not collide
+
+- **Prior et al., NLLP@ACL 2025** — amendatory instruction execution as a task. Cite on the first screen. Our axis is *predicting failure before publication and localising it*, not executing the amendment.
+- **`cfpb/regulations-parser`** — existing CFR amendment parser. Cite; we do not reimplement it as a contribution.
+- **ATLAS, arXiv 2509.18400** — HTS classification from CROSS. Unrelated domain; listed because it killed a predecessor project and the lesson is recorded.
+
+Not citing known prior art on a submission staked on integrity is an unforced error and is one search away for a judge.
+
+---
+
+## 13. Change log
+
+| Version | Date | Change |
+|---|---|---|
+| v1.0 | 2026-08-30 03:20 UTC | Initial. Assembled from `08-FINAL-CALL.md` §5 over `07-KILL-TEST.md` §7. |
