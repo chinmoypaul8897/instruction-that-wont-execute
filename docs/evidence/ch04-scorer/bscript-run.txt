@@ -1,0 +1,85 @@
+==============================================================================
+CH-04 3b - THE B-SCRIPT ARM (PDF baseline type 3) AND ITS PERMUTATION NULL
+==============================================================================
+
+  eval set        data/evalset/items.jsonl
+  n               76   (38 positive / 38 negative)
+  pairs           38
+  features        30   (CONTEXT.md section 4 says ~26)
+  validation      5-fold, GROUPED BY FR DOCUMENT, no RNG
+
+==============================================================================
+RESULT
+==============================================================================
+
+  best feature                 instr_chars_max
+  held-out CV accuracy         0.5921
+  95% CI (clustered by FR doc) [0.5286, 0.6548]   2000 reps, seed 20260831
+
+  success + failure == n       45 + 31 = 76   ASSERTED
+  false-defect rate            0.5526   (guard <= 0.25)   FAIL
+  missed-defect rate           0.2632   (guard <= 0.25)   FAIL
+  unparseable or absent        0
+
+==============================================================================
+THE NULL - the whole procedure, feature selection included, re-run per draw
+==============================================================================
+
+  PRIMARY  within-pair permutation   (respects the count-matched design)
+    draws                      2000  (sampled, seed 20260831)
+    draws >= observed          1046
+    p-value                    0.5230
+    null mean / p50 / p95 / max   0.5888 / 0.5921 / 0.6316 / 0.6842
+
+  DIAGNOSTIC  free permutation       (ignores the pairing - reported beside)
+    draws                      2000  (seed 20260831)
+    p-value                    0.8345
+
+==============================================================================
+EVERY FEATURE, RANKED - so nobody has to take 'best of 26' on trust
+==============================================================================
+
+    0.5921  instr_chars_max  <- selected
+    0.5921  instr_words_total
+    0.5789  anchor_count
+    0.5789  mentions_table
+    0.5658  anchor_chars_total
+    0.5658  instr_chars_mean
+    0.5658  instr_chars_total
+    0.5658  mentions_paragraph
+    0.5526  instr_without_anchor
+    0.5526  op_add
+    0.5526  op_remove
+    0.5263  op_redesignate
+    0.5263  section_text_chars
+    0.5132  section_text_lines
+    0.5000  as_of_edition
+    0.5000  cfr_title
+    0.5000  designation_chars_total
+    0.5000  designation_count
+    0.5000  document_amdpar_count
+    0.5000  document_completeness_v11
+    0.5000  instruction_count
+    0.5000  op_amend
+    0.5000  op_none
+    0.5000  publication_year
+    0.5000  section_numeric
+    0.5000  share_of_document
+    0.4868  distinct_operations
+    0.4868  instr_without_designation
+    0.4605  designation_max_depth
+    0.4342  op_revise
+
+==============================================================================
+WHAT THIS n CAN AND CANNOT DETECT
+==============================================================================
+
+  pairs 38, n 76, alpha 0.05
+  smallest ALL-ONE-WAY discordant count that clears alpha: 6
+  implied floor on the detectable gap: 7.9 pp
+  the smallest ALL-ONE-WAY discordant count that clears alpha; a mixed split needs more. This is a floor on the detectable effect, not a power calculation.
+
+  The instruction-count feature is pinned AT CHANCE BY CONSTRUCTION: the eval
+  set matches positives to negatives on it exactly, so the two classes have
+  identical distributions. That is the whole point of the matching, and
+  tests/test_eval_set.py asserts it on the frozen data.

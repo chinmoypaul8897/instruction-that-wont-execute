@@ -292,6 +292,33 @@ def free_permutation_null(rows, n_permutations: int = N_PERMUTATIONS,
             "note": "FREE permutation - ignores the pairing. Diagnostic only."}
 
 
+def cv_predictions(rows, feature: str) -> dict:
+    """OUT-OF-FOLD predictions for one feature. Pure.
+
+    The threshold is fitted on the training folds and applied to the held-out fold, so
+    no item is ever predicted by a rule that saw it. This is what the scorer's guards
+    and rates are computed on - an in-sample prediction would flatter every one of
+    them.
+    """
+    assign = fold_assignment([r["group"] for r in rows])
+    out = {}
+    for fold in range(N_FOLDS):
+        train = [r for r in rows if assign[r["group"]] != fold]
+        test = [r for r in rows if assign[r["group"]] == fold]
+        if not train or not test:
+            continue
+        rule = best_threshold([r["features"][feature] for r in train],
+                              [r["label"] for r in train])
+        preds = apply_threshold([r["features"][feature] for r in test], rule)
+        for pred, r in zip(preds, test):
+            out[r["item_id"]] = WILL_FAIL if pred else "WILL_EXECUTE"
+    if len(out) != len(rows):
+        raise BScriptError(
+            f"out-of-fold predictions cover {len(out)} of {len(rows)} items; an item "
+            "with no prediction would silently leave the denominator")
+    return out
+
+
 def build_rows(items) -> list[dict]:
     return [{"item_id": it["item_id"], "label": it["label"],
              "group": it["frdoc"], "features": features(it)} for it in items]
