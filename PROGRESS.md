@@ -11,6 +11,142 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## SPEC-FIX-2 · 2026-08-31 · BUILD (spec-edit scope) · Claude Code, `claude-opus-5` · GATE: none · **APPLIED**
+
+### Scope
+Apply the architect's ruling on `QUESTIONS.md` Q11 — which **accepted SPEC-FIX-1's refusal
+in full** — to `CONTEXT.md`, and clear Q13's housekeeping. *"You decide nothing."* The
+prompt gave the ruling verbatim and fenced everything else as a STOP.
+
+**`CONTEXT.md` is now v1.1. No number moved. Nothing was re-run.** The attributor was not
+executed, `data/`, `src/` and `tests/` were never opened, and every figure written into the
+spec was already committed before this session started.
+
+### The shape of the ruling, which is the point of the chunk
+
+The architect proposed a metric change that would have turned a failure into a pass.
+SPEC-FIX-1 refused it on a sabotage control it built itself. **This chunk does the opposite
+in three places on purpose:**
+
+| | change | effect on the number |
+|---|---|---|
+| 1 | §8 **records the failed gate** and publishes it — 0.5080 / 0.6643 against 0.90 | none; it documents a failure |
+| 2 | the detector takes the **word form**, **case-sensitively** (Q9, Q12(c)) | would **raise** attribution if re-measured |
+| 3 | `current_section` **resets at a `<REGTEXT>` part boundary** (Q10, Q12(a)) | **costs 8.0 points** |
+
+**Change 3 is the load-bearing one.** SPEC-FIX-1's third finding was that the original
+proposal took the +22.5-point fix and never mentioned the −8.0-point one CH-02 had already
+called *"a one-line change and would be an improvement"*. Adopting only the half that helps
+would have repeated the defect in the act of correcting it.
+
+### DID ANY CHANGE MAKE A FAILING NUMBER PASS? **NO** — and it is asserted, not claimed
+
+1. The **gate definition is byte-identical** to v1.0 and appears exactly once; the
+   threshold is untouched; the refused metric does not appear in `CONTEXT.md` at all —
+   the verifier asserts the string `attribution_completeness` is **absent from the file**.
+2. **The gated figure cannot reach the branch boundary even if every change helped.** The
+   word-form fix can at most move it from 0.5080 toward 0.6643. **0.6643 < 0.80**, so CH-02
+   stays in its pre-registered *"< 0.80 — documented failure"* branch and is nowhere near
+   0.90. The part reset moves it **down**; case-sensitivity can only **remove** detections.
+3. Nothing was measured, so no figure in the repository could have moved.
+
+### Decisions
+
+- **Class A — none taken.** Every substantive change was specified by the ruling. Where
+  the ruling was silent, the answer was a STOP, not a judgement call.
+- **Class B — the part-boundary reset was written into step 2 rather than a new step**, so
+  the algorithm keeps its five-step numbering and existing references to "§8 step 3" stay
+  valid. The reset is a property of `current_section`'s lifecycle, which is what step 2
+  declares.
+- **Class B — the 8-point cost is stated with its measurement basis.** v1.1 says the
+  0.9865 → 0.9066 endpoints were both measured under the case-**in**sensitive detector, so
+  the cost under the rule v1.1 actually specifies is itself unmeasured. Without that clause
+  §8 would print a precise number for a detector it no longer describes.
+- **Class C — `#### ` heading level** for the failure block, one level under §8's `###`.
+
+### What was deliberately NOT done
+
+`§8`'s *"only ~42% of AMDPARs name a section"* is now stale in a **third** way — Q9 already
+recorded that it matches neither 25.0% (sign-only) nor 37.4% (case-insensitive extended),
+and under v1.1 it matches an unmeasured figure. **It was left alone.** Editing a fourth
+number was not specified, and the scope fence says anything not specified is a STOP. Raised
+as **Q14** instead. Q10's two spellings stay recorded and unfixed. No metric was added, no
+threshold moved, no definition altered.
+
+### Questions
+
+- **Q11 — RULED.** Recorded **verbatim**, committed **first** at `5adab30` before any spec
+  edit, and the transcription is asserted byte-identical to its source in
+  `prompts/SPEC-FIX-2.md` (now tracked, so the check is reproducible by anyone).
+- **Q13 — CLOSED.** All three housekeeping items done; SPEC-FIX-1's original text left
+  exactly as written.
+- **Q14 — RAISED.** v1.1 specifies a case-sensitive detector, but **every `extended` figure
+  in the repository was computed case-INsensitively** — 0.6643, 0.9865, 0.9066, 57/70,
+  2,459, 1,086, and the 699 / 573 / 126 decomposition. They are **not reconstructible by
+  arithmetic**, so CH-03 must re-measure rather than adjust. Plus the stale "~42%".
+
+### The verifier failed on its first run, and the check was what was wrong
+
+`docs/evidence/spec-fix-2/spec_fix_2_verify.py` asserts, re-runnably, that each change
+landed and each replaced line is gone (hard rule 16), that nothing else in `CONTEXT.md`
+changed, and that no read-only or protected path was touched. **Its first run reported
+FAIL** on *"v1.0 bare `current_section` step 2 — absent"*. The edit was correct; the check
+was not — v1.0's step 2 is a strict **prefix** of its v1.1 replacement, so a substring test
+can never be satisfied by any correct edit. It was made line-exact, and **the reason is a
+comment in the script and a section in `applied.md` rather than a silent deletion**,
+because a check quietly adjusted until it turns green is exactly what this project exists
+to warn about. **38 checks, all pass, exit 0.**
+
+The script also fixes for itself the CRLF-on-a-`* -text`-repo defect CH-02 and SPEC-FIX-1
+both recorded and neither owned — one line reconfiguring stdout to LF.
+
+### A file-hygiene observation, recorded not fixed
+
+**`CONTEXT.md` is the only canonical markdown file in the repository stored with CRLF
+line endings** — 331 CRLF, no LF-only lines — while `QUESTIONS.md`, `STATUS.md`,
+`PROGRESS.md` and `AI-USE.md` are all LF. `.gitattributes` is `* -text`, so git stores
+what it is given and the mixture is invisible to it. This session **matched the existing
+CRLF** rather than normalising, because normalising would have produced a 331-line diff on
+a file that is LAW in a chunk authorised to change three things. It is written down here so
+the next session that edits `CONTEXT.md` does not introduce a mixed-ending file by
+accident.
+
+### Economy — the instruction was followed and it worked
+
+The prompt forbade a subagent panel, citing SPEC-FIX-1's own finding that its ten-agent
+panel took **55%** of that chunk's budget, voted **4–1 for the wrong answer**, and that
+*"a cheaper panel would have bought it too."* **No subagent was run in this chunk.**
+
+**Result: 10.58 M input tokens — the cheapest session in the project by a wide margin**
+(previous minimum SPEC-FIX-1's coding session at 19.15 M; CH-01 was 41.09 M).
+**It still missed the prompt's stated target of under 5 M, by 2.1×, and that is a miss.**
+Attributable causes, largest first: the `CLAUDE.md` read-order duty itself — this chunk's
+required reading is `CLAUDE.md`, a 20 KB verdict, five long `QUESTIONS.md` entries,
+`CONTEXT.md`, `STATUS.md` and `PROGRESS.md` — re-read as cached context across 99
+assistant turns, which is 10.33 M of the 10.58 M; and three self-inflicted retries (two
+shell here-documents that mangled escaping, and the verifier's first-run failure). The
+first is structural for any session under this constitution and a 5 M target may not be
+reachable while the read order stands; the retries were mine.
+
+### Gate
+None. This chunk edits a specification under a ruling; it certifies nothing and re-runs
+nothing. **CH-02 remains at `built`, in the `< 0.80` documented-failure branch**, and
+CH-03 proceeds on the per-document restriction pre-registered before any of this.
+
+### Status ledger
+`SPEC-FIX-2 · apply the Q11 ruling · built` — `CONTEXT.md` v1.1, gate stays FAILED and
+published, 38 verifier checks pass.
+
+### State for the next session
+`CONTEXT.md` **v1.1** is law. **CH-03 must re-measure under the v1.1 detector** — word form
+included, matched **case-sensitively**, with `current_section` reset at part boundaries —
+and must **publish the new figures beside the old rather than in place of them** (the
+`goldens.md` ERRATA convention). The gate outcome will not change: 0.6643 was already
+below 0.80 and a stricter detector cannot raise it. Read **Q14** before quoting any
+`extended` number.
+
+---
+
 ## SPEC-FIX-1 · 2026-08-31 · BUILD (spec-edit scope) · Claude Code, `claude-opus-5` · GATE: none · **REFUSED**
 
 ### Scope

@@ -75,6 +75,79 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### SPEC-FIX-2 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD (spec-edit scope) · **APPLIED**
+
+- **Scope:** apply the architect's `QUESTIONS.md` Q11 ruling — which accepted SPEC-FIX-1's
+  refusal in full — to `CONTEXT.md`, and clear Q13's housekeeping. `CONTEXT.md` went to
+  **v1.1**; **no number moved and the attributor was not re-run**. Written:
+  `docs/evidence/spec-fix-2/` (`applied.md`, a re-runnable verifier and its committed
+  output), `QUESTIONS.md` Q11 ruling / Q13 closed / **Q14 raised**, `STATUS.md`,
+  `PROGRESS.md`.
+- **Trajectory:** `docs/trajectories/build/SPEC-FIX-2.jsonl`.
+
+- **NO SUBAGENTS WERE RUN IN THIS CHUNK — and that is a finding, not an omission.**
+  `prompts/SPEC-FIX-2.md` forbade a panel in terms, citing SPEC-FIX-1's own disclosure
+  immediately above: that its ten-agent panel consumed **55%** of that chunk's spend, voted
+  **4–1 for the answer the session correctly rejected**, and that *"a cheaper panel would
+  have bought it too."* The instruction was followed. **This session's total is 10.58 M
+  input tokens against SPEC-FIX-1's 42.41 M combined — a 4.0× reduction on a chunk of
+  comparable stakes.** Recorded here because hard rule 13 requires disclosing what was
+  used, and the honest disclosure this time is *nothing beyond the coding agent itself*.
+
+- **Measured usage** (from the session transcript's own `usage` records — measured, not
+  estimated from character counts). **Snapshot taken before the closing commits**, so the
+  true totals are marginally higher; the same structural caveat every prior chunk recorded.
+  Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id a9ecc0ec-dabc-403e-8ae1-3dd27de278fc`;
+  committed output: `docs/evidence/spec-fix-2/spec-fix-2-session-cost.txt`.
+
+  | | tokens |
+  |---|---|
+  | output | 126,862 |
+  | input, uncached | 198 |
+  | input, cache write | 250,800 |
+  | input, cache read | 10,327,144 |
+  | **total input** | **10,578,142** |
+  | assistant turns | 99 |
+
+- **Imputed cost** — the same two bases as every prior chunk, and for the same reason: the
+  cache multipliers are assumed and were not re-verified this session, so the
+  assumption-free upper bound is printed beside them, never instead.
+
+  | Basis | USD |
+  |---|---|
+  | Upper bound — all input at full list, no cache discount | **56.062260** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **9.903612** |
+
+- **Against the economy instruction — the cheapest chunk in the project, and still a miss.**
+  `prompts/SPEC-FIX-2.md` set a target of **under 5 M input tokens**. This session used
+  **10.58 M — 2.1× over**. It is nonetheless the lowest figure any chunk has recorded
+  (CH-00 21.72 M · CH-01 41.09 M · CH-02 41.58 M · SPEC-FIX-1 19.15 M coding + 23.25 M
+  panel), and
+  the saving came entirely from not convening a panel. **10.33 M of the 10.58 M is cache
+  read** — the `CLAUDE.md` read-order duty (constitution, a 20 KB verdict, five long
+  `QUESTIONS.md` entries, `CONTEXT.md`, `STATUS.md`, `PROGRESS.md`) re-presented as cached
+  context across 99 turns. That is structural for any session under this constitution, and
+  a sub-5 M target may not be reachable while the read order stands; three self-inflicted
+  retries (two here-documents that mangled shell escaping, and a verifier check that was
+  itself wrong on its first run) account for the rest, and they were mine.
+
+- **Two measurement caveats, both pre-existing, both still unfixed and both stated rather
+  than smoothed:**
+  1. `docs/evidence/ch00_session_cost.py` hardcodes the header `CH-00 BUILD SESSION COST`,
+     so the committed output carries that header even though it was run against this
+     session. **The `transcript` line is the discriminator.** The script is outside this
+     chunk's scope fence and was **not** edited; the committed file states this at the top.
+  2. That script writes **CRLF** into a repository whose `.gitattributes` is `* -text`. The
+     output was normalised to LF before staging, as CH-02 and SPEC-FIX-1 also had to do.
+     **This chunk's own verifier fixes the defect for itself** in one line
+     (`sys.stdout.reconfigure(newline="\n")`), which is the fix the earlier chunks
+     described but could not apply inside their fences.
+
+- **No model was invoked by the code.** SPEC-FIX-2 ran no arm, wrote no `src/runlog.py`
+  row, and charged nothing against the USD 18 API ceiling in `QUESTIONS.md` Q1. The only
+  model in this chunk is the coding agent itself.
+
 ### SPEC-FIX-1 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD (spec-edit scope) · **REFUSED**
 
 - **Scope:** judge whether `prompts/SPEC-FIX-1.md`'s correction to `CONTEXT.md` §8's
