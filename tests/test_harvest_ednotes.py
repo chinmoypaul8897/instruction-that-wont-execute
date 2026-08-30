@@ -155,6 +155,8 @@ def test_golden_g1_defect_note_section_level():
     assert r["part"] == "2"
     assert r["section"] == "2.22"
     assert r["section_raw"] == f"{S} 2.22"
+    assert r["container_n"] == f"{S} 2.22"   # the container IS the section here
+    assert r["names_section"] is True        # and the note names it in prose too
     assert r["node"] == "7:1.1.1.1.5.3.29.9"
     assert r["container_type"] == "SECTION"
     assert r["section_level"] is True
@@ -178,7 +180,14 @@ def test_golden_g2_defect_note_in_appendix_is_not_section_level():
     assert r["title"] == "7"
     assert r["part"] == "1900"
     assert r["section"] is None
+    # goldens.md G2 pre-registered `section_raw` as the EMPTY STRING, reading it as
+    # "the container's N attribute". The implementation reads `section_raw` as "the
+    # enclosing SECTION's N", of which there is none here, so it returns None. Both
+    # values are kept and both are asserted; see the ERRATUM appended to goldens.md.
+    # The golden was NOT edited to match the code (hard rule 5).
     assert r["section_raw"] is None          # no enclosing SECTION container at all
+    assert r["container_n"] == ""            # the appendix's own N, as G2 recorded it
+    assert r["names_section"] is False       # and it names no section in its prose
     assert r["node"] == "7:12.1.2.7.10.2.1.8.15"
     assert r["container_type"] == "APPENDIX"
     assert r["section_level"] is False
@@ -289,6 +298,88 @@ def test_is_defect_matches_the_spec_literal_exactly():
     # Case matters, and the harvest reports the case-insensitive delta rather than
     # silently widening the filter (hard rule 5: never loosen to get a bigger number).
     assert is_defect("Could Not Be Incorporated") is False
+
+
+def test_names_section_is_the_second_reading_and_never_replaces_the_first():
+    """`CONTEXT.md` §8 reports 38 section-level on nine titles; the container reading
+    gives 36. The two notes in the gap sit in an APPENDIX or at PART level while naming
+    their section in prose. Both readings ship; the pool gate uses the container one,
+    because that is the definition `prompts/CH-01.md` step 5 gives - "section-level
+    (not appendix/part)". Reporting both and gating on the smaller is the opposite of
+    tuning toward the reference.
+    """
+    g1 = one(G1_DOC)                       # inside a SECTION *and* names § 2.22
+    assert g1["section_level"] is True and g1["names_section"] is True
+
+    g2 = one(G2_DOC)                       # in an APPENDIX, names no section
+    assert g2["section_level"] is False and g2["names_section"] is False
+
+    # The reconciling shape: part-level container, section named in the prose. This is
+    # the real title-49 part-383 note, one of the two that make 36 into 38.
+    raw = ('<?xml version="1.0" encoding="UTF-8" ?>\n<DLPSTEXTCLASS>'
+           '<DIV1 N="1" NODE="49:1" TYPE="TITLE">'
+           '<DIV5 N="383" NODE="49:1.1" TYPE="PART">'
+           f"<EDNOTE><PSPACE>At 90 FR 46525, Sept. 29, 2025, {S} 383.212 was amended; "
+           "however, the amendment could not be incorporated.</PSPACE></EDNOTE>"
+           "</DIV5></DIV1></DLPSTEXTCLASS>").encode("utf-8")
+    r = one(raw)
+    assert r["container_type"] == "PART"
+    assert r["section_level"] is False     # reading A - what the pool gate counts
+    assert r["names_section"] is True      # reading B - what the reference counted
+
+    t = tally([g1, g2, r])
+    assert t["defect_section_level"] == 1              # reading A
+    assert t["defect_section_or_named"] == 2           # reading B
+    assert t["defect_named_not_contained"] == 1
+    assert t["usable_section_and_fr"] == 1             # the gate uses reading A
+
+
+def test_div1_N_is_the_volume_index_and_is_not_the_title_number():
+    """`<DIV1 N="1" NODE="11:1" TYPE="TITLE">` is VOLUME 1 of TITLE 11.
+
+    Reading `N` here labels every title in the corpus "1", and the three title sources
+    then disagree on all 2,428 records - which reads as a spectacular data finding and
+    is in fact a one-word bug. It was one, briefly. Pinned so it cannot come back.
+    """
+    raw = ('<?xml version="1.0" encoding="UTF-8" ?>\n<DLPSTEXTCLASS>'
+           '<DIV1 N="1" NODE="11:1" TYPE="TITLE">'
+           '<DIV5 N="104" NODE="11:1.0.1.1.12" TYPE="PART">'
+           "<EDNOTE><PSPACE>could not be incorporated at 90 FR 9</PSPACE></EDNOTE>"
+           "</DIV5></DIV1></DLPSTEXTCLASS>").encode("utf-8")
+    r = one(raw, "ECFR-title11.xml", "11")
+    assert r["title"] == "11"
+    assert r["title_sources"] == {"node": "11", "div1_node": "11", "filename": "11"}
+
+
+def test_record_field_set_is_pinned():
+    """A field added in one branch and forgotten in another becomes a silent `.get()`
+    default three chunks downstream. Pinned, and raised on drift."""
+    from harvest_ednotes import RECORD_FIELDS
+    assert tuple(sorted(one(G1_DOC))) == RECORD_FIELDS
+
+
+class _ExplodingRecord(dict):
+    """Reports `is_defect` True on the first read and False on every later one, so the
+    defect and non-defect partitions cannot both be right."""
+
+    def __init__(self, base):
+        super().__init__(base)
+        self._reads = 0
+
+    def __getitem__(self, key):
+        if key == "is_defect":
+            self._reads += 1
+            return self._reads == 1
+        return super().__getitem__(key)
+
+
+def test_tally_raises_rather_than_asserts_so_minus_O_cannot_strip_it():
+    """`python -O` removes `assert` statements. A load-bearing count that stops
+    checking itself under an optimisation flag is exactly the silent green this
+    project exists to expose, so the ladder check is a raise."""
+    from harvest_ednotes import HarvestError
+    with pytest.raises(HarvestError, match="ladder does not sum"):
+        tally([_ExplodingRecord(one(G1_DOC))])
 
 
 def test_note_texts_handles_an_ednote_with_no_hed():

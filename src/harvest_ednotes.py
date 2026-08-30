@@ -43,9 +43,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
-import io
 import json
-import os
 import re
 import sys
 import urllib.request
@@ -76,6 +74,14 @@ SECTION_TYPE = "SECTION"
 #: the note is about. Golden G4 is the two-citation case that makes the rule load-bearing.
 FR_CITE_RE = re.compile(r"\b(\d+)\s+FR\s+(\d+)\b")
 
+#: A section citation inside the note's own prose, e.g. `s 383.212`. NOT used by the
+#: pool gate - the gate uses the container reading the prompt asks for, "section-level
+#: (not appendix/part)". This is the SECOND reading, reported as a diagnostic because
+#: it is what reconciles our 36 against `CONTEXT.md` section 8's 38 on the nine
+#: reference titles. Reporting both is the point; picking the larger one would be
+#: exactly the tuning hard rule 5 forbids.
+SECTION_NAME_RE = re.compile(r"§+\s*\d+[\w.]*\.\d")
+
 _DIV_TAG_RE = re.compile(r"^DIV\d*$")
 _WS_RE = re.compile(r"\s+")
 _SECTION_PREFIX_RE = re.compile(r"^[§\s]+")   # leading section sign(s) and space
@@ -93,10 +99,13 @@ USER_AGENT = "micro1-frontier-challenge CH-01 EDNOTE harvest"
 DEFAULT_RAW_DIR = Path("data/raw/ecfr")
 DEFAULT_OUT_DIR = Path("data/ednotes")
 
+#: Every key a record carries. Asserted on construction rather than left as prose: a
+#: field added in one branch and forgotten in another is how a downstream KeyError
+#: becomes a silent `.get()` default three chunks later.
 RECORD_FIELDS = (
-    "title", "part", "section", "section_raw", "node", "container_type",
-    "section_level", "hed", "text", "is_defect", "fr_citation", "fr_citations",
-    "source_file", "ordinal", "normalisation",
+    "container_n", "container_type", "fr_citation", "fr_citations", "hed", "is_defect",
+    "names_section", "node", "normalisation", "ordinal", "part", "section",
+    "section_level", "section_raw", "source_file", "text", "title", "title_sources",
 )
 
 
@@ -207,7 +216,11 @@ def iter_ednotes(source, source_name: str = "", title_hint: str | None = None):
                     }
                     stack.append(frame)
                     if div_type == "TITLE" and doc_title is None:
-                        doc_title = (el.get("N") or "").strip() or None
+                        # NOT el.get("N"). On a TYPE="TITLE" div, N is the printed
+                        # VOLUME index - `<DIV1 N="1" NODE="11:1" TYPE="TITLE">` is
+                        # volume 1 of title 11 - so reading N here labels every title
+                        # in the corpus "1". The title number is the NODE prefix.
+                        doc_title = _title_from_node(el.get("NODE"))
             elems.append(el)
             continue
 
@@ -241,23 +254,31 @@ def _build_record(ednote, stack, ordinal, source_name, doc_title, title_hint) ->
 
     node = container["node"] if container else None
     from_node = _title_from_node(node)
-    title_sources = {"node": from_node, "div_title_n": doc_title, "filename": title_hint}
+    title_sources = {"node": from_node, "div1_node": doc_title, "filename": title_hint}
     title = from_node or doc_title or title_hint
 
     section_raw = section_frame["n"] if section_frame else None
     hed, text = note_texts(ednote)
     cites = find_fr_citations(text)
 
-    return {
+    record = {
         "title": title,
         "part": (part_frame["n"] if part_frame else None),
         "section": normalise_section(section_raw),
+        # `section_raw` is the enclosing SECTION container's N, and is None when there
+        # is no SECTION ancestor at all. `container_n` is the NEAREST structural
+        # container's N whatever its type - the empty string for golden G2's appendix,
+        # whose identity lives in its <HEAD>. Both are carried because collapsing them
+        # loses the distinction between "no section" and "a section with no number".
         "section_raw": section_raw,
+        "container_n": (container["n"] if container else None),
         "node": node,
         "container_type": container_type,
         # Exactly the spec's question - "does it sit inside a section block" - asked
         # of this format's spelling of that block. QUESTIONS.md Q8.
         "section_level": container_type == SECTION_TYPE,
+        # The second reading, carried but never substituted for the first.
+        "names_section": bool(SECTION_NAME_RE.search(text)),
         "hed": hed,
         "text": text,
         "is_defect": is_defect(text),
@@ -268,6 +289,10 @@ def _build_record(ednote, stack, ordinal, source_name, doc_title, title_hint) ->
         "normalisation": NORMALISATION,
         "title_sources": title_sources,
     }
+    if tuple(sorted(record)) != RECORD_FIELDS:
+        raise HarvestError(
+            f"record field set drifted: {sorted(set(record) ^ set(RECORD_FIELDS))}")
+    return record
 
 
 def tally(records: list[dict]) -> dict:
@@ -286,9 +311,18 @@ def tally(records: list[dict]) -> dict:
     without_fr = [r for r in defect if not r["fr_citation"]]
     usable = [r for r in defect if r["section_level"] and r["fr_citation"]]
 
-    assert len(defect) + len(non_defect) == n, "defect + non-defect != n"
-    assert len(sect) + len(non_sect) == len(defect), "section + non-section != defect"
-    assert len(with_fr) + len(without_fr) == len(defect), "with-FR + without-FR != defect"
+    # Hard rule 14's `success + failure == n`, raised rather than asserted: `python -O`
+    # strips assert statements, and a load-bearing count that stops checking itself
+    # under an optimisation flag is precisely the silent-green failure this project
+    # exists to expose. tests/ and docs/evidence/ch01-pool/ch01_pool.py check it again
+    # by independent routes.
+    for label, lhs, rhs in (
+        ("defect + non-defect", len(defect) + len(non_defect), n),
+        ("section + non-section", len(sect) + len(non_sect), len(defect)),
+        ("with-FR + without-FR", len(with_fr) + len(without_fr), len(defect)),
+    ):
+        if lhs != rhs:
+            raise HarvestError(f"ladder does not sum: {label} = {lhs}, expected {rhs}")
 
     ci_only = sum(
         1 for r in non_defect if DEFECT_LITERAL.lower() in r["text"].lower()
@@ -308,6 +342,13 @@ def tally(records: list[dict]) -> dict:
         "defect_without_fr": len(without_fr),
         "defect_multi_fr": sum(1 for r in defect if len(r["fr_citations"]) > 1),
         "usable_section_and_fr": len(usable),
+        # Reading B, reported not used: a note may name its section in prose while
+        # sitting in an appendix or at part level. `CONTEXT.md` section 8's nine-title
+        # figure of 38 is this reading; the container reading gives 36. Both ship.
+        "defect_section_or_named": sum(
+            1 for r in defect if r["section_level"] or r["names_section"]),
+        "defect_named_not_contained": sum(
+            1 for r in defect if not r["section_level"] and r["names_section"]),
         # Both are expected to be 0. They are printed anyway: a filter that would have
         # matched more under a looser reading is a finding, and an unprinted 0 is
         # indistinguishable from an unasked question.

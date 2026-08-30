@@ -206,3 +206,83 @@ from `https://www.govinfo.gov/bulkdata/json/ECFR/title-N` on 2026-08-30:
 |---|---|---|
 | `ECFR-title7.xml` | 41,335,479 | 28-Aug-2026 21:27 |
 | `ECFR-title11.xml` | 1,673,499 | 09-Jun-2026 20:48 |
+
+---
+
+## ERRATUM — appended 2026-08-30, after the parser was written
+
+Recorded here rather than by editing the tables above. Hard rule 5 forbids moving a
+golden after seeing a result, and that includes moving one quietly to agree with the
+code it was written to test. **Nothing in G1–G4 above has been altered.** This section
+records where the implementation and the pre-registered expectation diverged, what was
+done, and why the load-bearing values are unaffected.
+
+### E1 — `section_raw` on G2: `""` pre-registered, `None` produced
+
+**G2 above pre-registers `section_raw` as the empty string**, reading the field as
+"the container's `N` attribute" — the appendix's `N` is genuinely `N=""`, which is the
+observation the golden was pinned for.
+
+`src/harvest_ednotes.py` implements `section_raw` with the narrower meaning **"the `N`
+of the enclosing `SECTION` container"**. Golden G2 has no `SECTION` ancestor at all, so
+the field is `None`, not `""`.
+
+| | G2 as pre-registered | As implemented |
+|---|---|---|
+| `section` | `null` | `null` — **agree** |
+| `section_level` | `false` | `false` — **agree** |
+| `container_type` | `APPENDIX` | `APPENDIX` — **agree** |
+| `section_raw` | `""` | `None` — **diverge** |
+
+**The two load-bearing values agree.** `section` and `section_level` decide whether a
+note enters the pool, and both readings answer "no section here" identically. The
+divergence is confined to how *absence* is spelled.
+
+**Resolution — carry both, delete neither.** A field `container_n` was added: the `N`
+of the nearest structural container whatever its type. For G2 that is `""`, exactly as
+pre-registered. `section_raw` keeps its narrower meaning and stays `None`. The test
+`test_golden_g2_defect_note_in_appendix_is_not_section_level` now asserts **both**
+values, so neither reading can drift unnoticed:
+
+```python
+assert r["section_raw"] is None      # no enclosing SECTION container at all
+assert r["container_n"] == ""        # the appendix's own N, as G2 recorded it
+```
+
+Collapsing the two into one field would lose the distinction between *no section* and
+*a section with no number*, and the second of those is a shape this corpus can produce.
+
+### E2 — a second reading of "section-level", found while checking the reference
+
+Not a golden divergence; recorded here because it is the same class of thing and the
+goldens are where a reader looks for definitions.
+
+`prompts/CH-01.md` step 5 defines section-level as *"not appendix/part"* — a question
+about the note's **container**, which is what G1 (`true`) and G2 (`false`) pin. On the
+nine reference titles that reading gives **36**, against `CONTEXT.md` §8's **38**.
+
+`CONTEXT.md` §8's own table resolves it: its rows *Section-level 38/44* and *Localise
+below section level 6/44* sum to 44, so its 38 counts notes that **localise to a named
+section** wherever they physically sit. Under that reading the re-derived figure is
+**38 — the reference exactly**. The two notes in the gap are title 40 part 63 (in an
+`APPENDIX`) and title 49 part 383 (at `PART` level), each naming its section in prose.
+
+A field `names_section` now carries the second reading. **The pool gate is computed on
+the container reading — the smaller of the two.** Working shown in
+`exclusion-ladder.md`.
+
+### E3 — `<DIV1 N=...>` is the volume index, not the title number
+
+Found by a check that was expected to print `0` and printed `2428`. The title of a
+record is stated three independent ways — the container's `NODE` prefix, the enclosing
+`TYPE="TITLE"` div, and the filename — and all three disagreed on **every** record.
+
+The cause was one attribute. `<DIV1 N="1" NODE="11:1" TYPE="TITLE">` is *volume 1 of
+title 11*: the `N` is the printed volume index, and the title number is the `NODE`
+prefix. Reading `N` labelled every title in the corpus `"1"`.
+
+Fixed to read `NODE`; the three sources now agree on all 2,428 records, and
+`test_div1_N_is_the_volume_index_and_is_not_the_title_number` pins it. No count in
+this chunk was affected — `title` already preferred the `NODE` prefix — but a
+disagreement counter that reads `2428` and is reported as a data finding rather than
+debugged is precisely the failure hard rule 15 exists to prevent.
