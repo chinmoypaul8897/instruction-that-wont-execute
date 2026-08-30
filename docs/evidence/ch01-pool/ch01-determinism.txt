@@ -1,0 +1,26 @@
+RE-EXTRACT  824 MB of raw govinfo XML -> a throwaway directory
+========================================================================
+
+TOTAL  titles 49  EDNOTE 2428  defect 107 (4.41%)  section-level 86  with FR 106  usable 85
+       defect notes per title: 2.184
+       POOL GATE (>= 60 section-level with FR citation): 85 -> CLEARS
+
+COMPARE  fresh run against the committed freeze, artefact by artefact
+========================================================================
+  IDENTICAL  ednotes.jsonl            a05edae2d24cf545fc93fa7e107818e936ead6a2c3cd4433b995c9d65dce6be7
+  IDENTICAL  defect_notes.jsonl       a0c841291698f7871184f880cf906ab2a0d8bc79715a1aa13d91e8a18b920e7d
+  IDENTICAL  counts.json              6d3cc3fa94a3c1e044fcdb16dd24375c4424d14f4337afe4b33d2e10701945ec
+  IDENTICAL  counts_by_title.csv      98ea21fe2ef445dd2a9be6e82880f16c8e2872914df59bc0f85d152bdac1b665
+  IDENTICAL  manifest.json            487cbc42fa1bfe5807b27759399841ed149ad7ebea488ab1c4e7a7b672ae91f1
+  IDENTICAL  source_index.json        fa47232d19e2221a05803201d7b8b248d5b50a8a9427d937edcea04cc579f620
+
+6/6 artefacts byte-identical across runs
+
+VERIFY  the committed freeze against its own manifest (no network)
+========================================================================
+OK   counts.json              6d3cc3fa94a3c1e044fcdb16dd24375c4424d14f4337afe4b33d2e10701945ec
+OK   counts_by_title.csv      98ea21fe2ef445dd2a9be6e82880f16c8e2872914df59bc0f85d152bdac1b665
+OK   defect_notes.jsonl       a0c841291698f7871184f880cf906ab2a0d8bc79715a1aa13d91e8a18b920e7d
+OK   ednotes.jsonl            a05edae2d24cf545fc93fa7e107818e936ead6a2c3cd4433b995c9d65dce6be7
+
+4/4 files verify

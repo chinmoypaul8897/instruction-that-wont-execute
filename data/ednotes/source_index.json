@@ -1,0 +1,299 @@
+{
+ "source": "https://www.govinfo.gov/bulkdata/json/ECFR",
+ "titles": {
+  "1": {
+   "bytes": 484392,
+   "govinfo_last_modified": "11-Aug-2026 20:55",
+   "name": "ECFR-title1.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-1/ECFR-title1.xml"
+  },
+  "10": {
+   "bytes": 20947190,
+   "govinfo_last_modified": "27-Aug-2026 21:12",
+   "name": "ECFR-title10.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-10/ECFR-title10.xml"
+  },
+  "11": {
+   "bytes": 1673499,
+   "govinfo_last_modified": "09-Jun-2026 20:48",
+   "name": "ECFR-title11.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-11/ECFR-title11.xml"
+  },
+  "12": {
+   "bytes": 39400530,
+   "govinfo_last_modified": "27-Aug-2026 21:12",
+   "name": "ECFR-title12.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-12/ECFR-title12.xml"
+  },
+  "13": {
+   "bytes": 4078783,
+   "govinfo_last_modified": "12-Aug-2026 21:08",
+   "name": "ECFR-title13.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-13/ECFR-title13.xml"
+  },
+  "14": {
+   "bytes": 16130573,
+   "govinfo_last_modified": "25-Aug-2026 21:25",
+   "name": "ECFR-title14.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-14/ECFR-title14.xml"
+  },
+  "15": {
+   "bytes": 13715126,
+   "govinfo_last_modified": "28-Aug-2026 21:23",
+   "name": "ECFR-title15.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-15/ECFR-title15.xml"
+  },
+  "16": {
+   "bytes": 6769437,
+   "govinfo_last_modified": "27-Aug-2026 21:07",
+   "name": "ECFR-title16.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-16/ECFR-title16.xml"
+  },
+  "17": {
+   "bytes": 17356007,
+   "govinfo_last_modified": "18-Aug-2026 21:41",
+   "name": "ECFR-title17.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-17/ECFR-title17.xml"
+  },
+  "18": {
+   "bytes": 7312532,
+   "govinfo_last_modified": "25-Aug-2026 21:21",
+   "name": "ECFR-title18.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-18/ECFR-title18.xml"
+  },
+  "19": {
+   "bytes": 10695340,
+   "govinfo_last_modified": "27-Aug-2026 21:06",
+   "name": "ECFR-title19.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-19/ECFR-title19.xml"
+  },
+  "2": {
+   "bytes": 2880742,
+   "govinfo_last_modified": "19-Aug-2026 20:28",
+   "name": "ECFR-title2.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-2/ECFR-title2.xml"
+  },
+  "20": {
+   "bytes": 14655918,
+   "govinfo_last_modified": "21-Aug-2026 21:35",
+   "name": "ECFR-title20.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-20/ECFR-title20.xml"
+  },
+  "21": {
+   "bytes": 21695581,
+   "govinfo_last_modified": "28-Aug-2026 21:25",
+   "name": "ECFR-title21.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-21/ECFR-title21.xml"
+  },
+  "22": {
+   "bytes": 6791558,
+   "govinfo_last_modified": "11-Aug-2026 20:57",
+   "name": "ECFR-title22.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-22/ECFR-title22.xml"
+  },
+  "23": {
+   "bytes": 3280794,
+   "govinfo_last_modified": "14-Jul-2026 21:14",
+   "name": "ECFR-title23.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-23/ECFR-title23.xml"
+  },
+  "24": {
+   "bytes": 12499434,
+   "govinfo_last_modified": "21-Aug-2026 21:35",
+   "name": "ECFR-title24.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-24/ECFR-title24.xml"
+  },
+  "25": {
+   "bytes": 6127391,
+   "govinfo_last_modified": "10-Dec-2025 00:35",
+   "name": "ECFR-title25.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-25/ECFR-title25.xml"
+  },
+  "26": {
+   "bytes": 88044351,
+   "govinfo_last_modified": "24-Aug-2026 21:15",
+   "name": "ECFR-title26.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-26/ECFR-title26.xml"
+  },
+  "27": {
+   "bytes": 7347407,
+   "govinfo_last_modified": "18-Aug-2026 21:40",
+   "name": "ECFR-title27.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-27/ECFR-title27.xml"
+  },
+  "28": {
+   "bytes": 10864089,
+   "govinfo_last_modified": "25-Aug-2026 21:20",
+   "name": "ECFR-title28.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-28/ECFR-title28.xml"
+  },
+  "29": {
+   "bytes": 28892286,
+   "govinfo_last_modified": "05-Aug-2026 21:29",
+   "name": "ECFR-title29.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-29/ECFR-title29.xml"
+  },
+  "3": {
+   "bytes": 32603,
+   "govinfo_last_modified": "20-May-2024 17:04",
+   "name": "ECFR-title3.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-3/ECFR-title3.xml"
+  },
+  "30": {
+   "bytes": 10357277,
+   "govinfo_last_modified": "26-Aug-2026 20:34",
+   "name": "ECFR-title30.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-30/ECFR-title30.xml"
+  },
+  "31": {
+   "bytes": 10097526,
+   "govinfo_last_modified": "27-Aug-2026 21:08",
+   "name": "ECFR-title31.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-31/ECFR-title31.xml"
+  },
+  "32": {
+   "bytes": 12922239,
+   "govinfo_last_modified": "18-Aug-2026 21:41",
+   "name": "ECFR-title32.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-32/ECFR-title32.xml"
+  },
+  "33": {
+   "bytes": 12131045,
+   "govinfo_last_modified": "28-Aug-2026 21:24",
+   "name": "ECFR-title33.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-33/ECFR-title33.xml"
+  },
+  "34": {
+   "bytes": 9430495,
+   "govinfo_last_modified": "27-Jul-2026 21:26",
+   "name": "ECFR-title34.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-34/ECFR-title34.xml"
+  },
+  "36": {
+   "bytes": 8132693,
+   "govinfo_last_modified": "25-Aug-2026 21:21",
+   "name": "ECFR-title36.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-36/ECFR-title36.xml"
+  },
+  "37": {
+   "bytes": 4688830,
+   "govinfo_last_modified": "27-Aug-2026 21:07",
+   "name": "ECFR-title37.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-37/ECFR-title37.xml"
+  },
+  "38": {
+   "bytes": 9821997,
+   "govinfo_last_modified": "28-Aug-2026 21:24",
+   "name": "ECFR-title38.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-38/ECFR-title38.xml"
+  },
+  "39": {
+   "bytes": 2309194,
+   "govinfo_last_modified": "15-Jun-2026 20:53",
+   "name": "ECFR-title39.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-39/ECFR-title39.xml"
+  },
+  "4": {
+   "bytes": 414435,
+   "govinfo_last_modified": "19-Jul-2024 22:33",
+   "name": "ECFR-title4.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-4/ECFR-title4.xml"
+  },
+  "40": {
+   "bytes": 161190197,
+   "govinfo_last_modified": "28-Aug-2026 22:01",
+   "name": "ECFR-title40.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-40/ECFR-title40.xml"
+  },
+  "41": {
+   "bytes": 4111081,
+   "govinfo_last_modified": "24-Aug-2026 21:22",
+   "name": "ECFR-title41.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-41/ECFR-title41.xml"
+  },
+  "42": {
+   "bytes": 22880997,
+   "govinfo_last_modified": "14-Aug-2026 21:38",
+   "name": "ECFR-title42.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-42/ECFR-title42.xml"
+  },
+  "43": {
+   "bytes": 8970673,
+   "govinfo_last_modified": "13-Aug-2026 21:13",
+   "name": "ECFR-title43.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-43/ECFR-title43.xml"
+  },
+  "44": {
+   "bytes": 2381401,
+   "govinfo_last_modified": "24-Jun-2026 14:49",
+   "name": "ECFR-title44.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-44/ECFR-title44.xml"
+  },
+  "45": {
+   "bytes": 14196209,
+   "govinfo_last_modified": "27-Aug-2026 21:09",
+   "name": "ECFR-title45.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-45/ECFR-title45.xml"
+  },
+  "46": {
+   "bytes": 15991615,
+   "govinfo_last_modified": "31-Jul-2026 21:17",
+   "name": "ECFR-title46.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-46/ECFR-title46.xml"
+  },
+  "47": {
+   "bytes": 20029052,
+   "govinfo_last_modified": "28-Aug-2026 21:27",
+   "name": "ECFR-title47.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-47/ECFR-title47.xml"
+  },
+  "48": {
+   "bytes": 20440201,
+   "govinfo_last_modified": "10-Aug-2026 21:33",
+   "name": "ECFR-title48.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-48/ECFR-title48.xml"
+  },
+  "49": {
+   "bytes": 33788779,
+   "govinfo_last_modified": "20-Aug-2026 21:29",
+   "name": "ECFR-title49.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-49/ECFR-title49.xml"
+  },
+  "5": {
+   "bytes": 11778895,
+   "govinfo_last_modified": "27-Aug-2026 20:58",
+   "name": "ECFR-title5.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-5/ECFR-title5.xml"
+  },
+  "50": {
+   "bytes": 30206782,
+   "govinfo_last_modified": "28-Aug-2026 21:52",
+   "name": "ECFR-title50.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-50/ECFR-title50.xml"
+  },
+  "6": {
+   "bytes": 1997515,
+   "govinfo_last_modified": "13-Aug-2026 21:09",
+   "name": "ECFR-title6.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-6/ECFR-title6.xml"
+  },
+  "7": {
+   "bytes": 41335479,
+   "govinfo_last_modified": "28-Aug-2026 21:27",
+   "name": "ECFR-title7.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-7/ECFR-title7.xml"
+  },
+  "8": {
+   "bytes": 5438166,
+   "govinfo_last_modified": "24-Aug-2026 21:12",
+   "name": "ECFR-title8.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-8/ECFR-title8.xml"
+  },
+  "9": {
+   "bytes": 7570716,
+   "govinfo_last_modified": "20-Aug-2026 21:15",
+   "name": "ECFR-title9.xml",
+   "url": "https://www.govinfo.gov/bulkdata/ECFR/title-9/ECFR-title9.xml"
+  }
+ }
+}

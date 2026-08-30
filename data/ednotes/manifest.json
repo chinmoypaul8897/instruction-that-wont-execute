@@ -1,0 +1,226 @@
+{
+ "chunk": "CH-01",
+ "defect_literal": "could not be incorporated",
+ "files": {
+  "counts.json": {
+   "bytes": 28242,
+   "sha256": "6d3cc3fa94a3c1e044fcdb16dd24375c4424d14f4337afe4b33d2e10701945ec"
+  },
+  "counts_by_title.csv": {
+   "bytes": 1818,
+   "sha256": "98ea21fe2ef445dd2a9be6e82880f16c8e2872914df59bc0f85d152bdac1b665"
+  },
+  "defect_notes.jsonl": {
+   "bytes": 76973,
+   "sha256": "a0c841291698f7871184f880cf906ab2a0d8bc79715a1aa13d91e8a18b920e7d"
+  },
+  "ednotes.jsonl": {
+   "bytes": 1545091,
+   "sha256": "a05edae2d24cf545fc93fa7e107818e936ead6a2c3cd4433b995c9d65dce6be7"
+  }
+ },
+ "normalisation": "whitespace-collapsed",
+ "raw_inputs": {
+  "ECFR-title1.xml": {
+   "bytes": 484392,
+   "sha256": "82b20b348c0b4b19dc270bed494eb10fca01c5408b5f282ec91087aa34609306"
+  },
+  "ECFR-title10.xml": {
+   "bytes": 20947190,
+   "sha256": "33bf0d77fb775a9d0e009fa23db9f06b31d444d44f25111cffccfbb4ffd84c74"
+  },
+  "ECFR-title11.xml": {
+   "bytes": 1673499,
+   "sha256": "235e17571d3a2a4d992e75e8dc452ae92c33e3721ca99a2f532db33addedba85"
+  },
+  "ECFR-title12.xml": {
+   "bytes": 39400530,
+   "sha256": "dbf1d8cab2df349a9d8d158e98dfc4d4f92481053b63ec1aa56d5447bf5ee121"
+  },
+  "ECFR-title13.xml": {
+   "bytes": 4078783,
+   "sha256": "8e02c947340da9722b3fa517325aca38a6fcf931ce5b293fbe268e7fff3287f4"
+  },
+  "ECFR-title14.xml": {
+   "bytes": 16130573,
+   "sha256": "e23fe76d270e0fb5268586f150389a0dcf4156dc0ed8e0d91d70a548bcca755d"
+  },
+  "ECFR-title15.xml": {
+   "bytes": 13715126,
+   "sha256": "736198eddd46e78d250ee3273719f05fcca8386ed987becc14816c7541a172e7"
+  },
+  "ECFR-title16.xml": {
+   "bytes": 6769437,
+   "sha256": "38cfbf7a036160447953872533fe9f88cb66de9e3d4b628dc2444fb76b8a100d"
+  },
+  "ECFR-title17.xml": {
+   "bytes": 17356007,
+   "sha256": "1c51983f94cccc20bb72717cfd431ea3150ba5f4beba874918224d3b9400bcd7"
+  },
+  "ECFR-title18.xml": {
+   "bytes": 7312532,
+   "sha256": "210da3c66dc097ab48ba527552a0628486dcd7c7c7bb94110e47424265a20e66"
+  },
+  "ECFR-title19.xml": {
+   "bytes": 10695340,
+   "sha256": "4fa365bacff498126903f6c6bff940b720d39efb292266c240624dd21b94c279"
+  },
+  "ECFR-title2.xml": {
+   "bytes": 2880742,
+   "sha256": "118da26a4b4b55a0c8f85a611aa976d62e5dc155dc27cd679043e8b140df174d"
+  },
+  "ECFR-title20.xml": {
+   "bytes": 14655918,
+   "sha256": "08d870e93d304b08476975b9409afea616388e63304b3263ceae7c58c23a12f6"
+  },
+  "ECFR-title21.xml": {
+   "bytes": 21695581,
+   "sha256": "f3da0b457381bb98042e4823e82ce42e09893b0eddc0ca8a716e0d5690ee490e"
+  },
+  "ECFR-title22.xml": {
+   "bytes": 6791558,
+   "sha256": "9016f83d213e5b9c7084960194931a1d6d053e4e1dbf8a94682215fecfc55f72"
+  },
+  "ECFR-title23.xml": {
+   "bytes": 3280794,
+   "sha256": "ba34de6caa564f2d2c5c2459f974b94b1a6420c393911dadc17f642c4aa5e2bd"
+  },
+  "ECFR-title24.xml": {
+   "bytes": 12499434,
+   "sha256": "15f5b9fc031b2bcfe322b5cac9ffe5472fe99354a25a7d4a32f9c2cde2c98ddf"
+  },
+  "ECFR-title25.xml": {
+   "bytes": 6127391,
+   "sha256": "58b4e040bee4f7f56a604cc1b705e5242ebdf15b327a048e28ff6ac41878b25f"
+  },
+  "ECFR-title26.xml": {
+   "bytes": 88044351,
+   "sha256": "d548a489e5b63095ec2bc088a6114ffddbdc71e5d6239c840571c69990ca124f"
+  },
+  "ECFR-title27.xml": {
+   "bytes": 7347407,
+   "sha256": "a9b9fa38c2b8e5e765a4a5c5b38f387d5b3f6a7b8581482e94e71b6dbb932a5e"
+  },
+  "ECFR-title28.xml": {
+   "bytes": 10864089,
+   "sha256": "83b6f48d0c106da65608baa23a40a11e816eed1faf2a553e89f73e0d437117c5"
+  },
+  "ECFR-title29.xml": {
+   "bytes": 28892286,
+   "sha256": "5e2acbfe49ce8e50f63cc775af9f2b8903e16fe0ed9315c1fbade360095bd568"
+  },
+  "ECFR-title3.xml": {
+   "bytes": 32603,
+   "sha256": "7bec4fd7320a81094dee378118c64be1eb67857c25f15efc7d9d14f729350a00"
+  },
+  "ECFR-title30.xml": {
+   "bytes": 10357277,
+   "sha256": "74239704a71e8fcc99b6840da30d9b9bee3cb227be218c5ebfb4e35a5b99750f"
+  },
+  "ECFR-title31.xml": {
+   "bytes": 10097526,
+   "sha256": "042369966f03dcc7d6ce25405b227008215e5104a5c059401708634137df7dc5"
+  },
+  "ECFR-title32.xml": {
+   "bytes": 12922239,
+   "sha256": "981e75d8686b9b4ea73e7fff568a3cac7a56bfbc7752b9314b4b9d71caf5a877"
+  },
+  "ECFR-title33.xml": {
+   "bytes": 12131045,
+   "sha256": "910c57422a98e8ff15b23450b94b62bee8fadf85405c7c460bbc23a4d5ee835d"
+  },
+  "ECFR-title34.xml": {
+   "bytes": 9430495,
+   "sha256": "ece3c9aa125fa283be52401cb85d045bc02a9d904445cd8506e11d2fc075801e"
+  },
+  "ECFR-title36.xml": {
+   "bytes": 8132693,
+   "sha256": "331d8ac80d1be8cebba3a7f7063ebd610f321554ae0baf802596053b347f8e7a"
+  },
+  "ECFR-title37.xml": {
+   "bytes": 4688830,
+   "sha256": "25794b9c881dfff70c0266577c25cc255db51b3fb90b9621f42fc572854654c6"
+  },
+  "ECFR-title38.xml": {
+   "bytes": 9821997,
+   "sha256": "0aba070ea0adb504b18374f0beb3cba5af449a01822c77d8706c63e814d630ab"
+  },
+  "ECFR-title39.xml": {
+   "bytes": 2309194,
+   "sha256": "23aac6e1706267330028c9e1829d438fc153ee1c1bfd69806cf4bc8eef23bcad"
+  },
+  "ECFR-title4.xml": {
+   "bytes": 414435,
+   "sha256": "ad89429c97812f07711bb766fdb880b423db8db4a93826f2885d3146f1267804"
+  },
+  "ECFR-title40.xml": {
+   "bytes": 161190197,
+   "sha256": "b4e5c36002406a13c12ae1867f936abbf392de522e4e3f30cf105e054580aaae"
+  },
+  "ECFR-title41.xml": {
+   "bytes": 4111081,
+   "sha256": "3b2a7fd232d33c9a8f6d6431865aec11e6f0c0d15ce52a3d64d47aece9ff54f6"
+  },
+  "ECFR-title42.xml": {
+   "bytes": 22880997,
+   "sha256": "48499bc7e67b21aaf31ea41d313f72c93949e458eab4f820870316a8663407fb"
+  },
+  "ECFR-title43.xml": {
+   "bytes": 8970673,
+   "sha256": "dad4b6f641a015585116efc68ef646ac1bdb5e1ac3f2d784ad8ebdd9f735ec73"
+  },
+  "ECFR-title44.xml": {
+   "bytes": 2381401,
+   "sha256": "aa17793e2507ef7d129b3ba6b5e2739a2d915c062ead1eeb8697433f594adf83"
+  },
+  "ECFR-title45.xml": {
+   "bytes": 14196209,
+   "sha256": "9b22d36903900ab47ba209d6764cf26cbeac930b6225420f155b954a9fbe1de9"
+  },
+  "ECFR-title46.xml": {
+   "bytes": 15991615,
+   "sha256": "1dbae7073761c6933fdaaa6b563777d0030a6df9efe27589c5757973fe88cf8c"
+  },
+  "ECFR-title47.xml": {
+   "bytes": 20029052,
+   "sha256": "d8ecd6333a29f35d9f97544286ad796255a363cd7d30860326a4796e5b0aa0fc"
+  },
+  "ECFR-title48.xml": {
+   "bytes": 20440201,
+   "sha256": "cec41d312f0e6d008712d53f36f84d40ad0f423d1511219179984aa615651f70"
+  },
+  "ECFR-title49.xml": {
+   "bytes": 33788779,
+   "sha256": "d48282c3ad9d2f3118592abdc445902b8fdd86b7e70e5db991b8ba44850bfead"
+  },
+  "ECFR-title5.xml": {
+   "bytes": 11778895,
+   "sha256": "647571d41511c02d76bd140ca0dab9e5679f179974b1ccb7d7e24326e4a0dfc3"
+  },
+  "ECFR-title50.xml": {
+   "bytes": 30206782,
+   "sha256": "6ab101368cd204137c4f68a276260e2a78682a6999b9340b5825f745369d8467"
+  },
+  "ECFR-title6.xml": {
+   "bytes": 1997515,
+   "sha256": "59b2659a2c235e7ffe636e0b71904f6d29942c51ed9238902749a253684d0e0a"
+  },
+  "ECFR-title7.xml": {
+   "bytes": 41335479,
+   "sha256": "c4f148091813acd6343b10493bf696efd07a3d41fe9c5a8133f987689c45d3ef"
+  },
+  "ECFR-title8.xml": {
+   "bytes": 5438166,
+   "sha256": "3432fda7f5ded7d9b8512e091e5dac96bcd56de6da5f92a4fa4323ebf040e60b"
+  },
+  "ECFR-title9.xml": {
+   "bytes": 7570716,
+   "sha256": "26d69302a5be11586e49b186bdfe6694b9d78e2ed422e5d4073b6740c20c2375"
+  }
+ },
+ "source": "https://www.govinfo.gov/bulkdata/ECFR",
+ "titles": 49,
+ "unhashed_provenance": [
+  "source_index.json"
+ ]
+}

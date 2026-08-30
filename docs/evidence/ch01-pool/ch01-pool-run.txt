@@ -1,0 +1,40 @@
+CH-01 EXCLUSION LADDER
+========================================================================
+rung 0  CFR titles on govinfo ECFR bulk                    49
+rung 1  <EDNOTE> elements extracted                     2,428
+rung 2  minus not-a-defect-note      (- 2,321)        107   4.4% of EDNOTEs
+rung 3  minus not section-level      (-    21)         86   80.4% of defect notes
+rung 4  minus no FR citation         (-     1)         85   98.8% of section-level
+========================================================================
+defect notes per title              2.184
+POOL GATE  pre-registered >= 60       measured 85   CLEARS
+
+NINE-TITLE REFERENCE (CONTEXT.md s8, re-derived on today's govinfo bytes)
+  total EDNOTEs                  reference   903   measured   903   delta +0
+  defect notes                   reference    44   measured    44   delta +0
+  carrying an FR citation        reference    44   measured    44   delta +0
+  section-level (A: container)   reference    38   measured    36   delta -2
+  section-level (B: names one)   reference    38   measured    38   delta +0   <- B reconciles exactly
+  the gap: title 40 part 63 in a APPENDIX; title 49 part 383 in a PART
+  gate uses reading A, the smaller: 85 usable, not 87
+
+PROJECTION  <- the largest deviation in this chunk
+  CONTEXT.md s8 expected  150-250 defect notes, 130-210 section-level
+  measured                107 defect notes, 86 section-level   <- BELOW BOTH
+  cause: the 9 reference titles are the LARGEST - 408,351,996 of 824,289,052 B,
+         50% of the corpus by bytes but only 18% by title count. Extrapolating
+         per title gave 244, over by 2.28x.
+  eCFR search API         92   govinfo/eCFR ratio 1.16x
+  CONTEXT.md s8 blames a ~2.3x eCFR undercount. It is not the API: the 2.28x is
+  the extrapolation's own error, and 92 was closer to the truth than 150-250.
+
+LOOSER READINGS DECLINED (both expected 0; printed either way)
+  case-insensitive match would add   0
+  literal in <HED> only would add    0
+
+defect notes citing >1 FR document   5
+defect notes with NO FR citation     1   (title 47 s54.503: the published note omits the page number)
+non-section-level defect containers  {'APPENDIX': 16, 'PART': 3, 'SECTION': 86, 'SUBPART': 2}
+title-source disagreements           0
+
+wrote docs\evidence\ch01-pool\exclusion-ladder.md

@@ -1,0 +1,1220 @@
+{
+ "by_title": {
+  "1": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {},
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 0,
+   "literal_in_hed_only": 0,
+   "non_defect": 0,
+   "raw_bytes": 484392,
+   "usable_section_and_fr": 0
+  },
+  "10": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 28,
+    "SECTION": 42
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "APPENDIX": 1,
+    "SECTION": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 2.82,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 71,
+   "literal_in_hed_only": 0,
+   "non_defect": 69,
+   "raw_bytes": 20947190,
+   "usable_section_and_fr": 1
+  },
+  "11": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "SECTION": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 2,
+   "literal_in_hed_only": 0,
+   "non_defect": 2,
+   "raw_bytes": 1673499,
+   "usable_section_and_fr": 0
+  },
+  "12": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 6,
+    "PART": 26,
+    "SECTION": 22,
+    "SUBPART": 2
+   },
+   "defect": 7,
+   "defect_container_types": {
+    "APPENDIX": 1,
+    "SECTION": 6
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 12.5,
+   "defect_section_level": 6,
+   "defect_section_or_named": 6,
+   "defect_with_fr": 7,
+   "defect_without_fr": 0,
+   "ednotes": 56,
+   "literal_in_hed_only": 0,
+   "non_defect": 49,
+   "raw_bytes": 39400530,
+   "usable_section_and_fr": 6
+  },
+  "13": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 7,
+    "SECTION": 4
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 18.18,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 11,
+   "literal_in_hed_only": 0,
+   "non_defect": 9,
+   "raw_bytes": 4078783,
+   "usable_section_and_fr": 2
+  },
+  "14": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 17,
+    "PART": 17,
+    "SECTION": 25,
+    "SUBPART": 6
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "APPENDIX": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 2,
+   "defect_pct_of_ednotes": 3.08,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 65,
+   "literal_in_hed_only": 0,
+   "non_defect": 63,
+   "raw_bytes": 16130573,
+   "usable_section_and_fr": 0
+  },
+  "15": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 7,
+    "PART": 9,
+    "SECTION": 24,
+    "SUBPART": 1
+   },
+   "defect": 4,
+   "defect_container_types": {
+    "APPENDIX": 2,
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 2,
+   "defect_pct_of_ednotes": 9.76,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 4,
+   "defect_without_fr": 0,
+   "ednotes": 41,
+   "literal_in_hed_only": 0,
+   "non_defect": 37,
+   "raw_bytes": 13715126,
+   "usable_section_and_fr": 2
+  },
+  "16": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "SECTION": 8
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 9,
+   "literal_in_hed_only": 0,
+   "non_defect": 9,
+   "raw_bytes": 6769437,
+   "usable_section_and_fr": 0
+  },
+  "17": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 9,
+    "SECTION": 201,
+    "SUBPART": 1
+   },
+   "defect": 5,
+   "defect_container_types": {
+    "SECTION": 5
+   },
+   "defect_multi_fr": 1,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 2.36,
+   "defect_section_level": 5,
+   "defect_section_or_named": 5,
+   "defect_with_fr": 5,
+   "defect_without_fr": 0,
+   "ednotes": 212,
+   "literal_in_hed_only": 0,
+   "non_defect": 207,
+   "raw_bytes": 17356007,
+   "usable_section_and_fr": 5
+  },
+  "18": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 5,
+    "SECTION": 29
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 34,
+   "literal_in_hed_only": 0,
+   "non_defect": 34,
+   "raw_bytes": 7312532,
+   "usable_section_and_fr": 0
+  },
+  "19": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 2,
+    "PART": 13,
+    "SECTION": 55
+   },
+   "defect": 4,
+   "defect_container_types": {
+    "APPENDIX": 1,
+    "SECTION": 3
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 5.71,
+   "defect_section_level": 3,
+   "defect_section_or_named": 3,
+   "defect_with_fr": 4,
+   "defect_without_fr": 0,
+   "ednotes": 70,
+   "literal_in_hed_only": 0,
+   "non_defect": 66,
+   "raw_bytes": 10695340,
+   "usable_section_and_fr": 3
+  },
+  "2": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "SUBPART": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 1,
+   "literal_in_hed_only": 0,
+   "non_defect": 1,
+   "raw_bytes": 2880742,
+   "usable_section_and_fr": 0
+  },
+  "20": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 6,
+    "SECTION": 1,
+    "SUBPART": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 10,
+   "literal_in_hed_only": 0,
+   "non_defect": 10,
+   "raw_bytes": 14655918,
+   "usable_section_and_fr": 0
+  },
+  "21": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 64,
+    "SECTION": 61,
+    "SUBPART": 1
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 1.59,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 126,
+   "literal_in_hed_only": 0,
+   "non_defect": 124,
+   "raw_bytes": 21695581,
+   "usable_section_and_fr": 2
+  },
+  "22": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 23,
+    "SECTION": 4,
+    "SUBPART": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 28,
+   "literal_in_hed_only": 0,
+   "non_defect": 28,
+   "raw_bytes": 6791558,
+   "usable_section_and_fr": 0
+  },
+  "23": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 3,
+    "SECTION": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 4,
+   "literal_in_hed_only": 0,
+   "non_defect": 4,
+   "raw_bytes": 3280794,
+   "usable_section_and_fr": 0
+  },
+  "24": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 11,
+    "SECTION": 4
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 15,
+   "literal_in_hed_only": 0,
+   "non_defect": 15,
+   "raw_bytes": 12499434,
+   "usable_section_and_fr": 0
+  },
+  "25": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 3
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 3,
+   "literal_in_hed_only": 0,
+   "non_defect": 3,
+   "raw_bytes": 6127391,
+   "usable_section_and_fr": 0
+  },
+  "26": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 2,
+    "SECTION": 93,
+    "SUBJGRP": 1
+   },
+   "defect": 10,
+   "defect_container_types": {
+    "SECTION": 10
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 10.42,
+   "defect_section_level": 10,
+   "defect_section_or_named": 10,
+   "defect_with_fr": 10,
+   "defect_without_fr": 0,
+   "ednotes": 96,
+   "literal_in_hed_only": 0,
+   "non_defect": 86,
+   "raw_bytes": 88044351,
+   "usable_section_and_fr": 10
+  },
+  "27": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 27,
+    "SECTION": 36,
+    "SUBPART": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 64,
+   "literal_in_hed_only": 0,
+   "non_defect": 64,
+   "raw_bytes": 7347407,
+   "usable_section_and_fr": 0
+  },
+  "28": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 7,
+    "PART": 2,
+    "SECTION": 12,
+    "SUBPART": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 23,
+   "literal_in_hed_only": 0,
+   "non_defect": 23,
+   "raw_bytes": 10864089,
+   "usable_section_and_fr": 0
+  },
+  "29": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 2,
+    "PART": 10,
+    "SECTION": 8,
+    "SUBPART": 1
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SECTION": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 4.76,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 21,
+   "literal_in_hed_only": 0,
+   "non_defect": 20,
+   "raw_bytes": 28892286,
+   "usable_section_and_fr": 1
+  },
+  "3": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {},
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 0,
+   "literal_in_hed_only": 0,
+   "non_defect": 0,
+   "raw_bytes": 32603,
+   "usable_section_and_fr": 0
+  },
+  "30": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 19,
+    "SECTION": 17
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 5.56,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 36,
+   "literal_in_hed_only": 0,
+   "non_defect": 34,
+   "raw_bytes": 10357277,
+   "usable_section_and_fr": 2
+  },
+  "31": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 6,
+    "SECTION": 5,
+    "SUBCHAP": 1
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SECTION": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 8.33,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 12,
+   "literal_in_hed_only": 0,
+   "non_defect": 11,
+   "raw_bytes": 10097526,
+   "usable_section_and_fr": 1
+  },
+  "32": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 3,
+    "SECTION": 6
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SECTION": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 11.11,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 9,
+   "literal_in_hed_only": 0,
+   "non_defect": 8,
+   "raw_bytes": 12922239,
+   "usable_section_and_fr": 1
+  },
+  "33": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 26,
+    "SECTION": 38
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "PART": 1,
+    "SECTION": 1
+   },
+   "defect_multi_fr": 1,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 3.12,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 64,
+   "literal_in_hed_only": 0,
+   "non_defect": 62,
+   "raw_bytes": 12131045,
+   "usable_section_and_fr": 1
+  },
+  "34": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 2,
+    "SECTION": 20
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 9.09,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 22,
+   "literal_in_hed_only": 0,
+   "non_defect": 20,
+   "raw_bytes": 9430495,
+   "usable_section_and_fr": 2
+  },
+  "36": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 2,
+    "PART": 2,
+    "SECTION": 6
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "APPENDIX": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 2,
+   "defect_pct_of_ednotes": 20.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 10,
+   "literal_in_hed_only": 0,
+   "non_defect": 8,
+   "raw_bytes": 8132693,
+   "usable_section_and_fr": 0
+  },
+  "37": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 8,
+    "SECTION": 9,
+    "SUBCHAP": 6,
+    "SUBJGRP": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 25,
+   "literal_in_hed_only": 0,
+   "non_defect": 25,
+   "raw_bytes": 4688830,
+   "usable_section_and_fr": 0
+  },
+  "38": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 4,
+    "SECTION": 28,
+    "SUBPART": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 33,
+   "literal_in_hed_only": 0,
+   "non_defect": 33,
+   "raw_bytes": 9821997,
+   "usable_section_and_fr": 0
+  },
+  "39": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 1,
+    "SECTION": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 3,
+   "literal_in_hed_only": 0,
+   "non_defect": 3,
+   "raw_bytes": 2309194,
+   "usable_section_and_fr": 0
+  },
+  "4": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 2
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 2,
+   "literal_in_hed_only": 0,
+   "non_defect": 2,
+   "raw_bytes": 414435,
+   "usable_section_and_fr": 0
+  },
+  "40": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 25,
+    "PART": 13,
+    "SECTION": 298,
+    "SUBPART": 6
+   },
+   "defect": 12,
+   "defect_container_types": {
+    "APPENDIX": 5,
+    "SECTION": 7
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 1,
+   "defect_not_section_level": 5,
+   "defect_pct_of_ednotes": 3.51,
+   "defect_section_level": 7,
+   "defect_section_or_named": 8,
+   "defect_with_fr": 12,
+   "defect_without_fr": 0,
+   "ednotes": 342,
+   "literal_in_hed_only": 0,
+   "non_defect": 330,
+   "raw_bytes": 161190197,
+   "usable_section_and_fr": 7
+  },
+  "41": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 1,
+    "SECTION": 1,
+    "SUBPART": 3
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 5,
+   "literal_in_hed_only": 0,
+   "non_defect": 5,
+   "raw_bytes": 4111081,
+   "usable_section_and_fr": 0
+  },
+  "42": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 11,
+    "SECTION": 51,
+    "SUBPART": 4
+   },
+   "defect": 5,
+   "defect_container_types": {
+    "SECTION": 5
+   },
+   "defect_multi_fr": 1,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 7.58,
+   "defect_section_level": 5,
+   "defect_section_or_named": 5,
+   "defect_with_fr": 5,
+   "defect_without_fr": 0,
+   "ednotes": 66,
+   "literal_in_hed_only": 0,
+   "non_defect": 61,
+   "raw_bytes": 22880997,
+   "usable_section_and_fr": 5
+  },
+  "43": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 2,
+    "SECTION": 3,
+    "SUBPART": 1
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SECTION": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 16.67,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 6,
+   "literal_in_hed_only": 0,
+   "non_defect": 5,
+   "raw_bytes": 8970673,
+   "usable_section_and_fr": 1
+  },
+  "44": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 1,
+    "SECTION": 7
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 8,
+   "literal_in_hed_only": 0,
+   "non_defect": 8,
+   "raw_bytes": 2381401,
+   "usable_section_and_fr": 0
+  },
+  "45": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 14,
+    "SECTION": 10,
+    "SUBPART": 1
+   },
+   "defect": 3,
+   "defect_container_types": {
+    "SECTION": 3
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 12.0,
+   "defect_section_level": 3,
+   "defect_section_or_named": 3,
+   "defect_with_fr": 3,
+   "defect_without_fr": 0,
+   "ednotes": 25,
+   "literal_in_hed_only": 0,
+   "non_defect": 22,
+   "raw_bytes": 14196209,
+   "usable_section_and_fr": 3
+  },
+  "46": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 35,
+    "SECTION": 34,
+    "SUBPART": 2
+   },
+   "defect": 4,
+   "defect_container_types": {
+    "APPENDIX": 1,
+    "SECTION": 3
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 5.56,
+   "defect_section_level": 3,
+   "defect_section_or_named": 3,
+   "defect_with_fr": 4,
+   "defect_without_fr": 0,
+   "ednotes": 72,
+   "literal_in_hed_only": 0,
+   "non_defect": 68,
+   "raw_bytes": 15991615,
+   "usable_section_and_fr": 3
+  },
+  "47": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 5,
+    "SECTION": 84,
+    "SUBPART": 1
+   },
+   "defect": 8,
+   "defect_container_types": {
+    "SECTION": 8
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 8.89,
+   "defect_section_level": 8,
+   "defect_section_or_named": 8,
+   "defect_with_fr": 7,
+   "defect_without_fr": 1,
+   "ednotes": 90,
+   "literal_in_hed_only": 0,
+   "non_defect": 82,
+   "raw_bytes": 20029052,
+   "usable_section_and_fr": 7
+  },
+  "48": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 5,
+    "SECTION": 80,
+    "SUBPART": 3
+   },
+   "defect": 5,
+   "defect_container_types": {
+    "SECTION": 4,
+    "SUBPART": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 5.62,
+   "defect_section_level": 4,
+   "defect_section_or_named": 4,
+   "defect_with_fr": 5,
+   "defect_without_fr": 0,
+   "ednotes": 89,
+   "literal_in_hed_only": 0,
+   "non_defect": 84,
+   "raw_bytes": 20440201,
+   "usable_section_and_fr": 4
+  },
+  "49": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 8,
+    "PART": 40,
+    "SECTION": 117,
+    "SUBPART": 1,
+    "TITLE": 1
+   },
+   "defect": 5,
+   "defect_container_types": {
+    "PART": 2,
+    "SECTION": 3
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 1,
+   "defect_not_section_level": 2,
+   "defect_pct_of_ednotes": 2.99,
+   "defect_section_level": 3,
+   "defect_section_or_named": 4,
+   "defect_with_fr": 5,
+   "defect_without_fr": 0,
+   "ednotes": 167,
+   "literal_in_hed_only": 0,
+   "non_defect": 162,
+   "raw_bytes": 33788779,
+   "usable_section_and_fr": 3
+  },
+  "5": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 3,
+    "PART": 3,
+    "SECTION": 11,
+    "SUBPART": 11,
+    "TITLE": 3
+   },
+   "defect": 2,
+   "defect_container_types": {
+    "SECTION": 2
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 6.45,
+   "defect_section_level": 2,
+   "defect_section_or_named": 2,
+   "defect_with_fr": 2,
+   "defect_without_fr": 0,
+   "ednotes": 31,
+   "literal_in_hed_only": 0,
+   "non_defect": 29,
+   "raw_bytes": 11778895,
+   "usable_section_and_fr": 2
+  },
+  "50": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 8,
+    "SECTION": 72,
+    "SUBPART": 5
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SUBPART": 1
+   },
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 1.18,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 85,
+   "literal_in_hed_only": 0,
+   "non_defect": 84,
+   "raw_bytes": 30206782,
+   "usable_section_and_fr": 0
+  },
+  "6": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 1,
+    "PART": 1
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 2,
+   "literal_in_hed_only": 0,
+   "non_defect": 2,
+   "raw_bytes": 1997515,
+   "usable_section_and_fr": 0
+  },
+  "7": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "APPENDIX": 5,
+    "PART": 48,
+    "SECTION": 91,
+    "SUBCHAP": 4,
+    "SUBPART": 8
+   },
+   "defect": 11,
+   "defect_container_types": {
+    "APPENDIX": 1,
+    "SECTION": 10
+   },
+   "defect_multi_fr": 1,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 1,
+   "defect_pct_of_ednotes": 7.05,
+   "defect_section_level": 10,
+   "defect_section_or_named": 10,
+   "defect_with_fr": 11,
+   "defect_without_fr": 0,
+   "ednotes": 156,
+   "literal_in_hed_only": 0,
+   "non_defect": 145,
+   "raw_bytes": 41335479,
+   "usable_section_and_fr": 10
+  },
+  "8": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 25,
+    "SECTION": 23
+   },
+   "defect": 0,
+   "defect_container_types": {},
+   "defect_multi_fr": 0,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 0.0,
+   "defect_section_level": 0,
+   "defect_section_or_named": 0,
+   "defect_with_fr": 0,
+   "defect_without_fr": 0,
+   "ednotes": 48,
+   "literal_in_hed_only": 0,
+   "non_defect": 48,
+   "raw_bytes": 5438166,
+   "usable_section_and_fr": 0
+  },
+  "9": {
+   "case_insensitive_only_extra": 0,
+   "container_types": {
+    "PART": 4,
+    "SECTION": 51,
+    "SUBPART": 1,
+    "TITLE": 2
+   },
+   "defect": 1,
+   "defect_container_types": {
+    "SECTION": 1
+   },
+   "defect_multi_fr": 1,
+   "defect_named_not_contained": 0,
+   "defect_not_section_level": 0,
+   "defect_pct_of_ednotes": 1.72,
+   "defect_section_level": 1,
+   "defect_section_or_named": 1,
+   "defect_with_fr": 1,
+   "defect_without_fr": 0,
+   "ednotes": 58,
+   "literal_in_hed_only": 0,
+   "non_defect": 57,
+   "raw_bytes": 7570716,
+   "usable_section_and_fr": 1
+  }
+ },
+ "total": {
+  "case_insensitive_only_extra": 0,
+  "container_types": {
+   "APPENDIX": 91,
+   "PART": 554,
+   "SECTION": 1696,
+   "SUBCHAP": 11,
+   "SUBJGRP": 3,
+   "SUBPART": 67,
+   "TITLE": 6
+  },
+  "defect": 107,
+  "defect_container_types": {
+   "APPENDIX": 16,
+   "PART": 3,
+   "SECTION": 86,
+   "SUBPART": 2
+  },
+  "defect_multi_fr": 5,
+  "defect_named_not_contained": 2,
+  "defect_not_section_level": 21,
+  "defect_notes_per_title": 2.184,
+  "defect_pct_of_ednotes": 4.41,
+  "defect_section_level": 86,
+  "defect_section_or_named": 88,
+  "defect_with_fr": 106,
+  "defect_without_fr": 1,
+  "ednotes": 2428,
+  "literal_in_hed_only": 0,
+  "non_defect": 2321,
+  "title_source_disagreements": 0,
+  "titles": 49,
+  "usable_section_and_fr": 85
+ }
+}
