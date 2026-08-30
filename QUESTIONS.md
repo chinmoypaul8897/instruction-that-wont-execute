@@ -381,3 +381,144 @@ wrong. The record carries `part_mismatch` so CH-03 can exclude them; the parser 
 silently repair them. Resetting at a part boundary is a one-line change and would be an
 improvement, but it is a change to a pre-registered rule after the measurement, so it is
 the architect's call, not a build session's.
+## Q11 - SPEC-FIX-1's metric correction is REFUSED; what would make it legitimate
+Raised: SPEC-FIX-1, 2026-08-31. Status: REFUSED BY THE JUDGING SESSION, which the prompt
+authorised. **A decision is wanted: re-issue with the four changes below, or overrule.**
+Full reasoning and evidence: `docs/evidence/spec-fix-1/verdict.md`, committed at `72b95e1`
+**before** any other work in the chunk, so the order is provable from git.
+
+`prompts/SPEC-FIX-1.md` section 2a proposed replacing `CONTEXT.md` section 8's failing
+completeness definition with `attribution_completeness = attributed / total`, gated at
+0.90, and asserted of it: *"This is the gate metric. It answers the question the gate
+exists to answer"* - namely *"did carry-forward put each instruction on the RIGHT
+section?"*
+
+**That assertion is false, and it is disproved rather than argued.**
+`docs/evidence/spec-fix-1/spec_fix_1_sabotage.py` builds a control attributor identical to
+the shipped one except for one line - it carries the **first**-named section of a document
+forward instead of the **last** - and scores it on the proposed metric:
+
+| detector | real | sabotaged | difference | elements placed differently |
+|---|---:|---:|---:|---:|
+| `extended` | **0.9865** | **0.9865** | **0.000000** | **8,417 / 8,634 = 97.5%** |
+| `spec_literal` | 0.7613 | 0.7613 | 0.000000 | 6,395 / 6,663 = 96.0% |
+
+The script asserts its replay of section 8 reproduces the frozen record with **0 mismatches
+of 8,752** before drawing the comparison. The result is structural, not accidental: an
+element is attributed iff some section was named at or before it, which holds for both
+rules, so `attributed / total` measures only *where the first citation appears*.
+
+**Stated fairly:** the metric is not vacuous in general. It does catch the silent-DROP mode
+that killed the predecessor pilot at 0.46 - a lead-ins-only extractor scores 0.2503 /
+0.3744 and fails hard. It is blind specifically to the silent-WRONG mode that CH-02
+discovered in this corpus (Q9), which is the mode the correction was written in response to.
+
+**Three further findings, each measured in-repo:**
+
+1. **The pass needs both post-hoc edits.** Section 2a alone 0.7613 FAIL; section 2c alone
+   0.6643 FAIL; both 0.9865 PASS. The prompt's fact table quotes only the `extended` figure
+   and does not say CH-02 gated on `spec_literal`.
+2. **Strictly harder metrics were free and none was taken** - every one computable from
+   booleans already in the frozen record: attributed AND part-consistent = **0.9066**, which
+   still PASSES but at a 0.66-point margin instead of 8.65; attributed AND part-consistent
+   AND no rival-section conflict = **0.8579**, FAIL; the per-document floor section 8
+   *already mandates* = **57/70 = 0.8143**, FAIL.
+3. **Golden G1 passes the proposed gate.** FR Doc 2020-11897 is the document CH-02 chose
+   *because* it demonstrates mis-attribution, and Q9 records 20 of its 28 elements pinned to
+   a section they do not amend. Its proposed-gate score is **26/28 = 0.9286 - PASS**.
+
+**On the counterfactual the prompt itself made decisive.** Would this have been raised at
+0.92? The *diagnosis* would - it already had been, in `goldens.md` section 2 rule P6 at
+`98f1cff`, twenty-five minutes before the attributor existed. The *metric change* would not:
+`prompts/CH-02.md`'s pre-registered `>= 0.90` row reads, in full, *"Proceed. Report the
+figure."*, and CH-02 - holding every fact SPEC-FIX-1 holds - wrote *"The definition was not
+rewritten to raise the number."* Nothing was learned between the specification and the
+correction except the number.
+
+**THE PATH BACK. Four changes; nothing requires re-running the attributor.**
+
+1. **Keep the split.** `parse_completeness` does not belong in an attributor's gate. Only
+   **46 of 2,913** unparsed elements (1.6%) are recoverable parser gaps; the rest is
+   Federal Register drafting. This half of the correction survives the refusal intact and
+   should be re-issued.
+2. **Do not gate on `attributed / total`.** Gate on a correctness-constrained metric. The
+   minimum honest version is **attributed AND part-consistent = 0.9066**, one already-frozen
+   boolean, still passing. Publish the whole ladder beside whichever is chosen, so a reader
+   sees which harder metrics were available and declined at the moment the definition changed.
+3. **Restore the per-document floor** section 8 already requires and CH-02's branch table
+   already restricts on. Publish **57/70 = 0.8143** and say it fails.
+4. **Rule on the part-boundary reset in the same edit as the Q9 regex fix.** Q9's fix is
+   worth **+22.5 points** and was adopted; the part-boundary reset is worth **-8.0 points**,
+   CH-02 called it *"a one-line change and would be an improvement"*, and SPEC-FIX-1 does not
+   mention it. A fix that raises the number and a fix that lowers it must be ruled on
+   together, or the ruling is made with the scoreboard visible.
+
+**Recommended regardless of the ruling:** publish the sabotage control itself. A metric
+returning 0.9865 for an attributor that is 97.5% wrong is the sharpest artefact this project
+has produced for its own thesis that a green number is not evidence of correctness.
+
+**What was NOT done, so the state is unambiguous:** `CONTEXT.md` is untouched - no 2a, no
+2b, no 2c, no v1.1 bump, no section 13 row. `data/` was read-only. The attributor was not
+re-run. `src/` and `tests/` were not opened.
+
+## Q12 - Q9's and Q10's own numbers overstate the attributor's error; and the word-form detector over-detects
+Raised: SPEC-FIX-1, 2026-08-31. Status: MEASURED AND RECORDED, NOT CORRECTED IN PLACE.
+Following `goldens.md`'s own ERRATA convention - a wrong number is corrected in a new
+entry, never edited out of the old one. Evidence: `docs/evidence/spec-fix-1/sabotage.txt`
+section 4, and `classes.txt`.
+
+**(a) Q10 states of the 699 part-mismatched elements that "every one of those is wrong."
+126 of them are not.** Those 126 **name their own section in their own text** - e.g. an
+element citing 1037.605 sitting inside a `<REGTEXT>` tagged part 1036. Their attribution is
+right; the `REGTEXT/@PART` tag is the thing that disagrees. The reliable figure for
+*carry-forward* mismatches is **573**, and the residual **126** are evidence of a separate
+`regtext_part` extraction defect that nobody has logged. Both figures should ship.
+
+**(b) Q9's `detector_disagrees = 2,459` is not 2,459 conflicts.** Decomposed: **488** are
+genuine rival-section conflicts, where both detectors named a section and the two differ;
+the other **1,971** are elements `spec_literal` failed to attribute at all. Quoting 2,459 as
+"attributed differently" overstates disagreement and, worse, charges the `extended` detector
+for repairing the very defect Q9 asks to have fixed.
+
+**(c) NEW - the shipped `extended` detector is case-insensitive, and that over-detects.**
+`goldens.md` rule P3 specifies the word form as `Section 90.209` / `Sections 90.209 and
+90.210`. The shipped detector also fires on **lowercase** `section 1.1`: of 684 elements
+whose only word-form citation is lowercase, **683** are treated as naming a section, and
+**676 of the 1,086** extended-only namers are lowercase. Most are correct, but some are
+**appendix-internal numbering read as CFR sections** - *"Appendix A to part 75 is amended by
+revising the title of section 1.1"* pins `current_section` to `1.1` inside a `REGTEXT` for
+part 75. 44 of the 683 lowercase-form namers carry `part_mismatch`, and the 4 clearest cases
+name an Appendix explicitly.
+
+**Why this matters for Q11's item 4.** If the Q9 correction is re-issued, `CONTEXT.md`
+section 8 must say **whether the word form is case-sensitive**, because the two readings are
+different detectors and the 0.9865 figure is the case-**in**sensitive one. Specifying it
+either way is an architect decision (Class A); this session did not make it, having refused
+the edit that would have required it. The over-detection is bounded and the `part_mismatch`
+diagnostic CH-02 shipped already flags it - which is that diagnostic doing exactly the job
+it was built for.
+
+## Q13 - SPEC-FIX-1's housekeeping is fenced behind a verdict it did not get
+Raised: SPEC-FIX-1, 2026-08-31. Status: BLOCKED, NOTHING DONE, ONE LINE UNBLOCKS IT.
+
+`prompts/SPEC-FIX-1.md` section 2d asks for three items of pure housekeeping - commit the
+uncommitted `CONTEXT.md` working-tree edit from CH-01, commit the untracked
+`prompts/CH-02.md`, and bump `CONTEXT.md` to v1.1. But section 2 opens *"If and only if the
+verdict is LEGITIMATE - apply these four changes"*, and section 2d is the fourth. The
+verdict is GOALPOST-MOVING, so **none of it was done**, and the scope fence's *"anything not
+specified above -> STOP"* forbids a build session widening its own mandate to do it anyway.
+
+**Consequently the tree is left as it was found:**
+
+| item | state |
+|---|---|
+| `CONTEXT.md` | still carries the **uncommitted** CH-01 measured-pool edit |
+| `prompts/CH-02.md` | still **untracked** |
+| `prompts/SPEC-FIX-1.md` | still **untracked** - not named in section 2d at all, and not in the scope fence |
+
+The first two are genuinely independent of the metric dispute, and the third is a
+deliverable-1 gap on the same footing as the second: *the prompts are the instructions that
+shape each agent*, and every other chunk prompt is tracked. **Requested: a one-line
+authorisation to commit all three, independent of how Q11 is ruled.** Recorded rather than
+assumed, because the whole point of this chunk was that a session may not decide the parts
+it was told it does not decide.
