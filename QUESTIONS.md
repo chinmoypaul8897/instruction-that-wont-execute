@@ -248,3 +248,43 @@ Options presented: (a) keep it; (b) set a repo-local `user.email` to the GitHub
 
 **RULING: option (a), keep it.** No action taken; recorded so that the choice is
 visible rather than defaulted into.
+
+---
+
+## Q8 - The spec names a `<SECTION>` element that does not exist in the format CH-01 reads
+Raised: CH-01, 2026-08-30. Status: RESOLVED IN CODE, no operator decision needed.
+Consequence flagged forward to CH-03.
+
+`CONTEXT.md` section 8 and `prompts/CH-01.md` step 2 both ask whether an `<EDNOTE>`
+sits "inside a `<SECTION>` block". **The ECFR bulk XML contains no `<SECTION>`
+element.** It is a `DLPSTEXTCLASS` document whose structural containers are numbered
+`DIV` elements carrying a `TYPE` attribute; the section container is
+`<DIV8 TYPE="SECTION">`. Measured on title 7: 17,205 `DIV8 TYPE="SECTION"`, 548
+`DIV5 TYPE="PART"`, 144 `DIV9 TYPE="APPENDIX"`, and zero `<SECTION>`.
+
+`<SECTION>` is the **CFR annual-edition** spelling - a different govinfo product with
+a different DTD. That is in fact the source `CONTEXT.md`'s own leakage measurement was
+taken on (`CFR-2024-title40-vol5`, 5,524,321 B, "26 of 28 `<EDNOTE>` sit inside a
+`<SECTION>` block"). So both descriptions are correct, each for its own format; the
+spec simply carries one format's element name into the other's chunk.
+
+RESOLVED without an operator call because the semantic test is unambiguous - *"section
+level, not appendix/part"* - and only the element's spelling differs. CH-01 records
+`container_type` as the `TYPE` of the nearest enclosing structural `DIV` and sets
+`section_level = (container_type == "SECTION")`. Recorded as a **Class B** deviation in
+`PROGRESS.md`, and pinned by golden **G2** (`docs/evidence/ch01-pool/goldens.md`), a
+defect note inside a `DIV9 TYPE="APPENDIX"` whose expected `section_level` is `false`.
+
+**Consequence for CH-03, which is the reason this is written down rather than fixed
+silently.** `plan.md`'s CH-03 card and `CONTEXT.md` section 8 specify the leakage-strip
+test against `<EDNOTE>`, `<EFFDNOTP>`, `<CITA>` and `<EAR>`. Those are annual-edition
+names, and CH-03 reads annual editions, so **they are the right names there** - no
+change is needed. But a CH-03 session that reaches for ECFR bulk XML for any reason
+would strip nothing and its per-element counts would print as zeros, which under hard
+rule 14 must read as a real zero. **Any strip counter must therefore assert against a
+known-positive input before its zeros are believed.** The element names are
+format-dependent and neither file says so.
+
+Not escalated as Class A because it changes no result, no threshold and no count. If
+the architect prefers the spec text corrected rather than annotated, that is a
+`CONTEXT.md` edit and `CONTEXT.md` is protected read-only for build sessions.
