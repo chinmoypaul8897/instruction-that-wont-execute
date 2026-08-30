@@ -143,8 +143,9 @@ issues), `QUESTIONS.md` (Q9, Q10), `STATUS.md`, `PROGRESS.md`, `AI-USE.md`.
 
 ### Tests
 `python -m pytest tests/ -q` → **121 passed, 0 failed, 0 skipped** (61 from CH-00/CH-01,
-60 new). Zero skips *because `data/raw/fr` is populated*; on a clean clone the tests
-marked `skipif` stand down. Both states are correct and both are reported.
+60 new). Zero skips *because `data/raw/fr` is populated*; **on a clean clone the 19
+tests gated on the 272 MB of raw issues stand down and the count is 102 passed /
+19 skipped.** Both states are correct and both are reported.
 
 **The Q8 known-positive assertion, applied to this chunk's counter.** A zero AMDPAR count
 that means "wrong tag name" looks exactly like a zero that means "nothing there", so
