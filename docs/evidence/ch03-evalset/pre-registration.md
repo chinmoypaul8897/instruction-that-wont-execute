@@ -154,8 +154,8 @@ model, no CFR text and no instruction text**:
 | | before the fix | after the fix |
 |---|---:|---:|
 | label-blind sort-order attack | **0.8158** | **0.5610** |
-| negatives sorting before their positive | **32 / 38** | **21 / 41** |
-| exact two-sided binomial | **p = 0.000024** | **p = 1.0000** |
+| negatives sorting before their positive | **36 / 50** | **25 / 50** |
+| exact two-sided binomial | **p = 0.0026** | **p = 1.0000** |
 
 0.8158 beat `B0-agent` (0.6447) by 17 pp and cleared `GOOD.md`'s A1 absolute bar of
 0.80. **This is the death `CONTEXT.md` section 8's exact-count rule was written to
@@ -206,3 +206,14 @@ finding nothing is a real answer; refusing to search it and reporting absence is
 fabricated one.
 
 **Effect on n:** 38 pairs -> **41 pairs**, n 76 -> **82**.
+
+> **E-2 CORRECTION, after round 2.** The line above attributes all three recovered
+> pairs to F2. **Only one of them is F2's.** Measured by fixing F2 while reverting F1
+> to the pre-fix rule: **39 pairs / 78 items** - exactly what the round-1 reviewer
+> predicted for F2 alone. The other **two** pairs were recovered because F1's new rule
+> picks a *different negative*, and that different negative happens to resolve in its
+> as-of edition where the sorted-first one did not.
+>
+> The distinction matters: a reader crediting all +3 to the `<PARTS>` fix would
+> over-rate it and under-rate how much the selection rule touches. Round 2 raised this
+> as a MAJOR finding and it was re-measured here before being accepted.

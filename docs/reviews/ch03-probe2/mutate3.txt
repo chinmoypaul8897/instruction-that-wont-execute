@@ -1,0 +1,27 @@
+========================================================================================
+MUTATION TEST, DONE CORRECTLY - a mutation is CAUGHT only if the RESULT CHANGES
+========================================================================================
+
+  Round 1's harness read `returncode != 0` as 'caught' and never established a
+  baseline, so a no-op mutation on an already-red suite counted as caught. That
+  is how 'M7 caught' entered four committed documents while being impossible.
+
+  BASELINE   rc=0   278 passed in 23.88s
+
+  id   target            result                            verdict     what it breaks
+  N1   eval_set.py       1 failed, 277 passed in 24.47s    CAUGHT      revert the F1 fix to the EXACT defect that failed the gate
+  N2   eval_set.py       1 failed, 277 passed in 23.22s    CAUGHT      always take the LOWER side - the F1 bias, re-created
+  N3   eval_set.py       1 failed, 277 passed in 22.64s    CAUGHT      always take the HIGHER side - the F1 bias, mirrored
+  N4   eval_set.py       1 failed, 277 passed in 24.27s    CAUGHT      disable the balance counter entirely
+  N5   cfr_pit.py        1 failed, 277 passed in 21.12s    CAUGHT      revert the F2 fix - a volume with no <PARTS> header is skipped again
+  N6   eval_set.py       2 failed, 276 passed in 21.39s    CAUGHT      relax EXACT instruction-count matching to +/-1
+
+========================================================================================
+  6 caught, 0 MISSED of 6
+========================================================================================
+  (no mutation went uncaught)
+
+  A MISSED row is a hole in the suite, not a pass. Round 2's SEVERE finding 1
+  was exactly this: five of six mutations of the fixed selection rule were
+  uncaught, because the kept test asserted on the FROZEN FILE and a source
+  mutation does not touch a frozen file.

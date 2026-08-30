@@ -10,8 +10,8 @@ CH-03 DETERMINISM - rebuild into a temp dir, compare SHA-256 (hard rule 9)
   data/evalset
     OK    exclusion_ladder.json      440885be50e42a972e0c06a8da84902cd0b604261b66ff12ae453cf31352c99f
     OK    items.jsonl                975959c6ec305c5263bea76efa371d5a270571045200c154edfe70611556f6fe
-    OK    leakage.json               b3b72f7b76b41d7b3b5f9c2a3ad2daf587478bc465f14652412037f322016017
-    OK    manifest.json              b44987401c8896c23f1eba06d8ae6327aba1d0c5ef1ccfcbef05c44a4f40cdf0
+    OK    leakage.json               4771d3449d9dc3b5e6a26cf49e9f5233e5a611f61280748bc687776f9e95c7cc
+    OK    manifest.json              51025460104568a9b46fbcec977a5a947d2e44f45b676418a0171b7b6f662521
 
   data/evalset-restricted
     OK    exclusion_ladder.json      091d19cc7e6ec4a418163b7f9637cc5c9ebd53d70f249b40c344ef066da1e45c

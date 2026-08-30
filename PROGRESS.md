@@ -39,18 +39,27 @@ neighbouring door.
 | **F2** a volume with no `<PARTS>` header excludes its whole title silently | 🟠 MAJOR | **fixed** |
 | **F3** from-spec reimplementation differs on 545/8,752 elements (title-26 long forms) | 🟡 MINOR | recorded; known at Q9 / goldens P2 |
 
-**Mutations: 9 designed, 9 caught.** Including M7 — flipping the rule from
-sorted-**first** to sorted-**last**. So the suite pinned the declared rule exactly, and
-**no test asserted the rule was unbiased.** That is the lesson: *a test that pins a
-rule is not a test that the rule is correct.* New golden **G-D2** closes it.
+**Mutations: 9 designed, and the "9 caught" claim is RETRACTED.** Round 2 showed the
+harness decided *caught* from `returncode != 0` **with no green baseline**, and that M7
+— flipping *first* to *last* — **cannot** be caught, because golden G-D's free list is
+`["B"]` and the two are the same element. **I repeated that claim in four documents
+without checking it**, which is exactly the failure hard rule 15 exists to prevent, and
+I did it on the evidence meant to prove the gate worked. Verified before retracting:
+reverting the F1 fix gives a test result identical to the unmutated run.
+
+The true statement is worse: **no test pinned the rule at all** — the kept test asserts
+on the *frozen file*, and a source mutation does not touch a frozen file. Corrected
+harness `docs/reviews/ch03-probe2/mutate3.py`, against a green baseline of 278 passed:
+**6 caught, 0 missed.** *A test that pins an artifact is not a test that pins the
+property.*
 
 ### The probe flips — hard rule 6, on the most important defect found so far
 
 | | before | after |
 |---|---:|---:|
 | label-blind sort-order attack | **0.8158** | **0.5610** |
-| negatives sorting before their positive | **32 / 38** | **21 / 41** |
-| exact two-sided binomial | **p = 0.000024** | **p = 1.0000** |
+| negatives sorting before their positive | **36 / 50** | **25 / 50** |
+| exact two-sided binomial | **p = 0.0026** | **p = 1.0000** |
 | pairs / n | 38 / 76 | **41 / 82** |
 
 The reviewer's two RED tests are kept forever in `tests/test_review_ch03_findings.py`.

@@ -1,0 +1,34 @@
+====================================================================================
+ORDERING BIAS OF THE NEGATIVE-SELECTION RULE - pre-fix vs shipped
+====================================================================================
+
+  Measured by RUNNING each rule over the real corpus, not by reconstructing
+  the pairing from the frozen items file. Exact two-sided binomial at p = 1/2
+  over the untied pairs.
+
+  rule                                pairs  neg BEFORE  neg AFTER  tied     exact p
+  PRE-FIX  negative = free[0]            50          36         14     0    0.002602
+  SHIPPED  balanced in sort order        50          25         25     0    1.000000
+
+====================================================================================
+RETRACTION
+====================================================================================
+
+  The figure published as '32/38, exact p = 0.000024' is WITHDRAWN. It was
+  computed by an uncommitted inline snippet that RECONSTRUCTED the pairing
+  from the frozen items file by re-matching on (frdoc, instruction_count),
+  rather than by running the rule. The round-2 reviewer could not reproduce
+  it and was right not to be able to.
+
+  The correct pre-fix figure, from running the pre-fix rule:
+      36/50 negatives sort before their positive,  exact p = 0.002602
+  The correct shipped figure:
+      25/50 negatives sort before their positive,  exact p = 1.000000
+
+  The DIRECTION and the CONCLUSION are unchanged - the pre-fix rule is
+  strongly biased and the shipped rule is not - but the published number was
+  wrong and no script backed it. Both defects are the build session's.
+
+  NOTE ON THE PAIR COUNTS. These are the pairing stage only, BEFORE the
+  point-in-time text lookup and the leakage test remove items, so they are
+  larger than the frozen n. The frozen eval set is 41 pairs / 82 items.

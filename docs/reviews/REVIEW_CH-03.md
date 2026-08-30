@@ -42,8 +42,15 @@ section order than their positives.
 | measurement | reviewer | build session's own re-derivation |
 |---|---|---|
 | label-blind sort-order script accuracy | 0.7763 (59/76) | **0.8158 (62/76)** |
-| pairs whose negative sorts BEFORE its positive | 27/33 | **32/38** |
-| exact two-sided binomial | p = 0.000324 | **p = 0.000024** |
+| pairs whose negative sorts BEFORE its positive | 27/33 | **32/38 — RETRACTED, see below** |
+| exact two-sided binomial | p = 0.000324 | **p = 0.000024 — RETRACTED** |
+
+> **The build session's `32/38, p = 0.000024` is WITHDRAWN.** It came from an
+> uncommitted inline snippet that RECONSTRUCTED the pairing from the frozen items
+> file instead of running the rule — a hard rule 14 violation, no generating script.
+> Measured properly by `docs/evidence/ch03-evalset/ordering_bias.py`, the pre-fix rule
+> gives **36/50, exact p = 0.0026**, and the shipped rule **25/50, p = 1.0000**. The
+> direction and the conclusion are unchanged; the number was wrong.
 
 *(The two differ because the reviewer recovered pairs from `(frdoc, count)` groups and
 the build session recovered them per-positive; both find the same defect.)*
@@ -108,7 +115,27 @@ is the architect's to close, not a build session's.
 
 ---
 
-## MUTATIONS — 9 designed, **9 caught**
+## MUTATIONS — 9 designed, **the "9 caught" claim is RETRACTED**
+
+> **RETRACTION, added after round 2.** The table below is **false** and it is kept
+> rather than deleted. `mutate.py` decided "caught" from `returncode != 0` **with no
+> green baseline**, so a mutation applied to an already-red suite — or one that is a
+> **no-op on the fixture** — reads as caught. **M7 cannot have been caught**: golden
+> G-D's free candidate list is `["B"]`, so `free[0]` and `free[-1]` are the same
+> element and the mutation changes nothing.
+>
+> The build session **repeated this claim in four documents without checking it**,
+> which is precisely the failure `CLAUDE.md` hard rule 15 exists to prevent, and it
+> did so on the evidence that was supposed to prove the gate worked.
+>
+> **Verified independently before retracting:** reverting the F1 fix to
+> `negative = free[0]` produces a test result **identical** to the unmutated run.
+>
+> The corrected harness — which counts a mutation as caught only when the result
+> **changes from an established baseline** — is
+> `docs/reviews/ch03-probe2/mutate3.py`. Against a green baseline of 278 passed it
+> reports **6 caught, 0 missed**, and that number can be trusted because the harness
+> establishes the baseline it compares against.
 
 `docs/reviews/ch03-probe/mutate.py`. Each mutation was applied to the working tree, the
 suite run, and the tree restored.
@@ -125,11 +152,17 @@ suite run, and the tree restored.
 | M8 | the `n_items == 2 * n_pairs` assertion dropped | **CAUGHT** |
 | M9 | `instruction_counts` silently counts UNATTRIBUTED elements too | **CAUGHT** |
 
-**M7 is worth dwelling on.** The suite catches a flip from *first* to *last* sorted
-candidate — it pins the declared rule — but **no test asserted that the rule is
-unbiased**, which is why F1 survived a green suite. A test that pins a rule is not a
-test that the rule is correct. That gap is now closed by
-`tests/test_review_ch03_findings.py`.
+**M7 is worth dwelling on, and for a different reason than this review first gave.**
+The original text here claimed the suite catches a flip from *first* to *last* sorted
+candidate. **It does not, and cannot** — see the retraction above. The true statement
+is stronger and worse: **no test pinned the rule at all**, and the kept test added by
+this review asserted on the FROZEN FILE, which a source mutation does not touch. Round
+2's SEVERE finding 1 is exactly that, and the gap is closed by
+`tests/test_review_ch03_round2_findings.py::test_R1_...`, which runs `build_pairs`
+against the real corpus so a change to the RULE is caught by the RULE's own test.
+
+*A test that pins an artifact is not a test that pins the property.* That sentence is
+the whole lesson of both review rounds.
 
 ---
 

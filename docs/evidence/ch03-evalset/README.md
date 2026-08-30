@@ -21,7 +21,7 @@ computed on the defective set. Nothing was quietly replaced.
 | Pairs | 38 | **41** |
 | n | 76 | **82** |
 | **label-blind sort-order attack** | **0.8158** | **0.5610** |
-| negatives sorting before their positive | 32/38, p = 0.000024 | **21/41, p = 1.0000** |
+| negatives sorting before their positive | 36/50, p = 0.0026 | **25/50, p = 1.0000** |
 
 Target is >= 42 pairs (n >= 84) - **not reached**, so the pre-registered
 **[30, 42) branch** applies: proceed, report the real n, and state the effect size the
@@ -90,7 +90,7 @@ names and the known-positive assertion RAISES —
 
 ### The publishable corpus result plan.md CH-04 asks for
 
-> **5 of 82 items would have contained the answer in their UNSTRIPPED text.**
+> **3 of 82 items would have contained the answer in their UNSTRIPPED text.**
 
 `CONTEXT.md` §8 said "the per-item rate is UNKNOWN and measuring it is part of the
 fix." This is that number.

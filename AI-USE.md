@@ -114,7 +114,7 @@ count-matched sibling, so a six-line label-blind program reading only `frdoc` an
 `section` — no model, no CFR text, no instruction text — scored **0.8158**, beating
 the `B0-agent` baseline by 17 points. `CONTEXT.md` §8 had guarded the *count*; nobody
 had guarded the *selection*. Fixed, and the probe flips: **0.8158 → 0.5610**, ordering
-bias 32/38 (p = 0.000024) → 21/41 (p = 1.0000). The first CHECKPOINT's numbers were
+bias 36/50 (p = 0.0026) → 25/50 (p = 1.0000). The first CHECKPOINT's numbers were
 computed on the defective set and are **withdrawn, not deleted** —
 `docs/evidence/checkpoint/withdrawn/`.
 

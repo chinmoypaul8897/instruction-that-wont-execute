@@ -268,3 +268,32 @@ Measured after: **0.5610**, and **21 of 41** (exact two-sided p = 1.0000).
 The kept tests are `tests/test_review_ch03_findings.py`. They were RED when written
 and are GREEN now, and both states are in the history — hard rule 6's probe that
 flips, on the most important defect this project has found in its own work.
+
+### G-D2 ERRATA - the mutation claim inside G-D2 was itself false
+
+G-D2 above says *"Mutation M7 ... **is caught** by the suite. So the suite pinned the
+declared rule exactly."* **That is wrong**, and it is corrected here rather than edited
+out.
+
+M7 **cannot** be caught: G-D's free candidate list for positive `A` is `["B"]`, a
+single element, so `free[0]` and `free[-1]` are the same section and the mutation
+changes nothing. Round 1's harness read `returncode != 0` as "caught" without ever
+establishing a green baseline, and the build session repeated the result in four
+documents without checking it - `CLAUDE.md` hard rule 15, broken on the very evidence
+meant to show the gate working.
+
+**The true statement is worse than the false one.** No test pinned the rule at all:
+the kept round-1 test asserts on the FROZEN `items.jsonl`, and a source mutation does
+not touch a frozen file. Five of six mutations of the fixed rule went uncaught.
+
+**Closed by** `tests/test_review_ch03_round2_findings.py::test_R1_...`, which runs
+`build_pairs` over the real corpus so the RULE has a test of its own, and by
+`docs/reviews/ch03-probe2/mutate3.py`, a harness that counts a mutation as caught only
+when the result **changes from an established baseline**. Against a green baseline of
+278 passed: **6 caught, 0 missed**.
+
+G-D2's numeric expectations are also corrected: the pre-fix ordering bias is
+**36/50 at exact p = 0.0026** and the shipped rule is **25/50 at p = 1.0000**, both
+measured by running the rules rather than reconstructing them from the freeze
+(`docs/evidence/ch03-evalset/ordering_bias.py`). The withdrawn figures were
+32/38 and p = 0.000024.

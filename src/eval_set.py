@@ -20,9 +20,21 @@ A strip counter that prints zero because it is looking for the wrong element nam
 `QUESTIONS.md` Q8's trap, and the assertion is what stops the zero being believed.
 
 DETERMINISM - hard rule 9: sorted iteration everywhere, sorted-key JSON, LF endings,
-no clock, no randomness. The negative chosen for a positive is the FIRST in sorted
-order among free count-matched siblings — declared in the pre-registration, so it is
-independent of any label.
+no clock, no randomness.
+
+THE NEGATIVE-SELECTION RULE, and why it is NOT the one the pre-registration declared.
+The pre-registration said *"sorted order, first element - deterministic, declared, and
+independent of any label."* **The adversarial review falsified that** (finding F1,
+`docs/reviews/REVIEW_CH-03.md`): the positive is a GIVEN section and the negative is
+CHOSEN, so taking the sorted-first candidate put negatives systematically earlier in
+section order, and a label-blind script reading only `frdoc` and `section` scored
+**0.8158** on the primary metric. The rule was independent of the label and
+**correlated with it through the selection asymmetry**.
+
+`build_pairs` now BALANCES sort order. Recorded as ERRATA E-1 in the pre-registration;
+its original text is untouched. Round 2 measured the residual: every structural attack
+is dead (numeric sort 0.5244, lexicographic 0.5366, part number 0.5610,
+position-in-document <= 0.5976, and an attack on the selection rule itself 0.5122).
 
     python -m eval_set build --out data/evalset
     python -m eval_set verify --out data/evalset
@@ -131,7 +143,9 @@ def build_pairs(counts, defects, tolerance: int = 0):
     # in section order, and a six-line label-blind script reading only `frdoc` and
     # `section` scored 0.8158 on the primary metric - beating B0-agent by 17 pp and
     # clearing GOOD.md's A1 bar, with no model, no CFR text and no instruction text.
-    # Negatives sorted before their positives 32 of 38 times, exact p = 0.000024.
+    # Negatives sorted before their positives 36 of 50 times, exact p = 0.0026
+    # (docs/evidence/ch03-evalset/ordering_bias.py; an earlier '32/38, p=0.000024'
+    # was published without a generating script and is RETRACTED).
     #
     # `balance` is the running (#negatives that sorted BEFORE) - (#that sorted AFTER).
     # When candidates exist on both sides of the positive, the side that reduces the
@@ -446,8 +460,6 @@ def cmd_build(args) -> int:
             v = leakage_violations(res["text"], own_citation)
             if v:
                 bad.append({"role": role, "section": section, "violations": v})
-            if leakage_violations(res["text_unstripped"], own_citation):
-                would_have_leaked += 1
         if bad:
             leak_failures.append({"frdoc": frdoc, "detail": bad})
             ladder.drop("leakage-test-failed-after-strip", positives=1, negatives=1,
@@ -458,6 +470,14 @@ def cmd_build(args) -> int:
             for t in cfr_pit.LEAKAGE_ELEMENTS:
                 strip_totals[t] += res["strip_counts"][t]
             strip_totals["total"] += res["strip_counts"]["total"]
+            # ROUND-2 REVIEW FINDING R2. This counter used to sit in the loop ABOVE,
+            # which runs before the leaking pairs are dropped - so the numerator
+            # covered 86 items while it was published against a denominator of 82,
+            # and printed 5 where the frozen corpus has 3. It is now incremented only
+            # for items that are actually KEPT, so numerator and denominator describe
+            # the same set. A ratio whose halves count different things is not a rate.
+            if leakage_violations(res["text_unstripped"], own_citation):
+                would_have_leaked += 1
             items.append({
                 "item_id": f"{frdoc}|{section}",
                 "frdoc": frdoc,
