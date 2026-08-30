@@ -1,0 +1,97 @@
+==============================================================================
+SPEC-FIX-1 - does the PROPOSED gate metric discriminate?
+==============================================================================
+records : 8752 over 70 FR documents
+
+-- detector = spec_literal --------------------------------------------
+   replay of CONTEXT.md section 8 vs the frozen record : 0 mismatches of 8752
+   ASSERTED: the replay IS the shipped attributor, so the control below
+   differs from it in exactly one respect - first-named vs last-named.
+
+   REAL      attribution_completeness = 6663/8752 = 0.7613  -> FAIL
+   SABOTAGED attribution_completeness = 6663/8752 = 0.7613  -> FAIL
+   difference in the metric            = 0.000000
+   elements the sabotage puts on a DIFFERENT section = 6395 of 6663 attributed = 0.9598
+
+   >>> IDENTICAL. The metric cannot tell the two attributors apart,
+       though they disagree about 6395 of 6663 attributed elements.
+       This is not a coincidence: an element is attributed iff at
+       least one section was named at or before it, which is true of
+       BOTH rules. attributed/total therefore measures only WHERE THE
+       FIRST CITATION APPEARS - it is invariant to whether the
+       carry-forward that follows is right or wrong.
+
+   CONTROL 2 - the predecessor pilot's failure mode (lead-ins only, no
+   carry-forward at all): attribution_completeness = 2191/8752 = 0.2503 -> FAIL
+       So the metric DOES catch the silent-DROP failure that killed the
+       predecessor at 0.46. It is blind only to the silent-WRONG failure
+       that CH-02 actually found in this corpus (Q9).
+
+-- detector = extended ------------------------------------------------
+   replay of CONTEXT.md section 8 vs the frozen record : 0 mismatches of 8752
+   ASSERTED: the replay IS the shipped attributor, so the control below
+   differs from it in exactly one respect - first-named vs last-named.
+
+   REAL      attribution_completeness = 8634/8752 = 0.9865  -> PASS
+   SABOTAGED attribution_completeness = 8634/8752 = 0.9865  -> PASS
+   difference in the metric            = 0.000000
+   elements the sabotage puts on a DIFFERENT section = 8417 of 8634 attributed = 0.9749
+
+   >>> IDENTICAL. The metric cannot tell the two attributors apart,
+       though they disagree about 8417 of 8634 attributed elements.
+       This is not a coincidence: an element is attributed iff at
+       least one section was named at or before it, which is true of
+       BOTH rules. attributed/total therefore measures only WHERE THE
+       FIRST CITATION APPEARS - it is invariant to whether the
+       carry-forward that follows is right or wrong.
+
+   CONTROL 2 - the predecessor pilot's failure mode (lead-ins only, no
+   carry-forward at all): attribution_completeness = 3277/8752 = 0.3744 -> FAIL
+       So the metric DOES catch the silent-DROP failure that killed the
+       predecessor at 0.46. It is blind only to the silent-WRONG failure
+       that CH-02 actually found in this corpus (Q9).
+
+-- WHICH OF SPEC-FIX-1's EDITS IS LOAD-BEARING FOR THE PASS? ------------
+   neither edit  (status quo: CONTEXT.md section 8 as written)    0.5080  FAIL
+   2a only       (split the metric, keep section 8's sign-only regex) 0.7613  FAIL
+   2c only       (fix the regex, keep the combined definition)    0.6643  FAIL
+   2a + 2c       (both, as SPEC-FIX-1 proposes)                   0.9865  PASS
+
+   The pass exists only in the last row. Neither edit alone clears 0.90.
+
+-- THE STRICTLY-HARDER LADDER, FROM FROZEN FIELDS ONLY ------------------
+   part_mismatch_extended                       : 699
+     ... of which name their OWN section        : 126  (QUESTIONS.md Q10 says
+         'every one of those is wrong' - for these 126 the section is right
+         and the REGTEXT part tag is the thing that disagrees)
+     ... of which inherited by carry-forward    : 573
+   detector_disagrees (raw flag)                : 2459
+     ... genuine rival-section conflicts        : 488  (both detectors named a
+         section AND the two sections differ)
+     ... spec_literal simply found nothing      : 1971
+
+   L0  attributed (SPEC-FIX-1 section 2a as proposed)       8634/8752 = 0.9865  PASS
+   L1  attributed AND part-consistent                       7935/8752 = 0.9066  PASS
+   L2  attributed AND no CARRIED part mismatch              8061/8752 = 0.9210  PASS
+   L3  attributed AND no rival-section conflict             8146/8752 = 0.9308  PASS
+   L4  attributed AND part-consistent AND no rival conflict 7508/8752 = 0.8579  FAIL
+
+-- PER-DOCUMENT FLOOR (the aggregation CONTEXT.md section 8 already ------
+   requires be reported, and CH-02's branch table restricts on) -----------
+   extended      docs with attribution_completeness >= 0.90 : 57/70 = 0.8143  FAIL
+                 unweighted per-document mean = 0.9426   min = 0.0000
+   spec_literal  docs with attribution_completeness >= 0.90 : 47/70 = 0.6714  FAIL
+                 unweighted per-document mean = 0.7942   min = 0.0000
+
+-- GOLDEN G1 (FR 2020-11897), the document chosen to DEMONSTRATE the -----
+   silent-WRONG failure mode -----------------------------------------------
+   spec_literal  attribution_completeness = 26/28 = 0.9286 -> PASS   (old completeness 14/28 = 0.5000 -> FAIL)
+   extended      attribution_completeness = 27/28 = 0.9643 -> PASS   (old completeness 15/28 = 0.5357 -> FAIL)
+   elements the two detectors put on different sections : 24 of 28
+   QUESTIONS.md Q9 records 20 of these 28 as pinned to a section they do
+   not amend under spec_literal. The proposed gate scores that document
+   0.9286 and PASSES it.
+
+==============================================================================
+END. Nothing in data/ was written (hard rule 11).
+==============================================================================

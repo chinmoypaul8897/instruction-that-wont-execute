@@ -1,0 +1,129 @@
+==============================================================================
+SPEC-FIX-1 - class counts over the frozen CH-02 corpus
+==============================================================================
+records read           : 8752
+amdpars.jsonl          : data/amdpars/amdpars.jsonl
+completeness.json      : data/amdpars/completeness.json
+
+-- 1. THE ARCHITECT'S ASSERTED FACTS, RE-DERIVED FROM THE RECORDS ---------
+  OK  total elements         aggregate=8752   from records=8752
+  OK  attributed (extended)  aggregate=8634   from records=8634
+  OK  unattributable (ext)   aggregate=118    from records=118
+  OK  parsed                 aggregate=5839   from records=5839
+  OK  complete (extended)    aggregate=5814   from records=5814
+  OK  operation is none      aggregate=1074   from records=1074
+
+  attribution_rate  extended     = 8634/8752 = 0.9865   (architect said 0.9865)
+  attribution_rate  spec_literal = 6663/8752 = 0.7613   (NOT quoted by the architect)
+  parse_rate                     = 5839/8752 = 0.6672   (architect said 0.6672)
+  completeness      extended     = 5814/8752 = 0.6643   (architect said 0.6643)
+  completeness      spec_literal = 4446/8752 = 0.5080   (the gate CH-02 actually took)
+
+-- 2. EVERY UNPARSED ELEMENT, PARTITIONED. FIRST MATCH WINS --------------
+   unparsed = 2913 of 8752  (0.3328 of the corpus)
+
+   bucket                                      n    share  provenance / legitimacy
+   A_authority_citation                      591   0.2029  architect class A / legitimate-instruction
+   B_lead_in_section_named                   548   0.1881  architect class B / legitimate-instruction
+   B2_lead_in_part_or_appendix_level         155   0.0532  lead-in variant / legitimate-instruction
+   B3_lead_in_no_target_named                 91   0.0312  lead-in variant / legitimate-instruction
+   C_whole_section_operation                 436   0.1497  architect class C / legitimate-instruction
+   D_document_opener                           1   0.0003  NOT NAMED / legitimate-instruction
+   E_continuation_fragment_no_operation      598   0.2053  NOT NAMED / legitimate-instruction
+   F_part_or_appendix_level_operation         29   0.0100  NOT NAMED / legitimate-instruction
+   G_other_no_target_named                   464   0.1593  NOT NAMED / ambiguous
+   Z_UNEXPECTED_operation_and_target           0   0.0000  NOT NAMED / parser-defect
+   TOTAL                                    2913
+   ASSERTED: sum(buckets) == unparsed  (2913 == 2913)
+
+-- 3. THE ARCHITECT'S THREE CLASSES, STRICTLY READ -----------------------
+   A  authority citations                :   591
+   B  lead-ins (CFR section named)       :   548
+   C  whole-section operations           :   436
+   ---------------------------------------------
+   the three as named                    :  1575  = 0.5407 of unparsed  = 0.1800 of the corpus
+   residue the architect did NOT name    :  1338  = 0.4593 of unparsed
+
+   reading the lead-in class as the whole family (part/appendix-level and
+   untargeted lead-ins are the same drafting device one level out):
+   A + lead-in family + C + opener + continuation + part-level:  2449  = 0.8407 of unparsed
+
+-- 4. IS THE RESIDUE OUR DEFECT OR THE CORPUS'S SHAPE? -------------------
+   The split-metric is legitimate only if what it stops gating is NOT our
+   own parser bug. Three probes:
+
+   4a. elements with an operation AND a target yet parsed==False : 0
+       (a non-zero here would mean the record contradicts P6)
+
+   4b. unparsed, has an operation, no designation recorded, yet the raw
+       text contains a `(x)`-shaped group P5 could have taken : 19
+       | Par. 3. Section 1.367(a)-3T is removed.
+       | Par. 4. Section 1.367(b)-0 is amended by:
+       | 5. Adding entries for § 1.367(b)-10.
+       | 6. Adding entries for § 1.367(b)-13.
+       | Par. 5. Section 1.367(b)-10 is added to read as follows:
+       | Par. 6. Section 1.367(b)-14T is removed.
+       -> inspect: P5 excludes the span matched as a section by P2, so a
+          citation like 90.213(a) contributes no designation of its own.
+
+   4c. unclosed_quote (P1's own honest failure counter)          : 5
+       parse_rate ceiling lost to it at most                     : 0.000571
+
+-- 5. THE TWO PROPOSED METRICS, COMPUTED -------------------------------
+   spec_literal  attribution_completeness = 6663/8752 = 0.7613   gate 0.90 -> FAIL
+                 parse_completeness       = 5839/8752 = 0.6672   (reported, not gated)
+                 ORIGINAL completeness    = 4446/8752 = 0.5080   gate 0.90 -> FAIL
+   extended      attribution_completeness = 8634/8752 = 0.9865   gate 0.90 -> PASS
+                 parse_completeness       = 5839/8752 = 0.6672   (reported, not gated)
+                 ORIGINAL completeness    = 5814/8752 = 0.6643   gate 0.90 -> FAIL
+
+   NOTE: the gate CH-02 actually took was spec_literal. Its
+   attribution_completeness is 0.7613, which FAILS the 0.90 gate. The
+   architect quoted only the extended figure.
+
+-- 6. PER-DOCUMENT attribution_completeness ----------------------------
+   extended      docs=70  min=0.0000  p25=0.9474  median=0.9773  p75=0.9928  max=1.0000
+                 docs >= 0.90 : 57   docs >= 0.80 : 69   docs == 0 : 1
+   spec_literal  docs=70  min=0.0000  p25=0.8333  median=0.9655  p75=0.9900  max=1.0000
+                 docs >= 0.90 : 47   docs >= 0.80 : 57   docs == 0 : 10
+
+-- 7. STRICTLY-HARDER CANDIDATE GATES, COMPUTED ------------------------
+   part_mismatch (extended)                       : 699
+   detector_disagrees                             : 2459
+   H1 attributed AND part-consistent              : 7935/8752 = 0.9066  gate 0.90 -> PASS
+   H2 attributed AND part-consistent AND detectors agree : 5599/8752 = 0.6397  gate 0.90 -> FAIL
+
+-- 8. OPERATION MIX, WHOLE CORPUS --------------------------------------
+   revise           2011
+   add               548
+   remove           4060
+   redesignate       179
+   amend             880
+   none             1074
+   TOTAL            8752   ASSERTED == 8752
+
+-- 9. ONE VERBATIM EXAMPLE PER BUCKET ----------------------------------
+   A_authority_citation  n=591
+     | 1. The authority citation for part 60 continues to read as follows:
+   B_lead_in_section_named  n=548
+     | 2. Section 60.17 is amended by:
+   B2_lead_in_part_or_appendix_level  n=155
+     | 6. Subpart Da is amended by:
+   B3_lead_in_no_target_named  n=91
+     | 4. Amend section 1.107 by revising the introductory text to read as follows:
+   C_whole_section_operation  n=436
+     | a. Redesignating § 60.49a as § 60.51a;
+   D_document_opener  n=1
+     | For the reasons stated in the preamble, title 40, chapter I, parts 60, 72, and 75 of the Code of the Federal Regulations are amended as follows:
+   E_continuation_fragment_no_operation  n=598
+     | d. In paragraph (b)(11) introductory text:
+   F_part_or_appendix_level_operation  n=29
+     | a. Revising the title of section 7.3 and the first sentence of the introductory text of section 7.3;
+   G_other_no_target_named  n=464
+     | c. Adding new sections 3.3.8 and 3.4.3.
+   Z_UNEXPECTED_operation_and_target: (zero occurrences)
+
+==============================================================================
+END. Every count above is derived from the frozen records at read time;
+nothing in data/ was written (hard rule 11).
+==============================================================================
