@@ -315,6 +315,28 @@ Measured over all 70 FR documents / 8,752 AMDPAR elements:
 | `spec_literal` - section 8's own regex | 0.5080 | 0.7613 | 2,089 |
 | `extended` - adds the word form | 0.6643 | 0.9865 | 118 |
 
+**How widespread, measured over all 70 documents / 8,752 elements** - not inferred
+from golden G1, which is one document chosen precisely because it is hard:
+
+| | elements | share | documents |
+|---|---:|---:|---:|
+| name a section with the **sign** | 2,191 | 25.0% | - |
+| name a section under **extended** | 3,277 | 37.4% | - |
+| name it **only** in the word form | **1,086** | **12.4%** | **32 of 70** |
+| **attributed differently by the two detectors** | **2,459** | **28.1%** | **32 of 70** |
+
+So this is not a quirk of one FCC rule. Nearly half the documents in the pool contain at
+least one word-form lead-in, and **over a quarter of every AMDPAR element in the corpus
+is attributed to a different section depending on which detector is used.**
+
+**A corroborating check on section 8's own arithmetic.** Section 8 states that *"only
+~42% of AMDPARs name a section."* Measured here: **25.0%** under its own sign-only regex,
+**37.4%** under the extended reading. Section 8's own figure is 4.6 points from the
+extended reading and 17 points from the regex it prints - which is evidence that the
+sentence meant the broader reading and the regex beside it is an imprecise
+operationalisation of it, rather than the two being in genuine conflict. Offered as a
+measurement, not as a preference; the architect may read it the other way.
+
 **What CH-02 did.** Implemented **both**, recorded both in every frozen record
 (`section_spec_literal` / `section_extended`, and `detector_disagrees`), reported both
 everywhere, and **took the pre-registered gate branch on `spec_literal`**, because
