@@ -189,3 +189,54 @@ so at minimum **rule (a) and rule (c) both fire on both sections** before stripp
 **A leakage test that cannot be made to fail is not evidence of a clean corpus; it is
 an untested assertion.** If it cannot be made to fail, the pre-registration's branch
 applies: BLOCKER, freeze nothing, move on.
+
+---
+
+## G-G · Volume selection — hand-computed, added before `src/cfr_pit.py` was written
+
+**Appended, not edited.** G-A..G-F stand as committed at `c685e80`. This entry is new
+work, and it exists because reading the govinfo listings turned up a hazard that the
+pre-registration did not anticipate: **CFR annual-edition volumes do not map one-to-one
+onto parts.** Title 26's part 1 is split across roughly twenty volumes by *section*
+range, and 10 of the 85 pool citations are title 26.
+
+Real `<PARTS>` headers, read off govinfo:
+
+| header string | expected `part_lo` | `part_hi` | expected section range |
+|---|---:|---:|---|
+| `Parts 53 to 59` | 53 | 59 | none |
+| `Parts 1 to 49` | 1 | 49 | none |
+| `Part 52` | 52 | 52 | none |
+| `Part 80 to End` | 80 | **None** (= End, unbounded) | none |
+| `Parts 500 to 599` | 500 | 599 | none |
+| `Part 1 (§§ 1.908 to 1.1000)` | 1 | 1 | `1.908` … `1.1000` |
+| `Part 63 (§§ 63.600—63.1199)` | 63 | 63 | `63.600` … `63.1199` |
+| `Part 1 (§§ 1.1401 to 1.1550)` | 1 | 1 | `1.1401` … `1.1550` |
+
+Note the em-dash separator and the U+2009 thin space after `§§`. A parser that splits
+on ASCII `-` alone gets `63.600—63.1199` wrong, and a parser that splits on `-` at all
+would break a real hyphenated section number such as `1.199A-0`. **Declared rule: take
+every section-shaped token inside the parentheses and use the first and the last.**
+
+**G-G2 — section ordering must be NUMERIC, not lexicographic.** Hand-computed:
+
+| comparison | lexicographic says | **correct answer** |
+|---|---|---|
+| `1.908` vs `1.1000` | `1.908` > `1.1000` ❌ | `1.908` **<** `1.1000` |
+| `60.41a` vs `60.41b` | a < b ✅ | `60.41a` < `60.41b` |
+| `1.199A-0` vs `1.199B-1` | ✅ | `1.199A-0` < `1.199B-1` |
+| `1.61` vs `1.169` | `1.61` > `1.169` ❌ | `1.61` **<** `1.169` |
+
+A lexicographic comparator would send every title-26 lookup to the wrong volume, and
+it would do so *silently* — the section would simply not be found and the item would
+drop off the exclusion ladder as "not in the as-of edition". **That is the shape of
+every failure this project is built to catch: a wrong answer that presents as a
+smaller n rather than as an error.** Hence a declared fallback: if the section is not
+found in the volume the range chose, **every other volume covering that part is
+searched before the item is excluded**, and the route that found it is recorded.
+
+**G-G3 — a volume's own `<REVISED>` stamp is not always its edition year.**
+`CFR-2019-title26-vol21.xml` says *"Revised as of April 1, **2010**"*. GPO carries a
+volume forward unchanged when nothing in it was amended. **The edition is the year
+folder on govinfo, never the `<REVISED>` line**, and the `<REVISED>` line is recorded
+per item so the discrepancy is visible rather than assumed away.
