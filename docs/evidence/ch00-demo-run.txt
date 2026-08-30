@@ -1,0 +1,40 @@
+CH-00 DEMO RUN - dummy agent run, no model called
+==========================================================================
+trajectory : docs\evidence\runs\ch00-demo\trajectories\CH-00-demo.jsonl
+ledger     : docs\evidence\runs\ch00-demo\cost_ledger.csv
+
+TRAJECTORY - 10 records, one JSON object per line
+--------------------------------------------------------------------------
+           run_start       B0-agent / 40-433.2 / claude-haiku-4-5 / batch
+                           agent_instructions: 393 chars
+  step 1   action          cfr_resolve
+  step 2   tool_response   cfr_resolve
+  step 3   feedback        no (b)(4) exists at the as-of date; the inst...
+  step 4   retry           exact anchor match failed at (b)(4)(i)(A)
+  step 5   action          cfr_resolve
+  step 6   tool_response   cfr_resolve
+  step 7   human_checkpointtwo sibling sections carry a near-identical 
+  step 8   action          assistant
+           run_end         verdict=WILL_FAIL  in=18,432 out=1,207  4.219s  USD 0.012234
+
+COST LEDGER ROW
+--------------------------------------------------------------------------
+  run_id,arm,item_id,model,input_tokens,output_tokens,wall_clock_s,imputed_usd
+  CH-00-demo,B0-agent,40-433.2,claude-haiku-4-5,18432,1207,4.219,0.012234
+
+CHECKS
+--------------------------------------------------------------------------
+  PASS          every line parses as JSON
+  PASS          run_start first, run_end last
+  PASS          hand-computed USD matches
+  PASS          cost row carries input tokens
+  PASS          cost row carries output tokens
+  PASS          cost row carries wall-clock
+  PASS          cost row carries imputed USD
+  PASS          imputed USD > 0 (never $0)
+  PASS          production ledger untouched
+
+  9/9 checks passed   (success + failure == n: True)
+
+  hand-computed  USD 0.012234
+  logger emitted USD 0.012234

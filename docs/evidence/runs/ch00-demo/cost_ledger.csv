@@ -1,0 +1,2 @@
+run_id,arm,item_id,model,input_tokens,output_tokens,wall_clock_s,imputed_usd
+CH-00-demo,B0-agent,40-433.2,claude-haiku-4-5,18432,1207,4.219,0.012234
