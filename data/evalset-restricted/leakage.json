@@ -1,6 +1,6 @@
 {
   "items_total": 2,
-  "items_whose_UNSTRIPPED_text_would_have_leaked": 1,
+  "items_whose_UNSTRIPPED_text_would_have_leaked": 0,
   "known_positive_assertion": {
     "counts": {
       "CITA": 3,
@@ -37,8 +37,8 @@
   "strip_counts_over_the_frozen_corpus": {
     "CITA": 2,
     "EAR": 0,
-    "EDNOTE": 1,
-    "EFFDNOTP": 1,
-    "total": 4
+    "EDNOTE": 0,
+    "EFFDNOTP": 0,
+    "total": 2
   }
 }

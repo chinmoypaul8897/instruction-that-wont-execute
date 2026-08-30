@@ -1,6 +1,6 @@
 {
-  "items_total": 76,
-  "items_whose_UNSTRIPPED_text_would_have_leaked": 8,
+  "items_total": 82,
+  "items_whose_UNSTRIPPED_text_would_have_leaked": 5,
   "known_positive_assertion": {
     "counts": {
       "CITA": 3,
@@ -67,27 +67,16 @@
               "rule": "c"
             }
           ]
-        },
-        {
-          "role": "negative",
-          "section": "1.1",
-          "violations": [
-            {
-              "detail": "Effective Date Note",
-              "kind": "literal",
-              "rule": "c"
-            }
-          ]
         }
       ],
       "frdoc": "2020-07837"
     }
   ],
   "strip_counts_over_the_frozen_corpus": {
-    "CITA": 64,
+    "CITA": 65,
     "EAR": 0,
-    "EDNOTE": 5,
-    "EFFDNOTP": 1,
-    "total": 70
+    "EDNOTE": 3,
+    "EFFDNOTP": 0,
+    "total": 68
   }
 }

@@ -129,3 +129,80 @@ From `prompts/NIGHT-RUN.md`, restated so the branch cannot be re-read after the 
 - **The CH-02 gate outcome is not revisited.** A stricter detector cannot raise a
   failing figure; the re-measurement is reported, and CH-02 stays in its
   `< 0.80` documented-failure branch whatever `v11` returns.
+
+---
+
+## ERRATA
+
+The original text above stands exactly as committed at `c685e80`. A wrong entry is
+corrected in a **new** entry, never edited out of the old one.
+
+### E-1 - section 3's negative-selection rule was DEFECTIVE, and its stated justification was FALSE
+
+Section 3 reads: *"Where several siblings match, the negative is chosen by **sorted
+order, first element** - deterministic, declared, and independent of any label."*
+
+**The last clause is false in the way that mattered.** The rule is independent of the
+label and **correlated with it through the selection asymmetry**: the positive is a
+*given* section while the negative is *chosen*, so taking the sorted-first candidate
+put negatives systematically earlier in section order.
+
+**Measured at the CH-03 adversarial review** (`docs/reviews/REVIEW_CH-03.md`, finding
+F1) - a six-line label-blind script reading only `frdoc` and `section`, with **no
+model, no CFR text and no instruction text**:
+
+| | before the fix | after the fix |
+|---|---:|---:|
+| label-blind sort-order attack | **0.8158** | **0.5610** |
+| negatives sorting before their positive | **32 / 38** | **21 / 41** |
+| exact two-sided binomial | **p = 0.000024** | **p = 1.0000** |
+
+0.8158 beat `B0-agent` (0.6447) by 17 pp and cleared `GOOD.md`'s A1 absolute bar of
+0.80. **This is the death `CONTEXT.md` section 8's exact-count rule was written to
+prevent, arriving through the neighbouring door: the count was matched and the
+selection was not.**
+
+### The replacement rule, declared here
+
+For each positive, in sorted `(frdoc, section)` order, partition the free
+count-matched siblings into those sorting **before** and **after** the positive.
+
+- **Both sides non-empty:** take the side that pulls a running `balance` counter
+  toward zero, where `balance = (#negatives so far that sorted before) - (#after)`.
+  Within the chosen side, take the candidate **nearest** the positive.
+- **One side only:** the choice is structural rather than selectional. Take it, and
+  still update the counter, so the next free choice compensates.
+- **Sort keys tie:** fall back to the sorted candidate list.
+
+It is **label-blind** - `balance` is updated from section order alone and never sees a
+verdict - **deterministic and RNG-free** (hard rule 9), and its residual is
+**measured, not asserted**.
+
+### Why this is a fix and not a weakening
+
+`CLAUDE.md` hard rule 5 forbids moving a number or loosening a test to get green.
+Neither happened:
+
+- **No threshold moved.** Tolerance is still 0; the guards are still <= 0.25;
+  `GOOD.md` is untouched.
+- **The change makes the benchmark HARDER**, not easier: it removes a signal that was
+  scoring 0.8158 for free.
+- **The falsification is empirical**, not preferential: section 3's stated reason was
+  tested and found false.
+- **The old rule's failure and the new rule's success are both committed**, and the
+  two red tests that caught it are kept forever
+  (`tests/test_review_ch03_findings.py`).
+
+### E-2 - section 5's volume-selection fallback could not fire for a single-volume title
+
+Finding **F2**. Section 5 and golden G-G2 declared that *"every other volume covering
+that part is searched before the item is excluded"*. That fallback was gated on
+`covers_part`, and a **single-volume CFR title carries no `<PARTS>` element at all**,
+so `part_lo` was `None` and `covers_part` was `False` for every part. The volume was
+never searched and its sections were reported as *not in the as-of edition*.
+
+**A volume that declares no range now covers the whole title.** Searching it and
+finding nothing is a real answer; refusing to search it and reporting absence is a
+fabricated one.
+
+**Effect on n:** 38 pairs -> **41 pairs**, n 76 -> **82**.

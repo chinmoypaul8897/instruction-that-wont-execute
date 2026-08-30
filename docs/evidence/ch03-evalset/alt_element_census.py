@@ -125,7 +125,7 @@ def main() -> int:
     p("=" * 78)
     p("")
     p("  The whole-volume census above is an upper bound over material we never")
-    p("  freeze. What matters is what SURVIVES stripping inside the 76 frozen items.")
+    p("  freeze. What matters is what SURVIVES stripping inside the frozen items.")
     p("")
     import json as _json
     from cfr_pit import find_section, strip_leakage, section_text

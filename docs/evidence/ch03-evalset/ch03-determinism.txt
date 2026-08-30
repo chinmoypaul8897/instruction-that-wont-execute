@@ -8,16 +8,16 @@ CH-03 DETERMINISM - rebuild into a temp dir, compare SHA-256 (hard rule 9)
     OK    manifest.json              cda176a9edde37a6839c5c59239bd28e9368f00dc22d2e3d6ff293ad7d29ee4f
 
   data/evalset
-    OK    exclusion_ladder.json      1bce10f8da8d9ee342765dff994911ab9f73ee2d690680105256e8046e1593b4
-    OK    items.jsonl                da28c592710fb813269ae11cdebff1800d6d9c7ce329a00372c465db32125404
-    OK    leakage.json               10bd22412188c8d752dec4768d506dd6f2a42aa4b87d6c9593f4b93133c22d0e
-    OK    manifest.json              a7b67ef56b341764d3eece7689aa72a8fb1786802e6f1d3b69eba5c609ba47b6
+    OK    exclusion_ladder.json      440885be50e42a972e0c06a8da84902cd0b604261b66ff12ae453cf31352c99f
+    OK    items.jsonl                975959c6ec305c5263bea76efa371d5a270571045200c154edfe70611556f6fe
+    OK    leakage.json               b3b72f7b76b41d7b3b5f9c2a3ad2daf587478bc465f14652412037f322016017
+    OK    manifest.json              b44987401c8896c23f1eba06d8ae6327aba1d0c5ef1ccfcbef05c44a4f40cdf0
 
   data/evalset-restricted
     OK    exclusion_ladder.json      091d19cc7e6ec4a418163b7f9637cc5c9ebd53d70f249b40c344ef066da1e45c
-    OK    items.jsonl                aee64c3bf5afd6bed0f40253825da2a1a2973872382cc900fb7ecfe291bbb98e
-    OK    leakage.json               62a0897edf4b1aa6da9ecffdeaa658f0b9d0e75cff546e350a82ec00e3db164e
-    OK    manifest.json              2ff0ef95da973b14cdf8c938acb867ad8335816e50786a359ae86970526425dd
+    OK    items.jsonl                dae704268483ed240a2f4b9a05dce22d7f1b3c043618d014d89b19e76df3cfa5
+    OK    leakage.json               29854c1350508e0abdd11ce69165d2396dcc58982bec8b1ca62ed9a91a3b1bad
+    OK    manifest.json              9010b25cfef63e6e66efb548be0cff936ca92cb8b3851690c6e9319bd11d3a23
 
 ==============================================================================
   DETERMINISTIC - every artefact reproduces byte-for-byte

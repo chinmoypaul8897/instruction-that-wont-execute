@@ -41,6 +41,7 @@ from attribute_amdpars import sha256_file, write_json, write_jsonl  # noqa: E402
 import cfr_pit  # noqa: E402
 from cfr_pit import (  # noqa: E402
     PitError,
+    section_sort_key,
     assert_stripper_on_known_positive,
     candidate_volumes,
     edition_year,
@@ -74,6 +75,19 @@ NORMALISATION = "whitespace-collapsed"          # hard rule 7: declared, never s
 
 class EvalSetError(RuntimeError):
     """Raised instead of `assert`, which `python -O` strips."""
+
+
+def abs_rank(a, b) -> tuple:
+    """A total, order-only distance between two section sort keys.
+
+    Section keys are nested tuples, so they cannot be subtracted. This compares them
+    componentwise and returns a key that increases with distance, which is all the
+    "nearest candidate within a side" tie-break needs. Pure and deterministic.
+    """
+    for x, y in zip(a[1], b[1]):
+        if x != y:
+            return (abs(a[0] - b[0]), abs(x[1] - y[1]) if x[0] == y[0] == 0 else 1)
+    return (abs(a[0] - b[0]), abs(len(a[1]) - len(b[1])))
 
 
 # ============================================================ pure: the pairing
@@ -110,6 +124,26 @@ def build_pairs(counts, defects, tolerance: int = 0):
 
     pairs, unmatched = [], []
     used: dict[str, set] = {}
+    # REVIEW FINDING F1 - the defect that failed CH-03's gate, and the fix.
+    #
+    # The rule WAS `negative = free[0]`, the sorted-first count-matched sibling, while
+    # the positive is a GIVEN section. Negatives therefore sat systematically earlier
+    # in section order, and a six-line label-blind script reading only `frdoc` and
+    # `section` scored 0.8158 on the primary metric - beating B0-agent by 17 pp and
+    # clearing GOOD.md's A1 bar, with no model, no CFR text and no instruction text.
+    # Negatives sorted before their positives 32 of 38 times, exact p = 0.000024.
+    #
+    # `balance` is the running (#negatives that sorted BEFORE) - (#that sorted AFTER).
+    # When candidates exist on both sides of the positive, the side that reduces the
+    # imbalance is taken; within a side the candidate NEAREST the positive is taken,
+    # which is deterministic and needs no RNG. When only one side has candidates the
+    # choice is structural and is taken as-is, and the counter still records it, so
+    # the next free choice compensates.
+    #
+    # It is label-blind: `balance` is updated from section ORDER only and never sees a
+    # verdict. It is deterministic and byte-reproducible (hard rule 9). The residual
+    # is MEASURED rather than asserted - see docs/evidence/ch03-evalset/.
+    balance = 0
     for frdoc, section in sorted(defects):
         doc = counts.get(frdoc, {})
         own = doc.get(section)
@@ -135,12 +169,34 @@ def build_pairs(counts, defects, tolerance: int = 0):
                            else "no-count-matched-sibling"),
                 "count_matched_but_taken": len(any_match)})
             continue
-        negative = free[0]
+        key = section_sort_key(section)
+        lower = [s for s in free if section_sort_key(s) < key]
+        higher = [s for s in free if section_sort_key(s) > key]
+        if lower and higher:
+            # both sides available - take the side that pulls `balance` toward 0
+            side = higher if balance >= 0 else lower
+            forced = False
+        else:
+            # Only one side has candidates: the choice is structural, not selectional,
+            # and is taken as-is. `free` is the final fallback for candidates whose
+            # sort key TIES with the positive's - degenerate section forms, and the
+            # synthetic sections in golden G-D. It must never be empty here: `free`
+            # was already checked non-empty above.
+            side = lower or higher or free
+            forced = True
+        # nearest to the positive within the chosen side; deterministic, no RNG
+        negative = min(side, key=lambda s: (abs_rank(section_sort_key(s), key), s))
+        balance += 1 if section_sort_key(negative) < key else -1
         taken.add(negative)
         pairs.append({"frdoc": frdoc, "positive": section, "negative": negative,
                       "instruction_count": own,
                       "count_matched_candidates": len(any_match),
-                      "free_candidates": len(free)})
+                      "free_candidates": len(free),
+                      "candidates_lower": len(lower),
+                      "candidates_higher": len(higher),
+                      "side_forced": forced,
+                      "negative_sorts_before_positive":
+                          section_sort_key(negative) < key})
     if len(pairs) + len(unmatched) != len(list(defects)):
         raise EvalSetError("pairs + unmatched != defects; the ladder does not close")
     return pairs, unmatched

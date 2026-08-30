@@ -188,7 +188,16 @@ def parse_parts_header(header: str) -> dict:
             if re.search(r"\bEnd\b", paren):
                 sec_hi = None
     return {"part_lo": part_lo, "part_hi": part_hi,
-            "section_lo": sec_lo, "section_hi": sec_hi, "raw": header}
+            "section_lo": sec_lo, "section_hi": sec_hi, "raw": header,
+            # REVIEW FINDING F2. A SINGLE-VOLUME TITLE CARRIES NO <PARTS> ELEMENT AT
+            # ALL - CFR-2016-title13-vol1.xml has none in 4,157,015 bytes. Without
+            # this flag `part_lo` is None, `volume_covers` returns (False, False) for
+            # every part, `candidate_volumes` returns [], and the declared G-G2
+            # fallback cannot fire because it is itself gated on covers_part. The
+            # section is then dropped as "not in the as-of edition" - a wrong answer
+            # presenting as a smaller n rather than as an error, which is the exact
+            # shape goldens.md G-G2 warned about.
+            "declares_range": part_lo is not None}
 
 
 def volume_covers(rng: dict, part: str, section: str) -> tuple[bool, bool]:
@@ -203,7 +212,10 @@ def volume_covers(rng: dict, part: str, section: str) -> tuple[bool, bool]:
         return False, False
     lo, hi = rng["part_lo"], rng["part_hi"]
     if lo is None:
-        return False, False
+        # F2: no declared range means a single-volume title, which covers the WHOLE
+        # title. Searching it and finding nothing is a real answer; refusing to search
+        # it and reporting "not in the as-of edition" is a fabricated one.
+        return True, True
     covers_part = p >= lo and (hi is None or p <= hi)
     if not covers_part:
         return False, False

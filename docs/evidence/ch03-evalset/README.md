@@ -11,20 +11,33 @@ not exist at either SHA.
 
 ## The headline
 
+**CH-03 FAILED its first adversarial review and was fixed.** The numbers below are the
+post-fix numbers; `docs/reviews/REVIEW_CH-03.md` carries the verdict and the two
+findings, and `docs/evidence/checkpoint/withdrawn/` keeps the figures that were
+computed on the defective set. Nothing was quietly replaced.
+
+| | before the review | **after the fix** |
+|---|---:|---:|
+| Pairs | 38 | **41** |
+| n | 76 | **82** |
+| **label-blind sort-order attack** | **0.8158** | **0.5610** |
+| negatives sorting before their positive | 32/38, p = 0.000024 | **21/41, p = 1.0000** |
+
+Target is >= 42 pairs (n >= 84) - **not reached**, so the pre-registered
+**[30, 42) branch** applies: proceed, report the real n, and state the effect size the
+sample can and cannot detect.
+
 | | |
 |---|---|
-| **Pairs** | **38** · n = **76** |
-| Target | ≥ 42 pairs (n ≥ 84) — **not reached** |
-| Pre-registered branch | **[30, 42) → proceed; report the real n and state the effect size this sample can and cannot detect** |
-| Instruction-count match | **exact, tolerance 0**, asserted by `tests/test_eval_set.py::test_EXACT_instruction_count_matching_is_asserted` |
-| Leakage test FAILS on unstripped input? | **YES** — demonstrated on real govinfo bytes, both states committed |
-| Determinism | every artefact rebuilds **byte-for-byte** (`ch03-determinism.txt`) |
+| Instruction-count match | **exact, tolerance 0**, asserted by a test and by the frozen data |
+| Negative selection | **balanced in sort order** - the fix for review finding F1 |
+| Leakage test FAILS on unstripped input? | **YES** - demonstrated on real govinfo bytes, both states committed |
+| Determinism | every artefact rebuilds **byte-for-byte** |
 
-**What n = 76 can detect.** `src/score.py::detectable_effect(38)` — the smallest
-all-one-way discordant count clearing α = 0.05 on an exact McNemar is **6**, i.e. a
-floor of **7.9 pp** at this n. A mixed discordant split needs more. This is a floor on
-the detectable effect, not a power calculation, and it is stated because the
-pre-registered branch requires it.
+**What n = 82 can detect.** The smallest all-one-way discordant count
+clearing alpha = 0.05 on an exact McNemar is **6**, a floor of
+**7.3 pp**. A mixed discordant split needs more. This is a floor
+on the detectable effect, not a power calculation.
 
 ## 1a · The v1.1 re-measurement — `remeasure-v11.txt`
 
@@ -56,8 +69,7 @@ cannot raise a failing figure, which is why re-measuring was safe to do honestly
 
 ## 1c · The leakage strips — `alt-element-census.txt`
 
-**Over the 76 frozen items:** `EDNOTE` 5 · `EFFDNOTP` 1 · `CITA` 64 · `EAR` 0 —
-**70 elements stripped**.
+**Over the 82 frozen items:** `EDNOTE` 3 - `EFFDNOTP` 0 - `CITA` 65 - `EAR` 0 = **68 elements stripped**.
 
 **`EAR` is 0 and the zero is warranted, not merely printed.** Q8: a strip counter that
 prints zero may be looking for the wrong element name. The known-positive assertion
@@ -78,7 +90,7 @@ names and the known-positive assertion RAISES —
 
 ### The publishable corpus result plan.md CH-04 asks for
 
-> **8 of 76 items (10.5%) would have contained the answer in their UNSTRIPPED text.**
+> **5 of 82 items would have contained the answer in their UNSTRIPPED text.**
 
 `CONTEXT.md` §8 said "the per-item rate is UNKNOWN and measuring it is part of the
 fix." This is that number.
@@ -94,30 +106,29 @@ in 26 volumes**.
 **The pre-registered three-rule test caught it and a one-rule test would not have.**
 All 379 carry one of the literals, so rule (c) is a complete backstop; rule (a) is
 blind to it. Two pairs were excluded on `leakage-test-failed-after-strip`. **The
-stripper was NOT extended** — that is a Class A spec change, and the post-hoc edit
-would have raised n from 76 to 80, which is the direction this project refuses.
+stripper was NOT extended** — that is a Class A spec change, and a post-hoc edit that
+RAISES n is the direction this project refuses.
 
 **Residual exposure, measured on the frozen corpus:** `EFFDNOT` 0 · `REVTXT` 0 ·
-`SOURCE` 0 · `NOTE` 14 in 6 items · `APPRO` 1 · `SECAUTH` 1. And **0 of 76 frozen items
+`SOURCE` 0 · `NOTE` 21 in 7 items · `APPRO` 2 · `SECAUTH` 4. And **0 of 82 frozen items
 contain any `NN FR NNNN` citation at all** — stronger than rule (b) requires.
 
 ## 1d · The exclusion ladder — every rung with its positive/negative split
 
 | rung | items | positives | negatives |
 |---|---:|---:|---:|
-| pool citations resolved (the top) | 85 | 85 | — |
+| pool citations resolved | 85 | 85 | 0 |
 | document completeness below floor | 0 | 0 | 0 |
 | positive has no attributed instructions | 13 | 13 | 0 |
-| no count-matched sibling | 22 | 22 | 0 |
-| no **free** count-matched sibling | 0 | 0 | 0 |
+| no count matched sibling | 22 | 22 | 0 |
+| no free count matched sibling | 0 | 0 | 0 |
 | no title for section | 0 | 0 | 0 |
-| as-of edition unavailable | 0 | 0 | 0 |
-| section not in the as-of edition | 20 | 10 | 10 |
-| **leakage test failed after strip** | 4 | 2 | 2 |
-| **kept** | **76** | **38** | **38** |
+| as of edition unavailable | 0 | 0 | 0 |
+| section not in as of edition | 14 | 7 | 7 |
+| leakage test failed after strip | 4 | 2 | 2 |
+| kept | 82 | 41 | 41 |
 
-`13 + 22 + 10 + 2 + 38 = 85`. The ladder closes, and the closure is **asserted** in
-code, not eyeballed.
+The ladder closes at 85 and the closure is **asserted** in code, not eyeballed.
 
 **Diagnostics — computed, published, never used as the eval set:** pairs at
 tolerance ±1 = **56**; pairs under the 0.90 reference floor = **1**.
@@ -128,7 +139,7 @@ finding.
 
 ## 1e · The freeze
 
-`data/evalset/` — `items.jsonl` (976,820 B), `exclusion_ladder.json`, `leakage.json`,
+`data/evalset/` — `items.jsonl`, `exclusion_ladder.json`, `leakage.json`,
 `manifest.json`. `data/evalset-restricted/` is the same build with the ≥ 0.90 floor
 applied (`QUESTIONS.md` Q16 reading (i)): **1 pair, n = 2**, committed so the architect
 can flip the eval set with one flag.

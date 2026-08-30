@@ -43,9 +43,9 @@
       },
       "kept": {
         "detail": [],
-        "items": 76,
-        "negatives": 38,
-        "positives": 38
+        "items": 82,
+        "negatives": 41,
+        "positives": 41
       },
       "leakage-test-failed-after-strip": {
         "detail": [
@@ -75,17 +75,6 @@
               {
                 "role": "positive",
                 "section": "3.111",
-                "violations": [
-                  {
-                    "detail": "Effective Date Note",
-                    "kind": "literal",
-                    "rule": "c"
-                  }
-                ]
-              },
-              {
-                "role": "negative",
-                "section": "1.1",
                 "violations": [
                   {
                     "detail": "Effective Date Note",
@@ -375,22 +364,10 @@
             "why": "positive: section-not-in-as-of-edition"
           },
           {
-            "frdoc": "2016-16399",
-            "negative": "121.1001",
-            "positive": "125.6",
-            "why": "positive: no-volume-covers-this-part"
-          },
-          {
             "frdoc": "2018-25443",
             "negative": "2.42",
             "positive": "2.22",
             "why": "positive: section-not-in-as-of-edition"
-          },
-          {
-            "frdoc": "2021-04453",
-            "negative": "516.812",
-            "positive": "556.360",
-            "why": "negative: section-not-in-as-of-edition"
           },
           {
             "frdoc": "2021-27643",
@@ -400,7 +377,7 @@
           },
           {
             "frdoc": "2023-25797",
-            "negative": "228.22",
+            "negative": "25.21",
             "positive": "25.13",
             "why": "positive: section-not-in-as-of-edition"
           },
@@ -418,25 +395,19 @@
           },
           {
             "frdoc": "2025-24232",
-            "negative": "107.1140",
+            "negative": "107.1810",
             "positive": "107.1820",
             "why": "positive: volume-index-failed: <HTTPError 404: 'Not Found'>"
-          },
-          {
-            "frdoc": "2026-08556",
-            "negative": "674.39",
-            "positive": "682.405",
-            "why": "negative: section-not-in-as-of-edition"
           }
         ],
-        "items": 20,
-        "negatives": 10,
-        "positives": 10
+        "items": 14,
+        "negatives": 7,
+        "positives": 7
       }
     }
   },
-  "n_items": 76,
-  "n_pairs": 38,
+  "n_items": 82,
+  "n_pairs": 41,
   "per_document_completeness_floor": 0.9,
   "target_pairs": 42
 }

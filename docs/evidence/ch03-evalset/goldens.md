@@ -240,3 +240,31 @@ searched before the item is excluded**, and the route that found it is recorded.
 volume forward unchanged when nothing in it was amended. **The edition is the year
 folder on govinfo, never the `<REVISED>` line**, and the `<REVISED>` line is recorded
 per item so the discrepancy is visible rather than assumed away.
+
+### G-D2 · The negative-selection rule must be NEUTRAL IN SORT ORDER — added at the review
+
+G-D fixed *which* negative is consumed and *that* a negative is consumed once. It did
+not fix the property that mattered, and the CH-03 adversarial review found the gap:
+**a rule can satisfy every assertion in G-D and still leak the label through section
+order.**
+
+Mutation **M7** — flipping the rule from the sorted-FIRST to the sorted-LAST candidate
+— **is caught** by the suite. So the suite pinned the declared rule exactly. **No test
+asserted the rule was unbiased**, and that is why a green suite shipped an eval set a
+six-line script beat at 0.8158.
+
+**A test that pins a rule is not a test that the rule is correct.**
+
+**Expected, and now asserted on the frozen corpus forever:**
+
+| property | expected |
+|---|---|
+| label-blind sort-order script accuracy | **≤ 0.60** |
+| negatives sorting before their positive | not significantly ≠ half at α = 0.05 |
+
+Measured before the fix: **0.8158**, and **32 of 38** (exact two-sided p = 0.000024).
+Measured after: **0.5610**, and **21 of 41** (exact two-sided p = 1.0000).
+
+The kept tests are `tests/test_review_ch03_findings.py`. They were RED when written
+and are GREEN now, and both states are in the history — hard rule 6's probe that
+flips, on the most important defect this project has found in its own work.

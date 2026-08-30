@@ -2,16 +2,16 @@
   "chunk": "CH-03",
   "files": {
     "exclusion_ladder.json": {
-      "bytes": 13109,
-      "sha256": "1bce10f8da8d9ee342765dff994911ab9f73ee2d690680105256e8046e1593b4"
+      "bytes": 12223,
+      "sha256": "440885be50e42a972e0c06a8da84902cd0b604261b66ff12ae453cf31352c99f"
     },
     "items.jsonl": {
-      "bytes": 976820,
-      "sha256": "da28c592710fb813269ae11cdebff1800d6d9c7ce329a00372c465db32125404"
+      "bytes": 925057,
+      "sha256": "975959c6ec305c5263bea76efa371d5a270571045200c154edfe70611556f6fe"
     },
     "leakage.json": {
-      "bytes": 1923,
-      "sha256": "10bd22412188c8d752dec4768d506dd6f2a42aa4b87d6c9593f4b93133c22d0e"
+      "bytes": 1672,
+      "sha256": "b3b72f7b76b41d7b3b5f9c2a3ad2daf587478bc465f14652412037f322016017"
     }
   },
   "normalisation": "whitespace-collapsed",
@@ -20,25 +20,13 @@
       "bytes": 4822576,
       "sha256": "195e20f6bd9339496c5f491096e6c01a9e04b912afc59b28b32e5b7745e0ffa4"
     },
-    "CFR-2004-title40-vol6.xml": {
-      "bytes": 3917644,
-      "sha256": "0fc0183829a00a7d25949489cb1a310bf7175d1ff91d6c899683f4ff643e76f1"
-    },
     "CFR-2005-title49-vol2.xml": {
       "bytes": 8092952,
       "sha256": "ec889a7afe9bb7a0842562a4d3ab5ae2b6738adf5c8391705cb9b3fb1bb36a95"
     },
-    "CFR-2011-title47-vol1.xml": {
-      "bytes": 4738085,
-      "sha256": "67ce5263eb8bd1814f62655e5f325365820cce73fed9ecc1d2636e233f65f314"
-    },
     "CFR-2011-title47-vol5.xml": {
       "bytes": 6309833,
       "sha256": "26e860f98612090e41bf2b1bb162a5f6c19baf358ff4b9c5bef7a6c46bcf3794"
-    },
-    "CFR-2014-title47-vol1.xml": {
-      "bytes": 4936387,
-      "sha256": "f3374fece6d19e823ea6fbb81e7697f0a48f2aaadd01da2c58e13672dd403b81"
     },
     "CFR-2014-title47-vol5.xml": {
       "bytes": 6240212,
@@ -56,13 +44,13 @@
       "bytes": 1831878,
       "sha256": "320226f854e6903b4847a330a2f5530b10d5f55007006ee2f6ecd686116464eb"
     },
-    "CFR-2015-title7-vol12.xml": {
-      "bytes": 3520386,
-      "sha256": "1ae4caa97e3719d5517a555de750634b49a78d57e8186a9b14e6b7f1b75ce938"
-    },
     "CFR-2015-title7-vol13.xml": {
       "bytes": 1813125,
       "sha256": "4832b099176d312d7460b47fd2f00d62f908f1e2f20d79aced03d658a69d3a9c"
+    },
+    "CFR-2016-title13-vol1.xml": {
+      "bytes": 4157015,
+      "sha256": "ff6f36d59fab5d8dedcaedb781af4871ff482a45775132d0a550d00a1be75230"
     },
     "CFR-2016-title21-vol6.xml": {
       "bytes": 3307021,
@@ -96,14 +84,6 @@
       "bytes": 4862693,
       "sha256": "1989fc2b2f65f42f5b1104add2a54e67beab59150b5c4c7f2dddc08762945522"
     },
-    "CFR-2019-title47-vol1.xml": {
-      "bytes": 5033215,
-      "sha256": "9fac0dc2bd8268c5007ebbc102204e65e8edeefdfcccdf782220089b06a9a6a7"
-    },
-    "CFR-2019-title47-vol2.xml": {
-      "bytes": 2985956,
-      "sha256": "a8dc7b642495c722835cd99a025ac0d2c286e1a25c1a79fd2f8d8726a3850ac6"
-    },
     "CFR-2019-title47-vol5.xml": {
       "bytes": 6018315,
       "sha256": "5143d6cc129dbdbbd0836c1d07c7431076b72d961d2095901bbdadeb729a5d0c"
@@ -112,9 +92,9 @@
       "bytes": 4646138,
       "sha256": "489b13ec7c7a6979c42235379738a203c549be7fa3b0b3ed6d1173355dc93cad"
     },
-    "CFR-2020-title40-vol11.xml": {
-      "bytes": 5689617,
-      "sha256": "a7fcd092ca649da0b9bbda512bdf1a428961fb7ef88e18221eeb976573aefedb"
+    "CFR-2020-title21-vol6.xml": {
+      "bytes": 3391470,
+      "sha256": "039dcdc9d5bbbad05c735a3ea3ecba150cc5425edd84700f1e6493fdb1f12b49"
     },
     "CFR-2020-title40-vol15.xml": {
       "bytes": 3355384,
@@ -136,10 +116,6 @@
       "bytes": 5727595,
       "sha256": "09df731acd54c69a75f2152f705c90fa2255fe2d775d235c616ae7facccff637"
     },
-    "CFR-2023-title40-vol7.xml": {
-      "bytes": 4706751,
-      "sha256": "3987a3edc005c10aa5911500f7f3d9f328020fe1f114259420c49bdb95b2e570"
-    },
     "CFR-2023-title7-vol8.xml": {
       "bytes": 4657223,
       "sha256": "39ddf657b67f97e0d4253277686b11591210d68c390f54afb5423b4fa1e98578"
@@ -147,10 +123,6 @@
     "CFR-2024-title34-vol1.xml": {
       "bytes": 3501459,
       "sha256": "6ea00ea64d6217710e64d2c4d5edcb0a8f7f97c14685baa7eac8db8b796c38c7"
-    },
-    "CFR-2024-title45-vol4.xml": {
-      "bytes": 3224740,
-      "sha256": "c11257490ae375a5814d0ff51ff332ae6bbf07b3767a55c65912a7e0d8cfdcc3"
     },
     "CFR-2024-title45-vol5.xml": {
       "bytes": 5345881,
@@ -180,13 +152,13 @@
       "bytes": 5891948,
       "sha256": "2eb0b2c8833ae102d764c56d6a73c8111b886210ef59bf8f95f783bfd19c8dd2"
     },
+    "CFR-2025-title34-vol4.xml": {
+      "bytes": 2405250,
+      "sha256": "2fb6499f28ebf92a971dcaebcc076ecfdbfe26c2858e6da94d4a3fa5ff0b8c2f"
+    },
     "CFR-2025-title40-vol36.xml": {
       "bytes": 6019788,
       "sha256": "f2ff680fe2d9473beb791d35d23f4ebeed075e7fbf5fe3341d71c58b2e1b8c1e"
-    },
-    "CFR-2025-title40-vol7.xml": {
-      "bytes": 5240865,
-      "sha256": "ac562a8f30576876c2af78f2b5159ac4dafbdb72e83ebd2258eb71e5fdd51c00"
     },
     "CFR-2025-title40-vol8.xml": {
       "bytes": 8095227,

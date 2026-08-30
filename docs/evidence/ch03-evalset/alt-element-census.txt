@@ -2,22 +2,22 @@
 ALTERNATE NOTE-ELEMENT CENSUS - QUESTIONS.md Q8's trap, measured
 ==============================================================================
 
-  volumes scanned: 68
+  volumes scanned: 69
 
   element       occurrences   volumes   named by CONTEXT 8
-  EDNOTE                857        67                  YES
+  EDNOTE                868        68                  YES
   EFFDNOTP              446        31                  YES
-  CITA                31943        68                  YES
-  EAR                  3303        68                  YES
+  CITA                32631        69                  YES
+  EAR                  3352        69                  YES
   EFFDNOT               379        26                   no
   EFFDNOTE                0         0                   no
-  NOTE                 3051        46                   no
+  NOTE                 3053        47                   no
   NOTES                   0         0                   no
   NOTE1                   0         0                   no
   REVTXT                200        27                   no
-  APPRO                 964        32                   no
+  APPRO                 965        33                   no
   SECAUTH              2322        50                   no
-  SOURCE               3140        66                   no
+  SOURCE               3207        67                   no
   CREDIT                  0         0                   no
   AMDNOTE                 0         0                   no
 
@@ -28,18 +28,18 @@ IS plan.md's LITERAL TEST (rule c) A COMPLETE BACKSTOP FOR THE UNNAMED ONES?
 ==============================================================================
 
   element       carries a literal   carries NONE    backstop
-  EDNOTE                      856              1 n/a (named)
+  EDNOTE                      867              1 n/a (named)
   EFFDNOTP                    446              0 n/a (named)
-  CITA                          0          31943 n/a (named)
-  EAR                           0           3303 n/a (named)
+  CITA                          0          32631 n/a (named)
+  EAR                           0           3352 n/a (named)
   EFFDNOT                     379              0    COMPLETE
-  NOTE                          0           3051  INCOMPLETE
+  NOTE                          0           3053  INCOMPLETE
   REVTXT                        5            195  INCOMPLETE
-  APPRO                         0            964  INCOMPLETE
+  APPRO                         0            965  INCOMPLETE
   SECAUTH                       0           2322  INCOMPLETE
-  SOURCE                        0           3140  INCOMPLETE
+  SOURCE                        0           3207  INCOMPLETE
 
-  UNNAMED elements carrying NO literal, i.e. residual exposure: 9672
+  UNNAMED elements carrying NO literal, i.e. residual exposure: 9742
 
   A sample <EFFDNOT>, the element CONTEXT.md section 8 does not name:
     from CFR-2004-title40-vol15.xml
@@ -50,26 +50,26 @@ RESIDUAL EXPOSURE ON THE FROZEN CORPUS ITSELF - the number that decides
 ==============================================================================
 
   The whole-volume census above is an upper bound over material we never
-  freeze. What matters is what SURVIVES stripping inside the 76 frozen items.
+  freeze. What matters is what SURVIVES stripping inside the frozen items.
 
-  frozen items inspected: 76
+  frozen items inspected: 82
 
   element        surviving   items affected
   EFFDNOT                0                0
   EFFDNOTE               0                0
-  NOTE                  14                6
+  NOTE                  21                7
   NOTES                  0                0
   NOTE1                  0                0
   REVTXT                 0                0
-  APPRO                  1                1
-  SECAUTH                1                1
+  APPRO                  2                2
+  SECAUTH                4                4
   SOURCE                 0                0
   CREDIT                 0                0
   AMDNOTE                0                0
 
   frozen items whose STRIPPED text still contains ANY 'NN FR NNNN'
   citation (not necessarily their own - rule (b) already excludes that):
-    0 of 76
+    0 of 82
 
   This figure is REPORTED, not remedied. CONTEXT.md section 8's honest
   bounding already says prior notes on the same section are

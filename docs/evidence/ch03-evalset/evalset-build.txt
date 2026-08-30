@@ -20,11 +20,11 @@ EXCLUSION LADDER - every rung, with its positive/negative split
   no-free-count-matched-sibling                  0   (+0 / -0)
   no-title-for-section                           0   (+0 / -0)
   as-of-edition-unavailable                      0   (+0 / -0)
-  section-not-in-as-of-edition                  20   (+10 / -10)
+  section-not-in-as-of-edition                  14   (+7 / -7)
   leakage-test-failed-after-strip                4   (+2 / -2)
-  kept                                          76   (+38 / -38)
+  kept                                          82   (+41 / -41)
 
-  PAIRS = 38   n = 76   target >= 42 pairs (n >= 84)
+  PAIRS = 41   n = 82   target >= 42 pairs (n >= 84)
   per-document completeness floor APPLIED: 0.0
   documents kept 70 / excluded by that floor 0
 
@@ -36,12 +36,12 @@ EXCLUSION LADDER - every rung, with its positive/negative split
 ==============================================================================
 LEAKAGE STRIPS over the frozen corpus
 ==============================================================================
-  EDNOTE          5
-  EFFDNOTP        1
-  CITA           64
+  EDNOTE          3
+  EFFDNOTP        0
+  CITA           65
   EAR             0
-  TOTAL          70
-  items whose UNSTRIPPED text would have contained the answer: 8 / 76
+  TOTAL          68
+  items whose UNSTRIPPED text would have contained the answer: 5 / 82
   leakage-test failures after stripping: 2
 
-  frozen: data\evalset   items.jsonl bytes=976,820
+  frozen: data\evalset   items.jsonl bytes=925,057
