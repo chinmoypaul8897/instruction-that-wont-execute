@@ -165,7 +165,25 @@ Reference measurements from 9 titles (12, 20, 21, 24, 26, 40, 42, 45, 49) — sa
 | Localise below section level | 6/44 (13.6%) |
 | State an explicit mechanism | 10/44 (22.7%) |
 
-**Expected full pool across 50 titles: 150–250 defect notes, ~130–210 section-level.** The eCFR search API previously reported 92 — it undercounts by ~2.3×.
+### MEASURED at CH-01 — this supersedes the projection that was here
+
+| | |
+|---|---|
+| Corpus | **49 titles, 824,289,052 B** (not ~2.3 GB / 50 — title 35 is reserved and has no govinfo folder) |
+| `<EDNOTE>` extracted | **2,428** |
+| Codification-defect notes | **107** (4.4% of EDNOTEs) |
+| … section-level | **86** |
+| … **with a resolvable FR citation** | **85 — the pool gate number. ≥ 60 required. CLEARS at 1.42×.** |
+| Distinct FR documents | **78** — this bounds the count-matched pair yield |
+| Spread | 25 titles |
+
+**Three corrections to this file's own earlier text, each measured rather than argued:**
+
+1. **The "150–250" projection was wrong — the real figure is 107.** The nine reference titles are the *largest*: 408 MB of 824 MB (50% of the corpus by bytes, 18% by title count). Extrapolating per-title from them overshot by **2.28×**.
+2. **The claim that the eCFR search API's 92 "undercounts by ~2.3×" was false.** Measured govinfo:eCFR = **1.16×**. 92 was close to the truth; the range built to discredit it carried the error. Both figures are published; neither is quoted alone.
+3. **"Section-level" has two readings and they differ by 2.** Notes that *name* a section = 38 on the reference set; notes that *sit inside* one = 36. **The gate uses the smaller.** Both ship.
+
+*The 9-title reference reproduces exactly on today's bytes — 903 EDNOTEs, 44 defect, 44 carrying an FR citation — from a parser written without sight of those numbers.*
 
 ### AMDPAR attribution — the algorithm, specified here so a reviewer can reimplement it
 
@@ -217,6 +235,10 @@ Per-element strip counts go in the freeze manifest **and** in the README as a na
 **Why this is gate-class: it fails silently and in the flattering direction.** Accuracy goes *up*. Every guard in §7 still passes. `GOOD.md`'s thresholds are cleared. And a FULL adversarial review of CH-03 could not have caught it, because this file — the only document the reviewer reimplements from — did not mention it. It was lost in transcription from `08-FINAL-CALL.md` §5.
 
 *(The eCFR "Link to an amendment published at NN FR …" annotation needs no strip: it is an eCFR artifact and appears 0 times in the govinfo annual editions, which are our only source.)*
+
+> ⚠️ **ELEMENT NAMES ARE FORMAT-DEPENDENT — raised at CH-01 (Q8), and it bites at CH-03.**
+> The leakage containment above (26/28 `<EDNOTE>` inside `<SECTION>`) was measured on a **CFR annual-edition** file. **ECFR bulk XML has no `<SECTION>` element at all** — it uses `DIV8 TYPE="SECTION"` (title 7: 17,205 `DIV8`, 548 `DIV5 TYPE="PART"`, 144 `DIV9 TYPE="APPENDIX"`, **zero** `<SECTION>`). Both descriptions are correct for their own format; neither spec file said which format it meant.
+> **Consequence, binding on CH-03:** a strip counter that reports **zero** may simply be looking for the wrong element name. **Every strip counter must be asserted against a known-positive input before any zero it prints is believed.** A silent zero here is the leakage defect returning by a different door.
 
 ### Eval set
 - **Positives:** `(rule, section)` pairs carrying a live codification-defect note.
