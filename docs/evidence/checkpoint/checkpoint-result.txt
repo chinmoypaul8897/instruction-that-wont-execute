@@ -1,0 +1,86 @@
+==============================================================================
+*** CHECKPOINT - plan.md's decision rule, applied in its own order
+==============================================================================
+
+  eval set   data/evalset/items.jsonl   n = 82   41 positive / 41 negative
+  aggregation across reps: MAJORITY, ties resolved to the FAILURE side
+
+==============================================================================
+STEP 0 - leakage precondition, checked BEFORE any branch
+==============================================================================
+
+  B0 accuracy = 0.4756   threshold 0.7
+  B0 < 0.70: the precondition does not fire. The branch table is
+  evaluated on these numbers.
+
+==============================================================================
+THE ARMS
+==============================================================================
+
+  as run
+    B0        accuracy 0.4756   per-rep ['0.4756', '0.4756', '0.4634']
+    B0-agent  accuracy 0.6585   per-rep ['0.6585', '0.6585', '0.6585']
+    gap       +18.3 pp
+    McNemar   p = 0.0059   (b=21 c=6 discordant=27, exact two-sided binomial)
+
+==============================================================================
+STEP 1 - the branch table. First match wins.
+==============================================================================
+
+  BRANCH: GREEN
+  because gap 18.3 pp >= 8.0 and p 0.0059 < 0.05
+  evaluated on the as-run numbers
+
+==============================================================================
+GUARDS - CONTEXT.md section 7, per arm, never blended
+==============================================================================
+
+  B0         success+failure 39+43=82   false-defect 0.1220 PASS   missed-defect 0.9268 FAIL   unparseable 3   errors 0
+             95% CI (clustered by FR doc) [0.4146, 0.5357]
+  B0-agent   success+failure 54+28=82   false-defect 0.1951 PASS   missed-defect 0.4878 FAIL   unparseable 0   errors 0
+             95% CI (clustered by FR doc) [0.5385, 0.7703]
+
+==============================================================================
+WHAT THIS n CAN AND CANNOT DETECT - GOOD.md section 4
+==============================================================================
+
+  pairs 41, n 82
+  smallest ALL-ONE-WAY discordant count clearing alpha: 6  -> floor 7.3 pp
+  GOOD.md section 4: the pre-registered success criterion requires n >= 84.
+  n = 82. THE CRITERION IS NOT SATISFIABLE ON THIS CORPUS and 84
+  was not moved to 82.
+
+==============================================================================
+MODEL-SENSITIVITY CHECK - claude-sonnet-5, 1 rep, the pre-registered subset
+==============================================================================
+
+  arm                               B0    B0-agent       gap
+  claude-sonnet-5, n=20         0.5000      0.2000    -30.0 pp
+  haiku, THE SAME 20 items      0.5000      0.7000    +20.0 pp
+  haiku, full corpus n=82       0.4756      0.6585    +18.3 pp
+
+  The haiku row on the SAME 20 items is the only fair comparison. A
+  20-item sonnet gap set against an 82-item haiku gap would be
+  two different item sets with the difference called a model effect.
+
+  QUESTIONS.md Q1 anticipated the OPPOSITE failure - that a cheap model
+  would fail to use the text and we would kill a sound project on weak
+  inference. What was measured is the reverse: the CHEAPER model gains
+  from the text and the STRONGER one loses. The RED branch was not taken
+  and this does not rescue or threaten the GREEN branch either way,
+  which is decided on the full-corpus haiku arms alone.
+
+  THREE REASONS NOT TO OVER-READ THIS, stated before anyone else says them:
+   1. n = 20, ONE rep. The haiku arms are n = 82 and three reps.
+   2. A CONFOUND, not merely a limitation: sonnet-5 REJECTS `temperature`
+      (HTTP 400, measured), so this subset ran at the model default while
+      every haiku arm ran at 0. A sampling difference is a live
+      alternative explanation for a reversal of this size and it has not
+      been ruled out.
+   3. One rep gives no variance estimate at all, so the -30.0 pp has no
+      interval around it.
+
+  It is reported because it was pre-registered and run, not because it is
+  a result this project wanted. CH-08 can settle it with reps at a
+  matched sampling setting; tonight it is a flag, not a finding.
+

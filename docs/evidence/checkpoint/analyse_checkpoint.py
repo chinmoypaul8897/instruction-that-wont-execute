@@ -265,7 +265,7 @@ def main() -> int:
         sub = [i for i in items if i["item_id"] in sub_ids]
         s0, s0a = evaluate(sub, sb0), evaluate(sub, sb0a)
         # The ONLY fair comparison is haiku on the SAME 20 items. Comparing a
-        # 20-item sonnet gap against a 76-item haiku gap would be comparing two
+        # 20-item sonnet gap against the FULL-CORPUS haiku gap would be comparing two
         # different item sets and calling the difference a model effect.
         h0, h0a = evaluate(sub, b0_reps), evaluate(sub, b0a_reps)
         sens = {"n": len(sub),
@@ -286,28 +286,29 @@ def main() -> int:
         p(f"  {'haiku, THE SAME 20 items':<26}{sens['haiku_same_items_b0']:>10.4f}"
           f"{sens['haiku_same_items_b0_agent']:>12.4f}"
           f"{sens['haiku_same_items_gap_pp']:>+9.1f} pp")
-        p(f"  {'haiku, full corpus n=76':<26}{b0['score']['accuracy']:>10.4f}"
+        p(f"  {f'haiku, full corpus n={len(items)}':<26}{b0['score']['accuracy']:>10.4f}"
           f"{b0a['score']['accuracy']:>12.4f}{first['gap_pp']:>+9.1f} pp")
         p("")
         p("  The haiku row on the SAME 20 items is the only fair comparison. A")
-        p("  20-item sonnet gap set against a 76-item haiku gap would be two")
-        p("  different item sets with the difference called a model effect.")
+        p(f"  20-item sonnet gap set against an {len(items)}-item haiku gap would be")
+        p("  two different item sets with the difference called a model effect.")
         p("")
         p("  QUESTIONS.md Q1 anticipated the OPPOSITE failure - that a cheap model")
         p("  would fail to use the text and we would kill a sound project on weak")
         p("  inference. What was measured is the reverse: the CHEAPER model gains")
         p("  from the text and the STRONGER one loses. The RED branch was not taken")
-        p("  and this does not rescue or threaten the AMBER branch either way, which")
-        p("  is decided on the full-corpus haiku arms alone.")
+        p(f"  and this does not rescue or threaten the {verdict} branch either way,")
+        p("  which is decided on the full-corpus haiku arms alone.")
         p("")
         p("  THREE REASONS NOT TO OVER-READ THIS, stated before anyone else says them:")
-        p("   1. n = 20, ONE rep. The haiku arms are n = 76 and three reps.")
+        p(f"   1. n = 20, ONE rep. The haiku arms are n = {len(items)} and three reps.")
         p("   2. A CONFOUND, not merely a limitation: sonnet-5 REJECTS `temperature`")
         p("      (HTTP 400, measured), so this subset ran at the model default while")
         p("      every haiku arm ran at 0. A sampling difference is a live")
         p("      alternative explanation for a reversal of this size and it has not")
         p("      been ruled out.")
-        p("   3. One rep gives no variance estimate at all, so the -15.0 pp has no")
+        p(f"   3. One rep gives no variance estimate at all, so the "
+          f"{sens['gap_pp']:+.1f} pp has no")
         p("      interval around it.")
         p("")
         p("  It is reported because it was pre-registered and run, not because it is")
