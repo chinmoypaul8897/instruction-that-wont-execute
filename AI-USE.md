@@ -15,9 +15,9 @@ are what makes it checkable rather than asserted.
 | Class | What it is | Count | Trajectories live at |
 |---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects | ~90 | `context/*-raw.json` (committed) |
-| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **4** — CH-00, CH-01, CH-02, SPEC-FIX-1 | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
-| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. First used at SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached | **10** | the run's own transcript dir (outside the repo); per-agent tokens and USD in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
-| **Solution** | the evaluation arms — the thing being measured | 0 so far | `docs/trajectories/<run_id>.jsonl` + `docs/evidence/runs/cost_ledger.csv` |
+| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **6** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
+| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached. **NIGHT-RUN: two CH-03 gate reviewers with zero shared context — the first FAILED the chunk and its finding is the most important defect this project has found in its own work** | **12** | `docs/reviews/` for the verdicts and the runnable probes; per-agent cost for the SPEC-FIX-1 panel in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
+| **Solution** | the evaluation arms — the thing being measured | **1028** logged runs across B0, B0-agent and the sonnet subset | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` |
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
 live outside the repository in `~/.claude/projects/`, where Claude Code rotates and
@@ -33,12 +33,24 @@ duty 6 makes a chunk **not done** until its transcript is exported.
 | Model | Exact id | Where used | Price basis |
 |---|---|---|---|
 | Claude Opus 5 (1M context) | `claude-opus-5` | every Claude Code build/review session, incl. this one | $5.00 / $25.00 per MTok |
-| Claude Haiku 4.5 | `claude-haiku-4-5` | **planned** — every evaluation arm, via Message Batches (`QUESTIONS.md` Q1) | $1.00 / $5.00 per MTok, batch at 50% |
-| Claude Sonnet 5 | `claude-sonnet-5` | **planned** — model-sensitivity check at the CHECKPOINT only, 20-item subset | $2.00 / $10.00 per MTok |
+| Claude Haiku 4.5 | **`claude-haiku-4-5-20251001`** | **USED** — every evaluation arm. 951 logged calls | $1.00 / $5.00 per MTok |
+| Claude Haiku 4.5 (alias) | `claude-haiku-4-5` | probe only, 3 calls. See Q1's correction — the night run pre-registered that this alias 404s; **it does not**, and the dated id is used anyway because an alias does not pin a reproducibility claim | same |
+| Claude Sonnet 5 | `claude-sonnet-5` | **USED** — model-sensitivity check only, 20-item subset. 84 calls. **Rejects `temperature` (HTTP 400, measured)**, so it ran at the model default while every haiku arm ran at 0 — a reported asymmetry | $2.00 / $10.00 per MTok |
 
 Prices are Anthropic published list, re-read from the published table on 2026-08-30
 rather than recalled, and recorded in every run as `price_basis` +
 `price_basis_url`. Source: <https://docs.claude.com/en/docs/about-claude/pricing>.
+
+**Delivery is STANDARD, not batch, and that is a correction to `QUESTIONS.md` Q1.**
+Q1 mandated the Message Batches API for its 50% discount; batch is asynchronous with
+up to 24h latency and the CHECKPOINT answer was needed inside one overnight run. Every
+ledger row records `delivery=standard`, so the doubled unit price is visible in the
+evidence rather than assumed away. Q1's batch ruling stands for CH-08's full matrix.
+
+**Measured spend to date: USD 1.935538 over 1038 logged runs** (1,761,960 input /
+8,880 output tokens), against the USD 18.00 ceiling enforced in `src/runlog.py`.
+3 runs carry an EMPTY cost cell rather than a zero — they died before
+reporting token counts, and unknown is not the same claim as free.
 
 **Fairness constraint:** every evaluation arm gets the *same* model. What the model
 choice limits is generalisability, not the internal comparison — and the
@@ -74,6 +86,46 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 ## Session log
 
 Newest first. Every build session appends one row here **and** exports its transcript.
+
+### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 FAILED then FIXED · CHECKPOINT GREEN**
+
+One unattended session, roughly six hours, working a pre-registered queue with the
+operator asleep. Transcript: `docs/trajectories/build/NIGHT-RUN-CHECKPOINT.jsonl`
+(1,348 lines, 3.1 MB; the exporter's redaction sweep found **zero** credentials).
+
+**Models called, all logged through `src/runlog.py`:**
+
+| id | calls | why |
+|---|---:|---|
+| `claude-haiku-4-5-20251001` | 951 | every evaluation arm, 3 reps, temperature 0 |
+| `claude-sonnet-5` | 84 | the 20-item model-sensitivity subset, 1 rep |
+| `claude-haiku-4-5` | 3 | the alias probe that disproved a pre-registered "fact" |
+
+**Subagents: two, both adversarial CH-03 gate reviewers with zero shared context.**
+The first was stopped by a crash before writing its verdict file; its seven runnable
+probes and two RED kept tests survived on disk, the build session re-derived every
+finding independently before acting, and the provenance weakness is stated at the top
+of `docs/reviews/REVIEW_CH-03.md` rather than glossed. The second re-reviews the fix.
+
+**What the first reviewer found, and why it is the most valuable output of the run.**
+The eval set this project built specifically to be unbeatable by a trivial script was
+**beatable by a trivial script**: negatives were chosen as the sorted-first
+count-matched sibling, so a six-line label-blind program reading only `frdoc` and
+`section` — no model, no CFR text, no instruction text — scored **0.8158**, beating
+the `B0-agent` baseline by 17 points. `CONTEXT.md` §8 had guarded the *count*; nobody
+had guarded the *selection*. Fixed, and the probe flips: **0.8158 → 0.5610**, ordering
+bias 32/38 (p = 0.000024) → 21/41 (p = 1.0000). The first CHECKPOINT's numbers were
+computed on the defective set and are **withdrawn, not deleted** —
+`docs/evidence/checkpoint/withdrawn/`.
+
+**Human direction: none during the run.** Every decision that could have blocked was
+pre-registered in `prompts/NIGHT-RUN.md`, and the four questions that arose anyway
+(Q15–Q18) were recorded as Class A for the architect rather than self-authorised —
+including three defects in `CONTEXT.md` itself, which is LAW and which a build session
+does not edit.
+
+**Cost: USD 1.94 of the 18.00 ceiling**, 1,038 logged runs, 3 of unknown cost carrying
+an empty cell rather than a zero.
 
 ### SPEC-FIX-2 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD (spec-edit scope) · **APPLIED**
 
