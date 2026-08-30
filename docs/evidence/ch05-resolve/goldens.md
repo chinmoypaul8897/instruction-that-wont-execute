@@ -134,3 +134,42 @@ False would assert that a designation is absent when none was queried.
 Echoing the identifiers is not decoration: `resolution_trace` in `CONTEXT.md` §5 is the
 artifact a judge reads, and a trace that does not say which section it resolved against
 cannot be checked.
+
+---
+
+## ERRATA
+
+A wrong entry is corrected in a **new** entry, never edited out of the old one.
+R-A..R-G above stand exactly as committed at `715eeec`.
+
+### E-1 — the first test run failed SIX ways. None of the six was the golden's fault.
+
+Written down because `GOOD.md` and `CLAUDE.md` both turn on the difference between
+fixing the code and weakening the test, and this is a worked example of telling them
+apart.
+
+**Five failures were the CODE being incomplete against its own docstring.**
+`_DECLARED` was written to match a designation only at the start of a line, while the
+comment above it said *"at the start of a line **or after sentence-ending
+punctuation**"*. The R-B fixture is a single line - `(a) alpha. (b) beta  gamma.` - so
+`(b)` at offset 11 was never seen. **The code was fixed to do what its own comment
+claimed and what the golden required.** The cross-reference test
+(`as described in (z) above` must not declare a paragraph `(z)`) still passes, which
+is what shows the widened rule did not simply become permissive.
+
+**One failure was a TRANSCRIPTION error in the test, not in the golden.** R-B's table
+gives `siblings = ["(a)", "(b)"]` for the query `(b)(1)`; the test was written with
+`[]`. The fix was to the test.
+
+That correction forced a real design decision, and it is recorded rather than absorbed:
+**`siblings` reports the deepest level ON THE PATH TO THE TARGET that actually
+exists.** For `(b)(1)` where no depth-2 designations are declared, that is
+`["(a)", "(b)"]`. The alternative - an empty list - is strictly less useful, and it is
+less useful in exactly the way section 6 says matters: an empty list says only *no*,
+which is the answer a pure quoted-string matcher already gives on ~80% of the pool.
+Reporting the level that does exist says *"(b) exists, it has no numbered children,
+and here is what does exist at that level"*, which is what `CONTEXT.md` section 9's
+two hard cases - revising a definition that did not exist, adding an entry that already
+exists - actually need.
+
+**No golden value was changed and no assertion was loosened.**
