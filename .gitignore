@@ -1,0 +1,46 @@
+# secrets and env
+.env
+.env.*
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+
+# third-party material we must not redistribute (micro1's own assets)
+d.pdf
+context/01-PROBLEM-PDF.md
+context/media/
+context/images/
+context/slices/
+context/screenshots/
+context/raw/
+
+# operator personal data (ground rule 08)
+context/02-ABOUT-ME.md
+context/me/
+
+# research scratch from prior sessions - large, superseded, not part of the build
+aec/
+bip/
+killtest/
+probe/
+replay/
+scraper/
+hz.html
+wl.html
+
+# bulk corpus downloads - NEVER tracked. data/ holds only extracted, frozen artifacts.
+*.xml
+!data/**/*.xml
+data/raw/
+data/cache/
+dist/
+*.zip
+
+# large media - the video is hosted, not committed (see CH-13)
+*.mp4
+*.mov
+*.mkv
+
+# Windows/Cygwin crash dumps - these land in the repo root unannounced
+*.stackdump
