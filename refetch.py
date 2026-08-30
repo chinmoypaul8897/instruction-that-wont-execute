@@ -23,7 +23,8 @@ manifest records what it looked like when this project measured it. The mismatch
 report below prints both sides rather than exiting on the first difference.
 
 Chunks add to this file as they freeze more of `data/`. CH-01 freezes
-`data/ednotes/`; CH-03 adds the point-in-time section text and the AMDPAR blocks.
+`data/ednotes/`; CH-02 adds `data/amdpars/`; CH-03 adds the point-in-time
+section text.
 """
 from __future__ import annotations
 
@@ -42,6 +43,7 @@ from harvest_ednotes import (  # noqa: E402
     main as harvest_main,
     sha256_file,
 )
+import attribute_amdpars as amdpar  # noqa: E402
 
 # Every frozen artefact set, in the order a fresh clone should rebuild them.
 FREEZES = [
@@ -50,6 +52,12 @@ FREEZES = [
         "dir": DEFAULT_OUT_DIR,
         "raw": DEFAULT_RAW_DIR,
         "what": "govinfo ECFR <EDNOTE> records and the codification-defect pool",
+    },
+    {
+        "chunk": "CH-02",
+        "dir": amdpar.DEFAULT_OUT_DIR,
+        "raw": amdpar.DEFAULT_RAW_DIR,
+        "what": "govinfo FR <AMDPAR> instructions attributed to sections",
     },
 ]
 
@@ -113,6 +121,39 @@ def main(argv=None) -> int:
                            "--out", str(REPO / DEFAULT_OUT_DIR)])
         if rc != 0:
             failures.append("extract returned a non-zero status")
+
+        print()
+        print("=" * 72)
+        print("FETCH  govinfo FR daily issues -> data/raw/fr/   (git-ignored)")
+        print("=" * 72)
+        rc = amdpar.main(["fetch", "--raw", str(REPO / amdpar.DEFAULT_RAW_DIR)])
+        if rc != 0:
+            failures.append("FR issue fetch reported a failure")
+
+        print()
+        print("=" * 72)
+        print("EXTRACT  <AMDPAR> -> data/amdpars/   (pure: no network, no clock)")
+        print("=" * 72)
+        # Two rounds, bounded. A citation whose note carries the FILING date rather
+        # than the publication date resolves in a neighbouring issue, and the extract
+        # cannot know which neighbours it needs until it has tried. Round 1 records
+        # them in `wanted_issues.json`; round 2 runs with them present. If round 2
+        # still wants an issue the ladder says so and the rung is counted, never
+        # papered over.
+        for round_no in (1, 2):
+            rc = amdpar.main(["extract", "--raw", str(REPO / amdpar.DEFAULT_RAW_DIR),
+                              "--out", str(REPO / amdpar.DEFAULT_OUT_DIR)])
+            if rc != 0:
+                failures.append(f"AMDPAR extract round {round_no} returned non-zero")
+                break
+            wanted_path = REPO / amdpar.DEFAULT_OUT_DIR / "wanted_issues.json"
+            wanted = json.loads(wanted_path.read_text(encoding="utf-8"))["dates"]
+            if not wanted:
+                print(f"  round {round_no}: no neighbour-day issues outstanding")
+                break
+            print(f"  round {round_no}: fetching neighbour-day issues {wanted}")
+            for r in amdpar.fetch_issues(REPO / amdpar.DEFAULT_RAW_DIR, wanted):
+                print(f"    {r['date']}  {r['bytes']:>12,} B  {r['status']}")
 
     print()
     print("=" * 72)

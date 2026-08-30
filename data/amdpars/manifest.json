@@ -1,0 +1,398 @@
+{
+  "chunk": "CH-02",
+  "files": {
+    "amdpars.jsonl": {
+      "bytes": 7446301,
+      "sha256": "f60e9e116359fabd7572d91a86e7b7d451d38d3f28257ee20828ad5a83954581"
+    },
+    "citations.json": {
+      "bytes": 30226,
+      "sha256": "13c347a1adac1948355571d66ed46efbe32ea031208365345766d2142815e157"
+    },
+    "completeness.json": {
+      "bytes": 77746,
+      "sha256": "dd27ef574fd49f5fe284d6653f54610085349f31a18639b6c734cdadec8e1310"
+    },
+    "documents.json": {
+      "bytes": 191225,
+      "sha256": "17e0df3082a1dd80996c3da0a78eba070898ac9f43a8d0952ef3f85e38f8f736"
+    },
+    "pair_yield.json": {
+      "bytes": 57894,
+      "sha256": "d2dac0f8d43b7c9d636d233cac068e8f2b3caabee7b6b797c84a727055651e59"
+    },
+    "wanted_issues.json": {
+      "bytes": 141,
+      "sha256": "72e08e20425e1fbdd55431197dfcb398920c481f1c7e654c908f8cb3b944e6e7"
+    }
+  },
+  "normalisation": "whitespace-collapsed",
+  "raw_inputs": {
+    "FR-2005-05-18.xml": {
+      "bytes": 3328424,
+      "sha256": "3486bf35bfc2499271018806fcbbf0993c89091951456300262af107115f200f",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2005/05/FR-2005-05-18.xml"
+    },
+    "FR-2006-09-14.xml": {
+      "bytes": 1893997,
+      "sha256": "349f46671c52438c28a74f1b36005ccf91f177c3e7014aa78d86e847f26095fe",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2006/09/FR-2006-09-14.xml"
+    },
+    "FR-2011-05-19.xml": {
+      "bytes": 2268238,
+      "sha256": "1fd90444bc827640df1afc03a41a9acc832c9bf510103f70adf0f496fb6f932b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2011/05/FR-2011-05-19.xml"
+    },
+    "FR-2011-11-02.xml": {
+      "bytes": 4324174,
+      "sha256": "86e6e51f286db2f00a8e29bd320e43ca65995636bec2c469fca5aacde5efc32b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2011/11/FR-2011-11-02.xml"
+    },
+    "FR-2014-04-29.xml": {
+      "bytes": 3936631,
+      "sha256": "00df32bc3f9590df4138ccd75fdd2dfebebf5a855138dc9d0a7f5028e19ade9c",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2014/04/FR-2014-04-29.xml"
+    },
+    "FR-2015-02-24.xml": {
+      "bytes": 3862675,
+      "sha256": "307b9383ac61d6b3b8a3633c8d84fcf149c7ec6ce72a3bbf8f4b55334f634617",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2015/02/FR-2015-02-24.xml"
+    },
+    "FR-2015-07-07.xml": {
+      "bytes": 2296964,
+      "sha256": "d7895f07ae6c29ed8193bac50068751223e06004e8eb531ebe5288b115d99b58",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2015/07/FR-2015-07-07.xml"
+    },
+    "FR-2016-02-23.xml": {
+      "bytes": 2600036,
+      "sha256": "f91d58a8da3f8ac65f0a02cd37ec7039fb27bcdf2404651121a1cbe502c3889b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/02/FR-2016-02-23.xml"
+    },
+    "FR-2016-04-18.xml": {
+      "bytes": 3860669,
+      "sha256": "b34b3036535c50d7bb25622323e5f7d8cec70ffecf0a8a4e566b47460c45baeb",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/04/FR-2016-04-18.xml"
+    },
+    "FR-2016-04-29.xml": {
+      "bytes": 4412116,
+      "sha256": "280bd7c5e1f0ef920eb2715a762dcb763aac6ba0013f54374e518c19626b2e6e",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/04/FR-2016-04-29.xml"
+    },
+    "FR-2016-06-10.xml": {
+      "bytes": 5426546,
+      "sha256": "c2e040d6e3e718839cdd85dee2db3e38c70382a4c73b7d608c284c012a8084e0",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/06/FR-2016-06-10.xml"
+    },
+    "FR-2016-06-14.xml": {
+      "bytes": 3048428,
+      "sha256": "c8486c769cc310e3f01fbd8814a2fb9a543a2d2bb10550931f8b0766f51fc739",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/06/FR-2016-06-14.xml"
+    },
+    "FR-2016-07-25.xml": {
+      "bytes": 3622300,
+      "sha256": "3ef33fa53ad1dacc69263858a949cc3863303713fdffaa850d847a16e84f23eb",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/07/FR-2016-07-25.xml"
+    },
+    "FR-2016-08-03.xml": {
+      "bytes": 2107683,
+      "sha256": "b254796caef938d5f5da0c08b19d17c70d12022d523d7640c058e2b5f2afc6a6",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/08/FR-2016-08-03.xml"
+    },
+    "FR-2016-10-04.xml": {
+      "bytes": 4697518,
+      "sha256": "6f36a7649c5ba30ebfe0c9297f9339845fd7351343940afc94d68b8baf5a7d05",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2016/10/FR-2016-10-04.xml"
+    },
+    "FR-2017-01-19.xml": {
+      "bytes": 12981773,
+      "sha256": "6ed417ff4a4a54fbfe0b6caebd5bbf4ea1806a9cd30d81411975a114d9ac34dc",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2017/01/FR-2017-01-19.xml"
+    },
+    "FR-2017-11-15.xml": {
+      "bytes": 4425116,
+      "sha256": "1e6eba9640e8a55314612d20f99c18e5308922f99ae595ed1b4266ae6af973c1",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2017/11/FR-2017-11-15.xml"
+    },
+    "FR-2017-12-18.xml": {
+      "bytes": 1424590,
+      "sha256": "58cdf7d99540e3848767639f90448a9acbe7d828a4e906c9a750e82e5dccc886",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2017/12/FR-2017-12-18.xml"
+    },
+    "FR-2018-11-29.xml": {
+      "bytes": 1848233,
+      "sha256": "dcea5f5d040b04cd853751c82401f867b06dd0e0836b2ecd19bbc603bb723c3f",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2018/11/FR-2018-11-29.xml"
+    },
+    "FR-2019-02-05.xml": {
+      "bytes": 4611045,
+      "sha256": "d0116c6a6626aaee69f1a7b933eff77a6010b7d43751e12a4ef053447a5f072e",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2019/02/FR-2019-02-05.xml"
+    },
+    "FR-2019-04-17.xml": {
+      "bytes": 2380558,
+      "sha256": "894aafe46cd48a86fb9bc2ed309c2623b83419623606c1c7a86da780af8eb233",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2019/04/FR-2019-04-17.xml"
+    },
+    "FR-2019-07-22.xml": {
+      "bytes": 2687793,
+      "sha256": "cb5fb0c516d195c28ace01c0a8bb1a6b756fba52c51cf7566707745a1742f018",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2019/07/FR-2019-07-22.xml"
+    },
+    "FR-2019-08-26.xml": {
+      "bytes": 1364072,
+      "sha256": "e810c4a91f6402d507349ff47d66865ed4411245533f4327f91026d6ca202303",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2019/08/FR-2019-08-26.xml"
+    },
+    "FR-2019-10-08.xml": {
+      "bytes": 3701156,
+      "sha256": "25d625e493fdfac856e9dbcde2fb9a07be4271139763013e5c1f7e667693dc78",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2019/10/FR-2019-10-08.xml"
+    },
+    "FR-2020-02-26.xml": {
+      "bytes": 3063440,
+      "sha256": "40cb59eba6c7b2dc1b765837d4b71cf2e1f8d51eebe19c00a5231403af6ad801",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/02/FR-2020-02-26.xml"
+    },
+    "FR-2020-03-02.xml": {
+      "bytes": 2078410,
+      "sha256": "ab9294efb1070c4565713fad606054b72c9b96cbbdce3719a970280e25be27eb",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/03/FR-2020-03-02.xml"
+    },
+    "FR-2020-04-06.xml": {
+      "bytes": 2619847,
+      "sha256": "7cac60188b88001b1455598e2fe05dbae7efe021ac29340b132be9f686286528",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/04/FR-2020-04-06.xml"
+    },
+    "FR-2020-04-20.xml": {
+      "bytes": 2811322,
+      "sha256": "01ba6df664afa6deb3a077e11f7ff91395c777ce2c0258b768b2bc7013f5f58b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/04/FR-2020-04-20.xml"
+    },
+    "FR-2020-05-13.xml": {
+      "bytes": 3480363,
+      "sha256": "bc706570613ae91a13d1ebb0d6598305262c0db16688dc7371d19d1afef58fbc",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/05/FR-2020-05-13.xml"
+    },
+    "FR-2020-07-14.xml": {
+      "bytes": 3854466,
+      "sha256": "dba7ee385aad0e9488dbe473f26942e39eac58e1ec8ac69339cc6cd38dd0d777",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/07/FR-2020-07-14.xml"
+    },
+    "FR-2020-07-15.xml": {
+      "bytes": 4098561,
+      "sha256": "daaca7871ed190f8671b35d241a852ce18168ba894ea1fcfe663a120a5cf6467",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/07/FR-2020-07-15.xml"
+    },
+    "FR-2020-07-16.xml": {
+      "bytes": 2715263,
+      "sha256": "80dcb94f3f22b3295ba992c0363d13ef5d88f3e22ef135a5a3625f3ec530f92b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/07/FR-2020-07-16.xml"
+    },
+    "FR-2020-07-24.xml": {
+      "bytes": 3608339,
+      "sha256": "d4decec3457dda3b235e7ddfe606422e58d184bb46732ee6ebab32bfe9d1e849",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/07/FR-2020-07-24.xml"
+    },
+    "FR-2020-08-27.xml": {
+      "bytes": 2483459,
+      "sha256": "efbef6a846f475369bd3c5fb47f811e09efdb90e85931cdcdffa8b6ca84c92e9",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/08/FR-2020-08-27.xml"
+    },
+    "FR-2020-09-01.xml": {
+      "bytes": 2487217,
+      "sha256": "8665a1a9d03301af6e7bd409f4240262a997ee9156fda4cf311584448ca531e0",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/09/FR-2020-09-01.xml"
+    },
+    "FR-2020-09-22.xml": {
+      "bytes": 2209312,
+      "sha256": "762f17d6a2a5c5416326759507314b3d42400e87272a205750437d2df50bbff0",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/09/FR-2020-09-22.xml"
+    },
+    "FR-2020-10-27.xml": {
+      "bytes": 2906543,
+      "sha256": "5d8fa8d544f029381f000c98f8dc5c23ed475f543da40fcb78f346c9d526b457",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/10/FR-2020-10-27.xml"
+    },
+    "FR-2020-11-16.xml": {
+      "bytes": 2631053,
+      "sha256": "d51c8e31855fb3b94504a18e8133a46739e290122cdba496977f9a21142c8b66",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2020/11/FR-2020-11-16.xml"
+    },
+    "FR-2021-01-11.xml": {
+      "bytes": 5174174,
+      "sha256": "42f6ff3758ca85052e569d42290d2ec3dae2ca67ca4d800bf116051e13ec8c47",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/01/FR-2021-01-11.xml"
+    },
+    "FR-2021-02-04.xml": {
+      "bytes": 1592712,
+      "sha256": "14c9889d5e243fc835e824fc9cb973a910baf2e3f1d98e4b785542286b5e3191",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/02/FR-2021-02-04.xml"
+    },
+    "FR-2021-03-08.xml": {
+      "bytes": 2901946,
+      "sha256": "14e18b6d8bcf18f42f188db009637f6d77d9b1bde0b75de25fd3377cf1786795",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/03/FR-2021-03-08.xml"
+    },
+    "FR-2021-05-03.xml": {
+      "bytes": 3002493,
+      "sha256": "a0cfd1ef21aca8e5b397207cedbdf226a86534191b7a35ea103aa38628e1cce2",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/05/FR-2021-05-03.xml"
+    },
+    "FR-2021-11-04.xml": {
+      "bytes": 2927513,
+      "sha256": "ec19ea42c3006691778017e9c595ff65bea835ff9d82308f2803ead3c0cfe12a",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/11/FR-2021-11-04.xml"
+    },
+    "FR-2021-12-23.xml": {
+      "bytes": 3135874,
+      "sha256": "dbc3f1842329f7184fa472005b50adf69442153cd6c0bd9b40322c72db5e2140",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2021/12/FR-2021-12-23.xml"
+    },
+    "FR-2022-03-17.xml": {
+      "bytes": 2444640,
+      "sha256": "3d9d2872fb653f80beb60fdb390e52728157c212143852c5757dfd5a13be927e",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/03/FR-2022-03-17.xml"
+    },
+    "FR-2022-04-07.xml": {
+      "bytes": 3580377,
+      "sha256": "357ac89db045c4db3d5f0db0a661abe44004d7ee39b782592a9f7ea5714ed98c",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/04/FR-2022-04-07.xml"
+    },
+    "FR-2022-05-24.xml": {
+      "bytes": 3357811,
+      "sha256": "34f2bfa65fc2914af6b70832484adce4445dcedb74102f2cf6f9e57a26a315d3",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/05/FR-2022-05-24.xml"
+    },
+    "FR-2022-05-25.xml": {
+      "bytes": 2137238,
+      "sha256": "9c663d3d128f4870a9de736e495ea772db4f22411114d9d3cd6e6059824f410c",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/05/FR-2022-05-25.xml"
+    },
+    "FR-2022-05-26.xml": {
+      "bytes": 1400796,
+      "sha256": "c4b7f52620c62df08a836ba0ee86d8aadf3109bd326e380a1691ca1599e3f759",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/05/FR-2022-05-26.xml"
+    },
+    "FR-2022-11-15.xml": {
+      "bytes": 2535189,
+      "sha256": "27c4289cf13109fe1fddbd6af758419fa61b7e101e16a146dbcf8e673b91e391",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2022/11/FR-2022-11-15.xml"
+    },
+    "FR-2023-11-24.xml": {
+      "bytes": 5204419,
+      "sha256": "6cfaf85afb2729abdb1a55e89385e7e2616ad5bf882e6b22cc4952b8f1aa40ec",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2023/11/FR-2023-11-24.xml"
+    },
+    "FR-2024-02-01.xml": {
+      "bytes": 7820947,
+      "sha256": "de43cf410f086adf3bfa046f299eed399888bcf01a262d1be5f8385f41f8b63b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/02/FR-2024-02-01.xml"
+    },
+    "FR-2024-05-16.xml": {
+      "bytes": 4876075,
+      "sha256": "1f5bb515881b71e8eec923ecc54f1fd553d66d835d7324ebbfd4f840bcaf727c",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/05/FR-2024-05-16.xml"
+    },
+    "FR-2024-07-19.xml": {
+      "bytes": 3333547,
+      "sha256": "901f348204e9c51eb341fc7a0e5b84e14516de57f4c6dd581921b95046c58417",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/07/FR-2024-07-19.xml"
+    },
+    "FR-2024-08-29.xml": {
+      "bytes": 3470377,
+      "sha256": "60c3c3bb0f97f95ef51333d34adfe8cf0447427fb80e90e507ee85459d6acd58",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/08/FR-2024-08-29.xml"
+    },
+    "FR-2024-09-04.xml": {
+      "bytes": 4519743,
+      "sha256": "fd81448068ab0479a5e7b8b29d711a773bcda49ede4dc028bb2950b64b9837d3",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/09/FR-2024-09-04.xml"
+    },
+    "FR-2024-10-02.xml": {
+      "bytes": 2669809,
+      "sha256": "40f4da71e2de652950e057990cf90e95d9db7dcf871a131a1412a25d658c2239",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/10/FR-2024-10-02.xml"
+    },
+    "FR-2024-10-15.xml": {
+      "bytes": 4541412,
+      "sha256": "d511f0c732cd2a6e8959218731c232b6c65e5f4e90a3916073bb8555ff944916",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/10/FR-2024-10-15.xml"
+    },
+    "FR-2024-11-26.xml": {
+      "bytes": 3169892,
+      "sha256": "828339a110aac409c5faa5e3d7e3819a9f28ad7934650e81e85e71812e7ca36d",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/11/FR-2024-11-26.xml"
+    },
+    "FR-2024-12-11.xml": {
+      "bytes": 5793132,
+      "sha256": "70922153e4ad3682dd206e084612a2296dc208792884983ee6efcb139dc85f1b",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/12/FR-2024-12-11.xml"
+    },
+    "FR-2024-12-18.xml": {
+      "bytes": 8429693,
+      "sha256": "da4c6666c91cd28fd9178ffc68dbae6b253910b4933da06e708701e481864aef",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/12/FR-2024-12-18.xml"
+    },
+    "FR-2024-12-23.xml": {
+      "bytes": 3349367,
+      "sha256": "e4fc0aae2e153e0abd3daec8b3b8f8b2c326d12393307969d2cb1cb2f6110a3f",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2024/12/FR-2024-12-23.xml"
+    },
+    "FR-2025-01-10.xml": {
+      "bytes": 6606481,
+      "sha256": "0f20157fbe20f801eb0f266d7091df7dab2267e7ee01583f08dfc270c283f3e9",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2025/01/FR-2025-01-10.xml"
+    },
+    "FR-2025-01-16.xml": {
+      "bytes": 9107964,
+      "sha256": "3749b54231839c8ceeb1d24be495761c9cd5881f7e79870e111e9fa3230ad678",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2025/01/FR-2025-01-16.xml"
+    },
+    "FR-2025-07-16.xml": {
+      "bytes": 8054511,
+      "sha256": "c40cfa177aaab1a7b47e37dc5c8e292f96917782c48a0e7a51f740166116660a",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2025/07/FR-2025-07-16.xml"
+    },
+    "FR-2025-09-08.xml": {
+      "bytes": 1678613,
+      "sha256": "18c65a74a19a6a449191c2f25fbb8ac1624b2aa6f72b4d7e17ab0fbec796ef92",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2025/09/FR-2025-09-08.xml"
+    },
+    "FR-2025-11-24.xml": {
+      "bytes": 3458671,
+      "sha256": "bb3c4aadb94d39336eebc13205eaa9c1b8a328a4d055bef1b4dee3ff385709d1",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2025/11/FR-2025-11-24.xml"
+    },
+    "FR-2026-01-02.xml": {
+      "bytes": 1901402,
+      "sha256": "6b73122beef5911a596b186c953ab69f846ed2111db0c887a6b4451375d8fcf3",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/01/FR-2026-01-02.xml"
+    },
+    "FR-2026-02-18.xml": {
+      "bytes": 4114974,
+      "sha256": "9f0a6b5efd1e58256245643fa4bce3ca5d7b62d39800e348095271cfc5bb8d0c",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/02/FR-2026-02-18.xml"
+    },
+    "FR-2026-04-09.xml": {
+      "bytes": 3260298,
+      "sha256": "72ca40ea1da34f526ca5d1b4bbd0eff3eacd8f83856d0b4eff6132ebb5360a1a",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/04/FR-2026-04-09.xml"
+    },
+    "FR-2026-05-01.xml": {
+      "bytes": 4972202,
+      "sha256": "9679d5cad8cc089f0750cba17e1c8b4ada0eee77cc489a7d34615458c03310df",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/05/FR-2026-05-01.xml"
+    },
+    "FR-2026-06-04.xml": {
+      "bytes": 4399210,
+      "sha256": "5b97305e24a0e522dc93e858be7d86a2ad6bcdd0a7dcc3731cb1ce1d5c20bb37",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/06/FR-2026-06-04.xml"
+    },
+    "FR-2026-06-10.xml": {
+      "bytes": 2284786,
+      "sha256": "7ec12f33d76b8210c409ffeb412ffdb70d13ac6b94daa526cc35bc49cea235a0",
+      "url": "https://www.govinfo.gov/bulkdata/FR/2026/06/FR-2026-06-10.xml"
+    }
+  },
+  "what": "AMDPAR instructions attributed to sections by carry-forward"
+}

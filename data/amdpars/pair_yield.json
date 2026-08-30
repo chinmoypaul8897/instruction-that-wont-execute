@@ -1,0 +1,2261 @@
+{
+  "0": {
+    "n_defect_sections": 85,
+    "projected_pairs": 51,
+    "rows": [
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "05-8447",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "2.6",
+          "60.49a",
+          "60.50a",
+          "60.52a"
+        ],
+        "section": "75.6",
+        "sections_amended_by_document": 45,
+        "sibling_sections": 44
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2011-12279",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1.367(a)-3T",
+          "1.367(b)-10",
+          "1.367(b)-4"
+        ],
+        "section": "1.367(b)-0",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 7
+      },
+      {
+        "count_matched_siblings": 51,
+        "frdoc": "2011-27587",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "80.103",
+          "80.1053",
+          "80.1055",
+          "80.1059",
+          "80.1061"
+        ],
+        "section": "80.905",
+        "sections_amended_by_document": 53,
+        "sibling_sections": 52
+      },
+      {
+        "count_matched_siblings": 19,
+        "frdoc": "2014-08744",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "13.501",
+          "15.306",
+          "22.1001",
+          "24.202",
+          "25.101"
+        ],
+        "section": "6.302-1",
+        "sections_amended_by_document": 389,
+        "sibling_sections": 388
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2015-01571",
+        "has_match": true,
+        "instruction_count": 21,
+        "matched_examples": [
+          "1948.84",
+          "1948.92"
+        ],
+        "section": "1942.5",
+        "sections_amended_by_document": 443,
+        "sibling_sections": 441
+      },
+      {
+        "count_matched_siblings": 29,
+        "frdoc": "2015-01571",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1740.8",
+          "1806.1",
+          "1806.25",
+          "1806.3",
+          "1822.268"
+        ],
+        "section": "1942.8",
+        "sections_amended_by_document": 443,
+        "sibling_sections": 441
+      },
+      {
+        "count_matched_siblings": 8,
+        "frdoc": "2015-15249",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1.924",
+          "25.202",
+          "27.803",
+          "74.32",
+          "78.19"
+        ],
+        "section": "87.475",
+        "sections_amended_by_document": 26,
+        "sibling_sections": 25
+      },
+      {
+        "count_matched_siblings": 9,
+        "frdoc": "2016-03298",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1007.6",
+          "1018.28",
+          "1103.20",
+          "1105.10",
+          "1111.1"
+        ],
+        "section": "1150.35",
+        "sections_amended_by_document": 93,
+        "sibling_sections": 92
+      },
+      {
+        "count_matched_siblings": 33,
+        "frdoc": "2016-08827",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "520.100",
+          "520.1044b",
+          "520.1248",
+          "520.1263c",
+          "520.1484"
+        ],
+        "section": "522.1193",
+        "sections_amended_by_document": 41,
+        "sibling_sections": 40
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2016-09949",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "1436.8"
+        ],
+        "section": "1436.3",
+        "sections_amended_by_document": 12,
+        "sibling_sections": 11
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2016-13651",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "425.604",
+          "425.606"
+        ],
+        "section": "425.610",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2016-13983",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "165.502",
+          "165.505",
+          "165.509"
+        ],
+        "section": "165.518",
+        "sections_amended_by_document": 12,
+        "sibling_sections": 11
+      },
+      {
+        "count_matched_siblings": 38,
+        "frdoc": "2016-16399",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "121.103",
+          "121.404",
+          "121.406",
+          "121.702",
+          "124.104"
+        ],
+        "section": "125.6",
+        "sections_amended_by_document": 50,
+        "sibling_sections": 49
+      },
+      {
+        "count_matched_siblings": 11,
+        "frdoc": "2016-18075",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1436.17",
+          "761.10",
+          "763.16",
+          "764.51",
+          "765.252"
+        ],
+        "section": "766.102",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2016-23968",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "236.4"
+        ],
+        "section": "236.2",
+        "sections_amended_by_document": 7,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2017-00727",
+        "has_match": false,
+        "instruction_count": 8,
+        "matched_examples": [],
+        "section": "3163.2",
+        "sections_amended_by_document": 1,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2017-23953",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "425.404"
+        ],
+        "section": "425.500",
+        "sections_amended_by_document": 29,
+        "sibling_sections": 28
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2017-26532",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "2.106"
+        ],
+        "section": "25.151",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2018-25443",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "2.42",
+          "2.79"
+        ],
+        "section": "2.22",
+        "sections_amended_by_document": 31,
+        "sibling_sections": 30
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2018-27472",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "702.304",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 40
+      },
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "2019-07652",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.199A-1",
+          "1.199A-2",
+          "1.199A-4",
+          "1.199A-5"
+        ],
+        "section": "1.199A-0",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 4
+      },
+      {
+        "count_matched_siblings": 63,
+        "frdoc": "2019-15131",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "217.10",
+          "217.11",
+          "217.131",
+          "217.133",
+          "217.152"
+        ],
+        "section": "217.22",
+        "sections_amended_by_document": 67,
+        "sibling_sections": 66
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2019-18241",
+        "has_match": false,
+        "instruction_count": 3,
+        "matched_examples": [],
+        "section": "52.1170",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 1
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2019-19810",
+        "has_match": false,
+        "instruction_count": 6,
+        "matched_examples": [],
+        "section": "25.115",
+        "sections_amended_by_document": 24,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-03841",
+        "has_match": false,
+        "instruction_count": 13,
+        "matched_examples": [],
+        "section": "1416.302",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-04103",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "1437.10",
+        "sections_amended_by_document": 16,
+        "sibling_sections": 15
+      },
+      {
+        "count_matched_siblings": 9,
+        "frdoc": "2020-04776",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "210.10-01",
+          "210.3-10",
+          "210.3-16",
+          "210.8-03",
+          "229.1100"
+        ],
+        "section": "210.8-01",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-07013",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "1.1400Z2(b)-1",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-07013",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "1.1400Z2(d)-1",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 30,
+        "frdoc": "2020-07837",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "2.10",
+          "2.102",
+          "2.11",
+          "2.12",
+          "2.126"
+        ],
+        "section": "3.111",
+        "sections_amended_by_document": 42,
+        "sibling_sections": 41
+      },
+      {
+        "count_matched_siblings": 14,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.907",
+          "27.1",
+          "27.12",
+          "27.5",
+          "90.205"
+        ],
+        "section": "90.209",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 14,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.907",
+          "27.1",
+          "27.12",
+          "27.5",
+          "90.205"
+        ],
+        "section": "90.210",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 14,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.907",
+          "27.1",
+          "27.12",
+          "27.5",
+          "90.205"
+        ],
+        "section": "90.213",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 15,
+        "frdoc": "2020-12588",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "63.14",
+          "63.7083",
+          "63.7090",
+          "63.7100",
+          "63.7110"
+        ],
+        "section": "63.7831",
+        "sections_amended_by_document": 19,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-16986",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1831.205-70",
+        "sections_amended_by_document": 3,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2020-17090",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "9.2",
+          "9.5"
+        ],
+        "section": "9.3",
+        "sections_amended_by_document": 7,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-17549",
+        "has_match": false,
+        "instruction_count": 12,
+        "matched_examples": [],
+        "section": "1.367(a)-8",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-21774",
+        "has_match": false,
+        "instruction_count": 6,
+        "matched_examples": [],
+        "section": "1328.5",
+        "sections_amended_by_document": 71,
+        "sibling_sections": 70
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-22974",
+        "has_match": false,
+        "instruction_count": 53,
+        "matched_examples": [],
+        "section": "1.1502-47",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-22974",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "1.1503(d)-4",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 29,
+        "frdoc": "2020-25236",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "213.15",
+          "214.5",
+          "215.7",
+          "216.7",
+          "217.5"
+        ],
+        "section": "232.11",
+        "sections_amended_by_document": 47,
+        "sibling_sections": 46
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2021-02268",
+        "has_match": false,
+        "instruction_count": 8,
+        "matched_examples": [],
+        "section": "1468.3",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 10
+      },
+      {
+        "count_matched_siblings": 40,
+        "frdoc": "2021-04453",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "520.100",
+          "520.1443",
+          "520.1447",
+          "520.1510",
+          "520.304"
+        ],
+        "section": "556.360",
+        "sections_amended_by_document": 49,
+        "sibling_sections": 48
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2021-09097",
+        "has_match": false,
+        "instruction_count": 5,
+        "matched_examples": [],
+        "section": "510.305",
+        "sections_amended_by_document": 19,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 123,
+        "frdoc": "2021-22144",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.102",
+          "1.102-2",
+          "10.003",
+          "12.101",
+          "12.201"
+        ],
+        "section": "15.601",
+        "sections_amended_by_document": 228,
+        "sibling_sections": 227
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2021-27643",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "702.401",
+          "702.402",
+          "741.204"
+        ],
+        "section": "702.2",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 4
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-05512",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "525.1",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 1
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-06949",
+        "has_match": false,
+        "instruction_count": 7,
+        "matched_examples": [],
+        "section": "433.2",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 80,
+        "frdoc": "2022-10875",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1600.11",
+          "1600.13",
+          "1600.14",
+          "1600.18",
+          "1600.21"
+        ],
+        "section": "1653.2",
+        "sections_amended_by_document": 116,
+        "sibling_sections": 114
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2022-10875",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "1600.19",
+          "1653.36",
+          "1655.9"
+        ],
+        "section": "1655.1",
+        "sections_amended_by_document": 116,
+        "sibling_sections": 114
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-23329",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "102.20",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-23329",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "102.21",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 7,
+        "frdoc": "2023-25238",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "932.152",
+          "944.31",
+          "944.401",
+          "980.117",
+          "987.112"
+        ],
+        "section": "981.467",
+        "sections_amended_by_document": 95,
+        "sibling_sections": 94
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2023-25797",
+        "has_match": false,
+        "instruction_count": 29,
+        "matched_examples": [],
+        "section": "25.12",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 6,
+        "frdoc": "2023-25797",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "228.22",
+          "228.26",
+          "25.21",
+          "25.22",
+          "345.22"
+        ],
+        "section": "25.13",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2023-25797",
+        "has_match": false,
+        "instruction_count": 46,
+        "matched_examples": [],
+        "section": "25.51",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2024-07002",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "60.486a",
+          "63.119",
+          "63.525"
+        ],
+        "section": "63.485",
+        "sections_amended_by_document": 130,
+        "sibling_sections": 129
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-14542",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1.401(a)(31)-1",
+        "sections_amended_by_document": 9,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 102,
+        "frdoc": "2024-17239",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "299.12",
+          "299.16",
+          "299.18",
+          "75.1",
+          "75.102"
+        ],
+        "section": "76.500",
+        "sections_amended_by_document": 169,
+        "sibling_sections": 168
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "140.11",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "140.75",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "45.14",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "45.15",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 38,
+        "frdoc": "2024-21984",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1000.3",
+          "1007.17",
+          "124.11",
+          "1303.12",
+          "1336.77"
+        ],
+        "section": "1321.9",
+        "sections_amended_by_document": 151,
+        "sibling_sections": 150
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2024-23195",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "405.930",
+          "476.71"
+        ],
+        "section": "405.1210",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 6,
+        "frdoc": "2024-27310",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "800.104",
+          "800.501",
+          "800.801",
+          "802.501",
+          "802.801"
+        ],
+        "section": "802.104",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-28372",
+        "has_match": false,
+        "instruction_count": 5,
+        "matched_examples": [],
+        "section": "1.988-1",
+        "sections_amended_by_document": 16,
+        "sibling_sections": 15
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-29226",
+        "has_match": false,
+        "instruction_count": 19,
+        "matched_examples": [],
+        "section": "252.227-7014",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2024-30575",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "253.6"
+        ],
+        "section": "247.9",
+        "sections_amended_by_document": 6,
+        "sibling_sections": 5
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-31513",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1.45V-3",
+        "sections_amended_by_document": 3,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2025-00723",
+        "has_match": false,
+        "instruction_count": 1,
+        "matched_examples": [],
+        "section": "742.4",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 2
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2025-00723",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "740.6"
+        ],
+        "section": "742.6",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 2
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2025-13289",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "180.578",
+        "sections_amended_by_document": 1,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2025-17122",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "10.307"
+        ],
+        "section": "10.224",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "2025-20831",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "872.21",
+          "872.26",
+          "875.11",
+          "886.12"
+        ],
+        "section": "887.11",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 25,
+        "frdoc": "2025-24232",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "107.1140",
+          "107.1160",
+          "107.120",
+          "107.1400",
+          "107.1410"
+        ],
+        "section": "107.1820",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 7,
+        "frdoc": "2026-03157",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1037.205",
+          "600.002",
+          "600.117",
+          "86.1801-12",
+          "86.1829-15"
+        ],
+        "section": "1037.615",
+        "sections_amended_by_document": 160,
+        "sibling_sections": 159
+      },
+      {
+        "count_matched_siblings": 8,
+        "frdoc": "2026-06808",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "60.17",
+          "60.5377b",
+          "60.5391c",
+          "60.5412c",
+          "60.5415c"
+        ],
+        "section": "60.5417b",
+        "sections_amended_by_document": 9,
+        "sibling_sections": 8
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2026-08556",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "674.39",
+          "685.201"
+        ],
+        "section": "682.405",
+        "sections_amended_by_document": 17,
+        "sibling_sections": 16
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2026-11140",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "149.140",
+          "2590.716-6"
+        ],
+        "section": "149.510",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11140",
+        "has_match": false,
+        "instruction_count": 20,
+        "matched_examples": [],
+        "section": "2590.716-8",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11267",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "356.3",
+        "sections_amended_by_document": 0,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11267",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "356.51",
+        "sections_amended_by_document": 0,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2026-11648",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "250.1202"
+        ],
+        "section": "250.108",
+        "sections_amended_by_document": 67,
+        "sibling_sections": 66
+      },
+      {
+        "count_matched_siblings": 18,
+        "frdoc": "E6-15282",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "107.105",
+          "107.504",
+          "172.101",
+          "173.13",
+          "173.133"
+        ],
+        "section": "180.209",
+        "sections_amended_by_document": 32,
+        "sibling_sections": 31
+      }
+    ],
+    "tolerance": 0,
+    "with_match": 51,
+    "without_match": 34,
+    "yield": 0.6
+  },
+  "1": {
+    "n_defect_sections": 85,
+    "projected_pairs": 58,
+    "rows": [
+      {
+        "count_matched_siblings": 9,
+        "frdoc": "05-8447",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "2.1",
+          "2.3",
+          "2.6",
+          "60.49a",
+          "60.50a"
+        ],
+        "section": "75.6",
+        "sections_amended_by_document": 45,
+        "sibling_sections": 44
+      },
+      {
+        "count_matched_siblings": 7,
+        "frdoc": "2011-12279",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1.367(a)-3",
+          "1.367(a)-3T",
+          "1.367(b)-10",
+          "1.367(b)-13",
+          "1.367(b)-14T"
+        ],
+        "section": "1.367(b)-0",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 7
+      },
+      {
+        "count_matched_siblings": 52,
+        "frdoc": "2011-27587",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "2.1093",
+          "80.103",
+          "80.1053",
+          "80.1055",
+          "80.1059"
+        ],
+        "section": "80.905",
+        "sections_amended_by_document": 53,
+        "sibling_sections": 52
+      },
+      {
+        "count_matched_siblings": 83,
+        "frdoc": "2014-08744",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "12.503",
+          "12.504",
+          "13.501",
+          "15.303",
+          "15.304"
+        ],
+        "section": "6.302-1",
+        "sections_amended_by_document": 389,
+        "sibling_sections": 388
+      },
+      {
+        "count_matched_siblings": 5,
+        "frdoc": "2015-01571",
+        "has_match": true,
+        "instruction_count": 21,
+        "matched_examples": [
+          "1924.6",
+          "1948.84",
+          "1948.92",
+          "1955.10",
+          "1955.20"
+        ],
+        "section": "1942.5",
+        "sections_amended_by_document": 443,
+        "sibling_sections": 441
+      },
+      {
+        "count_matched_siblings": 72,
+        "frdoc": "2015-01571",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1740.8",
+          "1806.1",
+          "1806.22",
+          "1806.25",
+          "1806.3"
+        ],
+        "section": "1942.8",
+        "sections_amended_by_document": 443,
+        "sibling_sections": 441
+      },
+      {
+        "count_matched_siblings": 23,
+        "frdoc": "2015-15249",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1.924",
+          "101.111",
+          "101.31",
+          "2.1",
+          "2.100"
+        ],
+        "section": "87.475",
+        "sections_amended_by_document": 26,
+        "sibling_sections": 25
+      },
+      {
+        "count_matched_siblings": 26,
+        "frdoc": "2016-03298",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1007.6",
+          "1011.7",
+          "1016.105",
+          "1018.20",
+          "1018.28"
+        ],
+        "section": "1150.35",
+        "sections_amended_by_document": 93,
+        "sibling_sections": 92
+      },
+      {
+        "count_matched_siblings": 38,
+        "frdoc": "2016-08827",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "520.100",
+          "520.1044b",
+          "520.1248",
+          "520.1263c",
+          "520.1484"
+        ],
+        "section": "522.1193",
+        "sections_amended_by_document": 41,
+        "sibling_sections": 40
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2016-09949",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "1436.8"
+        ],
+        "section": "1436.3",
+        "sections_amended_by_document": 12,
+        "sibling_sections": 11
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2016-13651",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "425.604",
+          "425.606"
+        ],
+        "section": "425.610",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "2016-13983",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "165.502",
+          "165.505",
+          "165.509",
+          "3.25-15"
+        ],
+        "section": "165.518",
+        "sections_amended_by_document": 12,
+        "sibling_sections": 11
+      },
+      {
+        "count_matched_siblings": 43,
+        "frdoc": "2016-16399",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "121.1001",
+          "121.103",
+          "121.404",
+          "121.406",
+          "121.702"
+        ],
+        "section": "125.6",
+        "sections_amended_by_document": 50,
+        "sibling_sections": 49
+      },
+      {
+        "count_matched_siblings": 18,
+        "frdoc": "2016-18075",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1436.17",
+          "1940.301",
+          "761.10",
+          "763.16",
+          "763.7"
+        ],
+        "section": "766.102",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2016-23968",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "236.4",
+          "236.5",
+          "236.7"
+        ],
+        "section": "236.2",
+        "sections_amended_by_document": 7,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2017-00727",
+        "has_match": false,
+        "instruction_count": 8,
+        "matched_examples": [],
+        "section": "3163.2",
+        "sections_amended_by_document": 1,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 5,
+        "frdoc": "2017-23953",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "405.2415",
+          "414.1275",
+          "424.518",
+          "425.112",
+          "425.404"
+        ],
+        "section": "425.500",
+        "sections_amended_by_document": 29,
+        "sibling_sections": 28
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2017-26532",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "2.106",
+          "25.108",
+          "25.208"
+        ],
+        "section": "25.151",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 5,
+        "frdoc": "2018-25443",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "2.16",
+          "2.28",
+          "2.42",
+          "2.79",
+          "2.89"
+        ],
+        "section": "2.22",
+        "sections_amended_by_document": 31,
+        "sibling_sections": 30
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2018-27472",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "702.304",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 40
+      },
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "2019-07652",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.199A-1",
+          "1.199A-2",
+          "1.199A-4",
+          "1.199A-5"
+        ],
+        "section": "1.199A-0",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 4
+      },
+      {
+        "count_matched_siblings": 64,
+        "frdoc": "2019-15131",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "217.10",
+          "217.11",
+          "217.131",
+          "217.133",
+          "217.152"
+        ],
+        "section": "217.22",
+        "sections_amended_by_document": 67,
+        "sibling_sections": 66
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2019-18241",
+        "has_match": false,
+        "instruction_count": 3,
+        "matched_examples": [],
+        "section": "52.1170",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 1
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2019-19810",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "25.103"
+        ],
+        "section": "25.115",
+        "sections_amended_by_document": 24,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2020-03841",
+        "has_match": true,
+        "instruction_count": 13,
+        "matched_examples": [
+          "1416.304"
+        ],
+        "section": "1416.302",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-04103",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "1437.10",
+        "sections_amended_by_document": 16,
+        "sibling_sections": 15
+      },
+      {
+        "count_matched_siblings": 16,
+        "frdoc": "2020-04776",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "210.10-01",
+          "210.13-01",
+          "210.3-10",
+          "210.3-16",
+          "210.8-03"
+        ],
+        "section": "210.8-01",
+        "sections_amended_by_document": 20,
+        "sibling_sections": 19
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2020-07013",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1.1400Z2(c)-1",
+          "1.1400Z2(f)-1",
+          "1.1504-3"
+        ],
+        "section": "1.1400Z2(b)-1",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-07013",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "1.1400Z2(d)-1",
+        "sections_amended_by_document": 8,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 32,
+        "frdoc": "2020-07837",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.1",
+          "2.10",
+          "2.102",
+          "2.11",
+          "2.12"
+        ],
+        "section": "3.111",
+        "sections_amended_by_document": 42,
+        "sibling_sections": 41
+      },
+      {
+        "count_matched_siblings": 16,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.9005",
+          "1.907",
+          "20.12",
+          "27.1",
+          "27.12"
+        ],
+        "section": "90.209",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 16,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.9005",
+          "1.907",
+          "20.12",
+          "27.1",
+          "27.12"
+        ],
+        "section": "90.210",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 16,
+        "frdoc": "2020-11897",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.9005",
+          "1.907",
+          "20.12",
+          "27.1",
+          "27.12"
+        ],
+        "section": "90.213",
+        "sections_amended_by_document": 21,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 15,
+        "frdoc": "2020-12588",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "63.14",
+          "63.7083",
+          "63.7090",
+          "63.7100",
+          "63.7110"
+        ],
+        "section": "63.7831",
+        "sections_amended_by_document": 19,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-16986",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1831.205-70",
+        "sections_amended_by_document": 3,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2020-17090",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "9.12",
+          "9.2",
+          "9.5"
+        ],
+        "section": "9.3",
+        "sections_amended_by_document": 7,
+        "sibling_sections": 6
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-17549",
+        "has_match": false,
+        "instruction_count": 12,
+        "matched_examples": [],
+        "section": "1.367(a)-8",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2020-21774",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "1324.11",
+          "412.42",
+          "52i.11"
+        ],
+        "section": "1328.5",
+        "sections_amended_by_document": 71,
+        "sibling_sections": 70
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-22974",
+        "has_match": false,
+        "instruction_count": 53,
+        "matched_examples": [],
+        "section": "1.1502-47",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2020-22974",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "1.1503(d)-4",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 30,
+        "frdoc": "2020-25236",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "213.15",
+          "214.5",
+          "215.7",
+          "216.7",
+          "217.5"
+        ],
+        "section": "232.11",
+        "sections_amended_by_document": 47,
+        "sibling_sections": 46
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2021-02268",
+        "has_match": false,
+        "instruction_count": 8,
+        "matched_examples": [],
+        "section": "1468.3",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 10
+      },
+      {
+        "count_matched_siblings": 46,
+        "frdoc": "2021-04453",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "516.812",
+          "520.100",
+          "520.1443",
+          "520.1447",
+          "520.1510"
+        ],
+        "section": "556.360",
+        "sections_amended_by_document": 49,
+        "sibling_sections": 48
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2021-09097",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "510.300",
+          "510.400"
+        ],
+        "section": "510.305",
+        "sections_amended_by_document": 19,
+        "sibling_sections": 18
+      },
+      {
+        "count_matched_siblings": 131,
+        "frdoc": "2021-22144",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1.102",
+          "1.102-2",
+          "10.003",
+          "11.304",
+          "12.001"
+        ],
+        "section": "15.601",
+        "sections_amended_by_document": 228,
+        "sibling_sections": 227
+      },
+      {
+        "count_matched_siblings": 4,
+        "frdoc": "2021-27643",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "702.401",
+          "702.402",
+          "702.414",
+          "741.204"
+        ],
+        "section": "702.2",
+        "sections_amended_by_document": 5,
+        "sibling_sections": 4
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-05512",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "525.1",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 1
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-06949",
+        "has_match": false,
+        "instruction_count": 7,
+        "matched_examples": [],
+        "section": "433.2",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 92,
+        "frdoc": "2022-10875",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "1600.11",
+          "1600.13",
+          "1600.14",
+          "1600.18",
+          "1600.21"
+        ],
+        "section": "1653.2",
+        "sections_amended_by_document": 116,
+        "sibling_sections": 114
+      },
+      {
+        "count_matched_siblings": 12,
+        "frdoc": "2022-10875",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "1600.19",
+          "1600.37",
+          "1601.1",
+          "1605.1",
+          "1605.12"
+        ],
+        "section": "1655.1",
+        "sections_amended_by_document": 116,
+        "sibling_sections": 114
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-23329",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "102.20",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2022-23329",
+        "has_match": false,
+        "instruction_count": 10,
+        "matched_examples": [],
+        "section": "102.21",
+        "sections_amended_by_document": 2,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 41,
+        "frdoc": "2023-25238",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "900.700",
+          "905.161",
+          "906.40",
+          "915.306",
+          "917.18"
+        ],
+        "section": "981.467",
+        "sections_amended_by_document": 95,
+        "sibling_sections": 94
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2023-25797",
+        "has_match": false,
+        "instruction_count": 29,
+        "matched_examples": [],
+        "section": "25.12",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 12,
+        "frdoc": "2023-25797",
+        "has_match": true,
+        "instruction_count": 3,
+        "matched_examples": [
+          "228.11",
+          "228.22",
+          "228.26",
+          "228.43",
+          "25.21"
+        ],
+        "section": "25.13",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2023-25797",
+        "has_match": false,
+        "instruction_count": 46,
+        "matched_examples": [],
+        "section": "25.51",
+        "sections_amended_by_document": 40,
+        "sibling_sections": 37
+      },
+      {
+        "count_matched_siblings": 10,
+        "frdoc": "2024-07002",
+        "has_match": true,
+        "instruction_count": 7,
+        "matched_examples": [
+          "60.486a",
+          "63.100",
+          "63.110",
+          "63.119",
+          "63.152"
+        ],
+        "section": "63.485",
+        "sections_amended_by_document": 130,
+        "sibling_sections": 129
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-14542",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1.401(a)(31)-1",
+        "sections_amended_by_document": 9,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 106,
+        "frdoc": "2024-17239",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "299.12",
+          "299.16",
+          "299.18",
+          "299.7",
+          "75.1"
+        ],
+        "section": "76.500",
+        "sections_amended_by_document": 169,
+        "sibling_sections": 168
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "140.11",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "140.75",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "45.14",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-18445",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "45.15",
+        "sections_amended_by_document": 23,
+        "sibling_sections": 23
+      },
+      {
+        "count_matched_siblings": 124,
+        "frdoc": "2024-21984",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "1000.3",
+          "1007.17",
+          "124.11",
+          "124.6",
+          "124.7"
+        ],
+        "section": "1321.9",
+        "sections_amended_by_document": 151,
+        "sibling_sections": 150
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2024-23195",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "405.930",
+          "476.71",
+          "489.27"
+        ],
+        "section": "405.1210",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 6,
+        "frdoc": "2024-27310",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "800.104",
+          "800.501",
+          "800.801",
+          "802.501",
+          "802.801"
+        ],
+        "section": "802.104",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2024-28372",
+        "has_match": true,
+        "instruction_count": 5,
+        "matched_examples": [
+          "1.861-9"
+        ],
+        "section": "1.988-1",
+        "sections_amended_by_document": 16,
+        "sibling_sections": 15
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-29226",
+        "has_match": false,
+        "instruction_count": 19,
+        "matched_examples": [],
+        "section": "252.227-7014",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 5,
+        "frdoc": "2024-30575",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "247.5",
+          "251.4",
+          "253.2",
+          "253.5",
+          "253.6"
+        ],
+        "section": "247.9",
+        "sections_amended_by_document": 6,
+        "sibling_sections": 5
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2024-31513",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "1.45V-3",
+        "sections_amended_by_document": 3,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 1,
+        "frdoc": "2025-00723",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "740.6"
+        ],
+        "section": "742.4",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 2
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2025-00723",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "740.6",
+          "758.1"
+        ],
+        "section": "742.6",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 2
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2025-13289",
+        "has_match": false,
+        "instruction_count": 4,
+        "matched_examples": [],
+        "section": "180.578",
+        "sections_amended_by_document": 1,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 3,
+        "frdoc": "2025-17122",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "10.237",
+          "10.307",
+          "113.62"
+        ],
+        "section": "10.224",
+        "sections_amended_by_document": 4,
+        "sibling_sections": 3
+      },
+      {
+        "count_matched_siblings": 9,
+        "frdoc": "2025-20831",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "872.21",
+          "872.26",
+          "872.35",
+          "874.12",
+          "875.11"
+        ],
+        "section": "887.11",
+        "sections_amended_by_document": 10,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 27,
+        "frdoc": "2025-24232",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "107.1140",
+          "107.1160",
+          "107.1170",
+          "107.120",
+          "107.1400"
+        ],
+        "section": "107.1820",
+        "sections_amended_by_document": 30,
+        "sibling_sections": 29
+      },
+      {
+        "count_matched_siblings": 22,
+        "frdoc": "2026-03157",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "1036.205",
+          "1036.5",
+          "1036.535",
+          "1036.540",
+          "1036.545"
+        ],
+        "section": "1037.615",
+        "sections_amended_by_document": 160,
+        "sibling_sections": 159
+      },
+      {
+        "count_matched_siblings": 8,
+        "frdoc": "2026-06808",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "60.17",
+          "60.5377b",
+          "60.5391c",
+          "60.5412c",
+          "60.5415c"
+        ],
+        "section": "60.5417b",
+        "sections_amended_by_document": 9,
+        "sibling_sections": 8
+      },
+      {
+        "count_matched_siblings": 16,
+        "frdoc": "2026-08556",
+        "has_match": true,
+        "instruction_count": 2,
+        "matched_examples": [
+          "674.39",
+          "682.215",
+          "685.102",
+          "685.200",
+          "685.201"
+        ],
+        "section": "682.405",
+        "sections_amended_by_document": 17,
+        "sibling_sections": 16
+      },
+      {
+        "count_matched_siblings": 2,
+        "frdoc": "2026-11140",
+        "has_match": true,
+        "instruction_count": 6,
+        "matched_examples": [
+          "149.140",
+          "2590.716-6"
+        ],
+        "section": "149.510",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11140",
+        "has_match": false,
+        "instruction_count": 20,
+        "matched_examples": [],
+        "section": "2590.716-8",
+        "sections_amended_by_document": 11,
+        "sibling_sections": 9
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11267",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "356.3",
+        "sections_amended_by_document": 0,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 0,
+        "frdoc": "2026-11267",
+        "has_match": false,
+        "instruction_count": null,
+        "matched_examples": [],
+        "section": "356.51",
+        "sections_amended_by_document": 0,
+        "sibling_sections": 0
+      },
+      {
+        "count_matched_siblings": 15,
+        "frdoc": "2026-11648",
+        "has_match": true,
+        "instruction_count": 4,
+        "matched_examples": [
+          "250.1002",
+          "250.1202",
+          "250.1703",
+          "250.1900",
+          "250.1903"
+        ],
+        "section": "250.108",
+        "sections_amended_by_document": 67,
+        "sibling_sections": 66
+      },
+      {
+        "count_matched_siblings": 23,
+        "frdoc": "E6-15282",
+        "has_match": true,
+        "instruction_count": 1,
+        "matched_examples": [
+          "107.105",
+          "107.504",
+          "107.616",
+          "172.101",
+          "173.13"
+        ],
+        "section": "180.209",
+        "sections_amended_by_document": 32,
+        "sibling_sections": 31
+      }
+    ],
+    "tolerance": 1,
+    "with_match": 58,
+    "without_match": 27,
+    "yield": 0.6823529411764706
+  }
+}
