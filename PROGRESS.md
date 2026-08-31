@@ -11,6 +11,158 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## CH-06 → CH-08 → CH-09 · 2026-08-31 · Claude Code, `claude-opus-5` · BUILD, UNATTENDED · **THE ADVANCED SOLUTION EXISTS**
+
+### The one thing worth reading
+
+**Neither capability helps on its own. Together they do.**
+
+| Arm | Gets | Accuracy | vs B0-agent |
+|---|---|---:|---:|
+| `B0` | the instruction only | 0.4756 | −18.3 pp |
+| `B0-agent` | + point-in-time CFR text | 0.6585 | — |
+| `B0′` | + **A1's token budget**, spent on best-of-3 self-consistency | **0.6585** | **+0.0 pp** |
+| `A1-iter1` | + `cfr_resolve` **only** | 0.5610 | **−9.8 pp** |
+| `A1-minus-tool` | + `A1-SKILL.md` **only** | 0.6463 | −1.2 pp |
+| **`A1`** | + **both** | **0.7195** | **+6.1 pp** |
+
+The tool **on its own made the agent worse than having no tool at all.** The procedure on
+its own did nothing. An additive model of the two predicts **0.5488**; the measurement is
+**0.7195**, **superadditive by +17.1 pp**. That is `CONTEXT.md` §3's *"compose"* claim
+arriving as a number rather than a hope — and it arrived through a route nobody designed:
+the composition works because the **procedure repairs a defect in the tool**.
+
+**And the gap is not significant.** McNemar exact two-sided **p = 0.4244** at n = 82.
+**`GOOD.md`'s pre-registered success criterion is NOT MET on any of its four clauses.**
+
+### Scope
+
+`§0` rulings · `§1` CH-04 gate review · `§2` **A1, the advanced solution** · `§3` CH-08
+ablations, `B0′`, per-arm cost, clustered bootstrap, error taxonomy · `§4` CH-09 removed
+experiments, per-class recall, human-time reservation.
+
+### Files
+
+`agents/A1-SKILL.md` (v2) · `agents/A1.md` · `src/a1.py` · `src/arms.py` (`run_b0prime`,
+`tally_votes`, bundler fix) · `tests/test_a1.py` (35) ·
+`tests/test_bundle_and_b0prime.py` (19) · `docs/evidence/ch06-a1/**` ·
+`docs/evidence/ch09-removed/**` · `docs/evidence/error-taxonomy.csv` ·
+`docs/reviews/REVIEW_CH-04.md` + `ch04-probe/` · `CHANGELOG.md` · `QUESTIONS.md`
+(Q20–Q24) · `STATUS.md` · `AI-USE.md`
+
+### Tests
+
+**332 passed, 0 failed, 0 skipped.** 54 new. Goldens hand-computed from `CONTEXT.md` §5
+and committed at `aed8b17` **before** `tests/test_a1.py` existed.
+
+### Decisions
+
+**1 · The predictions were committed before the runs, and two of the three missed.**
+
+| Card | Predicted | Measured | Verdict |
+|---|---|---|---|
+| Iteration 1 — tool | **+8 pp → 0.74** | **−9.8 pp → 0.5610** | **missed by 17.8 pp, in the wrong direction** |
+| Iteration 2 v1 (`e12466c`) | 0.81 | 0.7195 | missed by 9.1 pp |
+| Iteration 2 v2 | 0.69 | 0.7195 | beaten by 3.0 pp |
+| `cb65539` "gap above 20 pp" (Q20 reading **b**, the binding one) | > +20 pp | +6.1 pp | **not met** |
+
+Iteration 2's `Observed failure` line was left **deliberately blank** at commit time and
+filled only from Iteration 1's measured errors. Its committed **prior was falsified and
+says so**: errors were predicted to concentrate on sections with ≥3 instructions; they
+concentrate **by class** instead — defective-item error rates *improved* while clean-item
+rates roughly doubled.
+
+**2 · Q21 — a material defect in a shipped capability, found and NOT fixed.**
+`cfr_resolve` cannot see a nested designation: the CFR writes the children of `(b)` as
+bare `(1)`, `(2)`, and the resolver searches for the literal `(b)(1)`. **60 of 128
+designations, 33 of 82 items, and every single misfire runs one way** — absent-when-
+present. On items it touches A1-iter1 fell **−18.2 pp**; elsewhere **−4.1 pp**; on clean
+items it touches the false-defect rate was **0.8462**.
+
+**It was not fixed, and the third reason is the one that decided it:** out of scope;
+CH-05 is gated and unreviewed; and **the defect was found because it cost the headline a
+point.** A capability changed on that basis is tuned, however good the engineering
+argument. Instead the v2 skill compensates **in the open** — Step 2.5 tells the agent its
+own tool has a measured blind spot and how to check around it.
+
+**3 · `B0′` is named and run, and it settles the first objection anyone will raise.**
+`0.6585` — **b = c = 0**, meaning it produced the **identical answer on all 82 items** as
+B0-agent, although 26 of them had samples that disagreed. Self-consistency converges to
+the greedy answer. **The gain is the capabilities, not the budget.** It runs at
+temperature 1.0 because at 0 self-consistency is a no-op (Q22); it is the only arm not at
+t=0 and that is stated everywhere it appears.
+
+**4 · A temperature-0 tool-using arm is NOT deterministic**, and this bounds the
+ablations. A1's three reps: `0.7195 / 0.6707 / 0.7195`, **spread 4.9 pp, up to 14.6% of
+items differing between reps.** B0-agent's three were identical, because it makes one call
+per item. The single-rep ablations therefore carry run-to-run noise of roughly this size,
+and the report says so rather than presenting the ordering as exact.
+
+**5 · A silent defect that would have lost 246 trajectories.** `bundle()`'s glob missed
+B0prime's per-sample filenames, wrote an **empty bundle without erroring**, and
+`per-item/` is git-ignored. Announced by nothing but a `0` in a progress line. Fixed,
+re-bundled to 984 records, four regression tests added.
+
+### Questions
+
+**Q20** the `cb65539` prediction is ambiguous — conservative (harder) reading taken as
+binding, both reported · **Q21** Class A, the resolver defect, escalated · **Q22** `B0′`
+cannot exist at t=0 · **Q23** `CONTEXT.md` §6's `833/1,984 = 42.0%` **does not reproduce
+and sits above the ceiling of the loosest reading** · **Q24 RAISED AND RETRACTED SEVEN
+MINUTES LATER** — see below.
+
+### The mistake this session made, and published
+
+**Q24 asserted a run duration I had never measured.** I estimated elapsed time from *how
+much work had happened* rather than reading the ledger's own `wall_clock_s` column, was
+wrong by a **factor of eight**, and built a scheduling contingency on it. `date -u` costs
+two seconds. The entry is kept unedited with the retraction beside it.
+
+This is **hard rule 15 turned on my own inference rather than another agent's claim**, and
+hard rule 17's *"if you catch yourself reasoning 'this is probably fine, and checking is
+slow', that is the signal to check."* Everything the retraction touched was then
+recomputed from the ledger, and `docs/evidence/ch06-a1/aiuse_entry.py` now **generates**
+the disclosure numbers rather than letting me type them.
+
+### Gate
+
+**CH-06 is CODE-ONLY** — 332 green, goldens predate the tests.
+**CH-04 gate: FAIL, strike 1** (`docs/reviews/REVIEW_CH-04.md`). 16 findings, 7 material.
+The reviewer **vindicated the arithmetic** — an independent from-scratch reimplementation
+of `CONTEXT.md` §7 reproduced every checkpoint number to `0.000e+00`, `GOOD.md` provably
+predates every arm by 478 s on three clocks, and the GREEN checkpoint survives every
+finding. The findings are provenance and coverage: a permutation p that can reach 0.0
+against `GOOD.md`'s own *"p can never be 0"*; **no attributor-completeness guard in the
+scorer at all**; `GOOD.md` still saying n=76/38 pairs against the shipped 82/41; **5 of 16
+mutations survive**, including deleting `success + failure == n`. **F3 was acted on the
+same session** — the rep-aggregation rule is pre-registered nowhere, and CH-06 now prints
+that in its own output rather than inheriting it silently.
+
+### Status ledger
+
+CH-04 `built` → **`reviewed-FAIL ×1`** · CH-06 `todo` → **`built`** · CH-08 `todo` →
+**`built`** (folded in) · CH-09 `todo` → **`built`** · CH-07 stays `not built`, its card
+now carrying a measured — and non-reproducing — class size.
+
+### State for the next session
+
+- **The entry is now valid.** A baseline *and* an advanced solution both exist and are
+  measured. That was the gating risk at the head of this session's queue and it is closed.
+- **The headline must be written as a null on the criterion and a positive on the
+  mechanism.** A1 beats B0-agent by 6.1 pp; the effect is not significant at n = 82; the
+  criterion fails all four clauses. The *composition* result and the *tool-made-it-worse*
+  result are the findings worth leading with, and neither depends on significance.
+- **Q21 needs an architect ruling** before CH-11's README claims anything about
+  `cfr_resolve`'s accuracy. Its ceiling is inside A1's number.
+- **Q23 means `CONTEXT.md` §6's 42.0% must not be quoted** in the README or the video
+  until it is either re-derived or errata'd. `CONTEXT.md` is architect-only.
+- **CH-04 has one strike.** A second FAIL hits the limit and escalates, as CH-03 did.
+- **The blind human-time study is reserved and runnable** — 8 items, 4/4 balanced, blind
+  brief and worksheet emitted, answers sealed. Operator task, ~30 minutes.
+- **Spend USD 10.24 of the 18.00 ceiling. USD 7.76 remains.**
+
+---
+
 ## CH-03 REVIEW → FIX → ★ CHECKPOINT · 2026-08-31 · NIGHT RUN · Claude Code, `claude-opus-5` · **CH-03 FAILED, FIXED; CHECKPOINT GREEN**
 
 ### The one thing worth reading

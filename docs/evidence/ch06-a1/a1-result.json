@@ -1,0 +1,366 @@
+{
+  "comparisons": {
+    "A1": {
+      "accuracy": 0.7195121951219512,
+      "ci": {
+        "alpha": 0.05,
+        "ci_high": 0.8157894736842105,
+        "ci_low": 0.6190476190476191,
+        "n_clusters": 37,
+        "note": "percentile bootstrap over FR documents, not over items",
+        "reps": 2000,
+        "seed": 20260831
+      },
+      "gap_pp": 6.097560975609751,
+      "mcnemar": {
+        "b_only_a_correct": 15,
+        "c_only_b_correct": 10,
+        "n_discordant": 25,
+        "p_value": 0.42435622215270996,
+        "test": "exact two-sided binomial (McNemar)"
+      }
+    },
+    "A1-iter1": {
+      "accuracy": 0.5609756097560976,
+      "ci": {
+        "alpha": 0.05,
+        "ci_high": 0.6625,
+        "ci_low": 0.4594594594594595,
+        "n_clusters": 37,
+        "note": "percentile bootstrap over FR documents, not over items",
+        "reps": 2000,
+        "seed": 20260831
+      },
+      "gap_pp": -9.756097560975608,
+      "mcnemar": {
+        "b_only_a_correct": 8,
+        "c_only_b_correct": 16,
+        "n_discordant": 24,
+        "p_value": 0.15158963203430176,
+        "test": "exact two-sided binomial (McNemar)"
+      }
+    },
+    "A1-minus-tool": {
+      "accuracy": 0.6463414634146342,
+      "ci": {
+        "alpha": 0.05,
+        "ci_high": 0.75,
+        "ci_low": 0.5375,
+        "n_clusters": 37,
+        "note": "percentile bootstrap over FR documents, not over items",
+        "reps": 2000,
+        "seed": 20260831
+      },
+      "gap_pp": -1.2195121951219523,
+      "mcnemar": {
+        "b_only_a_correct": 12,
+        "c_only_b_correct": 13,
+        "n_discordant": 25,
+        "p_value": 1.0,
+        "test": "exact two-sided binomial (McNemar)"
+      }
+    },
+    "B0": {
+      "accuracy": 0.47560975609756095,
+      "ci": {
+        "alpha": 0.05,
+        "ci_high": 0.5357142857142857,
+        "ci_low": 0.4146341463414634,
+        "n_clusters": 37,
+        "note": "percentile bootstrap over FR documents, not over items",
+        "reps": 2000,
+        "seed": 20260831
+      },
+      "gap_pp": -18.292682926829272,
+      "mcnemar": {
+        "b_only_a_correct": 6,
+        "c_only_b_correct": 21,
+        "n_discordant": 27,
+        "p_value": 0.005924612283706665,
+        "test": "exact two-sided binomial (McNemar)"
+      }
+    },
+    "B0prime": {
+      "accuracy": 0.6585365853658537,
+      "ci": {
+        "alpha": 0.05,
+        "ci_high": 0.7702702702702703,
+        "ci_low": 0.5384615384615384,
+        "n_clusters": 37,
+        "note": "percentile bootstrap over FR documents, not over items",
+        "reps": 2000,
+        "seed": 20260831
+      },
+      "gap_pp": 0.0,
+      "mcnemar": {
+        "b_only_a_correct": 0,
+        "c_only_b_correct": 0,
+        "n_discordant": 0,
+        "p_value": 1.0,
+        "test": "exact two-sided binomial (McNemar)"
+      }
+    }
+  },
+  "ledger": {
+    "A1": {
+      "in": 4006662,
+      "out": 265354,
+      "rows": 249,
+      "unknown_cost": 0,
+      "usd": 5.333432,
+      "wall": 2516.1040000000007
+    },
+    "A1-iter1": {
+      "in": 944767,
+      "out": 67840,
+      "rows": 82,
+      "unknown_cost": 0,
+      "usd": 1.283967,
+      "wall": 763.9499999999999
+    },
+    "A1-minus-tool": {
+      "in": 593843,
+      "out": 26648,
+      "rows": 84,
+      "unknown_cost": 0,
+      "usd": 0.727083,
+      "wall": 341.5900000000001
+    },
+    "B0": {
+      "in": 184275,
+      "out": 3952,
+      "rows": 474,
+      "unknown_cost": 0,
+      "usd": 0.204035,
+      "wall": 876.4190000000006
+    },
+    "B0-agent": {
+      "in": 1453863,
+      "out": 3816,
+      "rows": 474,
+      "unknown_cost": 0,
+      "usd": 1.472943,
+      "wall": 475.2460000000001
+    },
+    "B0-agent-currenttext": {
+      "in": 259727,
+      "out": 656,
+      "rows": 82,
+      "unknown_cost": 0,
+      "usd": 0.263007,
+      "wall": 81.48599999999999
+    },
+    "B0-agent-sonnet": {
+      "in": 100784,
+      "out": 584,
+      "rows": 40,
+      "unknown_cost": 0,
+      "usd": 0.207408,
+      "wall": 69.971
+    },
+    "B0-sonnet": {
+      "in": 22936,
+      "out": 500,
+      "rows": 40,
+      "unknown_cost": 0,
+      "usd": 0.050872,
+      "wall": 61.70099999999998
+    },
+    "B0prime": {
+      "in": 688701,
+      "out": 2160,
+      "rows": 246,
+      "unknown_cost": 0,
+      "usd": 0.699501,
+      "wall": 252.3769999999998
+    },
+    "probe-model-id": {
+      "in": 102,
+      "out": 28,
+      "rows": 10,
+      "unknown_cost": 3,
+      "usd": 0.00028,
+      "wall": 11.69
+    }
+  },
+  "n": 82,
+  "per_class_recall": {
+    "A1": {
+      "WILL_EXECUTE": {
+        "correct": 32,
+        "n": 41,
+        "recall": 0.7804878048780488
+      },
+      "WILL_FAIL": {
+        "correct": 27,
+        "n": 41,
+        "recall": 0.6585365853658537
+      }
+    },
+    "A1-iter1": {
+      "WILL_EXECUTE": {
+        "correct": 21,
+        "n": 41,
+        "recall": 0.5121951219512195
+      },
+      "WILL_FAIL": {
+        "correct": 25,
+        "n": 41,
+        "recall": 0.6097560975609756
+      }
+    },
+    "A1-minus-tool": {
+      "WILL_EXECUTE": {
+        "correct": 27,
+        "n": 41,
+        "recall": 0.6585365853658537
+      },
+      "WILL_FAIL": {
+        "correct": 26,
+        "n": 41,
+        "recall": 0.6341463414634146
+      }
+    },
+    "B0": {
+      "WILL_EXECUTE": {
+        "correct": 36,
+        "n": 41,
+        "recall": 0.8780487804878049
+      },
+      "WILL_FAIL": {
+        "correct": 3,
+        "n": 41,
+        "recall": 0.07317073170731707
+      }
+    },
+    "B0-agent": {
+      "WILL_EXECUTE": {
+        "correct": 33,
+        "n": 41,
+        "recall": 0.8048780487804879
+      },
+      "WILL_FAIL": {
+        "correct": 21,
+        "n": 41,
+        "recall": 0.5121951219512195
+      }
+    },
+    "B0prime": {
+      "WILL_EXECUTE": {
+        "correct": 33,
+        "n": 41,
+        "recall": 0.8048780487804879
+      },
+      "WILL_FAIL": {
+        "correct": 21,
+        "n": 41,
+        "recall": 0.5121951219512195
+      }
+    }
+  },
+  "results": {
+    "A1": {
+      "accuracy": 0.7195121951219512,
+      "failure": 23,
+      "false_defect_count": 9,
+      "false_defect_rate": 0.21951219512195122,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": true,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 14,
+      "missed_defect_rate": 0.34146341463414637,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 59,
+      "unparseable_or_absent": 0
+    },
+    "A1-iter1": {
+      "accuracy": 0.5609756097560976,
+      "failure": 36,
+      "false_defect_count": 20,
+      "false_defect_rate": 0.4878048780487805,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": false,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 16,
+      "missed_defect_rate": 0.3902439024390244,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 46,
+      "unparseable_or_absent": 2
+    },
+    "A1-minus-tool": {
+      "accuracy": 0.6463414634146342,
+      "failure": 29,
+      "false_defect_count": 14,
+      "false_defect_rate": 0.34146341463414637,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": false,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 15,
+      "missed_defect_rate": 0.36585365853658536,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 53,
+      "unparseable_or_absent": 0
+    },
+    "B0": {
+      "accuracy": 0.47560975609756095,
+      "failure": 43,
+      "false_defect_count": 5,
+      "false_defect_rate": 0.12195121951219512,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": true,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 38,
+      "missed_defect_rate": 0.926829268292683,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 39,
+      "unparseable_or_absent": 3
+    },
+    "B0-agent": {
+      "accuracy": 0.6585365853658537,
+      "failure": 28,
+      "false_defect_count": 8,
+      "false_defect_rate": 0.1951219512195122,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": true,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 20,
+      "missed_defect_rate": 0.4878048780487805,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 54,
+      "unparseable_or_absent": 0
+    },
+    "B0prime": {
+      "accuracy": 0.6585365853658537,
+      "failure": 28,
+      "false_defect_count": 8,
+      "false_defect_rate": 0.1951219512195122,
+      "guard_false_defect_max": 0.25,
+      "guard_false_defect_pass": true,
+      "guard_missed_defect_max": 0.25,
+      "guard_missed_defect_pass": false,
+      "missed_defect_count": 20,
+      "missed_defect_rate": 0.4878048780487805,
+      "n": 82,
+      "n_negatives": 41,
+      "n_positives": 41,
+      "success": 54,
+      "unparseable_or_absent": 0
+    }
+  },
+  "seed": 20260831
+}

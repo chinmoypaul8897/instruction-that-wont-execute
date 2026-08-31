@@ -87,6 +87,41 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-06 → CH-08 → CH-09 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **THE ADVANCED SOLUTION**
+
+One unattended session working a pre-registered queue. It produced the project's
+first advanced solution, without which the entry is invalid under the hackathon's
+own rule that *"every valid entry must present both a baseline solution and an
+advanced solution."*
+
+**Models called by THIS session, all logged through `src/runlog.py`:**
+
+| id | calls | USD | why |
+|---|---:|---:|---|
+| `claude-haiku-4-5-20251001` | 756 | 8.4120 | every A1 arm and both ablations, temperature 0 — the same model as every baseline (`CONTEXT.md` §4) |
+
+**Arms run by this session, per-arm, from the ledger:**
+
+| arm | calls | input tok | output tok | USD | wall s | unknown-cost rows |
+|---|---:|---:|---:|---:|---:|---:|
+| `A1` | 249 | 4,006,662 | 265,354 | 5.3334 | 2516 | 0 |
+| `A1-iter1` | 82 | 944,767 | 67,840 | 1.2840 | 764 | 0 |
+| `A1-minus-tool` | 97 | 671,332 | 32,157 | 0.8321 | 404 | 0 |
+| `B0prime` | 246 | 688,701 | 2,160 | 0.6995 | 252 | 0 |
+| `B0-agent-currenttext` | 82 | 259,727 | 656 | 0.2630 | 81 | 0 |
+| **this session** | | | | **8.4120** | | |
+
+**Subagents: one.** An independent adversarial **CH-04 gate reviewer**, `claude-opus-5`, spawned with zero shared context and given only `CLAUDE.md`, `CONTEXT.md` §7, `plan.md`'s CH-04 card and the diff — explicitly *not* this
+project's own account of its work. It returned **FAIL with 16 findings**, reimplemented the scorer from the specification prose alone, and mutation-tested `src/score.py` sixteen times, restoring it byte-for-byte after each. Its verdict is `docs/reviews/REVIEW_CH-04.md`; its probes are kept at `docs/reviews/ch04-probe/`. **Nothing it found was taken on trust** — finding F3 was independently checked against the repository before this session acted on it.
+
+**Tools the agent was given, and whether it used them.** `cfr_resolve` was exposed as a real Anthropic tool-use schema rather than pre-computed into the prompt, specifically so that *use* could be counted rather than assumed. It was called and the calls are in the trajectories. The measured availability-vs-use-vs-agreement gap is in `docs/evidence/ch06-a1/a1-result.txt`.
+
+**Human direction: none during the run.** The queue was fixed in `prompts/CH-06.md`, which is committed. Every ambiguity that arose was written to `QUESTIONS.md` (Q20–Q24) and the conservative option taken, rather than self-authorised — including **Q21**, a material defect in a shipped capability that this session declined to fix because the defect was discovered *through the fact that it cost the headline number a point*.
+
+**One published number was retracted by this session, seven minutes after it was published.** `QUESTIONS.md` **Q24** asserted a run duration that had been estimated from a sense of how much work had happened rather than read from the ledger's own `wall_clock_s` column. It was wrong by a factor of eight and the scheduling contingency built on it was unnecessary. The entry is kept unedited with the retraction beside it.
+
+**Cost: USD 8.4120 for this session; USD 10.3476 committed in total against the 18.00 ceiling**, 1,794 logged runs, 3 of unknown cost carrying an empty cell rather than a zero.
+
 ### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 FAILED then FIXED · CHECKPOINT GREEN**
 
 One unattended session, roughly six hours, working a pre-registered queue with the
