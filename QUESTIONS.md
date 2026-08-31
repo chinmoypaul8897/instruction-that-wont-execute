@@ -2915,3 +2915,258 @@ cases H-P prove each scrubber *fires*; **no probe proves the pattern set is
 complete**, and case N passes on a literal that is in the list by construction. That is
 the same defect class as a green test suite - the thing this project exists to
 demonstrate - found in this project's own safety machinery.
+
+---
+
+### Q40 ANSWERED at CH-14b — the class is right, the trajectory is missing, and the gap is now sized
+
+**Appended 2026-08-31 by CH-14b. The Q40 entry above is not edited.**
+
+Q40 asked the architect to decide whether `SELECTION-RULE.md` clause T1 names an agent
+class wrongly, or whether a trajectory is simply missing. **That is answerable by reading
+the artifacts, and CH-14b read them instead of restating the question.**
+
+`docs/evidence/ch14b/audit_class_census.py` walks every exported build transcript and
+separates three things the earlier wording ran together:
+
+| | count at `0410843` |
+|---|---:|
+| build transcripts read | 14 |
+| records in them | 12,168 |
+| **sidechain records — an audit agent's own turns** | **0** |
+| single-agent launch prompts, verbatim | 5 *(3 distinct; the night run's two are exported twice)* |
+| workflow scripts, verbatim — a fleet's instructions | 7 |
+| completion notifications delivering a result verbatim | 8 |
+| of those, a single agent's review VERDICT | 2 |
+| of those, a fleet's aggregated structured output | 6 |
+
+**The answer: the class is named correctly and the trajectory is genuinely missing.**
+Nought sidechain records means no audit agent's intermediate turns exist anywhere in this
+repository, so not one of them can be replayed. T1 stands as written and is **not**
+corrected and **not** deleted.
+
+**But "the class has zero trajectories" understated what is there**, and two of this
+project's own sentences were wrong in the generous direction:
+
+1. `AI-USE.md` and `INDEX.md` both said what ships for **every fleet** is *"the launch
+   prompt verbatim inside the parent build transcript"*. A fleet has no launch prompt.
+   Its instructions ship as a `Workflow` **script** — 7 of them, 11,352 to 19,291
+   characters, each carrying its subagents' prompt templates. The phrase was right for
+   the 3 single agents and wrong for the fleets.
+2. Both also said *"the final result verbatim in its task-notification"*. True for 8 of
+   the launches, **false for the first CH-03 reviewer** — see the Q42 update below.
+
+**What a reader can and cannot do, stated once:** they can read exactly what every audit
+agent was asked and, for all but one, exactly what it returned. They cannot watch one
+work. That stays true until the workflow journals are exported, which is the option Q40
+costed for the architect and which no chunk has been sanctioned to do.
+
+**A note on the measurement itself.** The first version of the census script counted the
+`Task` tool's immediate `tool_result` as the agent's report and printed "5 of 5 reports
+delivered". It is not a report: for an async agent it is launch metadata, byte-identical
+for every launch, beginning *"Async agent launched successfully"*. The real count is 2
+verdicts, taken from the completion notification. **The script says so in its own
+docstring** rather than shipping the corrected number as though it had always been right.
+
+---
+
+### Q41 CLOSED at CH-14b — the six untracked instruction files are tracked
+
+**Appended 2026-08-31 by CH-14b. The Q41 entry above is not edited.**
+
+Q41 recorded that `prompts/CH-11.md`, `prompts/CH-11c.md` and `prompts/CH-12.md` were
+untracked and that **no session could fix it**, because `prompts/` is protected in every
+fence that could have added them. By the time this chunk ran the count was six.
+
+`prompts/CH-14b.md` §"SCOPE FENCE" sanctions it in terms — *"and `git add` the untracked
+files listed in Part 2"*. Committed at `b6d80a4`:
+
+```
+docs/video-script.md
+prompts/CH-11.md  prompts/CH-11c.md  prompts/CH-12.md
+prompts/CH-13A.md  prompts/CH-13B.md  prompts/CH-14b.md
+```
+
+**Seven, not six: this chunk's own card is included**, because a card that orders this
+correction and is itself unreadable is the exact shape of the problem Q41 raised.
+
+`THIRD-PARTY.md`'s *"one exception"* is now **zero exceptions** for these files. That
+file is outside this chunk's fence and is **not** edited; the sentence is stale in the
+harmless direction and is recorded here for whichever chunk owns it.
+
+---
+
+### Q42 UPDATE at CH-14b — indexed, and the claim it was to be indexed with does not hold
+
+**Appended 2026-08-31 by CH-14b. The Q42 entry above is not edited.**
+
+`prompts/CH-14b.md` Part 2 asked this chunk to close Q42 by adding
+`NIGHT-RUN-FINAL.jsonl` to `docs/trajectories/INDEX.md` and `AI-USE.md`, *"naming what it
+contains: **both CH-03 reviewers, their launch prompts and their FAIL verdicts
+verbatim**."*
+
+**Hard rule 15 applied to the instruction itself. Half of it is false.**
+`docs/evidence/ch14b/nightrun_contents.py`, output committed beside it:
+
+| claim | measured | |
+|---|---|---|
+| both reviewers' **launch prompts** verbatim | **2 of 2** — 5,444 and 5,040 characters | HOLDS |
+| both reviewers' **FAIL verdicts** verbatim | **1 of 2** | **DOES NOT HOLD** |
+
+The re-reviewer's report arrived inside its completion notification and its
+`## VERDICT: **FAIL**` is in the file in full. The first reviewer's notification reads
+`<status>stopped</status>` with *"No completion record was found for background agent"* —
+it crashed across a session restart and the session never received a report. **The report
+is not lost**; it is `docs/reviews/REVIEW_CH-03.md`, which discloses in its own header
+that the build session assembled it from the reviewer's surviving probes. **It is not in
+the trajectory, and the trajectory must not be indexed as though it were.**
+
+`INDEX.md` §3 **already contradicted itself two lines apart** — a header sentence
+claiming both verdicts, directly above a row recording the crash. Both files are
+corrected: 2 prompts, 1 verdict, and the crash named in the same breath.
+
+**AI-USE.md now names both exports** in the NIGHT-RUN session entry, which previously
+named only `NIGHT-RUN-CHECKPOINT.jsonl` — the incomplete one — as the session's
+transcript. That was the substance of Q42 and it is closed.
+
+**The convention question Q42 raised is NOT closed.** Whether `tools/export_session.py`
+should overwrite or suffix, and what `docs/trajectories/build/README.md` should say, is
+still unwritten, and CH-02 and NIGHT-RUN still take opposite choices. Architect's.
+
+---
+
+## Q44 - the adversarial-audit fleet table is short by two fleets, and one of them is this project's largest self-audit
+
+**Raised at CH-14b, 2026-08-31. Named in `AI-USE.md` itself rather than left to be found.
+Not blocking.**
+
+`AI-USE.md`'s fleet table costs **six** fleets and totals **103** agents. The census
+counts **7** workflow launches and **6** delivered fleet results across the transcripts
+at `0410843`. Two fleets are missing from the table:
+
+- **CH-12's second, self-auditing fleet of 36** — five auditors instructed to assume
+  CH-12 was wrong, plus one refuter per finding. It raised 31, 11 were refuted, 18
+  survived, and all 31 were acted on (`STATUS.md`, CH-12 row). It is the sharpest
+  self-audit in the project and it is not in the class table.
+- **CH-13B's**, which ran in parallel with this chunk. Its evidence is in that chunk's
+  fence, not this one's.
+
+**Their agent counts are published in `STATUS.md`; their token cost is not measured
+anywhere, and no figure has been invented for it.** Counting CH-12's second fleet the
+class is **139**, which is the number `STATUS.md` already uses — so the project ships two
+different totals for the same class, 103 and 139, and both are defensible only because
+they count different things.
+
+**For the architect:** either the fleet table is completed with measured token costs for
+the two missing fleets, or the class total is stated once as *103 costed of 139 run*.
+CH-14b has added a paragraph under the table saying exactly that, which is a disclosure
+rather than a fix.
+
+---
+
+## Q45 - shipped trajectories contain U+FFFD, and they came from the harness rather than from us
+
+**Raised at CH-14b, 2026-08-31. Not fixed: `docs/trajectories/` is outside every chunk's
+fence and is the one directory this project has committed to leaving alone.**
+
+CH-11's 52-agent audit found nine literal **U+FFFD** replacement characters written into
+`README.md` from a cp1252 terminal artefact, with a paragraph defending them. They were
+removed, and the corpus was shown to contain **zero**.
+
+The same character is in the shipped trajectories:
+
+| file | U+FFFD |
+|---|---:|
+| `docs/trajectories/build/NIGHT-RUN-CHECKPOINT.jsonl` | **6** |
+| `docs/trajectories/build/NIGHT-RUN-FINAL.jsonl` | **10** |
+
+Counted by `docs/evidence/ch14b/nightrun_contents.py`. **These are not ours in the same
+sense.** Every occurrence inspected sits inside text the *harness* wrote — the `Agent`
+tool's own launch-metadata string, where an em dash arrives as U+FFFD — not inside
+anything a session composed. So the shape is different from the README's: there, a
+session wrote them and then argued for them; here, a session recorded what it was handed.
+
+**Why it is recorded rather than fixed.** Editing a trajectory to remove them means
+rewriting shipped evidence, which is what Q43 refused to do for a much stronger reason.
+Re-exporting would rewrite it just as thoroughly and would not fix the source.
+
+**For the architect:** this is a one-line note in `AI-USE.md` or `SAFETY.md` if it is
+worth saying at all — that exported transcripts reproduce the harness's own bytes,
+including its encoding artefacts. The alternative is that a reader greps for U+FFFD,
+finds sixteen, and reads CH-11's *"the corpus has zero"* as narrower than it was meant.
+
+---
+
+## Q46 - `CHANGELOG.md`'s Iteration 1 card quotes a WITHDRAWN missed-defect rate. Out of fence, re-verified, and reported not fixed
+
+**Raised at CH-14b, 2026-08-31. `CHANGELOG.md` is outside this chunk's fence and
+`prompts/CH-14b.md` says so in terms: *"record it for the architect, do not edit it."***
+
+`CHANGELOG.md` line 23, the Iteration 1 card's *"Observed failure it targets"* cell:
+
+> B0-agent's missed-defect rate is **0.4737**
+
+**Re-verified at CH-14b against the current file and the artifacts, not relayed from the
+sweep.** `0.4737` is the **withdrawn** checkpoint's figure, computed on the n = 76 eval
+set that the CH-03 review then failed; it survives only in
+`docs/evidence/checkpoint/withdrawn/checkpoint-result.json`
+(`0.47368421052631576`). The live figure on the shipped n = 82 set is **0.4878**
+(`docs/evidence/checkpoint/checkpoint-result.json`, `b0_agent.missed_defect_rate`), and
+**the EVIDENCE cell of the very same table row already says 0.4878** — so one row of
+`CHANGELOG.md` carries both the withdrawn number and the live one, twelve columns apart.
+
+**Why this needs a ruling rather than an edit.** The card is a **dated
+pre-registration**, committed before the build it describes, and this project's whole
+claim about its changelog is that the cards were not touched afterwards. An erratum
+appended beneath the table is one answer; editing the cell is a different and worse one.
+`QUESTIONS.md` Q39's UPDATE flagged the same item and reached the same conclusion.
+
+**For the architect:** may a dated card carry an erratum? If yes, the fix is one appended
+line and the number to use is **0.4878**. If no, the contradiction is stated in the
+README's LIMITATIONS instead. Either way it should not stay unremarked, because it is the
+kind of thing a judge finds by grepping one number against another.
+
+---
+
+## Q47 - `plan.md` gives CH-14b the final clean-clone rehearsal; `prompts/CH-14b.md` does not ask for it
+
+**Raised at CH-14b, 2026-08-31. STOP RULE: the card and the plan disagree, so the work was
+not silently absorbed and not silently skipped.**
+
+`plan.md` Phase 3 row 8 and `STATUS.md`'s CH-14b row both read:
+
+> **CH-14b** · final rehearsal from the finished repo; secret scan over full history
+
+`prompts/CH-14b.md` assigns three parts - the submission Description, housekeeping, and
+the last in-fence sweep findings - and its FINAL OUTPUT template has **no rehearsal row**.
+Its scope fence does not list `docs/evidence/ch14-clean-clone/`.
+
+**What this chunk did:** the **full-history secret scan**, because `SUBMISSION.md` names
+CH-14b as the chunk that re-runs it and the output lands in this chunk's own evidence
+directory. **PASS, 0 findings, 649 text blobs across 126 commits at `0410843`** -
+`docs/evidence/ch14b/secret-scan-ch14b.txt`.
+
+**What this chunk did not do:** the clean-clone and extracted-zip rehearsal. It was not
+asked for, it writes outside this fence, and inventing it would be exactly the scope
+creep `CLAUDE.md` forbids.
+
+**Why it matters rather than being bookkeeping.** CH-14a's rehearsal is the evidence that
+the zip a judge opens actually works, and it was run when the archive was **10.61 MB**.
+At `0410843` the archive is **22.40 MB across 451 entries** - it has more than doubled,
+and CH-13B's video assets and six sessions' transcripts have landed since. The rehearsal's
+verdict is still the best evidence in the packet and it is **no longer current**.
+
+**For the architect - three options:**
+
+1. **Sanction a rehearsal before CH-15 submits.** It is `python` and `unzip`, costs no API
+   spend, and the last one found *two tests that fail in the zip a judge opens*. On the
+   record, that is the single highest-yield check this project has run.
+2. **Fold it into CH-15**, which already owns the transaction and must download and open
+   the uploaded zip anyway.
+3. **Accept CH-14a's rehearsal as sufficient**, and say so in `SUBMISSION.md` with the
+   commit and the archive size it was run at, so a reader is not misled about freshness.
+
+**Conservative option taken: none of the three chosen by this session.** `SUBMISSION.md`
+now states plainly that the rehearsal was not re-run, at what size it was last run, and
+that this question is open. **A stale PASS presented as current would be worse than a gap
+that is labelled.**

@@ -1,0 +1,5 @@
+AI-USE.md                          6 edits applied, 60051 -> 63420 bytes
+docs/trajectories/INDEX.md         2 edits applied, 21231 -> 21925 bytes
+docs/trajectories/SELECTION-RULE.md 2 edits applied, 6162 -> 7193 bytes
+
+all 10 edits applied; old text gone and new text present for every one

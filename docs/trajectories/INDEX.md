@@ -78,7 +78,11 @@ lines, 537 assistant records. **This is the most valuable file in the directory 
 is more valuable than any clean one.**
 
 It contains **both** CH-03 adversarial reviewers, launched as background subagents with
-zero shared context, their **launch prompts verbatim** and their **verdicts verbatim**:
+zero shared context, and **both launch prompts verbatim** — 5,444 and 5,040 characters.
+**One of the two verdicts is in the file verbatim, not both**, and the row below says
+which. *Corrected at CH-14b: this sentence read "their verdicts verbatim", which
+contradicted the very next row of its own table. Measured 2 of 2 prompts and 1 of 2
+verdicts, `docs/evidence/ch14b/nightrun-contents.txt`.*
 
 | what | where in the file | verdict |
 |---|---|---|
@@ -206,11 +210,17 @@ omission from this index.** `QUESTIONS.md` **Q40**.
 **Why there is no JSONL.** `tools/export_session.py` captures a *session*; a subagent is
 not a session. Its per-agent records live in the Claude Code workflow journal outside
 this repository, and the `Agent` tool writes each transcript to a temp path that is
-never exported. **What does ship, for every fleet: the launch prompt verbatim inside
-the parent build transcript, the final result verbatim in the task-notification, and
-the runnable evidence under `docs/reviews/` or `docs/evidence/`.** For the 21-agent
-sweep, `ch11c-agent-sweep.md` is generated from the journal line by line, so no finding
-is paraphrased, dropped or re-scored.
+never exported.
+
+**What does ship was counted at CH-14b rather than characterised** — across all 14 build
+transcripts, 12,168 records (`docs/evidence/ch14b/audit-class-census.txt`): **0** sidechain records · 5 single-agent
+launch prompts, 3 distinct · 7 workflow scripts, which are a fleet's instructions · 8
+completion notifications carrying a result, of which 2 are a single agent's verdict and 6
+a fleet's aggregated output. **The zero is the point:** no audit agent's intermediate
+turns exist here at all. What a reader gets is both endpoints — what each agent was asked
+and what it returned — for every launch but one. For the 21-agent sweep,
+`ch11c-agent-sweep.md` is generated from the journal line by line, so no finding is
+paraphrased, dropped or re-scored.
 
 **Follow one end to end** to see what is and is not there: open
 [`build/NIGHT-RUN-FINAL.jsonl`](build/NIGHT-RUN-FINAL.jsonl) at

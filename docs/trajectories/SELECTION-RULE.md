@@ -86,7 +86,7 @@ Whether that still holds is a measurement, and it is reported in
 |---|---|---|
 | **build sessions** | one JSONL per Claude Code session, written by `tools/export_session.py` | `docs/trajectories/build/` |
 | **evaluation arms** | one JSONL per arm run, written by `src/runlog.py` | `docs/trajectories/arms/` |
-| **adversarial audits** | **not JSONL.** These are subagent fleets spawned *inside* a coding session; their per-agent records live in the workflow journal, which is outside the repository, and what is committed is the **verbatim** transcription of each agent's finding | `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md`, `docs/reviews/`, `docs/evidence/spec-fix-1/` |
+| **adversarial audits** | **not JSONL.** These are subagents and subagent fleets spawned *inside* a coding session; their per-agent records live in the workflow journal, which is outside the repository. What is committed is (a) their **instructions** verbatim inside the parent build transcript — 5 single-agent launch prompts and 7 workflow scripts — (b) their **results** verbatim in 8 completion notifications, and (c) the transcription of each agent's finding | `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md`, `docs/reviews/`, `docs/evidence/spec-fix-1/`, and `docs/trajectories/build/*.jsonl` |
 
 There is also a fourth directory, `docs/trajectories/probe/`, which T1 does not name:
 the model-id probe runs from `QUESTIONS.md` Q1. **It is not dropped.** T1 is applied to
@@ -94,10 +94,19 @@ the model-id probe runs from `QUESTIONS.md` Q1. **It is not dropped.** T1 is app
 rule that silently skipped a directory would be exactly the failure this file exists to
 prevent.
 
-**The gap is real and is not repaired by wording.** The adversarial-audit class is the
-one class whose agents cannot be replayed from `docs/trajectories/`, and
-`AI-USE.md` says where each fleet's evidence is instead. It is raised as
-`QUESTIONS.md` **Q40**.
+**The gap is real and is not repaired by wording — and CH-14b sized it rather than
+restating it.** `QUESTIONS.md` **Q40** asked whether the class was named wrongly or the
+trajectory was simply missing. Reading the artifacts answers it: **the class is right and
+the trajectory is missing.** Across all 14 build transcripts, 12,168 records, there are
+**0** sidechain records — not one audit agent's own turns are captured anywhere, so not
+one can be replayed. What is captured is both **endpoints**, and those are not nothing:
+12 sets of instructions and 8 delivered results, verbatim, listed in the row above.
+
+**So T1 is not corrected, and it is not deleted.** The clause names a class that exists,
+did the work the project leans on hardest, and has committed evidence at both ends of
+every agent. It has no trajectory, which is what T1's own column already says. The
+measurement is `docs/evidence/ch14b/audit-class-census.txt`; the one thing a reader cannot do is watch an audit
+agent work, and that stays true until the workflow journals are exported.
 
 ---
 

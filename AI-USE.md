@@ -21,12 +21,12 @@ landed, and what is worth opening the file for. The curation rule is
 | Class | What it is | Count | Trajectories live at | Replayable? |
 |---|---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects — **two whole projects died before a line of this one was written** | ~90 | `context/*-raw.json` (committed), beside the synthesised verdicts in `context/03`–`09` | synthesised output only; they predate the git history |
-| **Coding** | fresh Claude Code BUILD sessions that write this repository | **11 sessions / 12 files** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN (exported twice), CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c, CH-12 | `docs/trajectories/build/<CHUNK-ID>.jsonl` | **yes** — full transcript, every tool call and response |
-| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships — see the table below | **103** | `docs/reviews/`, `docs/evidence/ch11c-sweep/`, `docs/evidence/spec-fix-1/` | **NO — `QUESTIONS.md` Q40** |
+| **Coding** | fresh Claude Code BUILD sessions that write this repository | **13 sessions / 14 files at `0410843`** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN (exported twice), CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c, CH-12, CH-13A, CH-13B — and **14 sessions / 15 files** once CH-14b exports its own | `docs/trajectories/build/<CHUNK-ID>.jsonl` | **yes** — full transcript, every tool call and response |
+| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships — see the table below | **103** | `docs/reviews/`, `docs/evidence/ch11c-sweep/`, `docs/evidence/spec-fix-1/`, and **endpoints inside the build transcripts** | **NO, and now measured — `QUESTIONS.md` Q40.** **0** sidechain records in 12,168 records across 14 transcripts: no audit agent's own turns are captured anywhere. What ships is the endpoints — 3 launch prompts, 7 workflow scripts, 2 verdicts and 6 fleet results, all verbatim. `docs/evidence/ch14b/audit-class-census.txt` |
 | **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` | **yes** — bundled; `per-item/` is git-ignored and its every record is in the bundle |
 | **Probe** | the model-id probe that checked a claim the chunk card pre-registered as fact | **10** runs | `docs/trajectories/probe/probe-model-id__*.jsonl` | **yes** |
 
-**38 trajectory files at `7223552`**, measured by `docs/evidence/ch12/trajectory_facts.py`; the byte total is in `docs/evidence/ch12/trajectory-facts.txt` rather than quoted here, because it grows on every re-export. *The figure names a commit because it rises every time a session exports its transcript — it was 36 when CH-12 began and 37 when CH-12 exported its own.*
+**39 trajectory files at `0410843`** — 14 build · 15 arms · 10 probe — measured by `docs/evidence/ch12/trajectory_facts.py`; the byte total is in `docs/evidence/ch12/trajectory-facts.txt` rather than quoted here, because it grows on every re-export. *The figure names a commit because it rises every time a session exports its transcript — it was 36 when CH-12 began and 37 when CH-12 exported its own.*
 
 ### The adversarial-audit class, in full — 103 subagents, and its cost stated separately
 
@@ -43,6 +43,16 @@ be sceptical about, so it is broken out rather than summarised.
 | CH-12 re-verification `wf_3949a5b7-c7b` | **17** | `claude-opus-5[1m]` | **1,679,590** | 1,623 s | `build/CH-12.jsonl` | 10 auditors re-checking all 75 standing findings against the current files, 7 measuring the facts this chunk needed. 666 tool calls, 0 errors |
 | **total** | **103** | | **6,400,255** measured on three fleets | | | |
 
+**This table is not complete, and the shortfall is named rather than left to be found.**
+The census counts **7** workflow launches and **6** delivered fleet results across the
+transcripts at `0410843`; six fleets are costed above. Missing are **CH-12's second,
+self-auditing fleet of 36** (`STATUS.md`'s CH-12 row: 31 findings raised, 11 refuted, 18
+survived, all 31 acted on) and **CH-13B's**, which ran in parallel with this chunk and
+whose evidence is outside its fence. Their agent counts are published in `STATUS.md`;
+their token cost is **not** measured here and no figure is invented for it. Counting
+CH-12's second fleet the class is **139**, which is the number `STATUS.md` uses.
+
+
 **These tokens are NOT in `docs/evidence/runs/cost_ledger.csv` and are not part of the
 USD 11.6323.** The ledger records the *evaluation arms* — the thing being measured.
 Audit subagents are Claude Code sessions' own usage, billed on the coding-agent side, and
@@ -53,11 +63,31 @@ overstate the project's API spend at the same time.
 **This class has no trajectory file, and that is a gap in deliverable 4 rather than an
 omission from this index.** `tools/export_session.py` captures a *session*; a subagent is
 not a session, and the `Agent` tool writes each transcript to a temp path outside the
-repository. What ships for every fleet is **the launch prompt verbatim inside the parent
-build transcript, the final result verbatim in its task-notification, and the runnable
-evidence under `docs/reviews/` or `docs/evidence/`** — and for the 21-agent sweep, a
-finding-by-finding transcription generated from the journal rather than written by hand.
-It is raised as `QUESTIONS.md` **Q40** with the fix costed.
+repository.
+
+**What ships instead was measured at CH-14b rather than described, because the earlier
+description of it was too generous.** Over all 14 build transcripts, 12,168 records
+(`docs/evidence/ch14b/audit-class-census.txt`):
+
+| | count |
+|---|---:|
+| **sidechain records — an audit agent's own turns** | **0** |
+| single-agent launch prompts, verbatim (3 distinct agents; the night run's two are exported twice) | 5 |
+| workflow scripts, verbatim — a fleet's instructions, carrying each subagent's prompt template | 7 |
+| completion notifications delivering a result verbatim | 8 |
+| of those, a single agent's review VERDICT | 2 |
+| of those, a fleet's aggregated structured output | 6 |
+
+**The zero is the finding.** Not one audit agent's intermediate turns exist in this
+repository, so no reader can watch one work; what a reader can do is read exactly what
+each was asked and exactly what it returned. **Two corrections to the older wording:**
+the phrase *"the launch prompt verbatim"* was right for the three single agents and
+wrong for the fleets, whose instructions ship as a `Workflow` **script** instead; and
+*"the final result verbatim"* holds for 8 of the launches but **not** for the first CH-03
+reviewer, which crashed mid-run — see `docs/trajectories/INDEX.md` §3. For the 21-agent
+sweep, `ch11c-agent-sweep.md` is a finding-by-finding transcription generated from the
+journal rather than written by hand. Raised as `QUESTIONS.md` **Q40**, with the fix
+costed and the gap now sized.
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
 live outside the repository in `~/.claude/projects/`, where Claude Code rotates and
@@ -530,8 +560,23 @@ project's own account of its work. It returned **FAIL with 16 findings**, reimpl
 ### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 reviewed-FAIL ×2 → ESCALATED · CHECKPOINT GREEN**
 
 One unattended session, roughly six hours, working a pre-registered queue with the
-operator asleep. Transcript: `docs/trajectories/build/NIGHT-RUN-CHECKPOINT.jsonl`
-(1,348 lines, 3.1 MB; the exporter's redaction sweep found **zero** credentials).
+operator asleep. **Exported twice, and both exports ship** —
+`docs/trajectories/build/NIGHT-RUN-CHECKPOINT.jsonl` (1,348 lines, 3,123,874 B), a
+mid-session snapshot committed to satisfy `CLAUDE.md` duty 6 before the run continued,
+and `docs/trajectories/build/NIGHT-RUN-FINAL.jsonl` (1,659 lines, 3,696,750 B), **which
+is the complete record and the one to read.** The exporter's redaction sweep found
+**zero** credentials in either.
+
+**`NIGHT-RUN-FINAL.jsonl` is the most valuable process evidence in this repository and
+until CH-12 it was named nowhere** (`QUESTIONS.md` **Q42**). It holds **both** CH-03
+adversarial gate reviewers: their launch prompts verbatim, 5,444 and 5,040 characters,
+each opening *"Assume the work is WRONG until proven otherwise"*, and **one of their two
+verdicts verbatim** — the round-2 reviewer's `## VERDICT: **FAIL**` arrived inside its
+completion notification and is in the file in full. The first reviewer's is **not**: its
+own notification reads `<status>stopped</status>`, it crashed before delivering a report,
+and `docs/reviews/REVIEW_CH-03.md` says so in its own header. *Q42 and this file both
+said "their FAIL verdicts verbatim", plural. Measured at CH-14b: 2 of 2 prompts, **1** of
+2 verdicts — `docs/evidence/ch14b/nightrun-contents.txt`.*
 
 **Models called, all logged through `src/runlog.py`:**
 

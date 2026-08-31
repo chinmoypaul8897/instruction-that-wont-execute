@@ -2,7 +2,10 @@
 
 **Project:** The Instruction That Won't Execute
 **Repository:** https://github.com/chinmoypaul8897/instruction-that-wont-execute
-**Written at:** CH-14a, 2026-08-31. **Verified against commit:** see *Verification* below.
+**Written at:** CH-14a, 2026-08-31. **Every row re-measured at CH-14b, commit `0410843`**, by the commands named in `docs/evidence/ch14b/apply_submission_readme.py`.
+**Verified against commit:** see *Verification* below.
+
+**What CH-14b did NOT re-run, said here rather than left to be inferred:** the clean-clone and extracted-zip rehearsal. The *Verification* table below is CH-14a's, at its own commit, and the archive has since more than doubled. `plan.md` assigns the final rehearsal to CH-14b; `prompts/CH-14b.md` does not ask for it. That disagreement is `QUESTIONS.md` **Q47**, and the conservative reading is that the rehearsal is still owed before CH-15 submits.
 
 This file exists so a validator can tick the submission-validity list without hunting.
 Every row is a path in this repository or a URL. **Rows that are not yet satisfied say
@@ -14,21 +17,24 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 
 | # | FAQ item | Where it is | State |
 |---|---|---|---|
-| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ **323 tracked files, 90 commits** at `e01fdfd` (CH-11) |
-| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **12.51 MB** against a 50 MB cap | ✅ re-measured at CH-12, `b39cd0c`: **12,513,651 B, 4.00× under cap** (`docs/evidence/ch12/archive-size.txt`). It read 10,662,339 B / 373 entries at CH-11's `e01fdfd`; the growth is this chunk's own 2.8 MB session transcript |
-| 3 | **Tests** | [`tests/`](tests/) — 14 test modules, **353 passed / 26 skipped** in a clean clone at `7223552`; **351 / 28** from the extracted zip | ✅ green from the extracted zip |
+| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ **395 tracked files, 126 commits** at `0410843` (CH-14b). *Re-measured every chunk; it read 323 / 90 at CH-11's `e01fdfd`.* **Private until CH-15**, which owns flipping it public and proving 200 to an unauthenticated request |
+| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **22.40 MB** against a 50 MB cap | ✅ re-measured at CH-14b, `0410843`: **22,399,615 B across 451 entries, 2.23× under cap**. It read 12,513,651 B at CH-12's `b39cd0c` and 10,662,339 B at CH-11's `e01fdfd`. **The growth is real and is not trimmed**: each session commits its own multi-MB transcript, and CH-13B added the video assets. `.githooks/pre-commit` refuses any commit whose archive exceeds 45 MB and fails closed if it cannot measure |
+| 3 | **Tests** | [`tests/`](tests/) — **400 passed / 0 skipped** on the build machine at `0410843`, where `data/raw/` is present so nothing skips; **353 / 26** in a clean clone at `7223552`; **351 / 28** from the extracted zip | ✅ green from the extracted zip. *Three numbers because they are three environments, and the one a judge gets is the third* |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
-| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 38 JSONL trajectories at `7223552` + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
-| 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
+| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — **39 JSONL trajectories at `0410843`** + [`agents/`](agents/) + [`prompts/`](prompts/), **now complete: the six untracked instruction files were committed at `b6d80a4`** (`QUESTIONS.md` Q41) | ✅ |
+| 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ **the one row not satisfied.** CH-13B holds the recording; the URL lands here, in `README.md` and in the form. Everything else on this page is ✅ |
 
 ---
 
 ## Item 2 — the archive, and why nothing was trimmed out of it
 
-The uploaded artifact is `git archive --format=zip HEAD`. **10,662,339 B = 10.66 MB
-against a 50 MB cap** — 4.7× under, with 39.3 MB of headroom. Re-measured at CH-11's
-last commit; CH-14a measured 10,613,737 B and `docs/evidence/ch14-size/inventory.md`
-10,182,500 B, both at earlier commits.
+The uploaded artifact is `git archive --format=zip HEAD`. **22,399,615 B = 22.40 MB
+against a 50 MB cap** — 2.23× under, with 27.6 MB of headroom, measured at CH-14b's
+`0410843`. Earlier commits measured 12,513,651 B (CH-12 `b39cd0c`), 10,662,339 B
+(CH-11 `e01fdfd`), 10,613,737 B (CH-14a) and 10,182,500 B
+(`docs/evidence/ch14-size/inventory.md`). **Five figures, five commits, and the archive
+genuinely more than doubled** — session transcripts and the video assets, not drift in
+the measurement. The current number is the one to quote and it names its commit.
 
 The tracked tree at `e01fdfd` is 63.62 MB uncompressed. That number is **not** the constraint and was
 mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): the archive deflates 6×
@@ -64,7 +70,7 @@ one. `docs/evidence/ch12/corpus-size.txt`.)* `python refetch.py
 | what | where |
 |---|---|
 | every model, tool and agent, with what each did | [`AI-USE.md`](AI-USE.md) |
-| **38 JSONL at `7223552`** — 13 build transcripts (12 sessions; NIGHT-RUN exported twice), 15 arm bundles carrying every one of the 2,097 logged runs, 10 probe runs. *The count rises as each session exports its own transcript, which is why it names a commit.* **Nothing sampled**; the arms are bundled, not one file per run | [`docs/trajectories/`](docs/trajectories/) · [`INDEX.md`](docs/trajectories/INDEX.md) |
+| **39 JSONL at `0410843`** — 14 build transcripts (13 sessions; NIGHT-RUN exported twice), 15 arm bundles carrying every one of the 2,097 logged runs, 10 probe runs. *The count rises as each session exports its own transcript, which is why it names a commit.* **Nothing sampled**; the arms are bundled, not one file per run. **No audit agent has a trajectory here at all** — 0 sidechain records in 12,168, measured at CH-14b, `QUESTIONS.md` Q40 | [`docs/trajectories/`](docs/trajectories/) · [`INDEX.md`](docs/trajectories/INDEX.md) |
 | the exact instructions shaping each evaluation arm | [`agents/`](agents/) |
 | every chunk prompt, committed verbatim as issued | [`prompts/`](prompts/) |
 | per-call tokens, wall-clock and imputed USD | `docs/evidence/runs/cost_ledger.csv` |
@@ -92,9 +98,10 @@ it fails.
 | regenerated result files byte-identical to committed | ✅ 4/4 | ✅ 4/4 |
 | test suite | ✅ 316 passed | ✅ 314 passed |
 
-**Secret sweep:** `docs/evidence/secret-scan/scan.txt` — **PASS, 0 findings** across all
-462 text blobs of all 84 commits plus the 39.4 MB of trajectories that existed at the scan commit `263ed29`. **At `7223552` the set is 38 files** (byte total in `docs/evidence/ch12/trajectory-facts.txt`, regenerated each commit) (`docs/evidence/ch12/trajectory-facts.txt`); the sweep has not been re-run over the difference, and `CH-14b` is the chunk that does it. `.env` is git-ignored,
-never tracked, never committed on any ref.
+**Secret sweep: RE-RUN AT CH-14b over the full history, and it is the current one.**
+`docs/evidence/ch14b/secret-scan-ch14b.txt` — **VERDICT: PASS, 0 findings** across **649 text blobs of all 126 commits**, 43 trajectory files, 62,155,794 bytes, at `0410843`. 6 binary blobs were skipped and are counted, not silently dropped; 6 hits matched a declared exception, each listed with its reason. The earlier run (`docs/evidence/secret-scan/scan.txt`, 462 blobs / 84 commits at `263ed29`) **is kept, not replaced** — SUBMISSION.md said *"CH-14b is the chunk that does it"*, and this is it. `.env` is git-ignored, never tracked, never committed on any ref.
+
+The scan's own stated limitations travel with the verdict rather than behind it: **regex prefix matching, no entropy analysis**, binary blobs skipped, refs reachable from `--all` only. It is not gitleaks and its output says so in its header.
 
 ---
 
@@ -110,7 +117,7 @@ Two capabilities were measured and **neither works alone**: A1 = 0.7195, A1-minu
 0.6463, A1-iter1 = 0.5610, B0-agent = 0.6585. The gap A1 − B0-agent is +6.1 pp at
 p = 0.4244 — **not significant**, and reported as such.
 
-`QUESTIONS.md` holds **43** entries (`grep -c '^## Q'`; this read 31 until CH-11c, when the
+`QUESTIONS.md` holds **47** entries (`grep -c '^## Q'`; this read 31 until CH-11c and 43 until CH-14b, when the
 sweep found it stale and this chunk itself added four) including our own retractions, a duplicated-run
 disclosure, and three errors this project made about its own work. That file is the
 argument, not an appendix to it.
