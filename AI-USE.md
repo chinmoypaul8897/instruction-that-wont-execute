@@ -581,8 +581,8 @@ an empty cell rather than a zero.
   `prompts/SPEC-FIX-2.md` forbade a panel in terms, citing SPEC-FIX-1's own disclosure
   immediately above: that its ten-agent panel consumed **55%** of that chunk's spend, voted
   **4–1 for the answer the session correctly rejected**, and that *"a cheaper panel would
-  have bought it too."* The instruction was followed. **This session's total is 10.58 M
-  input tokens against SPEC-FIX-1's 42.41 M combined — a 4.0× reduction on a chunk of
+  have bought it too."* The instruction was followed. **This session's total is 11.05 M
+  input tokens against SPEC-FIX-1's 42.41 M combined — a 3.8× reduction on a chunk of
   comparable stakes.** Recorded here because hard rule 13 requires disclosing what was
   used, and the honest disclosure this time is *nothing beyond the coding agent itself*.
 
@@ -595,12 +595,24 @@ an empty cell rather than a zero.
 
   | | tokens |
   |---|---|
-  | output | 126,862 |
-  | input, uncached | 198 |
-  | input, cache write | 250,800 |
-  | input, cache read | 10,327,144 |
-  | **total input** | **10,578,142** |
-  | assistant turns | 99 |
+  | output | 132,805 |
+  | input, uncached | 204 |
+  | input, cache write | 252,525 |
+  | input, cache read | 10,797,901 |
+  | **total input** | **11,050,630** |
+  | assistant turns | 102 |
+
+  *Corrected at CH-14b, and the old row is named rather than deleted.* Every row above
+  and both cost bases below previously read a **pre-close snapshot** — output 126,862 ·
+  uncached 198 · cache write 250,800 · cache read 10,327,144 · total 10,578,142 · 99
+  turns · USD 56.062260 / 9.903612 — which the committed artifact this entry cites has
+  never carried. `git log -- docs/evidence/spec-fix-2/spec-fix-2-session-cost.txt`
+  returns exactly one commit, `28a59e3`, holding the figures now shown. The gap is
+  3 turns and 472,488 input tokens: the closing commits the caveat above warns about.
+  **The defect was not the snapshot; it was quoting pre-close figures beside a
+  post-close artifact and calling that artifact the source.** No result moves — this is
+  the coding agent's own usage and is not charged against the USD 18 arms ceiling.
+  Re-verification: `docs/evidence/ch14b/reverify-before.txt`.
 
 - **Imputed cost** — the same two bases as every prior chunk, and for the same reason: the
   cache multipliers are assumed and were not re-verified this session, so the
@@ -608,18 +620,18 @@ an empty cell rather than a zero.
 
   | Basis | USD |
   |---|---|
-  | Upper bound — all input at full list, no cache discount | **56.062260** |
-  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **9.903612** |
+  | Upper bound — all input at full list, no cache discount | **58.573275** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **10.298377** |
 
 - **Against the economy instruction — the cheapest chunk in the project, and still a miss.**
   `prompts/SPEC-FIX-2.md` set a target of **under 5 M input tokens**. This session used
-  **10.58 M — 2.1× over**. It is nonetheless the lowest figure any chunk has recorded
-  (CH-00 21.72 M · CH-01 41.09 M · CH-02 41.58 M · SPEC-FIX-1 19.15 M coding + 23.25 M
+  **11.05 M — 2.21× over**. It is nonetheless the lowest figure any chunk has recorded
+  (CH-00 21.72 M · CH-01 41.09 M · CH-02 42.21 M · SPEC-FIX-1 19.15 M coding + 23.25 M
   panel), and
-  the saving came entirely from not convening a panel. **10.33 M of the 10.58 M is cache
+  the saving came entirely from not convening a panel. **10.80 M of the 11.05 M is cache
   read** — the `CLAUDE.md` read-order duty (constitution, a 20 KB verdict, five long
   `QUESTIONS.md` entries, `CONTEXT.md`, `STATUS.md`, `PROGRESS.md`) re-presented as cached
-  context across 99 turns. That is structural for any session under this constitution, and
+  context across 102 turns. That is structural for any session under this constitution, and
   a sub-5 M target may not be reachable while the read order stands; three self-inflicted
   retries (two here-documents that mangled shell escaping, and a verifier check that was
   itself wrong on its first run) account for the rest, and they were mine.
@@ -727,9 +739,16 @@ an empty cell rather than a zero.
   the `data/amdpars/` freeze and `docs/evidence/ch02-attributor/`.
 - **Trajectory:** `docs/trajectories/build/CH-02.jsonl` (709 lines, 1,689,144 B;
   660 home-path substitutions, every other scrub category an explicit 0).
-- **Wall-clock:** first turn 14:43:18 UTC → last 15:30:55 UTC = **47.6 min**, against
-  the ~3 h unattended window `prompts/CH-02.md` allowed.
-- **Measured usage** (239 assistant turns, read from the transcript's own `usage`
+- **Wall-clock:** measured on the shipped trajectory, first assistant turn
+  `2026-08-30T14:43:21.021Z` → last `2026-08-30T18:16:43.050Z` = **213.4 min**, against
+  the ~3 h unattended window `prompts/CH-02.md` allowed. **That is over the window, not
+  under it.** *Corrected at CH-14b: this read "14:43:18 → 15:30:55 = 47.6 min", which is
+  the span of the **first** export (`215052e`, measured 14:43:21.021Z → 15:30:45.240Z =
+  47.4 min, 241 turns). The session was re-exported at `940c0b9` and the sentence was
+  not. The claim as it stood said the chunk beat its window roughly fourfold; measured
+  against the record it cites, it ran past it. The number was corrected in the direction
+  that costs the chunk.*
+- **Measured usage** (241 assistant turns, read from the transcript's own `usage`
   records — measured, not estimated). Snapshot taken at the export; the commits that
   land these numbers are necessarily not in them, so the true totals are marginally
   higher — the same structural caveat CH-00 and CH-01 recorded. Regenerate with
@@ -738,11 +757,20 @@ an empty cell rather than a zero.
 
   | | tokens |
   |---|---|
-  | output | 514,051 |
-  | input, uncached | 478 |
-  | input, cache write | 626,057 |
-  | input, cache read | 40,957,406 |
-  | **total input** | **41,583,941** |
+  | output | 515,671 |
+  | input, uncached | 482 |
+  | input, cache write | 627,283 |
+  | input, cache read | 41,584,976 |
+  | **total input** | **42,212,741** |
+
+  *Corrected at CH-14b.* These rows previously read output 514,051 · uncached 478 ·
+  cache write 626,057 · cache read 40,957,406 · total 41,583,941 · 239 turns · USD
+  220.770980 / 37.245224 — no row of which appears in the artifact named above, and
+  `git log` on that artifact returns one commit, `215052e`. **241 turns is the snapshot
+  the artifact holds, and the session did not stop there:** `CH-02.jsonl` was
+  deliberately re-exported at `940c0b9` to cover the later commits and now carries
+  **268** assistant turns. Both numbers are true of different moments; only one of them
+  is what this table's source measured.
 
 - **Imputed cost** — same two bases as CH-00 and CH-01, and for the same reason: the
   cache multipliers are assumed and were not re-verified this session, so the
@@ -750,14 +778,16 @@ an empty cell rather than a zero.
 
   | Basis | USD |
   |---|---|
-  | Upper bound — all input at full list, no cache discount | **220.770980** |
-  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **37.245224** |
+  | Upper bound — all input at full list, no cache discount | **223.955480** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **37.607192** |
 
 - **Against the economy instruction — a miss, and smaller than CH-01's but still a
   miss.** `prompts/CH-02.md` said *"this chunk downloads far less data than CH-01 did.
   Do not re-parse the whole corpus."* The download was indeed far smaller — 272 MB of
-  FR issues against CH-01's 824 MB — but input tokens came out at **41.6 M** against
-  CH-01's 41.1 M, i.e. **1.2% higher**, not lower. Attributable causes, in order of
+  FR issues against CH-01's 824 MB — but input tokens came out at **42.2 M** against
+  CH-01's 41.1 M, i.e. **2.7% higher**, not lower. *(Corrected at CH-14b from 41.6 M and
+  1.2%, which were derived from the superseded table above; CH-01's 41,093,185 does
+  match its own artifact.)* Attributable causes, in order of
   size and stated plainly rather than rounded away:
 
   1. **Hand-computing 97 golden AMDPAR elements** (hard rule 4) required dumping three

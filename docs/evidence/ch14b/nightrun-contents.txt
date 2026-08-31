@@ -1,0 +1,53 @@
+measured at commit 3ff4576
+==============================================================================
+NIGHT-RUN-CHECKPOINT.jsonl
+  1348 records, 3123874 bytes
+  launch prompts captured : 2
+  - Adversarial review of CH-03  launch prompt  5444 chars
+  - Re-review fixed CH-03        launch prompt  5040 chars
+  completion notifications: 4 agent id(s)
+    a6f11b086da2c518f  status=stopped  result_block=False  verbatim_FAIL=False
+        summary: No completion record was found for background agent \"Adversarial review of CH-03\" from the previous session. It may ha
+    b9vsqsejk  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Re-run the checkpoint arms on the corrected eval set\" completed (exit code 0)
+    bck54mrl6  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Rebuild the primary eval set\" completed (exit code 0)
+    byort3ph4  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Run the checkpoint arms, 3 reps each\" completed (exit code 0)
+  literal 'VERDICT: FAIL' occurrences in file : 2
+  U+FFFD replacement characters in file       : 6
+
+==============================================================================
+NIGHT-RUN-FINAL.jsonl
+  1659 records, 3696750 bytes
+  launch prompts captured : 2
+  - Adversarial review of CH-03  launch prompt  5444 chars
+  - Re-review fixed CH-03        launch prompt  5040 chars
+  completion notifications: 5 agent id(s)
+    a6f11b086da2c518f  status=stopped  result_block=False  verbatim_FAIL=False
+        summary: No completion record was found for background agent \"Adversarial review of CH-03\" from the previous session. It may ha
+    a928af8ce44020164  status=completed  result_block=True  verbatim_FAIL=True
+        summary: Agent \"Re-review fixed CH-03\" finished
+    b9vsqsejk  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Re-run the checkpoint arms on the corrected eval set\" completed (exit code 0)
+    bck54mrl6  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Rebuild the primary eval set\" completed (exit code 0)
+    byort3ph4  status=completed  result_block=False  verbatim_FAIL=False
+        summary: Background command \"Run the checkpoint arms, 3 reps each\" completed (exit code 0)
+  literal 'VERDICT: FAIL' occurrences in file : 9
+  U+FFFD replacement characters in file       : 10
+
+==============================================================================
+FINDING - against what Q42 and INDEX.md currently claim
+==============================================================================
+claim: NIGHT-RUN-FINAL.jsonl holds BOTH reviewers' launch prompts
+       -> launch prompts present: 2 of 2   HOLDS
+claim: ...and BOTH their FAIL verdicts verbatim
+       -> verbatim FAIL verdicts present: 1 of 2   DOES NOT HOLD
+
+       The first reviewer's own notification says why: its status is
+       'stopped', with 'No completion record was found'. It ran across a
+       session restart, so the session never received its report. The
+       report itself is not lost - it is docs/reviews/REVIEW_CH-03.md -
+       but it is NOT in this trajectory, and the file must not be indexed
+       as though it were.

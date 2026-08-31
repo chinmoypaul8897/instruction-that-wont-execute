@@ -1,0 +1,52 @@
+CH-14b - re-verification of the standing in-fence sweep findings
+measured at commit b6d80a4
+================================================================================================
+
+F1  AI-USE.md SPEC-FIX-2 usage table vs docs/evidence/spec-fix-2/spec-fix-2-session-cost.txt
+  output                           strict=1 scoped=1  truth=132,805        REPRODUCES
+  input, uncached                  strict=1 scoped=1  truth=204            REPRODUCES
+  input, cache write               strict=1 scoped=1  truth=252,525        REPRODUCES
+  input, cache read                strict=1 scoped=1  truth=10,797,901     REPRODUCES
+  total input                      strict=1 scoped=1  truth=11,050,630     REPRODUCES
+  assistant turns                  strict=10 scoped=1  truth=102            REPRODUCES
+  upper bound USD                  strict=1 scoped=1  truth=58.573275      REPRODUCES
+  cache-adjusted USD               strict=1 scoped=1  truth=10.298377      REPRODUCES
+
+F2  AI-USE.md CH-02 usage table vs docs/evidence/ch02-attributor/ch02-session-cost.txt
+  output                           strict=1 scoped=1  truth=515,671        REPRODUCES
+  input, uncached                  strict=1 scoped=1  truth=482            REPRODUCES
+  input, cache write               strict=1 scoped=1  truth=627,283        REPRODUCES
+  input, cache read                strict=1 scoped=1  truth=41,584,976     REPRODUCES
+  total input                      strict=1 scoped=1  truth=42,212,741     REPRODUCES
+  assistant turns                  strict=1 scoped=1  truth=241            REPRODUCES
+  upper bound USD                  strict=1 scoped=1  truth=223.955480     REPRODUCES
+  cache-adjusted USD               strict=1 scoped=1  truth=37.607192      REPRODUCES
+
+F3  derived figures that inherit the two tables
+  SPEC-FIX-2 total in M            strict=3 scoped=1  truth=11.05 M        REPRODUCES
+  over the 5 M target              strict=1 scoped=1  truth=2.21x          REPRODUCES
+  reduction vs SPEC-FIX-1          strict=1 scoped=1  truth=3.8x           REPRODUCES   SPEC-FIX-1 = 19,152,452+23,254,519
+  cache read share                 strict=1 scoped=1  truth=10.80 M        REPRODUCES
+  turns in the narrative           strict=1 scoped=1  truth=102 turns      REPRODUCES
+  CH-02 in the comparison list     strict=1 scoped=1  truth=42.21 M        REPRODUCES
+  CH-02 input tokens               strict=1 scoped=1  truth=42.2 M         REPRODUCES
+  CH-02 vs CH-01                   strict=1 scoped=1  truth=2.7% higher    REPRODUCES   CH-01 = 41,093,185
+
+F4  AI-USE.md CH-02 wall-clock vs the shipped trajectory it cites
+      shipped CH-02.jsonl : 268 assistant turns, 2026-08-30T14:43:21.021Z -> 2026-08-30T18:16:43.050Z
+  wall-clock span                  strict=1 scoped=1  truth=213.4 min      REPRODUCES
+
+F5  findings already fixed by CH-11c / CH-12 - confirm they stay fixed
+  CH-02 trajectory line count      strict=0 scoped=0  truth=709 lines      does NOT reproduce
+  CH-02 trajectory byte count      strict=0 scoped=0  truth=1,689,144      does NOT reproduce
+  project spend to date            strict=2 scoped=0  truth=11.632274      does NOT reproduce (strict hits are quotations)
+  NIGHT-RUN heading verdict        strict=1 scoped=0  truth=FAIL x2 -> ESC does NOT reproduce (strict hits are quotations)
+
+================================================================================================
+re-verified                       : 29
+REPRODUCE (live defect)           : 25
+do NOT reproduce                  : 4
+  of those, STRICT still hits     : 2  <- the old value quoted inside the
+                                       dated note that corrects it. Kept on
+                                       purpose: hard rule 5 forbids deleting
+                                       a number to make a discrepancy vanish.

@@ -1,0 +1,61 @@
+Q40 - adversarial-audit class census over docs/trajectories/build/
+measured at commit 3ff4576
+====================================================================================
+session transcript            records sidechain launches  scripts delivered verdicts  fleets
+--------------------------------------------------------------------------------------------
+CH-00.jsonl                       418         0        0        0         0        0       0
+CH-01.jsonl                       672         0        0        0         0        0       0
+CH-02.jsonl                       709         0        0        0         0        0       0
+CH-06.jsonl                      1027         0        1        0         1        1       0
+CH-11.jsonl                       987         0        0        2         1        0       1
+CH-11c.jsonl                      746         0        0        1         1        0       1
+CH-12.jsonl                      1367         0        0        2         2        0       2
+CH-13A.jsonl                      582         0        0        0         0        0       0
+CH-13B.jsonl                     1125         0        0        1         1        0       1
+CH-14a.jsonl                      733         0        0        0         0        0       0
+NIGHT-RUN-CHECKPOINT.jsonl       1348         0        2        0         0        0       0
+NIGHT-RUN-FINAL.jsonl            1659         0        2        0         1        1       0
+SPEC-FIX-1.jsonl                  454         0        0        1         1        0       1
+SPEC-FIX-2.jsonl                  341         0        0        0         0        0       0
+--------------------------------------------------------------------------------------------
+TOTAL (14 files)                12168         0        5        7         8        2       6
+
+Task tool_results that are launch metadata only, not a report: 5
+
+Every captured audit-agent launch, and every fleet script
+============================================================================================
+CH-06.jsonl                  Adversarial CH-04 scorer review  launch prompt   4982 chars
+CH-11.jsonl                  (subagent fleet)                 workflow script 14464 chars
+CH-11.jsonl                  (subagent fleet)                 workflow script 14464 chars
+CH-11c.jsonl                 (subagent fleet)                 workflow script 11352 chars
+CH-12.jsonl                  (subagent fleet)                 workflow script 19291 chars
+CH-12.jsonl                  (subagent fleet)                 workflow script 13409 chars
+CH-13B.jsonl                 (subagent fleet)                 workflow script 12961 chars
+NIGHT-RUN-CHECKPOINT.jsonl   Adversarial review of CH-03      launch prompt   5444 chars
+NIGHT-RUN-CHECKPOINT.jsonl   Re-review fixed CH-03            launch prompt   5040 chars
+NIGHT-RUN-FINAL.jsonl        Adversarial review of CH-03      launch prompt   5444 chars
+NIGHT-RUN-FINAL.jsonl        Re-review fixed CH-03            launch prompt   5040 chars
+SPEC-FIX-1.jsonl             (subagent fleet)                 workflow script 14695 chars
+
+FINDING
+====================================================================================
+sidechain records across every build transcript   : 0
+audit-agent launch prompts captured               : 5
+  minus the night run's second export of the same : -2
+  DISTINCT audit agents with a committed prompt   : 3
+workflow scripts committed (a fleet's instructions): 7
+reports delivered verbatim into a transcript      : 8
+  of those, a single agent's review VERDICT       : 2
+  of those, a subagent FLEET's aggregated output   : 6
+
+Q40 asked whether the class is wrong or the trajectory is missing.
+THE CLASS IS RIGHT AND THE TRAJECTORY IS MISSING - but the class is not
+evidence-free inside docs/trajectories/, which is what the rule implies now:
+  * 3 distinct audit agents ship their LAUNCH PROMPT verbatim
+  * 2 ship their VERDICT verbatim
+  * 7 workflow scripts ship verbatim - a fleet's instructions, carrying
+    each subagent's prompt template inside them
+  * 6 subagent FLEETS ship their aggregated structured output verbatim
+What no file holds, for any audit agent, is the agent's OWN INTERMEDIATE
+TURNS: 0 sidechain records in 12168 records across 14 transcripts.
+The gap is real, it is narrower than 'zero trajectories', and it is not closed.

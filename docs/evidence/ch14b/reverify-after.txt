@@ -1,0 +1,52 @@
+CH-14b - re-verification of the standing in-fence sweep findings
+measured at commit b6d80a4
+================================================================================================
+
+F1  AI-USE.md SPEC-FIX-2 usage table vs docs/evidence/spec-fix-2/spec-fix-2-session-cost.txt
+  output                           strict=1 scoped=0  truth=132,805        does NOT reproduce (strict hits are quotations)
+  input, uncached                  strict=1 scoped=0  truth=204            does NOT reproduce (strict hits are quotations)
+  input, cache write               strict=1 scoped=0  truth=252,525        does NOT reproduce (strict hits are quotations)
+  input, cache read                strict=1 scoped=0  truth=10,797,901     does NOT reproduce (strict hits are quotations)
+  total input                      strict=1 scoped=0  truth=11,050,630     does NOT reproduce (strict hits are quotations)
+  assistant turns                  strict=9 scoped=0  truth=102            does NOT reproduce (strict hits are quotations)
+  upper bound USD                  strict=1 scoped=0  truth=58.573275      does NOT reproduce (strict hits are quotations)
+  cache-adjusted USD               strict=1 scoped=0  truth=10.298377      does NOT reproduce (strict hits are quotations)
+
+F2  AI-USE.md CH-02 usage table vs docs/evidence/ch02-attributor/ch02-session-cost.txt
+  output                           strict=1 scoped=0  truth=515,671        does NOT reproduce (strict hits are quotations)
+  input, uncached                  strict=1 scoped=0  truth=482            does NOT reproduce (strict hits are quotations)
+  input, cache write               strict=1 scoped=0  truth=627,283        does NOT reproduce (strict hits are quotations)
+  input, cache read                strict=1 scoped=0  truth=41,584,976     does NOT reproduce (strict hits are quotations)
+  total input                      strict=1 scoped=0  truth=42,212,741     does NOT reproduce (strict hits are quotations)
+  assistant turns                  strict=1 scoped=0  truth=241            does NOT reproduce (strict hits are quotations)
+  upper bound USD                  strict=1 scoped=0  truth=223.955480     does NOT reproduce (strict hits are quotations)
+  cache-adjusted USD               strict=1 scoped=0  truth=37.607192      does NOT reproduce (strict hits are quotations)
+
+F3  derived figures that inherit the two tables
+  SPEC-FIX-2 total in M            strict=0 scoped=0  truth=11.05 M        does NOT reproduce
+  over the 5 M target              strict=0 scoped=0  truth=2.21x          does NOT reproduce
+  reduction vs SPEC-FIX-1          strict=0 scoped=0  truth=3.8x           does NOT reproduce   SPEC-FIX-1 = 19,152,452+23,254,519
+  cache read share                 strict=0 scoped=0  truth=10.80 M        does NOT reproduce
+  turns in the narrative           strict=0 scoped=0  truth=102 turns      does NOT reproduce
+  CH-02 in the comparison list     strict=0 scoped=0  truth=42.21 M        does NOT reproduce
+  CH-02 input tokens               strict=1 scoped=0  truth=42.2 M         does NOT reproduce (strict hits are quotations)
+  CH-02 vs CH-01                   strict=0 scoped=0  truth=2.7% higher    does NOT reproduce   CH-01 = 41,093,185
+
+F4  AI-USE.md CH-02 wall-clock vs the shipped trajectory it cites
+      shipped CH-02.jsonl : 268 assistant turns, 2026-08-30T14:43:21.021Z -> 2026-08-30T18:16:43.050Z
+  wall-clock span                  strict=1 scoped=0  truth=213.4 min      does NOT reproduce (strict hits are quotations)
+
+F5  findings already fixed by CH-11c / CH-12 - confirm they stay fixed
+  CH-02 trajectory line count      strict=0 scoped=0  truth=709 lines      does NOT reproduce
+  CH-02 trajectory byte count      strict=0 scoped=0  truth=1,689,144      does NOT reproduce
+  project spend to date            strict=2 scoped=0  truth=11.632274      does NOT reproduce (strict hits are quotations)
+  NIGHT-RUN heading verdict        strict=1 scoped=0  truth=FAIL x2 -> ESC does NOT reproduce (strict hits are quotations)
+
+================================================================================================
+re-verified                       : 29
+REPRODUCE (live defect)           : 0
+do NOT reproduce                  : 29
+  of those, STRICT still hits     : 20  <- the old value quoted inside the
+                                       dated note that corrects it. Kept on
+                                       purpose: hard rule 5 forbids deleting
+                                       a number to make a discrepancy vanish.
