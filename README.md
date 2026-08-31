@@ -527,6 +527,8 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 | **The spec** | [CONTEXT.md](CONTEXT.md) — architect-authored, versioned, outranks the code |
 | **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **43** entries (`grep -c '^## Q'`), including our own retractions |
 | **Chunk-by-chunk state** | [STATUS.md](STATUS.md) · [PROGRESS.md](PROGRESS.md) |
+| **The worksheet the agent produces** | [`docs/worksheet/index.html`](docs/worksheet/index.html) — real committed A1 output, opens offline by double-clicking |
+| **Every trajectory, and what to look at in it** | [`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md) — 36 files, with the curation rule published before it was applied |
 | **Every model, tool and agent** | [AI-USE.md](AI-USE.md) · [`docs/trajectories/`](docs/trajectories/) · [`prompts/`](prompts/) · [`agents/`](agents/) |
 | **What pre-existed vs what was built** | [PROVENANCE.md](PROVENANCE.md) |
 | **Reviews** | [`docs/reviews/`](docs/reviews/) — three reports, three FAIL verdicts, one escalation, with runnable probes |

@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codification worksheet - arm A1, rep 1</title>
+<style>
+  :root{
+    --bg:#fbfaf7; --ink:#1b1a17; --muted:#6b675f; --rule:#ddd8cd; --card:#fff;
+    --fail:#a3271f; --fail-bg:#fbeceb; --exec:#1f6b3f; --exec-bg:#eaf4ee;
+    --warn:#8a6100; --warn-bg:#fdf3dd; --hl:#ffe89a; --accent:#2a4d7a;
+    --flag:#6d3a8f; --flag-bg:#f3ecf8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#151412; --ink:#eceae4; --muted:#a6a099; --rule:#34322d; --card:#1d1c19;
+      --fail:#ff8a7d; --fail-bg:#2e1a18; --exec:#77d39b; --exec-bg:#152720;
+      --warn:#e8bf6a; --warn-bg:#2b2313; --hl:#6a5410; --accent:#8fb6e8;
+      --flag:#cda6e8; --flag-bg:#241a2c;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+  code,kbd,.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  header{padding:26px 0 16px;border-bottom:1px solid var(--rule)}
+  h1{margin:0 0 6px;font-size:1.55rem;letter-spacing:-.01em}
+  h2{margin:34px 0 8px;font-size:1.15rem;border-bottom:1px solid var(--rule);padding-bottom:5px}
+  h3{margin:0 0 4px;font-size:1.05rem}
+  h4{margin:16px 0 4px;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;
+     color:var(--muted);font-weight:600}
+  .sub{color:var(--muted);margin:0}
+  .band{background:var(--fail-bg);border:2px solid var(--fail);color:var(--fail);
+    border-radius:8px;padding:14px 16px;margin:18px 0;font-size:.94rem}
+  .band b{color:var(--fail)}
+  .band .k{color:var(--fail);opacity:.85}
+  table{width:100%;border-collapse:collapse;margin:8px 0}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--rule);
+    vertical-align:top;font-size:.9rem}
+  thead th{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);font-weight:600}
+  table.meta th{width:170px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);font-weight:600}
+  .item{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+    padding:16px 18px;margin:18px 0}
+  .verdict{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;
+    letter-spacing:.05em;font-weight:700;font-family:ui-monospace,monospace}
+  .WILL_FAIL{background:var(--fail-bg);color:var(--fail);border:1px solid var(--fail)}
+  .WILL_EXECUTE{background:var(--exec-bg);color:var(--exec);border:1px solid var(--exec)}
+  .mini{display:inline-block;padding:1px 6px;border-radius:4px;font-size:.68rem;
+    font-family:ui-monospace,monospace;font-weight:700}
+  .mini.WILL_FAIL{background:var(--fail-bg);color:var(--fail)}
+  .mini.WILL_EXECUTE{background:var(--exec-bg);color:var(--exec)}
+  .lvl{font-family:ui-monospace,monospace;font-size:.74rem;padding:1px 6px;
+    border-radius:4px;border:1px solid var(--rule);color:var(--muted);white-space:nowrap}
+  .lvl.exact{color:var(--exec);border-color:var(--exec)}
+  .lvl.none{color:var(--fail);border-color:var(--fail)}
+  .lvl.loose{color:var(--warn);border-color:var(--warn);background:var(--warn-bg)}
+  .res{font-family:ui-monospace,monospace;font-size:.74rem;font-weight:700}
+  .res.yes{color:var(--exec)} .res.no{color:var(--fail)}
+  .txt{background:var(--bg);border:1px solid var(--rule);border-radius:8px;
+    padding:12px 14px;white-space:pre-wrap;font-family:ui-monospace,monospace;
+    font-size:.8rem;max-height:300px;overflow:auto;margin:6px 0 0}
+  mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
+  .absent{color:var(--fail);font-weight:700;font-size:.75rem}
+  .ok{color:var(--exec);font-size:.75rem}
+  .agree{color:var(--exec);font-size:.72rem;margin-left:8px;font-weight:700}
+  .disagree{color:var(--fail);font-size:.72rem;margin-left:8px;font-weight:700}
+  .k{color:var(--muted);font-size:.8rem}
+  .q{font-family:ui-monospace,monospace;font-size:.8rem}
+  .q:before{content:'\201C'} .q:after{content:'\201D'}
+  .why{font-size:.76rem;line-height:1.4}
+  .instr{margin-top:3px;font-size:.76rem;line-height:1.4}
+  .sibs{font-size:.74rem;line-height:1.7}
+  .num{text-align:right;font-family:ui-monospace,monospace}
+  .pill{font-size:.7rem;color:var(--muted);border:1px solid var(--rule);
+    border-radius:999px;padding:1px 8px;margin-left:6px;font-family:ui-monospace,monospace}
+  .clause{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.05em;
+    font-family:ui-monospace,monospace;color:var(--accent);border:1px solid var(--accent);
+    border-radius:4px;padding:0 5px;margin-left:5px}
+  .clause-cell{width:60px}
+  .flag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.04em;
+    font-family:ui-monospace,monospace;color:var(--flag);background:var(--flag-bg);
+    border:1px solid var(--flag);border-radius:4px;padding:0 5px}
+  .routed{background:var(--warn-bg);border-left:3px solid var(--warn);color:var(--ink);
+    padding:9px 12px;margin:12px 0 0;font-size:.82rem;border-radius:0 6px 6px 0}
+  .routed b{color:var(--warn)}
+  .scroll{overflow-x:auto}
+  .hash{font-size:.7rem;word-break:break-all;color:var(--muted)}
+  footer{border-top:1px solid var(--rule);margin-top:38px;padding:18px 0 44px;
+    color:var(--muted);font-size:.84rem}
+  footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Codification worksheet</h1>
+  <p class="sub">Federal Register amendatory instructions, executed against the
+     point-in-time CFR text - one row per instruction, with the anchor, the
+     normalisation level it resolved at, the designation state, and the siblings
+     when it did not resolve.</p>
+</div></header>
+
+<div class="wrap">
+
+  <div class="band">
+    <b>NOT A FILING. NOT LEGAL ADVICE. NOT REVIEWED BY A QUALIFIED REVIEWER.</b><br>
+    This worksheet is an <b>input to a licensed regulations drafter's judgement</b>.
+    It does not file anything, does not amend anything, and takes no consequential
+    action. <b>No output on this page has been reviewed by a qualified regulations
+    drafter or by any other qualified reviewer</b> - not one row. The verdicts below
+    are the measured output of an evaluation arm whose pre-registered success
+    criterion was <b>NOT MET on all four clauses</b>, and which agrees with gold on
+    <b>59 of 82</b> items. Every unresolved case routes to the human-checkpoint
+    queue at the foot of this page rather than being decided here.<br>
+    <span class="k">Self-contained: no script, no network, no external font, no build
+    step. Opens from a clean clone by double-clicking, with the network off.</span>
+  </div>
+
+  <h2>What this page is drawn from</h2>
+  <table class="meta"><tbody>
+    <tr><th>arm</th><td><code>A1</code>, rep 1 - the advanced solution:
+        <code>cfr_resolve</code> plus the v2 <code>SKILL.md</code></td></tr>
+    <tr><th>model</th><td><code>claude-haiku-4-5-20251001</code>, temperature 0.0</td></tr>
+    <tr><th>eval set</th><td><code>data/evalset/items.jsonl</code> - n = 82,
+        balanced by construction, frozen before any arm ran</td></tr>
+    <tr><th>per-item output</th><td><code>docs/evidence/ch06-a1/A1-rep1-artifacts.jsonl</code>
+        - committed, not regenerated here</td></tr>
+    <tr><th>agreement with gold</th><td><b>59 / 82 = 0.7195</b>
+        <span class="k">- this is the published A1 primary accuracy</span></td></tr>
+    <tr><th>routed to a human</th><td><b>16 of 82</b> items
+        <span class="k">- the queue is a section of this page, below</span></td></tr>
+    <tr><th>instructions traced</th><td>208 across all 82 items;
+        253 <code>cfr_resolve</code> calls; 1,315,717 input /
+        87,559 output tokens</td></tr>
+  </tbody></table>
+
+  <h2>Which items are shown, and why</h2>
+  <p class="k">A worksheet showing all 82 items would be unreadable, and one showing a
+     hand-picked few would be unfalsifiable. The rule below is deterministic, ties
+     break on sorted <code>item_id</code>, and it is applied by
+     <code>docs/evidence/ch12/build_worksheet.py</code> - the same script that writes
+     this page. It selected <b>10 items</b>. The complete per-item output for
+     all 82 is in the artifacts file named above; nothing is hidden by this page,
+     only unrendered.</p>
+  <table><tbody><tr><td class="clause-cell"><span class="clause">W1</span></td><td>the composition exemplar named in <code>docs/evidence/ch06-a1/EXEMPLAR-composition.md</code> - the item where the model overrode <code>cfr_resolve</code> and published the tool's limitation</td></tr><tr><td class="clause-cell"><span class="clause">W2</span></td><td>for every distinct <b>failure class</b> A1 emitted, the first item carrying it by sorted <code>item_id</code></td></tr><tr><td class="clause-cell"><span class="clause">W3</span></td><td>for every distinct <b>human-checkpoint reason class</b> (C1 / C2 / C3), the first item carrying it by sorted <code>item_id</code></td></tr><tr><td class="clause-cell"><span class="clause">W4</span></td><td>every item where an anchor resolved at a normalisation level <b>other than <code>exact</code></b> - hard rule 7 says the level achieved is reported, never applied silently</td></tr><tr><td class="clause-cell"><span class="clause">W5</span></td><td>the first item by sorted <code>item_id</code> whose emitted verdict <b>disagreed with gold</b> - failures are never filtered out</td></tr></tbody></table>
+
+  <h2>Normalisation levels actually achieved, across all 82 items</h2>
+  <p class="k">Hard rule 7: three declared levels, tried in order, and the level
+     achieved is <b>reported</b>, never applied silently. Across
+     208 instructions:</p>
+  <table>
+    <thead><tr><th>level</th><th class="num">instructions</th><th>what it means</th></tr></thead>
+    <tbody><tr><td><code>exact</code></td><td class="num">74</td><td class="k">byte-for-byte</td></tr><tr><td><code>whitespace-collapsed</code></td><td class="num">0</td><td class="k">runs of whitespace folded to one space</td></tr><tr><td><code>alphanumeric-only</code></td><td class="num">4</td><td class="k">everything but letters and digits dropped; case NOT folded</td></tr><tr><td><code>none</code></td><td class="num">130</td><td class="k">not found at any declared level</td></tr></tbody>
+  </table>
+  <p class="k">The <code>whitespace-collapsed</code> row is <b>zero</b>, and it is
+     printed as zero rather than omitted: on this corpus no anchor needed that level
+     and none was helped by it. <code>none</code> is the majority because most
+     instructions carry no quoted anchor at all - they name a designation, and the
+     designation path answers them.</p>
+
+  <h2>The items</h2>
+
+  <section class="item" id="05-8447--75.31">
+    <h3>40 CFR 75.31
+        <span class="pill">05-8447|75.31</span>
+        <span class="clause">W1</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 05-8447, 70 FR 28678,
+          published 2005-05-18</td></tr>
+      <tr><th>section text as of</th><td>2004 annual edition,
+          revised 2004-07-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- no defect note; the instruction codified</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><span class="k">none - no instruction failed</span></td></tr>
+      <tr><th>failure class</th><td><span class="k">none</span></td></tr>
+      <tr><th>instructions</th><td>4 ·
+          4 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>amend</code><div class="k instr">26. Section 75.31 is amended by:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">umbrella; asserts no target</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>revise</code><div class="k instr">a. Revising the first sentence of paragraph (a);</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(a)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: designation_exists=true; paragraph (a) is declared in the section text</div></td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td><code>revise</code><div class="k instr">b. Revising paragraph (b) introductory text; and</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(b)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: designation_exists=true; paragraph (b) is declared in the section text</div></td>
+    </tr>
+    <tr>
+      <td class="num">4</td>
+      <td><code>revise</code><div class="k instr">c. Revising paragraphs (b)(1) and (b)(2).</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(b)(1)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span> <span class="flag">MODEL OVERRODE THE TOOL</span><div class="k why">cfr_resolve reported designation_exists=false, but (1) and (2) are declared under (b) in the section text; the tool cannot see nested designations. Siblings field confirms both exist: [&quot;(1)&quot;, &quot;(2)&quot;, &quot;(3)&quot;, ...]. Both paragraphs can be revised.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- no anchor resolved anywhere in this section at any declared level - and (b)(1) is not codified in it</span></h4>
+    <div class="txt">§ 75.31
+Initial missing data procedures.
+(a) During the first 720 quality-assured monitor operating hours following initial certification of the required SO2, CO2, O2 or moisture monitoring system(s) at a particular unit or stack location (i.e., the date and time at which quality-assured data begins to be recorded by CEMS(s) installed at that location), and during the first 2,160 quality-assured monitor operating hours following initial certification of the required NOX-diluent, NOX concentration, or flow monitoring system(s) at the unit or stack location, the owner or operator shall provide substitute data required under this subpart according to the procedures in paragraphs (b) and (c) of this section. The owner or operator of a unit shall use these procedures for no longer than three years (26,280 clock hours) following initial certification.
+(b) SO 2, CO 2, or O 2 concentration data and moisture data. For each hour of missing SO2 or CO2 pollutant concentration data (including CO2 data converted from O2 data using the procedures in appendix F of this part), or missing O2 or CO2 diluent concentration data used to calculate heat input, or missing moisture data, the owner or operator shall calculate the substitute data as follows:
+(1) Whenever prior quality-assured data exist, the owner or operator shall substitute, by means of the data acquisition and handling system, for each<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="05-8447--75.6">
+    <h3>40 CFR 75.6
+        <span class="pill">05-8447|75.6</span>
+        <span class="clause">W2</span><span class="clause">W3</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 05-8447, 70 FR 28678,
+          published 2005-05-18</td></tr>
+      <tr><th>section text as of</th><td>2004 annual edition,
+          revised 2004-07-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><code>(a)(38)</code></td></tr>
+      <tr><th>failure class</th><td><code>target-already-exists</code></td></tr>
+      <tr><th>instructions</th><td>4 ·
+          3 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    <p class="routed"><b>ROUTED TO THE HUMAN CHECKPOINT.</b> C3 designation (a)(38) is touched by instructions [3, 4] - instruction 3 changes what instruction 4 will find, and the ordered-state ledger is NOT BUILT (ruling R-01, counted removal #3)</p>
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>amend</code><div class="k instr">19. Section 75.6 is amended as follows:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><code>(1)</code> <code>(10)</code> <code>(11)</code> <code>(12)</code> <code>(13)</code> <code>(14)</code> <code>(15)</code> <code>(16)</code> <code>(17)</code> <code>(18)</code> <code>(19)</code> <code>(2)</code> <code>(20)</code> <code>(21)</code> <code>(22)</code> <code>(23)</code> <code>(24)</code> <code>(25)</code> <code>(26)</code> <code>(27)</code> <code>(28)</code> <code>(29)</code> <code>(3)</code> <code>(30)</code> <code>(31)</code> <code>(32)</code> <code>(33)</code> <code>(34)</code> <code>(35)</code> <code>(36)</code> <code>(37)</code> <code>(38)</code> <code>(39)</code> <code>(4)</code> <code>(40)</code> <code>(41)</code> <code>(5)</code> <code>(6)</code> <code>(7)</code> <code>(8)</code> <code>(9)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">umbrella; asserts no target</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>remove</code><div class="k instr">a. In the introductory text, by removing “1916 Race Street, Philadelphia, Pennsylvania 19103;” and adding “100 Barr harbor Drive, P.O. Box C-700, West Conshohocken, Pennsylvania 19428-2959;” in its place;</div></td>
+      <td><span class="q">1916 Race Street, Philadelphia, Pennsylvania 19103;</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 1103</div></td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: found=true, level=exact, char_offset=1103; quoted text is present in the section</div></td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td><code>redesignate</code><div class="k instr">b. Redesignate paragraphs (a)(38) through (a)(41) as (a)(39) through (a)(42);</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(a)(38)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(1)</code> <code>(10)</code> <code>(11)</code> <code>(12)</code> <code>(13)</code> <code>(14)</code> <code>(15)</code> <code>(16)</code> <code>(17)</code> <code>(18)</code> <code>(19)</code> <code>(2)</code> <code>(20)</code> <code>(21)</code> <code>(22)</code> <code>(23)</code> <code>(24)</code> <code>(25)</code> <code>(26)</code> <code>(27)</code> <code>(28)</code> <code>(29)</code> <code>(3)</code> <code>(30)</code> <code>(31)</code> <code>(32)</code> <code>(33)</code> <code>(34)</code> <code>(35)</code> <code>(36)</code> <code>(37)</code> <code>(38)</code> <code>(39)</code> <code>(4)</code> <code>(40)</code> <code>(41)</code> <code>(5)</code> <code>(6)</code> <code>(7)</code> <code>(8)</code> <code>(9)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span> <span class="flag">MODEL OVERRODE THE TOOL</span><div class="k why">cfr_resolve reported designation_exists=false, but (38) is declared under (a) in the section text; the tool cannot see nested designations. The siblings list confirms (38), (39), (40), (41) all exist.</div></td>
+    </tr>
+    <tr>
+      <td class="num">4</td>
+      <td><code>add</code><div class="k instr">c. Add new paragraphs (a)(38), (a)(43), and (a)(44); and</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(a)(38)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(1)</code> <code>(10)</code> <code>(11)</code> <code>(12)</code> <code>(13)</code> <code>(14)</code> <code>(15)</code> <code>(16)</code> <code>(17)</code> <code>(18)</code> <code>(19)</code> <code>(2)</code> <code>(20)</code> <code>(21)</code> <code>(22)</code> <code>(23)</code> <code>(24)</code> <code>(25)</code> <code>(26)</code> <code>(27)</code> <code>(28)</code> <code>(29)</code> <code>(3)</code> <code>(30)</code> <code>(31)</code> <code>(32)</code> <code>(33)</code> <code>(34)</code> <code>(35)</code> <code>(36)</code> <code>(37)</code> <code>(38)</code> <code>(39)</code> <code>(4)</code> <code>(40)</code> <code>(41)</code> <code>(5)</code> <code>(6)</code> <code>(7)</code> <code>(8)</code> <code>(9)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">Instruction attempts to add (a)(38), but (38) is already declared under (a) in the section text. The siblings list confirms (38) exists. Cannot add a paragraph that already exists.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 2 highlighted at char_offset 1103, level <code>exact</code> - window starts at char 403</span></h4>
+    <div class="txt">ll be published in the Federal Register. The materials are available for purchase at the corresponding address noted below and are available for inspection at the Public Information Reference Unit of the U.S. EPA, 401 M St., SW., Washington, DC and at the Library (MD-35), U.S. EPA, Research Triangle Park, North Carolina or at the National Archives and Records Administration (NARA). For information on the availability of this material at NARA, call 202-741-6030, or go to: http://www.archives.gov/federal_register/code_of_federal_regulations/ibr_locations.html.
+(a) The following materials are available for purchase from the following addresses: American Society for Testing and Material (ASTM), <mark>1916 Race Street, Philadelphia, Pennsylvania 19103;</mark> and the University Microfilms International 300 North Zeeb Road, Ann Arbor, Michigan 48106.
+(1) ASTM D129-91, Standard Test Method for Sulfur in Petroleum Products (General Bomb Method), for appendices A and D of this part.
+(2) ASTM D240-87 (Reapproved 1991), Standard Test Method for Heat of Combustion of Liquid Hydrocarbon Fuels by Bomb Calorimeter, for appendices A, D and F of this part.
+(3) ASTM D287-82 (Reapproved 1987), Standard Test Method for API Gravity of Crude Petroleum and Petroleum Products (Hydrometer Method), for appendix D of this part.
+(4) ASTM D388-92, Standard Classification of Coals by Rank, incorporation by reference for<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2011-27587--80.905">
+    <h3>47 CFR 80.905
+        <span class="pill">2011-27587|80.905</span>
+        <span class="clause">W5</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2011-27587, 76 FR 67616,
+          published 2011-11-02</td></tr>
+      <tr><th>section text as of</th><td>2011 annual edition,
+          revised 2011-10-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="disagree">DISAGREES WITH GOLD</span></td></tr>
+      <tr><th>failing designation</th><td><span class="k">none - no instruction failed</span></td></tr>
+      <tr><th>failure class</th><td><span class="k">none</span></td></tr>
+      <tr><th>instructions</th><td>1 ·
+          8 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>remove</code><div class="k instr">32. Section 80.905 is amended by removing paragraph (a)(4)(vii), redesignating paragraphs (a)(4)(viii) and (a)(4)(ix) as paragraphs (a)(4)(vii) and (a)(4)(viii), and by revising paragraphs (a)(3)(iii)(B), (a)(3)(v), (a)(3)(vi), (a)(4)(v), (a)(4)(vi), and newly redesignated paragraph (a)(4)(vii) to read as follows:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(a)(4)(vii)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(4)</code> <code>(5)</code> <code>(A)</code> <code>(B)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(i)</code> <code>(ii)</code> <code>(iii)</code> <code>(iv)</code> <code>(ix)</code> <code>(v)</code> <code>(vi)</code> <code>(vii)</code> <code>(viii)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span> <span class="flag">MODEL OVERRODE THE TOOL</span><div class="k why">cfr_resolve reported designation_exists=false for all targets, but the tool cannot see nested designations. The section text plainly declares (vii), (viii), (ix), (v), (vi), and (iii)(B) under their respective parents (a)(3) and (a)(4). The siblings list confirms these bare components exist. All targeted designations are present in the section.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- no anchor resolved anywhere in this section at any declared level - and (a)(4)(vii) is not codified in it</span></h4>
+    <div class="txt">§ 80.905
+Vessel radio equipment.
+(a) Vessels subject to part III of title III of the Communications Act that operate in the waters described in § 80.901 must, at a minimum, be equipped as follows:
+(1) Vessels operated solely within 20 nautical miles of land must be equipped with a VHF-DSC radiotelephone installation meeting the requirements of § 80.1101(c)(2), except that a VHF radiotelephone installation without DSC capability is permitted until one year after the Coast Guard notifies the Commission that shore-based sea area A1 coverage is established. Vessels in this category must not operate more than 20 nautical miles from land.
+(2) Vessels operated beyond the 20 nautical mile limitation specified in paragraph (a)(1) of this section, but not more than 100 nautical miles from the nearest land, must be equipped with a MF-DSC frequency transmitter meeting the requirements of § 80.1101(c)(3) and capable of transmitting J3E emission and a receiver capable of reception of J3E emission within the band 1710 to 2850 kHz, in addition to the VHF-DSC radiotelephone installation required by paragraph (a)(1) of this section, except that a MF radiotelephone installation without DSC capability is permitted until one year after the Coast Guard notifies the Commission that shore-based sea area A2 coverage is established. The MF or MF-DSC transmitter and receiver must be capable of operation <span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2011-27587--80.917">
+    <h3>47 CFR 80.917
+        <span class="pill">2011-27587|80.917</span>
+        <span class="clause">W2</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2011-27587, 76 FR 67616,
+          published 2011-11-02</td></tr>
+      <tr><th>section text as of</th><td>2011 annual edition,
+          revised 2011-10-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- no defect note; the instruction codified</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="disagree">DISAGREES WITH GOLD</span></td></tr>
+      <tr><th>failing designation</th><td><code>(a)</code></td></tr>
+      <tr><th>failure class</th><td><code>incomplete-set-out-text</code></td></tr>
+      <tr><th>instructions</th><td>1 ·
+          2 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>revise</code><div class="k instr">33. Section 80.917 is amended by revising paragraph (a), and by adding paragraph (h) to read as follows:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(a)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code> <code>(g)</code> <code>(i)</code> <code>(ii)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">The instruction states &#x27;to read as follows:&#x27; but no replacement text for (a) or new text for (h) is provided in the instruction. The set-out text is incomplete.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- no anchor resolved anywhere in this section at any declared level</span></h4>
+    <div class="txt">§ 80.917
+Reserve power supply.
+(a) The requirements of this section apply
+(1) To vessels of more than 100 gross tons; and
+(2) Beginning March 25, 2009 to
+(i) Vessels that carry more than 150 passengers or have overnight accommodations for more than 49 persons; and
+(ii) Vessels that operate on the high seas or more than three miles from shore on Great Lakes voyages. Any such vessel the keel of which was laid after March 1, 1957, must have a reserve power supply located on the same deck as the main wheel house or at least one deck above the vessel&#x27;s main deck, unless the main power supply is so situated.
+(b) The reserve power supply must be independent of the ship&#x27;s propulsion and of any other electrical system, and be sufficient to simulataneously energize the radiotelephone transmitter at its required output power, and the receiver. The reserve power supply must be available for use at all times.
+(c) When the reserve power supply consists of batteries, they must be installed as high above the bilge as practicable, secured against shifting with motion of the vessel, and accessible with not less than 26 cm (10 in.) head room.
+(d) The reserve power supply must be located as near the required transmitter and receiver as practicable.
+(e) All reserve power supply circuits must be protected from overloads.
+(f) Means must be provided for charging any storage batteries used as a reserve<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2015-01571--1942.8">
+    <h3>7 CFR 1942.8
+        <span class="pill">2015-01571|1942.8</span>
+        <span class="clause">W2</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2015-01571, 80 FR 9879,
+          published 2015-02-24</td></tr>
+      <tr><th>section text as of</th><td>2015 annual edition,
+          revised 2015-01-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><code>(h)</code></td></tr>
+      <tr><th>failure class</th><td><code>quoted-text-not-present</code></td></tr>
+      <tr><th>instructions</th><td>4 ·
+          4 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>amend</code><div class="k instr">160. Amend § 1942.8:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code> <code>(g)</code> <code>(h)</code> <code>(i)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">umbrella; asserts no target</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>remove</code><div class="k instr">a. In paragraph (d), removing “Form FmHA or its successor agency under Public Law 103-354” and adding “Form RD” in its place;</div></td>
+      <td><span class="q">Form FmHA or its successor agency under Public Law 103-354</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 1553</div></td>
+      <td><code>(d)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: designation_exists=true, found=true at exact match level, char_offset=1553</div></td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td><code>remove</code><div class="k instr">b. In paragraph (g), removing “review of FmHA or its successor agency under Public Law 103-354&#x27;s” and adding “review of Rural Developments&#x27;s” in its place; and</div></td>
+      <td><span class="q">review of FmHA or its successor agency under Public Law 103-354&#x27;s</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 3034</div></td>
+      <td><code>(g)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: designation_exists=true, found=true at exact match level, char_offset=3034</div></td>
+    </tr>
+    <tr>
+      <td class="num">4</td>
+      <td><code>remove</code><div class="k instr">c. In paragraph (h), removing “FmHA or its successor agency under Public Law 103-354 personnel” and adding “Rural Development personnel” in its place and removing “FmHA or its successor agency under Public Law 103-354 Instruction” and adding “RD Instruction” in its place.</div></td>
+      <td><span class="q">FmHA or its successor agency under Public Law 103-354 personnel</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 3597</div></td>
+      <td><code>(h)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">cfr_resolve: designation_exists=true but found=false for the second quoted phrase &#x27;FmHA or its successor agency under Public Law 103-354 Instruction&#x27; at all three normalisation levels; the first phrase &#x27;FmHA or its successor agency under Public Law 103-354 personnel&#x27; was found at exact match, but this instruction cannot execute because one of its two removal targets is absent</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 2 highlighted at char_offset 1553, level <code>exact</code> - window starts at char 853</span></h4>
+    <div class="txt"> as bond anticipation notes or interim receipts, is used to conform with the multiple advance requirement, the original temporary paper will be forwarded to the Finance Office after each advance is made to the borrower. The borrower&#x27;s case number will be entered in the upper righthand corner of such paper by the District Office. The permanent debt instrument(s) should be forwarded to the Finance Office as soon as possible after the last advance is made except that for promissory notes and single instrument bonds fully registered as to principal and interest, the original will be retained in the District Office and a copy will be forwarded to the Finance Office.
+(d) Bond registration record. <mark>Form FmHA or its successor agency under Public Law 103-354</mark> 442-28, “Bond Registration Book,” may be used as a guide to assist borrowers in the preparation of a bond registration book in those cases where a registration book is required and a book is not provided in connection with the printing of the bonds.
+(e) Disposition of title evidence. All title evidence other than the opinion of title, mortgage title insurance policy, and water stock certificates will be returned to the borrower when the loan has been closed.
+(f) Material for State Office. When the loan has been closed, the District Director will submit to the State Director:
+(1) The complete docket; and
+(2) A statement covering infor<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2016-03298--1150.35">
+    <h3>49 CFR 1150.35
+        <span class="pill">2016-03298|1150.35</span>
+        <span class="clause">W3</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2016-03298, 81 FR 8855,
+          published 2016-02-23</td></tr>
+      <tr><th>section text as of</th><td>2015 annual edition,
+          revised 2015-10-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><code>(b)</code></td></tr>
+      <tr><th>failure class</th><td><code>incomplete-set-out-text</code></td></tr>
+      <tr><th>instructions</th><td>4 ·
+          3 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    <p class="routed"><b>ROUTED TO THE HUMAN CHECKPOINT.</b> C1 instruction 3: level=&#x27;none&#x27; (quoted anchor not present at any declared level) while designation_exists=true for &#x27;(f)&#x27; - the designation path and the anchor path do not agree about this instruction; C2 instruction 3: both paths were asked and disagree - found=False designation_exists=True</p>
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>-</code><div class="k instr">108. In § 1150.35:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(4)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code> <code>(g)</code></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">umbrella; asserts no target</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>revise</code><div class="k instr">a. Revise paragraph (b) introductory text.</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(b)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(4)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code> <code>(g)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">instruction names (b) for revision but provides no quoted anchor and no replacement text; the revision is incomplete</div></td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td><code>remove</code><div class="k instr">b. In paragraph (f), remove the sentence “Stay petitions must be filed within 7 days of the filing of the notion of exemption.”</div></td>
+      <td><span class="q">Stay petitions must be filed within 7 days of the filing of the notion of exemption.</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(f)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(4)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code> <code>(g)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">cfr_resolve: found=false, level=none. The section text contains &#x27;notice of exemption&#x27; but the instruction quotes &#x27;notion of exemption&#x27;—a typographical error in the quoted text</div></td>
+    </tr>
+    <tr>
+      <td class="num">4</td>
+      <td><code>remove</code><div class="k instr">c. In paragraph (g), remove the reference to “§ 1150.33(g)” and add in its place “§ 1150.32(d)”.</div></td>
+      <td><span class="q">§ 1150.33(g)</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 1935</div></td>
+      <td><code>(g)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: found=true, level=exact, char_offset=1935. The quoted text &#x27;§ 1150.33(g)&#x27; is present in paragraph (g) and can be removed and replaced</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 4 highlighted at char_offset 1935, level <code>exact</code> - window starts at char 1235</span></h4>
+    <div class="txt">a copy of the notice of intent.
+(e) The exemption will be effective 45 days after the notice is filed. The Board, through the Director of the Office of Proceedings, will publish a notice in the Federal Register within 16 days of the filing.
+(f) If the notice contains false or misleading information, the exemption is void ab initio. A petition to revoke under 49 U.S.C. 10502(d) does not automatically stay the transaction. Stay petitions must be filed within 7 days of the filing of the notice of exemption. Stay petitions must be filed at least 14 days before the exemption becomes effective. To be considered, stay petitions must be timely served on the applicant.
+(g) Applicant must comply with <mark>§ 1150.33(g)</mark> regarding section 106 of the National Historic Preservation Act, 16 U.S.C. 470.<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2016-08827--522.1193">
+    <h3>21 CFR 522.1193
+        <span class="pill">2016-08827|522.1193</span>
+        <span class="clause">W2</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2016-08827, 81 FR 22524,
+          published 2016-04-18</td></tr>
+      <tr><th>section text as of</th><td>2016 annual edition,
+          revised 2016-04-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><code>(b)(2)</code></td></tr>
+      <tr><th>failure class</th><td><code>target-does-not-exist</code></td></tr>
+      <tr><th>instructions</th><td>1 ·
+          1 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>remove</code><div class="k instr">35. In paragraph (b)(2) of § 522.1193, remove “000859” and in its place add “016592”.</div></td>
+      <td><span class="q">000859</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><code>(b)(2)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(2)</code> <code>(3)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">cfr_resolve: designation_exists=false. Paragraph (b) in the section text is a single undivided paragraph about sponsors; there is no (b)(2). The siblings at the top level are (a), (b), (c), (d), (e), and (e) has subdivisions (1), (2), (3), but (b) does not.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- no anchor resolved anywhere in this section at any declared level - and (b)(2) is not codified in it</span></h4>
+    <div class="txt">§ 522.1193
+Ivermectin and clorsulon.
+(a) Specifications. Each milliliter (mL) of solution contains 10 milligrams (mg) (1 percent) ivermectin and 100 mg (10 percent) clorsulon.
+(b) Sponsors. See Nos. 050604, 055529, and 058005 in § 510.600(c) of this chapter.
+(c) Related tolerances. See §§ 556.163 and 556.344 of this chapter.
+(d) Special considerations. See § 500.25 of this chapter.
+(e) Conditions of use in cattle—(1) Amount. Administer 1 mL (10 mg ivermectin and 100 mg clorsulon) per 50 kilograms (110 pounds) by subcutaneous injection.
+(2) Indications for use. For the treatment and control of gastrointestinal nematodes (adults and fourth-stage larvae) (Haemonchus placei, Ostertagia ostertagi (including inhibited larvae), O. lyrata, Trichostrongylus axei, T. colubriformis, Cooperia oncophora, C. punctata, C. pectinata, Oesophagostomum radiatum, Nematodirus helvetianus (adults only), N. spathiger (adults only), Bunostomum phlebotomum; lungworms (adults and fourth-stage larvae) (Dictyocaulus viviparus); liver flukes (adults only) (Fasciola hepatica); grubs (parasitic stages) (Hypoderma bovis, H. lineatum); lice (Linognathus vituli, Haematopinus eurysternus, Solenopotes capillatus); mites (Psoroptes ovis (syn. P. communis var. bovis), Sarcoptes scabiei var. bovis); and for control of infections of D. viviparus and O. radiatum for 28 days afer treatment; O. ostertagi, T. axei, and C<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2016-09949--1436.3">
+    <h3>7 CFR 1436.3
+        <span class="pill">2016-09949|1436.3</span>
+        <span class="clause">W4</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2016-09949, 81 FR 25592,
+          published 2016-04-29</td></tr>
+      <tr><th>section text as of</th><td>2016 annual edition,
+          revised 2016-01-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="disagree">DISAGREES WITH GOLD</span></td></tr>
+      <tr><th>failing designation</th><td><span class="k">none - no instruction failed</span></td></tr>
+      <tr><th>failure class</th><td><span class="k">none</span></td></tr>
+      <tr><th>instructions</th><td>7 ·
+          3 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>amend</code><div class="k instr">4. Amend § 1436.3 as follows:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">none reported</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">umbrella; asserts no target</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>add</code><div class="k instr">a. Add in alphabetical order definitions for “Aquaculture,” “ARS,” and “CCC;”</div></td>
+      <td><span class="q">Aquaculture,</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">none reported</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">add directive with no specific target designation or anchor; asserts no verifiable target</div></td>
+    </tr>
+    <tr>
+      <td class="num">3</td>
+      <td><code>revise</code><div class="k instr">b. Revise the definition of “Collateral;”</div></td>
+      <td><span class="q">Collateral;</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl loose">alphanumeric-only</span>
+          <div class="k">everything but letters and digits dropped; case NOT folded</div>
+          <div class="k">char_offset 771</div></td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: found=true, level=exact, char_offset=771</div></td>
+    </tr>
+    <tr>
+      <td class="num">4</td>
+      <td><code>remove</code><div class="k instr">c. In the definition of “Commercial facility,” remove the words “means any structure” and add the words “means any facility” in their place;</div></td>
+      <td><span class="q">Commercial facility,</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl loose">alphanumeric-only</span>
+          <div class="k">everything but letters and digits dropped; case NOT folded</div>
+          <div class="k">char_offset 904</div></td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: found=true, level=exact, char_offset=924</div></td>
+    </tr>
+    <tr>
+      <td class="num">5</td>
+      <td><code>add</code><div class="k instr">d. Add in alphabetical order definitions for “Deputy Administrator” and “Facility;”</div></td>
+      <td><span class="q">Deputy Administrator</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">none reported</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">add directive with no specific target designation or anchor; asserts no verifiable target</div></td>
+    </tr>
+    <tr>
+      <td class="num">6</td>
+      <td><code>revise</code><div class="k instr">e. Revise the definition of “Facility loan commodity;” and</div></td>
+      <td><span class="q">Facility loan commodity;</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl loose">alphanumeric-only</span>
+          <div class="k">everything but letters and digits dropped; case NOT folded</div>
+          <div class="k">char_offset 2042</div></td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: found=true, level=exact, char_offset=2042</div></td>
+    </tr>
+    <tr>
+      <td class="num">7</td>
+      <td><code>add</code><div class="k instr">f. Add in alphabetical order definitions for, “FSA”, “FSFL”, “FSFL microloan”, “NAP”, “NEPA”, “NIFA”, “Off-farm paid labor”, “OSHA”, “Portable equipment and storage structures”, “Storage and handling truck”, and “USDA.”</div></td>
+      <td><span class="q">FSA</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><span class="k">none reported</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">add directive with no specific target designation or anchor; asserts no verifiable target</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 3 highlighted at char_offset 771, level <code>alphanumeric-only</code> - window starts at char 71</span></h4>
+    <div class="txt">he program authorized by this part and will be used in all aspects of administering this program:
+Aggregate outstanding balance means the sum of the outstanding balances of all loans disbursed under this part to each borrower signing the note and security agreement.
+Assumption means the act or agreement by which one borrower takes over or assumes the debt of another borrower.
+Cold storage facility means a facility or rooms within a facility that are specifically designed and constructed for the cold temperature storage of perishable commodities. The temperature and humidity in these facilities must be able to be regulated to specified conditions required for the commodity requiring storage.
+Collateral means the storage structure; the drying, handling, and cold storage equipment; and any other equipment securing the loan.
+Commercial facility means any structure, used in connection with or by any commercial operation including, but not limited to, grain elevators, warehouses, dryers, processing plants, or cold storage facilities used for the storage and handling of any agricultural product, whether paid or unpaid. Any structure suitable for the storage of an agricultural product that is in working proximity to any commercial storage operation will be considered to be part of a commercial storage operation.
+Commercial storage means the storing of any agricultural product, whether <span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+  <section class="item" id="2016-18075--774.17">
+    <h3>7 CFR 774.17
+        <span class="pill">2016-18075|774.17</span>
+        <span class="clause">W2</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2016-18075, 81 FR 51285,
+          published 2016-08-03</td></tr>
+      <tr><th>section text as of</th><td>2016 annual edition,
+          revised 2016-01-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span>
+          <span class="k">- no defect note; the instruction codified</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="disagree">DISAGREES WITH GOLD</span></td></tr>
+      <tr><th>failing designation</th><td><span class="k">none - no instruction failed</span></td></tr>
+      <tr><th>failure class</th><td><code>incorrect-citation-or-designation</code></td></tr>
+      <tr><th>instructions</th><td>2 ·
+          1 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>remove</code><div class="k instr">26. Amend § 774.17(d) by removing the words “7 CFR part 1940, subpart G” and adding the words “part 799 of this chapter” in their place.</div></td>
+      <td><span class="q">7 CFR part 1940, subpart G</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl exact">exact</span>
+          <div class="k">byte-for-byte</div>
+          <div class="k">char_offset 418</div></td>
+      <td><code>(d)</code> <span class="ok">exists</span></td>
+      <td class="sibs"><span class="k">n/a - resolved</span></td>
+      <td><span class="mini WILL_EXECUTE">executes</span><div class="k why">cfr_resolve: designation_exists=true, found=true at exact match level, char_offset=418. The quoted text is present in (d) and replacement text is provided.</div></td>
+    </tr>
+    <tr>
+      <td class="num">2</td>
+      <td><code>revise</code><div class="k instr">27. Revise part 799 to read as follows:</div></td>
+      <td><span class="k">no quoted anchor in the instruction</span></td>
+      <td><span class="res no">no</span></td>
+      <td><span class="lvl none">none</span>
+          <div class="k">not found at any declared level</div>
+          </td>
+      <td><span class="k">none asked</span></td>
+      <td class="sibs"><code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(d)</code> <code>(e)</code> <code>(f)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">Instruction targets &#x27;part 799&#x27;, which is not a paragraph designation within § 774.17. This instruction appears to amend a different section and cannot be executed against the section under review.</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 1 highlighted at char_offset 418, level <code>exact</code></span></h4>
+    <div class="txt">§ 774.17
+Loan application.
+A complete application will consist of the following:
+(a) A completed Agency application form;
+(b) Proof of a bankruptcy claim in the AgriBiotech bankruptcy proceedings;
+(c) If the applicant is a business entity, any legal documents evidencing the organization and any State recognition of the entity;
+(d) Documentation of compliance with the Agency&#x27;s environmental regulations contained in <mark>7 CFR part 1940, subpart G</mark>;
+(e) A balance sheet on the applicant; and
+(f) Any other additional information the Agency needs to determine the eligibility of the applicant and the application of any Federal, State or local laws.</div>
+  </section>
+  <section class="item" id="2024-21984--1321.9">
+    <h3>45 CFR 1321.9
+        <span class="pill">2024-21984|1321.9</span>
+        <span class="clause">W4</span></h3>
+    <table class="meta"><tbody>
+      <tr><th>rule</th><td>FR Doc 2024-21984, 89 FR 80073,
+          published 2024-10-02</td></tr>
+      <tr><th>section text as of</th><td>2024 annual edition,
+          revised 2024-10-01
+          <span class="k">- strictly before publication</span></td></tr>
+      <tr><th>gold label</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- NARA published a live codification-defect note</span></td></tr>
+      <tr><th>emitted verdict</th><td><span class="verdict WILL_FAIL">WILL_FAIL</span>
+          <span class="k">- derived in code from the per-instruction rulings below,
+          never asserted directly</span>
+          <span class="agree">agrees with gold</span></td></tr>
+      <tr><th>failing designation</th><td><code>(a)(1)(iii)</code></td></tr>
+      <tr><th>failure class</th><td><code>quoted-text-not-present</code></td></tr>
+      <tr><th>instructions</th><td>1 ·
+          3 <code>cfr_resolve</code> call(s) made</td></tr>
+    </tbody></table>
+    <p class="routed"><b>ROUTED TO THE HUMAN CHECKPOINT.</b> C2 instruction 1: both paths were asked and disagree - found=True designation_exists=False</p>
+
+    <h4>Resolution trace</h4>
+    <div class="scroll"><table class="trace">
+      <thead><tr>
+        <th>#</th><th>operation</th><th>anchor</th><th>resolved</th>
+        <th>normalisation level</th><th>designation</th><th>siblings</th>
+        <th>per-instruction ruling</th>
+      </tr></thead>
+      <tbody>
+    <tr>
+      <td class="num">1</td>
+      <td><code>remove</code><div class="k instr">208. Amend § 1321.9 paragraph (a)(1)(iii) by removing “and 45 CFR part 75, subpart F,” in paragraph (c)(2)(xi) by removing “and 45 CFR 75.307,” and in paragraph (c)(2)(xi) (H) by removing “and 45 CFR 75.307(e)(2).”</div></td>
+      <td><span class="q">and 45 CFR part 75, subpart F,</span></td>
+      <td><span class="res yes">yes</span></td>
+      <td><span class="lvl loose">alphanumeric-only</span>
+          <div class="k">everything but letters and digits dropped; case NOT folded</div>
+          <div class="k">char_offset 1796</div></td>
+      <td><code>(a)(1)(iii)</code> <span class="absent">DOES NOT EXIST</span></td>
+      <td class="sibs"><code>(1)</code> <code>(2)</code> <code>(3)</code> <code>(4)</code> <code>(A)</code> <code>(B)</code> <code>(C)</code> <code>(D)</code> <code>(E)</code> <code>(F)</code> <code>(G)</code> <code>(H)</code> <code>(I)</code> <code>(J)</code> <code>(a)</code> <code>(b)</code> <code>(c)</code> <code>(i)</code> <code>(ii)</code> <code>(iii)</code> <code>(iv)</code> <code>(ix)</code> <code>(v)</code> <code>(vi)</code> <code>(vii)</code> <code>(viii)</code> <code>(x)</code> <code>(xi)</code> <code>(xii)</code> <code>(xiii)</code> <code>(xiv)</code> <code>(xix)</code> <code>(xv)</code> <code>(xvi)</code> <code>(xvii)</code></td>
+      <td><span class="mini WILL_FAIL">fails</span><div class="k why">cfr_resolve: found=true at alphanumeric-only level but only as a partial match. The actual text in (c)(2)(xi)(H) reads &#x27;...2 CFR 200.307, 45 CFR 75.307, and in § 1321.9(c)(2)(xii).&#x27; The quoted text &#x27;and 45 CFR 75.307(e)(2).&#x27; is not present in the section</div></td>
+    </tr></tbody>
+    </table></div>
+
+    <h4>Section text <span class="k">- anchor of instruction 1 highlighted at char_offset 1796, level <code>alphanumeric-only</code> - window starts at char 1096</span></h4>
+    <div class="txt">nsistent with section 305(a)(1)(C) (42 U.S.C. 3025(a)(1)(C)), the State agency shall be responsible for monitoring the program and financial activities of subrecipients and subgrantees to ensure that grant awards are used for the authorized purposes and in compliance with Federal statutes, regulations, and the terms and conditions of the grant award, including:
+(i) Evaluating each subrecipient&#x27;s risk of noncompliance to ensure proper accountability and compliance with program requirements and achievement of performance goals;
+(ii) Reviewing subrecipient policies and procedures; and
+(iii) Ensuring that all subrecipients and subgrantees complete audits as required in 2 CFR part 200, subpart F and 45 CFR part 75, subpart F.
+(2) The State agency may not delegate to another agency the authority to award or administer funds under this part.
+(3) The State Long-Term Care Ombudsman shall be responsible for monitoring the files, records, and other information maintained by the Ombudsman program, as set forth in part 1324, subpart A. Such monitoring may be conducted by a designee of the Ombudsman. Neither the Ombudsman nor a designee shall disclose identifying information of any complainant or long- term care facility resident to individuals outside of the Ombudsman program, except as otherwise specifically provided in § 1324.11(e)(3) of this chapter.
+(b) The State agency shall ensure pol<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
+  </section>
+
+  <h2>Human-checkpoint queue - 16 of 82</h2>
+  <p class="k">These items are <b>not decided by the tool</b>. Each carries a verdict
+     derived from its trace, and each is flagged for a drafter with the reason it was
+     flagged. <b>C1</b>: the anchor path and the designation path disagree about an
+     instruction. <b>C2</b>: both paths were asked and returned contradictory facts.
+     <b>C3</b>: one designation is touched by two instructions, so the result depends
+     on execution order - and the ordered-state ledger that would resolve it is a
+     <b>declared, counted removal</b> (<code>CHANGELOG.md</code>, ruling R-01), so the
+     system refuses rather than guesses.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>item</th><th>emitted verdict</th><th>class</th><th>reason, verbatim from the artifact</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>05-8447|75.6</code><div class="k">40 CFR 75.6</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C3</span></td>
+        <td class="why">C3 designation (a)(38) is touched by instructions [3, 4] - instruction 3 changes what instruction 4 will find, and the ordered-state ledger is NOT BUILT (ruling R-01, counted removal #3)</td>
+      </tr>
+      <tr>
+        <td><code>2016-03298|1150.35</code><div class="k">49 CFR 1150.35</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C1</span> <span class="clause">C2</span></td>
+        <td class="why">C1 instruction 3: level=&#x27;none&#x27; (quoted anchor not present at any declared level) while designation_exists=true for &#x27;(f)&#x27; - the designation path and the anchor path do not agree about this instruction<br>C2 instruction 3: both paths were asked and disagree - found=False designation_exists=True</td>
+      </tr>
+      <tr>
+        <td><code>2016-08827|522.1315</code><div class="k">21 CFR 522.1315</div></td>
+        <td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 1: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2016-09949|1436.8</code><div class="k">7 CFR 1436.8</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2016-13651|425.606</code><div class="k">42 CFR 425.606</div></td>
+        <td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 2: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 5: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2016-13651|425.610</code><div class="k">42 CFR 425.610</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 2: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 5: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2016-13983|165.518</code><div class="k">33 CFR 165.518</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 1: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2017-23953|425.500</code><div class="k">42 CFR 425.500</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 2: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2020-11897|90.209</code><div class="k">47 CFR 90.209</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 1: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2020-17090|9.3</code><div class="k">42 CFR 9.3</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 2: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 4: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2020-17090|9.5</code><div class="k">42 CFR 9.5</div></td>
+        <td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 2: both paths were asked and disagree - found=True designation_exists=False<br>C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2021-04453|556.360</code><div class="k">21 CFR 556.360</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C1</span> <span class="clause">C2</span></td>
+        <td class="why">C1 instruction 1: level=&#x27;none&#x27; (quoted anchor not present at any declared level) while designation_exists=true for &#x27;(c)&#x27; - the designation path and the anchor path do not agree about this instruction<br>C2 instruction 1: both paths were asked and disagree - found=False designation_exists=True</td>
+      </tr>
+      <tr>
+        <td><code>2023-25238|980.117</code><div class="k">7 CFR 980.117</div></td>
+        <td><span class="verdict WILL_EXECUTE">WILL_EXECUTE</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 3: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2024-21984|1321.9</code><div class="k">45 CFR 1321.9</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C2</span></td>
+        <td class="why">C2 instruction 1: both paths were asked and disagree - found=True designation_exists=False</td>
+      </tr>
+      <tr>
+        <td><code>2025-17122|10.224</code><div class="k">19 CFR 10.224</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C1</span> <span class="clause">C2</span></td>
+        <td class="why">C1 instruction 1: level=&#x27;none&#x27; (quoted anchor not present at any declared level) while designation_exists=true for &#x27;(b)&#x27; - the designation path and the anchor path do not agree about this instruction<br>C2 instruction 1: both paths were asked and disagree - found=False designation_exists=True</td>
+      </tr>
+      <tr>
+        <td><code>2026-11140|149.140</code><div class="k">45 CFR 149.140</div></td>
+        <td><span class="verdict WILL_FAIL">WILL_FAIL</span></td>
+        <td><span class="clause">C3</span></td>
+        <td class="why">C3 designation (d)(1)(v) is touched by instructions [3, 4] - instruction 3 changes what instruction 4 will find, and the ordered-state ledger is NOT BUILT (ruling R-01, counted removal #3)</td>
+      </tr></tbody>
+  </table></div>
+
+  <footer>
+    <p><b>Provenance.</b> Every number on this page is read from committed artifacts
+    and none is computed by a model at render time. The page is generated by
+    <code>docs/evidence/ch12/build_worksheet.py</code> from exactly two inputs, both
+    already in this repository:</p>
+    <table><tbody><tr><td><code>data/evalset/items.jsonl</code></td><td class="mono hash">975959c6ec305c5263bea76efa371d5a270571045200c154edfe70611556f6fe</td></tr><tr><td><code>docs/evidence/ch06-a1/A1-rep1-artifacts.jsonl</code></td><td class="mono hash">43e7901f5cfa9c2ca57052a03e8b6a860828e3638d2ce0deda7c1f6e96ec4f39</td></tr><tr><td><code>docs/evidence/ch06-a1/A1-rep1.json</code></td><td class="mono hash">6b2dc2235bbdc20e046b8ecfff2a60f8cae91d941ca02390a0a91c4cc861eff7</td></tr></tbody></table>
+    <p><b>Commit.</b> The A1 rep-1 artifacts were committed at
+    <code>89d58c5</code>; the eval set was frozen at
+    <code>76e2e4b</code>. <b>Arm</b> <code>A1</code>, rep 1.
+    <b>Model</b> <code>claude-haiku-4-5-20251001</code> at temperature 0.0. The generator makes no
+    network call, reads no clock and calls no model, so re-running it on an unchanged
+    tree reproduces this file byte for byte -
+    <code>tests/test_worksheet.py</code> asserts that, and asserts that this page
+    references no external resource.</p>
+    <p><b>What this page is not.</b> It is not a filing, not a legal opinion, and not
+    a reviewed document. The arm that produced it missed gold on
+    <b>82 &minus; 59</b> items and those disagreements are shown, not filtered.
+    Read it beside <code>README.md</code> section g, LIMITATIONS.</p>
+  </footer>
+</div>
+</body>
+</html>
