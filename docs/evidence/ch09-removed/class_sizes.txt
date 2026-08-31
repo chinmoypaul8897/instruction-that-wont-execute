@@ -1,0 +1,98 @@
+==============================================================================
+REMOVED CAPABILITIES - CLASS SIZES RECOMPUTED IN-REPO
+==============================================================================
+
+  corpus       data/attribution-v11/amdpars_v11.jsonl
+  AMDPARs      6,501 attributed   (of 8,752 in the file)
+  ITEMS        2,527   = distinct (frdoc, section) pairs with >= 1 attributed AMDPAR
+
+  THE DENOMINATOR THE PRIOR FIGURES USED WAS 1,984. THIS SCRIPT MEASURES 2,527.
+  THEY ARE NOT THE SAME CORPUS. A percentage computed over 2,527 items is
+  not comparable with one computed over 1,984, and the difference of
+  543 items is reported here rather than divided away. Both raw
+  COUNTS are given below so a reader can form their own ratio.
+
+------------------------------------------------------------------------------
+REMOVED CAPABILITY 3 - the ORDERED-STATE LEDGER (ruling R-01, counted removal)
+------------------------------------------------------------------------------
+
+  Condition: a designation is touched by TWO OR MORE instructions in the item,
+  so instruction k+1 reads the state instructions 1..k left behind.
+
+  FOUR readings of that one sentence, strictest first. Every one is computed
+  because no single one reproduces the published figure:
+
+    reading                                        count      of     rate
+    A  same designation touched twice (literal)       83   2,527     3.3%
+    B  later path is a prefix/descendant             280   2,527    11.1%
+    C  >1 instruction naming any designation         495   2,527    19.6%
+    D  >1 instruction at all (the ceiling)           760   2,527    30.1%
+
+    PUBLISHED FIGURE                              833   1,984    42.0%   (CONTEXT.md §6)
+
+  *** THE 42.0% DOES NOT REPRODUCE. ***
+
+  Not under the literal reading, not under any of the three looser ones, and
+  not over any denominator this corpus yields: the shipped attribution has
+  2,527 items under v11 and 2,154 under the spec-literal rule. NEITHER IS
+  1,984. The loosest reading conceivable - 'the item has more than one
+  instruction' - reaches only 30.1%, so 42.0% is above this measurement's
+  CEILING, not merely outside its range.
+
+  WHAT IS AND IS NOT CONCLUDED. It is NOT concluded that 42.0% is wrong: it may
+  have been computed over a corpus or a definition this session cannot see, and
+  hard rule 15 forbids relaying a contradiction as a refutation. What IS
+  concluded is that THE FIGURE IS NOT REPRODUCIBLE FROM THE SHIPPED ARTIFACTS,
+  so it cannot carry a claim in the submission. It is raised as QUESTIONS.md
+  Q23 and is not quoted as settled anywhere.
+
+  THE REMOVAL DECISION IS UNAFFECTED, and that is worth stating plainly: ruling
+  R-01 cut the ledger to measure two capabilities properly rather than three
+  in a hurry. That reasoning never depended on the class size, which is why
+  discovering the number is unreliable costs the decision nothing. A removal
+  justified by a number that turns out not to reproduce would have been a
+  worse position to be in than this one.
+
+------------------------------------------------------------------------------
+REMOVED EXPERIMENT 2 - the INTRA-RULE COLLISION DETECTOR
+------------------------------------------------------------------------------
+
+  Condition: the item contains a REDESIGNATE instruction whose designation is
+  also touched by another instruction in the same item.
+
+    items containing ANY redesignation   82 of 2,527   = 3.2%
+    COLLISION fires on                   43 of 2,527   = 1.70%
+
+  against the two prior figures, NEITHER of which this reproduces exactly:
+    pilot            26 of 1,984 = 1.31%   difference +0.39 pp
+    naive recount    61 of 1,984 = 3.07%   difference -1.37 pp
+
+  PUBLISHED AS MEASURED. CONTEXT.md §10 pre-committed to publishing whatever
+  the shipped script yields, with the discrepancy stated, and that is what
+  this is. The 1.3%-3.1% range is NOT narrowed to a single settled figure by
+  this run; a third number is added to it, and the honest summary is that
+  THE CLASS SIZE DOES NOT REPRODUCE ACROSS IMPLEMENTATIONS.
+
+  WHY THAT DOES NOT CHANGE THE DECISION. Every one of the three figures is
+  small, and the removal never rested on the exact value. It rested on:
+    - 0/68 labelled items contain a redesignation instruction;
+    - NARA never publishes a note naming an intra-rule conflict - a live probe
+      for "conflicting amendments" returned 0;
+    - and 15 of the pilot's 26 collisions are CORRECT DRAFTING, not defects.
+  A detector for a class NARA does not write notes about cannot be scored
+  against NARA's notes, whatever its class size.
+
+------------------------------------------------------------------------------
+THE TWO CONDITIONS ARE NOT THE SAME MEASUREMENT
+------------------------------------------------------------------------------
+
+  state-carry only            40
+  collision only              0
+  both                        43
+  neither                     2,444
+
+  CONTEXT.md §6 warns that these two were conflated in an earlier draft and
+  are not comparable. The overlap above is the check on that warning: a
+  collision is a SPECIAL CASE of state-carry, so collision-only should be 0.
+  Measured collision-only: 0.  CONSISTENT.
+

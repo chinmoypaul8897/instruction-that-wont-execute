@@ -1,0 +1,128 @@
+REVIEW CH-04 - check 6: claims vs code
+==============================================================================
+
+CLAIM 1  src/score.py normalise_verdict: "Deliberately strict ... Anything
+         else - prose, a refusal, an empty string, a JSON blob without the
+         field - returns None and is scored as a FAILURE."
+
+  The strictness is REAL, but mutation M06 (substring match instead of exact)
+  survives the whole 313-test suite. Measured cost on the REAL B0 reps:
+
+    B0-rep1.json             strict acc 0.4756   lenient acc 0.4756   non-answers rescued 0
+    B0-rep2.json             strict acc 0.4756   lenient acc 0.4756   non-answers rescued 0
+    B0-rep3.json             strict acc 0.4634   lenient acc 0.4634   non-answers rescued 0
+    B0-agent-rep1.json       strict acc 0.6585   lenient acc 0.6585   non-answers rescued 0
+    B0-agent-rep2.json       strict acc 0.6585   lenient acc 0.6585   non-answers rescued 0
+    B0-agent-rep3.json       strict acc 0.6585   lenient acc 0.6585   non-answers rescued 0
+
+  non-answers a lenient parser would have converted, across all 6 reps: 0
+
+  Zero on TONIGHT's data - the B0 prose non-answers happen not to contain
+  either literal. The exposure is CH-06's A1, whose output contract is a JSON
+  blob that DOES contain the verdict string:
+    raw     {"verdict": "WILL_FAIL", "failing_designation": "(b)(4)"}
+    strict  -> None   (a non-answer: the scorer wants the bare verdict)
+    lenient -> 'WILL_FAIL'   (M06 would silently start accepting it)
+  VERDICT: score.py is correct here; the SUITE does not defend it.
+
+==============================================================================
+CLAIM 2  GOOD.md section 5, pre-registered and frozen:
+           "The observed labelling is one of the draws, so p can never be 0."
+         src/bscript.py module docstring, point 2:
+           "The observed statistic is included in its own null. A permutation
+            test that excludes it can return p = 0, which is not a probability
+            any finite permutation test can produce."
+
+  TRUE in EXHAUSTIVE mode - itertools.product contains the all-keep draw.
+  In SAMPLED mode the draws are independent coin flips, so the all-keep draw
+  appears with probability 2^-k per draw. The shipped run uses k = 41 pairs
+  and 2000 SAMPLED draws: 2^-41 = 4.547e-13 per draw. The claim does not hold
+  there, and `p_value = at_least / len(draws)` carries no +1 correction.
+
+  DIRECT CHECK on the SHIPPED configuration - is the observed labelling
+  (the all-keep draw) actually among the 2000 draws at seed 20260831?
+    k = 41 pairs, n_permutations = 2000 -> mode 'sampled', 2000 draws
+    all-keep draw present : False
+    all-swap draw present : False
+    -> the observed labelling is NOT one of the draws.
+
+  Constructed counterexample where p ACTUALLY comes out 0.0 -
+  20 pairs, positives all 1.0, negatives all 0.0, so ONLY the all-keep and
+  all-swap draws (2 of 2^20) can reach the observed 1.0, and 200 sampled
+  draws contain neither:
+    mode                     sampled
+    n_draws                  200
+    observed best CV acc     1.0000
+    draws >= observed        0
+    p_value                  0.0
+    p_value == 0.0           True   <<< a finite permutation test just
+                                      produced p = 0, which GOOD.md section 5
+                                      and bscript.py both say cannot happen
+    conventional (1+k)/(1+n) 0.004975124378109453
+
+  The SHIPPED run was not bitten - 471/2000 draws >= observed, p = 0.2355 -
+  because the B-script is near chance. The claim is still false as written,
+  and it is frozen in GOOD.md where hard rule 5 forbids editing it.
+
+  tests/test_score.py::test_SD_p_value_can_never_be_zero uses 2 pairs and
+  n_permutations=64, which takes the EXHAUSTIVE branch. The mode the project
+  actually runs in is not covered by that test:
+    the test's own call -> mode 'exhaustive', p 0.5000
+
+==============================================================================
+CLAIM 3  src/score.py bootstrap_ci_clustered docstring:
+           "`CONTEXT.md` section 7 / `plan.md` CH-08: clustered by FR
+            document."
+
+  grep of CONTEXT.md section 7 for 'bootstrap': 0 hits
+  grep of CONTEXT.md section 7 for 'cluster'  : 0 hits
+  grep of CONTEXT.md (whole file) for 'bootstrap': 0 hits
+  grep of GOOD.md for 'bootstrap': 0 hits
+  plan.md CH-08 does require it: True
+  -> section 7 does NOT mention a bootstrap. The citation is wrong.
+     plan.md CH-08 asks for a PAIRED bootstrap of the DIFFERENCE;
+     bootstrap_ci_clustered returns a one-arm accuracy CI, which is not that.
+
+  Mutation M12 (resample items, not clusters) survived the suite. Measured
+  cost, my own reimplementation, 2000 reps, seed 424242, on B0-agent:
+    clustered by frdoc   CI [0.5385, 0.7683]  width 0.2298  sd 0.0590
+    by ITEM              CI [0.5488, 0.7561]  width 0.2073  sd 0.0510
+  -> the item bootstrap is NARROWER. Using it would overstate precision,
+     and nothing in tests/ would notice.
+
+==============================================================================
+CLAIM 4  src/score.py detectable_effect(n_pairs, alpha=0.05, power=0.80)
+         returns a field named `target_power`.
+
+    power=0.50 -> min_discordant 6  gap 7.3171 pp  target_power reported 0.50
+    power=0.80 -> min_discordant 6  gap 7.3171 pp  target_power reported 0.80
+    power=0.99 -> min_discordant 6  gap 7.3171 pp  target_power reported 0.99
+    power=0.00 -> min_discordant 6  gap 7.3171 pp  target_power reported 0.00
+  -> `power` changes NOTHING. It is echoed into the output as `target_power`
+     beside a number that is not a power calculation. The docstring's closing
+     note says so; the emitted field does not, and checkpoint-result.json
+     carries "target_power": 0.8 next to "min_detectable_gap_pp": 7.317.
+
+  Also: min_discordant_all_one_way does not depend on n at all -
+    n_pairs=5     min_discordant 6  gap 60.0000 pp
+    n_pairs=41    min_discordant 6  gap 7.3171 pp
+    n_pairs=1000  min_discordant 6  gap 0.3000 pp
+     only the implied gap moves, because it is 100 * 6 / (2 * n_pairs).
+
+==============================================================================
+CLAIM 5  src/score.py n_needed_for_power - the NAME says power, the
+         docstring says "not a power calculation from an assumed effect".
+
+    n_needed_for_power(b=21, c=6, n_items=82) -> n_needed 82 (pairs 41)
+    the observed data ALREADY clears alpha (p = 0.0059), so the search stops
+    at d_try = d and returns the n it was given. It answers 'how big is the
+    n I already have', which is not what plan.md's AMBER branch asks for.
+    plan.md AMBER: "the n this design would need for power".
+
+    a genuinely under-powered shape, b=6 c=3 at n=82:
+      -> discordant_needed 37  n_needed 337  pairs_needed 169
+    no `power` argument exists and no target power is used anywhere in it.
+    Mutation M15 (flip the significance comparison) survived the suite: the
+    function has NO test at all.
+
+==============================================================================

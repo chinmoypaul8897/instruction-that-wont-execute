@@ -1,0 +1,82 @@
+REVIEW CH-04 - latent defects and an independent hand-check of the goldens
+==============================================================================
+
+D1  permutation_null RESTORES THE TRUE LABELS BY ASSUMPTION, NOT BY SNAPSHOT
+
+    src/bscript.py lines ~249-251 restore with:
+        for a, b in pairs:
+            by_id[a]['label'] = 'WILL_FAIL'
+            by_id[b]['label'] = 'WILL_EXECUTE'
+    i.e. it ASSUMES pair[0] is the positive. `free_permutation_null` does the
+    right thing - it snapshots `labels` on entry and restores from that. The
+    two functions disagree about how to be safe.
+
+    pairs given as (negative, positive) - a VALID matching of the same pair:
+      labels before  {'neg': 'WILL_EXECUTE', 'pos': 'WILL_FAIL'}
+      labels after   {'neg': 'WILL_FAIL', 'pos': 'WILL_EXECUTE'}
+      corrupted      True   <<< the caller's data was silently relabelled
+
+    the diagnostic null over the same rows, for contrast:
+      labels before  {'neg': 'WILL_EXECUTE', 'pos': 'WILL_FAIL'}
+      labels after   {'neg': 'WILL_EXECUTE', 'pos': 'WILL_FAIL'}
+      corrupted      False
+
+    NOT LIVE TONIGHT: docs/evidence/ch04-scorer/run_bscript.py's
+    `reconstruct_pairs` always emits (positive, negative), so the assumption
+    holds for the shipped run. tests/test_score.py's restore test also passes
+    pairs in that order, so no test would catch the reversal.
+
+==============================================================================
+D2  score() SILENTLY IGNORES PREDICTIONS FOR ITEMS NOT IN THE EVAL SET
+
+    2 items scored against 4 predictions (2 of them for unknown item_ids):
+      n 2  success 2  failure 0  accuracy 1.0000
+      no error, no warning, no count of the surplus keys.
+    `cv_predictions` DOES raise when coverage is short (a good check); nothing
+    checks the other direction. An arm answering an item the eval set no
+    longer holds - after CH-03's 76 -> 82 rebuild, say - passes unremarked.
+
+==============================================================================
+D3  src/score.py's MODULE DOCSTRING CONTRADICTS src/score.py
+
+    module docstring, verbatim:
+      'no randomness. The permutation null lives in `bscript.py`, uses a declared seed, and'
+      '. The permutation null lives in `bscript.py`, uses a declared seed, and says so.'
+
+    and in the same file:
+      line 193  import random
+      line 201  rng = random.Random(seed)
+      line 204  drawn = [by_cluster[keys[rng.randrange(len(keys))]] for _ in keys]
+
+    The bootstrap IS seeded and IS reproducible, so hard rule 9 holds. But the
+    file's own purity claim - and goldens.md S-G's 'the permutation null' as
+    THE one place randomness is allowed - do not mention it. S-G lists the
+    RNG-free functions as 'the accuracy, rate and McNemar functions'; the
+    bootstrap was added later and no declaration was extended to cover it.
+
+==============================================================================
+D4  INDEPENDENT HAND-CHECK OF THE GOLDENS (goldens.md S-A, S-B, S-C, S-D, S-F)
+    Arithmetic done here in Fractions, then compared with the golden's number.
+
+    S-C best threshold found by hand: t=3 direction=>= (golden: t=3, '>=')
+    S-F fold assignment hand-computed == golden: True
+
+    S-A accuracy             mine 0.625000000000  golden 0.625000000000  AGREE
+    S-A false-defect         mine 0.250000000000  golden 0.250000000000  AGREE
+    S-A missed-defect        mine 0.500000000000  golden 0.500000000000  AGREE
+    S-B1 b=8 c=2             mine 0.109375000000  golden 0.109375000000  AGREE
+    S-B2 b=10 c=0            mine 0.001953125000  golden 0.001953125000  AGREE
+    S-B3 b=5 c=5             mine 1.000000000000  golden 1.000000000000  AGREE
+    S-C best accuracy        mine 0.833333333333  golden 0.833333333333  AGREE
+    S-D free null            mine 0.333333333333  golden 0.333333333333  AGREE
+    E-1 within-pair null     mine 0.500000000000  golden 0.500000000000  AGREE
+
+    every golden reproduces by hand: True
+
+    AND the goldens predate the code:
+      goldens.md          added 8dae806  2026-08-30 21:15:36 UTC
+      src/score.py        added 067a9d9  2026-08-30 21:29:01 UTC
+      GOOD.md filled      5172092        2026-08-30 21:33:03 UTC
+      first arm API call  B0-rep1.jsonl  2026-08-30 21:41:00.692 UTC
+
+==============================================================================

@@ -1,0 +1,43 @@
+REVIEW CH-04 - check 3: mutation testing of src/score.py
+==============================================================================
+target        src/score.py
+git HEAD      487873db605362d8bd37dc4322a3761614270daf
+sha256 before 436e8967223bfd3c4b7b02aaac4b88d0f446cf703485b29b70548b81cce15374
+
+BASELINE (unmutated tree) - established FIRST, before any mutation
+    exit 0   313 passed in 35.96s
+    baseline is GREEN
+
+id    mutation                                                       suite  result
+------------------------------------------------------------------------------
+M01   mcnemar: swap b and c                                          RED    CAUGHT   2 failed, 311 passed in 30.18s
+M02   mcnemar: flip the tail comparison, min(b,c) -> max(b,c)        RED    CAUGHT   3 failed, 310 passed in 27.97s
+M03   mcnemar: make it ONE-SIDED (drop the factor of two)            RED    CAUGHT   4 failed, 309 passed in 27.68s
+M04   mcnemar: count CONCORDANT pairs into b as well                 RED    CAUGHT   5 failed, 308 passed in 29.37s
+M05   binom_tail_le: off-by-one, P(X < k) instead of P(X <= k)       RED    CAUGHT   6 failed, 307 passed in 30.17s
+M06   normalise_verdict: LENIENT - prose containing the word counts  GREEN  *** SURVIVED ***   313 passed in 26.73s
+M07   score: DROP the `success + failure == n` check                 GREEN  *** SURVIVED ***   313 passed in 27.13s
+M08   score: charge a wrong answer to the OPPOSITE class             RED    CAUGHT   3 failed, 310 passed in 27.93s
+M09   score: a NON-ANSWER is charged to NEITHER guard (a silent skip RED    CAUGHT   1 failed, 312 passed in 27.32s
+M10   score: a NON-ANSWER is dropped from the denominator entirely   RED    CAUGHT   9 failed, 304 passed in 26.18s
+M11   guards: WEAKEN both pre-registered thresholds 0.25 -> 0.50     RED    CAUGHT   1 failed, 312 passed in 29.15s
+M12   bootstrap: resample ITEMS instead of CLUSTERS                  GREEN  *** SURVIVED ***   313 passed in 27.90s
+M13   paired_accuracy_vectors: drop the sort, so two arms can mis-pa GREEN  *** SURVIVED ***   313 passed in 30.38s
+M14   detectable_effect: require a 1-sided split, not all-one-way    RED    CAUGHT   1 failed, 312 passed in 38.17s
+M15   n_needed_for_power: flip the significance comparison           GREEN  *** SURVIVED ***   313 passed in 34.65s
+M16   score: DROP the duplicate-item_id check                        RED    CAUGHT   1 failed, 312 passed in 33.71s
+
+sha256 after  436e8967223bfd3c4b7b02aaac4b88d0f446cf703485b29b70548b81cce15374
+restored byte-for-byte: True
+git diff --exit-code -- src/score.py  ->  exit 0 (clean)
+
+==============================================================================
+applied 16 - CAUGHT 11 - SURVIVED 5 - skipped 0
+
+MUTATIONS THE SUITE DID NOT CATCH:
+   M06  normalise_verdict: LENIENT - prose containing the word counts
+   M07  score: DROP the `success + failure == n` check
+   M12  bootstrap: resample ITEMS instead of CLUSTERS
+   M13  paired_accuracy_vectors: drop the sort, so two arms can mis-pair
+   M15  n_needed_for_power: flip the significance comparison
+==============================================================================

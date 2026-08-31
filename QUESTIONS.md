@@ -1298,3 +1298,116 @@ moved.
 
 This paragraph is written **before the arms ran**, so that the direction of the effect is
 a prediction and not an explanation.
+
+---
+
+## Q22 - B0′, the compute-matched control, CANNOT be built at the pre-registered temperature 0
+
+**Raised at CH-06 §3, 2026-08-31, before the arm ran. Class B: taken, recorded, continued.**
+
+`CONTEXT.md` §4 names **B0′** — *"B0-agent at A1's exact token budget, spent on best-of-3
+self-consistency with a published tie-break"* — and `plan.md` CH-08 requires it. It
+exists to answer one objection, which is the first thing any reader says: **"your agent
+just got more compute."**
+
+`GOOD.md` §8 fixes **temperature 0 on every haiku arm**.
+
+**These two cannot both hold.** Best-of-3 self-consistency at temperature 0 draws the
+same deterministic sample three times. The votes are identical, the majority is trivially
+that vote, and the control measures nothing while costing three times as much.
+
+### The resolution — both readings reported, only one of them billed
+
+| Reading | What it is | Cost |
+|---|---|---|
+| **B0′ at temperature 0** | **identical to `B0-agent`.** Three identical votes, majority trivially that vote. | **already measured: 0.6585.** No call made. |
+| **B0′ at temperature 1.0** | the control that can actually exist, and the one that is run | 82 items × 3 samples |
+
+The degenerate reading is *not* skipped — it is **reported, using the number it already
+has**, because re-measuring a proven degeneracy would be spending the budget to confirm
+arithmetic. The live reading is run at **temperature 1.0** and is **the only arm in the
+packet not at temperature 0**, which is disclosed in every table it appears in.
+
+**The tie-break is published before the run**, in `src/arms.py::run_b0prime`'s docstring
+and in the run's own JSON: **majority, ties to `WILL_FAIL`**. Same rule as rep
+aggregation, and the conservative direction for a defect detector — a tie resolves toward
+flagging, not toward waving through. An unparseable vote is **not a vote** and is dropped
+from the tally; an item whose every vote is unparseable gets no prediction and `score.py`
+charges it as a failure.
+
+### Why the deviation is disclosed rather than absorbed
+
+A control quietly run at a different temperature from the arm it controls is **worse than
+no control at all**: it looks like a fair comparison and is not. Naming it here, in
+`src/arms.py`, and in every results table costs nothing and is the only thing that makes
+the row readable. **The primary A1-vs-B0-agent comparison is untouched** — every arm in it
+runs the same model at temperature 0.
+
+---
+
+## Q23 - `CONTEXT.md` §6's state-carry figure of 833/1,984 = 42.0% DOES NOT REPRODUCE, and 42.0% is above this measurement's ceiling
+
+**Raised at CH-09, 2026-08-31, under hard rule 14. Escalated. Not acted on.**
+
+Evidence: `docs/evidence/ch09-removed/class_sizes.py`, output `.txt` / `.json`.
+
+`CONTEXT.md` §6 justifies building the ordered-state ledger — counted removal #3 — with:
+
+> **state-carry sensitivity** — instruction *k+1* reads the state instructions *1..k*
+> left — fires on **833/1,984 = 42.0%** of items
+
+§10 already flags the *neighbouring* collision figure as non-reproducing and pre-commits
+CH-09 to recomputing it. **This entry reports that the state-carry figure does not
+reproduce either**, and by a much larger margin.
+
+### What was measured
+
+`CONTEXT.md` §6 defines the condition in prose, and prose admits several readings, so
+**all four were computed** rather than one being picked:
+
+| Reading | Count | of | Rate |
+|---|---:|---:|---:|
+| **A** — the same designation touched twice (**most literal**) | 83 | 2,527 | **3.3%** |
+| **B** — a later path is a prefix or descendant of an earlier one | 280 | 2,527 | 11.1% |
+| **C** — more than one instruction naming any designation | 495 | 2,527 | 19.6% |
+| **D** — more than one instruction at all (**the ceiling**) | 760 | 2,527 | **30.1%** |
+| *published figure* | *833* | *1,984* | ***42.0%*** |
+
+**42.0% is above reading D**, and reading D is the loosest condition the sentence can
+possibly denote — *"this section has more than one instruction"*. The published figure is
+therefore not merely outside the range of readings; **it is above the ceiling of what this
+corpus can produce under any reading.**
+
+The denominator does not reconcile either. The shipped attribution yields **2,527** items
+under the v11 rule and **2,154** under the spec-literal rule. **Neither is 1,984.**
+
+### What is and is not concluded — hard rule 15 applies to me too
+
+**NOT concluded: that 42.0% is wrong.** It may have been computed over a corpus, or under
+a definition, that this session cannot see. A contradiction is not a refutation, and
+relaying it as one would be the exact failure hard rule 15 was written for.
+
+**Concluded: the figure is not reproducible from the shipped artifacts**, so it cannot
+carry a claim in the submission. It is not quoted as settled anywhere in this session's
+output, and the four readings ship with the script that produced them.
+
+### The removal decision is unaffected, and that is the point
+
+Ruling R-01 cut the ledger **to measure two capabilities properly rather than three in a
+hurry**. That reasoning never rested on the class size. So discovering the number is
+unreliable costs the decision nothing — which is a much better position than the one this
+project would be in had the removal been justified *by* a number that then failed to
+reproduce.
+
+### For the architect
+
+1. Does 42.0% have a derivation that can be pointed at? If so, the definition should be
+   written into `CONTEXT.md` §6 as one of the four readings above, or as a fifth.
+2. If it cannot be reproduced, does it get an errata note in `CONTEXT.md` §6 the way §10
+   already carries one for the collision figure? **This session cannot make that edit** —
+   `CONTEXT.md` is architect-only and read-only under the CH-06 scope fence.
+3. The collision figure recomputes at **43/2,527 = 1.70%**, which sits inside §10's
+   declared ~1.3–3.1% band but reproduces neither endpoint. §10 pre-committed to
+   publishing whatever the shipped script yields with the discrepancy stated, and that is
+   done. The consistency check passes: **collision-only = 0**, confirming collisions are a
+   strict subset of state-carry as §6 implies.

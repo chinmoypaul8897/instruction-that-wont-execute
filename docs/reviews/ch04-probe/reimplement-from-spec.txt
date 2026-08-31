@@ -1,0 +1,68 @@
+REVIEW CH-04 - independent reimplementation of CONTEXT.md section 7
+==============================================================================
+eval set        data/evalset/items.jsonl
+n               82
+labels          {'WILL_EXECUTE': 41, 'WILL_FAIL': 41}
+FR documents    37
+
+--- B0   (3 reps, majority, ties -> FAILURE)
+    accuracy          0.4756097561   hits 39  misses 43  n 82
+    hits+misses==n    True
+    per-rep accuracy  [0.4756097561, 0.4756097561, 0.4634146341]
+    STRICT  s7 false-defect   4/41 = 0.0975609756
+    STRICT  s7 missed-defect  36/41 = 0.8780487805
+    CHARGED score.py f-defect 5/41 = 0.1219512195
+    CHARGED score.py m-defect 38/41 = 0.9268292683
+    non-answers       on executable 1 - on defective 2
+
+--- B0-agent   (3 reps, majority, ties -> FAILURE)
+    accuracy          0.6585365854   hits 54  misses 28  n 82
+    hits+misses==n    True
+    per-rep accuracy  [0.6585365854, 0.6585365854, 0.6585365854]
+    STRICT  s7 false-defect   8/41 = 0.1951219512
+    STRICT  s7 missed-defect  20/41 = 0.4878048780
+    CHARGED score.py f-defect 8/41 = 0.1951219512
+    CHARGED score.py m-defect 20/41 = 0.4878048780
+    non-answers       on executable 0 - on defective 0
+
+--- McNemar, B0-agent vs B0 (exact, two-sided, Fractions)
+    b (agent right, B0 wrong)  21
+    c (agent wrong, B0 right)  6
+    discordant                 27
+    p (sum-of-at-most-likely)  0.005924612283706665
+    p (doubled smaller tail)   0.005924612283706665
+    conventions agree exactly  True
+    gap                        +18.2926829268 pp
+
+--- HOW MUCH IS THE UNWRITTEN REP-AGGREGATION RULE WORTH?
+    (no binding document fixes it; these are the alternatives)
+    majority, ties -> FAILURE    B0 0.4756  agent 0.6585  gap +18.3 pp  p 0.0059
+    majority, ties -> EXECUTE    B0 0.4756  agent 0.6585  gap +18.3 pp  p 0.0059
+    rep 1 alone                  B0 0.4756  agent 0.6585  gap +18.3 pp  p 0.0059
+    rep 2 alone                  B0 0.4756  agent 0.6585  gap +18.3 pp  p 0.0059
+    rep 3 alone                  B0 0.4634  agent 0.6585  gap +19.5 pp  p 0.0037
+
+==============================================================================
+DIFF - my arithmetic vs docs/evidence/checkpoint/checkpoint-result.json
+==============================================================================
+    B0 accuracy                        mine 0.475609756098  theirs 0.475609756098  delta 0.000e+00  MATCH
+    B0 false-defect (charged)          mine 0.121951219512  theirs 0.121951219512  delta 0.000e+00  MATCH
+    B0 missed-defect (charged)         mine 0.926829268293  theirs 0.926829268293  delta 0.000e+00  MATCH
+    B0 unparseable                     mine 3.000000000000  theirs 3.000000000000  delta 0.000e+00  MATCH
+    B0-agent accuracy                  mine 0.658536585366  theirs 0.658536585366  delta 0.000e+00  MATCH
+    B0-agent false-defect (charged)    mine 0.195121951220  theirs 0.195121951220  delta 0.000e+00  MATCH
+    B0-agent missed-defect (charged)   mine 0.487804878049  theirs 0.487804878049  delta 0.000e+00  MATCH
+    gap pp                             mine 18.292682926829  theirs 18.292682926829  delta 0.000e+00  MATCH
+    McNemar b                          mine 21.000000000000  theirs 21.000000000000  delta 0.000e+00  MATCH
+    McNemar c                          mine 6.000000000000  theirs 6.000000000000  delta 0.000e+00  MATCH
+    McNemar p                          mine 0.005924612284  theirs 0.005924612284  delta 0.000e+00  MATCH
+
+    largest absolute disagreement: 0.000e+00
+    VERDICT: ALL NUMBERS REPRODUCE EXACTLY
+
+==============================================================================
+SPEC-READING DELTA - section 7's parenthetical vs src/score.py
+==============================================================================
+    B0         false-defect strict 0.0976 vs charged 0.1220   missed-defect strict 0.8780 vs charged 0.9268
+    B0-agent   false-defect strict 0.1951 vs charged 0.1951   missed-defect strict 0.4878 vs charged 0.4878
+

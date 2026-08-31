@@ -20,7 +20,17 @@ WHAT IT COMPUTES, AND UNDER WHOSE RULES
 * the **tool-availability-vs-tool-use gap** - `plan.md` CH-06
 
 Aggregation across reps is MAJORITY, ties to the FAILURE side - the rule the checkpoint
-already applied. Restated, not re-chosen.
+already applied. Restated here, NOT re-chosen after seeing an A1 number.
+
+    DISCLOSED, from the CH-04 adversarial review (finding F3, `docs/reviews/
+    REVIEW_CH-04.md`): THIS RULE IS PRE-REGISTERED NOWHERE. It appears in no binding
+    document - not `CONTEXT.md`, not `GOOD.md`, not `plan.md` - and debuts in
+    `docs/evidence/checkpoint/analyse_checkpoint.py`, committed AFTER the first arm
+    call, whose docstring wrongly calls it pre-registered. The reviewer measured the
+    alternatives and every one of them still lands the checkpoint on GREEN, so nothing
+    published turns on the choice. It is restated here for consistency with the
+    baseline it is compared against, and the fact that it was never pre-registered is
+    printed in this script's own output rather than left in a review file.
 
 PURITY: no network, no clock. The bootstrap's RNG is seeded from `GOOD.md`'s declared
 `20260831` and the seed is printed with the interval.
@@ -191,6 +201,11 @@ def main() -> int:
     w(f"  clusters   {len(set(clusters.values()))} FR documents")
     w("  model      claude-haiku-4-5-20251001 @ temperature 0, EVERY arm")
     w("  reps       aggregated MAJORITY, ties to the FAILURE side")
+    w("             ^ NOT PRE-REGISTERED - CH-04 review finding F3. The rule is in no")
+    w("               binding document and debuts in analyse_checkpoint.py, committed")
+    w("               after the first arm call. Every alternative aggregation still")
+    w("               lands the checkpoint on GREEN, so nothing turns on it; it is")
+    w("               disclosed rather than defended.")
     w("")
 
     w("=" * 78)

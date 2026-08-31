@@ -1,0 +1,26 @@
+{
+  "any_redesignation_count": 82,
+  "both": 43,
+  "collision_count": 43,
+  "collision_only": 0,
+  "collision_rate": 0.01701622477245746,
+  "n_items": 2527,
+  "prior_collision": [
+    {
+      "den": 1984,
+      "num": 26,
+      "source": "pilot"
+    },
+    {
+      "den": 1984,
+      "num": 61,
+      "source": "naive recount"
+    }
+  ],
+  "prior_state_carry": {
+    "den": 1984,
+    "num": 833
+  },
+  "state_carry_count": 83,
+  "state_carry_rate": 0.032845271072417886
+}

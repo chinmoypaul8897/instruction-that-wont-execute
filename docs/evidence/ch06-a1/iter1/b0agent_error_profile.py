@@ -13,6 +13,12 @@ Aggregation across reps is MAJORITY with ties resolved to the FAILURE side, whic
 rule `docs/evidence/checkpoint/analyse_checkpoint.py` already applied to produce the
 published 0.6585. It is restated here rather than re-chosen.
 
+DISCLOSED (CH-04 review finding F3): that rule is **pre-registered nowhere**. It is in no
+binding document and first appears in `analyse_checkpoint.py`, committed after the first
+arm call. The reviewer measured every alternative and each still lands the checkpoint on
+GREEN. It is used here for consistency with the baseline being compared against, and the
+gap in its provenance is stated rather than inherited silently.
+
 PURITY: no network, no clock, no randomness. Determinism: same inputs, same bytes.
 
     python docs/evidence/ch06-a1/iter1/b0agent_error_profile.py

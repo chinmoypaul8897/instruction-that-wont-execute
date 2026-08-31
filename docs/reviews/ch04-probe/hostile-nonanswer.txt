@@ -1,0 +1,70 @@
+REVIEW CH-04 - check 4: a non-answer must be a FAILURE, never a skip
+==============================================================================
+
+1. EVERY REFUSAL SHAPE, on a DEFECTIVE item (gold WILL_FAIL) and on an
+   EXECUTABLE item (gold WILL_EXECUTE). n must stay 2; success must stay 1.
+
+   shape                          gold     success  failure  n      unpars charged to
+   empty string                   FAIL     1        1        2      1      missed-defect
+   empty string                   EXEC     1        1        2      1      false-defect
+   whitespace only                FAIL     1        1        2      1      missed-defect
+   whitespace only                EXEC     1        1        2      1      false-defect
+   explicit None                  FAIL     1        1        2      1      missed-defect
+   explicit None                  EXEC     1        1        2      1      false-defect
+   absent key                     FAIL     1        1        2      1      missed-defect
+   absent key                     EXEC     1        1        2      1      false-defect
+   prose refusal                  FAIL     1        1        2      1      missed-defect
+   prose refusal                  EXEC     1        1        2      1      false-defect
+   policy refusal                 FAIL     1        1        2      1      missed-defect
+   policy refusal                 EXEC     1        1        2      1      false-defect
+   empty JSON blob                FAIL     1        1        2      1      missed-defect
+   empty JSON blob                EXEC     1        1        2      1      false-defect
+   JSON without the field         FAIL     1        1        2      1      missed-defect
+   JSON without the field         EXEC     1        1        2      1      false-defect
+   hedged verdict                 FAIL     1        1        2      1      missed-defect
+   hedged verdict                 EXEC     1        1        2      1      false-defect
+   verdict inside a sentence      FAIL     1        1        2      1      missed-defect
+   verdict inside a sentence      EXEC     1        1        2      1      false-defect
+   list                           FAIL     1        1        2      1      missed-defect
+   list                           EXEC     1        1        2      1      false-defect
+   dict                           FAIL     1        1        2      1      missed-defect
+   dict                           EXEC     1        1        2      1      false-defect
+   bool                           FAIL     1        1        2      1      missed-defect
+   bool                           EXEC     1        1        2      1      false-defect
+   number                         FAIL     1        1        2      1      missed-defect
+   number                         EXEC     1        1        2      1      false-defect
+   near-miss spelling             FAIL     1        1        2      1      missed-defect
+   near-miss spelling             EXEC     1        1        2      1      false-defect
+   real B0 non-answer             FAIL     1        1        2      1      missed-defect
+   real B0 non-answer             EXEC     1        1        2      1      false-defect
+
+   shapes that behaved unexpectedly: 0
+
+2. CAN AN ARM RAISE ITS ACCURACY BY DECLINING? 20 items, 10/10.
+   HONEST arm answers every item and gets 12 right.
+   HOSTILE arm gives the SAME 12 answers and REFUSES the other 8.
+
+   HONEST   n 20  success 12  failure 8  accuracy 0.6000  unparseable 0
+   HOSTILE  n 20  success 12  failure 8  accuracy 0.6000  unparseable 8
+   refusing changed the accuracy by +0.0000  ->  NO GAIN
+
+3. THE TOTAL REFUSENIK - an arm that answers NOTHING at all.
+   n 20  success 0  failure 20  accuracy 0.0000  unparseable 20
+   false-defect 10/10 = 1.0000  missed-defect 10/10 = 1.0000
+   both guards fail: True
+
+4. IS `success + failure == n` GENUINELY ASSERTED, OR JUST COMPUTED?
+   A derived count that always agrees with itself proves nothing. The scorer
+   takes `n = len(items)` and then TALLIES BY ITERATING `items`. Feed it a
+   sequence whose `__len__` and whose iteration DISAGREE and the invariant is
+   genuinely violated; a real assertion must RAISE, not return a wrong number.
+   len()=3, yields 2  ->  ScoreError: success 2 + failure 0 != n 3
+   len()=1, yields 2  ->  ScoreError: success 2 + failure 0 != n 1
+
+   `python -O` note: the check is `if ...: raise ScoreError`, NOT an `assert`,
+   so it survives the optimisation flag. Verified by re-running this probe
+   under `python -O` - output at hostile-nonanswer-O.txt.
+
+==============================================================================
+CHECK 4 RESULT: PASS
+==============================================================================
