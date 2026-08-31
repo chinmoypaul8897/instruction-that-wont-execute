@@ -10,14 +10,54 @@ are what makes it checkable rather than asserted.
 
 ---
 
-## Agent classes — four, all evidenced
+## Agent classes — five, all evidenced, and one of them cannot be replayed
 
-| Class | What it is | Count | Trajectories live at |
-|---|---|---|---|
-| **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects | ~90 | `context/*-raw.json` (committed) |
-| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **10** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN, CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
-| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached. **NIGHT-RUN: two CH-03 gate reviewers with zero shared context — the first FAILED the chunk and its finding is the most important defect this project has found in its own work** | **86** | `docs/reviews/` for the verdicts and the runnable probes; per-agent cost for the SPEC-FIX-1 panel in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
-| **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` |
+**Navigate them with [`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md)**, which
+names, per trajectory, where the instructions are, what the agent did, where the result
+landed, and what is worth opening the file for. The curation rule is
+[`docs/trajectories/SELECTION-RULE.md`](docs/trajectories/SELECTION-RULE.md), committed
+**before** it was applied.
+
+| Class | What it is | Count | Trajectories live at | Replayable? |
+|---|---|---|---|---|
+| **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects — **two whole projects died before a line of this one was written** | ~90 | `context/*-raw.json` (committed), beside the synthesised verdicts in `context/03`–`09` | synthesised output only; they predate the git history |
+| **Coding** | fresh Claude Code BUILD sessions that write this repository | **10 sessions / 11 files** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN (exported twice), CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c, CH-12 | `docs/trajectories/build/<CHUNK-ID>.jsonl` | **yes** — full transcript, every tool call and response |
+| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships — see the table below | **103** | `docs/reviews/`, `docs/evidence/ch11c-sweep/`, `docs/evidence/spec-fix-1/` | **NO — `QUESTIONS.md` Q40** |
+| **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` | **yes** — bundled; `per-item/` is git-ignored and its every record is in the bundle |
+| **Probe** | the model-id probe that checked a claim the chunk card pre-registered as fact | **10** runs | `docs/trajectories/probe/probe-model-id__*.jsonl` | **yes** |
+
+**36 trajectory files, 43.62 MB, measured by `docs/evidence/ch12/trajectory_facts.py`.**
+
+### The adversarial-audit class, in full — 103 subagents, and its cost stated separately
+
+This is the class the project leans on hardest and the one a reader is most entitled to
+be sceptical about, so it is broken out rather than summarised.
+
+| fleet | agents | model | tokens | wall-clock | launched from | what survives in the repository |
+|---|---:|---|---:|---:|---|---|
+| SPEC-FIX-1 verdict panel | **10** | `claude-opus-5` | see per-agent file | — | `build/SPEC-FIX-1.jsonl` | `docs/evidence/spec-fix-1/` + `spec-fix-1-panel-cost.txt`. **The panel went 4–1 against the verdict the session then reached, and the session refused anyway.** |
+| CH-03 gate reviewers | **2** | `claude-opus-5` | — | — | `build/NIGHT-RUN-FINAL.jsonl` | `docs/reviews/REVIEW_CH-03.md`, `REVIEW_CH-03-round2.md` + 15 runnable probe scripts. **FAIL, then FAIL again — strike 2, escalated.** |
+| CH-04 gate reviewer | **1** | `claude-opus-5` | — | — | `build/CH-06.jsonl` | `docs/reviews/REVIEW_CH-04.md` + `ch04-probe/`. **FAIL, 16 findings.** |
+| CH-11 shipping audit `wf_44b0dd6c-5e5` | **52** | `claude-opus-5` | **2,625,778** | 916 s | `build/CH-11.jsonl` | 8 dimensions → 44 refuters, one per finding; 13 refuted, 31 survived. Its sharpest finding was against the session that ran it |
+| CH-11c shipping sweep `wf_74534735-795` | **21** | `claude-opus-5[1m]` | **2,094,887** | 2,170 s | `build/CH-11c.jsonl` | `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md` — **all 75 findings verbatim from the workflow journal.** 18 refuted, 57 standing |
+| CH-12 re-verification `wf_3949a5b7-c7b` | **17** | `claude-opus-5[1m]` | **1,679,590** | 1,623 s | `build/CH-12.jsonl` | 10 auditors re-checking all 75 standing findings against the current files, 7 measuring the facts this chunk needed. 666 tool calls, 0 errors |
+| **total** | **103** | | **6,400,255** measured on three fleets | | | |
+
+**These tokens are NOT in `docs/evidence/runs/cost_ledger.csv` and are not part of the
+USD 11.6323.** The ledger records the *evaluation arms* — the thing being measured.
+Audit subagents are Claude Code sessions' own usage, billed on the coding-agent side, and
+they are reported here in tokens rather than folded into a spend figure that means
+something else. Conflating the two would understate the arms' cost discipline and
+overstate the project's API spend at the same time.
+
+**This class has no trajectory file, and that is a gap in deliverable 4 rather than an
+omission from this index.** `tools/export_session.py` captures a *session*; a subagent is
+not a session, and the `Agent` tool writes each transcript to a temp path outside the
+repository. What ships for every fleet is **the launch prompt verbatim inside the parent
+build transcript, the final result verbatim in its task-notification, and the runnable
+evidence under `docs/reviews/` or `docs/evidence/`** — and for the 21-agent sweep, a
+finding-by-finding transcription generated from the journal rather than written by hand.
+It is raised as `QUESTIONS.md` **Q40** with the fix costed.
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
 live outside the repository in `~/.claude/projects/`, where Claude Code rotates and
@@ -67,13 +107,29 @@ model-sensitivity check turns that limit into a number instead of a caveat.
 
 ## Tools available to the coding sessions
 
-Claude Code's own harness: file read/write/edit, glob, grep, shell, web fetch, task
-subagents. No custom MCP server. No autonomous scheduling. The session runs under
-`CLAUDE.md`, a per-chunk prompt committed verbatim in `prompts/`, and a hard safety
-rider that makes `context/` and the root specs read-only to build sessions.
+Claude Code's own harness, and nothing else:
 
-Tools the *solution* agents get are a different and much smaller set, defined per arm
-in `agents/` — that separation is the point of the experiment and is not blurred here.
+| tool | used for | seen in |
+|---|---|---|
+| `Bash` / `PowerShell` | every measurement, every git operation, every script run | all 12 transcripts; 226 Bash calls in NIGHT-RUN-FINAL alone |
+| `Read` / `Write` / `Edit` / `Glob` / `Grep` | the code and the documents | all 12 |
+| `Agent` | the three gate reviewers, as background subagents with zero shared context | `NIGHT-RUN-FINAL.jsonl` (2), `CH-06.jsonl` (1) |
+| `Workflow` | the four subagent fleets — SPEC-FIX-1's panel, CH-11's 52, CH-11c's 21, CH-12's 17 | `SPEC-FIX-1`, `CH-11`, `CH-11c`, `CH-12` |
+| `TaskOutput` / `TaskStop` | collecting and cancelling background agents | `SPEC-FIX-1` (2), `CH-11c` (4), `CH-06` (1 stop) |
+| `AskUserQuestion` | putting a decision to the operator mid-session | `CH-00.jsonl`, `CH-14a.jsonl` — **two occasions in the whole project** |
+| `ToolSearch` | loading deferred tool schemas | `CH-06`, `SPEC-FIX-1`, `CH-11c`, `CH-12` |
+| `WebFetch` / `WebSearch` | **not used for the corpus.** `www.govinfo.gov` is fetched by `refetch.py` and `src/apiclient.py`, in code, so the fetch is reproducible | — |
+
+**No custom MCP server. No autonomous scheduling. No agent that could commit.** The
+session runs under `CLAUDE.md`, a per-chunk prompt committed verbatim in `prompts/`
+(three cards are currently untracked — `QUESTIONS.md` **Q41**), and a hard safety rider
+that makes `context/` and the root specs read-only to build sessions.
+
+Tools the *solution* agents get are a different and much smaller set, defined per arm in
+`agents/`: `B0` gets the instruction text alone, `B0-agent` also gets the section text,
+and only the `A1` family gets `cfr_resolve` and the OFR execution procedure. **That
+separation is the point of the experiment and it is not blurred here.**
+
 
 ---
 
@@ -94,9 +150,89 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-12 · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **trajectories, the worksheet, and a disclosure claim one grep falsified**
+
+Transcript: `docs/trajectories/build/CH-12.jsonl`.
+
+**No arm was re-run and no model call was made from this session's code.** API spend is
+unchanged at **USD 11.6323**, re-derived from `docs/evidence/runs/cost_ledger.csv`.
+
+**What it produced.** Deliverable 4's navigation —
+[`docs/trajectories/SELECTION-RULE.md`](docs/trajectories/SELECTION-RULE.md) committed at
+`1afc295` **before** anything was selected, and
+[`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md) pointing a judge at the three
+files worth opening first. And CH-10's codification worksheet,
+[`docs/worksheet/index.html`](docs/worksheet/index.html), generated from **real committed
+A1 output** by `docs/evidence/ch12/build_worksheet.py` — self-contained, offline, with a
+disclaimer band, a provenance footer, and the 16-of-82 human-checkpoint queue as its own
+section.
+
+**The claim that started the chunk.** `PROVENANCE.md` §4 asserted that the
+`nistula-assistance-` result *"is cited in this project's README"*. `README.md` contained
+**zero** occurrences of `nistula`, `17 blocker` and `github.com`. The sentence was written
+**17 h 33 min before the README existed** and was never re-checked. It is a ground-rule-02
+disclosure claim, and **one `grep -c` falsifies it.** The README now carries the citation;
+the correction is disclosed in `PROVENANCE.md` rather than quietly amended, and
+`docs/evidence/ch12/provenance_claim_check.py` prints the claim FALSE at the old commit
+and TRUE now, so nobody has to take the correction's word for it.
+
+**Agents used — one workflow, 17 subagents, `claude-opus-5[1m]`, run `wf_3949a5b7-c7b`.**
+Ten read-only auditors, one per shipping file, each re-running the CH-11c sweep's own
+checks **against the current files rather than against the sweep report** — hard rule 15
+applied to the project's own evidence. Seven more measured the facts this chunk needed:
+the trajectory inventory, the agent census, the build-session index, the checkpoint
+records, the corpus size, the worksheet's source data, and the README claim above.
+**666 tool calls, 1,679,590 subagent tokens, 1,623 s, 0 agent errors, 0 empty results.**
+No agent could edit a file.
+
+**Re-verifying 75 findings changed the number.** 7 had already been fixed, **14 did not
+reproduce**, 54 still stood. So the sweep's headline **57 is 54**, and the three that fell
+are recorded rather than dropped. 26 of the 54 were one-line factual corrections inside
+this chunk's fence and were applied by a script that asserts, for every one, that the old
+text is gone and the new text is present — 26 of 26 verified on disk, line endings
+preserved byte-for-byte. `AI-USE.md`'s own agent-class counts were four of them.
+
+**Two agent claims did not survive my own check**, which is the reason the check exists:
+a report said `CH-00.jsonl` is the only transcript containing an `AskUserQuestion`
+(`CH-14a.jsonl` has one too), and that the CH-03 reviewers left 23 runnable probe scripts
+(there are 15 scripts among 23 files). Both were corrected before publishing.
+
+**What this chunk found in its own safety machinery — Q43.** One operator contact address
+survives redaction in a shipped trajectory. The scrubber did not fail: it matches
+**literals from a pattern file**, and that address is not in the file. `ch00-guard-probe.txt`
+proves every scrubber **fires**; **nothing proves the pattern set is complete.** That is
+the same defect class as a green test suite, found in the machinery this project uses to
+answer ground rule 08. Not fixed here — removing it means rewriting shipped evidence.
+
+Questions raised: **Q40** (the selection rule names an agent class with no trajectories),
+**Q41** (three prompt cards untracked and unfixable from inside any fence), **Q42**
+(`NIGHT-RUN-FINAL.jsonl` shipped and disclosed nowhere), **Q43**. **Q39** takes a dated
+UPDATE with the re-verification table.
+
+- **Measured usage** (from the session transcript's own `usage` records — measured, not
+  estimated from character counts). **Snapshot taken before the closing commits**, so the
+  true totals are marginally higher. Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id b9978fdb-e017-4911-ab7a-331394e4cff6`:
+
+  | | tokens |
+  |---|---|
+  | output | 324,965 |
+  | input, uncached | 520 |
+  | input, cache write | 1,012,364 |
+  | input, cache read | 55,854,492 |
+  | **total input** | **56,867,376** |
+  | assistant turns | 260 |
+
+  Imputed at `claude-opus-5` list price: **USD 292.461005** upper bound with no cache
+  discount, **USD 42.381246** cache-adjusted at the assumed 1.25× / 0.10× multipliers. Both
+  are printed because the upper bound rests on no assumption. **This is the coding
+  agent's cost and it is NOT charged against the USD 18.00 ceiling in `src/runlog.py`**,
+  which governs the evaluation arms. Subagent tokens are counted separately in the
+  adversarial-audit table above and are **not** in this table.
+
 ### CH-11c · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **five factual corrections, and the sweep that caught a sixth in my own work**
 
-Transcript: `docs/trajectories/build/CH-11c.jsonl` (669 lines, 1,669,875 B; the exporter's
+Transcript: `docs/trajectories/build/CH-11c.jsonl` (746 lines, 1,799,806 B — *this read 669 / 1,669,875 until CH-12; the session was re-exported at `57829c1` after its last fix and the line was not refreshed, the same defect as CH-02's below*; the exporter's
 redaction sweep found **zero** credentials and rewrote 789 home paths to `~`).
 
 **No arm was re-run and no model call was made from this session's code.** API spend is

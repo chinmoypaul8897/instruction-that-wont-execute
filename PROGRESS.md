@@ -11,6 +11,439 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## CH-12 · 2026-08-31 · Claude Code, `claude-opus-5` (1M context) · BUILD · **TRAJECTORIES, THE WORKSHEET, AND A DISCLOSURE CLAIM ONE GREP FALSIFIED**
+
+### The one thing worth reading
+
+**`PROVENANCE.md` §4 told a judge to go and check something, and the thing it named did
+not contain it.** The sentence — *"The `nistula-assistance-` result is cited in this
+project's README as the motivating hypothesis"* — is a **ground rule 02 disclosure
+claim**, the kind a judge is specifically invited to verify. `README.md` held **zero**
+occurrences of `nistula`, of `17 blocker` and of `github.com`.
+
+The cause is ordinary and is the point: **the sentence was written 17 h 33 min before
+the README existed.** `PROVENANCE.md`'s first commit is `3ac8207`, 2026-08-30 18:03:46
++0530, and the sentence is in that first version; `README.md` was created at `67a5206`,
+2026-08-31 11:36:59 +0530. It described what the author intended the README to say, and
+**nobody ran the grep** — through four subsequent rewrites of the README and two prior
+corrections to `PROVENANCE.md` itself.
+
+**Route (a) taken: the README now cites it**, in §f beside the IETF prior-art credit,
+and it says in terms that the 17-defect number is **not re-derived here**, is **not
+checkable from inside this repository**, and **carries no weight here**. Counts after the
+edit: `nistula` **1**, `acumen` **0** (never required by the claim), `17 blocker` **1**,
+`github.com` **1**. The correction is disclosed in `PROVENANCE.md` as its **third**, and
+all three have the same shape: a sentence about the work, written once, never re-checked
+against the thing it describes.
+
+`docs/evidence/ch12/provenance_claim_check.py` keeps the grep. It prints the claim
+**FALSE at the pre-fix commit and TRUE in the working tree**, side by side, so nobody has
+to take the correction's word for it — and it prints, as its own section, what it
+**cannot** check: the external repository, which is prior art and is not verified here.
+
+### Scope
+
+`prompts/CH-12.md` §1–§3. The false claim and the standing sweep findings; deliverable
+4's trajectory selection rule and index; CH-10's codification worksheet.
+
+### Files
+
+`PROVENANCE.md` · `README.md` · `REPRODUCE.md` · `SUBMISSION.md` · `AI-USE.md` ·
+`QUESTIONS.md` (Q39 UPDATE, Q40–Q43) · `STATUS.md` · `PROGRESS.md` ·
+`docs/trajectories/SELECTION-RULE.md` (new) · `docs/trajectories/INDEX.md` (new) ·
+`docs/worksheet/index.html` (new) · `docs/worksheet/worksheet.html` (marked superseded,
+**not deleted**) · `tests/test_worksheet.py` (new) · `docs/evidence/ch12/`.
+
+**Not touched:** `CONTEXT.md`, `plan.md`, `PROCESS.md`, `CLAUDE.md`, `GOOD.md`,
+`CHANGELOG.md`, `src/`, `data/`, `agents/`, `prompts/`, `context/`, every prior
+`docs/evidence/` directory, and **no trajectory file**. **No model call was made and no
+arm was re-run.**
+
+### Deliverable 4 — the rule was published before anything was selected
+
+That ordering is the whole claim, and it is a `git log` away from being checked:
+`docs/trajectories/SELECTION-RULE.md` is commit **`1afc295`**;
+`docs/evidence/ch12/apply_selection.py`, which computes what it selects, is commit
+**`e2fd00a`**. A rule written after the measurement is a rationalisation.
+
+**The rule states its own gap rather than wording around it.** Clause T1 asks for one
+trajectory per agent class — *build sessions, evaluation arms, adversarial audits*.
+`docs/trajectories/` has directories for two. **The adversarial-audit class — 103
+subagents across six fleets — has no trajectory file at all**, because
+`tools/export_session.py` captures a *session* and a subagent is not a session. Raised
+as **Q40**, with the fix costed. There is also a fourth directory, `probe/`, that T1 does
+not name; the applier applies T1 to it anyway, because silently skipping a directory is
+the failure the rule exists to prevent.
+
+**Clause T3 still selects every arm file — 15 of 15.** No arm scores 1.000 on this corpus
+(the best, A1, is 0.7195), so every arm run contains items whose verdict disagreed with
+gold, and a clause that never filters out a failure necessarily keeps them all. **A rule
+that selects everything is honest and is reported as such**, rather than capped to look
+discriminating. 17 of 36 files are selected in total; the rule is **NOT INVOKED** as a
+filter, because `git archive` is 11.77 MB against a 50 MB cap and dropping the unselected
+19 would recover 4.75 MB of an upload that already clears by 38 MB. That trade is refused:
+build transcripts are deliverable 4's only trace of how the coding agents were directed.
+
+`docs/trajectories/INDEX.md` names, per trajectory, **where the instructions are, what the
+agent did, where the result landed, and what is worth opening the file for** — the brief's
+own *"easy to follow from the agent instructions to the final result"*. It points at three
+files first, and every one of them shows something going wrong or being caught:
+
+1. **`arms/A1-rep1.jsonl`, item `05-8447|75.31`, instruction 4** — `cfr_resolve` returned
+   `designation_exists: false`, and **the model overrode it**, having read the `siblings`
+   field, and wrote the reason into the shipped artifact: *"the tool cannot see nested
+   designations."* The resolver's known one-way blind spot (**Q21**, 60 of 128
+   designations) caught at run time, in writing, in the record a reader gets.
+2. **The same run's 16 `human_checkpoint` records** — computed in code from the trace,
+   never asked of the model, because an agent that decides for itself when to escalate is
+   reporting confidence rather than escalating.
+3. **`build/NIGHT-RUN-FINAL.jsonl`** — it holds **both** CH-03 adversarial reviewers,
+   their launch prompts verbatim and their verdicts verbatim: **FAIL**, then **FAIL
+   again**, strike 2, escalated. All three committed reviews are FAIL verdicts against
+   this project's own work and they ship unedited. **This is more valuable than a clean
+   transcript and it is pointed at first for that reason.**
+
+`AI-USE.md` now carries **five** agent classes, and the adversarial-audit class is broken
+out **per fleet** — SPEC-FIX-1's 10, NIGHT-RUN's 2, CH-06's 1, CH-11's 52, CH-11c's 21,
+CH-12's 17 = **103** — with each fleet's model, token count, wall-clock, launching
+transcript and surviving evidence. **Their tokens are stated separately and are explicitly
+NOT part of the USD 11.6323**: the ledger records the evaluation arms, and folding a
+coding agent's own usage into it would understate the arms' cost discipline and overstate
+the project's API spend in the same figure.
+
+### CH-10 — the worksheet, on real data
+
+`docs/worksheet/index.html`, generated by `docs/evidence/ch12/build_worksheet.py` from two
+committed artifacts and nothing else: the eval set frozen at `76e2e4b` and
+`A1-rep1-artifacts.jsonl` at `89d58c5`. The join is asserted (item_id sets identical) and
+the routed count is asserted against the run summary. No model is called at render time.
+
+Which items are shown is a **published deterministic rule**, W1–W5, ties broken on sorted
+`item_id`, applied by the same script that writes the page — it selected 10. A worksheet
+showing all 82 is unreadable; one showing a hand-picked few is unfalsifiable.
+
+**The level census is on the page and its zero prints as a zero** (hard rule 14): `exact`
+74, `alphanumeric-only` 4, `none` 130, **`whitespace-collapsed` 0** across 208
+instructions. Agreement with gold 59/82 = **0.7195**, which is A1's published accuracy.
+
+**The self-containment guard is the part worth reading.** The obvious test —
+`assert "http://" not in html` — **would fail**, and not because the page references
+anything: 40 CFR 75.6's own Federal Register text tells the reader to *"go to:
+http://www.archives.gov/…"*. That is corpus content, escaped, inside a text block, with
+no anchor around it and no request made for it. **Dropping the item to make the grep pass
+would be tampering with the corpus to get a green test** — precisely what hard rule 5
+forbids. So the guard is written to the real property, *no external resource reference*:
+it scans for every fetching tag and attribute, forbids `@import` and `url()`, and proves
+separately that every scheme-like substring on the page lies inside a rendered
+corpus-text block.
+
+**And the guard flips.** `worksheet_guard_probe.py` injects six real ways a page silently
+stops being offline — a CDN `<script>`, a Google Fonts `<link>`, a protocol-relative
+`<img src="//…">`, a CSS `@import`, a `url()` background, and an `<a href>` wrapped around
+**the page's own corpus URL**, which is the one a naive grep could never distinguish from
+what the page legitimately does today. **Baseline passes, 6 of 6 caught, 0 missed.**
+
+### The sweep findings — re-verified before they were acted on
+
+`prompts/CH-12.md` sanctioned the standing findings whose fix is a one-line factual
+correction in fence. **Before touching anything, all 75 were re-verified against the
+current files** — one read-only auditor per shipping file, each re-running the original
+auditor's check against the working tree rather than against the sweep report. Hard rule
+15, applied to the project's own evidence.
+
+| | count |
+|---|---:|
+| re-verified | **75** |
+| already fixed since the sweep | 7 |
+| **do not reproduce on re-check** | **14** |
+| still standing | **54** |
+| in fence | 42 |
+| **fixed here** | **26** |
+| standing, in fence, needing a rewrite or a ruling | 16 |
+| standing, outside every fence | 12 |
+
+**The sweep's headline 57 is 54.** The three that fell are recorded, not dropped: mostly
+present-tense claims a later commit made false, and two the sweep simply got wrong. A
+finding that survived one refuter and then failed re-verification is the system working.
+
+The 26 were applied by `docs/evidence/ch12/apply_sweep_fixes.py`, which asserts for every
+replacement that the OLD string occurred exactly once, that it is **gone** afterwards and
+that the NEW string is present exactly once — hard rule 16, which exists in this
+repository because a batch of hand edits once failed silently. **26 of 26 verified by
+reading the files back off disk**, line endings preserved byte-for-byte (six of the seven
+files are CRLF, `PROVENANCE.md` is LF; a replacement written with the wrong newline
+matches nothing and errors nowhere).
+
+**Four of the 26 were `AI-USE.md`'s own agent-class counts** — coding sessions 6 → 10,
+adversarial-audit subagents 12 → 86, solution runs 1028 → 2,097, haiku calls 951 → 2,020.
+A file whose subject is *"every model, tool and agent"* was wrong about all four.
+
+**Every replacement value was measured in this session, not copied from the report.** Two
+agent claims did not survive that check and were corrected before publishing: `CH-00.jsonl`
+is **not** the only transcript containing an `AskUserQuestion` (`CH-14a.jsonl` has one
+too), and the CH-03 reviewers left **15** runnable probe scripts among 23 files, not 23
+scripts. A third had to be re-scoped: the Q26 wasted-spend figure reproduces as **1.4081**
+only when scoped as Q26 scopes it, to the two arms that ran twice; unscoped it is 2.1402.
+
+### The corpus-size correction, and a number that only looked wrong
+
+`data/raw/` measures **1,443,366,993 B = 1.44 GB** across 234 files.
+`REPRODUCE.md` and `SUBMISSION.md` both said **824 MB** — which is the `ecfr/` titles
+alone, 824,298,523 B, **1.75× smaller**. `REPRODUCE.md`'s own table had said 1.44 GB all
+along and explained the 824 MB in the next paragraph, so **the document contradicted
+itself and the wrong half is the one that got quoted onward.** Both corrected; neither
+figure deleted; both kept with what each measures.
+
+The same measurement clears a **third** number that looks like a fourth disagreement and
+is not. `CONTEXT.md` §8 says *"49 titles, 824,289,052 B"*, 9,471 B short of
+`data/raw/ecfr/`. Traced: that directory holds **50** files — the 49 title XMLs, which
+come to **824,289,052 B and match `CONTEXT.md` to the byte**, plus `_govinfo_index.json`
+at exactly **9,471 B**. **Reconciled, not rounded.**
+
+### The finding this chunk did not go looking for — Q43
+
+**One operator contact address survives redaction in a shipped trajectory**,
+`docs/trajectories/build/CH-01.jsonl`, one occurrence, inside a `User-Agent` string in a
+harvest snippet.
+
+**The scrubber did not fail.** `tools/export_session.py` matches operator contact details
+as **literals from a pattern file** — deliberately, because *"a file that lists the value
+in order to remove it is a new copy of the leak"*, which is correct reasoning. That
+address is not in the pattern file, so no run of the exporter would ever have removed it.
+
+**Not fixed here**, because removing it means rewriting shipped evidence and
+`docs/trajectories/` is the one place this project has committed to leaving alone. Both
+readings are recorded — a ground-rule-08 leak, or deliberate courtesy to a government
+bulk-download server that received the address first.
+
+**The general finding is the one that matters, and it is this project's own thesis turned
+on its safety machinery:** `docs/evidence/ch00-guard-probe.txt` cases H–P prove every
+scrubber **fires**. **Nothing proves the pattern set is complete**, and the case that
+tests the contact scrubber passes on a literal that is in the list by construction. A
+redactor that matches a list can only ever be as complete as the list, and the passing
+probe looks identical either way.
+
+### Questions
+
+**Q39** takes a dated UPDATE with the re-verification table; the entry above it is not
+edited. **Q40** the selection rule names an agent class with no trajectories. **Q41**
+three prompt cards are untracked and `prompts/` is protected in every fence that could add
+them — including this chunk's, so the card that ordered this work is one a judge cannot
+read. **Q42** `NIGHT-RUN-FINAL.jsonl` is exported, shipped and disclosed nowhere; neither
+re-export convention is written down and the project has used both. **Q43** above.
+
+**Q36 was left alone**, as the card directed: `CONTEXT.md`, `src/arms.py` and
+`prompts/CH-06.md` still say *compute-matched* and all three are protected.
+
+### Gate
+
+**Ungated in `plan.md`.** The 17-agent re-verification fleet is **not** a review gate and
+is not claimed as one — hard rule 2 stands, and a fresh session with zero shared context
+still has to look at this.
+
+### Verification
+
+| artifact | what it proves |
+|---|---|
+| `docs/evidence/ch12/provenance_claim_check.py` + `.txt` | the §4 claim, FALSE at the old commit and TRUE now, with what it cannot check stated |
+| `docs/evidence/ch12/measure_corpus.py` + `corpus-size.txt` | `data/raw/` at 1,443,366,993 B, and `CONTEXT.md` §8 reconciled to the byte |
+| `docs/evidence/ch12/apply_sweep_fixes.py` | 26 replacements, old-gone and new-present asserted for every one, 26/26 re-verified off disk |
+| `docs/evidence/ch12/apply_selection.py` + `selection-applied.md` | what the published rule selects, clause by clause, file by file |
+| `docs/evidence/ch12/trajectory_facts.py` + `trajectory-facts.txt` | every size, line count, record span and session id in the INDEX |
+| `docs/evidence/ch12/build_worksheet.py` | the worksheet, from committed artifacts only, deterministically |
+| `docs/evidence/ch12/worksheet_guard_probe.py` + `.txt` | the offline guard flips: 6 of 6 injections caught, baseline passes |
+| `tests/test_worksheet.py` | 14 tests. Suite **356 passed** |
+
+**API spend: USD 11.6323, unchanged.** Re-derived from
+`docs/evidence/runs/cost_ledger.csv`: 2,107 rows, 11.632274, 3 empty cost cells.
+
+### State for the next session
+
+CH-13 (video) and CH-11b (the operator's voice pass) are the remaining `todo` items
+before DRAFT-1. **16 in-fence sweep findings still stand and need rewrites rather than
+swaps**, and **12 more are outside every fence** — `CHANGELOG.md`, `SAFETY.md`,
+`THIRD-PARTY.md`. The two sharpest are named in the Q39 UPDATE: `AI-USE.md`'s SPEC-FIX-2
+and CH-02 usage tables disagree with the artifacts they cite **on every row**, and
+`SAFETY.md`'s network-boundary sentence — the one that answers ground rule 04 — names
+only two of the three components that reach the network.
+
+---
+
+## CH-11c · 2026-08-31 · Claude Code, `claude-opus-5` (1M context) · BUILD · **FIVE FACTUAL CORRECTIONS IN SHIPPING FILES**
+
+> **Folded in at CH-12, per `QUESTIONS.md` Q38.** CH-11c's scope fence did not grant
+> `PROGRESS.md`, which `CLAUDE.md` end-of-session duty 2 requires it to update. It took
+> the conservative option and wrote its entry to
+> `docs/evidence/ch11c-sweep/progress-CH-11c.md` for the architect to fold in. This is
+> that fold. **The text below is CH-11c's own, unedited** — only this note and the
+> heading are added, and the source file is kept where it was written.
+
+**No arm was re-run. No model call was made. No result changed.**
+API spend re-derived from `docs/evidence/runs/cost_ledger.csv`: **USD 11.6323**,
+unchanged, USD 6.3677 of headroom against the 18.00 ceiling.
+
+### What this chunk was
+
+Five statements **about** the work — not the work — each of which a judge could check
+and find false. Every one was raised by CH-11 as a question and left for a session with
+the fence to fix it.
+
+### The five, and what was done
+
+#### Q35 · `PROVENANCE.md` named the wrong model — the architect's error
+
+`PROVENANCE.md` §5 row 3 read *"Anthropic API (`claude-sonnet-5`) | commercial, per
+terms | **every evaluation arm**"*. **False.** The authoritative artifact is
+`docs/evidence/runs/cost_ledger.csv`; grouped by `(model, arm)` over its 2,107 rows,
+**every evaluation arm is `claude-haiku-4-5-20251001`** — `A1` (249 rows), `A1-iter1`
+(82), `A1-minus-tool` (164), `B0` (474), `B0-agent` (474), `B0-agent-currenttext` (82),
+`B0prime` (492). `claude-sonnet-5` appears on **84 rows only**: the 80 of the withdrawn
+model-sensitivity subset, and 4 of the model-id probe.
+
+The row is replaced by two rows, and a dated correction note sits beneath the table
+saying what the file used to claim and why. `grep -ci sonnet PROVENANCE.md` = **4**, and
+all four are the corrected row or the note.
+
+The file was written before the model changed to Haiku on cost grounds and was never
+revisited. `context/11-REMEDIATION-2.md` had already recorded this defect and it was
+never carried out — *a defect named in a remediation document and then not acted on is
+indistinguishable from one never found.*
+
+#### Q32 · a ruling misattributed its own pre-registration — the architect's error
+
+`GOOD.md` §11, read and quoted, never edited:
+
+> **Primary: `data/evalset/` — 38 pairs, n = 76.** … **`data/evalset-restricted/`
+> (1 pair, n = 2) is committed**, so the architect can flip the primary with one flag
+> and a reviewer can run either.
+
+**`GOOD.md` §11 names the UNRESTRICTED set as primary** — the set that was used. The
+Q19 ruling's *"GOOD.md pre-registered the RESTRICTED set as primary"* is therefore
+**false on its first clause**. The restricted-primary pre-registration is
+`docs/evidence/ch03-evalset/pre-registration.md` §2.
+
+A **dated correction is appended beneath Q19**; the ruling's own text is not edited.
+**The substantive decision is unaffected** — it rests on the pair count, measured from
+the frozen items files as **1 pair against 41**, not on which document said what. The
+deviation is real; only the name of the deviated-from document was wrong. `README.md`
+was already correct here and now points at the correction.
+
+**Still open and deliberately not touched:** `docs/evidence/ch06-a1/a1-result.txt`'s
+deviation banner repeats the misattribution. It is outside the fence, it is a
+regenerated artifact whose byte-identity across three environments is itself a published
+result, and re-cutting it is the architect's call.
+
+#### Q34 · `B0′` was called compute-matched and is not
+
+Measured from the ledger: **B0′ 1,377,402 input tokens against A1's 4,006,662** — 34% —
+and **USD 1.3988 against USD 5.3334** — 26%. It is B0-agent sampled three times, which
+is roughly B0-agent's own three-rep input, not A1's budget.
+
+Every file the fence permits now calls it a **repeated-sampling control at 3× best-of
+sampling** and publishes both token counts beside it. **The plain statement was added in
+both `README.md` and `CHANGELOG.md`: a genuinely compute-matched control was not run.**
+That is stronger than the label it replaces — *"the agent did not simply get more
+compute"* is supported by the sampling control and is **not** supported by a token
+match, because there is none.
+
+`CONTEXT.md` §4, `src/arms.py:292` and `prompts/CH-06.md:139` still say
+*compute-matched*. All three are **protected** and were **not edited**; they are raised
+as **Q36** for the architect.
+
+#### Q33 · the changelog's "26" does not reproduce
+
+`docs/evidence/ch06-a1/B0prime-rep1-votes.json`, 82 items, counted three ways:
+**22** raw / **22** after `src/score.py::normalise_verdict` / **8** parseable-only.
+None is 26. `CHANGELOG.md` corrected to **22 of 82** with the path cited and the 8
+reading stated beside it, plus a note recording what the old figure was and that
+`QUESTIONS.md` Q26's double run overwrote run 1's per-item files — a plausible
+explanation, not a confirmed one. **Nothing downstream moves.**
+
+#### Q31 · the secret-sweep scope figures disagreed
+
+`scan.txt` is the generating artifact and it wins (hard rule 14): **462 text blobs / 84
+commits, PASS, 0 findings**. `STATUS.md` and `AI-USE.md` corrected, path cited.
+
+**The 450 / 81 pair was not invented and is not deleted.**
+`git log -- docs/evidence/secret-scan/scan.txt` has two revisions:
+
+| commit | repository | commits | blobs |
+|---|---|---:|---:|
+| `0f3f4fe` | `f0a246b1` | 81 | 450 |
+| `263ed29` | `2453998f` | 84 | 462 |
+
+The sweep was run, committed, and re-run three commits and twelve blobs later. Both
+summaries were written against the earlier run. That sentence ships in both files rather
+than a silent alignment. **The verdict is PASS on either scope.**
+
+---
+
+### Hard rule 15 fired on the chunk card itself
+
+`prompts/CH-11c.md` §1 offered its own supporting counts: *"19 artifact files under
+`docs/evidence/` name `claude-haiku-4-5-20251001`; 4 name `claude-sonnet-5` and those
+are the withdrawn sensitivity subset only."*
+
+**Measured over tracked files: 27 and 13** — and the 13 are **not** the withdrawn subset
+only. They include the model-id probe, `ch00-goldens.md`, `ch14-size/selection-applied.md`,
+`night-run/summary.md` and the cost ledger.
+
+**The card's conclusion was right and its two supporting numbers were not.** Copying
+them would have shipped the correction resting on figures that do not reproduce, which
+is the precise failure this project exists to demonstrate. Recorded as **Q37**, and
+`PROVENANCE.md`'s corrected row names the model-id probe as the third category the card
+did not mention.
+
+### Verification
+
+| artifact | what it proves |
+|---|---|
+| `docs/evidence/ch11c-sweep/ch11c_verify.py` + `ch11c-verify.txt` | every figure the five corrections rest on, re-derived. **36 checks, 36 PASS, 0 FAIL.** |
+| `docs/evidence/ch11c-sweep/ch11c_sweep.py` + `ch11c-sweep.txt` | the mechanical sweep of all ten shipping files — model names, cross-file figure agreement, surviving labels, every cited `docs/evidence/` path, the ledger re-summed |
+| `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md` | the 21-agent adversarial sweep: one auditor per shipping file, one refuter per file's findings, one completeness critic |
+
+**On detector scope.** The mechanical sweep runs **two readings and prints both** —
+STRICT (one line is the unit) and SCOPED (±4 lines, fenced blocks excluded from path
+extraction), with a third **section-scope** reading for the floating-alias check. STRICT
+over-detects, because a correction of the form *"this said X, which is wrong; the
+artifact says Y"* routinely spans four lines, and a ledger transcribing an operator's
+ruling verbatim corrects it fifty lines later in the same section. **No threshold was
+moved and nothing is suppressed:** every STRICT hit is printed with an explicit,
+structural disposition — *quoted verbatim under a heading that announces the correction*,
+*a template placeholder in a fenced block*, *a hypothetical path in a question to the
+architect* — so a reviewer can disagree with any one of them by name.
+
+Two categories the sweep proved worth having:
+- `REPRODUCE.md`'s **USD 11.11** looked like a rival total; re-summed from the ledger
+  over the six primary-matrix arms it is **11.1107**, and the difference from 11.6323 is
+  the withdrawn sonnet subset, the removed experiment and the probe. **Traceable.**
+- Two `docs/evidence/` paths that do not exist are **`docs/evidence/iter-N/`** (a literal
+  template placeholder in a fenced card-shape block) and **`docs/evidence/ch11-repro/`**
+  (a hypothetical directory in Q30's question *to* the architect, which Q30 states was
+  never created). Neither is a broken citation.
+
+### Questions raised
+
+**Q36** — `CONTEXT.md` §4, `src/arms.py` and `prompts/CH-06.md` still say
+*compute-matched*; all three are protected. `CONTEXT.md` is the specification the other
+two quote, so it is the one that matters.
+**Q37** — the chunk card's own counts do not reproduce (above).
+**Q38** — the fence excludes `PROGRESS.md`, which `CLAUDE.md` requires this chunk to
+update. Conservative option taken; this file is the entry. It also notes that
+`PROGRESS.md:397` still reads *"450 text blobs of 81 commits"* — a dated record of the
+CH-14a session, flagged and not edited.
+
+### Fence
+
+Changed: `PROVENANCE.md`, `README.md`, `CHANGELOG.md`, `STATUS.md`, `AI-USE.md`,
+`QUESTIONS.md`, `docs/evidence/ch11c-sweep/`.
+`SUBMISSION.md` was in the fence and **needed no change** — it already said 462 / 84 and
+carried none of the five wrong claims.
+**`GOOD.md` was read and quoted and never edited**; `git diff -- GOOD.md` is clean and
+the verification asserts it.
+
+---
+
 ## CH-11 · 2026-08-31 · Claude Code, `claude-opus-5` (1M context) · BUILD · **THE SIX MISSING FILES**
 
 ### The one thing worth reading
