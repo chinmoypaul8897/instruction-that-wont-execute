@@ -1,0 +1,44 @@
+MIT License
+
+Copyright (c) 2026 Chinmoy Paul
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+THE CORPUS UNDER data/ IS NOT COVERED BY THE LICENCE ABOVE, AND DOES NOT NEED
+TO BE.
+
+Everything under `data/` is extracted from the Code of Federal Regulations, the
+electronic CFR and the Federal Register, harvested from www.govinfo.gov. These
+are works of the United States Government. Under 17 U.S.C. section 105 a work
+prepared by an officer or employee of the US Government as part of that
+person's official duties is not subject to copyright protection in the United
+States. The corpus is in the public domain. It is redistributed here unchanged
+in substance, with a SHA-256 manifest recording the bytes this project measured
+and `refetch.py` to rebuild it from source.
+
+Nothing in the MIT grant above is asserted over that material, and nothing in
+it restricts anyone's use of it.
+
+Third-party dependencies, their licences, and the prior art this project cites
+rather than reimplements: `THIRD-PARTY.md`.
+
+NOT A LEGAL SERVICE. This software predicts whether an amendatory instruction
+will codify. It is not legal advice, it is not a filing, and it takes no
+consequential action. See `SAFETY.md`.

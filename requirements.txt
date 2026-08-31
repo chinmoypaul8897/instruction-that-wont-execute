@@ -1,0 +1,39 @@
+# requirements.txt - the complete third-party dependency set for this repository.
+#
+# GENERATED FROM WHAT THE CODE IMPORTS, NOT FROM `pip freeze`. Every top-level
+# import across `src/`, `tests/`, `tools/`, `refetch.py`, `docs/evidence/` and
+# `docs/reviews/` was collected and every name that is not the standard library
+# or a module of this project appears below. There is exactly one:
+#
+#   pytest    the test runner. `tests/` imports it for parametrize, raises, approx,
+#             mark.skipif, skip and fixture - it is not removable by deleting a few
+#             skip guards.
+#
+# There is no `requests` and no vendor SDK. `src/apiclient.py` speaks to the
+# Anthropic Messages API through `urllib`, on purpose: adding an unpinned
+# third-party package at the CHECKPOINT would have put it inside the clean-clone
+# rehearsal for the sake of one POST. The scorer and the resolver are stdlib
+# only by specification: `CONTEXT.md` section 7 fixes the SCORER as "stdlib only, no
+# model, no network", and `CLAUDE.md` hard rule 8 fixes purity for the scorer and the
+# resolver both. (`CONTEXT.md` contains no occurrence of the word "resolver", so the
+# resolver half rests on hard rule 8 alone. Stated rather than cited loosely.)
+#
+# TIER 1 - the offline replay - NEEDS NOTHING FROM THIS FILE. `refetch.py
+# --verify-only`, `analyse_checkpoint.py` and `analyse_a1.py` are stdlib. Only
+# the test suite needs pytest.
+#
+# Python 3.12.2. The version this project was built and rehearsed on
+# (`docs/evidence/ch14-clean-clone/rehearsal.txt`).
+#
+# The transitive set pip resolved for pytest 9.1.1 in that rehearsal, recorded
+# so a reader who wants a fully-pinned environment can pin it and so a future
+# resolution difference is visible rather than silent:
+#
+#   colorama==0.4.6  iniconfig==2.3.0  packaging==26.3
+#   pluggy==1.6.0    Pygments==2.21.0
+#
+# They are NOT pinned here because this project does not import them. Pinning a
+# package the code never names would be a claim about the environment dressed as
+# a dependency.
+
+pytest==9.1.1
