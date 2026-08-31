@@ -1,0 +1,38 @@
+CH-13B timing probe - old method vs new, same inputs
+
+A. STILL FRAME DURATION
+   three stills of 4.0s, 6.4s, 6.8s  ->  516 frames at 30 fps
+   OLD  concat list with a `duration` per image :   720 frames ( 24.00s)   DRIFTS by +204 frames = +6.80s
+   NEW  one segment per still, -frames:v N     :   516 frames ( 17.20s)   MATCHES
+   FLIPS: yes
+
+B. SCREENCAST CAPTION ALIGNMENT
+   this recording: wall clock 39.11s, tape 39.08s  (-0.03s, -0.08%)
+
+   Chromium drops capture frames under load, so the tape can run short of
+   the wall clock. Below, each method's sample point is fed to the tape and
+   the tape's own beat stamp says which beat is really on screen there.
+
+     drift    OLD (wall clock)      NEW (read off the tape)
+       0%     5 of 5 correct       5 of 5 correct
+       1%     5 of 5 correct       5 of 5 correct
+       2%     3 of 5 correct       5 of 5 correct   <-- old method breaks here
+       3%     2 of 5 correct       5 of 5 correct
+       4%     2 of 5 correct       5 of 5 correct
+       5%     1 of 5 correct       5 of 5 correct
+       6%     1 of 5 correct       5 of 5 correct
+       8%     1 of 5 correct       5 of 5 correct
+      10%     1 of 5 correct       5 of 5 correct
+      12%     1 of 5 correct       5 of 5 correct
+
+   OLD  correct only while capture drift stays under 2%; at 2% a caption is over the wrong beat
+   NEW  correct at every drift swept, because it never reads the wall clock
+   FLIPS: yes
+
+   NOTE, and it is the point: at 0% both are right. The defect that shipped
+   a caption over 47 CFR 80.905 does not reproduce on this tape, because the
+   machine was not busy. A bug that only appears under load is exactly the
+   kind that a green build hides, which is why the fix is to stop depending
+   on the wall clock rather than to widen a tolerance.
+
+BOTH PROBES FLIP: yes

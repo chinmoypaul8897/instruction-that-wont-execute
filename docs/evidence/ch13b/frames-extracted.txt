@@ -1,0 +1,14 @@
+CH-13B - frames extracted from the encoded MP4
+source: dist\instruction-that-wont-execute.mp4
+
+slide        timeline[20]  t =  151.68s  segment  6.40s
+             docs\evidence\ch13b\frame-slide.png
+             caption: On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.
+
+barchart     timeline[32]  t =  217.78s  segment  3.00s
+             docs\evidence\ch13b\frame-barchart.png
+             caption: The procedure alone made it worse.
+
+screencast   timeline[12]  t =   89.32s  segment 39.08s
+             docs\evidence\ch13b\frame-screencast.png
+             caption: (none) the recording of docs/worksheet/index.html

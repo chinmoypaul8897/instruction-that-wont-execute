@@ -1,0 +1,956 @@
+{
+  "duration_s": 270.866667,
+  "probe": {
+    "codec_name": "h264",
+    "width": "1920",
+    "height": "1080",
+    "pix_fmt": "yuv420p",
+    "avg_frame_rate": "30/1",
+    "nb_frames": "8126",
+    "sample_rate": "44100",
+    "channels": "2",
+    "duration": "270.866667",
+    "size": "37249921"
+  },
+  "plan": {
+    "frames_dir": "dist/frames",
+    "frames": [
+      {
+        "index": 0,
+        "source": "deck",
+        "slide": 1,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 4.0,
+        "note": "title card"
+      },
+      {
+        "index": 1,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "US agencies change the Code of Federal Regulations by publishing instructions like this one. Remove this exact sentence.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 2,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "The Office of the Federal Register has to find that sentence in the text. Look at the quoted words.",
+        "words": 19,
+        "duration": 6.8,
+        "note": ""
+      },
+      {
+        "index": 3,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "The rule says notion of exemption. The Code says notice. One word, and there is nothing to remove.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 4,
+        "source": "deck",
+        "slide": 3,
+        "step": 0,
+        "caption": "So the amendment could not go in. The National Archives publishes this note instead.",
+        "words": 14,
+        "duration": 5.0,
+        "note": ""
+      },
+      {
+        "index": 5,
+        "source": "deck",
+        "slide": 3,
+        "step": 0,
+        "caption": "It is permanent, it is citable, and the text it targeted never changed.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 6,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "The simple baseline is one prompt. Give a model the instruction, ask whether it will execute. No Code text, no tools.",
+        "words": 21,
+        "duration": 7.5,
+        "note": ""
+      },
+      {
+        "index": 7,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "On eighty-two items it scores forty-seven point six percent. That is a coin flip, and it should be.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 8,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "The instruction alone does not contain the answer.",
+        "words": 8,
+        "duration": 3.0,
+        "note": ""
+      },
+      {
+        "index": 9,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "Here is the whole system. Two inputs: the amendatory instruction, and the CFR text as it stood the day before.",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 10,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "For every instruction a deterministic resolver answers two questions, and each answer is written to a trace.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 11,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "The verdict is computed from that trace in code. Anything contradictory is refused rather than guessed.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 13,
+        "source": "deck",
+        "slide": 6,
+        "step": 0,
+        "caption": "Now the same case, step by step. Forty CFR seventy-five point six.",
+        "words": 12,
+        "duration": 4.3,
+        "note": ""
+      },
+      {
+        "index": 14,
+        "source": "deck",
+        "slide": 6,
+        "step": 0,
+        "caption": "The agent gets four instructions, and the section text as it stood before the rule was published.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 15,
+        "source": "deck",
+        "slide": 7,
+        "step": 0,
+        "caption": "For each instruction it calls the resolver. Is this paragraph declared? Is this quoted string present?",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 16,
+        "source": "deck",
+        "slide": 7,
+        "step": 0,
+        "caption": "Here is the real call and the real answer. The resolver says paragraph a thirty-eight does not exist.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 17,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "Then it writes the editorial note the Archives would have to publish. Not a yes or no.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 18,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "The failing designation, the failure class in the Archives' own vocabulary, and the full trace.",
+        "words": 15,
+        "duration": 5.4,
+        "note": ""
+      },
+      {
+        "index": 19,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "The verdict is derived in code from that trace, so it cannot be right for the wrong reason.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 20,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 21,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "The model read the section text, saw paragraph thirty-eight sitting there, and overrode its own tool.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 22,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "It named the tool's limitation in the published note. And it ruled correctly.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 23,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "Two results, and the second is a null. Giving the agent the Code text moves accuracy from forty-seven point six",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 24,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "to sixty-five point nine. Plus eighteen point three points, p equals zero point zero zero six. That is real.",
+        "words": 19,
+        "duration": 6.8,
+        "note": ""
+      },
+      {
+        "index": 25,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "Adding our two capabilities gets seventy-one point nine five. Plus six point one points, p equals zero point four two.",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 26,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "That is not significant. Our pre-registered criterion had four clauses. We met none. It ships unmet.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 27,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Every iteration was predicted before it ran, and the predictions are timestamped in git.",
+        "words": 14,
+        "duration": 5.0,
+        "note": ""
+      },
+      {
+        "index": 28,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Iteration one was the resolver. Predicted plus eight points, measured minus nine point eight. Wrong direction. Removed.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 29,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Iteration two was the written procedure. Predicted zero point eight one, measured zero point seven two.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 30,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "That prediction was committed seven hundred and sixty-four seconds before the arm ran.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 31,
+        "source": "deck",
+        "slide": 12,
+        "step": 1,
+        "caption": "The tool alone made it worse.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 1 of 4"
+      },
+      {
+        "index": 32,
+        "source": "deck",
+        "slide": 12,
+        "step": 2,
+        "caption": "The procedure alone made it worse.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 2 of 4"
+      },
+      {
+        "index": 33,
+        "source": "deck",
+        "slide": 12,
+        "step": 3,
+        "caption": "Together, plus six point one points.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 3 of 4"
+      },
+      {
+        "index": 34,
+        "source": "deck",
+        "slide": 12,
+        "step": 4,
+        "caption": "Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.",
+        "words": 22,
+        "duration": 7.9,
+        "note": "reveal 4 of 4"
+      },
+      {
+        "index": 35,
+        "source": "deck",
+        "slide": 13,
+        "step": 0,
+        "caption": "One experiment we removed. We predicted the current Code text would raise accuracy, because it leaks the answer.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 36,
+        "source": "deck",
+        "slide": 13,
+        "step": 0,
+        "caption": "It fell six point one points. The prediction was wrong, and it is published as wrong.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 37,
+        "source": "deck",
+        "slide": 14,
+        "step": 0,
+        "caption": "That page is the deliverable. Every item carries its trace, and the level each anchor actually resolved at.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 38,
+        "source": "deck",
+        "slide": 14,
+        "step": 0,
+        "caption": "Sixteen of eighty-two are not decided by the tool. They go to a person, each with its reason.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 39,
+        "source": "deck",
+        "slide": 15,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 11.8,
+        "note": "the hot take, uncaptioned - 33 words on the slide"
+      },
+      {
+        "index": 40,
+        "source": "docs/video/endcard.html",
+        "slide": null,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 4.0,
+        "note": "end card"
+      }
+    ],
+    "timeline": [
+      {
+        "index": 0,
+        "source": "deck",
+        "slide": 1,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 4.0,
+        "note": "title card"
+      },
+      {
+        "index": 1,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "US agencies change the Code of Federal Regulations by publishing instructions like this one. Remove this exact sentence.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 2,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "The Office of the Federal Register has to find that sentence in the text. Look at the quoted words.",
+        "words": 19,
+        "duration": 6.8,
+        "note": ""
+      },
+      {
+        "index": 3,
+        "source": "deck",
+        "slide": 2,
+        "step": 0,
+        "caption": "The rule says notion of exemption. The Code says notice. One word, and there is nothing to remove.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 4,
+        "source": "deck",
+        "slide": 3,
+        "step": 0,
+        "caption": "So the amendment could not go in. The National Archives publishes this note instead.",
+        "words": 14,
+        "duration": 5.0,
+        "note": ""
+      },
+      {
+        "index": 5,
+        "source": "deck",
+        "slide": 3,
+        "step": 0,
+        "caption": "It is permanent, it is citable, and the text it targeted never changed.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 6,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "The simple baseline is one prompt. Give a model the instruction, ask whether it will execute. No Code text, no tools.",
+        "words": 21,
+        "duration": 7.5,
+        "note": ""
+      },
+      {
+        "index": 7,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "On eighty-two items it scores forty-seven point six percent. That is a coin flip, and it should be.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 8,
+        "source": "deck",
+        "slide": 4,
+        "step": 0,
+        "caption": "The instruction alone does not contain the answer.",
+        "words": 8,
+        "duration": 3.0,
+        "note": ""
+      },
+      {
+        "index": 9,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "Here is the whole system. Two inputs: the amendatory instruction, and the CFR text as it stood the day before.",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 10,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "For every instruction a deterministic resolver answers two questions, and each answer is written to a trace.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 11,
+        "source": "deck",
+        "slide": 5,
+        "step": 0,
+        "caption": "The verdict is computed from that trace in code. Anything contradictory is refused rather than guessed.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 12,
+        "source": "screencast",
+        "slide": null,
+        "step": null,
+        "caption": null,
+        "words": 77,
+        "duration": null,
+        "note": "the recording of docs/worksheet/index.html"
+      },
+      {
+        "index": 13,
+        "source": "deck",
+        "slide": 6,
+        "step": 0,
+        "caption": "Now the same case, step by step. Forty CFR seventy-five point six.",
+        "words": 12,
+        "duration": 4.3,
+        "note": ""
+      },
+      {
+        "index": 14,
+        "source": "deck",
+        "slide": 6,
+        "step": 0,
+        "caption": "The agent gets four instructions, and the section text as it stood before the rule was published.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 15,
+        "source": "deck",
+        "slide": 7,
+        "step": 0,
+        "caption": "For each instruction it calls the resolver. Is this paragraph declared? Is this quoted string present?",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 16,
+        "source": "deck",
+        "slide": 7,
+        "step": 0,
+        "caption": "Here is the real call and the real answer. The resolver says paragraph a thirty-eight does not exist.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 17,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "Then it writes the editorial note the Archives would have to publish. Not a yes or no.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 18,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "The failing designation, the failure class in the Archives' own vocabulary, and the full trace.",
+        "words": 15,
+        "duration": 5.4,
+        "note": ""
+      },
+      {
+        "index": 19,
+        "source": "deck",
+        "slide": 8,
+        "step": 0,
+        "caption": "The verdict is derived in code from that trace, so it cannot be right for the wrong reason.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 20,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 21,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "The model read the section text, saw paragraph thirty-eight sitting there, and overrode its own tool.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 22,
+        "source": "deck",
+        "slide": 9,
+        "step": 0,
+        "caption": "It named the tool's limitation in the published note. And it ruled correctly.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 23,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "Two results, and the second is a null. Giving the agent the Code text moves accuracy from forty-seven point six",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 24,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "to sixty-five point nine. Plus eighteen point three points, p equals zero point zero zero six. That is real.",
+        "words": 19,
+        "duration": 6.8,
+        "note": ""
+      },
+      {
+        "index": 25,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "Adding our two capabilities gets seventy-one point nine five. Plus six point one points, p equals zero point four two.",
+        "words": 20,
+        "duration": 7.1,
+        "note": ""
+      },
+      {
+        "index": 26,
+        "source": "deck",
+        "slide": 10,
+        "step": 0,
+        "caption": "That is not significant. Our pre-registered criterion had four clauses. We met none. It ships unmet.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 27,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Every iteration was predicted before it ran, and the predictions are timestamped in git.",
+        "words": 14,
+        "duration": 5.0,
+        "note": ""
+      },
+      {
+        "index": 28,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Iteration one was the resolver. Predicted plus eight points, measured minus nine point eight. Wrong direction. Removed.",
+        "words": 17,
+        "duration": 6.1,
+        "note": ""
+      },
+      {
+        "index": 29,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "Iteration two was the written procedure. Predicted zero point eight one, measured zero point seven two.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 30,
+        "source": "deck",
+        "slide": 11,
+        "step": 0,
+        "caption": "That prediction was committed seven hundred and sixty-four seconds before the arm ran.",
+        "words": 13,
+        "duration": 4.6,
+        "note": ""
+      },
+      {
+        "index": 31,
+        "source": "deck",
+        "slide": 12,
+        "step": 1,
+        "caption": "The tool alone made it worse.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 1 of 4"
+      },
+      {
+        "index": 32,
+        "source": "deck",
+        "slide": 12,
+        "step": 2,
+        "caption": "The procedure alone made it worse.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 2 of 4"
+      },
+      {
+        "index": 33,
+        "source": "deck",
+        "slide": 12,
+        "step": 3,
+        "caption": "Together, plus six point one points.",
+        "words": 6,
+        "duration": 3.0,
+        "note": "reveal 3 of 4"
+      },
+      {
+        "index": 34,
+        "source": "deck",
+        "slide": 12,
+        "step": 4,
+        "caption": "Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.",
+        "words": 22,
+        "duration": 7.9,
+        "note": "reveal 4 of 4"
+      },
+      {
+        "index": 35,
+        "source": "deck",
+        "slide": 13,
+        "step": 0,
+        "caption": "One experiment we removed. We predicted the current Code text would raise accuracy, because it leaks the answer.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 36,
+        "source": "deck",
+        "slide": 13,
+        "step": 0,
+        "caption": "It fell six point one points. The prediction was wrong, and it is published as wrong.",
+        "words": 16,
+        "duration": 5.7,
+        "note": ""
+      },
+      {
+        "index": 37,
+        "source": "deck",
+        "slide": 14,
+        "step": 0,
+        "caption": "That page is the deliverable. Every item carries its trace, and the level each anchor actually resolved at.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 38,
+        "source": "deck",
+        "slide": 14,
+        "step": 0,
+        "caption": "Sixteen of eighty-two are not decided by the tool. They go to a person, each with its reason.",
+        "words": 18,
+        "duration": 6.4,
+        "note": ""
+      },
+      {
+        "index": 39,
+        "source": "deck",
+        "slide": 15,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 11.8,
+        "note": "the hot take, uncaptioned - 33 words on the slide"
+      },
+      {
+        "index": 40,
+        "source": "docs/video/endcard.html",
+        "slide": null,
+        "step": 0,
+        "caption": null,
+        "words": 0,
+        "duration": 4.0,
+        "note": "end card"
+      }
+    ],
+    "screencast": {
+      "lead_in_s": 1.44,
+      "duration_s": 39.08,
+      "captions": [
+        {
+          "text": "That system produces this. The real page, opened in a browser, scrolled \u2014 nothing here was drawn for the video.",
+          "words": 20,
+          "from": 0.0,
+          "to": 3.4,
+          "duration": 3.4,
+          "beat": "the top of the page - title, the NOT A FILING band, and what it is drawn from",
+          "scroll_y": 0,
+          "wall_clock_hold_s": 3.402
+        },
+        {
+          "text": "Forty CFR seventy-five point six: the failing designation, and the class of failure.",
+          "words": 13,
+          "from": 3.4,
+          "to": 12.36,
+          "duration": 8.96,
+          "beat": "40 CFR 75.6 - the failing designation (a)(38) and its failure class",
+          "scroll_y": 2618,
+          "wall_clock_hold_s": 3.003
+        },
+        {
+          "text": "The trace row where the resolver returned found equals false, and the page saying why.",
+          "words": 15,
+          "from": 12.36,
+          "to": 21.32,
+          "duration": 8.96,
+          "beat": "49 CFR 1150.35 - the trace row where cfr_resolve returned found=false, level=none, and the page says why",
+          "scroll_y": 7760,
+          "wall_clock_hold_s": 4.003
+        },
+        {
+          "text": "The human-checkpoint queue. Sixteen of eighty-two, each with the reason it was flagged.",
+          "words": 13,
+          "from": 21.32,
+          "to": 31.2,
+          "duration": 9.88,
+          "beat": "the human-checkpoint queue - 16 of 82, each with its reason verbatim",
+          "scroll_y": 13007,
+          "wall_clock_hold_s": 4.01
+        },
+        {
+          "text": "And the provenance footer: both commits, the arm, the model, and a hash for every input.",
+          "words": 16,
+          "from": 31.2,
+          "to": 39.08,
+          "duration": 7.88,
+          "beat": "the provenance footer - the three input hashes, both commits, arm and model",
+          "scroll_y": 13711,
+          "wall_clock_hold_s": 3.011
+        }
+      ],
+      "measured_windows": [
+        [
+          1.44,
+          4.84
+        ],
+        [
+          4.84,
+          13.8
+        ],
+        [
+          13.8,
+          22.76
+        ],
+        [
+          22.76,
+          32.64
+        ],
+        [
+          32.64,
+          40.52
+        ]
+      ],
+      "wall_clock_lead_in_s": 1.721,
+      "wall_clock_duration_s": 39.112,
+      "page_height_px": 14791,
+      "scrolled_px": 13711
+    }
+  },
+  "caption_heights": {
+    "0": 0,
+    "1": 43.5,
+    "2": 43.5,
+    "3": 43.5,
+    "4": 43.5,
+    "5": 43.5,
+    "6": 43.5,
+    "7": 43.5,
+    "8": 43.5,
+    "9": 43.5,
+    "10": 43.5,
+    "11": 43.5,
+    "13": 43.5,
+    "14": 43.5,
+    "15": 43.5,
+    "16": 43.5,
+    "17": 43.5,
+    "18": 43.5,
+    "19": 43.5,
+    "20": 43.5,
+    "21": 43.5,
+    "22": 43.5,
+    "23": 43.5,
+    "24": 43.5,
+    "25": 43.5,
+    "26": 43.5,
+    "27": 43.5,
+    "28": 43.5,
+    "29": 43.5,
+    "30": 43.5,
+    "31": 43.5,
+    "32": 43.5,
+    "33": 43.5,
+    "34": 43.5,
+    "35": 43.5,
+    "36": 43.5,
+    "37": 43.5,
+    "38": 43.5,
+    "39": 0,
+    "40": 0
+  }
+}
