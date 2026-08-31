@@ -14,8 +14,8 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 
 | # | FAQ item | Where it is | State |
 |---|---|---|---|
-| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ 317 tracked files, 86 commits |
-| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.61 MB** against a 50 MB cap | ✅ measured, `docs/evidence/ch14-size/inventory.md` |
+| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ **323 tracked files, 90 commits** at `e01fdfd` (CH-11) |
+| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.66 MB** against a 50 MB cap | ✅ re-measured at CH-11, `e01fdfd`: 10,662,339 B, 373 entries |
 | 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
 | 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 34 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
@@ -25,10 +25,12 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 
 ## Item 2 — the archive, and why nothing was trimmed out of it
 
-The uploaded artifact is `git archive --format=zip HEAD`. **10,613,737 B = 10.61 MB
-against a 50 MB cap** — 4.7× under, with 39.4 MB of headroom.
+The uploaded artifact is `git archive --format=zip HEAD`. **10,662,339 B = 10.66 MB
+against a 50 MB cap** — 4.7× under, with 39.3 MB of headroom. Re-measured at CH-11's
+last commit; CH-14a measured 10,613,737 B and `docs/evidence/ch14-size/inventory.md`
+10,182,500 B, both at earlier commits.
 
-The repository is 63.50 MB uncompressed. That number is **not** the constraint and was
+The repository is 63.62 MB uncompressed. That number is **not** the constraint and was
 mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): the archive deflates 6×
 overall, and the two largest tracked files deflate 21×. **Nothing is excluded from the
 archive.** The complete trajectory set, the complete frozen corpus and the complete
