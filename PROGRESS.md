@@ -143,6 +143,25 @@ stops being offline — a CDN `<script>`, a Google Fonts `<link>`, a protocol-re
 **the page's own corpus URL**, which is the one a naive grep could never distinguish from
 what the page legitimately does today. **Baseline passes, 6 of 6 caught, 0 missed.**
 
+### The worksheet shipped with a defect of its own, and counting is what found it
+
+The page rendered ten items. Six of them had an anchor that **resolved at a `char_offset`**. It drew **four** highlights.
+
+`highlight()` drew a `<mark>` only when the section text at that offset was **byte-identical** to the quoted anchor. That condition is false exactly when the match was made at `whitespace-collapsed` or `alphanumeric-only`, because at those levels the offset points at the text that matched **after punctuation was dropped**. Two items resolve that way on this corpus:
+
+| item | quoted | codified at that offset |
+|---|---|---|
+| `2016-09949\|1436.3` | `Collateral;` | `Collateral ` |
+| `2024-21984\|1321.9` | `…subpart F,` | `…subpart F.` |
+
+**Both rendered as if nothing had been found** — which is indistinguishable, on the page, from an item that legitimately has no anchor. The worksheet was **silently applying a normalisation level instead of reporting it**, in the one artifact whose entire purpose is to report it. That is `CLAUDE.md` hard rule 7, broken by the chunk that quotes it.
+
+**And it is the most drafter-relevant fact the page can carry.** *The text you quoted is not the text that is codified; it matched only because punctuation was dropped.* A drafter decides whether that is the same provision. The tool must not.
+
+Fixed: the matched region is always marked, divergent matches are marked differently, and the page names the divergence in words with both strings shown. **The probe flips — 4 marks on the old code, 6 on the new, both printed** (`docs/evidence/ch12/highlight_probe.py` → `highlight-probe.txt`), and the kept guard is `tests/test_worksheet.py::test_every_resolvable_anchor_is_actually_highlighted`.
+
+**Reading the page would not have caught this. Counting did.** The defect was found by comparing the number of `<mark>` tags against the number of resolvable anchors in the artifacts — a check that takes one line and that nothing in the original fourteen tests performed.
+
 ### The sweep findings — re-verified before they were acted on
 
 `prompts/CH-12.md` sanctioned the standing findings whose fix is a one-line factual

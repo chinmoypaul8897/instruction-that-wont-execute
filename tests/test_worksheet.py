@@ -269,6 +269,50 @@ def test_every_rendered_item_carries_the_five_required_fields(
             f"{item_id}: {rows} trace rows for {len(a['resolution_trace'])} instructions")
 
 
+def test_every_resolvable_anchor_is_actually_highlighted(
+        html_text: str, artifacts: list[dict], items: dict[str, dict]) -> None:
+    """One `<mark>` per rendered item that resolved an anchor at a char_offset.
+
+    This test exists because the page failed it. `highlight()` used to draw nothing
+    whenever the text at `char_offset` was not byte-identical to the quoted anchor —
+    which is precisely the case at `whitespace-collapsed` and `alphanumeric-only`,
+    where the offset points at the text that matched AFTER punctuation was dropped.
+    Two of the ten rendered items resolved that way and both rendered as if nothing
+    had been found: a normalisation level applied silently, which hard rule 7 forbids.
+
+    Counting caught it. Reading the page did not.
+    """
+    rendered = set(re.findall(r'<span class="pill">([^<]+)</span>', html_text))
+    by_id = {a["item_id"]: a for a in artifacts}
+
+    expected = 0
+    loose_expected = 0
+    for item_id in rendered:
+        hit = next((t for t in by_id[item_id]["resolution_trace"]
+                    if t["found"] and t["char_offset"] is not None), None)
+        if not hit:
+            continue
+        expected += 1
+        text = items[item_id]["section_text"]
+        off, anchor = hit["char_offset"], hit["anchor"]
+        if text[off:off + len(anchor)] != anchor:
+            loose_expected += 1
+
+    marks = len(re.findall(r"<mark[ >]", html_text))
+    loose = len(re.findall(r'<mark class="loose">', html_text))
+    print(f"rendered items with a resolvable anchor: {expected}; "
+          f"of which the codified text diverges from the quote: {loose_expected}")
+
+    assert marks == expected, (
+        f"{marks} <mark> tags for {expected} resolvable anchors — a resolved anchor "
+        f"is being rendered as if it had not resolved")
+    assert loose == loose_expected, (
+        f"{loose} loose marks for {loose_expected} divergent matches")
+    assert html_text.count("THE CODIFIED TEXT IS NOT THE QUOTED TEXT") == loose_expected, (
+        "a match that needed punctuation dropped is not named as one; hard rule 7 "
+        "says the level achieved is reported, never applied silently")
+
+
 def test_the_resolver_override_exemplar_is_shown(html_text: str) -> None:
     """The run where the model overrode its own tool and named the tool's limit.
 

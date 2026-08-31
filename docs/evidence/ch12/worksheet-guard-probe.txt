@@ -1,6 +1,6 @@
 WORKSHEET SELF-CONTAINMENT GUARD - PROBE
 ========================================================================
-page   : docs/worksheet/index.html  (80,883 B)
+page   : docs/worksheet/index.html  (82,057 B)
 guards : no_external_resource_reference, scheme_strings_are_corpus_text_only, scheme_strings_that_do_occur_are_inert
 
 BASELINE - the shipped page, unmodified

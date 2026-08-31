@@ -1,0 +1,29 @@
+CH-12 - SILENT-NORMALISATION PROBE
+============================================================================================
+items rendered on the worksheet: 10
+
+item                    level               quoted anchor                     codified at that offset
+----------------------------------------------------------------------------------------------------------------------
+2016-09949|1436.3       alphanumeric-only   'Collateral;'                     'Collateral '
+2024-21984|1321.9       alphanumeric-only   'and 45 CFR part 75, subpart F,'  'and 45 CFR part 75, subpart F.'
+----------------------------------------------------------------------------------------------------------------------
+
+rendered items whose anchor RESOLVED at a char_offset : 6
+  of which the codified text DIVERGES from the quote  : 2
+  of which it is byte-identical                       : 4
+  success + failure == n : 2 + 4 == 6  OK
+
+THE PROBE
+--------------------------------------------------------------------------------------------
+  marks drawn by the OLD highlighter : 4   (expected 6)
+  marks drawn by the NEW highlighter : 6   (expected 6)
+  marks on the SHIPPED page          : 6
+
+  FAILS on the old code  : True   (2 resolved anchors drawn as if not found)
+  PASSES on the new code : True
+  shipped page agrees    : True
+  divergence NAMED in words on the page, 2 time(s) : True
+
+VERDICT: PASS - the probe flips
+
+The kept guard is `tests/test_worksheet.py::test_every_resolvable_anchor_is_actually_highlighted`.

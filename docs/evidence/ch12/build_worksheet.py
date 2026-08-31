@@ -131,20 +131,31 @@ def code(s) -> str:
     return f'<code>{esc(s)}</code>'
 
 
-def highlight(text: str, anchor: str | None, offset: int | None) -> str:
-    """Escape the section text, marking the anchor at char_offset if given.
+def highlight(text: str, anchor: str | None, offset: int | None) -> tuple[str, str | None]:
+    """Escape the section text and mark the region the resolver matched.
 
-    char_offset indexes the CALLER's string (src/cfr_resolve.py asserts this before
-    returning), so the slice is taken on the raw text and each part escaped
-    separately. When the offset is absent the text is escaped whole.
+    Returns (html, divergence) where `divergence` is None if the codified text is
+    byte-identical to the quoted anchor, and otherwise the matched text.
+
+    char_offset indexes the CALLER's string (`src/cfr_resolve.py` asserts this before
+    returning) — but at `whitespace-collapsed` or `alphanumeric-only` the region it
+    points at is NOT the quoted anchor. It is the text that matched once punctuation
+    or spacing was dropped.
+
+    **That difference is the most drafter-relevant fact this page can show**, so it is
+    marked and named rather than swallowed. An earlier version of this function
+    returned the text unhighlighted whenever the region did not equal the anchor,
+    which rendered the two loose matches on this corpus as if nothing had been found —
+    silently applying a normalisation level instead of reporting it, which is exactly
+    what hard rule 7 forbids.
     """
     if anchor is None or offset is None or offset < 0 or offset + len(anchor) > len(text):
-        return esc(text)
-    if text[offset:offset + len(anchor)] != anchor:
-        # The offset does not point at the anchor. Report that rather than guessing.
-        return esc(text)
-    return (esc(text[:offset]) + "<mark>" + esc(anchor) + "</mark>"
-            + esc(text[offset + len(anchor):]))
+        return esc(text), None
+    matched = text[offset:offset + len(anchor)]
+    css = "mark" if matched == anchor else 'mark class="loose"'
+    return (esc(text[:offset]) + f"<{css}>" + esc(matched) + "</mark>"
+            + esc(text[offset + len(anchor):]),
+            None if matched == anchor else matched)
 
 
 def window(text: str, offset: int | None, radius: int = 700) -> tuple[str, int]:
@@ -231,10 +242,19 @@ def render_item(item_id: str, clauses: list[str], it: dict, a: dict) -> str:
     text = it["section_text"]
     if hit:
         win, start = window(text, hit["char_offset"])
-        body = highlight(win, hit["anchor"], hit["char_offset"] - start)
+        body, divergence = highlight(win, hit["anchor"], hit["char_offset"] - start)
         cap = (f'anchor of instruction {hit["instruction_index"]} highlighted at '
                f'char_offset {hit["char_offset"]}, level <code>{esc(hit["level"])}</code>'
                + (f' - window starts at char {start}' if start else ""))
+        if divergence is not None:
+            body = (
+                '<p class="diverge"><b>THE CODIFIED TEXT IS NOT THE QUOTED TEXT.</b> '
+                f'This anchor resolved only at <code>{esc(hit["level"])}</code>. '
+                f'The instruction quotes <span class="q">{esc(hit["anchor"])}</span>; '
+                f'the codified text at that position is '
+                f'<span class="q">{esc(divergence)}</span>. '
+                '<b>A drafter decides whether that is the same provision.</b> The tool '
+                'reports the level and does not rule.</p>' + body)
     else:
         win, start = window(text, None)
         body = esc(win)
@@ -449,6 +469,11 @@ PAGE = """<!DOCTYPE html>
     padding:12px 14px;white-space:pre-wrap;font-family:ui-monospace,monospace;
     font-size:.8rem;max-height:300px;overflow:auto;margin:6px 0 0}}
   mark{{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}}
+  mark.loose{{background:none;color:inherit;box-shadow:inset 0 -2px 0 var(--warn);
+    outline:1px dashed var(--warn);outline-offset:1px}}
+  .diverge{{background:var(--warn-bg);border-left:3px solid var(--warn);color:var(--ink);
+    padding:9px 12px;margin:6px 0 0;font-size:.82rem;border-radius:0 6px 6px 0}}
+  .diverge b{{color:var(--warn)}}
   .absent{{color:var(--fail);font-weight:700;font-size:.75rem}}
   .ok{{color:var(--exec);font-size:.75rem}}
   .agree{{color:var(--exec);font-size:.72rem;margin-left:8px;font-weight:700}}

@@ -63,6 +63,11 @@
     padding:12px 14px;white-space:pre-wrap;font-family:ui-monospace,monospace;
     font-size:.8rem;max-height:300px;overflow:auto;margin:6px 0 0}
   mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
+  mark.loose{background:none;color:inherit;box-shadow:inset 0 -2px 0 var(--warn);
+    outline:1px dashed var(--warn);outline-offset:1px}
+  .diverge{background:var(--warn-bg);border-left:3px solid var(--warn);color:var(--ink);
+    padding:9px 12px;margin:6px 0 0;font-size:.82rem;border-radius:0 6px 6px 0}
+  .diverge b{color:var(--warn)}
   .absent{color:var(--fail);font-weight:700;font-size:.75rem}
   .ok{color:var(--exec);font-size:.75rem}
   .agree{color:var(--exec);font-size:.72rem;margin-left:8px;font-weight:700}
@@ -799,11 +804,11 @@ Ivermectin and clorsulon.
     </table></div>
 
     <h4>Section text <span class="k">- anchor of instruction 3 highlighted at char_offset 771, level <code>alphanumeric-only</code> - window starts at char 71</span></h4>
-    <div class="txt">he program authorized by this part and will be used in all aspects of administering this program:
+    <div class="txt"><p class="diverge"><b>THE CODIFIED TEXT IS NOT THE QUOTED TEXT.</b> This anchor resolved only at <code>alphanumeric-only</code>. The instruction quotes <span class="q">Collateral;</span>; the codified text at that position is <span class="q">Collateral </span>. <b>A drafter decides whether that is the same provision.</b> The tool reports the level and does not rule.</p>he program authorized by this part and will be used in all aspects of administering this program:
 Aggregate outstanding balance means the sum of the outstanding balances of all loans disbursed under this part to each borrower signing the note and security agreement.
 Assumption means the act or agreement by which one borrower takes over or assumes the debt of another borrower.
 Cold storage facility means a facility or rooms within a facility that are specifically designed and constructed for the cold temperature storage of perishable commodities. The temperature and humidity in these facilities must be able to be regulated to specified conditions required for the commodity requiring storage.
-Collateral means the storage structure; the drying, handling, and cold storage equipment; and any other equipment securing the loan.
+<mark class="loose">Collateral </mark>means the storage structure; the drying, handling, and cold storage equipment; and any other equipment securing the loan.
 Commercial facility means any structure, used in connection with or by any commercial operation including, but not limited to, grain elevators, warehouses, dryers, processing plants, or cold storage facilities used for the storage and handling of any agricultural product, whether paid or unpaid. Any structure suitable for the storage of an agricultural product that is in working proximity to any commercial storage operation will be considered to be part of a commercial storage operation.
 Commercial storage means the storing of any agricultural product, whether <span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
   </section>
@@ -921,10 +926,10 @@ A complete application will consist of the following:
     </table></div>
 
     <h4>Section text <span class="k">- anchor of instruction 1 highlighted at char_offset 1796, level <code>alphanumeric-only</code> - window starts at char 1096</span></h4>
-    <div class="txt">nsistent with section 305(a)(1)(C) (42 U.S.C. 3025(a)(1)(C)), the State agency shall be responsible for monitoring the program and financial activities of subrecipients and subgrantees to ensure that grant awards are used for the authorized purposes and in compliance with Federal statutes, regulations, and the terms and conditions of the grant award, including:
+    <div class="txt"><p class="diverge"><b>THE CODIFIED TEXT IS NOT THE QUOTED TEXT.</b> This anchor resolved only at <code>alphanumeric-only</code>. The instruction quotes <span class="q">and 45 CFR part 75, subpart F,</span>; the codified text at that position is <span class="q">and 45 CFR part 75, subpart F.</span>. <b>A drafter decides whether that is the same provision.</b> The tool reports the level and does not rule.</p>nsistent with section 305(a)(1)(C) (42 U.S.C. 3025(a)(1)(C)), the State agency shall be responsible for monitoring the program and financial activities of subrecipients and subgrantees to ensure that grant awards are used for the authorized purposes and in compliance with Federal statutes, regulations, and the terms and conditions of the grant award, including:
 (i) Evaluating each subrecipient&#x27;s risk of noncompliance to ensure proper accountability and compliance with program requirements and achievement of performance goals;
 (ii) Reviewing subrecipient policies and procedures; and
-(iii) Ensuring that all subrecipients and subgrantees complete audits as required in 2 CFR part 200, subpart F and 45 CFR part 75, subpart F.
+(iii) Ensuring that all subrecipients and subgrantees complete audits as required in 2 CFR part 200, subpart F <mark class="loose">and 45 CFR part 75, subpart F.</mark>
 (2) The State agency may not delegate to another agency the authority to award or administer funds under this part.
 (3) The State Long-Term Care Ombudsman shall be responsible for monitoring the files, records, and other information maintained by the Ombudsman program, as set forth in part 1324, subpart A. Such monitoring may be conducted by a designee of the Ombudsman. Neither the Ombudsman nor a designee shall disclose identifying information of any complainant or long- term care facility resident to individuals outside of the Ombudsman program, except as otherwise specifically provided in § 1324.11(e)(3) of this chapter.
 (b) The State agency shall ensure pol<span class="k">[...] window truncated for the page; the full section text is in data/evalset/items.jsonl</span></div>
