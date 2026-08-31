@@ -200,6 +200,7 @@ entropy analysis** — travel with the verdict rather than behind it.
   is inside text the **harness** wrote, not text a session composed, which is a different
   shape from CH-11's README finding. Out of every fence; not fixed.
 - **Q46 raised** — `CHANGELOG.md`'s `0.4737`, above.
+- **Q48 raised — a BLOCKER, and it blocks this chunk's own gate item.** `.githooks/pre-commit` refused the transcript commit: *tracked file count 403 exceeds 400*. The archive check in the same hook — the direct measurement of the real constraint — passes with **22.18 MB of headroom**. This is `QUESTIONS.md` **Q28** firing a second time on the same line, whose ratification is still outstanding. The hook is outside this fence, `MAX_TRACKED` has no sanctioned override, and `--no-verify` is a bypass, so **nothing was edited and nothing was bypassed.** `docs/trajectories/build/CH-14b.jsonl` is exported, scrubbed, independently re-checked (**PASS**) and **untracked**, one `git add` from done. By `CLAUDE.md` duty 6's own words this chunk is **not done** until the architect rules.
 - **Q47 raised — the one a reader should care about.** `plan.md` and `STATUS.md` give
   CH-14b *"final rehearsal from the finished repo"*; `prompts/CH-14b.md` does not ask for
   it and its fence excludes the path. The secret scan was run because `SUBMISSION.md`

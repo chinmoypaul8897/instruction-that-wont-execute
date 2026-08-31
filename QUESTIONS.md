@@ -3170,3 +3170,71 @@ verdict is still the best evidence in the packet and it is **no longer current**
 now states plainly that the rehearsal was not re-run, at what size it was last run, and
 that this question is open. **A stale PASS presented as current would be worse than a gap
 that is labelled.**
+
+---
+
+## Q48 - BLOCKER. The tracked-file guard refuses this chunk's transcript export, which is a submission gate item
+
+**Raised at CH-14b, 2026-08-31. STOP RULE. Nothing was edited, nothing was bypassed, and
+the transcript is written to disk but NOT committed.**
+
+`CLAUDE.md` end-of-session duty 6:
+
+> **Run `python tools/export_session.py <CHUNK-ID>` and commit the exported trajectory.**
+> This is a deliverable-4 gate item ... **A chunk whose transcript was not exported is not
+> done.**
+
+The export ran and succeeded — `docs/trajectories/build/CH-14b.jsonl`, 684 lines of 684,
+1,791,149 B, every scrub category an explicit 0 and independently re-checked
+(`docs/evidence/ch14b/export-pii-check.txt`, **PASS**). **The commit was refused:**
+
+```
+PRE-COMMIT REFUSED:
+  * tracked file count 403 exceeds 400.
+  size at refusal: tracked 90,684,050 B (90.68 MB)
+                -> archive 22,821,876 B (22.82 MB), limit 45.00 MB, headroom 22.18 MB
+```
+
+**This is Q28 firing a second time, on the same guard, in the same shape.** `.githooks/
+pre-commit` records it in its own comments: 300 was set at CH-00 as *"an explicit PROXY
+for the 50 MB submission cap"*; CH-14a found the proxy *"was never tracking the thing it
+stood for"*, raised it to 400 as a **Class A change without a ruling**, and in the same
+commit added `MAX_ARCHIVE_BYTES` — a direct, fail-closed measurement of the real
+constraint. **That direct check passes here with 22.18 MB of headroom, 2.0× under its own
+45 MB limit and 2.2× under the platform's 50 MB.** The count is refusing a commit the
+constraint it stands for does not object to.
+
+**Why this session did not fix it.**
+
+1. `.githooks/pre-commit` is **not in this chunk's scope fence.** `prompts/CH-14b.md`
+   lists what may change and it is not on the list.
+2. Raising the number would be **a second unratified Class A change to the same line**,
+   and Q28's ratification is still outstanding. Doing it again because it is convenient
+   is precisely the move rule 3 exists to stop.
+3. `--no-verify` is a bypass. `MAX_ARCHIVE_BYTES` has a printed, loud environment
+   override for exactly this kind of seam; **`MAX_TRACKED` has none**, so there is no
+   sanctioned way through it.
+
+**What is true right now:** every other CH-14b commit is pushed (`e4a79f0`). The
+transcript exists at `docs/trajectories/build/CH-14b.jsonl`, untracked, scrubbed and
+checked. **It is one `git add` from being committed.**
+
+**For the architect — three options, cheapest first:**
+
+1. **`git add docs/trajectories/build/CH-14b.jsonl docs/evidence/ch14b/` and commit.** An
+   operator action outside any session's fence, exactly as Q41's fix was. Requires
+   raising `MAX_TRACKED` or committing with the hook disabled for that one commit, and
+   **either is the architect's call, not a build session's.**
+2. **Retire `MAX_TRACKED` and keep `MAX_ARCHIVE_BYTES`**, ratifying Q28 at the same time.
+   The count's remaining job — *"catch a bulk accident: a corpus download or a
+   node_modules walking into the index"* — is real, but a 45 MB fail-closed archive check
+   catches every accident large enough to matter, and this refusal shows the count now
+   generates false positives against the project's own mandatory duties.
+3. **Raise it once more with a ruling attached**, which is option 2 without the
+   simplification and leaves the next chunk to hit it again. Every remaining chunk adds
+   evidence files; CH-15 will add its own transcript.
+
+**The consequence if nothing is decided: CH-14b is, by `CLAUDE.md`'s own definition, not
+done** — and the file that proves what it did would be the one thing missing from
+deliverable 4. That is stated here rather than solved by a session quietly editing the
+guard that stood in its way.

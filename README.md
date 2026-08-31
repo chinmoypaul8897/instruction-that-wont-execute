@@ -525,7 +525,7 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 | **The pre-registration** | [GOOD.md](GOOD.md) — metric, thresholds, predictions, committed before any result existed |
 | **The iteration cards** | [CHANGELOG.md](CHANGELOG.md) — each committed before its build |
 | **The spec** | [CONTEXT.md](CONTEXT.md) — architect-authored, versioned, outranks the code |
-| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **47** entries (`grep -c '^## Q'`), including our own retractions |
+| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **48** entries (`grep -c '^## Q'`), including our own retractions |
 | **Chunk-by-chunk state** | [STATUS.md](STATUS.md) · [PROGRESS.md](PROGRESS.md) |
 | **The worksheet the agent produces** | [`docs/worksheet/index.html`](docs/worksheet/index.html) — real committed A1 output, opens offline by double-clicking |
 | **Every trajectory, and what to look at in it** | [`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md) — 39 files at `0410843`, with the curation rule published before it was applied |
