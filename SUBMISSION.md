@@ -17,7 +17,7 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 | 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ 317 tracked files, 86 commits |
 | 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.61 MB** against a 50 MB cap | ✅ measured, `docs/evidence/ch14-size/inventory.md` |
 | 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
-| 4 | **README** | — | ❌ **MISSING — deliverable 1. `QUESTIONS.md` Q29.** |
+| 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
 | 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 34 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
 | 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
 
@@ -104,32 +104,40 @@ Two capabilities were measured and **neither works alone**: A1 = 0.7195, A1-minu
 0.6463, A1-iter1 = 0.5610, B0-agent = 0.6585. The gap A1 − B0-agent is +6.1 pp at
 p = 0.4244 — **not significant**, and reported as such.
 
-`QUESTIONS.md` holds 29 entries including our own retractions, a duplicated-run
+`QUESTIONS.md` holds 31 entries including our own retractions, a duplicated-run
 disclosure, and three errors this project made about its own work. That file is the
 argument, not an appendix to it.
 
 ---
 
-## Missing — stated rather than hidden
+## Was missing — closed at CH-11
 
-`PROCESS.md` §3 marks six files "ships" that do not exist in the tree. Full detail in
-`QUESTIONS.md` **Q29**:
+`QUESTIONS.md` **Q29**, raised at CH-14a, recorded six files that `PROCESS.md` §3 marks
+"ships" and that did not exist anywhere in the tree. **All six now exist.** The rows are
+kept rather than deleted, because a checklist that erases its own gaps is not a
+checklist.
 
-| file | deliverable |
-|---|---|
-| `README.md` | **deliverable 1** |
-| `REPRODUCE.md` | **deliverable 2** |
-| `requirements.txt` | (clean-environment setup) |
-| `LICENSE` | ships |
-| `THIRD-PARTY.md` | ships |
-| `SAFETY.md` | ships |
+| file | deliverable | state |
+|---|---|---|
+| `README.md` | **deliverable 1** | ✅ CH-11 |
+| `REPRODUCE.md` | **deliverable 2** | ✅ CH-11 — two tiers, exact expected output |
+| `requirements.txt` | (clean-environment setup) | ✅ CH-11 — `pytest==9.1.1`, and nothing else |
+| `LICENSE` | ships | ✅ CH-11 — MIT, plus 17 U.S.C. §105 for the corpus |
+| `THIRD-PARTY.md` | ships | ✅ CH-11 |
+| `SAFETY.md` | ships | ✅ CH-11 |
 
-Measured dependency set for `requirements.txt` when it is written: **the standard
-library plus `pytest`**, nothing else — `src/apiclient.py` uses `urllib`, so there is no
-`requests` and no vendor SDK. Python 3.12.2.
+The dependency set CH-14a measured — **the standard library plus `pytest`**, nothing
+else, because `src/apiclient.py` uses `urllib` — was re-derived from the imports at
+CH-11 and holds. Python 3.12.2.
 
-**Two items outstanding before submission: the README/REPRODUCE set above, and the demo
-video URL.**
+**Tier 1 was re-verified at CH-11 from a virtual environment built off
+`requirements.txt` alone**, network proved unreachable first: manifests 18/18, every
+headline string matched, all four regenerated result files byte-identical, 316 passed /
+26 skipped, **14.42 s**. Working in `PROGRESS.md`'s CH-11 entry; it is not under
+`docs/evidence/` because CH-11's fence makes that directory read-only, which
+`QUESTIONS.md` **Q30** records.
+
+**One item outstanding before submission: the demo video URL.**
 
 ---
 

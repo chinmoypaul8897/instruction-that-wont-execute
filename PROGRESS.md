@@ -11,6 +11,236 @@ When sessions run in parallel (Phase 3 only), a build session writes
 
 ---
 
+## CH-11 · 2026-08-31 · Claude Code, `claude-opus-5` (1M context) · BUILD · **THE SIX MISSING FILES**
+
+### The one thing worth reading
+
+**`README.md` and `REPRODUCE.md` are deliverables 1 and 2, and until this session there
+was no README in the archive at all.** `QUESTIONS.md` Q29 recorded that at CH-14a and
+recommended a dedicated chunk. This is that chunk. Six files, no arm re-run, no number
+moved, and **API spend unchanged at USD 11.6323** — verified from the ledger before and
+after.
+
+The README leads with the misses, because that is what the evidence supports:
+
+```
+NOT MET  A1 >= B0-agent + 8 pp       gap +6.1 pp
+NOT MET  McNemar p < 0.05            p = 0.4244
+NOT MET  n >= 84                     n = 82  - TWO SHORT
+NOT MET  A1 >= 0.80 absolute         A1 = 0.7195
+```
+
+and the finding it does carry is the composition one: tool alone **−9.8 pp**, skill
+alone **−1.2 pp**, both **+6.1 pp** — **superadditive by +17.1 pp**. Neither capability
+helps alone. **A one-at-a-time ablation table would have deleted both of them**, and both
+ablations are published for exactly that reason.
+
+### Scope
+
+`prompts/CH-11.md` §1–§3. Write the six files `PROCESS.md` §3 marks "ships" and that
+`git ls-files` says do not exist, update `SUBMISSION.md`, and verify the Tier-1 replay
+from a fresh venv built off the new `requirements.txt`.
+
+### Files
+
+`README.md` (new) · `REPRODUCE.md` (new) · `LICENSE` (new) · `THIRD-PARTY.md` (new) ·
+`SAFETY.md` (new) · `requirements.txt` (new) · `SUBMISSION.md` · `QUESTIONS.md` (Q30,
+Q31) · `STATUS.md` · `PROGRESS.md` · `AI-USE.md`
+
+**Not touched:** `CONTEXT.md`, `plan.md`, `PROCESS.md`, `CLAUDE.md`, `PROVENANCE.md`,
+`GOOD.md`, `CHANGELOG.md`, `src/`, `tests/`, `data/`, `agents/`, `docs/`, `prompts/`,
+`context/`. **No model call was made and no arm was re-run.**
+
+### Verification — Tier 1 from a FRESH venv off `requirements.txt`
+
+A `git clone` into the scratchpad, a fresh `python -m venv`, `pip install -r
+requirements.txt` and nothing else, with the network **proved** unreachable by
+attempting `govinfo.gov` through a closed port and requiring the attempt to fail. This
+is the measurement `REPRODUCE.md` and `SUBMISSION.md` cite; it lives here rather than
+under `docs/evidence/` because CH-11's fence makes that directory read-only —
+`QUESTIONS.md` **Q30**.
+
+```
+clone                    317 tracked files, data/raw present False (correct - git-ignored)
+python                   Python 3.12.2
+pip install -r req...    exit 0 in 14.7s
+venv contents            Pygments==2.21.0, colorama==0.4.6, iniconfig==2.3.0,
+                         packaging==26.3, pluggy==1.6.0, pytest==9.1.1
+network off              PROVED - urllib.error.URLError: <urlopen error [WinError 10061]
+                         No connection could be made because the target machine ...>
+
+refetch.py --verify-only            exit 0     0.60s   4/4 6/6 2/2 3/3 3/3 = 18/18
+docs/evidence/checkpoint/
+  analyse_checkpoint.py             exit 0     0.39s
+docs/evidence/ch06-a1/analyse_a1.py exit 0     0.89s
+python -m pytest -q                 exit 0    12.54s   316 passed, 26 skipped
+TIER-1 TOTAL                                  14.42s
+
+docs/evidence/ch04-scorer/
+  run_bscript.py                    exit 0   143.13s   (2,000-draw permutation null)
+
+headline strings, matched literally               7 of 7 MATCH
+  'gap       +18.3 pp' · 'McNemar   p = 0.0059' · 'BRANCH: GREEN'
+  'accuracy 0.7195   gap +6.1 pp' · 'McNemar exact two-sided p = 0.4244'
+  'A1  vs  B0-agent 0.6585' · 'TOTAL   ...   11.6323'
+
+regenerated vs committed                          4 of 4 IDENTICAL
+  57e9ce452fedb3a0  docs/evidence/checkpoint/checkpoint-result.txt
+  e0f0005885f513f3  docs/evidence/checkpoint/checkpoint-result.json
+  3b293a57320ca190  docs/evidence/ch06-a1/a1-result.txt
+  2daa3c17f71073d4  docs/evidence/ch06-a1/a1-result.json
+bscript regenerated vs committed                  2 of 2 IDENTICAL
+  1730c73b80f5dc20  docs/evidence/ch04-scorer/bscript-run.txt
+  2cf7c8174492eb57  docs/evidence/ch04-scorer/bscript-result.json
+
+VERDICT: ALL PASS
+```
+
+**`requirements.txt` was derived from the imports, not from `pip freeze`.** Every
+top-level `import` across `src/`, `tests/`, `tools/`, `refetch.py`, `docs/evidence/` and
+`docs/reviews/` was collected and filtered against the standard library and this
+project's own module names. **One third-party name came back: `pytest`.** The five
+transitive packages pip resolved are recorded as a comment rather than pinned, because
+this project imports none of them. Their licences were read out of the installed
+`dist-info` metadata in that venv rather than recalled — hard rule 15.
+
+### Decisions
+
+**Class B — the `764 seconds` figure in the chunk prompt was checked before it was
+relayed.** `AI-USE.md` line 158 carries a `764` that is `A1-iter1`'s wall-clock, which
+made the prompt's claim look like a transcription error. It is not. `git show e12466c`
+gives `2026-08-31T07:41:37+05:30` = **02:11:37 UTC**; the first record of
+`docs/trajectories/arms/A1-iter1-rep1.jsonl` is `2026-08-31T02:24:21.091Z`. The gap is
+**764.091 s**. Two independent quantities that coincide to within a tenth of a second,
+and only one of them is the claim. Both are cited in the README so a reader can redo
+the subtraction.
+
+**Class B — the hot take is backed by in-repo numbers only.** `CONTEXT.md` §11 states it
+with IETF-errata figures (+12.0 pp, −4.0 pp, −16.7 pp, p = 0.64) from work outside this
+repository, and `CONTEXT.md` §3 carries an explicit **⚠️ warning** that the pilot figures
+`0.545 / 0.5855 / 0.52` and the **+27.3 pp** retrieval gain are *provenance-unverified*
+and **must not appear in the README**. None of those numbers is in the README. The hot
+take is carried by the per-class recall table, the leakage probe's class shift, and the
+composition finding, each with its `docs/evidence/` path. The IETF measurement is named
+once, as the origin of the hypothesis, and explicitly disclaimed as carrying no weight
+here.
+
+**Class B — the changelog table is embedded and extended, not copied.** §1d requires the
+four-column table embedded rather than linked, with the control row and **all three**
+removed experiments. `CHANGELOG.md`'s own table has five rows and folds only removal #3
+into them, so the README's table adds two rows — **Removed #1** (current-CFR-text
+leakage probe) and **Removed #2** (intra-rule collision detector) — in the same four
+columns, each with its measured class size and its evidence path. Cells are tightened
+for width; no number is changed and the full cards stay in `CHANGELOG.md`.
+
+**Class C — `prompts/CH-11.md` is NOT committed by this session.** `prompts/` is
+protected read-only by this chunk's fence, and the fence's create/change list does not
+include it. Every other chunk's prompt is tracked, so leaving this one untracked is a
+gap in deliverable 4 — but widening my own fence to close it is the wrong call. **One
+command fixes it:** `git add prompts/CH-11.md`. Flagged in the session report.
+
+### The adversarial audit, and what it found against me
+
+**I did not certify my own work.** After the six files were drafted, an eight-dimension
+audit ran over them in a `Workflow` — run `wf_44b0dd6c-5e5`, **52 agents**, zero shared
+context, read-only, effort high. Eight auditors, one per dimension: numbers in the results
+section · numbers everywhere else · the mandated structure against `prompts/CH-11.md` §1 ·
+voice against §4 · contradictions against every shipping document · whether `REPRODUCE.md`
+actually executes · dependencies and licences · scope-fence compliance and omissions. Then
+**one verifier per finding, prompted to refute it** and defaulting to *refuted*. **44
+findings went to verification; 13 were refuted and dropped; 31 survived**, and every
+survivor was checked against the artefact a third time by me before any text changed.
+
+**The sharpest finding was against this session, and it is the one worth reading.**
+
+The worked example quotes `2016-09949|1436.3`'s editorial note. My terminal renders UTF-8
+through a cp1252 code page, so the corpus's `§` and curly quotes came back as `?`. I read
+that as a decoding artefact **in the corpus**, wrote nine literal U+FFFD characters into
+the README, and added a paragraph explaining that the freeze carries U+FFFD and that
+reproducing it faithfully rather than tidying it was what hard rule 7 demanded.
+
+`data/evalset/items.jsonl` contains **zero** U+FFFD. It contains **973 `§`** and **755
+curly quotes**, counted at the byte level.
+
+**I invented a data defect out of my own console encoding, and then wrote a
+principled-sounding paragraph defending it.** The paragraph was the most dangerous part:
+it made a display artefact look like a considered editorial decision, in a project whose
+precision-critical objects are quoted strings. Nine U+FFFD are gone, the real characters
+are restored, and the paragraph is deleted. **Rule 15, on the session writing the file
+about rule 15.**
+
+**Nine other findings changed a published number or a citation**, each verified against
+the artefact before acting:
+
+| what the draft said | what the artefact says |
+|---|---|
+| B0′ differed from B0-agent while *"26 items had samples that disagreed"* — copied from `CHANGELOG.md` | **22**, from `B0prime-rep1-votes.json`, three ways. **Q33** |
+| *"A1 is the only agent arm that passes the false-defect guard"* — also from `CHANGELOG.md` | B0, B0-agent and B0′ pass it too. A1 is the only one of the **three A1-family arms** that does |
+| B0′ is *"B0-agent at A1's token budget"* — from `CONTEXT.md` §4 | 1,377,402 input tokens against A1's 4,006,662. A repeated-sampling control, not a token-matched one. **Q34** |
+| the criterion cited to `GOOD.md` §7 | §7 is the predictions table. The criterion is **§4** |
+| *"`GOOD.md` §11 named the restricted set as primary"* | §11 names the **unrestricted** set. The restricted-primary pre-registration is `docs/evidence/ch03-evalset/pre-registration.md` §2. **Q32** |
+| three chunks failed their gate | **six chunks carry a gate and none passed**, including **CH-02** (FULL, never reviewed) and **CH-08**, whose NUMBERS gate `PROCESS.md` §6 binds *"to CH-08 before any number reaches the README"* |
+| `docs/evidence/checkpoint/` cited for the B-script figures | they are CH-04's, at `ch04-scorer/bscript-run.txt` |
+| `data/raw/` is *"~824 MB"* | **1.44 GB**. 824 MB is the eCFR titles alone |
+| four freezes; `score.py` uses `fractions`; scorer purity *"asserted in `tests/`"* | five freezes; `math.comb` and a function-local `random`; **there is no source-level purity test for `score.py` and it does use randomness** — open finding F11 in `REVIEW_CH-04.md` |
+
+Two more were structural: `CONTEXT.md` §1's *"Non-goals — state these in the README"* was
+two-thirds unstated, and CH-03's escalation has **one of its three open items still
+unruled**, which `PROCESS.md` §6's two-strike rule requires quoted verbatim in LIMITATIONS.
+Both are now in the README.
+
+### Questions — six raised, none blocking
+
+- **Q30 — CH-11's fence makes `docs/` read-only, so this chunk's own verification cannot
+  ship as evidence.** Hard rule 14 wants it under `docs/evidence/`; the fence forbids
+  writing there. **The fence wins**, the measurement is published in this entry and cited
+  from `REPRODUCE.md`. The same fence blocks **`prompts/CH-11.md`** (untracked; one
+  `git add` closes it) and the **52 audit trajectories**. The architect is asked whether a
+  chunk should always be allowed to commit its own prompt and its own subagent runs.
+- **Q31 — `STATUS.md` and `AI-USE.md` say the secret sweep covered `450 blobs / 81
+  commits`; `scan.txt` says `462` and `84`**, and `SUBMISSION.md` already agrees with the
+  artifact. PASS, 0 findings on either scope. Not corrected here.
+- **Q32 — `a1-result.txt`'s deviation banner and Q19's ruling both attribute the
+  restricted-set pre-registration to `GOOD.md` §11, which says the opposite.** The
+  deviation is real; the attribution is not. The README cites the CH-03 pre-registration
+  and states the discrepancy.
+- **Q33 — `CHANGELOG.md`'s `26 items had samples that disagreed` does not reproduce.**
+  The votes file gives 22 (8 among parseable votes). Not concluded wrong — Q26 records a
+  duplicate run that overwrote run 1's per-item files — concluded **not reproducible**.
+- **Q34 — B0′ is called the compute-matched control and is not token-matched.** It
+  rules out *"three tries instead of one"*; it does not rule out *"three times the
+  tokens"*, and the README now says exactly that.
+- **Q35 — `PROVENANCE.md` §5 names `claude-sonnet-5` as the model of "every evaluation
+  arm".** Every artifact says `claude-haiku-4-5-20251001`; sonnet ran only the withdrawn
+  sensitivity subset. **`context/11-REMEDIATION-2.md` flagged this exact defect and it was
+  never carried out**, which is its own finding: a defect named in a remediation document
+  and not acted on is indistinguishable from one never found.
+
+### Gate
+
+None. CH-11 is ungated in `plan.md`. The 52-agent audit above **is not a review gate and
+is not claimed as one** — it was commissioned and read by the session it audited, which
+is exactly the arrangement hard rule 2 exists to forbid. It is a self-check with
+adversarial structure, nothing more. **CH-11b, the operator's voice pass, still
+follows.**
+
+### Status ledger
+
+CH-11 · **built** — six files written, `SUBMISSION.md`'s README row flipped from MISSING,
+Tier 1 re-verified ALL PASS from a fresh venv, API spend unchanged at USD 11.6323.
+
+### State for the next session
+
+`QUESTIONS.md` **Q29 is closed** — all six files exist. **Q30 through Q35 are open** and
+all six are for the architect; Q32, Q33 and Q35 each name a specific figure in a shipping
+file that does not reproduce or does not match its artifact. The remaining Phase-3 queue is unchanged: **CH-13 video** (the
+URL is still `TBD` in `README.md`, `SUBMISSION.md` and the form), **CH-12 trajectories +
+`AI-USE.md`**, **CH-11b voice pass**, **CH-10 worksheet** — which the README and
+`SAFETY.md` both currently describe as *a shell against a synthetic fixture*, because
+that is what `docs/worksheet/worksheet.html` is — then DRAFT-1, CH-14b and CH-15.
+
+---
+
 ## CH-14a · 2026-08-31 · Claude Code, `claude-opus-5` (1M context) · BUILD · **THE BLOCKER WAS NEVER A BLOCKER**
 
 ### The one thing worth reading

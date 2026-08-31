@@ -87,6 +87,86 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-11 · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **README, REPRODUCE, and the four files under them**
+
+**Models called against the paid ceiling: NONE.** Zero API calls, zero arms re-run.
+Committed spend is **unchanged at USD 11.6323** of 18.00, and
+`docs/evidence/runs/cost_ledger.csv` is byte-identical to how this session found it —
+hashed before the first commit and again after the last. `prompts/CH-11.md` forbade model
+calls; the ledger is the evidence that none were made.
+
+**Arms run: none.** Every figure in the six new files is copied from a committed artefact
+and cites its path, or is replayed from those artefacts by `analyse_checkpoint.py`,
+`analyse_a1.py` and `run_bscript.py` — all three pure, all three offline.
+
+**Subagents: 52 in one workflow, `claude-opus-5`, effort high, 2,625,778 tokens.**
+This is the largest disclosure in this entry and it is made in full.
+
+| | |
+|---|---|
+| orchestration | one `Workflow` run, id **`wf_44b0dd6c-5e5`**, script `ch11-doc-audit`, 916 s wall-clock, 729 tool uses, 0 errors |
+| stage 1 — Audit | **8 agents**, one per dimension, each with zero shared context and read-only: numbers in the results section · numbers everywhere else · mandated structure against `prompts/CH-11.md` §1 · voice against §4 · contradictions against every shipping document · whether `REPRODUCE.md` actually executes · dependencies and licences · scope-fence compliance and omissions |
+| stage 2 — Verify | **44 agents, one per finding**, each prompted to **refute** it and defaulting to *refuted* unless it could confirm the defect by opening the files itself. **13 findings were refuted and dropped; 31 survived.** |
+| what they could do | read, grep, glob, and run read-only shell commands. **No edits, no network, no model arms.** |
+| what was done with the output | every surviving finding was checked by the build session against the artefact a third time before any text changed |
+
+**Their transcripts are not in the repository, and that is a gap.** Hard rule 10 wants
+every agent run logged into `docs/trajectories/`; `prompts/CH-11.md`'s fence makes `docs/`
+read-only for this chunk. The fence was obeyed. The runs are on disk outside the repo at
+`~/.claude/projects/<slug>/subagents/workflows/wf_44b0dd6c-5e5/`, one JSONL per agent plus
+`journal.jsonl`, and **`QUESTIONS.md` Q30 asks the architect whether a documentation chunk
+should be allowed a directory to put them in.** They are named here rather than left
+unmentioned.
+
+**The audit paid for itself, and the sharpest finding was against this session.** The
+worked example in the README quoted `2016-09949|1436.3`'s editorial note. My terminal
+renders UTF-8 through a cp1252 code page, so `§` and the corpus's curly quotes came back
+as `?`. I read that as a decoding artefact **in the corpus**, wrote nine literal U+FFFD
+characters into the README, and added a paragraph explaining that the freeze carries
+U+FFFD and that reproducing it faithfully was what hard rule 7 demanded. The corpus
+contains **zero** U+FFFD: 973 `§` and 755 curly quotes, checked at the byte level. **I
+invented a data defect out of my own console encoding and then wrote a principled-sounding
+paragraph defending it.** The audit caught it, the bytes settled it, and the paragraph is
+gone. Rule 15, on the session that was writing the file about rule 15.
+
+**Tools used, and what each was for:**
+
+| tool | used for |
+|---|---|
+| `git clone`, `show`, `log`, `ls-files`, `status` | the clean-room clone; dating the Iteration 1 card against the arm it predicted |
+| `python -m venv` + `pip install -r requirements.txt` | the fresh environment for the Tier-1 verification — the one step that touched the network |
+| `python`, `pytest` | the offline replay, the suite, the import census, the licence-metadata read, the byte-level encoding checks |
+| `Workflow` (Claude Code) | the 8 + 44 adversarial audit above |
+| `grep`, `sed`, `find` | reading the evidence tree |
+
+**Human direction.** The whole chunk is `prompts/CH-11.md`, issued verbatim and followed.
+No question was put to the operator mid-session; six were raised to `QUESTIONS.md` instead
+— **Q30** through **Q35** — and each takes the conservative option and continues rather
+than blocking.
+
+**Four things this session checked before trusting them:**
+
+1. **The chunk prompt's `764 seconds` was checked, not relayed.** `AI-USE.md` already
+   carries a `764` that is `A1-iter1`'s wall-clock, which made the prompt's figure look
+   like a transcription slip. It is not: `e12466c` is `02:11:37Z` and the first record of
+   `A1-iter1-rep1.jsonl` is `02:24:21.091Z`, so the gap is **764.091 s**. Two unrelated
+   quantities agreeing to a tenth of a second, and only one of them is the claim.
+2. **Every dependency licence was read out of the installed `dist-info` metadata** in the
+   verification venv rather than recalled, and `colorama`'s clause count was checked in
+   its own `LICENSE.txt`.
+3. **`CONTEXT.md` §3's ⚠️ ban was honoured.** The pilot figures `0.545 / 0.5855 / 0.52`
+   and the **+27.3 pp** retrieval gain are marked *provenance-unverified* and forbidden in
+   the README until re-derived. They appear nowhere in any file this session wrote, and
+   the hot take is carried by in-repo per-class recall instead.
+4. **Two numbers this session was about to copy do not reproduce**, and both are now
+   `QUESTIONS.md` entries rather than repeated: `CHANGELOG.md`'s *"26 items had samples
+   that disagreed"* (the votes file gives **22** — Q33), and two shipping documents
+   attributing the restricted-set pre-registration to `GOOD.md` §11, which says the
+   opposite (Q32).
+
+**Trajectory:** `docs/trajectories/build/CH-11.jsonl`, exported by
+`tools/export_session.py` (hard rule 10, end-of-session duty 6).
+
 ### CH-14a · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **PACKAGING — and the blocker was never a blocker**
 
 **Models called by THIS session: NONE.** Zero API calls, zero tokens against the paid

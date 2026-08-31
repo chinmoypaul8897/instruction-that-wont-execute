@@ -2041,3 +2041,327 @@ reading it sees the gap instead of a tidy list with holes in it.
 A dedicated chunk, gated, before submission. `requirements.txt` and `LICENSE` are
 minutes of work. `README.md` and `REPRODUCE.md` are not, and they are the two a judge
 reads first.
+
+---
+
+## Q30 - CH-11's fence makes `docs/` read-only, so this chunk's own verification cannot be committed as evidence
+
+**Raised at CH-11, 2026-08-31. Class B: decided, recorded, work continued.**
+
+### The conflict
+
+`CLAUDE.md` hard rule 14: *"Any claim from data ships its generating script **and** its
+committed output under `docs/evidence/`."*
+
+`prompts/CH-11.md` SCOPE FENCE: *"Protected read-only: ... `docs/`."*
+
+CH-11 was asked to *"verify the Tier-1 replay works from a fresh venv built off"*
+`requirements.txt`. Verifying it produces a measurement - the replay's exit codes, its
+per-step wall-clock, the SHA-256 comparison of the regenerated result files. Rule 14
+says that measurement ships with its script under `docs/evidence/`. The fence says this
+chunk may not write there.
+
+### What was done
+
+**The fence wins, and the measurement is published somewhere the fence does allow.**
+
+- The verification script lives in the session scratchpad, not in the repository.
+- Its full output is transcribed into `PROGRESS.md`'s CH-11 entry, which **is** a
+  committed artifact and **is** inside the fence. `REPRODUCE.md` cites `PROGRESS.md`
+  for the timing rather than citing nothing.
+- No number from that run appears anywhere without that citation.
+
+**Why the fence rather than the rule.** The fence is narrower and more recent, it names
+`docs/` explicitly, and CH-11's whole risk is a documentation chunk quietly editing
+evidence directories it did not generate. Rule 14's purpose - *a number a reader can
+check* - is served by `PROGRESS.md`. Rule 14's letter is not. That is a real deviation
+and it is recorded here rather than absorbed.
+
+### The measurement, so it is in a ruling file as well
+
+Fresh `git clone`, fresh `python -m venv`, `pip install -r requirements.txt` only, the
+network proved unreachable by attempting `govinfo.gov` through a closed port and
+requiring the attempt to fail:
+
+```
+python                   Python 3.12.2
+venv contents            Pygments==2.21.0, colorama==0.4.6, iniconfig==2.3.0,
+                         packaging==26.3, pluggy==1.6.0, pytest==9.1.1
+refetch --verify-only    exit 0    0.60s   REFETCH OK - 4/4 6/6 2/2 3/3 3/3 = 18/18
+analyse_checkpoint       exit 0    0.39s
+analyse_a1               exit 0    0.89s
+pytest -q                exit 0   12.54s   316 passed, 26 skipped
+TIER-1 TOTAL                      14.42s
+run_bscript.py           exit 0  143.13s   (the 2,000-draw permutation null)
+7 of 7 headline strings MATCH · 4 of 4 result files IDENTICAL · 2 of 2 bscript files
+IDENTICAL
+VERDICT: ALL PASS
+```
+
+### Two more things the same fence blocked, named rather than left out
+
+**1. `prompts/CH-11.md` is not committed.** Every other chunk's prompt is tracked, and
+`PROCESS.md` section 3 calls `prompts/` *"the agent instructions deliverable 1
+requires"*. CH-11's fence lists `prompts/` as protected read-only and does not put it on
+the create/change list, so this session did not add it. `THIRD-PARTY.md` section 5 and
+`AI-USE.md` both name the exception rather than claiming a completeness they do not
+have. One command closes it, and it is the operator's to run:
+
+```
+git add prompts/CH-11.md
+```
+
+**2. The audit subagents' trajectories are not committed.** This session ran an
+eight-dimension adversarial audit over the six new files, one verifier per finding -
+workflow run `wf_44b0dd6c-5e5`, 52 agents. Hard rule 10 wants every agent run in
+`docs/trajectories/`; the fence makes `docs/` read-only. The runs are on disk outside the
+repository at `~/.claude/projects/<slug>/subagents/workflows/wf_44b0dd6c-5e5/`, one JSONL
+per agent plus `journal.jsonl`, and the counts and purpose are recorded in `AI-USE.md`'s
+CH-11 entry.
+
+### For the architect
+
+1. Should a documentation chunk's own verification be allowed a single evidence
+   directory - `docs/evidence/ch11-repro/` - as a named exception to its fence? The
+   alternative is what happened here: a real measurement published in the session
+   journal instead of the evidence tree.
+2. Should a chunk always be permitted to commit **its own prompt** and **its own
+   subagent trajectories**, whatever else its fence protects? Both are deliverable-4
+   items and both are, by construction, artifacts the chunk itself creates.
+3. This entry does not ask for the fence to be widened retrospectively. Nothing under
+   `docs/` or `prompts/` was written.
+
+---
+
+## Q31 - `STATUS.md`'s CH-14a row states the secret sweep's scope as 450 blobs / 81 commits; the committed scan says 462 / 84
+
+**Raised at CH-11, 2026-08-31, while citing the sweep in `SAFETY.md`. Not acted on -
+outside this chunk's business. Recorded under hard rule 15.**
+
+`STATUS.md`, CH-14a row: *"Secret sweep **PASS, 0 findings** over 450 blobs / 81
+commits"*.
+
+`docs/evidence/secret-scan/scan.txt`, which is the artifact:
+
+```
+repository    : 2453998f75446b52cbeb07c908eec5dbf689b9dd
+commits       : 84
+  blobs in history           462
+  text blobs scanned         462
+  binary blobs skipped         0
+  scanned + skipped == blobs : 462 + 0 == 462  -> True
+```
+
+`SUBMISSION.md` already says **462 / 84** and agrees with the artifact. **The verdict is
+unaffected** - PASS, 0 findings, on either scope - and both numbers describe the same
+sweep at slightly different commits, so the smaller pair is most likely a figure taken
+while the scan was still being iterated on.
+
+`SAFETY.md` cites **462 text blobs across 84 commits**, from the artifact.
+
+`AI-USE.md`'s CH-14a entry carries the same stale figure - *"sweeping all 450 blobs of
+history"*.
+
+**Not corrected here.** Editing another chunk's `STATUS.md` row or `AI-USE.md` entry is
+not CH-11's business, and the discrepancy is a stale quotation rather than a moved
+result. It is flagged so the architect can correct both or record why they stand.
+
+---
+
+## Q32 - two shipping documents attribute the restricted-set pre-registration to `GOOD.md` section 11, and `GOOD.md` section 11 says the opposite
+
+**Raised at CH-11, 2026-08-31, while writing the README's LIMITATIONS section. Not acted
+on - both documents are outside this chunk's fence. Recorded under hard rule 15.**
+
+### The contradiction
+
+`docs/evidence/ch06-a1/a1-result.txt`, the deviation banner printed above every arm
+table:
+
+> GOOD.md section 11 named data/evalset-restricted/ as the primary eval set.
+
+The architect's Q19 ruling, transcribed verbatim above:
+
+> GOOD.md pre-registered the RESTRICTED set as primary; the restricted set yields ONE
+> pair and measures nothing.
+
+`GOOD.md` section 11, in full:
+
+> **Primary: `data/evalset/` - 38 pairs, n = 76.** ... **`data/evalset-restricted/`
+> (1 pair, n = 2) is committed**, so the architect can flip the primary with one flag
+> and a reviewer can run either.
+
+**`GOOD.md` section 11 names the UNRESTRICTED set as primary.** It is the set that was
+used. On its own text there is no deviation from `GOOD.md` at all.
+
+### Where the restricted-primary pre-registration actually is
+
+`docs/evidence/ch03-evalset/pre-registration.md` section 2, committed at CH-03:
+
+> **Applied as a named rung of the exclusion ladder: FR documents whose per-document
+> completeness under `v11` is < 0.90 are excluded, with their count.** The ladder
+> publishes n **with and without** that rung, and the **restricted** set is the primary
+> eval set. That is the architect's ruling and it is fixed here, before the count is
+> known, precisely so that it cannot later be chosen for its effect on n.
+
+Q19's own open item 1 points at the right document - *"Pre-registration section 2 fixes
+the >= 0.90 per-document floor as primary"* - and then the ruling that answers it names
+`GOOD.md`.
+
+### What is and is not concluded
+
+**NOT concluded: that the deviation is unreal.** It is real. The CH-03 pre-registration
+fixed the restricted set as primary for a stated anti-gaming reason, and the shipped
+primary is the unrestricted set. Q19's substance stands and its ruling stands.
+
+**Concluded: the attribution is wrong, and it has propagated into a frozen results
+artifact.** A judge who follows `a1-result.txt`'s banner to `GOOD.md` section 11 finds it
+saying the opposite, and the natural reading of that is that the pre-registration was
+edited - which it was not. `GOOD.md` is byte-frozen and its CH-14a addendum changed zero
+original lines.
+
+**Not corrected here.** `docs/` is read-only under CH-11's fence, `a1-result.txt` is a
+regenerated artifact whose byte-identity is itself a published check, and an architect's
+transcribed ruling is not a build session's to rewrite. **`README.md`'s LIMITATIONS
+section cites `docs/evidence/ch03-evalset/pre-registration.md` section 2 as the source of
+the deviation and states this discrepancy in the same paragraph**, so the shipped README
+is right even while the two upstream documents disagree.
+
+### For the architect
+
+1. Should `a1-result.txt`'s banner be corrected to name the CH-03 pre-registration? It is
+   regenerated by `analyse_a1.py`, so this is a one-line source change plus a re-run, and
+   the re-run is offline and free - but it changes the bytes of a file whose
+   byte-identity across three environments is a published result.
+2. Or is an errata note the right shape, the way `GOOD.md` took an addendum rather than
+   an edit?
+
+---
+
+## Q33 - `CHANGELOG.md`'s "26 items had samples that disagreed with each other" does not reproduce; the shipped votes file gives 22
+
+**Raised at CH-11, 2026-08-31, while copying the Final changelog row into the README. Not
+acted on - `CHANGELOG.md` is outside this chunk's fence. Recorded under hard rules 14 and
+15.**
+
+`CHANGELOG.md`'s Final row, and `PROGRESS.md`'s CH-06 entry, both say of B0-prime:
+
+> it differs on just 2 of 82 items and the two flips cancel exactly, while **26 items had
+> samples that disagreed with each other**
+
+**No generating script publishes 26**, and the only committed record of B0-prime's three
+per-item samples is `docs/evidence/ch06-a1/B0prime-rep1-votes.json`. Counted from it three
+ways:
+
+| reading | count |
+|---|---:|
+| items whose three raw sample strings are not all equal | **22** |
+| the same after `src/score.py::normalise_verdict` | **22** |
+| items where the *parseable* votes disagree, non-answers dropped | **8** |
+
+None of the three is 26.
+
+**NOT concluded: that 26 is wrong.** `QUESTIONS.md` Q26 records that B0-prime was run
+**twice** and that the second run overwrote the first run's per-item files, so a figure
+computed against run 1 is no longer checkable from the tree. That is a plausible
+explanation and it is not a confirmed one.
+
+**Concluded: 26 is not reproducible from the shipped artifacts**, so it cannot carry a
+claim. `README.md` publishes **22 of 82** with the votes-file path beside it, and notes
+the 8-among-parseable reading in the same sentence.
+
+**Nothing downstream moves.** B0-prime's accuracy, its McNemar b = 1 / c = 1, its
+p = 1.0000 and the *"extra compute buys nothing"* conclusion are all independent of this
+count.
+
+---
+
+## Q34 - B0-prime is named the "compute-matched control" and it is not token-matched
+
+**Raised at CH-11, 2026-08-31. Not acted on - no arm is re-run and no number moves.
+Recorded because the README had to state the control's strength accurately.**
+
+`CONTEXT.md` section 4 specifies B0-prime as **"B0-agent at A1's exact token budget, spent
+on best-of-3 self-consistency with a published tie-break"**, and `CHANGELOG.md` and
+`src/arms.py`'s docstring repeat *"at A1's token budget"*.
+
+Measured, from `docs/evidence/ch06-a1/a1-result.json`'s own ledger block:
+
+| arm | input tokens | output tokens | USD |
+|---|---:|---:|---:|
+| A1 | **4,006,662** | 265,354 | 5.3334 |
+| B0prime | **1,377,402** | 4,288 | 1.3988 |
+| B0-agent | 1,453,863 | 3,816 | 1.4729 |
+
+**B0-prime spent about 34% of A1's input tokens and 26% of its dollars.** It is B0-agent
+sampled three times per item, which is three times the *calls* and roughly the same total
+input as B0-agent's own three reps - not A1's budget.
+
+**What the control does and does not rule out.** It rules out *"three tries instead of
+one"*: majority voting over three samples returns B0-agent's exact accuracy, 0.6585,
++0.0 pp, p = 1.0000. **It does not rule out *"three times the tokens"***, because it never
+spent them. The conclusion *"the gain is the capabilities, not the budget"* is therefore
+supported for repeated sampling and unsupported for token volume, and the README says so
+in those terms.
+
+**Not acted on.** Building a genuinely token-matched control means new paid arms, and
+CH-11 is forbidden model calls. `CONTEXT.md` is architect-only. The honest move available
+to a documentation chunk is to state the control's actual strength, which is done.
+
+### For the architect
+
+1. Is a token-matched B0-prime worth the spend before submission? Remaining headroom is
+   USD 6.3677 of the 18.00 ceiling.
+2. If not, should `CONTEXT.md` section 4's *"at A1's exact token budget"* take an errata
+   note, so the specification and the shipped arm agree?
+
+---
+
+## Q35 - `PROVENANCE.md` section 5 names `claude-sonnet-5` as the model of "every evaluation arm". Every other artifact says `claude-haiku-4-5-20251001`
+
+**Raised at CH-11, 2026-08-31, while writing `THIRD-PARTY.md`'s model row. Not acted on -
+`PROVENANCE.md` is outside this chunk's fence. Recorded under hard rule 15.**
+
+`PROVENANCE.md` section 5, third row of the third-party table:
+
+| Component | Licence | Role |
+|---|---|---|
+| Anthropic API (`claude-sonnet-5`) | commercial, per terms | every evaluation arm |
+
+`grep -i haiku PROVENANCE.md` returns nothing. Every authoritative artifact contradicts
+it:
+
+| source | says |
+|---|---|
+| `GOOD.md` section 8 | *"Model: `claude-haiku-4-5-20251001`, the same model for every arm"* |
+| `docs/evidence/ch06-a1/a1-result.txt` | *"model      claude-haiku-4-5-20251001 @ temperature 0, EVERY arm"* |
+| `AI-USE.md` | *"`claude-haiku-4-5-20251001` | 951 | every evaluation arm, 3 reps, temperature 0"* |
+| `docs/evidence/runs/cost_ledger.csv` | the `model` column is haiku on the overwhelming majority of rows; the `claude-sonnet-5` rows are the 20-item sensitivity subset |
+
+`claude-sonnet-5` was used for **one thing**: the model-sensitivity subset, which is
+**WITHDRAWN** as a harness defect - 13 of 20 `B0-agent-sonnet` calls returned empty
+(`QUESTIONS.md` Q19). **No claim in this submission rests on a sonnet arm.**
+
+So `PROVENANCE.md`'s row is wrong twice over: it names the wrong model, and it attributes
+to it a scope that belongs to a withdrawn subset.
+
+**Why it matters more than a typo.** `PROVENANCE.md` exists to answer ground rule 02 and
+is one of the first files a judge reads for disclosure. A reader who takes it at face
+value concludes the headline was measured on Sonnet, and then finds Haiku everywhere
+else. The fairness argument in `CONTEXT.md` section 4 - *"every arm runs the same model"* -
+is what the row appears to contradict.
+
+**Not corrected here.** `PROVENANCE.md` is protected read-only by CH-11's fence.
+`THIRD-PARTY.md` section 4 states the model correctly, names the sonnet subset as
+withdrawn, and cites the ledger. The suggested correction, for whoever holds the pen:
+
+```
+| Anthropic API (`claude-haiku-4-5-20251001`) | commercial, per terms | every evaluation
+  arm, temperature 0 |
+| Anthropic API (`claude-sonnet-5`) | commercial, per terms | the model-sensitivity
+  subset only - WITHDRAWN as a harness defect (QUESTIONS.md Q19); no claim rests on it |
+```
+
+**Previously spotted and not remediated.** `context/11-REMEDIATION-2.md` records the same
+defect. It survived into the shipping tree, which is itself the finding: a defect named in
+a remediation document and then not carried out is indistinguishable from one never found.
