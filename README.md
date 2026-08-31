@@ -207,9 +207,14 @@ to the greedy answer.
 **The caveat, because the control's own name overstates it.** `CONTEXT.md` §4 specifies
 B0′ as *"B0-agent at A1's exact token budget"*. Measured, it spent **1,377,402 input
 tokens against A1's 4,006,662** and USD 1.3988 against USD 5.3334
-(`docs/evidence/ch06-a1/a1-result.json`). It is a repeated-sampling control, not a
-token-matched one. It rules out *"three tries instead of one"*; it does not rule out
-*"three times the tokens"*. B0′ is also **the only arm in the packet not at temperature
+(`docs/evidence/ch06-a1/a1-result.json`) — roughly a third of A1's input, not a match.
+It is a **repeated-sampling control at 3× best-of sampling**, not a token-matched one. It
+rules out *"three tries instead of one"*; it does not rule out *"three times the tokens"*.
+**A genuinely compute-matched control was not run at all** — building one means new paid
+arms, and it is stated here rather than implied by a label. That statement is stronger
+than the mislabel would have been: *"the agent did not simply get more compute"* is
+supported by the sampling control, and it is **not** supported by a token match, because
+there is none. `QUESTIONS.md` **Q34**. B0′ is also **the only arm in the packet not at temperature
 0** — self-consistency at 0 is a no-op, and the deviation is ruled in `QUESTIONS.md` Q22.
 
 **And the trivial attack is dead.** The best model-free script, a threshold over 30 cheap
@@ -223,7 +228,7 @@ so this baseline was built to win if it could. `docs/evidence/ch04-scorer/bscrip
 |---|---:|---:|---:|---:|---:|
 | B0 — instruction only | 0.4756 | 39/82 | 0.1220 ✅ | 0.9268 ❌ | 3 |
 | B0-agent — + point-in-time CFR text | 0.6585 | 54/82 | 0.1951 ✅ | 0.4878 ❌ | 0 |
-| B0′ — compute-matched control | 0.6585 | 54/82 | 0.2195 ✅ | 0.4634 ❌ | 0 |
+| B0′ — repeated-sampling control | 0.6585 | 54/82 | 0.2195 ✅ | 0.4634 ❌ | 0 |
 | A1-iter1 — + tool | 0.5610 | 46/82 | 0.4878 ❌ | 0.3902 ❌ | 2 |
 | A1-minus-tool — + skill | 0.6463 | 53/82 | 0.3415 ❌ | 0.3659 ❌ | 0 |
 | **A1 — both** | **0.7195** | **59/82** | **0.2195 ✅** | **0.3415 ❌** | **0** |
@@ -249,7 +254,7 @@ one that quietly succeeded. The full cards, with their arithmetic, are in `CHANG
 | **Iteration 3** *(removed #3)* | **Ordered-state ledger — NOT BUILT.** Pre-declared as a counted removal by ruling R-01 before any code existed. | Class size recomputed in-repo and **the published justification DOES NOT REPRODUCE**: four readings of the spec's prose give 3.3% / 11.1% / 19.6% / 30.1%, and the published **42.0% sits above the ceiling of the loosest reading**. No denominator reconciles. `QUESTIONS.md` **Q23** | **REMOVED, and the removal is unaffected** — R-01 cut it to measure two capabilities properly rather than three in a hurry, which never rested on the class size. **A removal justified BY a number that then failed to reproduce would have been a far worse position.** The capability is visible as an escalation rather than absent: **human-checkpoint condition C3** fires when one designation is touched twice and **names R-01 in its own escalation text**. 16 of 82 items route to the checkpoint. |
 | **Removed #1** | **Current CFR text instead of point-in-time text.** The experiment that prices the corpus: CH-03 spent a night building text as it stood on the publication date, and this measures what skipping it would have bought. | **0.6585 → 0.5976, −6.1 pp**, McNemar p = 0.4421, same 82 items, identical text pipeline including stripping the editorial notes that define the labels. False-defect 0.1951 → **0.5122**; missed-defect 0.4878 → **0.2927**. `docs/evidence/ch09-removed/leakage-result.txt` | **The pre-registered prediction MISSED and is recorded as missed.** It predicted a *rise* and pre-committed that a rise would be proof of leakage. The number fell. **The point-in-time corpus is vindicated either way** — and look at the class shift, not the average: the current text turned a missed-defect problem into a false-defect problem. |
 | **Removed #2** | **Intra-rule collision detector.** Cut by R-01 with its class size measured rather than asserted. | **43 of 2,527 = 1.70%**, reproducing **neither** prior endpoint (pilot 1.31%, naive recount 3.07%). Consistency check passes: collision-only = 0, so collisions are a strict subset of state-carry. `docs/evidence/ch09-removed/class_sizes.txt` | **REMOVED, and not because of the class size.** 0 of 68 labelled items contain a redesignation instruction; **NARA never publishes a note naming an intra-rule conflict** — a live probe for *"conflicting amendments"* returned 0; and 15 of the pilot's 26 collisions are *correct drafting*. **A detector for a class NARA does not write notes about cannot be scored against NARA's notes at any class size.** |
-| **Final** | **The full arm matrix, both ablations, and the control for extra compute.** The first question any reader asks is *"did the agent just get more compute?"*, so **B0′** was built to answer it. | B0 0.4756 · B0-agent 0.6585 · **B0′ 0.6585** · A1-iter1 0.5610 · A1-minus-tool 0.6463 · A1 0.7195. Per-arm tokens and USD, per-class recall, clustered bootstrap with a probe against item-level resampling, and `docs/evidence/error-taxonomy.csv`. Spend **USD 11.63** of an 18.00 ceiling. | **B0′ = B0-agent to four decimal places**, +0.0 pp, p = 1.0000, differing on 2 of 82 items whose flips cancel — while **22 of 82** had samples that disagreed with each other (`B0prime-rep1-votes.json`). **Majority voting over repeated samples converges to the greedy answer and buys nothing** — though B0′ spent 1.38 M input tokens against A1's 4.01 M, so it is a repeated-sampling control rather than the token-matched one `CONTEXT.md` §4 specifies. **A1's per-class recall moves +14.6 pp on the defective class for −2.4 pp on the clean class** — the hot take confirmed on this project's own baseline. |
+| **Final** | **The full arm matrix, both ablations, and the control for extra compute.** The first question any reader asks is *"did the agent just get more compute?"*, so **B0′** was built to answer it. | B0 0.4756 · B0-agent 0.6585 · **B0′ 0.6585** · A1-iter1 0.5610 · A1-minus-tool 0.6463 · A1 0.7195. Per-arm tokens and USD, per-class recall, clustered bootstrap with a probe against item-level resampling, and `docs/evidence/error-taxonomy.csv`. Spend **USD 11.63** of an 18.00 ceiling. | **B0′ = B0-agent to four decimal places**, +0.0 pp, p = 1.0000, differing on 2 of 82 items whose flips cancel — while **22 of 82** had samples that disagreed with each other (`B0prime-rep1-votes.json`). **Majority voting over repeated samples converges to the greedy answer and buys nothing** — though B0′ spent 1.38 M input tokens against A1's 4.01 M, so it is a repeated-sampling control at 3× best-of sampling rather than the token-matched one `CONTEXT.md` §4 specifies, and **a genuinely compute-matched control was not run** (Q34). **A1's per-class recall moves +14.6 pp on the defective class for −2.4 pp on the clean class** — the hot take confirmed on this project's own baseline. |
 
 ## e. The main failure mode
 
@@ -406,8 +411,13 @@ one should not. `docs/evidence/ch06-a1/a1-result.txt`'s deviation banner and Q19
 text both attribute the restricted-primary pre-registration to **`GOOD.md` §11**. `GOOD.md`
 §11 says the opposite — *"Primary: `data/evalset/` — 38 pairs, n = 76"*, the unrestricted
 set. The deviation is real and it is from the CH-03 pre-registration; the attribution to
-`GOOD.md` is a misquotation that has propagated. It is recorded as `QUESTIONS.md` **Q32**
-rather than corrected in another chunk's frozen artifact.
+`GOOD.md` is a misquotation that has propagated. It was raised as `QUESTIONS.md` **Q32**
+and **answered at CH-11c**: a dated correction is appended beneath the Q19 ruling, quoting
+`GOOD.md` §11 in full, and **the ruling's own text is left unedited**. The substantive
+decision is unaffected — it rests on the pair count, **1 against 41**, not on which
+document pre-registered what. `a1-result.txt`'s banner is **still uncorrected** and is
+left so deliberately: it is a regenerated artifact whose byte-identity across three
+environments is itself a published result, and re-cutting it is the architect's call.
 
 **Gate status, plainly.** `PROCESS.md` §6 gates a chunk on review by a session with zero
 shared context. **Six chunks carry a gate. None of them passed it.**
