@@ -2510,6 +2510,18 @@ at `docs/evidence/ch11c-sweep/`):
 | tracked `docs/evidence/` files naming `claude-haiku-4-5-20251001` | 19 | **27** |
 | tracked `docs/evidence/` files naming `claude-sonnet-5` | 4 | **13** |
 
+**Both measured EXCLUDING `docs/evidence/ch11c-sweep/`, and that exclusion is the point.**
+This count is **self-referential**: CH-11c's own evidence names both models — it has to,
+it is the correction's evidence — so committing this pack raises the naive count. Run
+over *every* tracked evidence file at `144b9cf` it reads **32 / 19** and it will keep
+climbing. `ch11c_verify.py` prints **both readings** and neither is hidden.
+
+**Which is why a file count is the wrong instrument for this claim, and the card reached
+for it anyway.** A file that *mentions* a model name is not a file that *used* it: this
+very entry mentions `claude-sonnet-5` and ran no arm. The authoritative source is the
+ledger below, which records what each call actually used and cannot drift as documents
+are written about it.
+
 **The card's conclusion is right and its counts are not.** The 13 sonnet-naming files are
 **not** the withdrawn subset only: they also include `docs/evidence/ch03-model-id/`
 (the model-id probe from Q1), `docs/evidence/ch00-goldens.md`,

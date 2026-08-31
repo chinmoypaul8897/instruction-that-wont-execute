@@ -1,5 +1,5 @@
 CH-11c VERIFICATION -- every figure the five corrections rest on
-repository HEAD : 9f7c4717b8c58c5ffb999b3279566ceae85fca4b
+repository HEAD : 144b9cf28404570f0780a4aef2ff27403b129bf4
 no network, no model call, no clock, no RNG in any number below
 
 ==============================================================================
@@ -40,18 +40,26 @@ no network, no model call, no clock, no RNG in any number below
     | **A second correction, to the first one, same day.** The corrected row above first read *"every evaluation arm
 
   The chunk card claimed 19 haiku-naming / 4 sonnet-naming files
-  under docs/evidence/. Measured over TRACKED files:
-    tracked files naming claude-haiku-4-5-20251001 : 31 (card said 19)
-    tracked files naming claude-sonnet-5           : 18 (card said 4)
-    the sonnet-naming files:
+  under docs/evidence/. Measured over TRACKED files.
+
+  THIS COUNT IS SELF-REFERENTIAL AND IS REPORTED TWICE. CH-11c's own
+  evidence under docs/evidence/ch11c-sweep/ names both models -- it
+  has to, it is the correction's evidence -- so every commit of this
+  pack raises the count by one or two. A file count is therefore the
+  WRONG instrument for this claim and the ledger above is the right
+  one. Both readings are printed so neither is hidden:
+
+    EXCLUDING docs/evidence/ch11c-sweep/ -- the stable reading
+      naming claude-haiku-4-5-20251001 : 27   (card said 19)
+      naming claude-sonnet-5           : 13   (card said 4)
+    INCLUDING it -- grows as this pack is committed
+      naming claude-haiku-4-5-20251001 : 31
+      naming claude-sonnet-5           : 18
+
+    the sonnet-naming files, excluding this chunk's own:
       docs/evidence/ch00-goldens.md
       docs/evidence/ch03-model-id/model-id-probe.txt
       docs/evidence/ch03-model-id/model_id_probe.py
-      docs/evidence/ch11c-sweep/ch11c-agent-sweep.md
-      docs/evidence/ch11c-sweep/ch11c-sweep.txt
-      docs/evidence/ch11c-sweep/ch11c_sweep.py
-      docs/evidence/ch11c-sweep/ch11c_verify.py
-      docs/evidence/ch11c-sweep/progress-CH-11c.md
       docs/evidence/ch14-size/selection-applied.md
       docs/evidence/checkpoint/B0-agent-sonnet-rep1.json
       docs/evidence/checkpoint/B0-sonnet-rep1.json
@@ -62,7 +70,8 @@ no network, no model call, no clock, no RNG in any number below
       docs/evidence/checkpoint/withdrawn/checkpoint-result.txt
       docs/evidence/night-run/summary.md
       docs/evidence/runs/cost_ledger.csv
-  [PASS] the card's file counts do NOT reproduce, so they are not repeated (QUESTIONS.md Q37)  -- measured 31 / 18
+  [PASS] the card's file counts do NOT reproduce, so they are not repeated (QUESTIONS.md Q37)  -- stable reading 27 / 13
+  [PASS] the sonnet-naming files are NOT the withdrawn subset only, as the card said  -- 13 files, incl. the model-id probe
 
 ==============================================================================
 2. Q34 - B0-prime against A1, in tokens and dollars

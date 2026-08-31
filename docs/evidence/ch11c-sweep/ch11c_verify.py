@@ -118,10 +118,19 @@ def section_model():
     # -- the chunk card's own counts, checked rather than repeated (rule 15) --
     print("")
     print("  The chunk card claimed 19 haiku-naming / 4 sonnet-naming files")
-    print("  under docs/evidence/. Measured over TRACKED files:")
+    print("  under docs/evidence/. Measured over TRACKED files.")
+    print("")
+    print("  THIS COUNT IS SELF-REFERENTIAL AND IS REPORTED TWICE. CH-11c's own")
+    print("  evidence under docs/evidence/ch11c-sweep/ names both models -- it")
+    print("  has to, it is the correction's evidence -- so every commit of this")
+    print("  pack raises the count by one or two. A file count is therefore the")
+    print("  WRONG instrument for this claim and the ledger above is the right")
+    print("  one. Both readings are printed so neither is hidden:")
     tracked = [p for p in git("ls-files", "docs/evidence").splitlines()
                if p.strip()]
-    n_h = n_s = 0
+    OWN = "docs/evidence/ch11c-sweep/"
+    n_h = n_s = 0          # all tracked evidence
+    e_h = e_s = 0          # excluding this chunk's own output
     sonnet_files = []
     for rel in tracked:
         path = os.path.join(ROOT, rel)
@@ -129,21 +138,35 @@ def section_model():
             blob = io.open(path, encoding="utf-8", errors="ignore").read()
         except OSError:
             continue
+        own = rel.replace("\\", "/").startswith(OWN)
         if "claude-haiku-4-5-20251001" in blob:
             n_h += 1
+            if not own:
+                e_h += 1
         if "claude-sonnet-5" in blob:
             n_s += 1
-            sonnet_files.append(rel)
-    print("    tracked files naming claude-haiku-4-5-20251001 : %d "
-          "(card said 19)" % n_h)
-    print("    tracked files naming claude-sonnet-5           : %d "
-          "(card said 4)" % n_s)
-    print("    the sonnet-naming files:")
+            if not own:
+                e_s += 1
+                sonnet_files.append(rel)
+    print("")
+    print("    EXCLUDING docs/evidence/ch11c-sweep/ -- the stable reading")
+    print("      naming claude-haiku-4-5-20251001 : %d   (card said 19)" % e_h)
+    print("      naming claude-sonnet-5           : %d   (card said 4)" % e_s)
+    print("    INCLUDING it -- grows as this pack is committed")
+    print("      naming claude-haiku-4-5-20251001 : %d" % n_h)
+    print("      naming claude-sonnet-5           : %d" % n_s)
+    print("")
+    print("    the sonnet-naming files, excluding this chunk's own:")
     for rel in sonnet_files:
         print("      %s" % rel)
     check("the card's file counts do NOT reproduce, so they are not repeated "
-          "(QUESTIONS.md Q37)", (n_h, n_s) != (19, 4),
-          "measured %d / %d" % (n_h, n_s))
+          "(QUESTIONS.md Q37)", (e_h, e_s) != (19, 4),
+          "stable reading %d / %d" % (e_h, e_s))
+    check("the sonnet-naming files are NOT the withdrawn subset only, as the "
+          "card said",
+          any("ch03-model-id" in f or "ch00-goldens" in f
+              for f in sonnet_files),
+          "%d files, incl. the model-id probe" % len(sonnet_files))
 
 
 # ---------------------------------------------------------------------------
