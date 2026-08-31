@@ -2817,3 +2817,67 @@ corrected at this chunk. **Neither convention is written down.**
 **For the architect:** `tools/export_session.py` should either overwrite or suffix, and
 `docs/trajectories/build/README.md` should say which. Right now it does both, in
 different chunks, and the trajectory count disagrees with the session count as a result.
+
+---
+
+## Q43 - one operator contact address survives redaction in a shipped trajectory
+
+**Raised at CH-12, 2026-08-31. NOT fixed here, deliberately. Ground rule 08.**
+
+`tools/export_session.py` scrubs the operator's contact details out of every exported
+transcript, and it does so by **literal match against a pattern source** — first
+`$MICRO1_PII_PATTERNS`, then `~/.config/micro1/pii_patterns.txt`, then
+`context/02-ABOUT-ME.md`. The docstring explains why it is never hard-coded: *"a file
+that lists the value in order to remove it is a new copy of the leak."* That reasoning
+is right, and it has a consequence nobody checked.
+
+**The scrubber did not fail. It was never given the pattern.**
+
+```
+git grep -l -i 'nistula\.life'          -> docs/trajectories/build/CH-01.jsonl   (1 file)
+grep -c -i 'nistula\.life' context/02-ABOUT-ME.md  -> 0
+```
+
+One occurrence, in **one** tracked file, inside a `User-Agent` string in a harvest
+snippet the CH-01 session pasted into its own transcript:
+`micro1-frontier-challenge CH-01 harvest (contact: <operator address>)`. The address is
+**not** in any committed source file, and it is **not** in the git-ignored PII source
+the scrubber reads, so no run of the exporter would ever have removed it.
+
+**Two readings, and neither is obviously right:**
+
+- **(a) It is a leak.** Ground rule 08 excludes the operator's personal data, and a
+  contact address in a shipped 1.4 MB JSONL is exactly the shape of thing that gets
+  found by grep rather than by reading. `SAFETY.md` and `AI-USE.md` both describe the
+  redaction as covering *"the operator's contact details"*, without the qualifier that
+  it covers only the ones listed in a file.
+- **(b) It is deliberate courtesy.** The address was put in a `User-Agent` **on
+  purpose**, so that govinfo.gov could contact the operator about the harvest traffic —
+  the polite convention for a bulk-download client. It was published to a US government
+  server before it was published here.
+
+**Conservative option taken: nothing was touched.** Editing a trajectory to remove it
+would mean **rewriting shipped evidence**, and `docs/trajectories/` is the one place
+this project has committed to leaving alone. Re-exporting `CH-01.jsonl` with the pattern
+added would rewrite it just as thoroughly. Both are worse than reporting it.
+
+**For the architect — three options, in increasing cost:**
+
+1. **Accept it** and add one sentence to `SAFETY.md` saying the redaction is a
+   literal-match scrubber over a named pattern file, so its coverage is exactly that
+   file's contents. *This is the smallest change and it makes an existing claim
+   accurate.*
+2. **Add the address to the PII source and re-export `CH-01.jsonl`.** One command. It
+   changes a shipped trajectory's bytes, which is a thing this project has otherwise
+   refused to do.
+3. **Change the exporter** to also match a generic contact-shaped pattern
+   (`\bcontact:\s*\S+@\S+`). Broader, catches the next one, and risks redacting
+   corpus text that legitimately contains an address.
+
+**The general finding is bigger than the instance**, and it is the one worth recording:
+**a redactor that matches literals from a list can only ever be as complete as the
+list, and nothing measures that list's completeness.** `docs/evidence/ch00-guard-probe.txt`
+cases H-P prove each scrubber *fires*; **no probe proves the pattern set is
+complete**, and case N passes on a literal that is in the list by construction. That is
+the same defect class as a green test suite - the thing this project exists to
+demonstrate - found in this project's own safety machinery.

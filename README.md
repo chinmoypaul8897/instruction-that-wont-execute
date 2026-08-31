@@ -525,7 +525,7 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 | **The pre-registration** | [GOOD.md](GOOD.md) — metric, thresholds, predictions, committed before any result existed |
 | **The iteration cards** | [CHANGELOG.md](CHANGELOG.md) — each committed before its build |
 | **The spec** | [CONTEXT.md](CONTEXT.md) — architect-authored, versioned, outranks the code |
-| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **42** entries (`grep -c '^## Q'`), including our own retractions |
+| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **43** entries (`grep -c '^## Q'`), including our own retractions |
 | **Chunk-by-chunk state** | [STATUS.md](STATUS.md) · [PROGRESS.md](PROGRESS.md) |
 | **Every model, tool and agent** | [AI-USE.md](AI-USE.md) · [`docs/trajectories/`](docs/trajectories/) · [`prompts/`](prompts/) · [`agents/`](agents/) |
 | **What pre-existed vs what was built** | [PROVENANCE.md](PROVENANCE.md) |

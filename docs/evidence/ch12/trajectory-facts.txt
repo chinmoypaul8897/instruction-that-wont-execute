@@ -1,0 +1,105 @@
+CH-12 - TRAJECTORY FACTS
+============================================================================================================
+
+BUILD SESSIONS - docs/trajectories/build/
+
+file                                bytes   lines   asst  first record (UTC)        last record (UTC)         sessionId 
+--------------------------------------------------------------------------------------------------------------------------------
+CH-00.jsonl                     1,105,661     418    146  2026-08-30T09:06:37.143Z  2026-08-30T12:54:31.950Z  bc339ea4  
+CH-01.jsonl                     1,433,689     672    237  2026-08-30T13:51:08.178Z  2026-08-30T14:30:36.025Z  577b7ed1  
+CH-02.jsonl                     1,689,144     709    268  2026-08-30T14:43:18.748Z  2026-08-30T18:16:43.050Z  50cc446c  
+CH-06.jsonl                     2,302,522   1,027    364  2026-08-31T02:03:30.538Z  2026-08-31T03:28:16.194Z  5d0ed479  
+CH-11.jsonl                     2,456,849     987    318  2026-08-31T05:19:20.500Z  2026-08-31T06:10:21.491Z  a89fc411  
+CH-11c.jsonl                    1,799,806     746    276  2026-08-31T07:12:45.883Z  2026-08-31T08:12:30.700Z  c5f29e31  
+CH-14a.jsonl                    1,632,439     733    257  2026-08-31T03:54:08.289Z  2026-08-31T04:56:43.355Z  1636c57b  
+NIGHT-RUN-CHECKPOINT.jsonl      3,123,874   1,348    432  2026-08-30T20:31:44.901Z  2026-08-30T22:36:42.722Z  05dca6c2  
+NIGHT-RUN-FINAL.jsonl           3,696,750   1,659    537  2026-08-30T20:31:44.901Z  2026-08-30T23:13:57.806Z  05dca6c2  
+SPEC-FIX-1.jsonl                1,336,857     454    158  2026-08-30T18:18:57.050Z  2026-08-30T19:04:07.807Z  18eb2b78  
+SPEC-FIX-2.jsonl                  786,125     341    118  2026-08-30T19:53:45.270Z  2026-08-30T20:10:16.553Z  a9ecc0ec  
+--------------------------------------------------------------------------------------------------------------------------------
+TOTAL                          21,363,716   9,094
+
+files: 11   DISTINCT SESSIONS: 10
+  session 05dca6c2 exported 2 times: NIGHT-RUN-CHECKPOINT.jsonl, NIGHT-RUN-FINAL.jsonl
+  is NIGHT-RUN-CHECKPOINT.jsonl a byte-exact prefix of NIGHT-RUN-FINAL.jsonl? YES
+
+
+WHERE EACH BUILD SESSION'S INSTRUCTIONS ARE
+
+trajectory                    opening operator message                            card tracked?
+------------------------------------------------------------------------------------------------------------
+CH-00.jsonl                   Read prompts/CH-00.md and execute it fully.         tracked
+CH-01.jsonl                   Read prompts/CH-01.md and execute it fully.         tracked
+CH-02.jsonl                   Read prompts/CH-02.md and execute it fully.         tracked
+CH-06.jsonl                   Read prompts/CH-06.md and execute it fully.         tracked
+CH-11.jsonl                   Read prompts/CH-11.md and execute it fully.         UNTRACKED
+CH-11c.jsonl                  Read prompts/CH-11c.md and execute it fully.        UNTRACKED
+CH-14a.jsonl                  Read prompts/CH-14a.md and execute it fully.        tracked
+NIGHT-RUN-CHECKPOINT.jsonl    Read prompts/NIGHT-RUN.md and execute it fully.     tracked
+NIGHT-RUN-FINAL.jsonl         Read prompts/NIGHT-RUN.md and execute it fully.     tracked
+SPEC-FIX-1.jsonl              Read prompts/SPEC-FIX-1.md and execute it fully.    tracked
+SPEC-FIX-2.jsonl              Read prompts/SPEC-FIX-2.md and execute it fully.    tracked
+
+
+WHICH BUILD TRANSCRIPT CONTAINS WHICH REVIEW
+
+trajectory                    REVIEW_CH-03.md           REVIEW_CH-03-round2.md    REVIEW_CH-04.md           Agent calls
+--------------------------------------------------------------------------------------------------------------------------
+CH-00.jsonl                   0                         0                         0                         0
+CH-01.jsonl                   0                         0                         0                         0
+CH-02.jsonl                   0                         0                         0                         0
+CH-06.jsonl                   6                         2                         32                        1
+CH-11.jsonl                   13                        7                         28                        0
+CH-11c.jsonl                  6                         5                         0                         0
+CH-14a.jsonl                  0                         0                         6                         0
+NIGHT-RUN-CHECKPOINT.jsonl    26                        2                         0                         2
+NIGHT-RUN-FINAL.jsonl         73                        20                        0                         2
+SPEC-FIX-1.jsonl              0                         0                         0                         0
+SPEC-FIX-2.jsonl              0                         0                         0                         0
+
+Verdict of each committed review (first VERDICT line in the file):
+  REVIEW_CH-03.md            ## VERDICT: **FAIL**
+  REVIEW_CH-03-round2.md     ## VERDICT: **FAIL**
+  REVIEW_CH-04.md            # VERDICT: FAIL
+
+
+EVALUATION ARMS - docs/trajectories/arms/
+
+file                                    bytes  records  record kinds
+------------------------------------------------------------------------------------------------------------
+A1-iter1-rep1.jsonl                 1,605,694     1188  action:449, feedback:109, human_checkpoint:17, run_end:82, run_start:82, tool_response:449
+A1-minus-tool-rep1.jsonl            2,447,989      345  action:82, human_checkpoint:16, retry:1, run_end:82, run_start:82, tool_response:82
+A1-rep1.jsonl                       2,809,706      925  action:335, feedback:74, human_checkpoint:16, retry:1, run_end:82, run_start:82, tool_response:335
+A1-rep2.jsonl                       2,803,610      918  action:331, feedback:75, human_checkpoint:17, run_end:82, run_start:82, tool_response:331
+A1-rep3.jsonl                       2,804,905      925  action:335, feedback:75, human_checkpoint:16, run_end:82, run_start:82, tool_response:335
+B0-agent-currenttext-rep1.jsonl     1,187,233      328  action:82, run_end:82, run_start:82, tool_response:82
+B0-agent-rep1.jsonl                 1,386,464      432  action:108, run_end:108, run_start:108, tool_response:108
+B0-agent-rep2.jsonl                 1,386,471      432  action:108, run_end:108, run_start:108, tool_response:108
+B0-agent-rep3.jsonl                 1,386,463      432  action:108, run_end:108, run_start:108, tool_response:108
+B0-agent-sonnet-rep1.jsonl            245,063      121  action:30, retry:1, run_end:30, run_start:30, tool_response:30
+B0-rep1.jsonl                         305,718      434  action:108, retry:2, run_end:108, run_start:108, tool_response:108
+B0-rep2.jsonl                         305,480      432  action:108, run_end:108, run_start:108, tool_response:108
+B0-rep3.jsonl                         305,676      432  action:108, run_end:108, run_start:108, tool_response:108
+B0-sonnet-rep1.jsonl                   86,985      120  action:30, run_end:30, run_start:30, tool_response:30
+B0prime-rep1.jsonl                  3,172,976      984  action:246, run_end:246, run_start:246, tool_response:246
+
+
+WHAT IS ON DISK BUT NOT SHIPPED, AND WHY
+
+  docs/trajectories/arms/per-item/ : 1,446 files on disk, 0 tracked
+    git-ignored by .gitignore's `docs/trajectories/*/per-item/` rule. Every record
+    survives in the BUNDLED <arm>-rep<N>.jsonl - src/arms.py::bundle() promises
+    'EVERY RECORD SURVIVES - nothing is sampled, summarised or dropped'.
+  reviewer subagent transcripts       : 0 tracked. The Agent tool writes them to a
+    temp path outside the repository. What ships is the launch prompt verbatim inside
+    the build transcript, the verdict verbatim in its task-notification, and the
+    runnable probes under docs/reviews/.
+  workflow journals (86 audit subagents): 0 tracked. Same reason. QUESTIONS.md Q40.
+
+
+TOTALS
+
+  on disk : build 11, arms 15, probe 10  = 36
+  tracked : 36
+  on disk == tracked  OK
+  total   : 43,617,983 B = 43.62 MB
