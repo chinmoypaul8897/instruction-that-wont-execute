@@ -1079,3 +1079,66 @@ Worth stating, because two FAIL verdicts could otherwise read as a broken chunk:
 
 **The eval set is sound in substance. The evidence about it was not, and that is the
 finding.**
+
+
+---
+
+## ARCHITECT RULINGS — 2026-08-31, recorded at the head of CH-06 before any other work
+
+These three arrived together at the opening of the CH-06 build session and are
+transcribed **verbatim**, before the session touched anything else, so that the record
+of the ruling predates every artifact built under it.
+
+```
+Q19 - RULED by ARCHITECT, 2026-08-31.
+The primary eval set is the UNRESTRICTED one, 41 pairs / n=82. GOOD.md
+pre-registered the RESTRICTED set as primary; the restricted set yields ONE pair
+and measures nothing. The pre-registration is therefore DEVIATED FROM, and the
+deviation is disclosed prominently in the README and in every results table -
+never absorbed. Both sets stay built and committed so a judge can run either.
+The reason the restriction existed (so the set could not later be chosen for its
+effect on n) is honoured differently: the choice is recorded here, before the A1
+arm ran, and the restricted result is published beside the unrestricted one.
+
+Q16 - RULED by ARCHITECT, 2026-08-31.
+The pre-registered success criterion requires n >= 84. The corpus yields 82.
+THE CRITERION IS NOT MOVED. The result is reported as n=82 against a criterion
+written for 84, with the two-item shortfall stated plainly wherever the criterion
+is quoted. The gap and the p-value carry the claim; the criterion is reported as
+unmet-on-n and met-on-effect, both stated.
+
+MODEL-SENSITIVITY CHECK - WITHDRAWN, 2026-08-31.
+The sonnet-5 subset is a HARNESS DEFECT, not a finding: 13 of 20 B0-agent-sonnet
+predictions came back EMPTY and were scored as failures. The check did not run.
+It is withdrawn entirely, the artifacts are kept, and no sensitivity claim is
+made anywhere in the submission. Do not re-run it - the clock is better spent on
+A1.
+```
+
+### What each ruling obliges this session to do
+
+| Ruling | Binding consequence for CH-06 and everything downstream |
+|---|---|
+| **Q19** | `data/evalset/` (41 pairs, n = 82) is primary for every A1 arm. **The deviation from `GOOD.md` §11 is disclosed in every results table**, never absorbed into a footnote. `data/evalset-restricted/` stays committed and runnable. |
+| **Q16** | `GOOD.md`'s `n >= 84` is **not moved**. Every quotation of the success criterion in this session's output states the two-item shortfall in the same breath. The criterion is reported split: **unmet on n, evaluated on effect.** |
+| **Sensitivity** | The `-sonnet` rows are **withdrawn**. No sensitivity claim appears in any CH-06 artifact. The artifacts stay on disk under `docs/evidence/checkpoint/` and are labelled withdrawn where they are cited. Not re-run. |
+
+**Q19 and Q16 are hereby CLOSED as ruled.** The escalation that opened them
+(`STATUS.md`, CH-03 `reviewed-FAIL ×2 → ESCALATED`) is answered on points 1 and 3 of
+its three open items: the unrestricted set is sanctioned as primary, and CH-03 may be
+used downstream. **Point 2 — whether CH-03's post-strike corrections were legitimate —
+is not addressed by these rulings and remains open.**
+
+### The withdrawn sensitivity check — the defect, stated in numbers
+
+The row is withdrawn on a mechanical fact, not on a judgement about the result. Of the
+20 `B0-agent-sonnet` calls, **13 returned an empty text block** and `score.py`
+correctly charged each as a failure, because `GOOD.md` §1 fixes that a non-answer is a
+FAILURE and never a skip. That rule is right and it is not being relaxed here: what is
+withdrawn is the *inference*, because an arm that produced no output on 65% of its
+items measured the harness, not the model. `MAX_TOKENS = 16` with no `temperature`
+field is the live suspect and it is not investigated, by ruling.
+
+**The checkpoint's GREEN branch is untouched by this withdrawal**, because it was
+decided on the full-corpus haiku arms alone — `plan.md`'s branch table reads `B0` and
+`B0-agent` and never reads the sensitivity subset.
