@@ -180,3 +180,37 @@ byte-for-byte.
 - **A red result ships as red.** The RED branch is fully specified in `plan.md` and has
   its own writing plan. Nothing here may be relaxed to avoid it.
 - **No number in this file moves after a result is seen.**
+
+---
+
+## ADDENDUM 2026-08-31 - descriptive correction, no criterion moved
+
+GOOD.md was written when the eval set stood at 38 pairs / n=76. CH-03's review
+found and fixed a selection defect and the shipped set is 41 pairs / n=82.
+The SUCCESS CRITERION IS UNCHANGED - n>=84, gap>=8pp, p<0.05, A1>=0.80 - and it
+was ruled NOT MET on all four clauses at CH-06. Both the original figure and the
+shipped figure are shown so a reader can see the criterion was never adjusted to
+the corpus. Ruling: QUESTIONS.md Q16.
+
+**Nothing above this line was edited.** Sections 4 and 11 still read "38 pairs,
+n = 76" because that is what was true when they were committed, and a
+pre-registration that is rewritten when the world moves is not a
+pre-registration. The correction is appended, dated and attributed here.
+
+| | at pre-registration (CH-04) | as shipped (CH-06) |
+|---|---:|---:|
+| pairs | 38 | **41** |
+| n | 76 | **82** |
+| criterion's n clause | **84** | **84 - NOT MOVED** |
+| detectable-effect floor, all-one-way | 7.9 pp | 7.3 pp |
+
+The n clause was unsatisfiable at 76 and it is still unsatisfiable at 82: the
+corpus grew by six items and the criterion needed eight more. Section 4's
+conclusion - "A1 will therefore fail the pre-registered success criterion on the
+n clause alone, whatever it scores" - is unaffected, and it was written before
+any arm ran.
+
+Verified at CH-14a from `data/evalset/items.jsonl`: 82 items, 41 `WILL_EXECUTE`
+and 41 `WILL_FAIL`, over 37 FR documents. The eval set has two committed
+revisions - `067a9d9` at n=76 and `76e2e4b` at n=82 - and the growth is CH-03's
+fix, not a later re-selection.
