@@ -227,10 +227,20 @@ clean-clone replay reproduces the same `TOTAL 11.6323` from the extracted zip.
 
 | tool | used for |
 |---|---|
-| `git archive`, `ls-tree`, `rev-list`, `cat-file`, `write-tree` | measuring the real submission artifact and sweeping all 450 blobs of history |
+| `git archive`, `ls-tree`, `rev-list`, `cat-file`, `write-tree` | measuring the real submission artifact and sweeping all **462** text blobs of history across **84** commits (`docs/evidence/secret-scan/scan.txt`) |
 | `python -m venv` + `pip install pytest` | the clean-room interpreter — the one step that touched the network, before the offline phase began |
 | `pytest` | 10 new probe tests; the full suite in three environments |
 | filesystem + `zipfile` | building and extracting the submission archive |
+
+**Correction, 2026-08-31 (CH-11c).** This row read *"all 450 blobs of history"* until
+CH-11c. The generating artifact `docs/evidence/secret-scan/scan.txt` says **462 text blobs
+across 84 commits**, and under hard rule 14 the artifact wins. **The two figures are not a
+contradiction and neither was invented**: the sweep was committed twice, and this summary
+was written against the earlier run. `git log -- docs/evidence/secret-scan/scan.txt` shows
+`0f3f4fe` (repository `f0a246b1`, **450 blobs / 81 commits**) and then `263ed29`
+(repository `2453998f`, **462 / 84**) — three commits and twelve blobs later. **The verdict
+is PASS with 0 findings on either scope.** `QUESTIONS.md` **Q31**; re-derivation at
+`docs/evidence/ch11c-sweep/`.
 
 **Human direction.** The queue was fixed in `prompts/CH-14a.md`, committed verbatim.
 One question was put to the architect mid-session — whether to raise the 300-file guard
