@@ -1,0 +1,649 @@
+{
+  "affected_items": [
+    "05-8447|75.31",
+    "05-8447|75.6",
+    "2011-27587|80.905",
+    "2015-15249|87.475",
+    "2016-08827|522.1193",
+    "2016-09949|1436.8",
+    "2016-13651|425.606",
+    "2016-13651|425.610",
+    "2016-13983|165.518",
+    "2016-23968|236.4",
+    "2017-23953|425.500",
+    "2019-07652|1.199A-0",
+    "2019-07652|1.199A-1",
+    "2019-15131|217.22",
+    "2020-11897|90.209",
+    "2020-12588|63.7831",
+    "2020-17090|9.3",
+    "2020-17090|9.5",
+    "2022-10875|1653.2",
+    "2023-25238|980.117",
+    "2024-07002|63.119",
+    "2024-07002|63.485",
+    "2024-21984|1321.9",
+    "2024-30575|253.6",
+    "2025-00723|742.6",
+    "2026-06808|60.5417b",
+    "2026-06808|60.5417c",
+    "2026-08556|682.405",
+    "2026-08556|685.303",
+    "2026-11140|149.140",
+    "2026-11140|149.510",
+    "2026-11648|250.1202",
+    "E6-15282|180.209"
+  ],
+  "depth_histogram": {
+    "1": 60,
+    "2": 50,
+    "3": 18
+  },
+  "n_agree": 68,
+  "n_instructions": 208,
+  "n_refused": 0,
+  "n_with_designation": 128,
+  "shipped_false_nested_true": [
+    {
+      "depth": 2,
+      "designation": "(b)(1)",
+      "instruction_index": 4,
+      "item_id": "05-8447|75.31",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(38)",
+      "instruction_index": 3,
+      "item_id": "05-8447|75.6",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(38)",
+      "instruction_index": 4,
+      "item_id": "05-8447|75.6",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(4)(vii)",
+      "instruction_index": 1,
+      "item_id": "2011-27587|80.905",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(11)",
+      "instruction_index": 1,
+      "item_id": "2015-15249|87.475",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(2)",
+      "instruction_index": 1,
+      "item_id": "2016-08827|522.1193",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(2)",
+      "instruction_index": 3,
+      "item_id": "2016-09949|1436.8",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(3)",
+      "instruction_index": 4,
+      "item_id": "2016-09949|1436.8",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(1)",
+      "instruction_index": 6,
+      "item_id": "2016-09949|1436.8",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(1)",
+      "instruction_index": 2,
+      "item_id": "2016-13651|425.606",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(3)",
+      "instruction_index": 3,
+      "item_id": "2016-13651|425.606",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(4)",
+      "instruction_index": 4,
+      "item_id": "2016-13651|425.606",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(4)(i)",
+      "instruction_index": 5,
+      "item_id": "2016-13651|425.606",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(4)(ii)",
+      "instruction_index": 6,
+      "item_id": "2016-13651|425.606",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(1)",
+      "instruction_index": 2,
+      "item_id": "2016-13651|425.610",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(3)",
+      "instruction_index": 3,
+      "item_id": "2016-13651|425.610",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(4)",
+      "instruction_index": 4,
+      "item_id": "2016-13651|425.610",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(4)(i)",
+      "instruction_index": 5,
+      "item_id": "2016-13651|425.610",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(4)(ii)",
+      "instruction_index": 6,
+      "item_id": "2016-13651|425.610",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(c)(7)",
+      "instruction_index": 1,
+      "item_id": "2016-13983|165.518",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(m)(4)",
+      "instruction_index": 5,
+      "item_id": "2016-23968|236.4",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(m)(6)",
+      "instruction_index": 7,
+      "item_id": "2016-23968|236.4",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(e)(2)",
+      "instruction_index": 2,
+      "item_id": "2017-23953|425.500",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(e)(3)",
+      "instruction_index": 3,
+      "item_id": "2017-23953|425.500",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(16)",
+      "instruction_index": 1,
+      "item_id": "2019-07652|1.199A-0",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(10)",
+      "instruction_index": 1,
+      "item_id": "2019-07652|1.199A-1",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(1)(i)",
+      "instruction_index": 1,
+      "item_id": "2019-15131|217.22",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(5)",
+      "instruction_index": 1,
+      "item_id": "2020-11897|90.209",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(f)(4)",
+      "instruction_index": 1,
+      "item_id": "2020-12588|63.7831",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(2)(ix)",
+      "instruction_index": 2,
+      "item_id": "2020-17090|9.3",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(8)",
+      "instruction_index": 3,
+      "item_id": "2020-17090|9.3",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(b)(2)",
+      "instruction_index": 4,
+      "item_id": "2020-17090|9.3",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(c)(4)",
+      "instruction_index": 2,
+      "item_id": "2020-17090|9.5",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(d)(2)",
+      "instruction_index": 3,
+      "item_id": "2020-17090|9.5",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(3)(ii)",
+      "instruction_index": 1,
+      "item_id": "2022-10875|1653.2",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(f)(3)",
+      "instruction_index": 3,
+      "item_id": "2023-25238|980.117",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(5)",
+      "instruction_index": 3,
+      "item_id": "2024-07002|63.119",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(b)(5)(ix)",
+      "instruction_index": 5,
+      "item_id": "2024-07002|63.119",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(f)(3)",
+      "instruction_index": 7,
+      "item_id": "2024-07002|63.119",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(p)(5)",
+      "instruction_index": 3,
+      "item_id": "2024-07002|63.485",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(q)(1)",
+      "instruction_index": 4,
+      "item_id": "2024-07002|63.485",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(q)(3)",
+      "instruction_index": 5,
+      "item_id": "2024-07002|63.485",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(1)(iii)",
+      "instruction_index": 1,
+      "item_id": "2024-21984|1321.9",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(2)",
+      "instruction_index": 2,
+      "item_id": "2024-30575|253.6",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "amend",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(13)",
+      "instruction_index": 1,
+      "item_id": "2025-00723|742.6",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(c)(1)",
+      "instruction_index": 1,
+      "item_id": "2026-06808|60.5417b",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(d)(8)",
+      "instruction_index": 1,
+      "item_id": "2026-06808|60.5417c",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(3)",
+      "instruction_index": 1,
+      "item_id": "2026-08556|682.405",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(d)(5)",
+      "instruction_index": 1,
+      "item_id": "2026-08556|685.303",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(d)(1)(v)",
+      "instruction_index": 3,
+      "item_id": "2026-11140|149.140",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "redesignate",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(d)(1)(v)",
+      "instruction_index": 4,
+      "item_id": "2026-11140|149.140",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(d)(2)",
+      "instruction_index": 5,
+      "item_id": "2026-11140|149.140",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(a)(2)(i)",
+      "instruction_index": 2,
+      "item_id": "2026-11140|149.510",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(d)(2)(iii)",
+      "instruction_index": 3,
+      "item_id": "2026-11140|149.510",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(d)(3)",
+      "instruction_index": 4,
+      "item_id": "2026-11140|149.510",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "remove",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 3,
+      "designation": "(e)(2)(ix)",
+      "instruction_index": 5,
+      "item_id": "2026-11140|149.510",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(2)",
+      "instruction_index": 2,
+      "item_id": "2026-11648|250.1202",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(h)(5)",
+      "instruction_index": 3,
+      "item_id": "2026-11648|250.1202",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "add",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(k)(1)",
+      "instruction_index": 4,
+      "item_id": "2026-11648|250.1202",
+      "label": "WILL_EXECUTE",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    },
+    {
+      "depth": 2,
+      "designation": "(a)(1)",
+      "instruction_index": 1,
+      "item_id": "E6-15282|180.209",
+      "label": "WILL_FAIL",
+      "nested_aware_exists": true,
+      "operation": "revise",
+      "shipped_designation_exists": false
+    }
+  ],
+  "shipped_true_nested_false": []
+}

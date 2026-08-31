@@ -1192,3 +1192,109 @@ predictions are mutually unsatisfiable at 0.81 ≤ A1 < 0.8585, and that window 
 the honest expectation sits.** The likely outcome is therefore that CH-06's card is met
 and `cb65539`'s gap clause is **missed**, and both are reported as such. Neither number
 is moved.
+
+---
+
+## Q21 - CLASS A. `cfr_resolve` cannot see a nested paragraph designation, and it is wrong on 47% of the designations the eval set asks it about
+
+**Raised at CH-06 §2, 2026-08-31, during the 3-item smoke test — BEFORE any paid A1 arm
+ran and before any A1 accuracy number existed.** Escalated to the architect under hard
+rule 3. **Not acted on. The conservative option is taken and the work continues.**
+
+Evidence: `docs/evidence/ch06-a1/iter1/nested_designation_probe.py` and its committed
+output `.txt` / `.json`.
+
+### What was found
+
+The 3-item smoke test ruled `05-8447|75.31` **`WILL_FAIL`** on the ground that `(b)(1)`
+does not exist. The gold label is `WILL_EXECUTE`. **The paragraph is there.**
+
+`declared_designations()` on that section returns:
+
+```
+[('(a)', 41), ('(b)', 858), ('(1)', 1251), ('(2)', 1653), ('(c)', 2477), ...]
+```
+
+The children of `(b)` are codified as **bare `(1)` and `(2)`**. The CFR does not repeat
+the parent. But `designation_state()` builds the canonical string `(b)(1)` and searches
+the declared list for that literal, finds nothing, and returns
+`designation_exists: false` for a paragraph a drafter would locate in seconds.
+
+### The scale — measured across the whole frozen eval set
+
+| | Count |
+|---|---|
+| Instructions carrying a designation | **128** |
+| ... at depth 1 (structurally immune — no parent to be written separately from) | 60 |
+| ... at **depth ≥ 2** (can hit the ceiling) | **68 — 53.1%** |
+| Resolver **refused** to parse (a refusal, not a guess) | 0 |
+| The two readings **agree** | 68 |
+| Shipped says **absent**, nested-aware says **present** | **60** |
+| Shipped says present, nested-aware says absent | **0** |
+| **Eval items touched by a disagreement** | **33 of 82 — 40.2%** |
+
+Split by the gold label of the item the disagreement sits in: **27 `WILL_EXECUTE`, 33
+`WILL_FAIL`.**
+
+**Every single disagreement runs in one direction: the tool says a paragraph is missing
+when it is present.** That is the signature of a systematic modelling error, not noise —
+noise would scatter both ways, and the opposite direction is *exactly zero*.
+
+### Why this is worse than an accuracy loss
+
+- **On a `WILL_EXECUTE` item it manufactures a false defect** — `target-does-not-exist`
+  against a paragraph that exists. That is the error direction with the highest cost to
+  the actual user in `CONTEXT.md` §2: a drafter sent to chase a defect that is not there,
+  by a tool whose entire pitch is determinism.
+- **On a `WILL_FAIL` item it can produce the right verdict for the wrong reason.** The
+  arm scores a point on the primary metric while its `resolution_trace` names the wrong
+  instruction and the wrong class. **An accuracy average cannot see this and the emitted
+  note can** — which is `CONTEXT.md` §5's argument for the output contract, arriving as a
+  live example rather than a hypothetical. `docs/evidence/error-taxonomy.csv` must
+  therefore separate *right verdict, right reason* from *right verdict, wrong reason*.
+
+### The decision taken, and why it is NOT the obvious one
+
+**`src/cfr_resolve.py` is not modified. A1 runs against the tool exactly as committed at
+`cb65539`.** Three reasons, in ascending order of weight:
+
+1. **Scope.** `src/cfr_resolve.py` is not in CH-06's scope fence.
+2. **Gate.** CH-05 is `built` and **unreviewed**. Changing a gated chunk's results from
+   inside a different chunk removes the reviewer's subject.
+3. **The one that actually decides it.** *This defect was found because it cost A1 a
+   point.* A capability changed on that basis is tuned, however good the engineering
+   argument, and however sincerely the fix is believed to be correct. Hard rule 5 forbids
+   moving a number after seeing a result; hard rule 17 records that every failure in this
+   repository's history traces to hurrying past a check that felt slow. **The fix that
+   feels obviously right, discovered at exactly the moment it would help, is the single
+   most dangerous edit available tonight.**
+
+The nested-aware reading in the probe exists **only to size the gap**. It is never
+imported by `src/`, never scores an arm, and no published number depends on it.
+
+### What the architect is asked to rule
+
+1. **Is the nested-aware reading correct?** It is *one* reading of a hierarchy that
+   flattened text only implies. `(b)` at 858, `(1)` at 1251 — the probe walks components
+   in document order, requiring each to appear after its parent. It does **not** check
+   that `(1)` falls before `(c)` at 2477, so a stray `(1)` under a later parent could
+   satisfy it. **The probe is a lower bound on the disagreement, not a proposed fix.**
+2. **If it is correct, does it land as a CH-05 amendment, or as a pre-registered
+   Iteration 1b with its own card and its own prediction, run beside the shipped tool
+   with both numbers published?** The second is the honest shape if it is done at all —
+   it makes the change an experiment rather than a correction, and it cannot quietly
+   replace the number it improves on.
+3. **Either way, does the shipped A1 number stand as measured?** This session's position:
+   **yes.** It is the measured performance of the capability as built and reviewed, and
+   the ceiling is published beside it rather than subtracted from it.
+
+### Consequence, stated in advance of the run
+
+**A1's accuracy will be depressed by this, and the depression is not evenly spread** — it
+lands on `WILL_EXECUTE` items as false defects. So `A1`'s **false-defect rate is expected
+to rise** relative to B0-agent's 0.1951, possibly through the pre-registered 0.25 guard,
+**at the same time as its missed-defect rate falls.** Both are reported. Neither guard is
+moved.
+
+This paragraph is written **before the arms ran**, so that the direction of the effect is
+a prediction and not an explanation.

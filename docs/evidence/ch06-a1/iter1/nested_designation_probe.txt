@@ -1,0 +1,61 @@
+==============================================================================
+cfr_resolve's NESTED-DESIGNATION CEILING - counted, not fixed
+==============================================================================
+
+  eval set   data/evalset/items.jsonl   82 items
+  instructions                       208
+  ... carrying a designation         128
+  ... the resolver REFUSED to parse  0   (not a guess; a refusal)
+
+  designation DEPTH - depth 1 is unaffected by construction, because a depth-1
+  path has no parent to be written separately from:
+    depth 1     60 instruction(s)
+    depth 2     50 instruction(s)   <- can hit the ceiling
+    depth 3     18 instruction(s)   <- can hit the ceiling
+    depth >= 2 TOTAL   68   (53.1% of designations)
+
+------------------------------------------------------------------------------
+THE DISAGREEMENT
+------------------------------------------------------------------------------
+
+  the two readings AGREE on                          68 designations
+  shipped says NOT PRESENT, nested-aware says PRESENT 60   <- FALSE DEFECTS
+  shipped says PRESENT, nested-aware says NOT PRESENT 0
+  eval ITEMS touched by any disagreement              33 of 82   (40.2%)
+
+  those 60 disagreements by GOLD LABEL of their item: {'WILL_EXECUTE': 27, 'WILL_FAIL': 33}
+
+  A disagreement on a WILL_EXECUTE item pushes A1 toward a FALSE DEFECT.
+  A disagreement on a WILL_FAIL item may still land on the right verdict
+  for the WRONG REASON, which the resolution_trace makes visible and an
+  accuracy average would hide - CONTEXT.md section 5's whole argument.
+
+  first 12, in item order:
+    05-8447|75.31            #4  revise       (b)(1)           depth 2   gold WILL_EXECUTE
+    05-8447|75.6             #3  redesignate  (a)(38)          depth 2   gold WILL_FAIL
+    05-8447|75.6             #4  add          (a)(38)          depth 2   gold WILL_FAIL
+    2011-27587|80.905        #1  remove       (a)(4)(vii)      depth 3   gold WILL_FAIL
+    2015-15249|87.475        #1  add          (b)(11)          depth 2   gold WILL_FAIL
+    2016-08827|522.1193      #1  remove       (b)(2)           depth 2   gold WILL_FAIL
+    2016-09949|1436.8        #3  remove       (a)(2)           depth 2   gold WILL_EXECUTE
+    2016-09949|1436.8        #4  add          (a)(3)           depth 2   gold WILL_EXECUTE
+    2016-09949|1436.8        #6  revise       (b)(1)           depth 2   gold WILL_EXECUTE
+    2016-13651|425.606       #2  remove       (a)(1)           depth 2   gold WILL_EXECUTE
+    2016-13651|425.606       #3  remove       (a)(3)           depth 2   gold WILL_EXECUTE
+    2016-13651|425.606       #4  redesignate  (a)(4)           depth 2   gold WILL_EXECUTE
+
+------------------------------------------------------------------------------
+WHAT IS AND IS NOT BEING CLAIMED
+------------------------------------------------------------------------------
+
+  IS:      the shipped cfr_resolve under-detects nested paragraph designations,
+           on the count above, and that ceiling is inside A1's measured number.
+  IS NOT:  that the nested-aware reading is correct. It is ONE reading of a
+           hierarchy that flattened text only implies. Adopting a reading is a
+           Class A change and it is the architect's - QUESTIONS.md Q21.
+
+  cfr_resolve is NOT modified by CH-06. It is outside the scope fence, CH-05 is
+  gated and unreviewed, and - decisively - this defect was found BECAUSE it cost
+  A1 a point. Changing a capability on that basis is tuning, whatever the
+  engineering argument for it. The tool ships as committed at cb65539.
+
