@@ -1,0 +1,28 @@
+{
+  "committed_before_the_study_ran": true,
+  "distinct_documents": 8,
+  "item_ids": [
+    "05-8447|75.6",
+    "2011-27587|80.917",
+    "2015-01571|1942.8",
+    "2015-15249|87.305",
+    "2016-03298|1150.35",
+    "2016-08827|522.1315",
+    "2016-09949|1436.3",
+    "2016-13651|425.606"
+  ],
+  "labels_SEALED_do_not_read_before_timing": {
+    "05-8447|75.6": "WILL_FAIL",
+    "2011-27587|80.917": "WILL_EXECUTE",
+    "2015-01571|1942.8": "WILL_FAIL",
+    "2015-15249|87.305": "WILL_EXECUTE",
+    "2016-03298|1150.35": "WILL_FAIL",
+    "2016-08827|522.1315": "WILL_EXECUTE",
+    "2016-09949|1436.3": "WILL_FAIL",
+    "2016-13651|425.606": "WILL_EXECUTE"
+  },
+  "n": 8,
+  "n_negative": 4,
+  "n_positive": 4,
+  "selection_rule": "sorted by item_id; at most one item per FR document; label alternating WILL_FAIL/WILL_EXECUTE; first 8. No RNG."
+}

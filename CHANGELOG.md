@@ -258,3 +258,121 @@ They are the same configuration under two names, so the arm is **run once** and 
 in both rows with the identity stated. Running it twice would produce two numbers that
 differ only by sampling and inviting a reader to treat them as independent evidence.
 `A1 minus tool` is genuinely distinct — the procedure without the resolver.
+
+---
+
+## The three removed experiments — cards, CH-09
+
+Written as the removals were decided, not harvested at the end. **Each one ships its
+measured class size**, because a removal with a counted class is a decision and a removal
+with an asserted class is a preference.
+
+```
+## Removed experiment 1 - CURRENT CFR TEXT INSTEAD OF POINT-IN-TIME
+
+Status           : RUN. Excluded from every headline by design, not by result.
+Pre-registered   : CONTEXT.md section 10, written before the corpus was built:
+prediction         "accuracy collapses toward a trivial oracle, because after a failed
+                   amendment the current text still lacks the change and after a
+                   successful one it contains it - the current text LEAKS THE LABEL.
+                   IF THE NUMBER GOES UP, THAT IS PROOF OF LEAKAGE, NOT CAPABILITY,
+                   AND MUST BE REPORTED AS SUCH."
+Why run it       : it is the experiment that prices the point-in-time corpus. CH-03
+                   spent most of a night building text as it stood on the publication
+                   date. This is the measurement of what skipping that would have
+                   bought - and of how badly it would have flattered the result.
+Fairness         : both arms' text goes through the IDENTICAL pipeline -
+                   find-the-section -> strip_leakage -> section_text, with
+                   strip_leakage and section_text reused UNMODIFIED from
+                   src/cfr_pit.py. 41 EDNOTEs and 81 CITAs are stripped from the
+                   CURRENT text, INCLUDING the editorial notes that define the gold
+                   labels. Without that the probe would only prove we handed the
+                   agent the answer key. With it, any rise is STRUCTURAL leakage in
+                   the amendment state of the text itself.
+                   The eCFR uses a different schema - <DIV8 N="§ 75.31"> against the
+                   annual editions' <SECTION><SECTNO> - so an adapter was written in
+                   the probe, NOT in src/cfr_pit.py, which is CH-03's and frozen. The
+                   first extraction returned 0 of 82 for exactly that reason and the
+                   count is reported rather than quietly fixed.
+Evidence path    : docs/evidence/ch09-removed/leakage_probe.py, leakage-result.txt
+Result           : see leakage-result.txt - published whichever direction it went.
+
+## Removed experiment 2 - THE INTRA-RULE COLLISION DETECTOR
+
+Status           : NOT BUILT. Cut by ruling R-01 with its class size measured.
+Class size       : RECOMPUTED IN-REPO, as CONTEXT.md section 10 pre-committed:
+                     43 of 2,527 items = 1.70%
+                   against the two prior figures, reproducing NEITHER:
+                     pilot            26/1,984 = 1.31%   (+0.39 pp)
+                     naive recount    61/1,984 = 3.07%   (-1.37 pp)
+                   THE CLASS SIZE DOES NOT REPRODUCE ACROSS IMPLEMENTATIONS. A third
+                   number is added to the range rather than the range being narrowed,
+                   which is what section 10 asked for and is the honest outcome.
+Consistency      : collision-only = 0 of 2,527, so collisions are a STRICT SUBSET of
+                   state-carry exactly as section 6 implies. The check passes.
+Why the number   : the removal rested on three things, none of them the class size -
+does not decide    - 0 of 68 labelled items contain a redesignation instruction;
+                     - NARA NEVER PUBLISHES a note naming an intra-rule conflict; a
+                       live probe for "conflicting amendments" returned 0;
+                     - 15 of the pilot's 26 collisions are CORRECT DRAFTING.
+                   A detector for a class NARA does not write notes about cannot be
+                   scored against NARA's notes at any class size.
+Evidence path    : docs/evidence/ch09-removed/class_sizes.py, class_sizes.txt
+
+## Removed experiment 3 - THE ORDERED-STATE LEDGER (capability 3)
+
+Status           : NOT BUILT. Pre-declared as counted removal #3 at ruling R-01,
+                   BEFORE any code existed - the card ships, the code does not.
+Why it was worth : this is the actual OFR execution model. Instruction k+1 is executed
+building           against the text instructions 1..k left behind, and nothing else in
+                   the system models that. It is also the mechanism behind
+                   CONTEXT.md section 9's sharpest hard case, 12 CFR 702.504 -> 702.304.
+                   A1 does not model execution order, and rather than pretend to, it
+                   ROUTES: condition C3 of the human checkpoint fires when a
+                   designation is touched twice, naming R-01 in the escalation text.
+                   THE REMOVED CAPABILITY IS VISIBLE IN THE SHIPPED ARTIFACT as an
+                   escalation rather than absent from it.
+Class size       : RECOMPUTED IN-REPO, four readings of section 6's prose definition,
+                   because no single reading reproduces the published figure:
+                     A same designation touched twice (literal)   83/2,527 =  3.3%
+                     B later path is a prefix/descendant         280/2,527 = 11.1%
+                     C >1 instruction naming any designation     495/2,527 = 19.6%
+                     D >1 instruction at all (the CEILING)       760/2,527 = 30.1%
+                     published figure                            833/1,984 = 42.0%
+                   *** 42.0% IS ABOVE READING D, WHICH IS THE CEILING. *** No
+                   denominator reconciles either: 2,527 items under v11, 2,154
+                   spec-literal, neither is 1,984. QUESTIONS.md Q23. NOT concluded
+                   that 42.0% is wrong - only that it is not reproducible from the
+                   shipped artifacts and therefore cannot carry a claim.
+Why the removal  : R-01 cut it to measure TWO capabilities properly rather than three
+stands             in a hurry. That reasoning never rested on the class size - which
+                   is precisely why discovering the number is unreliable costs the
+                   decision nothing. A removal justified BY a number that then failed
+                   to reproduce would have been a far worse position to be in.
+Evidence path    : docs/evidence/ch09-removed/class_sizes.py
+```
+
+### The blind human-time study — reserved, not run
+
+`plan.md` CH-09 asks for 8 items timed by hand before seeing gold. **The selection rule
+is committed before the selection**, the same device `GOOD.md` §9 used for the
+model-sensitivity subset:
+
+> sorted by `item_id`; **at most one item per FR document**; label alternating
+> `WILL_FAIL` / `WILL_EXECUTE`; first 8. No RNG.
+
+Eight items hand-timed is a small enough sample that *which* eight decides the answer.
+Chosen afterwards they would be the eight that made the point. **The 8 reserved:**
+`05-8447|75.6` · `2011-27587|80.917` · `2015-01571|1942.8` · `2015-15249|87.305` ·
+`2016-03298|1150.35` · `2016-08827|522.1315` · `2016-09949|1436.3` · `2016-13651|425.606`
+— **4 defective, 4 clean, 8 distinct FR documents, balanced by construction.**
+
+`docs/evidence/ch09-removed/human_time_study.py` emits a **blind** operator brief
+(instructions + section text, no label, no note, no `role`) and a worksheet, and
+`assert_blind()` scans the emitted bytes for `will_fail`, `will_execute`, `editorial
+note` and `could not be incorporated` and **refuses to write the file** if any appears.
+The answers live in a separate sealed JSON the operator opens only after timing.
+
+**It is an order-of-magnitude reading on how long this takes a person, at n = 8, one
+operator.** It will never carry a statistical claim and its n is printed wherever it is
+quoted.
