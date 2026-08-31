@@ -1145,6 +1145,87 @@ decided on the full-corpus haiku arms alone — `plan.md`'s branch table reads `
 
 ---
 
+### CORRECTION TO THE Q19 RULING — appended 2026-08-31 (CH-11c). The ruling above is NOT edited.
+
+**The architect's Q19 ruling misdescribes its own pre-registration.** The ruling text
+transcribed above, verbatim and unaltered, reads:
+
+> GOOD.md pre-registered the RESTRICTED set as primary; the restricted set yields ONE pair
+> and measures nothing.
+
+**The first clause is false.** `GOOD.md` §11, quoted **verbatim and in full** so a reader
+can check it without opening the file:
+
+> ## 11. Which eval set
+>
+> **Primary: `data/evalset/` — 38 pairs, n = 76.** `QUESTIONS.md` Q16 records the
+> contradiction between `plan.md`'s scoping of the per-document completeness floor and
+> Q11's ruling, what each reading costs, and that the reading taken is also the one with
+> the larger n. **`data/evalset-restricted/` (1 pair, n = 2) is committed**, so the
+> architect can flip the primary with one flag and a reviewer can run either.
+>
+> Both freezes verify from their SHA-256 manifests, and every CH-03 artefact rebuilds
+> byte-for-byte.
+
+`GOOD.md` §11 names **`data/evalset/`, the UNRESTRICTED set, as primary** — the set that
+was actually used. It mentions the restricted set only to say it is *committed* and
+*flippable*. On its own text there is **no deviation from `GOOD.md` §11 at all**.
+
+**Where the restricted-primary pre-registration actually is:**
+`docs/evidence/ch03-evalset/pre-registration.md` §2, committed at CH-03:
+
+> **Applied as a named rung of the exclusion ladder: FR documents whose per-document
+> completeness under `v11` is < 0.90 are excluded, with their count.** The ladder
+> publishes n **with and without** that rung, and the **restricted** set is the primary
+> eval set. That is the architect's ruling and it is fixed here, before the count is
+> known, precisely so that it cannot later be chosen for its effect on n.
+
+Q19's own open item 1 pointed at the right document — *"Pre-registration section 2 fixes
+the >= 0.90 per-document floor as primary"* — and then the ruling that answered it named
+`GOOD.md`. The wrong name propagated from there.
+
+#### What this correction does and does not change
+
+**IT DOES NOT CHANGE THE DECISION, AND THE DECISION DOES NOT DEPEND ON THE ATTRIBUTION.**
+The ruling's substance is: *the unrestricted set (41 pairs, n = 82) is primary, the
+restricted set yields ONE pair and measures nothing, and the deviation is disclosed in
+every results table rather than absorbed.* **That rests entirely on the pair count — 1
+against 41 — which is measured from `data/evalset-restricted/items.jsonl` and
+`data/evalset/items.jsonl` and is unaffected by which document pre-registered what.**
+Q19 and Q16 stay CLOSED as ruled. No number moves, no arm is re-run, no threshold is
+touched.
+
+**IT DOES NOT MAKE THE DEVIATION UNREAL.** The deviation is real. A pre-registration
+*did* fix the restricted set as primary, for a stated anti-gaming reason, and the shipped
+primary is the unrestricted one. Only the **name of the deviated-from document** was
+wrong.
+
+**WHAT IT DOES CHANGE:** a judge who followed the ruling's citation to `GOOD.md` §11 found
+it saying the opposite, and the natural reading of that is that the pre-registration was
+edited after the fact. **It was not.** `GOOD.md` is byte-frozen and its CH-14a addendum
+changed zero original lines — the addendum says so itself and `git diff` confirms it.
+Correcting the attribution removes the appearance of a tampered pre-registration, which is
+a worse charge than the deviation it was miscited for.
+
+#### Where the misattribution appears, and what was done about each
+
+| location | in CH-11c's fence? | action |
+|---|---|---|
+| the Q19 ruling text above | dated record | **not edited.** This correction is appended beneath it. |
+| `docs/evidence/ch06-a1/a1-result.txt`, deviation banner line 6 | **no** — protected | **not edited.** Still reads *"GOOD.md section 11 named data/evalset-restricted/ as the primary eval set."* Open for the architect. |
+| `README.md` LIMITATIONS | yes | **already correct before CH-11c.** It cites `docs/evidence/ch03-evalset/pre-registration.md` §2 as the source of the deviation and states this discrepancy in the same paragraph. Updated at CH-11c only to point at this correction. |
+| `src/`, `CONTEXT.md`, `plan.md` | protected | swept at CH-11c: **the misattribution does not appear in any of them.** |
+
+**Q32 is therefore ANSWERED: the architect was wrong, and Q32 was right.** The remaining
+open item is `a1-result.txt`'s banner, which is a regenerated artifact whose byte-identity
+across three environments is itself a published result — the architect's two options are
+still those in Q32's *For the architect*: correct `analyse_a1.py` and re-run it offline, or
+attach an errata note the way `GOOD.md` took an addendum rather than an edit. **A build
+session does not rewrite an architect's transcribed ruling, and it does not silently
+re-cut a frozen results file.**
+
+---
+
 ## Q20 - the already-committed Iteration 1 prediction says "the gap above 20 pp" and does not say gap over WHAT
 
 **Raised at CH-06 §2a, 2026-08-31, BEFORE any A1 arm ran. Class B, taken conservatively
@@ -2365,3 +2446,123 @@ withdrawn, and cites the ledger. The suggested correction, for whoever holds the
 **Previously spotted and not remediated.** `context/11-REMEDIATION-2.md` records the same
 defect. It survived into the shipping tree, which is itself the finding: a defect named in
 a remediation document and then not carried out is indistinguishable from one never found.
+
+---
+
+## CH-11c RESOLUTIONS — 2026-08-31. Q31, Q33, Q34, Q35 CLOSED; Q32 ANSWERED; Q36–Q38 raised.
+
+CH-11c was a documentation chunk under a fence permitting `PROVENANCE.md`, `README.md`,
+`CHANGELOG.md`, `STATUS.md`, `AI-USE.md`, `QUESTIONS.md`, `SUBMISSION.md` and
+`docs/evidence/ch11c-sweep/`. **No arm was re-run, no model call was made, and API spend
+is unchanged at USD 11.6323** (re-derived from `docs/evidence/runs/cost_ledger.csv`).
+
+| Q | verdict | what was done |
+|---|---|---|
+| **Q31** | **CLOSED — confirmed, and the cause is now known** | `STATUS.md` and `AI-USE.md` corrected to **462 / 84** with `docs/evidence/secret-scan/scan.txt` cited. **The 450 / 81 pair was not invented:** `git log -- docs/evidence/secret-scan/scan.txt` shows the sweep was committed twice — `0f3f4fe` (repository `f0a246b1`) printed **450 blobs / 81 commits**, and `263ed29` (repository `2453998f`) printed **462 / 84** three commits later. Both summaries were written against the earlier run. That sentence is in both files rather than a silent alignment. **PASS, 0 findings on either scope.** |
+| **Q32** | **ANSWERED — the architect was wrong, Q32 was right** | A dated correction is appended beneath the Q19 ruling, quoting `GOOD.md` §11 verbatim and in full. **The ruling's original text is not edited.** The substantive decision is unaffected because it rests on the pair count (**1 against 41**), not on the attribution. `README.md` updated to point at the correction. **Still open: `docs/evidence/ch06-a1/a1-result.txt`'s banner**, outside the fence. |
+| **Q33** | **CLOSED — 26 does not reproduce** | `CHANGELOG.md` corrected **26 → 22 of 82**, with `docs/evidence/ch06-a1/B0prime-rep1-votes.json` cited and the 8-among-parseable reading stated beside it. All three readings re-derived at CH-11c: **22 / 22 / 8**. A note beneath the table records that 26 was the earlier figure and why it cannot be checked (Q26's double run overwrote run 1's per-item files). **Nothing downstream moves.** |
+| **Q34** | **CLOSED in every editable file; OPEN in the protected ones — see Q36** | `README.md` and `CHANGELOG.md` now call B0′ a **repeated-sampling control at 3× best-of sampling**, publish **1,377,402 input tokens against A1's 4,006,662** beside it, and **state plainly that a genuinely compute-matched control was not run**. |
+| **Q35** | **CLOSED** | `PROVENANCE.md` §5 split into two rows — `claude-haiku-4-5-20251001` for every evaluation arm, `claude-sonnet-5` for the withdrawn sensitivity subset only — with a dated correction note beneath the table. `grep -ci sonnet PROVENANCE.md` = **4**, and **every one is about the withdrawn subset or this correction**. |
+
+---
+
+## Q36 - three PROTECTED files still call B0′ the "compute-matched control". Architect-only.
+
+**Raised at CH-11c, 2026-08-31. Not acted on — all three are outside the fence. Recorded
+per the chunk card's instruction and hard rule 15.**
+
+Q34 established the arm is not token-matched: **1,377,402 input tokens against A1's
+4,006,662**, about a third. Every file CH-11c may edit now says *repeated-sampling
+control*. **These three still say compute-matched and CH-11c did not touch them:**
+
+| file | line | text |
+|---|---|---|
+| `CONTEXT.md` §4 | 63 | *"**B0′** \| compute-matched control \| B0-agent at A1's exact token budget, spent on best-of-3 self-consistency with a published tie-break"* |
+| `src/arms.py` | 292 | *"**B0-prime** - the COMPUTE-MATCHED CONTROL. `CONTEXT.md` section 4, `plan.md` CH-08."* |
+| `prompts/CH-06.md` | 139 | *"Name `B0′` explicitly — the compute-matched control: B0-agent at A1's token budget..."* |
+
+`CONTEXT.md` is architect-only and **is the specification the other two quote**, so it is
+the one that matters; `src/arms.py` is a docstring in a frozen source file and
+`prompts/CH-06.md` is a committed historical prompt. **The shipping surface a judge reads
+is now consistent** — the disagreement is between the shipped documents and the
+specification behind them, which is exactly the shape Q34 item 2 asked about.
+
+**For the architect:** does `CONTEXT.md` §4 take an errata note, so the specification and
+the shipped arm agree? Editing `prompts/CH-06.md` is not proposed — a committed prompt is a
+dated record of what was asked for.
+
+---
+
+## Q37 - the CH-11c chunk card's own model-name counts do not reproduce. Corrected, not repeated.
+
+**Raised and resolved at CH-11c, 2026-08-31, under hard rule 15 — which is the rule that
+says a claim in a prompt is a claim, not a fact.**
+
+`prompts/CH-11c.md` §1 states: *"Verified: **19** artifact files under `docs/evidence/` name
+`claude-haiku-4-5-20251001`; 4 name `claude-sonnet-5` and those are the **withdrawn**
+sensitivity subset only."*
+
+**Measured at CH-11c over tracked files** (`git ls-files docs/evidence`, script and output
+at `docs/evidence/ch11c-sweep/`):
+
+| claim | card says | measured |
+|---|---:|---:|
+| tracked `docs/evidence/` files naming `claude-haiku-4-5-20251001` | 19 | **27** |
+| tracked `docs/evidence/` files naming `claude-sonnet-5` | 4 | **13** |
+
+**The card's conclusion is right and its counts are not.** The 13 sonnet-naming files are
+**not** the withdrawn subset only: they also include `docs/evidence/ch03-model-id/`
+(the model-id probe from Q1), `docs/evidence/ch00-goldens.md`,
+`docs/evidence/ch14-size/selection-applied.md`, `docs/evidence/night-run/summary.md` and
+`docs/evidence/runs/cost_ledger.csv`.
+
+**The authoritative source is the ledger, not a file count**, and it is unambiguous.
+`docs/evidence/runs/cost_ledger.csv`, 2,107 rows, grouped by `(model, arm)`:
+
+```
+     3  ('claude-haiku-4-5',          'probe-model-id')
+   249  ('claude-haiku-4-5-20251001', 'A1')
+    82  ('claude-haiku-4-5-20251001', 'A1-iter1')
+   164  ('claude-haiku-4-5-20251001', 'A1-minus-tool')
+   474  ('claude-haiku-4-5-20251001', 'B0')
+   474  ('claude-haiku-4-5-20251001', 'B0-agent')
+    82  ('claude-haiku-4-5-20251001', 'B0-agent-currenttext')
+   492  ('claude-haiku-4-5-20251001', 'B0prime')
+     3  ('claude-haiku-4-5-20251001', 'probe-model-id')
+    40  ('claude-sonnet-5',           'B0-agent-sonnet')
+    40  ('claude-sonnet-5',           'B0-sonnet')
+     4  ('claude-sonnet-5',           'probe-model-id')
+```
+
+**Every evaluation arm is haiku. `claude-sonnet-5` appears on exactly 84 rows: the 80 of
+the withdrawn sensitivity subset, and 4 of the model-id probe** — which is a third
+category the card did not name, and `PROVENANCE.md`'s corrected row now names it.
+
+**Why this is recorded rather than passed over.** The correction the card ordered was
+right, and it would have shipped with two wrong supporting numbers had they been copied.
+That is precisely the failure hard rule 15 exists for, and this project's whole thesis is
+that a correct conclusion resting on an unchecked number is not evidence.
+
+---
+
+## Q38 - CH-11c's fence excludes `PROGRESS.md`, which `CLAUDE.md` requires it to update
+
+**Raised at CH-11c, 2026-08-31. Taken conservatively, work continued.**
+
+`CLAUDE.md` end-of-session duty 2 requires *"Update `STATUS.md` (one line for your chunk)
+and `PROGRESS.md` (newest entry on top)"*. **`prompts/CH-11c.md`'s scope fence lists
+`STATUS.md` but not `PROGRESS.md`**, and lists no `docs/progress/` path either.
+
+`CLAUDE.md`'s precedence chain puts `plan.md` (and the chunk card that implements it)
+below `CONTEXT.md` but above code, and its parallel-session rule is explicit: *"Commit
+ONLY the paths your chunk card declares."*
+
+**Conservative option taken: `PROGRESS.md` is NOT edited.** This chunk's progress entry
+ships at `docs/evidence/ch11c-sweep/progress-CH-11c.md`, inside the one directory the
+fence grants, for the architect to fold in. This is the same shape CH-11 took under Q30.
+
+**Consequence to be aware of:** `PROGRESS.md` line 397 still reads *"over 450 text blobs of
+81 commits and 37.7 MB"*. It is a **dated record of the CH-14a session** and is arguably
+correct as such — that session really did write it against the earlier scan — but a
+reader who greps for `450` will find it after `STATUS.md` and `AI-USE.md` have been
+corrected. **Flagged, not edited.**
