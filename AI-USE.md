@@ -94,6 +94,85 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-11c · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **five factual corrections, and the sweep that caught a sixth in my own work**
+
+Transcript: `docs/trajectories/build/CH-11c.jsonl` (669 lines, 1,669,875 B; the exporter's
+redaction sweep found **zero** credentials and rewrote 789 home paths to `~`).
+
+**No arm was re-run and no model call was made from this session's code.** API spend is
+unchanged at **USD 11.6323**, re-derived from `docs/evidence/runs/cost_ledger.csv` by this
+chunk's own script. The chunk corrected **statements about the work**, never the work.
+
+**The five, all raised by CH-11 and all outside its fence:** `PROVENANCE.md` naming
+`claude-sonnet-5` as the model of every arm (**Q35**); the Q19 ruling misattributing its own
+pre-registration to `GOOD.md` §11 (**Q32**); `B0′` called compute-matched at a third of A1's
+tokens (**Q34**); `CHANGELOG.md`'s non-reproducing **26** (**Q33**); and the secret sweep's
+**450 / 81** against the artifact's **462 / 84** (**Q31**).
+
+**Agents used — one workflow, 21 subagents, `claude-opus-5[1m]`, run `wf_74534735-795`.**
+Ten read-only auditors, one per shipping file; ten adversarial refuters, one per file, each
+told to kill that file's findings and to default to *refuted* when uncertain; one
+completeness critic asked what the sweep missed. **971 tool calls, 2,094,887 subagent
+tokens, 2,170 s, 0 agent errors, 0 empty results.** No agent could edit a file. Verbatim
+output at `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md`, generated from the workflow
+journal rather than summarised by hand. **75 findings, 18 refuted, 57 standing** — and a
+finding that survives one refuter is not a confirmed defect, which is how it is reported.
+
+**Four things this session checked instead of trusting:**
+
+1. **The chunk card's own supporting counts do not reproduce.** It stated *"19 artifact
+   files name haiku; 4 name sonnet, the withdrawn subset only"*. Measured over tracked
+   files: **27 and 13**, and the 13 are not the withdrawn subset only — they include the
+   model-id probe, `ch00-goldens.md`, `ch14-size/selection-applied.md`,
+   `night-run/summary.md` and the ledger. The card's *conclusion* was right and its
+   numbers were not, so the correction shipped resting on the ledger instead (**Q37**).
+2. **The claim that 450 / 81 was "written before the last three commits" was checked, not
+   assumed.** `git log -- docs/evidence/secret-scan/scan.txt` has two revisions: `0f3f4fe`
+   printing 450 / 81 and `263ed29` printing 462 / 84. The stale pair was real output, and
+   both files now say so rather than being silently aligned.
+3. **`GOOD.md` §11 was read and quoted rather than paraphrased**, because the whole of Q32
+   turns on what it says. It is frozen; `git diff -- GOOD.md` is clean and the verification
+   script asserts it.
+4. **A programmatic edit silently converted four files from CRLF to LF**, turning a
+   268-line diff into a 5,000-line one under `.gitattributes`' `* -text`. Caught by reading
+   `git diff --stat` before committing and reverted byte-exactly. Hard rule 16 is why the
+   check happened at all.
+
+**And the finding this session is least comfortable with, recorded because it is the
+point.** The corrected `PROVENANCE.md` row this chunk wrote said *"every evaluation arm,
+temperature 0"*. **That was false too:** `B0prime` ran at **temperature 1.0**
+(`docs/evidence/ch06-a1/B0prime-rep1.json`; best-of-3 self-consistency at 0 is a no-op,
+**Q22**), and the withdrawn sonnet arms ran at the model default because sonnet rejects the
+parameter. **A session correcting a false claim about the model introduced a new false
+claim about the temperature in the same sentence**, and only its own adversarial sweep
+caught it. It is disclosed in `PROVENANCE.md` as a second correction to the first.
+
+Four further findings were fixed because the card's §6 names them: a **false gate-pass
+claim** (`AI-USE.md`'s NIGHT-RUN heading read *"CH-03 FAILED then FIXED"* where CH-03 is
+`reviewed-FAIL ×2 → ESCALATED`), a stale ledger snapshot presented as project spend, a
+stale `QUESTIONS.md` entry count in two files, and a temperature-scope claim in the README.
+**The remaining 57 are reported and not fixed** — several are Class A, and two of the
+affected files are in no chunk's fence (**Q39**).
+
+Questions raised: **Q36** (three protected files still say *compute-matched*), **Q37**,
+**Q38** (the fence excludes `PROGRESS.md` that `CLAUDE.md` requires), **Q39**.
+
+- **Measured usage** (from the session transcript's own `usage` records, **248 assistant
+  turns** — measured, not estimated from character counts). **Snapshot taken at export
+  time**; the session continues for the final commit and push, so the true totals are
+  marginally higher. Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id c5f29e31-d471-4f9c-82c2-3d3a7f7de4d5`:
+
+  | | tokens |
+  |---|---|
+  | output | 294,756 |
+  | input, uncached | 496 |
+  | input, cache write | 531,752 |
+  | input, cache read | 41,927,070 |
+
+  Wall-clock **3,353 s (0.93 h)**, 07:12:45.883Z to 08:08:39.283Z. Subagent tokens are
+  counted separately above and are **not** included in this table.
+
 ### CH-11 · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **README, REPRODUCE, and the four files under them**
 
 **Models called against the paid ceiling: NONE.** Zero API calls, zero arms re-run.

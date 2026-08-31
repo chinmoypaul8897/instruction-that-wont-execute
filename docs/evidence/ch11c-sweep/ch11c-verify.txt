@@ -1,5 +1,5 @@
 CH-11c VERIFICATION -- every figure the five corrections rest on
-repository HEAD : a0432e7de0c5d829e52fee8cb6ff67b38fbc9165
+repository HEAD : 9f7c4717b8c58c5ffb999b3279566ceae85fca4b
 no network, no model call, no clock, no RNG in any number below
 
 ==============================================================================
@@ -41,12 +41,17 @@ no network, no model call, no clock, no RNG in any number below
 
   The chunk card claimed 19 haiku-naming / 4 sonnet-naming files
   under docs/evidence/. Measured over TRACKED files:
-    tracked files naming claude-haiku-4-5-20251001 : 27 (card said 19)
-    tracked files naming claude-sonnet-5           : 13 (card said 4)
+    tracked files naming claude-haiku-4-5-20251001 : 31 (card said 19)
+    tracked files naming claude-sonnet-5           : 18 (card said 4)
     the sonnet-naming files:
       docs/evidence/ch00-goldens.md
       docs/evidence/ch03-model-id/model-id-probe.txt
       docs/evidence/ch03-model-id/model_id_probe.py
+      docs/evidence/ch11c-sweep/ch11c-agent-sweep.md
+      docs/evidence/ch11c-sweep/ch11c-sweep.txt
+      docs/evidence/ch11c-sweep/ch11c_sweep.py
+      docs/evidence/ch11c-sweep/ch11c_verify.py
+      docs/evidence/ch11c-sweep/progress-CH-11c.md
       docs/evidence/ch14-size/selection-applied.md
       docs/evidence/checkpoint/B0-agent-sonnet-rep1.json
       docs/evidence/checkpoint/B0-sonnet-rep1.json
@@ -57,7 +62,7 @@ no network, no model call, no clock, no RNG in any number below
       docs/evidence/checkpoint/withdrawn/checkpoint-result.txt
       docs/evidence/night-run/summary.md
       docs/evidence/runs/cost_ledger.csv
-  [PASS] the card's file counts do NOT reproduce, so they are not repeated (QUESTIONS.md Q37)  -- measured 27 / 13
+  [PASS] the card's file counts do NOT reproduce, so they are not repeated (QUESTIONS.md Q37)  -- measured 31 / 18
 
 ==============================================================================
 2. Q34 - B0-prime against A1, in tokens and dollars

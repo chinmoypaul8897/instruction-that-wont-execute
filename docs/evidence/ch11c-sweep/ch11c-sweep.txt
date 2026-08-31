@@ -15,10 +15,10 @@ A. every model name in the shipping surface, classified
   SUBMISSION.md    haiku-dated   0   haiku-alias  0   sonnet   0
   CHANGELOG.md     haiku-dated   2   haiku-alias  0   sonnet   0
   STATUS.md        haiku-dated   1   haiku-alias  0   sonnet   3
-  AI-USE.md        haiku-dated   3   haiku-alias  2   sonnet   4
+  AI-USE.md        haiku-dated   3   haiku-alias  2   sonnet   7
   QUESTIONS.md     haiku-dated  18   haiku-alias  4   sonnet  31
 
-  TOTAL            haiku-dated  29   haiku-alias  6   sonnet  50
+  TOTAL            haiku-dated  29   haiku-alias  6   sonnet  53
   (the haiku-alias column counts the floating alias `claude-haiku-4-5`;
    GOOD.md section 8 records it works and is deliberately NOT used.)
 
@@ -74,7 +74,7 @@ B. headline figures - agreement across the shipping surface
     REPRODUCE.md:238  USD 11.11
         | **The six arms in the primary matrix cost USD 11.11 and 5,802 seconds of measured
         -> NOT the total: the six PRIMARY-MATRIX arms only, excluding the ablation A1-iter1? no - excluding the withdrawn sonnet subset, the B0-agent-currenttext removed experiment and the model-id probe
-    AI-USE.md:312  USD 9.6967
+    AI-USE.md:391  USD 9.6967
         | **Cost: USD 9.6967 for this session; USD 11.6323 committed in total against the 18.00 ceiling**, 2,107 l
         -> NOT the total: the CH-11 SESSION's own cost, stated beside the 11.6323 total on the same line
     QUESTIONS.md:2652  USD 11.11
@@ -90,9 +90,9 @@ B. headline figures - agreement across the shipping surface
   [PASS] REPRODUCE.md's 11.11 is the six-arm subtotal and reproduces  -- 11.1107
 
   B3. Stale figures - asserted, or quoted in order to correct?
-    [quoted to correct] AI-USE.md:242  the pre-re-run secret-sweep scope
+    [quoted to correct] AI-USE.md:321  the pre-re-run secret-sweep scope
         | **Correction, 2026-08-31 (CH-11c).** This row read *"all 450 blobs of history"* until
-    [quoted to correct] AI-USE.md:247  the pre-re-run secret-sweep scope
+    [quoted to correct] AI-USE.md:326  the pre-re-run secret-sweep scope
         | `0f3f4fe` (repository `f0a246b1`, **450 blobs / 81 commits**) and then `263ed29`
     [quoted to correct] QUESTIONS.md:2217  the pre-re-run secret-sweep scope
         | ## Q31 - `STATUS.md`'s CH-14a row states the secret sweep's scope as 450 blobs / 81 commits; the com
@@ -108,7 +108,7 @@ B. headline figures - agreement across the shipping surface
         | 1. **"26 items had samples that disagreed with each other" → 22.** The earlier figure of
     [quoted to correct] STATUS.md:42  the non-reproducing disagreement count
         | | 4 | CH-11 · README + `REPRODUCE.md` + `THIRD-PARTY.md` + `LICENSE` | **built** | **`QUESTIONS.md` 
-    [quoted to correct] AI-USE.md:169  the non-reproducing disagreement count
+    [quoted to correct] AI-USE.md:248  the non-reproducing disagreement count
         | `QUESTIONS.md` entries rather than repeated: `CHANGELOG.md`'s *"26 items had samples
     [quoted to correct] QUESTIONS.md:2322  the non-reproducing disagreement count
         | ## Q33 - `CHANGELOG.md`'s "26 items had samples that disagreed with each other" does not reproduce; 
@@ -124,6 +124,8 @@ C. surviving 'compute-matched' labels, and gate-pass claims
     [corrective] CHANGELOG.md:42  2. **"compute-matched control" → "repeated-sampling control".** B0′ spent about **34%**
     [corrective] CHANGELOG.md:45  **A genuinely compute-matched control was not run** — building one means new paid arms
     [corrective] STATUS.md:43  | 4b | CH-11c · five factual corrections in shipping files | **built** | **Five statements a
+    [corrective] AI-USE.md:108  pre-registration to `GOOD.md` §11 (**Q32**); `B0′` called compute-matched at a third of A1's
+    [corrective] AI-USE.md:157  Questions raised: **Q36** (three protected files still say *compute-matched*), **Q37**,
     [corrective] QUESTIONS.md:1385  ## Q22 - B0′, the compute-matched control, CANNOT be built at the pre-registered temperature
     [corrective] QUESTIONS.md:2360  ## Q34 - B0-prime is named the "compute-matched control" and it is not token-matched
     [corrective] QUESTIONS.md:2464  | **Q34** | **CLOSED in every editable file; OPEN in the protected ones — see Q36** | `READM
@@ -159,7 +161,7 @@ C. surviving 'compute-matched' labels, and gate-pass claims
 D. every docs/evidence/ path the shipping surface cites
 ==============================================================================
   distinct docs/evidence/ paths cited : 73
-  citations in total                  : 173
+  citations in total                  : 178
   paths that do not exist on disk     : 2
 
     ABSENT  docs/evidence/ch11-repro/
