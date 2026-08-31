@@ -214,8 +214,13 @@ rules out *"three tries instead of one"*; it does not rule out *"three times the
 arms, and it is stated here rather than implied by a label. That statement is stronger
 than the mislabel would have been: *"the agent did not simply get more compute"* is
 supported by the sampling control, and it is **not** supported by a token match, because
-there is none. `QUESTIONS.md` **Q34**. B0′ is also **the only arm in the packet not at temperature
-0** — self-consistency at 0 is a no-op, and the deviation is ruled in `QUESTIONS.md` Q22.
+there is none. `QUESTIONS.md` **Q34**. B0′ is **the only arm in the primary matrix not at temperature 0** — self-consistency
+at 0 is a no-op, and the deviation is ruled in `QUESTIONS.md` Q22. *Corrected at CH-11c:
+this read "the only arm in the packet", which is false — the two withdrawn sonnet arms
+also ran off 0, because `claude-sonnet-5` rejects the parameter (HTTP 400, measured), so
+they ran at the model default. `GOOD.md` §8 records that asymmetry as a reported
+limitation. B0′ at temperature 1.0 is the only such arm among the six that carry a
+published number.*
 
 **And the trivial attack is dead.** The best model-free script, a threshold over 30 cheap
 features with 5-fold CV grouped by FR document, scores **0.6098 at permutation
@@ -506,7 +511,7 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 | **The pre-registration** | [GOOD.md](GOOD.md) — metric, thresholds, predictions, committed before any result existed |
 | **The iteration cards** | [CHANGELOG.md](CHANGELOG.md) — each committed before its build |
 | **The spec** | [CONTEXT.md](CONTEXT.md) — architect-authored, versioned, outranks the code |
-| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — 31 entries, including our own retractions |
+| **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **39** entries (`grep -c '^## Q'`), including our own retractions |
 | **Chunk-by-chunk state** | [STATUS.md](STATUS.md) · [PROGRESS.md](PROGRESS.md) |
 | **Every model, tool and agent** | [AI-USE.md](AI-USE.md) · [`docs/trajectories/`](docs/trajectories/) · [`prompts/`](prompts/) · [`agents/`](agents/) |
 | **What pre-existed vs what was built** | [PROVENANCE.md](PROVENANCE.md) |

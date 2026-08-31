@@ -106,7 +106,8 @@ Two capabilities were measured and **neither works alone**: A1 = 0.7195, A1-minu
 0.6463, A1-iter1 = 0.5610, B0-agent = 0.6585. The gap A1 − B0-agent is +6.1 pp at
 p = 0.4244 — **not significant**, and reported as such.
 
-`QUESTIONS.md` holds 31 entries including our own retractions, a duplicated-run
+`QUESTIONS.md` holds **39** entries (`grep -c '^## Q'`; this read 31 until CH-11c, when the
+sweep found it stale and this chunk itself added four) including our own retractions, a duplicated-run
 disclosure, and three errors this project made about its own work. That file is the
 argument, not an appendix to it.
 

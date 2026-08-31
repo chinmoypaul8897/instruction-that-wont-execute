@@ -2566,3 +2566,104 @@ fence grants, for the architect to fold in. This is the same shape CH-11 took un
 correct as such — that session really did write it against the earlier scan — but a
 reader who greps for `450` will find it after `STATUS.md` and `AI-USE.md` have been
 corrected. **Flagged, not edited.**
+
+---
+
+## Q39 - the CH-11c shipping-surface sweep raised 75 findings; 57 survived a refuter and only 5 were in this chunk's mandate
+
+**Raised at CH-11c, 2026-08-31, by the sweep the chunk card's §6 commissioned. Five acted
+on, the rest recorded. Not absorbed.**
+
+`prompts/CH-11c.md` §6 asks for one sweep over every tracked shipping file — every model
+name against the artifacts, every numeric claim for a path that contains it, any surviving
+*compute-matched*, any claim a gate passed when it did not — and asks the session to
+**report what it found and what it could not check**.
+
+### What was run
+
+Two halves, both committed under `docs/evidence/ch11c-sweep/`:
+
+| half | artifact | result |
+|---|---|---|
+| mechanical, re-runnable | `ch11c_sweep.py` + `ch11c-sweep.txt` | **14 checks, 14 PASS** |
+| corrections re-derived | `ch11c_verify.py` + `ch11c-verify.txt` | **36 checks, 36 PASS** |
+| adversarial, 21 agents | `ch11c-agent-sweep.md` | **75 findings, 18 refuted, 57 survived** |
+
+The adversarial half is workflow run `wf_74534735-795`: one read-only auditor per shipping
+file (10), one adversarial refuter per file told to kill that file's findings and to
+default to *refuted* when uncertain (10), and one completeness critic (1). 971 tool calls,
+2,094,887 subagent tokens, 2,170 s. **0 agent errors, 0 empty results.**
+
+**A finding that survived one refuter is NOT a confirmed defect** and is not reported as
+one here. The tally is 75 raised / 18 killed / 57 standing, severity as the auditors
+assigned it: **2 blocker, 44 material, 29 cosmetic**.
+
+### What CH-11c fixed beyond its five, and why each was in scope
+
+| finding | disposition |
+|---|---|
+| `PROVENANCE.md:92` — *"every evaluation arm, temperature 0"*. **False:** `B0prime` ran at **temperature 1.0** (`docs/evidence/ch06-a1/B0prime-rep1.json` records it; `src/arms.py` defaults the arm to 1.0 because best-of-3 at 0 is a no-op, Q22), and the withdrawn sonnet arms ran at the model default because sonnet rejects the parameter. | **FIXED, and disclosed as this chunk's own defect.** CH-11c wrote that qualifier itself while correcting the model name — **a session correcting a false claim about the model introduced a new false claim about the temperature in the same sentence.** Caught within the hour by this chunk's own sweep. |
+| `AI-USE.md:307` — the NIGHT-RUN heading read **"CH-03 FAILED then FIXED"**. CH-03's state is `reviewed-FAIL ×2 → ESCALATED`, and Q19 says in terms: *"NOT done: no third review round … it is not claimed to pass."* | **FIXED.** The card's §6 names *"any claim that a gate passed when it did not"*. Heading now reads `CH-03 reviewed-FAIL ×2 → ESCALATED`. |
+| `AI-USE.md:50` — **"Measured spend to date: USD 1.935538 over 1038 logged runs"**, in the global `## Models` section. The ledger holds **2,107 rows / USD 11.632274**. | **FIXED, with the cause.** Not a wrong measurement — a stale one, exactly like Q31: `git log -- docs/evidence/runs/cost_ledger.csv` shows the file held **1038 rows at `9786f6c`** (the CHECKPOINT re-run) and 2,107 from `bc99ef4`. Those 1038 rows sum to 1.935538 to the last digit. Corrected, not deleted. |
+| `README.md:509` — **"QUESTIONS.md — 31 entries"**. `grep -c '^## Q'` gives **38**, contiguous Q1–Q38. | **FIXED** to 38. CH-11c itself added three of the seven it was stale by. |
+| `README.md:217` — **"the only arm in the packet not at temperature 0"**. | **FIXED** to *"the only arm in the primary matrix"*, with the two withdrawn sonnet arms and their HTTP-400 cause stated. |
+
+### What is NOT fixed, and why not
+
+**Everything else stands recorded and untouched.** Fixing ~50 further findings is a
+different chunk, not a widening of this one:
+
+1. **Two of the affected files are outside the fence entirely** — `REPRODUCE.md` and
+   `SAFETY.md`. The sharpest of those: `REPRODUCE.md:88` and `SUBMISSION.md:53` both say
+   `data/raw/` holds **824 MB**; measured it is **1,443,366,993 B = 1.44 GB**, and 824 MB
+   is the eCFR titles alone — *which `REPRODUCE.md` itself corrects 186 lines later, at
+   its own lines 274-276.* `PROGRESS.md:194` already logged this as fixed and it is still
+   live. `SAFETY.md:23`'s network-boundary sentence — the claim that answers ground rule
+   04 — survived its refuter.
+2. **Several are Class A or need the architect's triage**, e.g. `STATUS.md:32`'s Gate
+   column reading `none` for CH-08 where `PROCESS.md` §6 assigns it a NUMBERS gate bound
+   *"before any number reaches the README"*; and `CHANGELOG.md:23`'s `0.4737`, which is
+   the **withdrawn** checkpoint's B0-agent missed-defect rate on the failed n=76 eval set.
+3. **Some may not survive a second refuter.** One pass is one pass. Two of the auditors'
+   sub-claims were killed by their own verifiers mid-finding and are marked so in the
+   evidence.
+
+**The full 75, with each auditor's command, each refuter's command and each verdict, are
+in `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md`, generated verbatim from the workflow
+journal rather than summarised by hand.**
+
+### On the mechanical half's detector scope — reported, not applied silently
+
+`ch11c_sweep.py` runs **two readings and prints both**, in the shape Q33 used for the vote
+counts and hard rule 7 requires for normalisation: **STRICT** (one line is the unit) and
+**SCOPED** (±4 lines, fenced blocks excluded from path extraction), plus a third
+**section-scope** reading for the floating-alias check.
+
+STRICT over-detects, and the reason is structural: a correction of the form *"this said X,
+which is wrong; the artifact says Y"* routinely spans four lines, and Q1 transcribes the
+operator's ruling verbatim at its head and records the correction to it fifty lines later.
+**No threshold was moved and nothing is suppressed** — every STRICT hit is printed with an
+explicit, structural disposition (*quoted verbatim under a heading that announces the
+correction* · *a template placeholder in a fenced block* · *a hypothetical path in a
+question to the architect*), so a reviewer can disagree with any one of them by name.
+
+Two things that reading earned:
+
+- **`REPRODUCE.md`'s USD 11.11** looked like a rival project total. Re-summed from the
+  ledger over the six primary-matrix arms it is **11.1107**, and the gap to 11.6323 is the
+  withdrawn sonnet subset, the removed experiment and the model-id probe. **Traceable.**
+- **Two `docs/evidence/` paths that do not exist** are `docs/evidence/iter-N/` (a literal
+  template placeholder in a fenced card-shape block) and `docs/evidence/ch11-repro/` (a
+  hypothetical directory in Q30's question *to* the architect, which Q30 states was never
+  created). **Neither is a broken citation.**
+
+### For the architect
+
+1. Does a chunk get sanctioned to work the 57? It is the largest single block of
+   unaddressed findings in the tree and the two blockers are both in `AI-USE.md`, a
+   deliverable.
+2. `REPRODUCE.md` and `SAFETY.md` are in no chunk's fence right now and both carry a
+   surviving material finding.
+3. The `824 MB` / `1.44 GB` error is **already on `PROGRESS.md`'s corrected-findings table
+   as fixed** and is still live in two shipping files. That is the Q35 shape again: a
+   defect recorded as remediated and not actually remediated.

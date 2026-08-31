@@ -47,8 +47,15 @@ up to 24h latency and the CHECKPOINT answer was needed inside one overnight run.
 ledger row records `delivery=standard`, so the doubled unit price is visible in the
 evidence rather than assumed away. Q1's batch ruling stands for CH-08's full matrix.
 
-**Measured spend to date: USD 1.935538 over 1038 logged runs** (1,761,960 input /
-8,880 output tokens), against the USD 18.00 ceiling enforced in `src/runlog.py`.
+**Measured spend: USD 11.632274 over 2,107 logged runs** (9,509,276 input / 398,764
+output tokens), against the USD 18.00 ceiling enforced in `src/runlog.py`.
+*Corrected at CH-11c. This read **"spend to date: USD 1.935538 over 1038 logged
+runs"**, which was a true measurement of a ledger that has since grown, not a wrong
+one: `git log -- docs/evidence/runs/cost_ledger.csv` shows the file held exactly
+**1038 rows** at `9786f6c`, the CHECKPOINT re-run, and 2,107 from `bc99ef4` onward.
+Those 1038 rows are the `B0` / `B0-agent` / sonnet-subset / probe arms and they sum
+to 1.935538 to the last digit. The figure was a snapshot that stopped being the
+total; it is corrected rather than deleted. `QUESTIONS.md` **Q39**.*
 3 runs carry an EMPTY cost cell rather than a zero — they died before
 reporting token counts, and unknown is not the same claim as free.
 
@@ -304,7 +311,7 @@ project's own account of its work. It returned **FAIL with 16 findings**, reimpl
 
 **Cost: USD 9.6967 for this session; USD 11.6323 committed in total against the 18.00 ceiling**, 2,107 logged runs, 3 of unknown cost carrying an empty cell rather than a zero.
 
-### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 FAILED then FIXED · CHECKPOINT GREEN**
+### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 reviewed-FAIL ×2 → ESCALATED · CHECKPOINT GREEN**
 
 One unattended session, roughly six hours, working a pre-registered queue with the
 operator asleep. Transcript: `docs/trajectories/build/NIGHT-RUN-CHECKPOINT.jsonl`

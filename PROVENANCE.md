@@ -89,7 +89,7 @@ The extraction is faithful on every load-bearing element. Recorded here because 
 |---|---|---|
 | CFR / Federal Register / eCFR data from govinfo.gov | **Public domain, 17 U.S.C. §105** | the corpus |
 | Python standard library | PSF | the scorer, deliberately dependency-free |
-| Anthropic API — `claude-haiku-4-5-20251001` | commercial, per terms | every evaluation arm, temperature 0 |
+| Anthropic API — `claude-haiku-4-5-20251001` | commercial, per terms | every evaluation arm. Temperature 0 on all of them **except `B0prime`, which ran at temperature 1.0** — best-of-3 self-consistency at 0 draws the same deterministic sample three times, so the control could not exist at 0 (`QUESTIONS.md` Q22). |
 | Anthropic API — `claude-sonnet-5` | commercial, per terms | the model-sensitivity subset only, which was **WITHDRAWN** as a harness defect — `QUESTIONS.md` Q19. No claim in this submission rests on it. Also the four rows of the model-id probe. |
 | Claude Code | commercial, per terms | wrote this project — see `AI-USE.md` |
 
@@ -104,6 +104,8 @@ corrected here rather than quietly. The generating artifact is
 `claude-haiku-4-5-20251001`, and the only `claude-sonnet-5` rows are the 80 rows of the
 withdrawn sensitivity subset (`B0-sonnet`, `B0-agent-sonnet`) plus 4 rows of
 `probe-model-id`. Re-derivable at `docs/evidence/ch11c-sweep/`.
+
+**A second correction, to the first one, same day.** The corrected row above first read *"every evaluation arm, temperature 0"*. **That qualifier was also false, and CH-11c wrote it.** `B0prime` ran at **temperature 1.0** — `docs/evidence/ch06-a1/B0prime-rep1.json` records `temperature: 1.0`, and `src/arms.py` defaults the arm to 1.0 because best-of-3 self-consistency at 0 is a no-op (`QUESTIONS.md` Q22) — and the withdrawn sonnet subset ran at the model default because sonnet rejects the parameter. It was caught within the hour by this chunk's own adversarial sweep (`docs/evidence/ch11c-sweep/ch11c-agent-sweep.md`, finding ranked 2 of 9) and is recorded rather than quietly amended. **A session correcting a false claim about the model introduced a new false claim about the temperature in the same sentence** — which is the thesis of this repository applied to its own corrections.
 
 Prior art cited rather than reimplemented: **Prior et al., NLLP@ACL 2025** (amendatory instruction execution) and **`cfpb/regulations-parser`**. Neither is used as code; both are named in `CONTEXT.md` §12.
 
