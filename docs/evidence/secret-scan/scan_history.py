@@ -68,7 +68,7 @@ import sys
 from pathlib import Path
 
 TOOL = "micro1 scan_history.py"
-TOOL_VERSION = "1.1.0 (CH-14a, 2026-08-31)"
+TOOL_VERSION = "1.2.0 (CH-14a, 2026-08-31)"
 
 
 def sh(*args: str) -> str:
@@ -111,12 +111,48 @@ NAMED = ["anthropic-prefix", "google-prefix", "bearer-header", "operator-phone"]
 # purpose is to be detected by the guard it feeds. Nothing here is a real secret and
 # nothing here is suppressed on the basis of WHERE it lives - only on what it is.
 EXCEPTIONS: list[tuple[str, str, str]] = [
+    # NB: these reasons DESCRIBE the fixtures and do not QUOTE them. An earlier
+    # version quoted both literals, and this sweep then flagged its own exception
+    # list - and the scan.txt that printed it - as two fresh findings. The rule was
+    # right; the evidence file had no business reproducing credential-shaped strings
+    # to explain why credential-shaped strings are fine. Describe, never reproduce.
     ("docs/evidence/ch00_guard_probe.py", "generic-secret-assign",
-     "CH-00 probe fixture: literal 'ANTHROPIC_API_KEY=abcdefghijklmnopqrstuvwx', a "
-     "sequential alphabet fed to the redactor to prove it redacts. Not a key."),
+     "CH-00 probe fixture: an env-style assignment to an API-key-named variable whose "
+     "value is 24 sequential lowercase letters, fed to the redactor to prove it "
+     "redacts. Not a key - no provider prefix and no entropy."),
     ("docs/evidence/ch00_guard_probe.py", "bearer-header",
-     "CH-00 probe fixture: literal 'Bearer abcdefghijklmnopqrstuvwxyz012345', a "
-     "sequential alphabet fed to the redactor to prove it redacts. Not a token."),
+     "CH-00 probe fixture: an Authorization-style header whose value is 26 sequential "
+     "lowercase letters followed by six digits, fed to the redactor to prove it "
+     "redacts. Not a token."),
+]
+
+
+# ------------------------------------------------------- BLOB-PINNED EXCEPTIONS
+# (blob-oid, rule, reason). Pinned to ONE immutable object, never to a path.
+#
+# Why this class exists. The path exceptions above once QUOTED the fixture literals
+# they were excusing. This sweep - correctly - then flagged its own exception list,
+# and the scan.txt that printed it, as fresh findings. The working tree was fixed to
+# describe rather than quote, but THE OLD BLOBS ARE STILL IN THE HISTORY and this
+# sweep reads all of history. A history rewrite is forbidden by CH-14a's safety rider
+# and would be wildly disproportionate to two synthetic strings.
+#
+# A PATH exception would have been the wrong instrument: it would suppress the rule
+# on the scanner itself forever, including on content nobody has written yet - the
+# standing blind spot this script's whole design refuses. A blob OID is content-
+# addressed, so this excuses exactly these two objects and cannot extend to any
+# future edit of the same files: a new commit is a new blob and gets scanned.
+BLOB_EXCEPTIONS: list[tuple[str, str, str]] = [
+    ("bf13baf8e519bce137926c5c11edf8261584d5ba", "bearer-header",
+     "historical docs/evidence/secret-scan/scan.txt - the printed EXCEPTIONS table "
+     "of this script at v1.1.0, quoting the CH-00 fixture it excuses."),
+    ("bf13baf8e519bce137926c5c11edf8261584d5ba", "generic-secret-assign",
+     "same blob, same cause."),
+    ("9fc90e7305b30c9a9b20fa4ef78f1609b862ea2d", "bearer-header",
+     "historical docs/evidence/secret-scan/scan_history.py at v1.1.0 - the "
+     "EXCEPTIONS table before it was rewritten to describe rather than quote."),
+    ("9fc90e7305b30c9a9b20fa4ef78f1609b862ea2d", "generic-secret-assign",
+     "same blob, same cause."),
 ]
 
 
@@ -164,7 +200,8 @@ def main() -> int:
     out(f"PII source    : {pii_src or 'NONE FOUND'}\n")
     out(f"rules         : {len(BLOCKING)} blocking + {len(ADVISORY)} advisory + "
         f"{len(pii)} operator-contact (blocking)\n")
-    out(f"exceptions    : {len(EXCEPTIONS)} declared, listed in full below\n\n")
+    out(f"exceptions    : {len(EXCEPTIONS)} path-pinned + {len(BLOB_EXCEPTIONS)} "
+        "blob-pinned, all listed below with reasons\n\n")
 
     if not pii:
         out("REFUSED: no PII pattern source, so the contact sweep could not run.\n"
@@ -173,6 +210,7 @@ def main() -> int:
 
     blocking = BLOCKING + pii
     excepted = {(p, r) for p, r, _ in EXCEPTIONS}
+    blob_excepted = {(o, r) for o, r, _ in BLOB_EXCEPTIONS}
 
     # ---------------------------------------------------------- full history
     entries = []
@@ -191,6 +229,7 @@ def main() -> int:
     findings: list[tuple[str, str, str, int]] = []
     suppressed: list[tuple[str, str]] = []
     exception_hits = {(p, r): 0 for p, r, _ in EXCEPTIONS}
+    blob_hits = {(o, r): 0 for o, r, _ in BLOB_EXCEPTIONS}
     bcount = {label: 0 for label, _ in blocking}
     acount = {label: 0 for label, _, _ in ADVISORY}
     aben = {label: 0 for label, _, _ in ADVISORY}
@@ -211,6 +250,10 @@ def main() -> int:
             if (name, label) in excepted:
                 exception_hits[(name, label)] += 1
                 suppressed.append((name, label))
+                continue
+            if (oid, label) in blob_excepted:
+                blob_hits[(oid, label)] += 1
+                suppressed.append((f"{name}@{oid[:12]}", label))
                 continue
             findings.append((name or "(unnamed)", oid[:12], label,
                              data[:m.start()].count(b"\n") + 1))
@@ -299,6 +342,13 @@ def main() -> int:
         if n == 0:
             stale += 1
         out(f"  [{'USED ' + str(n) if n else 'STALE'}] {r}  {p}\n")
+        out(f"          {why}\n")
+    out("\n  BLOB-PINNED - content-addressed, cannot extend to a future edit:\n")
+    for o, r, why in BLOB_EXCEPTIONS:
+        n = blob_hits[(o, r)]
+        if n == 0:
+            stale += 1
+        out(f"  [{'USED ' + str(n) if n else 'STALE'}] {r}  {o[:12]}\n")
         out(f"          {why}\n")
     if stale:
         out(f"\n  {stale} STALE exception(s) - they match nothing and should be "

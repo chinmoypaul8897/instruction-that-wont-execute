@@ -2,23 +2,23 @@
 CH-14a SECRET SWEEP - full git history
 ==============================================================================
 
-tool          : micro1 scan_history.py 1.1.0 (CH-14a, 2026-08-31)
+tool          : micro1 scan_history.py 1.2.0 (CH-14a, 2026-08-31)
                 NOT gitleaks. gitleaks is not installed on this machine and
                 this chunk installs nothing. Local equivalent, labelled as
                 one. Limitations listed at the end.
-repository    : f0a246b195b5ecdd6958b3d105fd79b5bd71eb32
-commits       : 81
+repository    : 2453998f75446b52cbeb07c908eec5dbf689b9dd
+commits       : 84
 PII source    : context/02-ABOUT-ME.md
 rules         : 10 blocking + 2 advisory + 2 operator-contact (blocking)
-exceptions    : 2 declared, listed in full below
+exceptions    : 2 path-pinned + 4 blob-pinned, all listed below with reasons
 
 ------------------------------------------------------------------------------
 SCOPE 1 - every blob reachable from every ref
 ------------------------------------------------------------------------------
-  blobs in history           450
-  text blobs scanned         450
+  blobs in history           462
+  text blobs scanned         462
   binary blobs skipped         0
-  scanned + skipped == blobs : 450 + 0 == 450  -> True
+  scanned + skipped == blobs : 462 + 0 == 462  -> True
 
   BLOCKING rules - these decide the verdict, nothing suppresses them
   (zero-occurrence rules ARE printed, as zeros)
@@ -29,27 +29,27 @@ SCOPE 1 - every blob reachable from every ref
          0  aws-access-key-id
          0  slack-token
          0  private-key-block
-         1  bearer-header   (1 declared exception hit)   <- CH-14a names this one
+         3  bearer-header   (1 declared exception hit)   <- CH-14a names this one
          0  x-api-key-header
-         1  generic-secret-assign   (1 declared exception hit)
+         3  generic-secret-assign   (1 declared exception hit)
          0  operator-email#1
          0  operator-phone   <- CH-14a names this one
 
   ADVISORY rules - bare prefixes, classified by the match itself
-        30  anthropic-prefix   <- CH-14a names this one
-        30    of which NOT followed by a key-shaped tail -> not a anthropic-api-key
+        34  anthropic-prefix   <- CH-14a names this one
+        34    of which NOT followed by a key-shaped tail -> not a anthropic-api-key
          0    of which ARE key-shaped -> escalated to BLOCKING above
-        33  google-prefix   <- CH-14a names this one
-        33    of which NOT followed by a key-shaped tail -> not a google-api-key
+        35  google-prefix   <- CH-14a names this one
+        35    of which NOT followed by a key-shaped tail -> not a google-api-key
          0    of which ARE key-shaped -> escalated to BLOCKING above
 
 ------------------------------------------------------------------------------
 SCOPE 2 - docs/trajectories/** in the working tree, the four CH-14a names
 ------------------------------------------------------------------------------
-  files                       35
-  bytes                 37,730,774
-         5  anthropic-prefix   -> 0 that are actually credential-shaped
-         4  google-prefix   -> 0 that are actually credential-shaped
+  files                       36
+  bytes                 39,363,213
+         6  anthropic-prefix   -> 0 that are actually credential-shaped
+         5  google-prefix   -> 0 that are actually credential-shaped
          0  bearer-header   -> 0 that are actually credential-shaped
          0  operator-phone   -> 0 that are actually credential-shaped
 
@@ -57,9 +57,19 @@ SCOPE 2 - docs/trajectories/** in the working tree, the four CH-14a names
 DECLARED EXCEPTIONS - each with its reason, and each checked for staleness
 ------------------------------------------------------------------------------
   [USED 1] generic-secret-assign  docs/evidence/ch00_guard_probe.py
-          CH-00 probe fixture: literal 'ANTHROPIC_API_KEY=abcdefghijklmnopqrstuvwx', a sequential alphabet fed to the redactor to prove it redacts. Not a key.
+          CH-00 probe fixture: an env-style assignment to an API-key-named variable whose value is 24 sequential lowercase letters, fed to the redactor to prove it redacts. Not a key - no provider prefix and no entropy.
   [USED 1] bearer-header  docs/evidence/ch00_guard_probe.py
-          CH-00 probe fixture: literal 'Bearer abcdefghijklmnopqrstuvwxyz012345', a sequential alphabet fed to the redactor to prove it redacts. Not a token.
+          CH-00 probe fixture: an Authorization-style header whose value is 26 sequential lowercase letters followed by six digits, fed to the redactor to prove it redacts. Not a token.
+
+  BLOB-PINNED - content-addressed, cannot extend to a future edit:
+  [USED 1] bearer-header  bf13baf8e519
+          historical docs/evidence/secret-scan/scan.txt - the printed EXCEPTIONS table of this script at v1.1.0, quoting the CH-00 fixture it excuses.
+  [USED 1] generic-secret-assign  bf13baf8e519
+          same blob, same cause.
+  [USED 1] bearer-header  9fc90e7305b3
+          historical docs/evidence/secret-scan/scan_history.py at v1.1.0 - the EXCEPTIONS table before it was rewritten to describe rather than quote.
+  [USED 1] generic-secret-assign  9fc90e7305b3
+          same blob, same cause.
 
   0 stale.
 
@@ -76,8 +86,8 @@ SCOPE 3 - .env, confirmed by NAME ONLY (hard rule 12)
 ==============================================================================
 VERDICT: PASS - 0 findings.
 
-  450 text blobs across 81 commits, 35 trajectory files, 37,730,774 bytes.
-  2 hit(s) matched a DECLARED exception, listed above with reasons.
+  462 text blobs across 84 commits, 36 trajectory files, 39,363,213 bytes.
+  6 hit(s) matched a DECLARED exception, listed above with reasons.
   Every advisory prefix hit was classified as not-a-key by inspecting
   the match, not the path.
 ==============================================================================
