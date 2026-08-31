@@ -87,6 +87,56 @@ blind human-time study (8 items by hand, stopwatched, before seeing gold) is CH-
 
 Newest first. Every build session appends one row here **and** exports its transcript.
 
+### CH-14a · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **PACKAGING — and the blocker was never a blocker**
+
+**Models called by THIS session: NONE.** Zero API calls, zero tokens against the paid
+ceiling. Committed spend is **unchanged at USD 11.6323** of 18.00 and
+`docs/evidence/runs/cost_ledger.csv` is byte-identical to how the session found it.
+CH-14a forbade model calls; the ledger is the evidence that none were made, and the
+clean-clone replay reproduces the same `TOTAL 11.6323` from the extracted zip.
+
+**Subagents: none.** Every step ran in the main session.
+
+**Arms run: none.** Every number in this session's evidence is either measured from
+`git` plumbing and the filesystem, or replayed from committed artefacts by
+`analyse_checkpoint.py` and `analyse_a1.py` — both pure, both offline.
+
+**Tools used, and what each was for:**
+
+| tool | used for |
+|---|---|
+| `git archive`, `ls-tree`, `rev-list`, `cat-file`, `write-tree` | measuring the real submission artifact and sweeping all 450 blobs of history |
+| `python -m venv` + `pip install pytest` | the clean-room interpreter — the one step that touched the network, before the offline phase began |
+| `pytest` | 10 new probe tests; the full suite in three environments |
+| filesystem + `zipfile` | building and extracting the submission archive |
+
+**Human direction.** The queue was fixed in `prompts/CH-14a.md`, committed verbatim.
+One question was put to the architect mid-session — whether to raise the 300-file guard
+that was refusing every commit — **and was declined without a ruling**. The session then
+took the conservative-and-continue path the prompt specifies for unruled ambiguity and
+recorded the deviation as **Class A in `QUESTIONS.md` Q28**, awaiting ratification,
+rather than either shipping nothing or changing a guard quietly.
+
+**Three findings this session made against its own side of the project:**
+
+1. **`QUESTIONS.md` Q25's submission blocker does not exist.** The 50 MB cap is on the
+   uploaded zip; the zip is 10.24 MB. Q25 measured the uncompressed tree and its four
+   proposed remedies — compress, relocate, sample, or unseal `data/` — were all
+   unnecessary. `src/arms.py::bundle()`'s promise that *"EVERY RECORD SURVIVES"* is kept.
+2. **A test written by this session was broken inside the submission.**
+   `test_the_real_repository_is_under_the_real_limit` calls `git write-tree`; an
+   extracted zip is not a git repository. A test written to prove the archive is under
+   cap failed in the archive. Found by running the suite from the extraction — the one
+   environment nobody had tried — alongside a pre-existing CH-02 test with the same
+   shape of defect.
+3. **This session's own secret scanner reported 74 false findings before it worked.**
+   It was matching the credential detectors' own regex source. Rebuilt to classify by
+   the match rather than the path, with declared exceptions and staleness reporting.
+   The first version's output is preserved in git history.
+
+**Trajectory:** `docs/trajectories/build/CH-14a.jsonl`, exported by
+`tools/export_session.py` (hard rule 10, end-of-session duty 6).
+
 ### CH-06 → CH-08 → CH-09 · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **THE ADVANCED SOLUTION**
 
 One unattended session working a pre-registered queue. It produced the project's

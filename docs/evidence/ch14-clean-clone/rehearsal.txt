@@ -3,7 +3,7 @@ CH-14a CLEAN-CLONE REHEARSAL
 ==============================================================================
 
 source repo   : C:\Users\chinm\micro1 engineering challenge
-commit        : f0a246b195b5ecdd6958b3d105fd79b5bd71eb32
+commit        : 0f3f4fe8301f9bf9c112653c966cf4faaebbaf78
 interpreter   : C:/Users/chinm/AppData/Local/Temp/claude/c--Users-chinm-micro1-engineering-challenge/1636c57b-4ce6-4566-a8b8-11b7ab80a21d/scratchpad/ch14/venv/Scripts/python.exe
 python        : Python 3.12.2
 installed     : colorama==0.4.6, iniconfig==2.3.0, packaging==26.3, pip==24.0, pluggy==1.6.0, Pygments==2.21.0, pytest==9.1.1
@@ -23,14 +23,14 @@ NETWORK OFF - demonstrated, not asserted
 ENVIRONMENT 2 - a fresh `git clone`
 ------------------------------------------------------------------------------
   cloned to           C:\Users\chinm\AppData\Local\Temp\claude\c--Users-chinm-micro1-engineering-challenge\1636c57b-4ce6-4566-a8b8-11b7ab80a21d\scratchpad\ch14\rehearsal\clone
-  tracked files       311
+  tracked files       315
   data/raw present    False   (False is correct - it is git-ignored)
 
 ------------------------------------------------------------------------------
 ENVIRONMENT 3 - the EXTRACTED zip. THIS IS WHAT A JUDGE OPENS.
 ------------------------------------------------------------------------------
-  zip                 10,223,323 B = 10.22 MB (cap 50 MB, CH-14a limit 45 MB)
-  entries             359
+  zip                 10,239,186 B = 10.24 MB (cap 50 MB, CH-14a limit 45 MB)
+  entries             365
   extracted to        C:\Users\chinm\AppData\Local\Temp\claude\c--Users-chinm-micro1-engineering-challenge\1636c57b-4ce6-4566-a8b8-11b7ab80a21d\scratchpad\ch14\rehearsal\fromzip
   is a git repo       False   (False - a plain directory, as received)
 
@@ -53,7 +53,7 @@ REPLAY IN THE CLONE
     IDENTICAL  e0f0005885f513f3  docs/evidence/checkpoint/checkpoint-result.json
     IDENTICAL  3b293a57320ca190  docs/evidence/ch06-a1/a1-result.txt
     IDENTICAL  2daa3c17f71073d4  docs/evidence/ch06-a1/a1-result.json
-  pytest              1 failed, 316 passed, 25 skipped in 13.30s
+  pytest              316 passed, 26 skipped in 10.80s
 
 ==============================================================================
 REPLAY IN THE EXTRACTION
@@ -74,7 +74,7 @@ REPLAY IN THE EXTRACTION
     IDENTICAL  e0f0005885f513f3  docs/evidence/checkpoint/checkpoint-result.json
     IDENTICAL  3b293a57320ca190  docs/evidence/ch06-a1/a1-result.txt
     IDENTICAL  2daa3c17f71073d4  docs/evidence/ch06-a1/a1-result.json
-  pytest              2 failed, 314 passed, 26 skipped in 11.22s
+  pytest              314 passed, 28 skipped in 8.88s
 
 ==============================================================================
 VERDICT
@@ -82,12 +82,13 @@ VERDICT
   PASS  CLONE:byte-identical
   PASS  CLONE:headlines
   PASS  CLONE:manifest
-  FAIL  CLONE:tests
+  PASS  CLONE:tests
   PASS  EXTRACTION:byte-identical
   PASS  EXTRACTION:headlines
   PASS  EXTRACTION:manifest
-  FAIL  EXTRACTION:tests
+  PASS  EXTRACTION:tests
 
-  FAILURES ABOVE. CH-14a: a replay that fails from the EXTRACTION is the
-  most important finding of the day - report it immediately and stop.
+  ALL PASS. The published headline numbers reproduce EXACTLY from the
+  extracted zip, offline, on a fresh interpreter, and the regenerated
+  result files are byte-identical to the committed ones (hard rule 9).
 ==============================================================================
