@@ -6,19 +6,19 @@ Claim: the `nistula-assistance-` result is cited in this project's README
 
 term                  at HEAD  working tree   required?   meaning
 --------------------------------------------------------------------------------------------------------------
-nistula                     0             1   REQUIRED     the repository the claim names is cited
+nistula                     1             1   REQUIRED     the repository the claim names is cited
 acumen                      0             0   -            the OTHER prior-art repository is cited - NOT required by the claim
-17 blocker                  0             1   REQUIRED     the defect count the claim calls the motivating hypothesis is cited
-github.com                  0             1   REQUIRED     some GitHub repository is cited at all
-chinmoypaul                 0             1   -            the operator's own namespace is cited
-green test suite            1             2   -            the hypothesis is stated in the README's own words
+17 blocker                  1             1   REQUIRED     the defect count the claim calls the motivating hypothesis is cited
+github.com                  1             1   REQUIRED     some GitHub repository is cited at all
+chinmoypaul                 1             1   -            the operator's own namespace is cited
+green test suite            2             2   -            the hypothesis is stated in the README's own words
 --------------------------------------------------------------------------------------------------------------
 required terms present : 3
 required terms ABSENT  : 0
 success + failure == n : 3 + 0 == 3  OK
 
 VERDICT on the working tree : the §4 sentence is TRUE
-VERDICT at HEAD             : the §4 sentence is FALSE
+VERDICT at HEAD             : the §4 sentence is TRUE
    (these differ until the fixing commit lands; that is the point of printing both)
 
 WHERE THE CITATION SITS IN THE README

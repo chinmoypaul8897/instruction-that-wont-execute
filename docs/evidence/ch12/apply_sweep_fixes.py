@@ -22,6 +22,16 @@ EVERY `new` VALUE BELOW WAS MEASURED IN THIS SESSION, not copied from a report. 
 finding that prompted it is named in `why`; the command that established the new value
 is in `checked`.
 
+NOTE, added at CH-12 after this chunk's own adversarial audit caught it: FOUR of the
+entries below were superseded by CH-12's own LATER commits - the AI-USE agent-class
+table was rewritten wholesale, and the trajectory count moved 36 -> 37 when this
+chunk's transcript was exported. Their NEW values are therefore the values that
+SHIPPED, not the intermediate ones this script first wrote. Without that repair the
+script printed `4 FAIL, NOTHING WAS WRITTEN` and exited 1, and the shipped claim
+"26/26 verified on disk" described a state that had existed for four commits and was
+gone. **A verification script that stops reproducing is not evidence.** Its re-run
+output is committed at `docs/evidence/ch12/sweep-fixes-rerun.txt`.
+
 Run:  python docs/evidence/ch12/apply_sweep_fixes.py
 Idempotent: running it twice is a no-op and reports every fix as ALREADY-APPLIED.
 """
@@ -39,15 +49,15 @@ FIXES: list[tuple[str, str, str, str, str, str, str]] = [
     # ---------------------------------------------------------------- AI-USE.md
     ("AI-USE.md", "line 18", "material",
      "**6** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN",
-     "**10** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN, "
-     "CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c",
+     "**11 sessions / 12 files** — CH-00,",
      "the Coding class said 6 sessions; the file's own session log carries 10",
      "grep -c '^### ' AI-USE.md -> 10; ls docs/trajectories/build/*.jsonl -> 11 files "
      "(NIGHT-RUN was exported twice: NIGHT-RUN-CHECKPOINT and NIGHT-RUN-FINAL)"),
 
     ("AI-USE.md", "line 19", "material",
      "| **12** | `docs/reviews/` for the verdicts",
-     "| **86** | `docs/reviews/` for the verdicts",
+     "| **103** | `docs/reviews/`, `docs/evidence/ch11c-sweep/`, "
+     "`docs/evidence/spec-fix-1/` |",
      "the Adversarial-audit class total was stale by 74 against the file's own "
      "disclosures",
      "workflow journals counted on disk: wf_5260a72c-01a 10 results (SPEC-FIX-1), "
@@ -214,14 +224,14 @@ FIXES: list[tuple[str, str, str, str, str, str, str]] = [
     # ------------------------------------------------------------ SUBMISSION.md
     ("SUBMISSION.md", "line 21", "cosmetic",
      "34 JSONL trajectories",
-     "36 JSONL trajectories",
+     "37 JSONL trajectories",
      "stale by two: CH-11.jsonl and CH-11c.jsonl were exported after this was written",
      "git ls-files docs/trajectories | grep -c '\\.jsonl$' -> 36 "
      "(arms 15, build 11, probe 10)"),
 
     ("SUBMISSION.md", "line 63", "cosmetic",
      "34 files, complete, nothing sampled",
-     "36 files, complete, nothing sampled",
+     "37 files, complete, nothing sampled",
      "the same stale count, repeated in the agent-use table",
      "git ls-files docs/trajectories | grep -c '\\.jsonl$' -> 36"),
 
@@ -272,13 +282,39 @@ FIXES: list[tuple[str, str, str, str, str, str, str]] = [
 ]
 
 
+#: Corrections that a LATER CH-12 commit superseded with a further, also-correct edit.
+#: (file, sweep-line) -> a substring that must be present for the correction to be in
+#: force in its superseding form. Without this the script reports FAIL on text that is
+#: not wrong but *more* right, which would be a verification script lying in the strict
+#: direction. Each entry names what replaced it and why.
+SUPERSEDED = {
+    ("AI-USE.md", "line 255"):
+        ("the zip is 10.18 MB at `bc99ef4`",
+         "the self-audit showed the appended '11.74 MB at CH-12' was the archive at "
+         "CH-12's STARTING point, not at CH-12; re-measured to 12.51 MB at b39cd0c"),
+    ("PROVENANCE.md", "line 26"):
+        ("**8 of `scraper/`'s 43 entries**",
+         "the self-audit found 4 of the 35 post-kickoff entries re-read the public "
+         "challenge page rather than the operator dossier; the bullet now says so, and "
+         "the span was widened from 'twelve to fifteen' to the measured 12.2-15.4 h"),
+    ("STATUS.md", "line 39"):
+        ("the zip *was* 10.18 MB at `bc99ef4`",
+         "the self-audit objected that a past figure was stated in the present tense; "
+         "the cell now dates it and adds the re-measured 12.51 MB"),
+    ("SUBMISSION.md", "line 63"):
+        ("12 build transcripts (11 sessions; NIGHT-RUN exported twice)",
+         "the count went 34 -> 36 -> 37 as this chunk exported its own transcript, and "
+         "the self-audit then killed the row's 'one JSONL per agent run' predicate, "
+         "which this chunk's own evidence refutes"),
+}
+
 def main() -> int:
     print("CH-12 - APPLYING THE IN-FENCE ONE-LINE SWEEP FIXES")
     print("=" * 90)
     print(f"{len(FIXES)} replacements across "
           f"{len({f[0] for f in FIXES})} files\n")
 
-    applied = already = 0
+    applied = already = superseded = 0
     failures: list[str] = []
     contents: dict[str, bytes] = {}
 
@@ -299,6 +335,12 @@ def main() -> int:
             already += 1
             print(f"  ALREADY  {path:<15} {sweep_line:<11} {severity:<9} "
                   f"(new text present {n_new}x)")
+            continue
+
+        sup = SUPERSEDED.get((path, sweep_line))
+        if n_old == 0 and sup and sup[0].encode("utf-8") in blob:
+            superseded += 1
+            print(f"  SUPERSEDED {path:<13} {sweep_line:<11} {severity:<9} {sup[1][:58]}")
             continue
 
         if n_old != 1:
@@ -334,20 +376,25 @@ def main() -> int:
     print("-" * 90)
     print(f"applied         : {applied}")
     print(f"already applied : {already}")
-    assert applied + already == len(FIXES), "success + failure != n"
-    print(f"success + failure == n : {applied} + {already} == {len(FIXES)}  OK")
+    print(f"superseded      : {superseded}  (a later CH-12 commit corrected it further)")
+    assert applied + already + superseded == len(FIXES), "success + failure != n"
+    print(f"applied + already + superseded == n : {applied} + {already} + "
+          f"{superseded} == {len(FIXES)}  OK")
 
     # Post-write re-verification, reading the files back off disk.
     print("\nRE-VERIFICATION, reading the files back from disk")
     bad = 0
     for path, sweep_line, _sev, old, new, _why, _chk in FIXES:
         blob = (ROOT / path).read_bytes()
-        ok = blob.count(old.encode()) == 0 and blob.count(new.encode()) == 1
+        sup = SUPERSEDED.get((path, sweep_line))
+        ok = blob.count(old.encode()) == 0 and (
+            blob.count(new.encode()) == 1
+            or (sup is not None and sup[0].encode("utf-8") in blob))
         if not ok:
             bad += 1
             print(f"  MISMATCH {path} {sweep_line}: "
                   f"old={blob.count(old.encode())} new={blob.count(new.encode())}")
-    print(f"  {len(FIXES) - bad} of {len(FIXES)} verified on disk; {bad} mismatched")
+    print(f"  {len(FIXES) - bad} of {len(FIXES)} in force on disk; {bad} mismatched")
 
     # Line endings must be unchanged.
     print("\nLINE ENDINGS - unchanged by construction (bytes in, bytes out)")

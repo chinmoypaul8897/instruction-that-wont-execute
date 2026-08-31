@@ -1,0 +1,27 @@
+CH-12 - THE UPLOADED ARCHIVE, MEASURED AT NAMED COMMITS
+================================================================================================
+cap: 50,000,000 B = 50 MB  ·  pre-commit hook refuses above 45,000,000 B
+
+commit             bytes       MB  entries  x under cap  what it is
+----------------------------------------------------------------------------------------------------------------------
+bc99ef4       10,182,500    10.18      347        4.91x  CH-14a, the commit inventory.md measured (10.18 MB)
+e01fdfd       10,662,339    10.66      373        4.69x  CH-11's last, the commit SUBMISSION.md measured (10.66 MB)
+57829c1       11,736,711    11.74      382        4.26x  CH-11c's last - CH-12's starting point
+9f8c26d       11,766,867    11.77      391        4.25x  CH-12's first commit
+b39cd0c       12,513,651    12.51      402        4.00x  CH-12's last code/doc commit
+7223552       14,659,507    14.66      408        3.41x  whatever HEAD is when this is run - NOT a citable figure
+----------------------------------------------------------------------------------------------------------------------
+
+EVERY FIGURE THE PACKET QUOTES, AND WHETHER IT RECONCILES
+------------------------------------------------------------------------------------------------
+  10.18 MB   at bc99ef4  measured 10.18 MB   MATCH     docs/evidence/ch14-size/inventory.md, STATUS.md, AI-USE.md
+  10.66 MB   at e01fdfd  measured 10.66 MB   MATCH     SUBMISSION.md (superseded at CH-12)
+  12.51 MB   at b39cd0c  measured 12.51 MB   MATCH     SUBMISSION.md, STATUS.md, AI-USE.md after CH-12
+
+  reconciled : 3
+  mismatched : 0
+  success + failure == n : 3 + 0 == 3  OK
+
+NOT MEASURED HERE, and stated rather than implied: **10.24 MB**, which two
+shipping files carried until CH-12 and which no commit in this history
+produces. It was not a measurement of anything; it was corrected, not traced.

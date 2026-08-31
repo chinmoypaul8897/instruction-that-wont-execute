@@ -12,12 +12,13 @@ Every size, line count and record span below is measured by
 [`docs/evidence/ch12/trajectory_facts.py`](../evidence/ch12/trajectory_facts.py) →
 [`trajectory-facts.txt`](../evidence/ch12/trajectory-facts.txt).
 
-**37 trajectory files. 46.42 MB. Nothing is curated away — this is an index, not a
-filter.**
+**38 trajectory files, 50.34 MB, at commit `7223552`. Nothing is curated away — this
+is an index, not a filter.** *Every count here names a commit: the set grows each time a
+session exports its transcript, so a bare number would be stale before it was read.*
 
 | class | files | what it is | instructions | result |
 |---|---:|---|---|---|
-| [build sessions](#build-sessions--12-files-11-sessions) | **12** | the Claude Code sessions that wrote this repository | `prompts/<CHUNK-ID>.md` | the commits of that window |
+| [build sessions](#build-sessions--13-files-12-sessions) | **13** | the Claude Code sessions that wrote this repository | `prompts/<CHUNK-ID>.md` | the commits of that window |
 | [evaluation arms](#evaluation-arms--15-files) | **15** | the thing being measured | `agents/*.md` | `docs/evidence/ch06-a1/`, `docs/evidence/checkpoint/` |
 | [probe](#probe--10-files) | **10** | the model-id probe from `QUESTIONS.md` Q1 | `prompts/NIGHT-RUN.md` | `docs/evidence/ch03-model-id/` |
 | [adversarial audits](#adversarial-audits--103-subagents-and-no-jsonl) | **0** | 103 subagents that attacked this project's own conclusions | inside the build transcripts | `docs/reviews/`, `docs/evidence/ch11c-sweep/` |
@@ -101,7 +102,7 @@ they ship unedited.**
 
 ---
 
-## Build sessions — 12 files, 11 sessions
+## Build sessions — 13 files, 12 sessions
 
 `NIGHT-RUN` was exported **twice**: `NIGHT-RUN-CHECKPOINT.jsonl` is a **byte-exact
 prefix** of `NIGHT-RUN-FINAL.jsonl` (asserted in `trajectory_facts.py`), a mid-session
@@ -117,7 +118,7 @@ the transcript itself: `Read prompts/<CHUNK-ID>.md and execute it fully.`
 | [`CH-01.jsonl`](build/CH-01.jsonl) | 1,433,689 | 672 | 08-30 13:51 → 14:30 | [`prompts/CH-01.md`](../../prompts/CH-01.md) | govinfo EDNOTE harvest → `src/harvest_ednotes.py`, `docs/evidence/ch01-pool/` | a check expected to print 0 printed **2,428**: `N="1"` is a volume number, not a title. **The golden was not edited to agree with the code** — an erratum was appended instead |
 | [`CH-02.jsonl`](build/CH-02.jsonl) | 1,689,144 | 709 | 08-30 14:43 → 18:16 | [`prompts/CH-02.md`](../../prompts/CH-02.md) | AMDPAR carry-forward attributor → `src/attribute_amdpars.py`, `docs/evidence/ch02-attributor/` | the gate **FAILED** (0.5080 against 0.90) and the failure was reported rather than tuned; the pair yield cleared. Re-exported once, which is why `AI-USE.md` carried a stale line count until CH-12 |
 | [`SPEC-FIX-1.jsonl`](build/SPEC-FIX-1.jsonl) | 1,336,857 | 454 | 08-30 18:18 → 19:04 | [`prompts/SPEC-FIX-1.md`](../../prompts/SPEC-FIX-1.md) | judge a spec change → `docs/evidence/spec-fix-1/verdict.md`. **Zero source, zero `CONTEXT.md` change** | **the session that refused its operator.** It ran a ten-agent panel, the panel went **4–1 against** the verdict it then reached, and it refused anyway: *"the split is right, the replacement gate is not"* |
-| [`SPEC-FIX-2.jsonl`](build/SPEC-FIX-2.jsonl) | 786,125 | 341 | 08-30 19:53 → 20:10 | [`prompts/SPEC-FIX-2.md`](../../prompts/SPEC-FIX-2.md) | apply the ruling → `CONTEXT.md` v1.1, `docs/evidence/spec-fix-2/` | the refusal **accepted in full**: the gate stays FAILED and the failure is written into the specification itself. Shortest session in the set, and the only one that ran no subagent |
+| [`SPEC-FIX-2.jsonl`](build/SPEC-FIX-2.jsonl) | 786,125 | 341 | 08-30 19:53 → 20:10 | [`prompts/SPEC-FIX-2.md`](../../prompts/SPEC-FIX-2.md) | apply the ruling → `CONTEXT.md` v1.1, `docs/evidence/spec-fix-2/` | the refusal **accepted in full**: the gate stays FAILED and the failure is written into the specification itself. Shortest session in the set. It ran no subagent — so did CH-00, CH-01, CH-02 and CH-14a — but it is the one that **says so in terms**: `AI-USE.md` records *"NO SUBAGENTS WERE RUN"* as a finding rather than an omission |
 | [`NIGHT-RUN-CHECKPOINT.jsonl`](build/NIGHT-RUN-CHECKPOINT.jsonl) | 3,123,874 | 1,348 | 08-30 20:31 → 22:36 | [`prompts/NIGHT-RUN.md`](../../prompts/NIGHT-RUN.md) | mid-session snapshot of the run below | kept because duty 6 made it mandatory at that moment; a byte-exact prefix of FINAL |
 | **[`NIGHT-RUN-FINAL.jsonl`](build/NIGHT-RUN-FINAL.jsonl)** | 3,696,750 | 1,659 | 08-30 20:31 → 23:13 | [`prompts/NIGHT-RUN.md`](../../prompts/NIGHT-RUN.md) | CH-03 → review → CH-04 → ★CHECKPOINT, unattended → `src/eval_set.py`, `src/score.py`, `src/cfr_resolve.py`, `docs/reviews/`, `docs/evidence/checkpoint/` | **§3 above.** Also: it corrected its own chunk card (*"the alias answers HTTP 200. The claim is false"*) and, after the second FAIL, retracted three of its own published numbers including a *"9 mutations designed, 9 caught"* that it had put in four documents without checking |
 | [`CH-06.jsonl`](build/CH-06.jsonl) | 2,302,522 | 1,027 | 08-31 02:03 → 03:28 | [`prompts/CH-06.md`](../../prompts/CH-06.md) | the advanced solution → `agents/A1.md`, `agents/A1-SKILL.md`, `src/a1.py`, `docs/evidence/ch06-a1/` | holds the **CH-04 reviewer** (FAIL, 16 findings). And a **7-minute self-correction**: it raised a schedule question from a remembered duration, then retracted it from the ledger's own `wall_clock_s` — *"I never read a clock… and then reasoned confidently from that fabricated quantity to a ruling"* |
@@ -126,6 +127,8 @@ the transcript itself: `Read prompts/<CHUNK-ID>.md and execute it fully.`
 | [`CH-11c.jsonl`](build/CH-11c.jsonl) | 1,799,806 | 746 | 08-31 07:12 → 08:12 | `prompts/CH-11c.md` — **untracked, Q41** | five factual corrections → `docs/evidence/ch11c-sweep/` | **a correction that was itself false.** While fixing a wrong model name it wrote *"every evaluation arm, temperature 0"*; `B0prime` ran at 1.0. Its own 21-agent sweep caught it within the hour |
 
 | [`CH-12.jsonl`](build/CH-12.jsonl) | 2,801,859 | 883 | 08-31 08:21 → 09:18 | `prompts/CH-12.md` — **untracked, Q41** | trajectories, the worksheet, and one false disclosure claim → `docs/trajectories/SELECTION-RULE.md`, `INDEX.md`, `docs/worksheet/index.html`, `docs/evidence/ch12/` | **the export that demonstrated its own finding.** Its first run shipped four copies of an operator contact address while reporting `0  operator contact detail` — the scrubber matches literals from a list and that address is not in the list (**Q43**). Re-exported against a complete pattern source: **8 redactions, zero full addresses** |
+
+| [`CH-13A.jsonl`](build/CH-13A.jsonl) | 3,916,288 | 582 | 08-31 09:18 → 09:53 | `prompts/CH-13A.md` — **untracked, Q41** | the demo video's read-aloud script → `docs/video-script.md` | *Indexed here for completeness; it landed **after** this index was written, by a parallel session, and its own chunk owns the description. Its presence is why every count on this page names a commit.* |
 
 **Two cards are not in git** — `prompts/CH-11.md` and `prompts/CH-11c.md`, plus
 `prompts/CH-12.md` for the chunk that wrote this index. `prompts/` is protected

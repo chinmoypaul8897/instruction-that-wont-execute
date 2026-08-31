@@ -82,12 +82,16 @@ four-clause verdict against `GOOD.md` §4's frozen success criterion, and all fo
 **4. `python -m pytest -q`**
 
 ```
-316 passed, 26 skipped
+353 passed, 26 skipped
 ```
+
+*Measured in a fresh clone at `7223552`. **The count grows as chunks add tests** — it
+was 316 / 26 at CH-11 and 331 / 26 at CH-12's last code commit, so a figure without a
+commit beside it goes stale by design. The 26 skips are stable: they are the `data/raw/`-dependent tests and nothing else.*
 
 The 26 skips are the tests that need `data/raw/` — **1.44 GB** of source XML that is
 git-ignored. They skip rather than fail, and `refetch.py` brings them back. **From the
-extracted submission zip the count is `314 passed, 28 skipped`** — two more, both in
+extracted submission zip the count is `351 passed, 28 skipped`** (same commit) — two more, both in
 `tests/test_size_guard.py`, which inspects the live repository and carries its own
 reason string: *"not a git work tree (an extracted submission zip is a plain
 directory)"*. Both counts are recorded in
@@ -256,7 +260,7 @@ From `docs/evidence/runs/cost_ledger.csv`, printed by `analyse_a1.py`:
 wall-clock — about 97 minutes.** Every row above is USD 11.6323 and 6,027 seconds,
 against a USD 18.00 ceiling enforced in code. Elapsed time was less than the sum,
 because some arms ran concurrently — which is how two of them came to be **run twice**,
-wasting roughly **USD 1.43**. That duplication is disclosed in full at `QUESTIONS.md`
+wasting roughly **USD 1.41**. That duplication is disclosed in full at `QUESTIONS.md`
 Q26, both runs' figures are published side by side, and no headline number moves
 between them.
 

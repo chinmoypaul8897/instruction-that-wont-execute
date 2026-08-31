@@ -15,10 +15,10 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 | # | FAQ item | Where it is | State |
 |---|---|---|---|
 | 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ **323 tracked files, 90 commits** at `e01fdfd` (CH-11) |
-| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.66 MB** against a 50 MB cap | ✅ re-measured at CH-11, `e01fdfd`: 10,662,339 B, 373 entries |
-| 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
+| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **12.51 MB** against a 50 MB cap | ✅ re-measured at CH-12, `b39cd0c`: **12,513,651 B, 4.00× under cap** (`docs/evidence/ch12/archive-size.txt`). It read 10,662,339 B / 373 entries at CH-11's `e01fdfd`; the growth is this chunk's own 2.8 MB session transcript |
+| 3 | **Tests** | [`tests/`](tests/) — 14 test modules, **353 passed / 26 skipped** in a clean clone at `7223552`; **351 / 28** from the extracted zip | ✅ green from the extracted zip |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
-| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 37 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
+| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 38 JSONL trajectories at `7223552` + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
 | 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
 
 ---
@@ -37,8 +37,9 @@ archive.** The complete trajectory set, the complete frozen corpus and the compl
 evidence tree all ship.
 
 A curation rule exists in case that ever changes — `docs/evidence/ch14-size/
-selection-rule.md`, published and mechanically applied, selecting 17 of 33 trajectory
-files — and it is **deliberately not invoked**. `.githooks/pre-commit` now refuses any
+selection-rule.md`, published and mechanically applied, selecting 17 of the 33 trajectory
+files that existed at CH-14a — superseded by `docs/trajectories/SELECTION-RULE.md`, which
+selects **17 of the 38** that exist at `7223552` — and it is **deliberately not invoked**. `.githooks/pre-commit` now refuses any
 commit whose archive exceeds 45 MB, and fails closed if it cannot measure.
 
 ## Item 3 — tests, and the environment they were run in
@@ -47,7 +48,7 @@ commit whose archive exceeds 45 MB, and fails closed if it cannot measure.
 git archive --format=zip -o submission.zip HEAD
 unzip submission.zip -d judge/ && cd judge/
 python -m venv .venv && .venv/bin/pip install pytest      # stdlib + pytest only
-.venv/bin/python -m pytest -q                             # 314 passed, 28 skipped
+.venv/bin/python -m pytest -q                             # 351 passed, 28 skipped
 ```
 
 The skips are raw-input-dependent tests: `data/raw/` holds **1.44 GB** of source XML, is
@@ -63,7 +64,7 @@ one. `docs/evidence/ch12/corpus-size.txt`.)* `python refetch.py
 | what | where |
 |---|---|
 | every model, tool and agent, with what each did | [`AI-USE.md`](AI-USE.md) |
-| one JSONL per agent run — 37 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
+| **38 JSONL at `7223552`** — 13 build transcripts (12 sessions; NIGHT-RUN exported twice), 15 arm bundles carrying every one of the 2,097 logged runs, 10 probe runs. *The count rises as each session exports its own transcript, which is why it names a commit.* **Nothing sampled**; the arms are bundled, not one file per run | [`docs/trajectories/`](docs/trajectories/) · [`INDEX.md`](docs/trajectories/INDEX.md) |
 | the exact instructions shaping each evaluation arm | [`agents/`](agents/) |
 | every chunk prompt, committed verbatim as issued | [`prompts/`](prompts/) |
 | per-call tokens, wall-clock and imputed USD | `docs/evidence/runs/cost_ledger.csv` |
@@ -92,7 +93,7 @@ it fails.
 | test suite | ✅ 316 passed | ✅ 314 passed |
 
 **Secret sweep:** `docs/evidence/secret-scan/scan.txt` — **PASS, 0 findings** across all
-462 text blobs of all 84 commits plus 39.4 MB of trajectories. `.env` is git-ignored,
+462 text blobs of all 84 commits plus the 39.4 MB of trajectories that existed at the scan commit `263ed29`. **At `7223552` the set is 50.34 MB across 38 files** (`docs/evidence/ch12/trajectory-facts.txt`); the sweep has not been re-run over the difference, and `CH-14b` is the chunk that does it. `.env` is git-ignored,
 never tracked, never committed on any ref.
 
 ---

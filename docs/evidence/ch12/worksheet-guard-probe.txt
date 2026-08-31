@@ -1,6 +1,6 @@
 WORKSHEET SELF-CONTAINMENT GUARD - PROBE
 ========================================================================
-page   : docs/worksheet/index.html  (82,057 B)
+page   : docs/worksheet/index.html  (82,058 B)
 guards : no_external_resource_reference, scheme_strings_are_corpus_text_only, scheme_strings_that_do_occur_are_inert
 
 BASELINE - the shipped page, unmodified
@@ -22,9 +22,17 @@ scheme strings rendered as corpus text: 2
   css url() background                   CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
 scheme strings rendered as corpus text: 2
   corpus url made into a live link       CAUGHT  by ['no_external_resource_reference', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  meta refresh navigation                CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  inline event handler                   CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  css image-set()                        CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 1
+  javascript: url                        CAUGHT  by ['no_external_resource_reference']
 ------------------------------------------------------------------------
-injections caught : 6
+injections caught : 10
 injections MISSED : 0
-success + failure == n : 6 + 0 == 6  OK
+success + failure == n : 10 + 0 == 10  OK
 
 VERDICT: PASS - the guard flips: it passes the real page and rejects every injection

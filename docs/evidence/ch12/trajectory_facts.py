@@ -155,7 +155,7 @@ def main() -> int:
     print("    the build transcript, the verdict verbatim in its task-notification, "
           "and the")
     print("    runnable probes under docs/reviews/.")
-    print("  workflow journals (86 audit subagents): 0 tracked. Same reason. "
+    print("  workflow journals (103 audit subagents): 0 tracked. Same reason. "
           "QUESTIONS.md Q40.")
 
     # ------------------------------------------------------------------- totals

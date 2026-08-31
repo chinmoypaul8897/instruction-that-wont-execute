@@ -16,6 +16,10 @@ Each injection is a real way a self-contained page silently stops being one:
   6. an <a href="https://..."> around a corpus URL - the page's own text,
      made live. This is the one the naive "assert 'http://' not in html" guard
      could never distinguish from what the page legitimately does today.
+  7. a <meta http-equiv="refresh"> - navigates with no fetching attribute at all
+  8. an inline on* event handler - script, without a <script> tag
+  9. CSS image-set() - a fetch with no tag, no attribute and no url()
+ 10. a javascript: URL in a form action
 
 Run:  python docs/evidence/ch12/worksheet_guard_probe.py
 """
@@ -61,6 +65,21 @@ INJECTIONS = (
     ("corpus url made into a live link",
      "http://www.archives.gov",
      '<a href="http://www.archives.gov">http://www.archives.gov</a>'),
+    # Added at CH-12 after this chunk's own adversarial audit observed that an
+    # enumerated allowlist is only as good as the enumeration. Each of these fetches
+    # or navigates WITHOUT any of the tags or attributes the first six use.
+    ("meta refresh navigation",
+     "</head>",
+     '<meta http-equiv="refresh" content="0;url=https://example.invalid/"></head>'),
+    ("inline event handler",
+     "<body>",
+     "<body onload=\"fetch('https://example.invalid/beacon')\">"),
+    ("css image-set()",
+     "  body{",
+     '  body{background:image-set("https://example.invalid/a.png" 1x);'),
+    ("javascript: url",
+     "</body>",
+     '<form action="javascript:fetch(1)"></form></body>'),
 )
 
 

@@ -1407,7 +1407,7 @@ that vote, and the control measures nothing while costing three times as much.
 The degenerate reading is *not* skipped — it is **reported, using the number it already
 has**, because re-measuring a proven degeneracy would be spending the budget to confirm
 arithmetic. The live reading is run at **temperature 1.0** and is **the only arm in the
-packet not at temperature 0**, which is disclosed in every table it appears in.
+primary matrix not at temperature 0**, which is disclosed in every table it appears in. *(Corrected at CH-12: this read "the only arm in the **packet**", which is false — the two **withdrawn** sonnet arms also ran off 0, because `claude-sonnet-5` rejects the parameter with HTTP 400. Every other shipping file was corrected at CH-11c and this ruling, the one the others cite, was the last to still say it.)*
 
 **The tie-break is published before the run**, in `src/arms.py::run_b0prime`'s docstring
 and in the run's own JSON: **majority, ties to `WILL_FAIL`**. Same rule as rep
@@ -2421,7 +2421,7 @@ it:
 
 `claude-sonnet-5` was used for **one thing**: the model-sensitivity subset, which is
 **WITHDRAWN** as a harness defect - 13 of 20 `B0-agent-sonnet` calls returned empty
-(`QUESTIONS.md` Q19). **No claim in this submission rests on a sonnet arm.**
+(`QUESTIONS.md`, **ARCHITECT RULINGS — 2026-08-31**; *not* Q19, which is the CH-03 escalation). **No claim in this submission rests on a sonnet arm.**
 
 So `PROVENANCE.md`'s row is wrong twice over: it names the wrong model, and it attributes
 to it a scope that belongs to a withdrawn subset.
@@ -2440,7 +2440,7 @@ withdrawn, and cites the ledger. The suggested correction, for whoever holds the
 | Anthropic API (`claude-haiku-4-5-20251001`) | commercial, per terms | every evaluation
   arm, temperature 0 |
 | Anthropic API (`claude-sonnet-5`) | commercial, per terms | the model-sensitivity
-  subset only - WITHDRAWN as a harness defect (QUESTIONS.md Q19); no claim rests on it |
+  subset only - WITHDRAWN as a harness defect (QUESTIONS.md, ARCHITECT RULINGS 2026-08-31; not Q19); no claim rests on it |
 ```
 
 **Previously spotted and not remediated.** `context/11-REMEDIATION-2.md` records the same
@@ -2750,7 +2750,7 @@ under `docs/trajectories/`. **The third does not.**
 | **adversarial audits** | **none** |
 | *(a fourth class the clause does not name)* | `docs/trajectories/probe/` — **10** JSONL |
 
-The adversarial-audit class is **86 subagents** — SPEC-FIX-1's panel of ten, NIGHT-RUN's
+The adversarial-audit class is **103 subagents** (139 counting this chunk's own second, self-auditing fleet of 36) — SPEC-FIX-1's panel of ten, NIGHT-RUN's
 two CH-03 gate reviewers, CH-06's one CH-04 gate reviewer, CH-11's 52-agent workflow and
 CH-11c's 21-agent workflow. Their per-agent records live in the Claude Code **workflow
 journal**, which is outside this repository and which `tools/export_session.py` does not
@@ -2801,8 +2801,9 @@ in a file outside this chunk's fence.
 **Raised at CH-12, 2026-08-31. Named in `AI-USE.md` and `docs/trajectories/INDEX.md` by
 this chunk; the underlying convention question stands.**
 
-`docs/trajectories/build/` holds **11** JSONL against **10** session entries in
-`AI-USE.md`, and the extra file is `NIGHT-RUN-FINAL.jsonl` (3,696,750 B). The night run
+**Before this chunk**, `docs/trajectories/build/` held **11** JSONL against **10** session
+entries in `AI-USE.md` — **it is now 12 against 11**, and the arithmetic is unchanged —
+and the extra file is `NIGHT-RUN-FINAL.jsonl` (3,696,750 B). The night run
 was exported **twice** — once at the CHECKPOINT and once at the end — and only the first
 export was named anywhere. A reader counting sessions from `AI-USE.md` and files from the
 directory gets 10 against 11 and cannot tell which is wrong.

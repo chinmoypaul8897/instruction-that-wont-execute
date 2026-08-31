@@ -145,7 +145,7 @@ as **MISSED**, not reinterpreted. `docs/evidence/ch09-removed/leakage-result.txt
 `B0-agent-sonnet` calls returned an empty text block and the scorer correctly charged each
 as a failure. An arm that produced no output on 65% of its items measured the harness.
 **No sensitivity claim is made anywhere in this submission.** Artifacts kept, labelled
-withdrawn. `QUESTIONS.md` Q19.
+withdrawn. The ruling is `QUESTIONS.md`'s **ARCHITECT RULINGS — 2026-08-31**, *"MODEL-SENSITIVITY CHECK - WITHDRAWN"* — **not Q19**, which is the CH-03 escalation.
 
 ### What did work
 
@@ -491,7 +491,7 @@ repository cannot see. We conclude only that **it is not reproducible from the s
 artifacts and therefore cannot carry a claim**
 (`QUESTIONS.md` Q23).
 
-**About USD 1.43 of API spend was wasted on a double-run.** Two arms were run twice because
+**About USD 1.41 of API spend was wasted on a double-run.** Two arms were run twice because
 the operator reasoned about the job queue from memory instead of reading the command he had
 typed. The ledger is append-only and both runs are kept, so the money is reported correctly;
 what is damaged is `run_id` uniqueness, on 651 rows, and the duplicates are enumerable in one
@@ -528,7 +528,7 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 | **Every ambiguity and every ruling** | [QUESTIONS.md](QUESTIONS.md) — **43** entries (`grep -c '^## Q'`), including our own retractions |
 | **Chunk-by-chunk state** | [STATUS.md](STATUS.md) · [PROGRESS.md](PROGRESS.md) |
 | **The worksheet the agent produces** | [`docs/worksheet/index.html`](docs/worksheet/index.html) — real committed A1 output, opens offline by double-clicking |
-| **Every trajectory, and what to look at in it** | [`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md) — 37 files, with the curation rule published before it was applied |
+| **Every trajectory, and what to look at in it** | [`docs/trajectories/INDEX.md`](docs/trajectories/INDEX.md) — 38 files at `7223552`, with the curation rule published before it was applied |
 | **Every model, tool and agent** | [AI-USE.md](AI-USE.md) · [`docs/trajectories/`](docs/trajectories/) · [`prompts/`](prompts/) · [`agents/`](agents/) |
 | **What pre-existed vs what was built** | [PROVENANCE.md](PROVENANCE.md) |
 | **Reviews** | [`docs/reviews/`](docs/reviews/) — three reports, three FAIL verdicts, one escalation, with runnable probes |

@@ -26,7 +26,7 @@ landed, and what is worth opening the file for. The curation rule is
 | **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` | **yes** — bundled; `per-item/` is git-ignored and its every record is in the bundle |
 | **Probe** | the model-id probe that checked a claim the chunk card pre-registered as fact | **10** runs | `docs/trajectories/probe/probe-model-id__*.jsonl` | **yes** |
 
-**37 trajectory files, 46.42 MB, measured by `docs/evidence/ch12/trajectory_facts.py`.**
+**38 trajectory files, 50.34 MB at `7223552`, measured by `docs/evidence/ch12/trajectory_facts.py`.** *The figure names a commit because it rises every time a session exports its transcript — it was 36 when CH-12 began and 37 when CH-12 exported its own.*
 
 ### The adversarial-audit class, in full — 103 subagents, and its cost stated separately
 
@@ -176,7 +176,7 @@ the correction is disclosed in `PROVENANCE.md` rather than quietly amended, and
 `docs/evidence/ch12/provenance_claim_check.py` prints the claim FALSE at the old commit
 and TRUE now, so nobody has to take the correction's word for it.
 
-**Agents used — one workflow, 17 subagents, `claude-opus-5[1m]`, run `wf_3949a5b7-c7b`.**
+**Agents used — 17 subagents in workflow `wf_3949a5b7-c7b`, `claude-opus-5[1m]`, plus a second fleet of 36 in `wf_7b927948-32f` that adversarially audited this chunk's own output: 5 auditors and 31 refuters, 3 of which errored. 53 in total.** *The 17 figure was written mid-session and was already incomplete when written — the same structural caveat the token table below carries, and it was the audit fleet itself that pointed it out.*
 Ten read-only auditors, one per shipping file, each re-running the CH-11c sweep's own
 checks **against the current files rather than against the sweep report** — hard rule 15
 applied to the project's own evidence. Seven more measured the facts this chunk needed:
@@ -474,7 +474,7 @@ rather than either shipping nothing or changing a guard quietly.
 **Three findings this session made against its own side of the project:**
 
 1. **`QUESTIONS.md` Q25's submission blocker does not exist.** The 50 MB cap is on the
-   uploaded zip; the zip is 10.18 MB at `bc99ef4` (`docs/evidence/ch14-size/inventory.md`; 11.74 MB at CH-12). Q25 measured the uncompressed tree and its four
+   uploaded zip; the zip is 10.18 MB at `bc99ef4` (`docs/evidence/ch14-size/inventory.md`; re-measured **12.51 MB at CH-12's last commit `b39cd0c`**, `docs/evidence/ch12/archive-size.txt`). Q25 measured the uncompressed tree and its four
    proposed remedies — compress, relocate, sample, or unseal `data/` — were all
    unnecessary. `src/arms.py::bundle()`'s promise that *"EVERY RECORD SURVIVES"* is kept.
 2. **A test written by this session was broken inside the submission.**

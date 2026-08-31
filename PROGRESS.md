@@ -25,7 +25,7 @@ The cause is ordinary and is the point: **the sentence was written 17 h 33 min b
 the README existed.** `PROVENANCE.md`'s first commit is `3ac8207`, 2026-08-30 18:03:46
 +0530, and the sentence is in that first version; `README.md` was created at `67a5206`,
 2026-08-31 11:36:59 +0530. It described what the author intended the README to say, and
-**nobody ran the grep** — through four subsequent rewrites of the README and two prior
+**nobody ran the grep** — through three subsequent rewrites of the README and two prior
 corrections to `PROVENANCE.md` itself.
 
 **Route (a) taken: the README now cites it**, in §f beside the IETF prior-art credit,
@@ -194,7 +194,7 @@ files are CRLF, `PROVENANCE.md` is LF; a replacement written with the wrong newl
 matches nothing and errors nowhere).
 
 **Four of the 26 were `AI-USE.md`'s own agent-class counts** — coding sessions 6 → 10,
-adversarial-audit subagents 12 → 86, solution runs 1028 → 2,097, haiku calls 951 → 2,020.
+coding sessions 6 → 10 (**11 sessions / 12 files** once this chunk's own transcript landed), adversarial-audit subagents 12 → 86 (**103** once this chunk's own fleet was counted), solution runs 1028 → 2,097, haiku calls 951 → 2,020. *The two moving targets are this chunk moving them, which is why the figures a reader greps are the ones in the shipped files and not the ones in this sentence.*
 A file whose subject is *"every model, tool and agent"* was wrong about all four.
 
 **Every replacement value was measured in this session, not copied from the report.** Two
@@ -241,6 +241,68 @@ scrubber **fires**. **Nothing proves the pattern set is complete**, and the case
 tests the contact scrubber passes on a literal that is in the list by construction. A
 redactor that matches a list can only ever be as complete as the list, and the passing
 probe looks identical either way.
+
+### Then this chunk audited itself, and 31 findings came back
+
+**A chunk that has just spent its whole budget on other people's unchecked claims does
+not get to skip the check on its own.** A second fleet — **36 subagents**, five auditors
+told to assume CH-12 was wrong and one refuter per finding told to kill it — went over
+everything this chunk had shipped. **31 raised, 11 refuted, 18 survived**, 3 refuters
+died to API errors and are counted as unrefuted rather than quietly dropped.
+
+**It was right about a great deal, and the pattern is worth naming: almost every finding
+is a number this chunk itself made stale.**
+
+- **The worksheet's provenance footer said "exactly two inputs" one line above printing
+  three.** The generator reads `A1-rep1.json` too, and the model name and the routed-count
+  assertion come from it alone.
+- **`PROVENANCE.md` said "this is the third correction in this file" in the very commit
+  that added a fourth** — §2's own dating error. The count survived only because the
+  evidence script counts with a line-anchored `grep '^\*\*Correction'` that structurally
+  cannot see an inline one. **A counting rule that makes the count come out right is not a
+  measurement**, and a reader counting by reading counts four.
+- **The archive had five different sizes in the packet** — 10.18, 10.24, 10.66, 11.74 and
+  11.77 MB — and *none* was the archive at the time of writing. Worse, my own `checked`
+  note for one of them said in terms that I picked 10.18 **because it made the adjacent
+  "4.9×" true**. That is hard rule 5 inverted, in this chunk's own evidence file.
+  `docs/evidence/ch12/measure_archive.py` now measures it at named commits and
+  reconciles all three quoted figures to the byte; 10.24 reconciles to nothing and is
+  said to reconcile to nothing.
+- **`apply_sweep_fixes.py` had stopped reproducing.** Four of its 26 entries were
+  superseded by CH-12's own later commits, so re-running it printed `4 FAIL, NOTHING WAS
+  WRITTEN` and exited 1 — while `STATUS.md` and `PROGRESS.md` both claimed "26/26
+  verified on disk". **A verification script that no longer runs is not evidence**, and
+  the shipped claim described a state that had been gone for four commits. It now carries
+  an explicit SUPERSEDED state naming what replaced each entry and why, reports
+  `0 applied + 22 already + 4 superseded == 26`, and its re-run output is committed.
+- **The self-containment guard was an enumerated allowlist**, and the audit pointed out
+  the obvious: it is only as good as the enumeration. It had no entry for
+  `<meta http-equiv="refresh">`, for any `on*` handler, for `image-set()` or for
+  `javascript:` URLs — four ways a page fetches or navigates using none of the tags or
+  attributes it did check. All four are now guarded, all four are now injected by the
+  probe, and **the probe went from 6 of 6 to 10 of 10 caught**.
+- **`assert "font-family" in html_text`** was labelled *"a system-font stack only: no
+  webfont may be named without a local fallback"* and tested nothing of the sort. It now
+  parses every stack and asserts the last family is one the browser already has.
+- Two counting claims disagreed with the shipped files **inside a single log entry** —
+  this one said the chunk set the audit class to 86 while two paragraphs above it said
+  103 — and `QUESTIONS.md` Q40 published the 86.
+- **Folding CH-11c's entry into this file broke a citation inside it.** CH-11c wrote
+  *"`PROGRESS.md:397` still reads…"*; the fold moved that text to line 849. **A line
+  number is not a citation**, and the act of filing the record invalidated it. An
+  editorial note now says so; CH-11c's text is still unedited.
+
+**All 31 were acted on**: 26 corrections applied by a fail-closed script, plus the guard,
+the probe, the generator, the applier's contract and the archive measurement.
+
+**Two lessons, and the second is the uncomfortable one.** First, *every* count that is not
+pinned to a commit will be wrong by the time someone reads it — so every figure this
+chunk ships now names one, and a parallel session landing `CH-13A.jsonl` mid-audit
+demonstrated why within the hour. Second: **this chunk's own evidence file contained a
+number chosen to preserve a conclusion.** Not a mistake — a choice, written down in the
+`checked` field, and it took an adversary to notice. Hard rule 5 says never move a
+threshold after seeing a result; nothing said "never pick the datum that keeps the
+multiple." It says it now.
 
 ### Questions
 
@@ -450,6 +512,13 @@ two quote, so it is the one that matters.
 **Q38** — the fence excludes `PROGRESS.md`, which `CLAUDE.md` requires this chunk to
 update. Conservative option taken; this file is the entry. It also notes that
 `PROGRESS.md:397` still reads *"450 text blobs of 81 commits"* — a dated record of the
+> *[CH-12 note, added when this entry was folded in: **the fold moved the line it
+> cites.** The quoted text is now at `PROGRESS.md:849`; line 397 is blank. CH-11c's
+> text is left unedited, so a self-referential line number inside `PROGRESS.md` is
+> now false about `PROGRESS.md` — the same failure shape as this chunk's headline
+> finding, caused by the act of filing it. **A line number is not a citation.**]*
+>
+> 
 CH-14a session, flagged and not edited.
 
 ### Fence
@@ -778,7 +847,7 @@ what it cannot fetch. Reproducibility makes exclusion possible, not right.
 
 **Class C — a transposed digit in `STATUS.md`.** The CH-06 row read
 `McNemar exact p = 0.4421`. Ground truth is `0.42435622215270996` → **0.4244**, which
-`a1-result.txt` has always printed; `0.4421` was the only occurrence in the repository.
+`a1-result.txt` has always printed; `0.4421` was the only occurrence in the repository. *(**Corrected at CH-12:** that second clause is false. `0.4421` is A1 rep 1's own single-rep McNemar, superseded by the 3-rep aggregate, and it is still published live at `docs/evidence/ch09-removed/leakage-result.txt` as the McNemar of removed experiment #1. `STATUS.md`'s CH-06 row now says so.)*
 Corrected, with the correction stated in the cell. No result moved.
 
 ### Tests
@@ -1024,7 +1093,7 @@ now carrying a measured — and non-reproducing — class size.
 - **CH-04 has one strike.** A second FAIL hits the limit and escalates, as CH-03 did.
 - **The blind human-time study is reserved and runnable** — 8 items, 4/4 balanced, blind
   brief and worksheet emitted, answers sealed. Operator task, ~30 minutes.
-- **Spend USD 11.63 of the 18.00 ceiling; USD 6.37 remains.** That includes **~USD 1.43
+- **Spend USD 11.63 of the 18.00 ceiling; USD 6.37 remains.** That includes **~USD 1.41
   wasted** — `A1-minus-tool` and `B0prime` were each run twice because I launched a
   second job for work already queued in the first, acting on the false timing premise
   that Q24 retracted. **`QUESTIONS.md` Q26.** No published number moved: the two runs

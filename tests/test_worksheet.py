@@ -69,6 +69,16 @@ FETCHING_TAGS = (
 FETCHING_ATTRS = (
     "src", "href", "srcset", "data", "action", "formaction", "poster",
     "background", "codebase", "cite", "ping", "manifest", "archive",
+    # Added at CH-12 after this chunk's own adversarial audit pointed out that an
+    # enumerated allowlist is only as good as the enumeration. These were missing:
+    "http-equiv",          # <meta http-equiv="refresh" content="0;url=...">
+    "imagesrcset", "usemap", "profile", "longdesc", "dynsrc", "lowsrc",
+)
+
+#: Constructs that fetch without any of the tags or attributes above.
+FETCHING_MISC = (
+    "@import", "url(", "@font-face", "image-set(", "-webkit-image-set(",
+    "javascript:", "data:text/html", "srcdoc",
 )
 
 
@@ -84,10 +94,19 @@ def test_no_external_resource_reference(html_text: str) -> None:
         assert not re.search(rf"\b{attr}\s*=", lowered), (
             f"the worksheet carries a '{attr}=' attribute; the page must fetch nothing")
 
-    for css in ("@import", "url(", "@font-face"):
+    for css in FETCHING_MISC:
         assert css not in lowered, (
-            f"the worksheet stylesheet uses '{css}'; every style must be inline "
-            f"and every font must be a system fallback")
+            f"the worksheet uses '{css}'; every style must be inline, every font a "
+            f"system fallback, and nothing may resolve a URL at render time")
+
+    # An inline event handler is script, and script can fetch. There is no `on*=`
+    # attribute the page legitimately needs.
+    handlers = re.findall(r"\son[a-z]+\s*=", lowered)
+    assert not handlers, f"inline event handler(s) on the page: {sorted(set(handlers))}"
+
+    # `<meta http-equiv="refresh">` navigates without any fetching attribute at all.
+    assert not re.search(r"http-equiv\s*=\s*[\"']?\s*refresh", lowered), (
+        "the worksheet carries a meta refresh; the page must not navigate")
 
 
 def _corpus_text_spans(html_text: str) -> list[tuple[int, int]]:
@@ -147,8 +166,22 @@ def test_opens_as_a_standalone_document(html_text: str) -> None:
     assert '<meta charset="utf-8">' in html_text
     assert "<style>" in html_text and "</style>" in html_text
     assert html_text.rstrip().endswith("</html>")
-    # A system-font stack only: no webfont may be named without a local fallback.
-    assert "font-family" in html_text
+
+    # A system-font stack only. The previous version of this assertion was
+    # `assert "font-family" in html_text`, which tests that the string occurs, not
+    # that the property holds — it would pass on `font-family:'SomeRemoteFont'` with
+    # no fallback at all. This checks the actual property: every stack ends in a
+    # generic family the browser already has.
+    GENERIC = ("serif", "sans-serif", "monospace", "system-ui", "ui-monospace",
+               "ui-serif", "ui-sans-serif", "cursive", "fantasy")
+    stacks = re.findall(r"font(?:-family)?\s*:\s*([^;}]+)", html_text)
+    assert stacks, "no font declaration at all"
+    for stack in stacks:
+        last = stack.strip().rstrip('"\'').split(",")[-1].strip().strip('"\'')
+        assert last in GENERIC, (
+            f"font stack does not end in a generic family the browser already has: "
+            f"{stack.strip()!r} (ends {last!r})")
+    print(f"font stacks checked: {len(stacks)}, all ending in a generic family")
 
 
 # --------------------------------------------------------------------------------

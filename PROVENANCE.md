@@ -21,14 +21,14 @@ This includes:
 
 ---
 
-## 2. Produced before kickoff — research only, no project code
+## 2. Research scaffolding — 8 entries before kickoff, 35 after, and no project code in any of it
 
 **2026-08-27, approximately 21:45 UTC — seventeen hours before kickoff.**
 
-- `scraper/recon.cjs`, `sections.cjs`, `sections2.cjs`, `mapimg.cjs`, `slice.cjs` — Playwright recon scripts written to read the **public** HackerEarth challenge page, with their npm tooling (`package.json`, `package-lock.json`, `node_modules/`). That is **8 of `scraper/`'s 43 entries**. **The other 35 were written AFTER kickoff** — 2026-08-29, 03:13–06:21 UTC, twelve to fifteen hours past the 15:00 UTC line — and they are `portfolio.cjs`, `work.cjs`, `li.cjs`, `hn.cjs`, `he.mjs`, `rd.mjs`, `rd2.mjs` and 28 page dumps, which read the **operator's own** portfolio, LinkedIn and blog into `context/me/` and public commentary on the challenge into `rd_*.txt`. **Corrected at CH-12**, because dating all 43 to before kickoff is exactly the kind of claim ground rule 02 exists to make checkable. None of the 35 is problem work, none is reused, and `scraper/` is git-ignored in its entirety — so the substance of this section is unchanged and only its dating was wrong.
+- `scraper/recon.cjs`, `sections.cjs`, `sections2.cjs`, `mapimg.cjs`, `slice.cjs` — Playwright recon scripts written to read the **public** HackerEarth challenge page, with their npm tooling (`package.json`, `package-lock.json`, `node_modules/`). That is **8 of `scraper/`'s 43 entries**. **The other 35 were written AFTER kickoff** — 2026-08-29, 03:13–06:21 UTC, **12.2 to 15.4 hours** past the 15:00 UTC line — and they are `portfolio.cjs`, `work.cjs`, `li.cjs`, `hn.cjs`, `he.mjs`, `rd.mjs`, `rd2.mjs` and 28 page dumps, of which **31** read the **operator's own** portfolio, LinkedIn and blog into `context/me/` or public commentary on the challenge into `rd_*.txt`, and **4** — `he.mjs` with `he_page.txt` and `he_links.json`, plus one `rd_*.txt` — re-read the same **public** HackerEarth challenge page the pre-kickoff five did. **Corrected at CH-12**, because dating all 43 to before kickoff is exactly the kind of claim ground rule 02 exists to make checkable. None of the 35 is problem work, none is reused, and `scraper/` is git-ignored in its entirety — so the substance of this section is unchanged and only its dating was wrong.
 - `context/00-MASTER-CONTEXT.md` — an extraction of that public page, including content that was only present inside images (the rubric weights, the timeline, the registration deadline).
 
-**Why this is not problem-specific work:** the problem did not exist yet. The brief was released at kickoff. Nothing produced before 15:00 UTC on 2026-08-28 could have addressed the actual task, and nothing in `scraper/` is part of the submitted system — it is excluded from the repository by `.gitignore`.
+**Why this is not problem-specific work.** Two different defences, for two different sets, and they are separated here because the first does not cover the second. **For the 8 pre-kickoff entries:** the problem did not exist yet — the brief was released at kickoff, so nothing produced before 15:00 UTC on 2026-08-28 could have addressed the actual task. **For the 35 post-kickoff entries:** the date is no defence at all, and none is claimed. They gather the operator's own dossier and public commentary, they contain no problem work, and nothing they produced is used by the submitted system. **Neither set is part of it:** `scraper/` is excluded from the repository in its entirety by `.gitignore`, and `git ls-files scraper` is empty.
 
 **Ground rule 01 expressly permits this:** *"You are welcome to build with tools and components you already know."* The tooling used was Playwright, cheerio and sharp — public libraries, used under their own licences.
 
@@ -67,7 +67,7 @@ The `nistula-assistance-` result is cited in this project's README — [`README.
 
 Two lawful repairs existed: make the README cite it, or correct this file to say it does not. **The first was taken** — the citation is real, it is in the README's hot-take section beside the other prior-art credit, and it states in terms that the 17-defect number is *not* re-derived here and carries no weight here. Re-verified after the edit: `grep -ci nistula README.md` = **1**, `grep -ci '17 blocker' README.md` = **1**, `grep -ci github.com README.md` = **1**. `acumen` remains **0** and is not claimed above. Evidence: [`docs/evidence/ch12/`](docs/evidence/ch12/).
 
-*This is the third correction in this file, and the pattern in all three is the same: a sentence about the work, written once, never re-checked against the thing it describes.*
+*This is the **fourth** correction in this file — §2's dating error, shipped in the very same commit as this note, is the third — and the pattern in all four is the same: a sentence about the work, written once, never re-checked against the thing it describes. **The miscount is itself the fourth instance.** It survived only because the evidence script counts with a line-anchored `grep '^\*\*Correction'`, which structurally cannot see §2's inline `**Corrected at CH-12**`; a reader counting by reading counts four. Caught by this chunk's own adversarial audit, and corrected rather than re-defined.*
 
 ---
 

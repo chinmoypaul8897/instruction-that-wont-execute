@@ -1,0 +1,47 @@
+CH-12 - APPLYING THE IN-FENCE ONE-LINE SWEEP FIXES
+==========================================================================================
+26 replacements across 7 files
+
+  ALREADY  AI-USE.md       line 18     material  (new text present 1x)
+  ALREADY  AI-USE.md       line 19     material  (new text present 1x)
+  ALREADY  AI-USE.md       line 20     material  (new text present 1x)
+  ALREADY  AI-USE.md       line 36     material  (new text present 1x)
+  ALREADY  AI-USE.md       line 78     cosmetic  (new text present 1x)
+  SUPERSEDED AI-USE.md     line 255    material  the self-audit showed the appended '11.74 MB at CH-12' was
+  ALREADY  AI-USE.md       line 505    material  (new text present 1x)
+  ALREADY  AI-USE.md       line 598    cosmetic  (new text present 1x)
+  SUPERSEDED PROVENANCE.md line 26     material  the self-audit found 4 of the 35 post-kickoff entries re-r
+  ALREADY  PROVENANCE.md   line 43     material  (new text present 1x)
+  ALREADY  PROVENANCE.md   line 93     cosmetic  (new text present 1x)
+  ALREADY  README.md       line 67     material  (new text present 1x)
+  ALREADY  README.md       line 505    material  (new text present 1x)
+  ALREADY  REPRODUCE.md    line 176    material  (new text present 1x)
+  ALREADY  STATUS.md       line 23     cosmetic  (new text present 1x)
+  ALREADY  STATUS.md       line 30     material  (new text present 1x)
+  ALREADY  STATUS.md       line 32     material  (new text present 1x)
+  SUPERSEDED STATUS.md     line 39     material  the self-audit objected that a past figure was stated in t
+  ALREADY  SUBMISSION.md   line 21     cosmetic  (new text present 1x)
+  SUPERSEDED SUBMISSION.md line 63     cosmetic  the count went 34 -> 36 -> 37 as this chunk exported its o
+  ALREADY  SUBMISSION.md   line 33     cosmetic  (new text present 1x)
+  ALREADY  QUESTIONS.md    line 807    cosmetic  (new text present 1x)
+  ALREADY  QUESTIONS.md    line 808    cosmetic  (new text present 1x)
+  ALREADY  QUESTIONS.md    line 1249   cosmetic  (new text present 1x)
+  ALREADY  QUESTIONS.md    line 1744   cosmetic  (new text present 1x)
+  ALREADY  QUESTIONS.md    line 1796   cosmetic  (new text present 1x)
+------------------------------------------------------------------------------------------
+applied         : 0
+already applied : 22
+superseded      : 4  (a later CH-12 commit corrected it further)
+applied + already + superseded == n : 0 + 22 + 4 == 26  OK
+
+RE-VERIFICATION, reading the files back from disk
+  26 of 26 in force on disk; 0 mismatched
+
+LINE ENDINGS - unchanged by construction (bytes in, bytes out)
+  AI-USE.md        CRLF 864    bare-LF 0
+  PROVENANCE.md    CRLF 0      bare-LF 129
+  QUESTIONS.md     CRLF 2917   bare-LF 0
+  README.md        CRLF 550    bare-LF 0
+  REPRODUCE.md     CRLF 328    bare-LF 0
+  STATUS.md        CRLF 53     bare-LF 0
+  SUBMISSION.md    CRLF 157    bare-LF 0
