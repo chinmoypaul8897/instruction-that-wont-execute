@@ -14,18 +14,78 @@
 #   3. a staged file carries the operator's phone or personal email
 #   4. a staged file carries a credential-shaped token
 #   5. no PII pattern source can be found  <- fail CLOSED
+#   6. the resulting ARCHIVE exceeds 45 MB  <- added at CH-14a
+#   7. the archive cannot be built at all   <- fail CLOSED
 #
 # (5) is deliberate. A sweep that cannot find its patterns and passes anyway is
 # the exact failure this project is built to expose: an empty result that reads
 # as a clean result. Bypass for a genuine emergency is `git commit --no-verify`,
 # which at least leaves a visible choice in the reflog.
+#
+# ---------------------------------------------------------------------------
+# CH-14a: WHY (6) MEASURES THE ARCHIVE AND NOT THE TRACKED BYTES.
+#
+# QUESTIONS.md Q25 caught this guard measuring proxies -- per-blob size and file
+# count -- and reporting "ok" while the tracked tree stood at 59.4 MB against a
+# 50 MB cap. The diagnosis was right and it is this project's own thesis: a
+# green check on a proxy is not evidence about the constraint.
+#
+# CH-14a then measured the constraint itself. QUESTIONS.md Q2 (C1) is exact
+# about what the cap binds: "Source Code - an UPLOADED FILE (zip). MAX 50 MB."
+# The uploaded file is `git archive --format=zip`, and at 61.70 MB tracked it
+# was 10.18 MB -- 4.9x UNDER the cap, because JSONL trajectories deflate 4-21x.
+#
+# So TOTAL TRACKED BYTES is itself a proxy. Guarding it at 45 MB would have
+# refused every commit in a repository that was never over the real limit --
+# the same class of error as Q25's, inverted: a red check on a proxy is not
+# evidence either. This hook therefore SUMS AND PRINTS the tracked bytes every
+# time, so the quantity Q25 says was never measured is now always visible, and
+# it REFUSES on the archive, which is the quantity the cap is on.
+#
+# Evidence: docs/evidence/ch14-size/inventory.md.  Ruling: QUESTIONS.md Q27.
+# Probe:    tests/test_size_guard.py -- fails on the old hook, passes on this one.
+# ---------------------------------------------------------------------------
 
 python - "$@" <<'PYEOF'
-import re, subprocess, sys, os
+import re, subprocess, sys, os, tempfile
 from pathlib import Path
 
 MAX_BLOB_BYTES = 25 * 1024 * 1024
-MAX_TRACKED    = 300
+
+# CH-14a, CLASS A, RAISED FROM 300. Disclosed in QUESTIONS.md Q28, flagged for
+# architect ratification, reversible by editing this one line.
+#
+# 300 was set at CH-00 as an explicit PROXY for the 50 MB submission cap -- the
+# CH-00 prompt's words: "the tracked count exceeds 300 ... which is where the
+# 50 MB cap actually gets broken." CH-14a measured the cap directly: the tracked
+# tree is 61.70 MB and the ARCHIVE IS 10.18 MB, 4.9x under. The proxy was never
+# tracking the thing it stood for, and at 300/300 it refused a chunk whose own
+# prompt ordered eleven new evidence and test files into the tree.
+#
+# This is NOT a threshold traded away to get green. The commit that raises it is
+# the same commit that adds MAX_ARCHIVE_BYTES below -- a DIRECT, fail-closed
+# measurement of the constraint the count was standing in for. The guard is
+# strictly stronger afterwards on the thing it exists to protect. What the count
+# still does is catch a bulk accident: a corpus download or a node_modules
+# walking into the index.
+#
+# It is NOT set to "whatever makes this commit pass" (that would be 311).
+MAX_TRACKED    = 400
+
+# The HackerEarth cap (QUESTIONS.md Q2, C1) is 50 MB on the UPLOADED ZIP.
+# 45 MB leaves 5 MB of headroom. CH-14a. Decimal MB, which is the conservative
+# reading -- if the platform means MiB the true cap is larger, never smaller.
+MAX_ARCHIVE_BYTES = 45_000_000
+HACKEREARTH_CAP   = 50_000_000
+
+# Testability seam for tests/test_size_guard.py, which cannot afford to generate
+# 45 MB of incompressible data. An override is PRINTED LOUDLY below so that a
+# commit made under a relaxed limit is visible in the terminal and the reflog.
+_override = os.environ.get("MICRO1_MAX_ARCHIVE_BYTES")
+ARCHIVE_LIMIT_OVERRIDDEN = bool(_override)
+if _override:
+    MAX_ARCHIVE_BYTES = int(_override)
+
 FAIL = []
 
 def sh(*args):
@@ -53,6 +113,56 @@ for path in staged:
 tracked = [p for p in sh("git", "ls-files", "-z").split("\0") if p]
 if len(tracked) > MAX_TRACKED:
     FAIL.append(f"tracked file count {len(tracked)} exceeds {MAX_TRACKED}.")
+
+# ------------------------------------ 2b + 6. TOTAL SIZE, of the tree and the zip
+#
+# Q25: "It never sums the tracked bytes." It does now -- every commit, printed
+# whether it passes or not. The REFUSAL is on the archive, because that is what
+# the 50 MB cap binds; see the header. Both numbers are shown so nobody has to
+# take the relationship between them on trust.
+staged_tree = sh("git", "write-tree").strip()
+tracked_bytes = None
+archive_bytes = None
+
+if not staged_tree:
+    FAIL.append(
+        "could not write the staged tree (`git write-tree` produced nothing), so "
+        "the archive-size check could not run. Refusing rather than passing a "
+        "size check that measured nothing -- resolve the index and retry.")
+else:
+    # sizes of the exact blobs about to be committed, not the worktree's
+    total = 0
+    for line in sh("git", "ls-tree", "-r", "-l", "-z", staged_tree).split("\0"):
+        if not line.strip():
+            continue
+        try:
+            total += int(line.split()[3])
+        except (IndexError, ValueError):
+            continue
+    tracked_bytes = total
+
+    with tempfile.TemporaryDirectory() as td:
+        zpath = os.path.join(td, "submission.zip")
+        proc = subprocess.run(
+            ["git", "archive", "--format=zip", "-o", zpath, staged_tree],
+            capture_output=True, text=True)
+        if proc.returncode != 0 or not os.path.exists(zpath):
+            FAIL.append(
+                "`git archive --format=zip` failed, so the 50 MB submission cap "
+                "could not be checked. Refusing rather than passing a check that "
+                f"never ran (git said: {proc.stderr.strip()[:200]!r}).")
+        else:
+            archive_bytes = os.path.getsize(zpath)
+            if archive_bytes > MAX_ARCHIVE_BYTES:
+                FAIL.append(
+                    f"the submission ARCHIVE is {archive_bytes:,} B "
+                    f"({archive_bytes/1e6:.2f} MB), over the "
+                    f"{MAX_ARCHIVE_BYTES:,} B ({MAX_ARCHIVE_BYTES/1e6:.2f} MB) "
+                    f"limit and heading for the {HACKEREARTH_CAP/1e6:.0f} MB "
+                    "HackerEarth cap (QUESTIONS.md Q2, C1). Apply the published "
+                    "trajectory selection rule -- docs/evidence/ch14-size/"
+                    "selection-rule.md -- and record what it dropped. Do NOT "
+                    "raise this limit (hard rule 5).")
 
 # ------------------------------------------------ 3. PII literals, fail closed
 def pii_sources():
@@ -127,13 +237,28 @@ if staged and scanned == 0 and pii:
                 "broken. Refusing rather than reporting a vacuous pass.")
 
 # ----------------------------------------------------------------- verdict
+def size_line():
+    t = f"{tracked_bytes:,} B ({tracked_bytes/1e6:.2f} MB)" if tracked_bytes is not None else "unmeasured"
+    if archive_bytes is None:
+        return f"tracked {t} -> archive UNMEASURED"
+    head = MAX_ARCHIVE_BYTES - archive_bytes
+    return (f"tracked {t} -> archive {archive_bytes:,} B "
+            f"({archive_bytes/1e6:.2f} MB), limit {MAX_ARCHIVE_BYTES/1e6:.2f} MB, "
+            f"headroom {head/1e6:.2f} MB")
+
+if ARCHIVE_LIMIT_OVERRIDDEN:
+    print(f"*** ARCHIVE LIMIT OVERRIDDEN via MICRO1_MAX_ARCHIVE_BYTES="
+          f"{MAX_ARCHIVE_BYTES:,} (default {45_000_000:,}). This commit was NOT "
+          "checked against the real submission cap.", file=sys.stderr)
+
 if FAIL:
     print("\nPRE-COMMIT REFUSED:\n", file=sys.stderr)
     for f in FAIL:
         print(f"  * {f}", file=sys.stderr)
-    print("", file=sys.stderr)
+    print(f"\n  size at refusal: {size_line()}\n", file=sys.stderr)
     sys.exit(1)
 
 print(f"pre-commit ok: {len(staged)} staged, {scanned} swept for PII+credentials "
       f"(patterns from {pii_src}), {len(tracked)} tracked, largest blob under 25 MB.")
+print(f"               {size_line()}")
 PYEOF

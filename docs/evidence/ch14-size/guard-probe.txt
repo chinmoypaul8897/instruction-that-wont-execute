@@ -1,0 +1,43 @@
+==============================================================================
+CH-14a GUARD PROBE - QUESTIONS.md Q25, executed
+==============================================================================
+
+THE DEFECT, in Q25's words:
+  "It enforces three things: a 25 MB per-blob limit, a 300-file count,
+   and PII / credential sweeps. IT NEVER SUMS THE TRACKED BYTES."
+
+THE SYNTHETIC TREE - every per-file guard green, only the total over:
+  tracked files                   7   (limit 300)
+  largest blob              120,000 B (limit 26,214,400)
+  ARCHIVE                   720,904 B
+  archive limit             300,000 B  <- the probe's stand-in for 45,000,000
+  OVER BY                   420,904 B
+
+  (The limit is driven down through MICRO1_MAX_ARCHIVE_BYTES so the
+   probe runs in seconds instead of generating 45 MB of payload. The
+   hook announces the override on stderr; that announcement is itself
+   asserted by tests/test_size_guard.py::test_override_is_announced.)
+
+------------------------------------------------------------------------------
+OLD hook, as committed at bc99ef4 - THE DEFECT
+------------------------------------------------------------------------------
+  exit code : 0   (expected 0: PASS - it never measured the total)
+  stdout | pre-commit ok: 7 staged, 1 swept for PII+credentials (patterns from C:\Users\chinm\AppData\Local\Temp\tmp3f7qbtlv\probe_pii_patterns.txt), 7 tracked, largest blob under 25 MB.
+
+------------------------------------------------------------------------------
+NEW hook, .githooks/pre-commit as it now stands - THE FIX
+------------------------------------------------------------------------------
+  exit code : 1   (expected 1: REFUSE)
+  stderr | *** ARCHIVE LIMIT OVERRIDDEN via MICRO1_MAX_ARCHIVE_BYTES=300,000 (default 45,000,000). This commit was NOT checked against the real submission cap.
+  stderr | PRE-COMMIT REFUSED:
+  stderr |   * the submission ARCHIVE is 720,904 B (0.72 MB), over the 300,000 B (0.30 MB) limit and heading for the 50 MB HackerEarth cap (QUESTIONS.md Q2, C1). Apply the published trajectory selection rule -- docs/evidence/ch14-size/selection-rule.md -- and record what it dropped. Do NOT raise this limit (hard rule 5).
+  stderr |   size at refusal: tracked 720,059 B (0.72 MB) -> archive 720,904 B (0.72 MB), limit 0.30 MB, headroom -0.42 MB
+
+==============================================================================
+THE FLIP: old hook exit 0 on an over-cap tree; new hook exit 1 on the
+same tree, naming the measured archive size. Hard rule 6 satisfied.
+
+Note what the OLD hook printed: 'pre-commit ok ... largest blob under
+25 MB'. A green report about a proxy, on a tree that breaches the real
+constraint. That is this project's thesis, found in its own tooling.
+==============================================================================
