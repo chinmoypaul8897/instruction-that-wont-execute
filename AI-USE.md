@@ -216,15 +216,16 @@ UPDATE with the re-verification table.
 
   | | tokens |
   |---|---|
-  | output | 324,965 |
-  | input, uncached | 520 |
-  | input, cache write | 1,012,364 |
-  | input, cache read | 55,854,492 |
-  | **total input** | **56,867,376** |
-  | assistant turns | 260 |
+  | output | 552,139 |
+  | input, uncached | 916 |
+  | input, cache write | 1,373,511 |
+  | input, cache read | 153,863,804 |
+  | **total input** | **155,238,231** |
+  | assistant turns | 458 |
+  | wall-clock | **7,035 s (1.95 h)**, 08:21:12Z → 10:18:27Z |
 
-  Imputed at `claude-opus-5` list price: **USD 292.461005** upper bound with no cache
-  discount, **USD 42.381246** cache-adjusted at the assumed 1.25× / 0.10× multipliers. Both
+  Imputed at `claude-opus-5` list price: **USD 789.994630** upper bound with no cache
+  discount, **USD 99.324401** cache-adjusted at the assumed 1.25× / 0.10× multipliers. Both
   are printed because the upper bound rests on no assumption. **This is the coding
   agent's cost and it is NOT charged against the USD 18.00 ceiling in `src/runlog.py`**,
   which governs the evaluation arms. Subagent tokens are counted separately in the
