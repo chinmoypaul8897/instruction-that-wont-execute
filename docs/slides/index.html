@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instruction That Won't Execute — thirteen slides</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --paper:#FBFAF7;
+  --ink:#1A1A18;
+  --ink-muted:#6B6862;
+  --rule:#D8D4CC;
+  --accent:#9B2226;
+  --serif:Georgia,'Times New Roman',serif;
+  --mono:Consolas,'SF Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:var(--ink);}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;
+  transform:translate(-50%,-50%) scale(1);transform-origin:50% 50%;
+  background:var(--paper);color:var(--ink);}
+.slide{position:absolute;left:0;top:0;width:1920px;height:1080px;display:none;}
+.slide.on{display:block;}
+.page{position:absolute;left:120px;right:120px;top:100px;bottom:100px;
+  display:flex;flex-direction:column;}
+.hr{height:1px;background:var(--rule);flex:none;}
+.vr{width:1px;background:var(--rule);flex:none;}
+.head{flex:none;padding-bottom:16px;}
+.area{flex:1 1 auto;min-height:0;padding:44px 0 20px;}
+.foot{flex:none;display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;}
+.src,.folio{font-family:var(--mono);font-size:14px;color:var(--ink-muted);}
+.label{font-family:var(--mono);font-size:15px;line-height:1.3;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-muted);}
+.headline{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1.15;max-width:24ch;}
+.headline.wide{max-width:34ch;}
+.prose{font-family:var(--serif);font-size:28px;line-height:1.5;max-width:60ch;}
+.mono{font-family:var(--mono);font-size:22px;line-height:1.6;white-space:pre-wrap;}
+.m20{font-size:20px;}
+.m19{font-size:19px;}
+.m18{font-size:18px;}
+.m17{font-size:17px;}
+.m16{font-size:16px;}
+.m26{font-size:26px;}
+.m30{font-size:30px;}
+.m34{font-size:34px;}
+.m64{font-size:64px;line-height:1.15;}
+.hero{font-family:var(--mono);font-weight:400;font-size:180px;letter-spacing:-.03em;line-height:1;}
+.muted{color:var(--ink-muted);}
+.bad{color:var(--accent);}
+.u{border-bottom:2px solid currentColor;}
+.cols{display:flex;height:100%;min-height:0;}
+.cols .vr{margin:0 46px;}
+.step{visibility:hidden;}
+.hang{display:inline-block;width:1380px;vertical-align:top;}
+.gap12{height:12px;}.gap18{height:18px;}.gap24{height:24px;}
+.gap32{height:32px;}.gap40{height:40px;}.gap56{height:56px;}
+table{border-collapse:collapse;font-family:var(--mono);}
+th{font-family:var(--mono);font-size:15px;font-weight:400;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-muted);text-align:left;
+  padding:0 34px 12px 0;border-bottom:1px solid var(--rule);vertical-align:bottom;}
+td{padding:16px 34px 16px 0;border-bottom:1px solid var(--rule);vertical-align:top;}
+.centre{position:absolute;left:120px;right:120px;top:100px;bottom:100px;
+  display:flex;align-items:center;justify-content:center;text-align:center;}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<section class="slide">
+  <div class="page">
+    <div class="area" style="display:flex;flex-direction:column;justify-content:center;padding:0;">
+      <h1 class="headline">The Instruction<br>That Won't Execute</h1>
+      <div class="gap40"></div>
+      <p class="prose">An agent that reads a Federal Register amendatory instruction the way the Office of the Federal Register does, and writes the editorial note the National Archives will have to publish if the rule ships as drafted.</p>
+    </div>
+    <div class="foot"><div class="label">Chinmoy Paul &middot; IIT Guwahati</div><div></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Federal Register &middot; amendatory instruction</div></div>
+    <div class="hr"></div>
+    <div class="area">
+<div class="mono m16 muted">81 FR 8855 &middot; published 2016-02-23 &middot; FR Doc 2016-03298 &middot; 49 CFR 1150.35</div>
+      <div class="gap32"></div>
+<div class="mono m34">b. In paragraph (f), remove the sentence &ldquo;<span class="bad">Stay petitions must be filed within 7 days of the filing of the <span class="u">notion</span> of exemption.</span>&rdquo;</div>
+      <div class="gap40"></div>
+      <div class="hr"></div>
+      <div class="gap32"></div>
+<div class="mono m16 muted">49 CFR 1150.35(f) as it stood &middot; 2015 annual edition, revised 2015-10-01</div>
+      <div class="gap18"></div>
+<div class="mono m26">Stay petitions must be filed within 7 days of the filing of the <span class="u">notice</span> of exemption.</div>
+      <div class="gap32"></div>
+      <p class="prose">One word. The quoted sentence is absent from the section at every normalisation level the resolver declares, so there is nothing for the Office of the Federal Register to remove.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">data/amdpars/amdpars.jsonl &middot; frdoc 2016-03298 &middot; ordinal 180 &middot; data/evalset/items.jsonl</div><div class="folio">02 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">What the Code of Federal Regulations says today</div></div>
+    <div class="hr"></div>
+    <div class="area">
+<div class="mono m20 muted">Editorial Note:</div>
+      <div class="gap18"></div>
+<div class="mono m30">At 81 FR 8855, Feb. 23, 2016, &sect; 1150.35 was amended; however, a portion of the amendment could not be incorporated due to inaccurate amendatory instruction.</div>
+      <div class="gap40"></div>
+<div class="mono m16 muted">verbatim, exact &middot; eCFR node 49:8.1.1.2.66.4.7.5 &middot; source ECFR-title49.xml &middot; one of 107 harvested defect notes</div>
+      <div class="gap40"></div>
+      <p class="prose">That portion of the rule never codified. The text it targeted was not changed, and the note is permanent and citable.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">data/ednotes/defect_notes.jsonl &middot; ordinal 164 &middot; node 49:8.1.1.2.66.4.7.5</div><div class="folio">03 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Baseline B0 &middot; one model, one prompt, no CFR text</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <div class="cols">
+        <div style="width:880px;flex:none;">
+<div class="mono m19">You are an editor at the Office of the Federal Register (OFR).
+
+Your job is to decide whether an amendatory instruction in a final rule can be
+EXECUTED against the Code of Federal Regulations <span class="muted">[...]</span>
+
+You will be shown the amendatory instructions for ONE CFR section from ONE final
+rule. You will NOT be shown the CFR text.
+
+Answer with exactly one word, and nothing else:
+
+WILL_FAIL      - at least one instruction cannot be executed as written
+WILL_EXECUTE   - every instruction can be executed as written</div>
+          <div class="gap24"></div>
+<div class="mono m16 muted">verbatim from the shipped system prompt &middot; one elision marked</div>
+        </div>
+        <div class="vr"></div>
+        <div style="flex:1 1 auto;min-width:0;">
+          <div class="hero">47.6%</div>
+          <div class="gap18"></div>
+<div class="mono m20">n = 82</div>
+          <div class="gap12"></div>
+<div class="mono m16 muted">39 / 82 correct &middot; 3 reps &middot; claude-haiku-4-5-20251001 @ t = 0</div>
+          <div class="gap40"></div>
+          <p class="prose">A coin flip, and it should be. The instruction alone does not contain the answer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">agents/B0.md &middot; docs/evidence/checkpoint/checkpoint-result.json</div><div class="folio">04 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">What the agent receives</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <div class="cols">
+        <div style="width:790px;flex:none;">
+<div class="mono m16 muted">Amendatory instructions (4) &middot; FR Doc 05-8447 &middot; 70 FR 28678 &middot; 2005-05-18</div>
+          <div class="gap24"></div>
+<div class="mono m18">1  19. Section 75.6 is amended as follows:
+
+2  a. In the introductory text, by removing &ldquo;1916 Race Street, Philadelphia, Pennsylvania 19103;&rdquo; and adding &ldquo;100 Barr harbor Drive, P.O. Box C-700, West Conshohocken, Pennsylvania 19428-2959;&rdquo; in its place;
+
+3  b. Redesignate paragraphs (a)(38) through (a)(41) as (a)(39) through (a)(42);
+
+4  c. Add new paragraphs (a)(38), (a)(43), and (a)(44); and</div>
+        </div>
+        <div class="vr"></div>
+        <div style="flex:1 1 auto;min-width:0;">
+<div class="mono m16 muted">40 CFR 75.6 as it stood &middot; 2004 annual edition, revised 2004-07-01</div>
+          <div class="gap24"></div>
+<div class="mono m17">&sect; 75.6
+Incorporation by reference.
+<span class="muted">[...]</span>
+(a) The following materials are available for purchase from the following addresses: American Society for Testing and Material (ASTM), 1916 Race Street, Philadelphia, Pennsylvania 19103; and the University Microfilms International 300 North Zeeb Road, Ann Arbor, Michigan 48106.
+<span class="muted">[...]</span>
+(38) ASTM D4891-89, Standard Test Method for Heating Value of Gases in Natural Gas Range by Stoichiometric Combustion, for appendices D and F to this part.
+<span class="muted">[...]</span></div>
+          <div class="gap24"></div>
+<div class="mono m16 muted">11,488 characters in full &middot; user prompt 12,238 characters &middot; three elisions marked</div>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">data/evalset/items.jsonl &middot; item 05-8447|75.6 &middot; docs/trajectories/arms/A1-rep1.jsonl step 1</div><div class="folio">05 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Deterministic resolution</div></div>
+    <div class="hr"></div>
+    <div class="area">
+<div class="mono m16 muted">tool call &middot; step 6</div>
+      <div class="gap18"></div>
+<div class="mono m20">{"record": "action", "step": 6, "type": "tool_call",
+ "name": "cfr_resolve",
+ "input": {"instruction_index": 4, "designation": "(a)(38)"}}</div>
+      <div class="gap32"></div>
+      <div class="hr"></div>
+      <div class="gap24"></div>
+<div class="mono m16 muted">tool response &middot; step 7</div>
+      <div class="gap18"></div>
+<div class="mono m19">{"record": "tool_response", "step": 7, "name": "cfr_resolve", "error": null,
+ "output": {"title": "40", "part": "75", "section": "75.6",
+            "as_of_date": "2004-07-01",
+            "found": false, "level": "none", "levels_tried": [],
+            "char_offset": null, "matched_span": null, "quoted_text": null,
+            "designation": "(a)(38)",
+            "designation_exists": false,
+            "designation_path": ["a", "38"],
+            "designation_offset": null,
+            "siblings": [<span class="muted">47 entries, among them "(38)"</span>],
+            "declared_designations": 60,
+            "normalisation_levels_declared": ["exact", "whitespace-collapsed",
+                                              "alphanumeric-only"]}}</div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/trajectories/arms/A1-rep1.jsonl &middot; run A1__05-8447_75.6__rep1 &middot; steps 6-7</div><div class="folio">06 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">What the agent writes</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <table class="m17" style="width:100%;">
+        <tr><th style="width:44px;">#</th><th style="width:170px;">operation</th><th style="width:330px;">target</th><th style="width:360px;">cfr_resolve returned</th><th>the model ruled</th></tr>
+        <tr><td>1</td><td>amend</td><td class="muted">null</td><td>found = false<br>level = none</td><td>executes = true</td></tr>
+        <tr><td>2</td><td>remove</td><td>"1916 Race Street, Philadelphia, Pennsylvania 19103;"</td><td>found = true<br>level = exact<br>char_offset = 1103</td><td>executes = true</td></tr>
+        <tr><td>3</td><td>redesignate</td><td>(a)(38)</td><td>designation_exists = false</td><td>executes = true</td></tr>
+        <tr><td>4</td><td>add</td><td>(a)(38)</td><td>designation_exists = false</td><td>executes = false<br>failure_class = "target-already-exists"</td></tr>
+      </table>
+      <div class="gap32"></div>
+<div class="mono m20">verdict               WILL_FAIL            <span class="muted">gold  WILL_FAIL</span>
+failing_designation   (a)(38)
+failure_class         target-already-exists
+needs_human_review    true</div>
+      <div class="gap18"></div>
+<div class="mono m16 muted">16 of 82 items routed to the human queue in this rep &middot; the trigger is computed in code from the trace</div>
+      <div class="gap32"></div>
+      <p class="prose">The verdict is derived in code from that trace, so the system cannot be right for the wrong reason.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/evidence/ch06-a1/A1-rep1-artifacts.jsonl &middot; item 05-8447|75.6</div><div class="folio">07 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">The override &middot; 40 CFR 75.6 &middot; instructions 3 and 4</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <h2 class="headline wide">The agent overrode its own tool.</h2>
+      <div class="gap40"></div>
+<div class="mono m19"><span class="muted">instruction 3</span>   b. Redesignate paragraphs (a)(38) through (a)(41) as (a)(39) through (a)(42);
+<span class="muted">resolver</span>        designation_exists = false     found = false
+<span class="muted">model</span>           executes = true     failure_class = null
+<span class="muted">why</span>             <span class="hang">"cfr_resolve reported designation_exists=false, but (38) is declared under (a) in the section text; the tool cannot see nested designations. The siblings list confirms (38), (39), (40), (41) all exist."</span>
+
+<span class="muted">instruction 4</span>   c. Add new paragraphs (a)(38), (a)(43), and (a)(44); and
+<span class="muted">resolver</span>        designation_exists = false     found = false
+<span class="muted">model</span>           executes = false    failure_class = "target-already-exists"
+<span class="muted">why</span>             <span class="hang">"Instruction attempts to add (a)(38), but (38) is already declared under (a) in the section text. The siblings list confirms (38) exists. Cannot add a paragraph that already exists."</span></div>
+      <div class="gap32"></div>
+      <p class="prose">The resolver was wrong, and the published note says so.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/evidence/ch06-a1/EXEMPLAR-composition.md &middot; A1-rep1-artifacts.jsonl</div><div class="folio">08 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Every arm, on the same 82 items</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <table class="m26" style="width:100%;">
+        <tr><th style="width:300px;">arm</th><th style="width:340px;">accuracy</th><th style="width:460px;">gap</th><th>McNemar p</th></tr>
+        <tr><td>B0</td><td>0.4756<span class="muted">&nbsp;&nbsp;39 / 82</span></td><td class="muted">reference</td><td class="muted">&mdash;</td></tr>
+        <tr><td>B0-agent</td><td>0.6585<span class="muted">&nbsp;&nbsp;54 / 82</span></td><td>+18.3 pp<span class="muted">&nbsp;&nbsp;vs B0</span></td><td>0.0059</td></tr>
+        <tr><td>A1</td><td>0.7195<span class="muted">&nbsp;&nbsp;59 / 82</span></td><td>+6.1 pp<span class="muted">&nbsp;&nbsp;vs B0-agent</span></td><td><span class="bad">0.4244</span> &nbsp;<span class="bad m20">not significant</span></td></tr>
+        <tr><td>B0&prime;</td><td>0.6585<span class="muted">&nbsp;&nbsp;54 / 82</span></td><td>+0.0 pp<span class="muted">&nbsp;&nbsp;vs B0-agent</span></td><td>1.0000</td></tr>
+      </table>
+      <div class="gap32"></div>
+<div class="mono m16 muted">McNemar exact two-sided &middot; 41 (rule, section) pairs &middot; claude-haiku-4-5-20251001 @ t = 0 &middot; B0&prime; is B0-agent at 3&times; best-of sampling</div>
+      <div class="gap18"></div>
+<div class="mono m18">pre-registered criterion: A1 &ge; B0-agent + 8 pp, p &lt; 0.05, n &ge; 84, A1 &ge; 0.80 absolute &nbsp;&mdash;&nbsp; <span class="bad">met on none of the four clauses</span></div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/evidence/checkpoint/checkpoint-result.json &middot; docs/evidence/ch06-a1/a1-result.json &middot; GOOD.md &sect;4</div><div class="folio">09 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Predicted before the run &middot; measured after it</div></div>
+    <div class="hr"></div>
+    <div class="area">
+<div class="mono m20"><span class="muted">iteration 1</span>   cfr_resolve, the deterministic resolver
+              predicted   +8 pp over B0-agent, i.e. 0.74
+              measured    0.5610   <span class="bad">&minus;9.8 pp</span>
+              decision    REMOVED as a standalone capability</div>
+      <div class="gap32"></div>
+      <div class="hr"></div>
+      <div class="gap32"></div>
+<div class="mono m20"><span class="muted">iteration 2</span>   A1-SKILL.md, the ordered execution procedure
+              predicted   v1  0.81        v2  0.69
+              measured    0.7195   <span class="bad">v1 missed by 9.1 pp</span>   v2 beaten by 3.0 pp
+              decision    KEPT</div>
+      <div class="gap40"></div>
+<div class="mono m20">the prediction was committed to git 764 seconds before the arm ran</div>
+      <div class="gap12"></div>
+<div class="mono m16 muted">e12466c at 2026-08-31T02:11:37Z &rarr; first record of A1-iter1-rep1.jsonl at 02:24:21.091Z &nbsp;=&nbsp; 764.091 s</div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">CHANGELOG.md &middot; docs/evidence/ch06-a1/a1-result.json &middot; git e12466c</div><div class="folio">10 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Percentage points against B0-agent &middot; n = 82</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <div class="step" style="display:flex;align-items:baseline;">
+        <div class="headline" style="width:470px;flex:none;max-width:none;">tool alone</div>
+        <div class="mono m18 muted" style="width:360px;flex:none;">A1-iter1</div>
+        <div class="mono m64 bad">&minus;9.8</div>
+      </div>
+      <div class="gap32"></div>
+      <div class="step" style="display:flex;align-items:baseline;">
+        <div class="headline" style="width:470px;flex:none;max-width:none;">skill alone</div>
+        <div class="mono m18 muted" style="width:360px;flex:none;">A1-minus-tool</div>
+        <div class="mono m64 bad">&minus;1.2</div>
+      </div>
+      <div class="gap32"></div>
+      <div class="step" style="display:flex;align-items:baseline;">
+        <div class="headline" style="width:470px;flex:none;max-width:none;">together</div>
+        <div class="mono m18 muted" style="width:360px;flex:none;">A1</div>
+        <div class="mono m64">+6.1</div>
+      </div>
+      <div class="gap56"></div>
+      <div class="step">
+        <p class="prose">Neither capability helps alone.</p>
+        <div class="gap18"></div>
+<div class="mono m16 muted">the single-capability arms are one rep each and A1's own rep-to-rep spread is 4.9 pp, so read this as not distinguishable from no effect, not as measured harm</div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/evidence/ch06-a1/a1-result.json &middot; comparisons[].gap_pp &middot; a1-result.txt rep stability</div><div class="folio">11 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="page">
+    <div class="head"><div class="label">Pre-registered prediction &middot; wrong</div></div>
+    <div class="hr"></div>
+    <div class="area">
+      <p class="prose" style="max-width:76ch;">&ldquo;accuracy collapses toward a trivial oracle, because after a failed amendment the current text still lacks the change and after a successful one it contains it - the current text LEAKS THE LABEL. If the number goes up, that is PROOF OF LEAKAGE, NOT CAPABILITY, and must be reported as such.&rdquo;</p>
+      <div class="gap12"></div>
+<div class="mono m16 muted">CONTEXT.md &sect;10, written before the corpus was built &middot; quoted whitespace-collapsed</div>
+      <div class="gap40"></div>
+      <div class="hr"></div>
+      <div class="gap32"></div>
+<div class="mono m26">point-in-time text   0.6585   <span class="muted">54 / 82</span>
+current text         0.5976   <span class="muted">49 / 82</span>
+difference           <span class="bad">&minus;6.1 pp</span>
+McNemar exact        p = 0.4421   <span class="muted">b = 11  c = 16</span></div>
+      <div class="gap32"></div>
+      <p class="prose">The number went down. The prediction is recorded as missed rather than reinterpreted.</p>
+    </div>
+    <div class="hr"></div>
+    <div class="foot"><div class="src">docs/evidence/ch09-removed/leakage-result.txt &middot; leakage-result.json &middot; leakage_probe.py</div><div class="folio">12 / 13</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="centre">
+    <p class="headline wide">A verification agent's grounding corpus is a precision instrument, not a recall instrument &mdash; and if you hand it the document, measure <em>which class</em> got better, because the average will lie to you.</p>
+  </div>
+</section>
+
+</div>
+<script>
+(function(){
+var stage=document.getElementById('stage');
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var steps=slides.map(function(s){return s.querySelectorAll('.step').length;});
+var i=0,k=0;
+
+function fit(){
+  var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+  stage.style.transform='translate(-50%,-50%) scale('+s+')';
+}
+function render(){
+  for(var n=0;n<slides.length;n++){slides[n].className=(n===i)?'slide on':'slide';}
+  var st=slides[i].querySelectorAll('.step');
+  for(var j=0;j<st.length;j++){st[j].style.visibility=(j<k)?'visible':'hidden';}
+}
+function next(){
+  if(k<steps[i]){k++;render();return;}
+  if(i<slides.length-1){i++;k=0;render();}
+}
+function prev(){
+  if(k>0){k--;render();return;}
+  if(i>0){i--;k=steps[i];render();}
+}
+var m=/^#(\d+)(?:\.(\d+))?$/.exec(window.location.hash||'');
+if(m){
+  var n=parseInt(m[1],10);
+  if(n>=1&&n<=slides.length){i=n-1;k=m[2]?Math.min(parseInt(m[2],10),steps[i]):0;}
+}
+window.addEventListener('resize',fit);
+window.addEventListener('keydown',function(e){
+  var key=e.key;
+  if(key==='ArrowRight'||key==='ArrowDown'||key===' '||key==='Spacebar'){e.preventDefault();next();}
+  else if(key==='ArrowLeft'||key==='ArrowUp'){e.preventDefault();prev();}
+  else if(key==='f'||key==='F'){
+    e.preventDefault();
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen();}
+  }
+});
+fit();render();
+})();
+</script>
+</body>
+</html>
