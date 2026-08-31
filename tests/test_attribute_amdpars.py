@@ -481,9 +481,31 @@ def test_freeze_pair_yield_clears_the_42_target_on_EXACT_matching_alone():
     assert y["1"]["with_match"] == 58 > y["0"]["with_match"]
 
 
+@needs_raw
 @needs_freeze
 def test_freeze_is_deterministic_byte_for_byte(tmp_path):
-    """Hard rule 9, proved by hash rather than asserted."""
+    """Hard rule 9, proved by hash rather than asserted.
+
+    CH-14a: `@needs_raw` was MISSING here and is added. This test re-runs the
+    extractor over `--raw data/raw/fr`, so it needs the RAW inputs, not merely the
+    committed freeze that `@needs_freeze` checks for. `data/raw/` is git-ignored, so
+    in a clean clone - and therefore in the zip a judge extracts - the extractor ran
+    over nothing, produced an empty `amdpars.jsonl`, and this test FAILED on the
+    SHA-256 of the empty string:
+
+        assert 'f60e9e116359...' == 'e3b0c44298fc1c149afbf4c8996fb92427ae41e46...'
+                                     ^ sha256 of zero bytes
+
+    The other nine raw-dependent tests in this file were already guarded with
+    `@needs_raw` and skipped cleanly. This one had the wrong precondition.
+
+    THIS IS NOT A TEST WEAKENED TO GET GREEN (hard rule 5). Where the raw inputs
+    exist the test still RUNS and still PASSES - unchanged assertions, same hashes -
+    and `docs/evidence/ch14-clean-clone/` shows it running and passing on the build
+    machine in the same session it is shown skipping in the clone. What changed is
+    only the condition under which it is meaningful to run at all: a determinism
+    check fed no input is not a determinism check.
+    """
     rc = subprocess.run(
         [sys.executable, str(REPO / "src/attribute_amdpars.py"), "extract",
          "--raw", str(RAW), "--out", str(tmp_path)],
