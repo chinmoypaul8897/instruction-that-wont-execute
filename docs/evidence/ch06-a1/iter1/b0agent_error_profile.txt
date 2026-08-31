@@ -1,0 +1,69 @@
+==============================================================================
+B0-agent ERROR PROFILE - measured BEFORE the Iteration 1 card is written
+==============================================================================
+
+  eval set  data/evalset/items.jsonl   n = 82   41 positive / 41 negative
+  reps      3, aggregated MAJORITY, ties to the FAILURE side
+
+  accuracy              0.6585   (54/82)
+  success + failure     54 + 28 = 82   (asserted == n by score.py)
+  false-defect  rate    0.1951   (8/41)   guard <= 0.25   PASS
+  missed-defect rate    0.4878   (20/41)   guard <= 0.25   FAIL
+  unparseable/absent    0
+
+------------------------------------------------------------------------------
+WHERE THE ERRORS ARE - the whole point of this file
+------------------------------------------------------------------------------
+
+  An error on a WILL_FAIL item is a MISSED DEFECT: the arm read the section
+  text and still failed to see that an instruction cannot execute.
+  An error on a WILL_EXECUTE item is a FALSE DEFECT.
+
+  missed defects   20   71.4% of all errors
+  false defects     8   28.6% of all errors
+  total errors     28
+
+  recall on WILL_FAIL    (defective) 0.5122
+  recall on WILL_EXECUTE (clean)     0.8049
+
+  THE ARM IS NOT AT CHANCE AND NOT BALANCED. It is strongly biased toward
+  WILL_EXECUTE: it clears the false-defect guard comfortably and fails the
+  missed-defect guard by a wide margin. Reading the text made it CAUTIOUS,
+  not ACCURATE. This is CONTEXT.md section 11's hot take showing up in the
+  baseline: the average moved +18.3 pp and the decision boundary did not.
+
+------------------------------------------------------------------------------
+DO THE MISSES HAVE A CHECKABLE STRUCTURE? - can a resolver reach them?
+------------------------------------------------------------------------------
+
+  ALL ITEMS, split by what a deterministic resolver could check:
+  has >=1 extractable designation              n= 65   errors  21   rate 0.3231
+  has NO extractable designation               n= 17   errors   7   rate 0.4118
+  has >=1 extractable quoted anchor            n= 41   errors  17   rate 0.4146
+  has NO extractable quoted anchor             n= 41   errors  11   rate 0.2683
+
+  MISSED DEFECTS ONLY (gold WILL_FAIL, predicted WILL_EXECUTE or nothing):
+    of 20 missed defects:
+       15 carry an extractable designation
+       12 carry an extractable quoted anchor
+       19 carry AT LEAST ONE of the two
+        1 carry NEITHER  <- these are OUT OF REACH of cfr_resolve
+
+    operations across the missed defects' instructions: [('remove', 23), ('revise', 19), ('add', 12), ('amend', 10), ('redesignate', 2), (None, 1)]
+
+  INSTRUCTION COUNT - CONTEXT.md section 9's hard case is the defect that is
+  NOT the first instruction, where a partial read rules correctly for the
+  wrong reason and a deep read is needed to rule at all:
+    defective, >=3 instructions      n= 16   missed  11   miss-rate 0.6875
+    defective, <3 instructions       n= 25   missed   9   miss-rate 0.3600
+
+==============================================================================
+THE OBSERVED FAILURE, IN ONE SENTENCE, FOR THE ITERATION 1 CARD
+==============================================================================
+
+  B0-agent scores 0.6585 and 71% of its errors are MISSED
+  DEFECTS: 20 of 41 defective sections called executable, a missed-defect
+  rate of 0.4878 against a pre-registered guard of 0.25. Of those 20
+  misses, 19 carry a designation or a quoted anchor that a deterministic
+  resolver can check against the point-in-time text, and 1 carry neither.
+

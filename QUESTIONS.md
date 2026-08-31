@@ -1142,3 +1142,53 @@ field is the live suspect and it is not investigated, by ruling.
 **The checkpoint's GREEN branch is untouched by this withdrawal**, because it was
 decided on the full-corpus haiku arms alone — `plan.md`'s branch table reads `B0` and
 `B0-agent` and never reads the sensitivity subset.
+
+---
+
+## Q20 - the already-committed Iteration 1 prediction says "the gap above 20 pp" and does not say gap over WHAT
+
+**Raised at CH-06 §2a, 2026-08-31, BEFORE any A1 arm ran. Class B, taken conservatively
+and continued — no work is blocked on it.**
+
+`CHANGELOG.md`'s Iteration 1 row was committed at `cb65539`, before `cfr_resolve` was
+wired into any arm, and it fixes this prediction:
+
+> **Prediction, fixed now: A1 moves the missed-defect rate below 0.25 and the gap above 20 pp.**
+
+The missed-defect clause is unambiguous. **The gap clause is not.** "The gap" has two
+live referents in this repository and they are 18.3 pp apart:
+
+| Reading | What it means | What A1 must score to satisfy it |
+|---|---|---|
+| **(a)** the headline gap, `A1 − B0` | the checkpoint's own published "gap +18.3 pp" is `B0-agent − B0`, so "the gap" in `CHANGELOG.md`'s baseline row means *the arm minus the no-text baseline* | A1 > 0.4756 + 0.20 = **0.6756** |
+| **(b)** the capability gap, `A1 − B0-agent` | the Iteration 1 card is about what the TOOL adds, and the thing the tool is added to is B0-agent | A1 > 0.6585 + 0.20 = **0.8585** |
+
+Reading (a) is nearly free — B0-agent already clears it at 0.6585 without any capability
+at all, which is a strong argument that (a) is *not* what a prediction about a new
+capability could have meant. Reading (b) is demanding, and is 0.85 higher than the
+**0.81** the CH-06 Iteration 2 card commits to.
+
+### The ruling taken, under hard rule 1
+
+**The conservative option is (b), the harder reading, and that is the one taken.** A
+prediction is a commitment against oneself; where it is ambiguous, the reading that is
+easier to satisfy is the one that must be refused. So:
+
+- **(b) is evaluated as the binding form of the `cb65539` prediction.**
+- **Both readings are reported anyway**, with their numbers side by side, because the
+  ambiguity is real and a reader who prefers (a) is entitled to see it scored.
+- **Nothing is edited at `cb65539`.** The ambiguous sentence stays exactly as committed.
+  This entry sits beside it; it does not replace it.
+
+**This is recorded before the A1 arm ran**, which is the only thing that makes the choice
+of reading credible. Had it been written afterwards, the reading chosen would have been
+the one the result satisfied.
+
+### Consequence, stated in advance
+
+Under reading (b), A1 must reach **0.8585** to satisfy the `cb65539` prediction, while
+the CH-06 Iteration 2 card predicts **0.81**. **These two of this project's own
+predictions are mutually unsatisfiable at 0.81 ≤ A1 < 0.8585, and that window is where
+the honest expectation sits.** The likely outcome is therefore that CH-06's card is met
+and `cb65539`'s gap clause is **missed**, and both are reported as such. Neither number
+is moved.
