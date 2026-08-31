@@ -132,11 +132,12 @@ The dependency set CH-14a measured — **the standard library plus `pytest`**, n
 else, because `src/apiclient.py` uses `urllib` — was re-derived from the imports at
 CH-11 and holds. Python 3.12.2.
 
-**Tier 1 was re-verified at CH-11 from a virtual environment built off
-`requirements.txt` alone**, network proved unreachable first: manifests 18/18, every
-headline string matched, all four regenerated result files byte-identical, 316 passed /
-26 skipped, **14.42 s**. Working in `PROGRESS.md`'s CH-11 entry; it is not under
-`docs/evidence/` because CH-11's fence makes that directory read-only, which
+**Tier 1 was re-verified twice at CH-11 from a fresh clone and a virtual environment
+built off `requirements.txt` alone**, network proved unreachable first: manifests 18/18,
+all seven headline strings matched, all four regenerated result files byte-identical,
+316 passed / 26 skipped. **14.42 s and 25.84 s** — both published, because one would be
+a claim about the reader's machine. Working in `PROGRESS.md`'s CH-11 entry; it is not
+under `docs/evidence/` because CH-11's fence makes that directory read-only, which
 `QUESTIONS.md` **Q30** records.
 
 **One item outstanding before submission: the demo video URL.**

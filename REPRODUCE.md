@@ -116,13 +116,27 @@ draws, so the p-value prices in the search over all 30 features.
 
 ## Runtime and what has been verified
 
-**Under 15 seconds for the four commands above.** Measured at CH-11 in a fresh virtual
-environment built from `requirements.txt` alone, with the network proved unreachable
-first: `refetch --verify-only` 0.60 s · `analyse_checkpoint` 0.39 s · `analyse_a1`
-0.89 s · `pytest` 12.54 s — **14.42 s total**. `run_bscript.py` adds **143.13 s**, and
-its two committed outputs come back byte-identical as well. The working is in
-`PROGRESS.md`'s CH-11 entry. It is not under `docs/evidence/` because CH-11's scope
-fence makes that directory read-only; `QUESTIONS.md` Q30 records that.
+**Under half a minute for the four commands above.** Measured twice at CH-11, each time
+in a fresh `git clone` and a fresh virtual environment built from `requirements.txt`
+alone, with the network proved unreachable first by attempting `govinfo.gov` through a
+closed port and requiring the attempt to fail:
+
+| | run 1 | run 2 |
+|---|---:|---:|
+| `refetch.py --verify-only` | 0.60 s | 1.75 s |
+| `analyse_checkpoint.py` | 0.39 s | 1.61 s |
+| `analyse_a1.py` | 0.89 s | 1.34 s |
+| `pytest -q` | 12.54 s | 21.15 s |
+| **total** | **14.42 s** | **25.84 s** |
+
+**Both numbers are published because a single one would be a claim about your machine
+rather than a measurement of ours.** Same repository, same interpreter, same commit
+family; the spread is load on the build machine. `run_bscript.py` adds about 2½ minutes
+(143.13 s measured), and its two committed outputs come back byte-identical as well.
+Both runs matched all seven headline strings and all four regenerated result files.
+
+The working is in `PROGRESS.md`'s CH-11 entry. It is not under `docs/evidence/` because
+CH-11's scope fence makes that directory read-only; `QUESTIONS.md` Q30 records that.
 
 **This path was rehearsed from the extracted zip, not just from a clone.** CH-14a
 unpacked `git archive --format=zip HEAD` into a plain directory — what a judge actually

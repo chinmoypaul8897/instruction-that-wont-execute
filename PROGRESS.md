@@ -76,6 +76,16 @@ docs/evidence/ch06-a1/analyse_a1.py exit 0     0.89s
 python -m pytest -q                 exit 0    12.54s   316 passed, 26 skipped
 TIER-1 TOTAL                                  14.42s
 
+  RE-RUN against the SHIPPING tree at 5e8390c, 323 tracked files, same method:
+    refetch 1.75s + checkpoint 1.61s + a1 1.34s + pytest 21.15s = 25.84s
+    316 passed, 26 skipped   7/7 headlines MATCH   4/4 files IDENTICAL
+    VERDICT: ALL PASS
+
+  BOTH totals are published. 14.42 s and 25.84 s are the same four commands on
+  the same machine minutes apart; the spread is machine load. Publishing one
+  would be a claim about the reader's hardware rather than a measurement of
+  ours, so REPRODUCE.md carries the table and says "under half a minute".
+
 docs/evidence/ch04-scorer/
   run_bscript.py                    exit 0   143.13s   (2,000-draw permutation null)
 

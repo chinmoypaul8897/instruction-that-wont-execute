@@ -13,7 +13,7 @@ land +17.1 pp above the sum of their separate deltas.** The single-capability ar
 rep each and A1's own rep-to-rep spread is 4.9 pp, so read "neither helps alone" as *not
 distinguishable from no effect*, not as a measured harm.
 
-Reproduce all of it offline, in fifteen seconds, for nothing: **[REPRODUCE.md](REPRODUCE.md)**.
+Reproduce all of it offline, in under half a minute, for nothing: **[REPRODUCE.md](REPRODUCE.md)**.
 
 ---
 
