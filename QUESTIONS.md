@@ -1411,3 +1411,65 @@ reproduce.
    publishing whatever the shipped script yields with the discrepancy stated, and that is
    done. The consistency check passes: **collision-only = 0**, confirming collisions are a
    strict subset of state-carry as §6 implies.
+
+---
+
+## Q24 - A1's third rep may not finish before the hard stop. The rule for what happens is fixed NOW, while rep 2 is still running
+
+**Raised at CH-06 §2d, 2026-08-31 ~06:20 UTC, WITH REP 2 STILL IN FLIGHT and rep 3 not
+started. Class B: decided, recorded, work continues.**
+
+### The situation, in numbers
+
+`GOOD.md` §8 fixes **"Reps: 3 for the final arms."** A1 is a final arm.
+
+Measured, not estimated: A1 rep 1 took **~1 h 55 min** for 82 items — far longer than
+`A1-iter1`'s ~27 min, because the v2 skill is 14,077 characters and the arm makes real
+tool-use rounds, so each item is several API calls against a growing context rather than
+one. Three reps is therefore **~5 h 45 min** from a 04:12 UTC start, landing near
+**10:05 UTC**. The hard stop is **10:00 UTC**, after which Phase 3 opens regardless, and
+the video's 14:00 UTC upload deadline is not movable.
+
+### The rule — committed before the number that would be affected by it exists
+
+> **If A1 rep 3 has not completed by 09:30 UTC, the reported A1 is the MAJORITY over the
+> reps that did complete, ties to the FAILURE side — the same aggregation rule used for
+> every other arm. The rep count actually used is printed in every table.**
+
+**Why this is written now rather than at 09:30.** At 09:30 I will know rep 1 and rep 2's
+numbers. A decision made then about how many reps to report is a decision made *with a
+result in view*, and it does not matter that the intention would be honest — the
+mechanism this project exists to defend is that such choices are made in advance or not
+at all. This entry timestamps the rule to a moment when rep 2 has not finished and rep 3
+has not begun.
+
+### What is explicitly NOT permitted under this rule
+
+- **Choosing the rep count by which gives the better accuracy.** The rule is time-based
+  and nothing else. If rep 3 lands by 09:30 it is included **whatever it does to the
+  number**.
+- **Reporting 2 reps as though `GOOD.md` asked for 2.** It asks for 3. A 2-rep result is
+  a **disclosed deviation from the pre-registration**, labelled as such in the report and
+  in every results table, with the reason given as wall clock — which is a real
+  constraint and a poor excuse, and is stated as both.
+- **Dropping a rep that did complete.** Every completed rep is in the aggregate.
+
+### Why 2 reps is nevertheless close to costless here, measured rather than assumed
+
+Every A1 arm runs at **temperature 0**. The checkpoint's three `B0-agent` reps produced
+**identical** accuracies — `['0.6585', '0.6585', '0.6585']` — while `B0`'s three did not
+(`['0.4756', '0.4756', '0.4634']`), so this arm family is *near*-deterministic but not
+exactly so, and that difference is a fact about the arms rather than an assumption.
+
+**So the report states the rep-to-rep agreement it actually measured**: how many of the
+82 items rep 1 and rep 2 disagreed on. If that number is 0, the third rep would have
+added no information and the deviation costs nothing; if it is not 0, the report says so
+and the deviation costs exactly as much as that disagreement implies. **Either way the
+cost of the shortfall is published as a measurement, not argued about.**
+
+### Related
+
+This is the same shape as `QUESTIONS.md` Q16 and Q19: a pre-registered quantity the
+corpus or the clock cannot deliver. The response is identical — **the pre-registration is
+not moved, the shortfall is named wherever the number is quoted, and the reason is
+stated.**
