@@ -15,9 +15,9 @@ are what makes it checkable rather than asserted.
 | Class | What it is | Count | Trajectories live at |
 |---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects | ~90 | `context/*-raw.json` (committed) |
-| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **6** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
-| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached. **NIGHT-RUN: two CH-03 gate reviewers with zero shared context — the first FAILED the chunk and its finding is the most important defect this project has found in its own work** | **12** | `docs/reviews/` for the verdicts and the runnable probes; per-agent cost for the SPEC-FIX-1 panel in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
-| **Solution** | the evaluation arms — the thing being measured | **1028** logged runs across B0, B0-agent and the sonnet subset | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` |
+| **Coding** | fresh Claude Code BUILD and REVIEW sessions that write this repository | **10** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN, CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c | `docs/trajectories/build/<CHUNK-ID>.jsonl` |
+| **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships. SPEC-FIX-1: ten agents, 4–1 against the verdict the session then reached. **NIGHT-RUN: two CH-03 gate reviewers with zero shared context — the first FAILED the chunk and its finding is the most important defect this project has found in its own work** | **86** | `docs/reviews/` for the verdicts and the runnable probes; per-agent cost for the SPEC-FIX-1 panel in `docs/evidence/spec-fix-1/spec-fix-1-panel-cost.txt` |
+| **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` |
 
 The coding row is the one that is easy to lose and easy to fake. Those transcripts
 live outside the repository in `~/.claude/projects/`, where Claude Code rotates and
@@ -33,7 +33,7 @@ duty 6 makes a chunk **not done** until its transcript is exported.
 | Model | Exact id | Where used | Price basis |
 |---|---|---|---|
 | Claude Opus 5 (1M context) | `claude-opus-5` | every Claude Code build/review session, incl. this one | $5.00 / $25.00 per MTok |
-| Claude Haiku 4.5 | **`claude-haiku-4-5-20251001`** | **USED** — every evaluation arm. 951 logged calls | $1.00 / $5.00 per MTok |
+| Claude Haiku 4.5 | **`claude-haiku-4-5-20251001`** | **USED** — every evaluation arm. 2,020 logged calls | $1.00 / $5.00 per MTok |
 | Claude Haiku 4.5 (alias) | `claude-haiku-4-5` | probe only, 3 calls. See Q1's correction — the night run pre-registered that this alias 404s; **it does not**, and the dated id is used anyway because an alias does not pin a reproducibility claim | same |
 | Claude Sonnet 5 | `claude-sonnet-5` | **USED** — model-sensitivity check only, 20-item subset. 84 calls. **Rejects `temperature` (HTTP 400, measured)**, so it ran at the model default while every haiku arm ran at 0 — a reported asymmetry | $2.00 / $10.00 per MTok |
 
@@ -82,7 +82,7 @@ in `agents/` — that separation is the point of the experiment and is not blurr
 The operator (Chinmoy Paul) is the architect: writes the spec and the chunk prompts,
 rules on every question raised to `QUESTIONS.md`, and merges `STATUS.md` /
 `PROGRESS.md`. Sessions do not certify their own work (hard rule 2). Human decision
-points are recorded as they happen — `QUESTIONS.md` Q5 and Q7 in this chunk were both
+points are recorded as they happen — `QUESTIONS.md` Q5 and Q7 in CH-00 were both
 put to the operator mid-session and answered before work continued.
 
 Human time per chunk is tracked for the rubric's *human time per task* row; the
@@ -338,7 +338,7 @@ rather than either shipping nothing or changing a guard quietly.
 **Three findings this session made against its own side of the project:**
 
 1. **`QUESTIONS.md` Q25's submission blocker does not exist.** The 50 MB cap is on the
-   uploaded zip; the zip is 10.24 MB. Q25 measured the uncompressed tree and its four
+   uploaded zip; the zip is 10.18 MB at `bc99ef4` (`docs/evidence/ch14-size/inventory.md`; 11.74 MB at CH-12). Q25 measured the uncompressed tree and its four
    proposed remedies — compress, relocate, sample, or unseal `data/` — were all
    unnecessary. `src/arms.py::bundle()`'s promise that *"EVERY RECORD SURVIVES"* is kept.
 2. **A test written by this session was broken inside the submission.**
@@ -588,7 +588,7 @@ an empty cell rather than a zero.
 - **Scope:** govinfo FR `<AMDPAR>` carry-forward attributor and the count-matched pair
   yield — `src/attribute_amdpars.py`, `tests/test_attribute_amdpars.py`, `refetch.py`,
   the `data/amdpars/` freeze and `docs/evidence/ch02-attributor/`.
-- **Trajectory:** `docs/trajectories/build/CH-02.jsonl` (644 lines, 1,574,519 B;
+- **Trajectory:** `docs/trajectories/build/CH-02.jsonl` (709 lines, 1,689,144 B;
   660 home-path substitutions, every other scrub category an explicit 0).
 - **Wall-clock:** first turn 14:43:18 UTC → last 15:30:55 UTC = **47.6 min**, against
   the ~3 h unattended window `prompts/CH-02.md` allowed.
@@ -681,7 +681,7 @@ an empty cell rather than a zero.
 
 - **Against the economy instruction — a miss, stated plainly.** `prompts/CH-01.md`
   asked for *"a fraction of"* CH-00's ~26 M input tokens. This session used
-  **41.1 M**, about **1.6×** CH-00 rather than a fraction, and 32.41 against 22.51
+  **41.1 M**, about **1.89×** CH-00's measured 21.72 M rather than a fraction, and 32.41 against 22.51
   cache-adjusted. Attributable causes, in order of size: a 824 MB download and two
   full-corpus re-parses (the extraction plus the determinism proof) that produced
   long tool outputs across many turns; a `sed -i` that converted every `\n` escape

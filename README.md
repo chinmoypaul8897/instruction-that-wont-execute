@@ -64,7 +64,7 @@ failed to execute, and says why.
 part, section, as-of date, quoted anchor and paragraph designation, it returns
 `{found, level, designation_exists, siblings, char_offset}`. **Designation-hierarchy
 resolution first, quoted-anchor matching second.** That order is forced by measurement,
-not taste: most labelled items have no extractable quoted anchor at all, and NARA's
+not taste: 41 of 82 labelled items have no extractable quoted anchor on any instruction (118 of 208 instructions carry none; `data/evalset/items.jsonl`), and NARA's
 dominant note mechanisms are designation-*state* facts. Matching is attempted at three
 **declared** levels, `exact`, `whitespace-collapsed` and `alphanumeric-only`, and **the
 level achieved is returned in the output, never applied invisibly.** `alphanumeric-only`
@@ -380,6 +380,20 @@ measurement on IETF errata, from work outside this repository; it is not re-deri
 and it carries no weight here. Everything above is measured on this corpus, with its script
 and its output committed.
 
+**And the premise underneath the whole project is prior art, cited rather than claimed.**
+The thing this repository was built to test — *a green test suite is not evidence of
+correctness* — did not originate here. The motivating observation is
+`github.com/chinmoypaul8897/nistula-assistance-`, public and last pushed **2026-08-18,
+ten days before kickoff**, which documents the multi-agent review gate this project's
+`PROCESS.md` derives from and records **17 blocker-class defects found while the test
+suite was green**. That is the hypothesis. **This project reuses none of its code, data
+or artifacts, and does not re-derive that number** — nothing in `docs/evidence/` measures
+it, it is not checkable from inside this repository, and no claim in this submission rests
+on it. What is new here is the *test*: the same premise put to a different corpus under a
+criterion written before any model ran — 82 Federal Register items, and a criterion this
+project then **failed on all four clauses** and did not move. Full disclosure of what
+pre-existed is [PROVENANCE.md](PROVENANCE.md) §4.
+
 ### What it changes about what we build next
 
 Three things. **Report per-class recall beside every average**, as a default, in every
@@ -507,7 +521,7 @@ CPython 3.12.2; nothing is claimed about other platforms because nothing was mea
 
 | | |
 |---|---|
-| **Reproduce it** | [REPRODUCE.md](REPRODUCE.md) — Tier 1 offline in 15 s for USD 0, Tier 2 live |
+| **Reproduce it** | [REPRODUCE.md](REPRODUCE.md) — Tier 1 offline in 14.42 s and 25.84 s on two runs for USD 0, Tier 2 live |
 | **The pre-registration** | [GOOD.md](GOOD.md) — metric, thresholds, predictions, committed before any result existed |
 | **The iteration cards** | [CHANGELOG.md](CHANGELOG.md) — each committed before its build |
 | **The spec** | [CONTEXT.md](CONTEXT.md) — architect-authored, versioned, outranks the code |

@@ -18,7 +18,7 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 | 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.66 MB** against a 50 MB cap | ✅ re-measured at CH-11, `e01fdfd`: 10,662,339 B, 373 entries |
 | 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
-| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 34 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
+| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 36 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
 | 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
 
 ---
@@ -30,7 +30,7 @@ against a 50 MB cap** — 4.7× under, with 39.3 MB of headroom. Re-measured at 
 last commit; CH-14a measured 10,613,737 B and `docs/evidence/ch14-size/inventory.md`
 10,182,500 B, both at earlier commits.
 
-The repository is 63.62 MB uncompressed. That number is **not** the constraint and was
+The tracked tree at `e01fdfd` is 63.62 MB uncompressed. That number is **not** the constraint and was
 mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): the archive deflates 6×
 overall, and the two largest tracked files deflate 21×. **Nothing is excluded from the
 archive.** The complete trajectory set, the complete frozen corpus and the complete
@@ -50,8 +50,11 @@ python -m venv .venv && .venv/bin/pip install pytest      # stdlib + pytest only
 .venv/bin/python -m pytest -q                             # 314 passed, 28 skipped
 ```
 
-The skips are raw-input-dependent tests: `data/raw/` holds 824 MB of source XML, is
-git-ignored, and is re-fetchable with `python refetch.py`. `python refetch.py
+The skips are raw-input-dependent tests: `data/raw/` holds **1.44 GB** of source XML, is
+git-ignored, and is re-fetchable with `python refetch.py`. *(This read **824 MB** until
+CH-12. Measured: **1,443,366,993 B across 234 files**; 824 MB is the `ecfr/` titles alone,
+824,298,523 B. `REPRODUCE.md` carried both figures at once and this file quoted the wrong
+one. `docs/evidence/ch12/corpus-size.txt`.)* `python refetch.py
 --verify-only` checks the frozen corpus against its SHA-256 manifest **with no network**
 — 18/18 files.
 
@@ -60,7 +63,7 @@ git-ignored, and is re-fetchable with `python refetch.py`. `python refetch.py
 | what | where |
 |---|---|
 | every model, tool and agent, with what each did | [`AI-USE.md`](AI-USE.md) |
-| one JSONL per agent run — 34 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
+| one JSONL per agent run — 36 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
 | the exact instructions shaping each evaluation arm | [`agents/`](agents/) |
 | every chunk prompt, committed verbatim as issued | [`prompts/`](prompts/) |
 | per-call tokens, wall-clock and imputed USD | `docs/evidence/runs/cost_ledger.csv` |

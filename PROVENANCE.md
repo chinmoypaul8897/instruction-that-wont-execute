@@ -25,7 +25,7 @@ This includes:
 
 **2026-08-27, approximately 21:45 UTC — seventeen hours before kickoff.**
 
-- `scraper/` — Playwright recon scripts written to read the **public** HackerEarth challenge page.
+- `scraper/recon.cjs`, `sections.cjs`, `sections2.cjs`, `mapimg.cjs`, `slice.cjs` — Playwright recon scripts written to read the **public** HackerEarth challenge page, with their npm tooling (`package.json`, `package-lock.json`, `node_modules/`). That is **8 of `scraper/`'s 43 entries**. **The other 35 were written AFTER kickoff** — 2026-08-29, 03:13–06:21 UTC, twelve to fifteen hours past the 15:00 UTC line — and they are `portfolio.cjs`, `work.cjs`, `li.cjs`, `hn.cjs`, `he.mjs`, `rd.mjs`, `rd2.mjs` and 28 page dumps, which read the **operator's own** portfolio, LinkedIn and blog into `context/me/` and public commentary on the challenge into `rd_*.txt`. **Corrected at CH-12**, because dating all 43 to before kickoff is exactly the kind of claim ground rule 02 exists to make checkable. None of the 35 is problem work, none is reused, and `scraper/` is git-ignored in its entirety — so the substance of this section is unchanged and only its dating was wrong.
 - `context/00-MASTER-CONTEXT.md` — an extraction of that public page, including content that was only present inside images (the rubric weights, the timeline, the registration deadline).
 
 **Why this is not problem-specific work:** the problem did not exist yet. The brief was released at kickoff. Nothing produced before 15:00 UTC on 2026-08-28 could have addressed the actual task, and nothing in `scraper/` is part of the submitted system — it is excluded from the repository by `.gitignore`.
@@ -40,7 +40,7 @@ This includes:
 
 | Artifact | What it is |
 |---|---|
-| `context/03-IDEA-REVIEW-VERDICT.md` | 15 agents attacking the first candidate. It died. |
+| `context/03-IDEA-REVIEW-VERDICT.md` | 13 agents attacking the first candidate — 5 hostile critiques, 2 alternative passes, 6 rubric scorings, counted from `context/03b-review-raw.json`. It died. |
 | `context/04-STRATEGY-BRIEF.md` | Research on the judging organisation and the competitive field. |
 | `context/05-FINAL-DECISION.md` | A five-way design tournament. |
 | `context/06-DIVERGENT-RESEARCH.md` | 143 candidate projects generated from 18 angles. **All 143 died.** |
@@ -61,7 +61,13 @@ This includes:
 
 **The method is prior art and is not claimed as new here.** What is new is its application to this problem, and the process file itself was rewritten for this project's constraints.
 
-The `nistula-assistance-` result is cited in this project's README as the *motivating hypothesis* for why a green test suite is insufficient evidence — never as a result of this project. No code, data, or artifact from either repository is reused here.
+The `nistula-assistance-` result is cited in this project's README — [`README.md` §f, "the premise underneath the whole project is prior art"](README.md) — as the *motivating hypothesis* for why a green test suite is insufficient evidence, never as a result of this project. No code, data, or artifact from either repository is reused here.
+
+**Correction, 2026-08-31 (CH-12). The sentence above was FALSE from the day it was written until the commit that carries this note.** It asserts something about the contents of another file, and that file did not contain it: `README.md` held **zero** occurrences of `nistula`, of `17 blocker` and of `github.com`. The cause is ordinary and worth naming — **this section was written before `README.md` existed.** `git log --diff-filter=A` puts this file's first commit at `3ac8207`, **2026-08-30 18:03:46 +0530**, and the sentence is in that first version (`git show 3ac8207:PROVENANCE.md | grep -ci nistula` → 2); `README.md` was created at `67a5206`, **2026-08-31 11:36:59 +0530**, **17 h 33 min later**. The sentence described what the author intended the README to say, and nobody ran the grep. **One `grep -c` falsifies it**, and a disclosure claim under ground rule 02 is exactly the kind of claim a judge is entitled to check.
+
+Two lawful repairs existed: make the README cite it, or correct this file to say it does not. **The first was taken** — the citation is real, it is in the README's hot-take section beside the other prior-art credit, and it states in terms that the 17-defect number is *not* re-derived here and carries no weight here. Re-verified after the edit: `grep -ci nistula README.md` = **1**, `grep -ci '17 blocker' README.md` = **1**, `grep -ci github.com README.md` = **1**. `acumen` remains **0** and is not claimed above. Evidence: [`docs/evidence/ch12/`](docs/evidence/ch12/).
+
+*This is the third correction in this file, and the pattern in all three is the same: a sentence about the work, written once, never re-checked against the thing it describes.*
 
 ---
 
@@ -90,7 +96,7 @@ The extraction is faithful on every load-bearing element. Recorded here because 
 | CFR / Federal Register / eCFR data from govinfo.gov | **Public domain, 17 U.S.C. §105** | the corpus |
 | Python standard library | PSF | the scorer, deliberately dependency-free |
 | Anthropic API — `claude-haiku-4-5-20251001` | commercial, per terms | every evaluation arm. Temperature 0 on all of them **except `B0prime`, which ran at temperature 1.0** — best-of-3 self-consistency at 0 draws the same deterministic sample three times, so the control could not exist at 0 (`QUESTIONS.md` Q22). |
-| Anthropic API — `claude-sonnet-5` | commercial, per terms | the model-sensitivity subset only, which was **WITHDRAWN** as a harness defect — `QUESTIONS.md` Q19. No claim in this submission rests on it. Also the four rows of the model-id probe. |
+| Anthropic API — `claude-sonnet-5` | commercial, per terms | the model-sensitivity subset only, which was **WITHDRAWN** as a harness defect — the architect's ruling *"MODEL-SENSITIVITY CHECK - WITHDRAWN, 2026-08-31"*, recorded in `QUESTIONS.md` under **ARCHITECT RULINGS — 2026-08-31** (not Q19, which is the CH-03 escalation). No claim in this submission rests on it. Also the four rows of the model-id probe. |
 | Claude Code | commercial, per terms | wrote this project — see `AI-USE.md` |
 
 **Correction, 2026-08-31 (CH-11c).** An earlier version of this file named

@@ -1,0 +1,36 @@
+CH-12 - CORPUS SIZE, MEASURED
+==============================================================================
+root: data/raw
+
+subdirectory  files  bytes
+------------------------------------------------------------------------------
+cfr/            110  349,679,334 B  =  349.68 MB (10^6)  =  0.350 GB (10^9)   [333.48 MiB, 0.326 GiB]
+ecfr/            50  824,298,523 B  =  824.30 MB (10^6)  =  0.824 GB (10^9)   [786.11 MiB, 0.768 GiB]
+fr/              74  269,389,136 B  =  269.39 MB (10^6)  =  0.269 GB (10^9)   [256.91 MiB, 0.251 GiB]
+(loose)           0  0 B  =  0.00 MB (10^6)  =  0.000 GB (10^9)   [0.00 MiB, 0.000 GiB]
+------------------------------------------------------------------------------
+TOTAL           234  1,443,366,993 B  =  1,443.37 MB (10^6)  =  1.443 GB (10^9)   [1,376.50 MiB, 1.344 GiB]
+sums check: 1,443,366,993 + 0 == 1,443,366,993  OK
+
+THE DISCREPANCY, RESOLVED
+------------------------------------------------------------------------------
+  claimed in REPRODUCE.md and SUBMISSION.md : 824 MB
+  data/raw/ecfr/ alone                      : 824,298,523 B  =  824.30 MB (10^6)  =  0.824 GB (10^9)   [786.11 MiB, 0.768 GiB]
+  data/raw/ (the whole tree)                : 1,443,366,993 B  =  1,443.37 MB (10^6)  =  1.443 GB (10^9)   [1,376.50 MiB, 1.344 GiB]
+  understatement                            : 619,068,470 B  (1.75x)
+  REPRODUCE.md's own later table            : 1,443,366,993 B = 1.44 GB
+  matches this measurement                  : YES
+
+AND THE THIRD NUMBER - CONTEXT.md section 8's 824,289,052 B
+------------------------------------------------------------------------------
+  data/raw/ecfr/*.xml            :  49 files      824,289,052 B
+  data/raw/ecfr/_govinfo_index.json                       9,471 B
+  data/raw/ecfr/ total           :  50 files      824,298,523 B
+  CONTEXT.md section 8 claims    :                 824,289,052 B
+  gap                            :                       9,471 B
+  gap explained by the non-XML file(s) above : YES - the XML titles alone match CONTEXT.md to the byte
+
+data/ as a whole: 258 files, 1,461,641,195 B  =  1,461.64 MB (10^6)  =  1.462 GB (10^9)   [1,393.93 MiB, 1.361 GiB]
+data/ minus data/raw/ (the FROZEN, tracked corpus): 18,274,202 B  =  18.27 MB (10^6)  =  0.018 GB (10^9)   [17.43 MiB, 0.017 GiB]
+
+data/ was not modified by this script. It is opened read-only (hard rule 11).

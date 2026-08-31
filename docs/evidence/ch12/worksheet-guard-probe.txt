@@ -1,0 +1,30 @@
+WORKSHEET SELF-CONTAINMENT GUARD - PROBE
+========================================================================
+page   : docs/worksheet/index.html  (80,883 B)
+guards : no_external_resource_reference, scheme_strings_are_corpus_text_only, scheme_strings_that_do_occur_are_inert
+
+BASELINE - the shipped page, unmodified
+scheme strings rendered as corpus text: 1
+  guards that rejected it : none
+  PASS - the shipped page must pass every guard
+
+INJECTIONS - each must be rejected by at least one guard
+------------------------------------------------------------------------
+scheme strings rendered as corpus text: 2
+  cdn script tag                         CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  google fonts stylesheet                CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 1
+  protocol-relative image                CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only']
+scheme strings rendered as corpus text: 2
+  css @import                            CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  css url() background                   CAUGHT  by ['no_external_resource_reference', 'scheme_strings_are_corpus_text_only', 'scheme_strings_that_do_occur_are_inert']
+scheme strings rendered as corpus text: 2
+  corpus url made into a live link       CAUGHT  by ['no_external_resource_reference', 'scheme_strings_that_do_occur_are_inert']
+------------------------------------------------------------------------
+injections caught : 6
+injections MISSED : 0
+success + failure == n : 6 + 0 == 6  OK
+
+VERDICT: PASS - the guard flips: it passes the real page and rejects every injection

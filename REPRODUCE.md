@@ -85,13 +85,30 @@ four-clause verdict against `GOOD.md` §4's frozen success criterion, and all fo
 316 passed, 26 skipped
 ```
 
-The 26 skips are the tests that need `data/raw/` — 824 MB of source XML that is
+The 26 skips are the tests that need `data/raw/` — **1.44 GB** of source XML that is
 git-ignored. They skip rather than fail, and `refetch.py` brings them back. **From the
 extracted submission zip the count is `314 passed, 28 skipped`** — two more, both in
 `tests/test_size_guard.py`, which inspects the live repository and carries its own
 reason string: *"not a git work tree (an extracted submission zip is a plain
 directory)"*. Both counts are recorded in
 `docs/evidence/ch14-clean-clone/rehearsal.txt`.
+
+> **Corrected at CH-12.** The sentence above read **824 MB** until 2026-08-31. Measured,
+> `data/raw/` holds **1,443,366,993 B = 1.44 GB** across 234 files; **824 MB is the
+> `ecfr/` titles alone** (824,298,523 B), and the whole tree is **1.75×** that. **The
+> right figure was already in this file** — the per-subdirectory table further down,
+> under *"`data/`, `data/raw/`, and rebuilding the corpus"*, has said 1.44 GB all along
+> and explains the 824 MB in the next paragraph. So this document contradicted itself,
+> and **the wrong half is the one that got quoted onward** into `SUBMISSION.md`. Neither
+> figure was deleted; both are here with what each measures. Generating script and
+> committed output: `docs/evidence/ch12/measure_corpus.py` →
+> `docs/evidence/ch12/corpus-size.txt`.
+>
+> The same measurement clears a **third** number that looks like a fourth
+> disagreement and is not. `CONTEXT.md` §8 says *"49 titles, 824,289,052 B"*, which is
+> 9,471 B short of `data/raw/ecfr/`. Traced: `data/raw/ecfr/` holds **50** files — the
+> 49 title XMLs, which come to **824,289,052 B and match `CONTEXT.md` to the byte**,
+> plus `_govinfo_index.json` at exactly **9,471 B**. **Reconciled, not rounded.**
 
 ## The fifth command, if you want the model-free baseline too
 
@@ -173,7 +190,7 @@ refuses to start a run that would take total spend past **USD 18.00**.
 | | |
 |---|---|
 | **Model** | **`claude-haiku-4-5-20251001`** — dated, never the floating alias. |
-| **Temperature** | **0** on every arm **except `B0prime`**, which runs at **1.0**. Self-consistency at temperature 0 is a no-op — three deterministic samples are the same sample — so the control could not exist at 0. `B0prime`@0 **is** B0-agent and is reported using the 0.6585 it already has. The deviation from `GOOD.md` §8 is declared in `src/arms.py::run_b0prime`'s own docstring and ruled in `QUESTIONS.md` **Q22**. It is the only arm in the packet not at temperature 0. |
+| **Temperature** | **0** on every arm **except `B0prime`**, which runs at **1.0**. Self-consistency at temperature 0 is a no-op — three deterministic samples are the same sample — so the control could not exist at 0. `B0prime`@0 **is** B0-agent and is reported using the 0.6585 it already has. The deviation from `GOOD.md` §8 is declared in `src/arms.py::run_b0prime`'s own docstring and ruled in `QUESTIONS.md` **Q22**. It is the only arm in the primary matrix not at temperature 0. |
 | **Delivery** | standard, not batch. Recorded per ledger row, so the doubled unit price is visible. |
 | **Retries** | 3, on 429/5xx and transport errors only. A 400 or a 404 is a real answer and is not retried. |
 | **Item order** | sorted by `item_id`, identical for every arm and every rep. |

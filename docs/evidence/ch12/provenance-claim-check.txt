@@ -1,0 +1,45 @@
+CH-12 - PROVENANCE.md SECTION 4, THE DISCLOSURE CLAIM, CHECKED
+====================================================================================
+Claim: the `nistula-assistance-` result is cited in this project's README
+       as the motivating hypothesis for why a green test suite is
+       insufficient evidence.
+
+term                  at HEAD  working tree   required?   meaning
+--------------------------------------------------------------------------------------------------------------
+nistula                     0             1   REQUIRED     the repository the claim names is cited
+acumen                      0             0   -            the OTHER prior-art repository is cited - NOT required by the claim
+17 blocker                  0             1   REQUIRED     the defect count the claim calls the motivating hypothesis is cited
+github.com                  0             1   REQUIRED     some GitHub repository is cited at all
+chinmoypaul                 0             1   -            the operator's own namespace is cited
+green test suite            1             2   -            the hypothesis is stated in the README's own words
+--------------------------------------------------------------------------------------------------------------
+required terms present : 3
+required terms ABSENT  : 0
+success + failure == n : 3 + 0 == 3  OK
+
+VERDICT on the working tree : the §4 sentence is TRUE
+VERDICT at HEAD             : the §4 sentence is FALSE
+   (these differ until the fixing commit lands; that is the point of printing both)
+
+WHERE THE CITATION SITS IN THE README
+------------------------------------------------------------------------------------
+  README.md:386: `github.com/chinmoypaul8897/nistula-assistance-`, public and last pushed **2026-08-18,
+  README.md:388: `PROCESS.md` derives from and records **17 blocker-class defects found while the test
+
+WHY IT WAS WRONG - the file asserted this before the file it asserts about existed
+------------------------------------------------------------------------------------
+  PROVENANCE.md    created: 3ac8207  2026-08-30 18:03:46 +0530  chore: spec, process and provenance (unreviewed)
+  README.md        created: 67a5206  2026-08-31 11:36:59 +0530  CH-11: README.md - deliverable 1, and it leads with the four clauses the criterion did not meet (unreviewed)
+  the sentence is in PROVENANCE.md's FIRST commit: 2 occurrence(s) of 'nistula' at 3ac8207
+
+WHAT THIS SCRIPT DOES NOT AND CANNOT CHECK
+------------------------------------------------------------------------------------
+  The external repository itself. No network call is made here, by policy,
+  and nothing in this repository re-derives the 17-defect count. It is
+  PRIOR ART, cited; it is not a result of this project and no claim in
+  this submission rests on it. A reader who wants that number verified
+  must go to the cited repository - which is exactly what a citation is
+  for, and exactly why the README says the number carries no weight here.
+
+PROVENANCE.md mentions 'nistula' 5x and 'acumen' 2x
+PROVENANCE.md carries 3 dated corrections (grep '^\*\*Correction' + '^\*\*A second correction')

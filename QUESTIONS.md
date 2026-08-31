@@ -804,8 +804,8 @@ reason this entry does not rest on n. Per-document *completeness* is
 | **attribution >= 0.90** and yet excluded by the completeness floor | **36** |
 | `parse_rate < 0.90` | 68 / 68 |
 
-Three excluded documents have attribution **1.0000** - perfect - and fail purely on
-parse rate (`2011-12279` 0.4167, `2020-17549` 0.6111, `2024-30575` 0.2500).
+Four excluded documents have attribution **1.0000** - perfect - and fail purely on
+parse rate (`2024-31513` 0.0000, `2011-12279` 0.4167, `2020-17549` 0.6111, `2024-30575` 0.2500).
 
 **And the ruling that created this situation says the parse half does not belong here.**
 Q11, verbatim: *"only 46 of 2,913 unparsed elements (1.6%) are our defect. Parse shape
@@ -1246,7 +1246,7 @@ live referents in this repository and they are 18.3 pp apart:
 
 Reading (a) is nearly free — B0-agent already clears it at 0.6585 without any capability
 at all, which is a strong argument that (a) is *not* what a prediction about a new
-capability could have meant. Reading (b) is demanding, and is 0.85 higher than the
+capability could have meant. Reading (b) is demanding, and is 0.0485 higher than the
 **0.81** the CH-06 Iteration 2 card commits to.
 
 ### The ruling taken, under hard rule 1
@@ -1741,7 +1741,7 @@ retracted with it** — the duplicate work was already in flight.
 |---|---|
 | `A1-minus-tool` | run **twice**, 82 items each — 164 ledger rows |
 | `B0prime` | run **twice**, 246 samples each — 492 ledger rows |
-| **Wasted spend** | **~USD 1.43** of the 18.00 ceiling |
+| **Wasted spend** | **~USD 1.41** of the 18.00 ceiling |
 | **Ledger integrity** | **651 `run_id` values now appear twice.** `run_id` was intended to be unique. |
 
 The ledger is **append-only and both runs' rows are kept**, so the *money* is reported
@@ -1793,7 +1793,7 @@ repository whose entire thesis is that the recorded thing is the only thing that
    component that must not lose a record, and it currently can.
 2. **`verify_bundles.py` should run as a CH-12 gate.** It caught this, and it caught two
    other silent bundling defects in the same session.
-3. The **~USD 1.43** is spent and is not recoverable; remaining headroom against the
+3. The **~USD 1.41** is spent and is not recoverable; remaining headroom against the
    18.00 ceiling is reported in `a1-result.txt` from the ledger.
 
 ---
