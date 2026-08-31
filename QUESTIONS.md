@@ -2679,3 +2679,141 @@ Two things that reading earned:
 3. The `824 MB` / `1.44 GB` error is **already on `PROGRESS.md`'s corrected-findings table
    as fixed** and is still live in two shipping files. That is the Q35 shape again: a
    defect recorded as remediated and not actually remediated.
+
+---
+
+### Q39 UPDATE at CH-12 — the 57 were re-verified against the current files, and 54 still stand
+
+**Appended 2026-08-31 by CH-12. The Q39 entry above is not edited.**
+
+CH-12 was sanctioned to work the standing findings whose fix is a one-line factual
+correction inside its fence. Before touching anything it **re-verified all 75**, one
+read-only auditor per shipping file, each re-running the original auditor's check
+against the working tree rather than against the sweep report — hard rule 15 applied to
+the project's own evidence.
+
+| | count |
+|---|---:|
+| findings re-verified | **75** |
+| **ALREADY FIXED** since the sweep (CH-11c's five, plus two more) | **7** |
+| **CANNOT REPRODUCE** — the sweep's own claim does not hold on re-check | **14** |
+| **STILL STANDING** | **54** |
+| of those, inside CH-12's fence | **42** |
+| of those, a one-line factual correction | **26** |
+| **FIXED AT CH-12** | **26** |
+| standing, in-fence, needing a rewrite or an architect ruling | **16** |
+| standing, outside every fence (`CHANGELOG.md`, `SAFETY.md`, `THIRD-PARTY.md`) | **12** |
+
+**The sweep's 57 is now 54, and the three that fell are recorded rather than dropped.**
+14 findings did not reproduce — mostly present-tense claims that a later commit made
+false, and two the sweep simply got wrong. A finding that survived one refuter and then
+failed re-verification is the system working, not the system embarrassed.
+
+**What was fixed and what was left is in CH-12's commit and in `PROGRESS.md`.** The 16
+in-fence rewrites were left because each changes meaning rather than a value — an
+ablation's stated motivation, a class's prose enumeration, a stale usage table whose
+replacement figures exist but whose surrounding argument would have to be re-derived.
+**They are not cosmetic and they are not done.**
+
+**Three of the sharpest are worth naming here**, because they are the ones a judge would
+find:
+
+1. **`AI-USE.md`'s SPEC-FIX-2 and CH-02 usage tables disagree with the artifacts they
+   cite on every row** — turns, output tokens, cache reads, imputed cost. The artifacts
+   are right; the tables are a pre-closing snapshot. Fixing them means re-deriving three
+   downstream ratios, so it is a rewrite and not a swap.
+2. **`CHANGELOG.md`'s Iteration 1 card quotes a missed-defect rate of `0.4737`**, which
+   is the **withdrawn** n=76 checkpoint figure; the live figure is `0.4878`, and the
+   EVIDENCE cell of the same row already says `0.4878`. `CHANGELOG.md` is outside every
+   fence and the card is a dated pre-registration, so this needs an architect ruling on
+   whether a card may carry an erratum.
+3. **`SAFETY.md`'s network-boundary sentence** — the one that answers ground rule 04 —
+   names only `src/apiclient.py` and `refetch.py` as the components that reach the
+   network. `src/a1.py` opens its own connection to the Messages API. `SAFETY.md` is in
+   no chunk's fence.
+
+---
+
+## Q40 - the trajectory selection rule names an agent class that has no trajectories
+
+**Raised at CH-12, 2026-08-31. Not blocking; the rule was published anyway, with the gap
+stated inside the rule itself.**
+
+`prompts/CH-12.md` §2 clause 1 asks for *"one trajectory per **agent class** — build
+sessions, evaluation arms, adversarial audits"*. Two of those three have a directory
+under `docs/trajectories/`. **The third does not.**
+
+| class | trajectories on disk |
+|---|---|
+| build sessions | `docs/trajectories/build/` — **11** JSONL |
+| evaluation arms | `docs/trajectories/arms/` — **15** JSONL |
+| **adversarial audits** | **none** |
+| *(a fourth class the clause does not name)* | `docs/trajectories/probe/` — **10** JSONL |
+
+The adversarial-audit class is **86 subagents** — SPEC-FIX-1's panel of ten, NIGHT-RUN's
+two CH-03 gate reviewers, CH-06's one CH-04 gate reviewer, CH-11's 52-agent workflow and
+CH-11c's 21-agent workflow. Their per-agent records live in the Claude Code **workflow
+journal**, which is outside this repository and which `tools/export_session.py` does not
+capture: the exporter captures a *session*, and a subagent is not a session. What is
+committed instead is the **verbatim** transcription of every agent's finding, generated
+from the journal rather than summarised by hand —
+`docs/evidence/ch11c-sweep/ch11c-agent-sweep.md` is the fullest example, and
+`docs/reviews/` carries the gate reviewers' reports with their runnable probes.
+
+**Why this is not repaired by wording.** The brief asks that each trajectory be *"easy to
+follow from the agent instructions to the final result"*. For the audit class the
+instructions are in the workflow script, the intermediate tool calls are in the journal,
+and only the endpoints ship. **That is a genuine partial gap in deliverable 4, and it is
+stated in `docs/trajectories/SELECTION-RULE.md` and `AI-USE.md` rather than papered
+over.**
+
+**For the architect:** should a future chunk export the workflow journals into
+`docs/trajectories/audit/`? They are on disk now. The cost is size and one more export
+path; the gain is that the largest agent class stops being the only one a reader cannot
+replay.
+
+---
+
+## Q41 - three prompt cards are untracked, and `prompts/` is protected in every fence that could add them
+
+**Raised at CH-12, 2026-08-31. Conservative option taken: not added.**
+
+`git status` reports `prompts/CH-11.md`, `prompts/CH-11c.md` and `prompts/CH-12.md` as
+**untracked**. Every other chunk card is committed verbatim, and `AI-USE.md` says in
+terms that a session runs under *"a per-chunk prompt committed verbatim in `prompts/`"*.
+`THIRD-PARTY.md` states there is *"one exception"*; there are three.
+
+**No session can fix this.** CH-11's, CH-11c's and CH-12's scope fences all list
+`prompts/` as **protected read-only**, which is correct — a committed prompt is a dated
+record of what was asked for, and a build session should not be able to write one. The
+consequence is that the three most recent cards, including the one that ordered this very
+correction, are the three a judge cannot read.
+
+**For the architect:** `git add prompts/CH-11.md prompts/CH-11c.md prompts/CH-12.md` is a
+one-line operator action outside any session's fence. Until then `THIRD-PARTY.md`'s
+"one exception" is wrong by two, and that is recorded here rather than silently corrected
+in a file outside this chunk's fence.
+
+---
+
+## Q42 - `NIGHT-RUN-FINAL.jsonl` is exported, shipped, and disclosed nowhere
+
+**Raised at CH-12, 2026-08-31. Named in `AI-USE.md` and `docs/trajectories/INDEX.md` by
+this chunk; the underlying convention question stands.**
+
+`docs/trajectories/build/` holds **11** JSONL against **10** session entries in
+`AI-USE.md`, and the extra file is `NIGHT-RUN-FINAL.jsonl` (3,696,750 B). The night run
+was exported **twice** — once at the CHECKPOINT and once at the end — and only the first
+export was named anywhere. A reader counting sessions from `AI-USE.md` and files from the
+directory gets 10 against 11 and cannot tell which is wrong.
+
+CH-12 names both exports in `docs/trajectories/INDEX.md` and counts the night run as
+**one session with two exports**, which is what it was. **The question left open is
+whether a re-export should replace its predecessor or sit beside it.** CH-02 took the
+other choice — re-exported in place, one file — and the consequence was a stale
+`644 lines / 1,574,519 B` in `AI-USE.md` that survived four rewrites of that file and is
+corrected at this chunk. **Neither convention is written down.**
+
+**For the architect:** `tools/export_session.py` should either overwrite or suffix, and
+`docs/trajectories/build/README.md` should say which. Right now it does both, in
+different chunks, and the trajectory count disagrees with the session count as a result.
