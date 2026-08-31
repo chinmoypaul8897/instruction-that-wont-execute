@@ -1473,3 +1473,57 @@ This is the same shape as `QUESTIONS.md` Q16 and Q19: a pre-registered quantity 
 corpus or the clock cannot deliver. The response is identical — **the pre-registration is
 not moved, the shortfall is named wherever the number is quoted, and the reason is
 stated.**
+
+### Q24 — **RETRACTED IN FULL, 2026-08-31 02:58 UTC, seven minutes after it was written**
+
+**The entry above rests on a number I did not measure, and the number is wrong by a
+factor of eight.** The entry is kept, unedited, because this repository does not delete
+false statements it has published — it retracts them beside themselves (`PROVENANCE.md`,
+and the CH-03 round-2 retractions).
+
+**What I claimed:** *"A1 rep 1 took ~1 h 55 min for 82 items"*, and therefore that three
+reps would land near 10:05 UTC against a 10:00 hard stop.
+
+**What is true, measured from `docs/evidence/runs/cost_ledger.csv`'s own
+`wall_clock_s` column:**
+
+| Arm | Rows | Total wall clock | Mean per item |
+|---|---:|---:|---:|
+| `A1` rep 1 | 82 | **~13.9 min** | 10.18 s |
+| `A1-iter1` | 82 | 12.7 min | 9.32 s |
+
+**Three A1 reps take about 42 minutes, not 5 h 45 min.** At the moment Q24 was committed
+the UTC time was **02:57**, not the ~06:20 I had assumed. There was never a schedule
+problem. **Q24 solved a problem that did not exist.**
+
+### How the error was made, since that is the part worth keeping
+
+I never read a clock. I estimated elapsed time from the *number of things I had done*
+since the session began — an accumulating sense that a lot of work had happened, therefore
+a lot of time had passed — and then reasoned confidently from that fabricated quantity to
+a scheduling decision. `date -u`, which would have cost one command and two seconds, was
+run only when I happened to append it to an unrelated call.
+
+**This is hard rule 15 — verify before you relay — turned on my own inference rather than
+on another agent's claim,** and hard rule 17's *"if you catch yourself reasoning 'this is
+probably fine, and checking is slow', that is the signal to check."* The ledger has
+carried a `wall_clock_s` column since CH-00 precisely so that this question is answerable
+by measurement. I did not look at it until after I had committed a ruling based on
+guessing it.
+
+### What stands and what falls
+
+**FALLS:** the premise, the 09:30 deadline, and the entire contingency. **All three A1
+reps run to completion as `GOOD.md` §8 requires.** There is no deviation from the
+pre-registration on rep count, and none is claimed.
+
+**STANDS, and is kept as a live commitment:** the report will still publish **how many of
+the 82 items rep 1 and rep 2 disagreed on**. That measurement was proposed for the wrong
+reason and is worth having for the right one — it is the only direct evidence in the
+packet of how deterministic a temperature-0 tool-using arm actually is, and `B0`'s
+non-identical reps (`0.4756, 0.4756, 0.4634`) show the question is not rhetorical.
+
+**Also stands:** the principle Q24 was written to defend — that a choice about which data
+to report is made in advance or not at all. Nothing about the reasoning was wrong except
+the fact it was built on, which is the more dangerous of the two ways to be wrong,
+because it is the one that feels rigorous.
