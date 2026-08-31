@@ -164,8 +164,50 @@ than blocking.
    attributing the restricted-set pre-registration to `GOOD.md` §11, which says the
    opposite (Q32).
 
+- **Measured usage** (from the session transcript's own `usage` records, 320
+  assistant turns — measured, not estimated from character counts). **Snapshot taken
+  at export time**; the session continues for the final commit and push, so the true
+  totals are marginally higher. Regenerate with
+  `python docs/evidence/ch00_session_cost.py --session-id <uuid>`:
+
+  | | tokens |
+  |---|---|
+  | output | 361,822 |
+  | input, uncached | 640 |
+  | input, cache write | 838,411 |
+  | input, cache read | 84,111,529 |
+  | **total input** | **84,950,580** |
+
+- **Imputed cost — the build subscription is flat-cost to the operator, so this is an
+  imputation and is labelled one (never `$0`):**
+
+  | Basis | USD |
+  |---|---|
+  | Upper bound — all input at full list, no cache discount | **433.798450** |
+  | Cache-adjusted — cache write at 1.25×, cache read at 0.10× input list | **56.344583** |
+
+  Both are printed because the second rests on cache multipliers that were **not**
+  re-verified against the published table this session, and an unverified multiplier is
+  a claim rather than a measurement (hard rule 15). The upper bound rests on no
+  assumption at all.
+
+- **The 2,625,778 subagent tokens of the audit are NOT in the figures above.**
+  `ch00_session_cost.py` reads one transcript; the 52 audit agents have their own, under
+  `subagents/workflows/wf_44b0dd6c-5e5/`. Counted together the session is roughly
+  87.9 M tokens. Stated rather than left for a reader to discover a gap between two
+  numbers this file publishes.
+
+- **This session's spend is not charged against the USD 18 ceiling in `src/runlog.py`.**
+  That ceiling governs the paid API used by the evaluation arms (`QUESTIONS.md` Q1);
+  build-session cost is a flat subscription and is reported here for disclosure, not
+  budgeting. **The ceiling's own counter did not move: USD 11.6323, ledger
+  byte-identical.**
+
 **Trajectory:** `docs/trajectories/build/CH-11.jsonl`, exported by
-`tools/export_session.py` (hard rule 10, end-of-session duty 6).
+`tools/export_session.py` (hard rule 10, end-of-session duty 6). 987 lines,
+2,456,849 bytes. Scrubber counts printed with every zero explicit: **0 credential
+substitutions of any class, 0 operator-contact substitutions, 3 `KEY=value` env values
+redacted, 1,091 home paths rewritten to `~`, 0 lines that stopped being valid JSON.**
 
 ### CH-14a · 2026-08-31 · Claude Code · `claude-opus-5` (1M context) · BUILD · **PACKAGING — and the blocker was never a blocker**
 
