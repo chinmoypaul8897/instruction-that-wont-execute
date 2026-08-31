@@ -40,7 +40,7 @@ Trajectory files considered: **38** across **3** directories (`arms` 15, `build`
 | `build` | `CH-06.jsonl` | 2,302,522 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `build` | `CH-11.jsonl` | 2,456,849 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `build` | `CH-11c.jsonl` | 1,799,806 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
-| `build` | `CH-12.jsonl` | 2,801,859 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
+| `build` | `CH-12.jsonl` | 4,019,792 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `build` | `CH-13A.jsonl` | 3,916,288 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `build` | `CH-14a.jsonl` | 1,632,439 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `build` | `NIGHT-RUN-CHECKPOINT.jsonl` | 3,123,874 | - | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
@@ -58,7 +58,7 @@ Trajectory files considered: **38** across **3** directories (`arms` 15, `build`
 | `probe` | `probe-model-id__claude-sonnet-5__20260830T203738.jsonl` | 1,598 | 1 | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 | `probe` | `probe-model-id__claude-sonnet-5__20260830T203745.jsonl` | 1,599 | 1 | 0.0000 | **NOT SELECTED BY ANY CLAUSE** |
 
-**Selected: 17 of 38 files (23,347,415 B of 50,336,130 B = 46.4%). Not selected: 21.** `17 + 21 == 38`.
+**Selected: 17 of 38 files (23,347,415 B of 51,554,063 B = 45.3%). Not selected: 21.** `17 + 21 == 38`.
 
 ## Does T3 still select every arm file?
 
@@ -86,13 +86,13 @@ Trajectory files considered: **38** across **3** directories (`arms` 15, `build`
 
 ## What curation would save, measured inside the archive
 
-`git archive --format=zip HEAD` is **14,659,507 B = 14.66 MB** against a **50 MB** cap (3.41x under, 35.34 MB of headroom).
+`git archive --format=zip HEAD` is **14,670,426 B = 14.67 MB** against a **50 MB** cap (3.41x under, 35.33 MB of headroom).
 
 | | files | raw B | compressed B | share of the upload |
 |---|---:|---:|---:|---:|
 | selected | 17 | 23,347,415 | 3,890,842 | 26.5% |
-| **NOT selected** | 21 | 26,988,715 | 7,553,886 | **51.5%** |
+| **NOT selected** | 21 | 28,206,648 | 7,553,886 | **51.5%** |
 
-Dropping every unselected file would take the upload from **14.66 MB** to **7.11 MB**, against a cap it already clears by **35.34 MB**.
+Dropping every unselected file would take the upload from **14.67 MB** to **7.12 MB**, against a cap it already clears by **35.33 MB**.
 
 **So the rule is NOT INVOKED as a filter.** Under T4 the complete set ships, and a superset of the representatives is representative *a fortiori*. Invoking it here would cost real evidence - build-session transcripts are deliverable 4's only trace of how the coding agents were directed - to recover a fraction of an upload that is already far under cap. **That trade is refused.**

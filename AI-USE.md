@@ -26,7 +26,7 @@ landed, and what is worth opening the file for. The curation rule is
 | **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` | **yes** — bundled; `per-item/` is git-ignored and its every record is in the bundle |
 | **Probe** | the model-id probe that checked a claim the chunk card pre-registered as fact | **10** runs | `docs/trajectories/probe/probe-model-id__*.jsonl` | **yes** |
 
-**38 trajectory files, 50.34 MB at `7223552`, measured by `docs/evidence/ch12/trajectory_facts.py`.** *The figure names a commit because it rises every time a session exports its transcript — it was 36 when CH-12 began and 37 when CH-12 exported its own.*
+**38 trajectory files at `7223552`**, measured by `docs/evidence/ch12/trajectory_facts.py`; the byte total is in `docs/evidence/ch12/trajectory-facts.txt` rather than quoted here, because it grows on every re-export. *The figure names a commit because it rises every time a session exports its transcript — it was 36 when CH-12 began and 37 when CH-12 exported its own.*
 
 ### The adversarial-audit class, in full — 103 subagents, and its cost stated separately
 

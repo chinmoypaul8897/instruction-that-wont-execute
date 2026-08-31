@@ -93,7 +93,7 @@ it fails.
 | test suite | ✅ 316 passed | ✅ 314 passed |
 
 **Secret sweep:** `docs/evidence/secret-scan/scan.txt` — **PASS, 0 findings** across all
-462 text blobs of all 84 commits plus the 39.4 MB of trajectories that existed at the scan commit `263ed29`. **At `7223552` the set is 50.34 MB across 38 files** (`docs/evidence/ch12/trajectory-facts.txt`); the sweep has not been re-run over the difference, and `CH-14b` is the chunk that does it. `.env` is git-ignored,
+462 text blobs of all 84 commits plus the 39.4 MB of trajectories that existed at the scan commit `263ed29`. **At `7223552` the set is 38 files** (byte total in `docs/evidence/ch12/trajectory-facts.txt`, regenerated each commit) (`docs/evidence/ch12/trajectory-facts.txt`); the sweep has not been re-run over the difference, and `CH-14b` is the chunk that does it. `.env` is git-ignored,
 never tracked, never committed on any ref.
 
 ---

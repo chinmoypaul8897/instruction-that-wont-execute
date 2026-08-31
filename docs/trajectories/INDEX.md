@@ -12,8 +12,11 @@ Every size, line count and record span below is measured by
 [`docs/evidence/ch12/trajectory_facts.py`](../evidence/ch12/trajectory_facts.py) →
 [`trajectory-facts.txt`](../evidence/ch12/trajectory-facts.txt).
 
-**38 trajectory files, 50.34 MB, at commit `7223552`. Nothing is curated away — this
-is an index, not a filter.** *Every count here names a commit: the set grows each time a
+**38 trajectory files at commit `7223552`. Nothing is curated away — this is an index,
+not a filter.** The byte total is deliberately **not** inlined here: it grows every time
+a session re-exports, so it is cited rather than quoted —
+[`trajectory-facts.txt`](../evidence/ch12/trajectory-facts.txt) carries it, regenerated
+at each commit. *Every count here names a commit: the set grows each time a
 session exports its transcript, so a bare number would be stale before it was read.*
 
 | class | files | what it is | instructions | result |
