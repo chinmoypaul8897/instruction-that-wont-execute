@@ -84,9 +84,15 @@ def majority(reps: list[dict]) -> dict:
 
 def collect(arm: str, directory: Path) -> tuple[dict, list[dict], int]:
     """All reps of one arm -> (majority predictions, per-rep run dicts, n_reps)."""
+    import re as _re
+    # STRICT: `<arm>-rep<N>.json` and nothing else. The loose glob also matched the
+    # sidecars this pipeline writes - `-rep1-artifacts.jsonl` and B0prime's
+    # `-rep1-votes.json` - and a votes file has no `predictions` key, so it would have
+    # crashed the collector or, worse, been counted as a rep.
+    pat = _re.compile(rf"^{_re.escape(arm)}-rep\d+\.json$")
     runs = []
     for path in sorted(directory.glob(f"{arm}-rep*.json")):
-        if path.name.startswith(f"{arm}-rep") and "artifacts" not in path.name:
+        if pat.match(path.name):
             runs.append(json.loads(path.read_text(encoding="utf-8")))
     if not runs:
         return {}, [], 0
@@ -94,7 +100,14 @@ def collect(arm: str, directory: Path) -> tuple[dict, list[dict], int]:
 
 
 def load_artifacts(arm: str) -> dict[str, dict]:
-    """The LAST rep's emitted notes, for the trace-level analysis."""
+    """The LAST rep's emitted notes, for the trace-level analysis.
+
+    The scored `predicted` column always comes from the MAJORITY across reps; the trace
+    detail can only come from ONE rep, and the last is chosen by a rule rather than by
+    inspection. Where that rep's own verdict differs from the majority the taxonomy says
+    so in `trace_rep_agrees_with_majority`, because a trace explaining a verdict the arm
+    did not report would be a fabricated explanation.
+    """
     paths = sorted(HERE.glob(f"{arm}-rep*-artifacts.jsonl"))
     if not paths:
         return {}
@@ -152,6 +165,92 @@ def ledger_by_arm() -> dict[str, dict]:
             else:
                 a["unknown_cost"] += 1
     return dict(agg)
+
+
+def rep_stability(runs: list[dict], items) -> dict:
+    """How much does this arm move BETWEEN REPS at temperature 0?
+
+    Committed as a live obligation in `QUESTIONS.md` Q24's retraction, and it turns out
+    to matter far more than the retraction expected. A temperature-0 arm is widely
+    assumed deterministic; the checkpoint's three `B0-agent` reps were in fact
+    identical. **A tool-using arm is not**, because the agentic loop varies in how many
+    calls it makes and in what order, and each variation changes the context the next
+    turn is sampled from.
+
+    This is reported because it bounds what the SINGLE-REP arms can carry. `A1-iter1`,
+    `A1-minus-tool` and `B0prime` are 1 rep each by `GOOD.md` §8 / ruling R-01, so any
+    ablation gap smaller than the rep-to-rep spread measured here is inside the noise
+    and must not be read as an effect.
+    """
+    if len(runs) < 2:
+        return {"n_reps": len(runs), "comparable": False}
+    ids = [i["item_id"] for i in items]
+    accs, pairs = [], []
+    for r in runs:
+        p_ = r["predictions"]
+        accs.append(sum(1 for i in items
+                        if normalise_verdict(p_.get(i["item_id"])) == i["label"]) / len(items))
+    for a in range(len(runs)):
+        for b in range(a + 1, len(runs)):
+            pa, pb = runs[a]["predictions"], runs[b]["predictions"]
+            diff = [k for k in ids
+                    if normalise_verdict(pa.get(k)) != normalise_verdict(pb.get(k))]
+            pairs.append({"rep_a": runs[a]["rep"], "rep_b": runs[b]["rep"],
+                          "n_disagree": len(diff), "rate": len(diff) / len(ids)})
+    return {"n_reps": len(runs), "comparable": True,
+            "per_rep_accuracy": accs,
+            "accuracy_spread_pp": 100.0 * (max(accs) - min(accs)),
+            "pairwise": pairs,
+            "max_disagreement_rate": max(p_["rate"] for p_ in pairs)}
+
+
+def tool_use_profile(arts: dict) -> dict:
+    """`plan.md` CH-06's TOOL-AVAILABILITY-VS-TOOL-USE GAP, in three separable layers.
+
+    Availability is not use, and use is not agreement. An arm can hold the tool and
+    never call it; call it and ignore what came back; or call it, disagree with it, and
+    be right to. Only the third layer distinguishes `A1` from `A1-iter1`, because Step
+    2.5 of the v2 skill exists precisely to make the agent OVERRIDE a resolver it has
+    measured to be wrong (`QUESTIONS.md` Q21).
+
+    OVERRIDE is counted only on instructions where the resolver actually asserted
+    something - `designation_exists is True/False`, never `None`, which means nothing
+    was asked and there is nothing to agree or disagree with.
+    """
+    n_items = len(arts)
+    calls = sum(a.get("tool_calls_made", 0) for a in arts.values())
+    zero = sum(1 for a in arts.values() if not a.get("tool_calls_made"))
+    ruled = agree = override_to_fail = override_to_pass = 0
+    override_items = set()
+    for a in arts.values():
+        for t in a.get("resolution_trace", []):
+            mr = t.get("model_ruling") or {}
+            if mr.get("executes") is None or t.get("designation_exists") is None:
+                continue
+            ruled += 1
+            resolver_says_ok = bool(t["designation_exists"])
+            model_says_ok = bool(mr["executes"])
+            if resolver_says_ok == model_says_ok:
+                agree += 1
+            else:
+                override_items.add(a["item_id"])
+                if model_says_ok:
+                    # resolver said the target is ABSENT; the model ruled it EXECUTES.
+                    # This is the Step 2.5 cross-check firing - the shape that recovers
+                    # Q21's false defects.
+                    override_to_pass += 1
+                else:
+                    override_to_fail += 1
+    return {"n_items": n_items, "tool_calls": calls,
+            "calls_per_item": calls / max(1, n_items),
+            "items_with_zero_calls": zero,
+            "instructions_where_resolver_asserted": ruled,
+            "model_agrees_with_resolver": agree,
+            "model_overrides_resolver": ruled - agree,
+            "override_rate": (ruled - agree) / max(1, ruled),
+            "override_toward_EXECUTES": override_to_pass,
+            "override_toward_FAILS": override_to_fail,
+            "items_containing_an_override": len(override_items)}
 
 
 def per_class_recall(items, preds) -> dict:
@@ -299,21 +398,87 @@ def main() -> int:
         w("THE TOOL-AVAILABILITY-VS-TOOL-USE GAP - plan.md CH-06 requires it measured")
         w("=" * 78)
         w("")
+        w("  LAYER 1 - AVAILABILITY vs USE. Did the arm call the tool it was given?")
+        w("")
         w(f"  {'arm':16s} {'tool?':>6s} {'calls':>8s} {'calls/item':>11s} {'items w/ 0 calls':>17s}")
+        profiles = {}
         for a in order:
             arts = load_artifacts(a)
             if not arts:
                 continue
-            calls = sum(x.get("tool_calls_made", 0) for x in arts.values())
-            zero = sum(1 for x in arts.values() if not x.get("tool_calls_made"))
+            pr = tool_use_profile(arts)
+            profiles[a] = pr
             has_tool = "yes" if a in ("A1", "A1-iter1") else "no"
-            w(f"  {a:16s} {has_tool:>6s} {calls:>8d} {calls / max(1, len(arts)):>11.2f}"
-              f" {zero:>13d}/{len(arts)}")
+            w(f"  {a:16s} {has_tool:>6s} {pr['tool_calls']:>8d}"
+              f" {pr['calls_per_item']:>11.2f}"
+              f" {pr['items_with_zero_calls']:>13d}/{pr['n_items']}")
         w("")
-        w("  AVAILABILITY IS NOT USE. An arm holding the tool and not calling it is")
-        w("  measured here rather than assumed away; it is the difference between")
-        w("  shipping a capability and the agent exercising one.")
+        w("  LAYER 2 - USE vs AGREEMENT. When the resolver asserted something about a")
+        w("  designation, did the model's ruling go along with it? Counted only where")
+        w("  designation_exists is true or false - never null, which means nothing was")
+        w("  asked and there is nothing to agree or disagree with.")
         w("")
+        w(f"  {'arm':16s} {'asserted':>9s} {'agree':>7s} {'override':>9s} {'rate':>7s}"
+          f" {'->EXECUTES':>11s} {'->FAILS':>8s}")
+        for a, pr in profiles.items():
+            w(f"  {a:16s} {pr['instructions_where_resolver_asserted']:>9d}"
+              f" {pr['model_agrees_with_resolver']:>7d}"
+              f" {pr['model_overrides_resolver']:>9d}"
+              f" {pr['override_rate']:>6.1%}"
+              f" {pr['override_toward_EXECUTES']:>11d}"
+              f" {pr['override_toward_FAILS']:>8d}")
+        w("")
+        w("  LAYER 3 - WHAT THE OVERRIDES MEAN. `->EXECUTES` is the Step 2.5 cross-check")
+        w("  firing: the resolver said the target is ABSENT and the model ruled the")
+        w("  instruction executes anyway, having checked `siblings` against the section")
+        w("  text. That is the shape that recovers Q21's manufactured false defects, and")
+        w("  the difference between A1 and A1-iter1 on this row is the SKILL's whole")
+        w("  contribution made visible.")
+        w("")
+        w("  AVAILABILITY IS NOT USE, AND USE IS NOT AGREEMENT. An arm can hold the tool")
+        w("  and never call it; call it and ignore the answer; or call it, disagree, and")
+        w("  be RIGHT to. Only the third layer separates a capability that was shipped")
+        w("  from one the agent actually exercised.")
+        w("")
+
+    # ------------------------------------------------------- rep stability
+    w("=" * 78)
+    w("REP-TO-REP STABILITY AT TEMPERATURE 0 - and why it bounds the ablations")
+    w("=" * 78)
+    w("")
+    stab = {}
+    for a in order:
+        if arms[a].get("runs") and len(arms[a]["runs"]) >= 2:
+            st = rep_stability(arms[a]["runs"], items)
+            stab[a] = st
+            w(f"  {a:16s} {st['n_reps']} reps   per-rep accuracy "
+              f"{[f'{x:.4f}' for x in st['per_rep_accuracy']]}")
+            w(f"  {'':16s} spread {st['accuracy_spread_pp']:.1f} pp   "
+              f"max pairwise disagreement {st['max_disagreement_rate']:.1%} of items")
+            for pr in st["pairwise"]:
+                w(f"  {'':16s}   rep{pr['rep_a']} vs rep{pr['rep_b']}: "
+                  f"{pr['n_disagree']} of {len(items)} items differ")
+    if not stab:
+        w("  no arm in this run has >= 2 reps to compare (zero, printed as zero)")
+    w("")
+    w("  A TEMPERATURE-0 TOOL-USING ARM IS NOT DETERMINISTIC. The checkpoint's three")
+    w("  B0-agent reps were identical (0.6585 x3) because that arm makes ONE call per")
+    w("  item. A1 runs an agentic loop, and the loop varies in how many tool calls it")
+    w("  makes and in what order - so each turn is sampled from a context the previous")
+    w("  turn shaped. Determinism at temperature 0 is a property of a SINGLE call, not")
+    w("  of a multi-turn agent, and this is the measurement of the difference.")
+    w("")
+    w("  WHAT THIS COSTS THE ABLATIONS, stated plainly. A1-iter1, A1-minus-tool and")
+    w("  B0prime are ONE REP each (GOOD.md section 8; ruling R-01 item 2). Any gap")
+    w("  between them smaller than the spread above is INSIDE THE RUN-TO-RUN NOISE and")
+    w("  must not be read as an effect. The ablation ordering is reported with that")
+    w("  caveat attached rather than presented as if the numbers were exact.")
+    w("")
+    w("  hard rule 9 - DETERMINISM - is not violated by this. It binds the SCORER and")
+    w("  the RESOLVER, both of which are pure and byte-reproducible; a sampled model is")
+    w("  not in its scope. What would violate the rule is claiming a model arm is")
+    w("  reproducible when it is not, which is why this section exists.")
+    w("")
 
     # ---------------------------------------------------------------- GOOD.md
     w("=" * 78)
@@ -416,6 +581,11 @@ def main() -> int:
                     "tool_calls_made": a.get("tool_calls_made", 0),
                     "instructions_unruled": ";".join(str(x) for x in a.get("instructions_unruled", [])),
                     "needs_human_review": a.get("needs_human_review", ""),
+                    # the trace is one rep's; the verdict is the majority's. When they
+                    # disagree the trace does not explain the scored answer, and that is
+                    # printed rather than glossed.
+                    "trace_rep_verdict": a.get("verdict") or "(none)",
+                    "trace_rep_agrees_with_majority": (a.get("verdict") == pred),
                 })
         TAXONOMY.parent.mkdir(parents=True, exist_ok=True)
         with open(TAXONOMY, "w", encoding="utf-8", newline="") as fh:

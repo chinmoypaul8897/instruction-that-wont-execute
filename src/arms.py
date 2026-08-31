@@ -260,6 +260,33 @@ def run_arm(key, items, model, rep, temperature, traj_dir, ledger_path,
             "n_items": len(items), "n_predicted": len(preds)}
 
 
+def tally_votes(votes) -> str | None:
+    """B0-prime's PUBLISHED tie-break, as a pure function so it can be tested.
+
+    Majority over the votes; **a tie resolves to `WILL_FAIL`**. Same rule as rep
+    aggregation, and the conservative direction for a defect detector - a tie resolves
+    toward flagging, not toward waving through. An unparseable vote is **not a vote**
+    and is dropped from the tally; if nothing parses the item gets NO prediction, which
+    `score.py` charges as a failure (`GOOD.md` §1).
+
+    Extracted from `run_b0prime` at CH-06 because a rule published in a docstring and
+    executed inline inside a network-calling function cannot be checked without spending
+    money. Goldens: `tests/test_bundle_and_b0prime.py`.
+    """
+    tally: dict[str, int] = {}
+    for v in votes:
+        key = str(v).strip().strip('"').strip("'").upper()
+        if key in ("WILL_FAIL", "WILL_EXECUTE"):
+            tally[key] = tally.get(key, 0) + 1
+    if not tally:
+        return None
+    top = max(tally.values())
+    winners = sorted(k for k, c in tally.items() if c == top)
+    if len(winners) > 1 and "WILL_FAIL" in winners:
+        return "WILL_FAIL"
+    return winners[0]
+
+
 def run_b0prime(items, model, rep, traj_dir, ledger_path, out_dir,
                 samples: int = 3, temperature: float = 1.0) -> dict:
     """**B0-prime** - the COMPUTE-MATCHED CONTROL. `CONTEXT.md` section 4, `plan.md` CH-08.
@@ -340,16 +367,9 @@ def run_b0prime(items, model, rep, traj_dir, ledger_path, out_dir,
                 errors.append({"item_id": item["item_id"], "error": "SPEND CEILING"})
                 raise
         votes_all[item["item_id"]] = votes
-        tally = {}
-        for v in votes:
-            key = v.strip().strip('"').strip("'").upper()
-            if key in ("WILL_FAIL", "WILL_EXECUTE"):   # an unparseable vote is not a vote
-                tally[key] = tally.get(key, 0) + 1
-        if tally:
-            top = max(tally.values())
-            winners = sorted(k for k, c in tally.items() if c == top)
-            preds[item["item_id"]] = ("WILL_FAIL" if len(winners) > 1 and
-                                      "WILL_FAIL" in winners else winners[0])
+        decided = tally_votes(votes)                   # the published rule, testable
+        if decided is not None:
+            preds[item["item_id"]] = decided
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"B0prime-rep{rep}-votes.json").write_text(
         json.dumps(votes_all, indent=2, sort_keys=True) + "\n",
@@ -370,7 +390,13 @@ def bundle(arm_label: str, rep: int) -> int:
     that had been sampled or trimmed would stop being evidence.
     """
     BUNDLE_DIR.mkdir(parents=True, exist_ok=True)
-    files = sorted(DEFAULT_TRAJ.glob(f"{arm_label}__*__rep{rep}.jsonl"))
+    # B0prime writes one trajectory PER SAMPLE - `...__rep1__s1.jsonl` - because each
+    # self-consistency draw is its own logged run (hard rule 10). The original glob
+    # matched only the unsuffixed form and silently bundled ZERO records for that arm,
+    # which would have left 246 trajectories in a git-ignored directory and lost them.
+    # Both shapes are collected, de-duplicated, and sorted for byte-reproducibility.
+    files = sorted(set(DEFAULT_TRAJ.glob(f"{arm_label}__*__rep{rep}.jsonl"))
+                   | set(DEFAULT_TRAJ.glob(f"{arm_label}__*__rep{rep}__*.jsonl")))
     out = BUNDLE_DIR / f"{arm_label}-rep{rep}.jsonl"
     n = 0
     with open(out, "w", encoding="utf-8", newline="\n") as fh:

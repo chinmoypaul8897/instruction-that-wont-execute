@@ -1,0 +1,40 @@
+==============================================================================
+REMOVED EXPERIMENT 1 - CURRENT CFR TEXT INSTEAD OF POINT-IN-TIME
+==============================================================================
+
+  PRE-REGISTERED PREDICTION - CONTEXT.md section 10, written before the corpus
+  was built and quoted here verbatim:
+
+    "accuracy collapses toward a trivial oracle, because after a failed
+     amendment the current text still lacks the change and after a successful
+     one it contains it - the current text LEAKS THE LABEL. If the number goes
+     up, that is PROOF OF LEAKAGE, NOT CAPABILITY, and must be reported as
+     such."
+
+  items compared            82 of 82   (the SAME items for both arms)
+  items with no current section  0   see extract-report.json
+
+  Both arms get text prepared by the IDENTICAL pipeline:
+  ecfr_find_section / find_section -> strip_leakage -> section_text, with the
+  last two reused UNMODIFIED from src/cfr_pit.py. The EDNOTE that DEFINES the
+  gold label is stripped from the current text too, so a rise here cannot be
+  'we showed it the answer key' - it is structural leakage in the text itself.
+
+------------------------------------------------------------------------------
+  point-in-time (B0-agent)   0.6585   (54/82)
+  CURRENT text               0.5976   (49/82)
+  difference                 -6.1 pp
+  McNemar exact two-sided    p = 0.4421   (b=11 c=16 discordant=27)
+------------------------------------------------------------------------------
+
+  false-defect  0.1951 -> 0.5122
+  missed-defect 0.4878 -> 0.2927
+
+  The number went DOWN. The pre-registered prediction anticipated a rise;
+  it did not happen, and the prediction is recorded as MISSED rather than
+  reinterpreted. A drop is still consistent with the current text being
+  the wrong evidence - it is simply not the leakage direction.
+
+  EITHER WAY THE POINT-IN-TIME CORPUS IS VINDICATED AS A DESIGN CHOICE: this
+  is the experiment that shows what it would have cost to skip it.
+
