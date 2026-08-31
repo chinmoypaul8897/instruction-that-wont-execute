@@ -21,12 +21,12 @@ landed, and what is worth opening the file for. The curation rule is
 | Class | What it is | Count | Trajectories live at | Replayable? |
 |---|---|---|---|---|
 | **Research / ideation** | ~90 agents across four design workflows that proposed, attacked and killed candidate projects — **two whole projects died before a line of this one was written** | ~90 | `context/*-raw.json` (committed), beside the synthesised verdicts in `context/03`–`09` | synthesised output only; they predate the git history |
-| **Coding** | fresh Claude Code BUILD sessions that write this repository | **10 sessions / 11 files** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN (exported twice), CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c, CH-12 | `docs/trajectories/build/<CHUNK-ID>.jsonl` | **yes** — full transcript, every tool call and response |
+| **Coding** | fresh Claude Code BUILD sessions that write this repository | **11 sessions / 12 files** — CH-00, CH-01, CH-02, SPEC-FIX-1, SPEC-FIX-2, NIGHT-RUN (exported twice), CH-06/CH-08/CH-09, CH-14a, CH-11, CH-11c, CH-12 | `docs/trajectories/build/<CHUNK-ID>.jsonl` | **yes** — full transcript, every tool call and response |
 | **Adversarial audit** | subagents spawned *by* a coding session to attack its own conclusion before it ships — see the table below | **103** | `docs/reviews/`, `docs/evidence/ch11c-sweep/`, `docs/evidence/spec-fix-1/` | **NO — `QUESTIONS.md` Q40** |
 | **Solution** | the evaluation arms — the thing being measured | **2,097** logged runs across every evaluation arm (2,107 ledger rows less the 10 model-id probe calls) | `docs/trajectories/arms/<arm>-rep<N>.jsonl` (bundled, every record kept) + `docs/evidence/runs/cost_ledger.csv` | **yes** — bundled; `per-item/` is git-ignored and its every record is in the bundle |
 | **Probe** | the model-id probe that checked a claim the chunk card pre-registered as fact | **10** runs | `docs/trajectories/probe/probe-model-id__*.jsonl` | **yes** |
 
-**36 trajectory files, 43.62 MB, measured by `docs/evidence/ch12/trajectory_facts.py`.**
+**37 trajectory files, 46.42 MB, measured by `docs/evidence/ch12/trajectory_facts.py`.**
 
 ### The adversarial-audit class, in full — 103 subagents, and its cost stated separately
 

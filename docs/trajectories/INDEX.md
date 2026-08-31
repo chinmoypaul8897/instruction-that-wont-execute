@@ -12,15 +12,15 @@ Every size, line count and record span below is measured by
 [`docs/evidence/ch12/trajectory_facts.py`](../evidence/ch12/trajectory_facts.py) →
 [`trajectory-facts.txt`](../evidence/ch12/trajectory-facts.txt).
 
-**36 trajectory files. 43.62 MB. Nothing is curated away — this is an index, not a
+**37 trajectory files. 46.42 MB. Nothing is curated away — this is an index, not a
 filter.**
 
 | class | files | what it is | instructions | result |
 |---|---:|---|---|---|
-| [build sessions](#build-sessions--11-files-10-sessions) | **11** | the Claude Code sessions that wrote this repository | `prompts/<CHUNK-ID>.md` | the commits of that window |
+| [build sessions](#build-sessions--12-files-11-sessions) | **12** | the Claude Code sessions that wrote this repository | `prompts/<CHUNK-ID>.md` | the commits of that window |
 | [evaluation arms](#evaluation-arms--15-files) | **15** | the thing being measured | `agents/*.md` | `docs/evidence/ch06-a1/`, `docs/evidence/checkpoint/` |
 | [probe](#probe--10-files) | **10** | the model-id probe from `QUESTIONS.md` Q1 | `prompts/NIGHT-RUN.md` | `docs/evidence/ch03-model-id/` |
-| [adversarial audits](#adversarial-audits--86-subagents-and-no-jsonl) | **0** | 86 subagents that attacked this project's own conclusions | inside the build transcripts | `docs/reviews/`, `docs/evidence/ch11c-sweep/` |
+| [adversarial audits](#adversarial-audits--103-subagents-and-no-jsonl) | **0** | 103 subagents that attacked this project's own conclusions | inside the build transcripts | `docs/reviews/`, `docs/evidence/ch11c-sweep/` |
 
 ---
 
@@ -101,7 +101,7 @@ they ship unedited.**
 
 ---
 
-## Build sessions — 11 files, 10 sessions
+## Build sessions — 12 files, 11 sessions
 
 `NIGHT-RUN` was exported **twice**: `NIGHT-RUN-CHECKPOINT.jsonl` is a **byte-exact
 prefix** of `NIGHT-RUN-FINAL.jsonl` (asserted in `trajectory_facts.py`), a mid-session
@@ -124,6 +124,8 @@ the transcript itself: `Read prompts/<CHUNK-ID>.md and execute it fully.`
 | [`CH-14a.jsonl`](build/CH-14a.jsonl) | 1,632,439 | 733 | 08-31 03:54 → 04:56 | [`prompts/CH-14a.md`](../../prompts/CH-14a.md) | packaging, clean-clone rehearsal → `docs/evidence/ch14-size/`, `ch14-clean-clone/`, `secret-scan/` | the 50 MB blocker **was never a blocker**. Found two tests that fail in the zip a judge opens, *"and one of them was mine"*. Contains a **human interrupt** marker at 04:20:15Z |
 | [`CH-11.jsonl`](build/CH-11.jsonl) | 2,456,849 | 987 | 08-31 05:19 → 06:10 | `prompts/CH-11.md` — **untracked, Q41** | README and the five files under it → `README.md`, `REPRODUCE.md`, `SAFETY.md`, `LICENSE`, `THIRD-PARTY.md` | ran a **52-agent** audit over its own drafts whose sharpest finding was against itself: nine literal U+FFFD written into the README from a terminal artefact, **with a paragraph defending them**. Removed |
 | [`CH-11c.jsonl`](build/CH-11c.jsonl) | 1,799,806 | 746 | 08-31 07:12 → 08:12 | `prompts/CH-11c.md` — **untracked, Q41** | five factual corrections → `docs/evidence/ch11c-sweep/` | **a correction that was itself false.** While fixing a wrong model name it wrote *"every evaluation arm, temperature 0"*; `B0prime` ran at 1.0. Its own 21-agent sweep caught it within the hour |
+
+| [`CH-12.jsonl`](build/CH-12.jsonl) | 2,801,859 | 883 | 08-31 08:21 → 09:18 | `prompts/CH-12.md` — **untracked, Q41** | trajectories, the worksheet, and one false disclosure claim → `docs/trajectories/SELECTION-RULE.md`, `INDEX.md`, `docs/worksheet/index.html`, `docs/evidence/ch12/` | **the export that demonstrated its own finding.** Its first run shipped four copies of an operator contact address while reporting `0  operator contact detail` — the scrubber matches literals from a list and that address is not in the list (**Q43**). Re-exported against a complete pattern source: **8 redactions, zero full addresses** |
 
 **Two cards are not in git** — `prompts/CH-11.md` and `prompts/CH-11c.md`, plus
 `prompts/CH-12.md` for the chunk that wrote this index. `prompts/` is protected
@@ -180,7 +182,7 @@ only `claude-sonnet-5` rows in the ledger that are **not** the withdrawn subset.
 
 ---
 
-## Adversarial audits — 86 subagents, and no JSONL
+## Adversarial audits — 103 subagents, and no JSONL
 
 **This class has no trajectory file, and that is a gap in deliverable 4 rather than an
 omission from this index.** `QUESTIONS.md` **Q40**.
@@ -192,7 +194,8 @@ omission from this index.** `QUESTIONS.md` **Q40**.
 | CH-04 gate reviewer | **1** | [`build/CH-06.jsonl`](build/CH-06.jsonl) | `docs/reviews/REVIEW_CH-04.md` + `ch04-probe/` |
 | CH-11 shipping audit | **52** | [`build/CH-11.jsonl`](build/CH-11.jsonl) | the nine figures it corrected before they shipped |
 | CH-11c shipping sweep | **21** | [`build/CH-11c.jsonl`](build/CH-11c.jsonl) | `docs/evidence/ch11c-sweep/ch11c-agent-sweep.md` — **all 75 findings verbatim from the workflow journal**, not summarised by hand |
-| **total** | **86** | | |
+| CH-12 re-verification | **17** | [`build/CH-12.jsonl`](build/CH-12.jsonl) | `docs/evidence/ch12/` — the re-verification of all 75 standing findings, and the measurements behind this index |
+| **total** | **103** | | |
 
 **Why there is no JSONL.** `tools/export_session.py` captures a *session*; a subagent is
 not a session. Its per-agent records live in the Claude Code workflow journal outside

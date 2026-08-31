@@ -18,7 +18,7 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 | 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.66 MB** against a 50 MB cap | ✅ re-measured at CH-11, `e01fdfd`: 10,662,339 B, 373 entries |
 | 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
-| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 36 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
+| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 37 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
 | 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
 
 ---
@@ -63,7 +63,7 @@ one. `docs/evidence/ch12/corpus-size.txt`.)* `python refetch.py
 | what | where |
 |---|---|
 | every model, tool and agent, with what each did | [`AI-USE.md`](AI-USE.md) |
-| one JSONL per agent run — 36 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
+| one JSONL per agent run — 37 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
 | the exact instructions shaping each evaluation arm | [`agents/`](agents/) |
 | every chunk prompt, committed verbatim as issued | [`prompts/`](prompts/) |
 | per-call tokens, wall-clock and imputed USD | `docs/evidence/runs/cost_ledger.csv` |

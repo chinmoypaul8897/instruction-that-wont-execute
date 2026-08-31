@@ -2745,7 +2745,7 @@ under `docs/trajectories/`. **The third does not.**
 
 | class | trajectories on disk |
 |---|---|
-| build sessions | `docs/trajectories/build/` — **11** JSONL |
+| build sessions | `docs/trajectories/build/` — **12** JSONL |
 | evaluation arms | `docs/trajectories/arms/` — **15** JSONL |
 | **adversarial audits** | **none** |
 | *(a fourth class the clause does not name)* | `docs/trajectories/probe/` — **10** JSONL |
@@ -2873,6 +2873,39 @@ added would rewrite it just as thoroughly. Both are worse than reporting it.
 3. **Change the exporter** to also match a generic contact-shaped pattern
    (`\bcontact:\s*\S+@\S+`). Broader, catches the next one, and risks redacting
    corpus text that legitimately contains an address.
+
+### What happened when this chunk exported its own transcript — the finding, demonstrated
+
+**CH-12 discussed Q43, so CH-12's own transcript carried the address.** The first export
+of `docs/trajectories/build/CH-12.jsonl` printed `0  operator contact detail` and shipped
+**four** copies of it. **A session that found the leak was about to double it**, and the
+scrubber reported a clean sweep while doing so — which is precisely what "the passing
+probe looks identical either way" means.
+
+**Option 2 was then applied to this one export, and it works in one command.**
+`tools/export_session.py` reads its pattern source from `$MICRO1_PII_PATTERNS` first, so
+a complete source was built **outside the repository** — the existing git-ignored dossier
+plus every contact-shaped address already present in `CH-01.jsonl`, recovered by regex
+from the leak itself so the literal never had to be typed anywhere — and the export was
+re-run against it:
+
+```
+                    first export      re-export with the complete source
+operator contact           0                          8
+```
+
+**The shipped `CH-12.jsonl` now contains zero full addresses.** Seven occurrences of the
+bare **domain** remain, inside the `git grep` patterns this session and its auditors ran
+while investigating — a search term, not a contact detail, and the thing a reader needs
+in order to reproduce this entry at all.
+
+**This does not close the question, and it must not be read as closing it.** It fixes the
+one export this chunk is responsible for and **leaves `CH-01.jsonl` exactly as it was**.
+It also shows the fix costs one environment variable, which is the fact the architect
+needs in order to choose between the three options above. **And it makes the smallest
+option, (1), more urgent rather than less:** the exporter's redaction is only as complete
+as a file nobody diffs, and `SAFETY.md` and `AI-USE.md` both describe it without that
+qualifier.
 
 **The general finding is bigger than the instance**, and it is the one worth recording:
 **a redactor that matches literals from a list can only ever be as complete as the
