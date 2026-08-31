@@ -24,7 +24,7 @@ duration = max(3.0, words / 2.8)      # ~168 wpm reading speed, rounded to 0.1 s
 so a six-word line still holds for three seconds even though nobody needs three seconds
 to read it. That floor is why the total is not simply `words / 2.8`.
 
-Two frames carry no caption at all, and both are deliberate:
+Three frames carry no caption at all, and all three are deliberate:
 
 - **Slide 1**, the title card. Four seconds, the title, nothing else.
 - **Slide 15**, the hot take. The slide *is* one sentence set in 64px serif. A caption
@@ -84,11 +84,24 @@ itself over 22 words. One segment, one frame.
 
 **Five captions, one per storyboard beat.** These are not stills, so they are drawn onto
 the recording with ffmpeg `drawtext` in the same band, at the same size, in the same
-place. The builder reads the beat boundaries out of `dist/screencast/worksheet.json` —
-they are measured offsets into the recording, not planned ones — and holds caption *k*
-from the start of beat *k* to the start of beat *k+1*.
+place.
 
-> That system produces this. The real page, opened in a browser, scrolled — nothing here was drawn for the video.
+The builder does **not** take the beat boundaries from the recorder's sidecar, and an
+earlier version of this paragraph said it did. It reads them off the tape:
+`record_worksheet.js` stamps a grey patch, one level per beat, into the strip the band
+later paints over, and `build_video.py` decodes that patch per frame. The sidecar's
+wall-clock offsets survive only for comparison, and both appear in
+`docs/evidence/ch13b/build-video.txt`. The reason is `docs/progress/CH-13B.md` §2b — a
+caption timed off the wall clock was drawn over the wrong CFR section, and the build
+reported nothing wrong.
+
+Caption *k* is held for the whole of beat *k*: the scroll toward the section and then
+the hold on it. Each is subject to the same `max(3.0, words / 2.8)` rule as the stills,
+and `build_video.py` enforces it — the first draft of caption 1 ran 20 words in 3.4
+seconds, which is 353 wpm, and the build now refuses that rather than reporting it as
+`OK`.
+
+> That system produces this page. Nothing here is staged.
 
 > Forty CFR seventy-five point six: the failing designation, and the class of failure.
 
@@ -120,7 +133,7 @@ from the start of beat *k* to the start of beat *k+1*.
 
 ### Slide 9 · The override
 
-> On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.
+> In this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.
 
 > The model read the section text, saw paragraph thirty-eight sitting there, and overrode its own tool.
 
@@ -152,13 +165,13 @@ from the start of beat *k* to the start of beat *k+1*.
 with bars 1 through *k* visible, so the chart is built in front of the viewer rather
 than arriving finished.
 
-> The tool alone made it worse.
+> The tool alone: minus nine point eight points.
 
-> The procedure alone made it worse.
+> The procedure alone: minus one point two points.
 
 > Together, plus six point one points.
 
-> Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.
+> One rep each against a 4.9 point spread, so read the negatives as no effect, not harm. Together, they compose.
 
 ### Slide 13 · The removed experiment
 

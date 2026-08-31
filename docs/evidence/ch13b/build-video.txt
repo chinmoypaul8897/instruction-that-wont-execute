@@ -1,25 +1,25 @@
 CH-13B  build_video.py
 
   output              dist\instruction-that-wont-execute.mp4
-  ffprobe duration    270.87s = 4:30.87   (cap 5:00)   UNDER
+  ffprobe duration    270.63s = 4:30.63   (cap 5:00)   UNDER
   resolution          1920x1080
   frame rate          30/1   pix_fmt yuv420p   codec h264
-  audio stream        aac 44100Hz 2ch
-  size                37.25 MB
+  audio stream        PRESENT   aac 44100Hz 2ch
+  size                36.77 MB
 
-  still frames        40, 231.8s   + screencast 39.08s   = 270.88s planned, 270.87s encoded (-0.01s)
+  still frames        40, 231.0s   + screencast 39.64s   = 270.64s planned, 270.63s encoded (-0.01s)
   shortest frame      3.0s   (floor 3.0s)   OK
-  longest caption     22 words on a still, 20 on the screencast   (cap 22)
+  longest caption     21 words on a still, 16 on the screencast   (cap 22)
   shortest screencast caption  3.4s   OK
   caption band        37 captions rendered, tallest 43.5px of 124px available
 
-  screencast          39.08s, trimmed from 1.44s in
-                      page 14791px tall, scrolled 13711px
-      0.00-  3.40s  y=0       20w  the top of the page - title, the NOT A FILING band, and what it 
-      3.40- 12.36s  y=2618    13w  40 CFR 75.6 - the failing designation (a)(38) and its failure cl
-     12.36- 21.32s  y=7760    15w  49 CFR 1150.35 - the trace row where cfr_resolve returned found=
-     21.32- 31.20s  y=13007   13w  the human-checkpoint queue - 16 of 82, each with its reason verb
-     31.20- 39.08s  y=13711   16w  the provenance footer - the three input hashes, both commits, ar
+  screencast          39.64s, trimmed from 0.40s in
+                      page 14951px tall, scrolled 13871px
+      0.00-  3.44s  y=0        9w  the top of the page - title, the NOT A FILING band, and what it 
+      3.44- 12.96s  y=2618    13w  40 CFR 75.6 - the failing designation (a)(38) and its failure cl
+     12.96- 21.76s  y=7760    15w  49 CFR 1150.35 - the trace row where cfr_resolve returned found=
+     21.76- 31.72s  y=13007   13w  the human-checkpoint queue - 16 of 82, each with its reason verb
+     31.72- 39.64s  y=13871   16w  the provenance footer - the three input hashes, both commits, ar
 
   timeline
     [00]    4.0s  s01     0w  (title card)
@@ -34,7 +34,7 @@ CH-13B  build_video.py
     [09]    7.1s  s05    20w  Here is the whole system. Two inputs: the amendatory instruction, and the CFR 
     [10]    6.1s  s05    17w  For every instruction a deterministic resolver answers two questions, and each
     [11]    5.7s  s05    16w  The verdict is computed from that trace in code. Anything contradictory is ref
-    [--]   39.1s  SCREENCAST  the recording of docs/worksheet/index.html
+    [--]   39.6s  SCREENCAST  the recording of docs/worksheet/index.html
     [13]    4.3s  s06    12w  Now the same case, step by step. Forty CFR seventy-five point six.
     [14]    6.1s  s06    17w  The agent gets four instructions, and the section text as it stood before the 
     [15]    5.7s  s07    16w  For each instruction it calls the resolver. Is this paragraph declared? Is thi
@@ -42,7 +42,7 @@ CH-13B  build_video.py
     [17]    6.1s  s08    17w  Then it writes the editorial note the Archives would have to publish. Not a ye
     [18]    5.4s  s08    15w  The failing designation, the failure class in the Archives' own vocabulary, an
     [19]    6.4s  s08    18w  The verdict is derived in code from that trace, so it cannot be right for the 
-    [20]    6.4s  s09    18w  On this case, something I did not expect happened. The resolver was wrong: it 
+    [20]    6.4s  s09    18w  In this case, something I did not expect happened. The resolver was wrong: it 
     [21]    5.7s  s09    16w  The model read the section text, saw paragraph thirty-eight sitting there, and
     [22]    4.6s  s09    13w  It named the tool's limitation in the published note. And it ruled correctly.
     [23]    7.1s  s10    20w  Two results, and the second is a null. Giving the agent the Code text moves ac
@@ -53,10 +53,10 @@ CH-13B  build_video.py
     [28]    6.1s  s11    17w  Iteration one was the resolver. Predicted plus eight points, measured minus ni
     [29]    5.7s  s11    16w  Iteration two was the written procedure. Predicted zero point eight one, measu
     [30]    4.6s  s11    13w  That prediction was committed seven hundred and sixty-four seconds before the 
-    [31]    3.0s  s12.1   6w  The tool alone made it worse.
-    [32]    3.0s  s12.2   6w  The procedure alone made it worse.
+    [31]    3.0s  s12.1   8w  The tool alone: minus nine point eight points.
+    [32]    3.0s  s12.2   8w  The procedure alone: minus one point two points.
     [33]    3.0s  s12.3   6w  Together, plus six point one points.
-    [34]    7.9s  s12.4  22w  Neither helps on its own. It composes because the procedure repairs a defect i
+    [34]    7.1s  s12.4  20w  One rep each against a 4.9 point spread, so read the negatives as no effect, n
     [35]    6.4s  s13    18w  One experiment we removed. We predicted the current Code text would raise accu
     [36]    5.7s  s13    16w  It fell six point one points. The prediction was wrong, and it is published as
     [37]    6.4s  s14    18w  That page is the deliverable. Every item carries its trace, and the level each

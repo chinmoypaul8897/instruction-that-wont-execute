@@ -58,7 +58,17 @@ def main() -> int:
         dest = OUT / f"frame-{label}.png"
         subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{at:.3f}", "-i", str(MP4),
                         "-frames:v", "1", "-y", str(dest)], cwd=REPO, check=True)
-        rows.append((label, i, at, length, f.get("caption"), f["note"], dest))
+        # The screencast's timeline entry carries no caption of its own - the caption on
+        # that frame is an ffmpeg overlay - so name the one actually on screen. The first
+        # version printed "(none)" beside a frame that plainly has words burned into it.
+        caption = f.get("caption")
+        if caption is None and f["source"] == "screencast":
+            at_cast = at - starts[i]
+            live = [c for c in plan["screencast"]["captions"]
+                    if c["from"] <= at_cast < c["to"]]
+            if live:
+                caption = f'(ffmpeg drawtext) {live[0]["text"]}'
+        rows.append((label, i, at, length, caption, f["note"], dest))
 
     lines = ["CH-13B - frames extracted from the encoded MP4",
              f"source: {MP4.relative_to(REPO)}", ""]

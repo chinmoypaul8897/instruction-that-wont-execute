@@ -201,21 +201,44 @@ def probe_b(out: list[str]) -> bool:
                    f"       {new_ok} of {len(beats)} correct"
                    f"{'   <-- old method breaks here' if pct == breaking else ''}")
     out.append("")
+    zero_old = rows[0][1]
+    new_always_right = all(new_ok == len(beats) for _, _, new_ok in rows)
     if breaking is None:
         out.append("   the old method survived every drift swept - NOT a flip")
         flipped = False
+    elif breaking == 0:
+        out.append(f"   OLD  wrong on THIS tape with no simulated drift at all:"
+                   f" {zero_old} of {len(beats)} captions over the beat they name")
+        out.append("   NEW  correct at every drift swept, because it never reads the wall clock")
+        flipped = new_always_right
     else:
         out.append(f"   OLD  correct only while capture drift stays under {breaking}%;"
                    f" at {breaking}% a caption is over the wrong beat")
         out.append("   NEW  correct at every drift swept, because it never reads the wall clock")
-        flipped = all(new_ok == len(beats) for _, _, new_ok in rows)
+        flipped = new_always_right
     out.append(f"   FLIPS: {'yes' if flipped else 'NO'}")
     out.append("")
-    out.append("   NOTE, and it is the point: at 0% both are right. The defect that shipped")
-    out.append("   a caption over 47 CFR 80.905 does not reproduce on this tape, because the")
-    out.append("   machine was not busy. A bug that only appears under load is exactly the")
-    out.append("   kind that a green build hides, which is why the fix is to stop depending")
-    out.append("   on the wall clock rather than to widen a tolerance.")
+
+    # COMPUTED, not typed. An earlier version of this note was a fixed paragraph saying
+    # "at 0% both are right" - true of the tape it was written against, false of the very
+    # next one. A static sentence beside a moving number is the failure this repository
+    # keeps finding in itself, so the note now branches on what was actually measured.
+    if zero_old == len(beats):
+        out.append("   NOTE: at 0% simulated drift both methods are right on THIS tape - the")
+        out.append("   machine was not busy while it recorded, so the defect does not reproduce")
+        out.append("   here and the sweep above is what shows it. The old method's correctness")
+        out.append("   is a property of the load, not of the code.")
+    else:
+        out.append("   NOTE: this tape reproduces the defect on its own. The wall clock puts the")
+        out.append(f"   lead-in at {float(meta['lead_in_s']):.2f}s where the tape puts it at"
+                   f" {new_lead:.2f}s, and with NO simulated drift the old")
+        out.append(f"   method leaves {len(beats) - zero_old} of {len(beats)} captions over a"
+                   f" section they do not name. The size of")
+        out.append("   that gap varies run to run with machine load, which is the point.")
+    out.append("")
+    out.append("   Either way: a bug that appears only under load is exactly the kind a green")
+    out.append("   build hides, which is why the fix is to stop reading the wall clock rather")
+    out.append("   than to widen a tolerance.")
     out.append("")
     return flipped
 

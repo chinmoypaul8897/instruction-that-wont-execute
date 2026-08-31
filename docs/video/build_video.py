@@ -5,8 +5,7 @@
 Re-runnable and deterministic in everything it controls: the same ``script.md``, the
 same deck and the same recording produce the same frame list, the same durations and
 the same concat plan. (The *recording* itself is a browser capture and is not
-byte-reproducible; that is why ``record_worksheet.js`` writes a sidecar of measured
-offsets, and everything downstream of it reads those numbers instead of assuming any.)
+byte-reproducible, which is the whole reason for step 4 below.)
 
 The pipeline
 ------------
@@ -20,8 +19,13 @@ The pipeline
    rendered into the page, and reports the measured pixel height of every caption. A
    caption that would run past the band's 124px of text space is a hard failure here,
    not a clipped word discovered in the finished file.
-4. The screencast is trimmed by its own measured lead-in and captioned with ffmpeg
-   ``drawtext`` in the same band, at the same size, at the same x.
+4. The screencast's beat boundaries are **read off the tape** - not from the recorder's
+   wall clock and not from its JSON sidecar. ``record_worksheet.js`` stamps a grey patch,
+   one level per beat, into the strip the caption band later paints over, and
+   ``read_beat_windows`` decodes it per frame; the sidecar's wall-clock numbers survive
+   only so the report can print both. See that function for what went wrong twice before
+   it. Captions are drawn with ffmpeg ``drawtext`` in the same band, at the same size and
+   x, and obey the same ``max(3.0, words/2.8)`` rule as the stills.
 5. Three parts are encoded with identical settings, concatenated, given a silent AAC
    track, and written to ``dist/instruction-that-wont-execute.mp4``.
 
@@ -62,7 +66,12 @@ CAP = 300.0             # 5:00, hard
 BAND_TOP = 930
 BAND_H = 150
 BAND_X = 120
-TEXT_Y = 959            # matches the browser's first-line box: 930 + 26 padding + half-leading
+TEXT_Y = 965            # MEASURED, not derived. A row scan of the rendered band puts the
+                        # browser's caption glyphs at rows 965-994 and ffmpeg's at 959-988,
+                        # so drawtext's y sat 6px high and the caption jumped at the cut.
+                        # drawtext measures from the top of the glyph box and the browser
+                        # from the top of the line box; the half-leading between them is
+                        # not worth deriving twice.
 INK = "0x1A1A18"
 PAPER = "0xFBFAF7"
 FONT_SIZE = 30
@@ -88,7 +97,6 @@ def parse_script() -> tuple[dict[int, list[str]], list[str]]:
     body = parts[1].split("\n---\n", 1)[0]
     slides: dict[int, list[str]] = {}
     cast: list[str] = []
-    current: list[str] | None = None
     for chunk in re.split(r"^### ", body, flags=re.M)[1:]:
         head, _, rest = chunk.partition("\n")
         blocks = [re.sub(r"\s+", " ", b).strip()
@@ -284,9 +292,14 @@ def build_plan() -> dict:
         start = round(windows[k][0] - lead_in, 3)
         stop = round(windows[k][1] - lead_in, 3)
         assert words(block) <= MAX_WORDS, f"screencast caption {k} is {words(block)} words"
-        assert stop - start >= FLOOR - 1e-9, (
-            f"screencast caption {k} would hold {stop - start:.2f}s, under the {FLOOR}s floor - "
-            f"lengthen beat {k}'s hold in record_worksheet.js and re-record")
+        # The same rule the stills obey. This used to check the 3.0s floor ONLY, so a
+        # 20-word caption held for 3.4s - 353 wpm - and the report printed it as "OK".
+        need = duration(block)
+        assert stop - start >= need - 1e-9, (
+            f"screencast caption {k} would hold {stop - start:.2f}s for {words(block)} words, "
+            f"and max(3.0, words/2.8) needs {need:.1f}s. Shorten it to "
+            f"{int((stop - start) * WPS)} words, or lengthen beat {k}'s hold in "
+            f"record_worksheet.js and re-record.")
         cast_caps.append({"text": block, "words": words(block),
                           "from": start, "to": stop, "duration": round(stop - start, 3),
                           "beat": beats[k]["name"], "scroll_y": beats[k]["scroll_y"],
@@ -377,7 +390,11 @@ def encode_screencast(plan: dict, out: Path) -> None:
         chain.append(
             f"drawtext=fontfile={rel_font}:textfile={rel_txt}:"
             f"fontcolor={PAPER}:fontsize={FONT_SIZE}:x={BAND_X}:y={TEXT_Y}:"
-            f"enable='between(t\\,{cap['from']}\\,{cap['to']})'")
+            # NOT between(): it is inclusive at BOTH ends, and read_beat_windows returns
+            # windows that are exactly back to back, so on a boundary frame two captions
+            # drew over each other into illegible pulp - visible in the shipped file at
+            # n=2172 before this was fixed. A half-open interval closes it.
+            f"enable='gte(t\\,{cap['from']})*lt(t\\,{cap['to']})'")
     run(["ffmpeg", "-y", "-v", "error",
          "-ss", str(plan["screencast"]["lead_in_s"]), "-i", fpath(CAST),
          "-t", str(plan["screencast"]["duration_s"]),
@@ -410,11 +427,17 @@ def probe(path: Path) -> dict:
     a = q(["-select_streams", "a:0", "-show_entries",
            "stream=codec_name,sample_rate,channels", "-of", "default=noprint_wrappers=1:nokey=0"])
     d = q(["-show_entries", "format=duration,size", "-of", "default=noprint_wrappers=1:nokey=0"])
-    out = {}
-    for line in (v + "\n" + a + "\n" + d).splitlines():
-        if "=" in line:
-            k, _, val = line.partition("=")
-            out.setdefault(k, val)
+    # Namespaced, because video and audio both carry `codec_name` and the flat dict this
+    # replaces silently kept the video one - after which the report fell back to printing
+    # a hard-coded "aac", which it would have printed for a file with no audio at all.
+    # A reported value that is never measured is hard rule 14 inverted.
+    out: dict = {}
+    for prefix, block in (("v", v), ("a", a), ("f", d)):
+        for line in block.splitlines():
+            if "=" in line:
+                k, _, val = line.partition("=")
+                out[f"{prefix}.{k}"] = val
+    out["has_audio"] = bool(a.strip())
     return out
 
 
@@ -437,7 +460,6 @@ def main() -> int:
         return 1
 
     measured = json.loads((FRAMES / "_measured.json").read_text(encoding="utf-8"))
-    by_index = {m["index"]: m for m in measured}
     over = [m for m in measured if m["caption_h"] > 124]
     assert not over, f"captions overflow the band: {[(m['index'], m['caption_h']) for m in over]}"
     clash = [m for m in measured
@@ -465,7 +487,7 @@ def main() -> int:
     cast_longest = max(c["words"] for c in plan["screencast"]["captions"])
     cast_shortest = min(c["duration"] for c in plan["screencast"]["captions"])
     planned = sum(f["duration"] for f in stills) + plan["screencast"]["duration_s"]
-    dur = float(info["duration"])
+    dur = float(info["f.duration"])
 
     report = []
     w = report.append
@@ -474,12 +496,13 @@ def main() -> int:
     w(f"  output              {OUT.relative_to(REPO)}")
     w(f"  ffprobe duration    {dur:.2f}s = {int(dur // 60)}:{dur % 60:05.2f}   (cap 5:00)"
       f"   {'UNDER' if dur < CAP else 'OVER - CUT SLIDES 10 AND 11'}")
-    w(f"  resolution          {info['width']}x{info['height']}")
-    w(f"  frame rate          {info['avg_frame_rate']}   pix_fmt {info['pix_fmt']}"
-      f"   codec {info['codec_name']}")
-    w(f"  audio stream        {info.get('codec_name.1', 'aac')} "
-      f"{info.get('sample_rate', '?')}Hz {info.get('channels', '?')}ch")
-    w(f"  size                {int(info['size']) / 1e6:.2f} MB")
+    w(f"  resolution          {info['v.width']}x{info['v.height']}")
+    w(f"  frame rate          {info['v.avg_frame_rate']}   pix_fmt {info['v.pix_fmt']}"
+      f"   codec {info['v.codec_name']}")
+    w(f"  audio stream        {'PRESENT' if info['has_audio'] else 'ABSENT'}   "
+      f"{info.get('a.codec_name', '-')} {info.get('a.sample_rate', '-')}Hz "
+      f"{info.get('a.channels', '-')}ch")
+    w(f"  size                {int(info['f.size']) / 1e6:.2f} MB")
     w("")
     still_s = sum(f["duration"] for f in stills)
     w(f"  still frames        {len(stills)}, {still_s:.1f}s   + screencast "
@@ -511,6 +534,10 @@ def main() -> int:
         step = f".{f['step']}" if f["step"] else "  "
         cap = f["caption"] or f"({f['note']})"
         w(f"    [{f['index']:02d}]  {f['duration']:5.1f}s  {tag}{step}  {f['words']:2d}w  {cap[:78]}")
+
+    assert info["has_audio"], (
+        "the finished file has NO audio stream - some players and platforms mishandle "
+        "that, which is why anullsrc is in the final pass")
 
     text = "\n".join(report)
     print(text)

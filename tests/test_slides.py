@@ -21,11 +21,26 @@ silently ruin it and neither shows up by looking at the file:
 
 CH-13B added three slides - the pipeline diagram, the composition as bars, and a real
 screenshot of ``docs/worksheet/index.html`` - and with them the deck's first ``<img>``.
-The old rule was a blanket ban on ``<img>``; the property it was protecting is *offline
-self-containment*, not the absence of a tag. So the ban is replaced by a **stronger**
-pair: no ``<iframe|video|audio|object|embed>`` at all, and **every** ``src`` and ``href``
-in the file must begin with ``data:`` or ``#`` - which the old rule never checked, and
-which would have caught a relative ``src="shot.png"`` that the old rule let through.
+The old rule was a blanket ban on ``<img>``; the property it protects is *offline
+self-containment*, not the absence of a tag, so the tag ban had to give way to a
+reference ban.
+
+**The first attempt at that was a weakening, and an adversarial audit of this chunk
+proved it.** It matched only ``(?:src|href)\\s*=\\s*"([^"]*)"`` - double quotes, and only
+those two attribute names - so three mutations the old blanket ban caught went green:
+``<img src='shot.png'>``, ``<img src=shot.png>`` and, worst, ``<img
+srcset="//cdn.example.com/logo.png">``, a live off-file reference. The rule was
+quote-shape-dependent where it claimed to be property-dependent. The docstring also
+justified the change by saying the old rule "would have passed a relative
+``src="shot.png"``". **That was false**: ``src=`` appears only on img/script/iframe/
+video/audio/embed/source, and the old line banned every one of those tags, so it caught
+exactly that case. A rule was relaxed on a stated warrant the repository contradicts.
+
+What stands now is genuinely stronger than the tag ban:
+``test_every_reference_is_inline`` matches ``src``, ``srcset``, ``href``, ``data`` and
+``poster`` under **any** quoting - double, single or bare - and requires every value to
+begin with ``data:`` or ``#``. It catches the three mutations above *and* a relative
+``href`` on an ``<a>``, which no version of the tag ban ever looked at.
 ``test_worksheet_screenshot_is_a_real_1920x1080_png`` then decodes the payload and reads
 its IHDR, so a slide claiming a 1920x1080 capture cannot ship a placeholder.
 
@@ -156,18 +171,54 @@ def test_no_external_stylesheet_or_script(raw: str):
         "deck embeds an external media element"
 
 
-def test_every_src_and_href_is_inline(raw: str):
-    """Stronger than the old blanket <img> ban: nothing may point off the file.
+REFERENCE_ATTR = re.compile(
+    r"""\b(src|srcset|href|data|poster)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))""",
+    re.I)
 
-    The old rule forbade the tag. This one forbids the *reference*, so a relative
-    ``src="shot.png"`` - which the old rule permitted, and which breaks the deck the
-    moment it is opened anywhere but this directory - now fails.
+
+def _references(html: str) -> list[tuple[str, str]]:
+    """(attribute, value) for every reference-bearing attribute, any quoting."""
+    out = []
+    for attr, dq, sq, bare in REFERENCE_ATTR.findall(html):
+        out.append((attr.lower(), dq or sq or bare))
+    return out
+
+
+def test_every_reference_is_inline(raw: str):
+    """Forbids the reference, not the tag - and does it whatever the quoting.
+
+    The first version of this test matched only double-quoted ``src`` and ``href``, and
+    an adversarial audit of CH-13B showed three mutations walking straight through it:
+    ``<img src='shot.png'>``, ``<img src=shot.png>`` and ``<img srcset="//cdn...">``.
+    All three are caught here, and so is a relative ``href`` on an ``<a>``, which the
+    blanket ``<img>`` ban this replaced never looked at. See the module docstring.
     """
-    refs = re.findall(r'\b(?:src|href)\s*=\s*"([^"]*)"', raw, re.I)
-    assert refs, "no src/href found at all - the regex has stopped matching"
-    for ref in refs:
-        assert ref.startswith("data:") or ref.startswith("#"), \
-            f"deck points outside itself: {ref[:60]}"
+    refs = _references(raw)
+    assert refs, "no reference attribute found at all - the regex has stopped matching"
+    for attr, value in refs:
+        assert value.startswith("data:") or value.startswith("#"), \
+            f"deck points outside itself: {attr}={value[:60]}"
+
+
+@pytest.mark.parametrize("mutation", [
+    '<img src="shot.png">',
+    "<img src='shot.png'>",
+    "<img src=shot.png>",
+    '<img srcset="//cdn.example.com/logo.png">',
+    '<a href="../README.md">x</a>',
+    "<img src='data:image/png;base64,AAAA' srcset='//cdn.example.com/x.png'>",
+])
+def test_the_offline_rule_actually_catches_a_reference(raw: str, mutation: str):
+    """The guard has to flip. Inject a real off-file reference; it must go red.
+
+    Six shapes, because the version this replaced passed four of them. This is the
+    probe kept for hard rule 6, run on every suite invocation rather than once.
+    """
+    mutated = raw.replace("</section>", mutation + "</section>", 1)
+    assert mutated != raw
+    refs = _references(mutated)
+    assert any(not (v.startswith("data:") or v.startswith("#")) for _, v in refs), \
+        f"the offline rule does not catch {mutation}"
 
 
 def test_worksheet_screenshot_is_a_real_1920x1080_png(raw: str):
@@ -422,12 +473,36 @@ def test_slide_12_keeps_the_four_step_reveal(raw: str):
     assert frag.group(0).count('<div class="step">') == 1
 
 
-def test_caption_band_exists_and_is_off_by_default(raw: str):
+def test_caption_band_is_off_by_default_and_built_to_the_cards_geometry(raw: str):
+    """The band's numbers, read out of the rule that sets them - not grepped loosely.
+
+    The version this replaced grepped for "display:none" and "font-size:30px" anywhere
+    in the file, which any other rule could have satisfied, and it never checked the one
+    thing its own name promised. Every figure below is the card's: full width, ~150px,
+    --ink on --paper, Georgia 30px/1.45, max-width 90ch, the slide's 120px left margin,
+    and clearance so the band cannot overlap the content.
+    """
     assert '<div id="caption"><span></span></div>' in raw
-    assert "#caption{" in raw and "display:none" in raw
-    assert "body.cap #caption{display:block;}" in raw
-    assert "body.cap .page{bottom:178px;}" in raw, "the band would overlap the slide"
-    assert "font-size:30px" in raw and "line-height:1.45" in raw and "max-width:90ch" in raw
+
+    band = re.search(r"#caption\{([^}]*)\}", raw)
+    assert band, "#caption has no rule"
+    decl = band.group(1)
+    assert "display:none" in decl, "the band is not off by default in the deck"
+    assert "height:150px" in decl and "left:0" in decl and "right:0" in decl
+    assert "background:var(--ink)" in decl and "color:var(--paper)" in decl
+    assert "padding:26px 120px 0 120px" in decl, "the band is not on the slide's margin"
+
+    text = re.search(r"#caption span\{([^}]*)\}", raw)
+    assert text, "#caption span has no rule"
+    for needed in ("font-family:var(--serif)", "font-size:30px", "line-height:1.45",
+                   "max-width:90ch"):
+        assert needed in text.group(1), f"caption text is missing {needed}"
+
+    assert "body.cap #caption{display:block;}" in raw, "nothing turns the band on"
+    # clearance: the content must give up strictly more than the band is tall
+    give_up = {int(m) for m in re.findall(r"body\.cap \.(?:page|centre)\{bottom:(\d+)px;\}", raw)}
+    assert give_up == {178}, f"clearance drifted: {give_up}"
+    assert 178 - 150 > 0, "the band would overlap the slide content"
 
 
 # ---------------------------------------------------------------------------
@@ -458,11 +533,19 @@ def test_endcard_uses_the_decks_palette(endcard: str):
 
 
 def test_endcard_carries_the_repo_and_the_name_and_nothing_else(endcard: str):
-    text = _render(endcard)
-    assert "github.com/chinmoypaul8897/instruction-that-wont-execute" in text
-    assert "Chinmoy Paul · IIT Guwahati" in text
-    # "nothing else" per the card: the title, the repo, the name. No figures, no claims.
-    assert not re.search(r"\d+\.\d{2,}", text), f"the end card carries a number: {text}"
+    """"Nothing else" checked literally, not paraphrased.
+
+    The version this replaced asserted only that the card carried no decimal number,
+    and passed a draft that also carried the project title in 64px serif - which the
+    card's "repo URL, Chinmoy Paul - IIT Guwahati, nothing else" does not allow. Here
+    the rendered text must BE those two strings and nothing besides.
+    """
+    repo = "github.com/chinmoypaul8897/instruction-that-wont-execute"
+    name = "Chinmoy Paul · IIT Guwahati"
+    body = re.search(r"<body>(.*)</body>", endcard, flags=re.S)
+    assert body, "the end card has no body"
+    text = _render(body.group(1))
+    assert text == f"{repo} {name}", f"the end card carries more than the card allows: {text!r}"
 
 
 def test_endcard_has_no_banned_decoration(endcard: str):
@@ -499,10 +582,64 @@ def test_every_caption_segment_is_at_most_22_words():
     slides, cast = bv.parse_script()
     for n, blocks in slides.items():
         for block in blocks:
-            for seg in bv.segment(block):
+            segs = bv.segment(block)
+            # segmentation must be LOSSLESS - a dropped word is the failure this
+            # catches, and bv.segment()'s own assert cannot see it
+            assert " ".join(segs).split() == block.split(), \
+                f"slide {n}: segmentation lost or reordered words"
+            for seg in segs:
                 assert len(seg.split()) <= 22, f"slide {n}: {len(seg.split())} words - {seg}"
-                assert bv.duration(seg) >= 3.0
+                # recomputed here, not read back from bv.duration
+                assert bv.duration(seg) == round(max(3.0, len(seg.split()) / 2.8), 1)
     for block in cast:
         assert len(block.split()) <= 22, f"screencast caption: {len(block.split())} words"
     assert len(slides[12]) == 4, "slide 12's four-step reveal needs exactly four blocks"
     assert slides[1] == [] and slides[15] == [], "slides 1 and 15 carry no caption"
+
+
+def test_the_bar_chart_captions_do_not_claim_measured_harm():
+    """Slide 12 prints a caveat; its captions must not contradict it.
+
+    The slide says in so many words that the single-capability arms are one rep each
+    against a 4.9 pp rep-to-rep spread, so the two negatives are "not distinguishable
+    from no effect, not measured harm". CH-13A's captions said "made it worse" over
+    exactly that line. A caption that asserts what the slide behind it forbids is a
+    wrong result on screen, not a wording preference.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "build_video", REPO / "docs" / "video" / "build_video.py")
+    bv = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bv)
+    captions = " ".join(bv.parse_script()[0][12]).lower()
+    for banned in ("made it worse", "harmed", "hurt", "damaged"):
+        assert banned not in captions, \
+            f"slide 12's captions claim measured harm ({banned!r}) the slide caveats away"
+    assert "no effect" in captions or "not harm" in captions, \
+        "slide 12's captions never state the caveat the slide prints"
+
+
+def test_slide_14_describes_the_page_it_screenshots(slide):
+    """The claim on slide 14 has to be true of docs/worksheet/index.html.
+
+    The first version said "the arm's 23 disagreements with gold are shown, not
+    filtered". 23 is the right count of disagreements, but the page renders ten items
+    and four of them disagree - the sentence was carried over from the worksheet's
+    footer with the qualification that makes it true dropped. CLAUDE.md rule 15: a claim
+    from another document is a claim, not a fact.
+    """
+    worksheet = (REPO / "docs" / "worksheet" / "index.html").read_text(encoding="utf-8")
+    rendered = len(re.findall(r'<section class="item" id="', worksheet))
+    assert rendered == 10, f"the worksheet renders {rendered} items"
+
+    gold = {r["item_id"]: r["label"] for r in _jsonl(EVALSET)}
+    rows = {r["item_id"]: r for r in _jsonl(ARTIFACTS)}
+    misses = sum(1 for i, r in rows.items() if r["verdict"] != gold[i])
+    assert misses == 23, f"the arm misses gold on {misses} items"
+
+    page = slide(14)
+    assert "the ten it renders" in page, "slide 14 does not say how many items are rendered"
+    assert f"{misses} misses against gold are declared" in page
+    assert "all 82 rows ship in the artifacts file" in page
+    assert "disagreements with gold are shown" not in page, \
+        "slide 14 still claims the page shows every disagreement"

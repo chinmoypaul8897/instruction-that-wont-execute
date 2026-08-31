@@ -6,6 +6,11 @@
 <!--
   CH-13B. The last four seconds of the video: repository, name, nothing else.
 
+  "Nothing else" is literal. A first draft carried the project title above the URL,
+  which reads well and is not what the card asked for; an adversarial audit of this
+  chunk caught it, and tests/test_slides.py now checks the clause instead of
+  paraphrasing it.
+
   It is a separate file rather than a sixteenth slide because it is not part of the
   deck - the deck ends on its hot take, and a 16th section would put an attribution
   card into the folio run and into every assertion tests/test_slides.py makes about
@@ -37,9 +42,6 @@ html,body{height:100%;overflow:hidden;background:var(--ink);}
 .mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;}
 .foot{flex:none;}
 .hr{height:1px;background:var(--rule);}
-/* weight 400 to match .headline in the deck - an h1's default bold is the one thing
-   in this file that would not have come from docs/slides/index.html */
-.title{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1.15;}
 .repo{font-family:var(--mono);font-size:30px;line-height:1.4;}
 .who{font-family:var(--mono);font-size:15px;line-height:1.3;text-transform:uppercase;
   letter-spacing:.14em;color:var(--ink-muted);}
@@ -50,8 +52,6 @@ html,body{height:100%;overflow:hidden;background:var(--ink);}
 <div id="stage">
   <div class="page">
     <div class="mid">
-      <h1 class="title">The Instruction<br>That Won't Execute</h1>
-      <div class="gap40"></div>
       <div class="hr"></div>
       <div class="gap24"></div>
       <div class="repo">github.com/chinmoypaul8897/instruction-that-wont-execute</div>

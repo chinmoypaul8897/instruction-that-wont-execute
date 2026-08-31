@@ -1,16 +1,18 @@
 {
-  "duration_s": 270.866667,
+  "duration_s": 270.633333,
   "probe": {
-    "codec_name": "h264",
-    "width": "1920",
-    "height": "1080",
-    "pix_fmt": "yuv420p",
-    "avg_frame_rate": "30/1",
-    "nb_frames": "8126",
-    "sample_rate": "44100",
-    "channels": "2",
-    "duration": "270.866667",
-    "size": "37249921"
+    "v.codec_name": "h264",
+    "v.width": "1920",
+    "v.height": "1080",
+    "v.pix_fmt": "yuv420p",
+    "v.avg_frame_rate": "30/1",
+    "v.nb_frames": "8119",
+    "a.codec_name": "aac",
+    "a.sample_rate": "44100",
+    "a.channels": "2",
+    "f.duration": "270.633333",
+    "f.size": "36771215",
+    "has_audio": true
   },
   "plan": {
     "frames_dir": "dist/frames",
@@ -210,7 +212,7 @@
         "source": "deck",
         "slide": 9,
         "step": 0,
-        "caption": "On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
+        "caption": "In this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
         "words": 18,
         "duration": 6.4,
         "note": ""
@@ -320,8 +322,8 @@
         "source": "deck",
         "slide": 12,
         "step": 1,
-        "caption": "The tool alone made it worse.",
-        "words": 6,
+        "caption": "The tool alone: minus nine point eight points.",
+        "words": 8,
         "duration": 3.0,
         "note": "reveal 1 of 4"
       },
@@ -330,8 +332,8 @@
         "source": "deck",
         "slide": 12,
         "step": 2,
-        "caption": "The procedure alone made it worse.",
-        "words": 6,
+        "caption": "The procedure alone: minus one point two points.",
+        "words": 8,
         "duration": 3.0,
         "note": "reveal 2 of 4"
       },
@@ -350,9 +352,9 @@
         "source": "deck",
         "slide": 12,
         "step": 4,
-        "caption": "Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.",
-        "words": 22,
-        "duration": 7.9,
+        "caption": "One rep each against a 4.9 point spread, so read the negatives as no effect, not harm. Together, they compose.",
+        "words": 20,
+        "duration": 7.1,
         "note": "reveal 4 of 4"
       },
       {
@@ -543,7 +545,7 @@
         "slide": null,
         "step": null,
         "caption": null,
-        "words": 77,
+        "words": 66,
         "duration": null,
         "note": "the recording of docs/worksheet/index.html"
       },
@@ -622,7 +624,7 @@
         "source": "deck",
         "slide": 9,
         "step": 0,
-        "caption": "On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
+        "caption": "In this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.",
         "words": 18,
         "duration": 6.4,
         "note": ""
@@ -732,8 +734,8 @@
         "source": "deck",
         "slide": 12,
         "step": 1,
-        "caption": "The tool alone made it worse.",
-        "words": 6,
+        "caption": "The tool alone: minus nine point eight points.",
+        "words": 8,
         "duration": 3.0,
         "note": "reveal 1 of 4"
       },
@@ -742,8 +744,8 @@
         "source": "deck",
         "slide": 12,
         "step": 2,
-        "caption": "The procedure alone made it worse.",
-        "words": 6,
+        "caption": "The procedure alone: minus one point two points.",
+        "words": 8,
         "duration": 3.0,
         "note": "reveal 2 of 4"
       },
@@ -762,9 +764,9 @@
         "source": "deck",
         "slide": 12,
         "step": 4,
-        "caption": "Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.",
-        "words": 22,
-        "duration": 7.9,
+        "caption": "One rep each against a 4.9 point spread, so read the negatives as no effect, not harm. Together, they compose.",
+        "words": 20,
+        "duration": 7.1,
         "note": "reveal 4 of 4"
       },
       {
@@ -829,86 +831,86 @@
       }
     ],
     "screencast": {
-      "lead_in_s": 1.44,
-      "duration_s": 39.08,
+      "lead_in_s": 0.4,
+      "duration_s": 39.64,
       "captions": [
         {
-          "text": "That system produces this. The real page, opened in a browser, scrolled \u2014 nothing here was drawn for the video.",
-          "words": 20,
+          "text": "That system produces this page. Nothing here is staged.",
+          "words": 9,
           "from": 0.0,
-          "to": 3.4,
-          "duration": 3.4,
+          "to": 3.44,
+          "duration": 3.44,
           "beat": "the top of the page - title, the NOT A FILING band, and what it is drawn from",
           "scroll_y": 0,
-          "wall_clock_hold_s": 3.402
+          "wall_clock_hold_s": 3.413
         },
         {
           "text": "Forty CFR seventy-five point six: the failing designation, and the class of failure.",
           "words": 13,
-          "from": 3.4,
-          "to": 12.36,
-          "duration": 8.96,
+          "from": 3.44,
+          "to": 12.96,
+          "duration": 9.52,
           "beat": "40 CFR 75.6 - the failing designation (a)(38) and its failure class",
           "scroll_y": 2618,
-          "wall_clock_hold_s": 3.003
+          "wall_clock_hold_s": 3.006
         },
         {
           "text": "The trace row where the resolver returned found equals false, and the page saying why.",
           "words": 15,
-          "from": 12.36,
-          "to": 21.32,
-          "duration": 8.96,
+          "from": 12.96,
+          "to": 21.76,
+          "duration": 8.8,
           "beat": "49 CFR 1150.35 - the trace row where cfr_resolve returned found=false, level=none, and the page says why",
           "scroll_y": 7760,
-          "wall_clock_hold_s": 4.003
+          "wall_clock_hold_s": 4.008
         },
         {
           "text": "The human-checkpoint queue. Sixteen of eighty-two, each with the reason it was flagged.",
           "words": 13,
-          "from": 21.32,
-          "to": 31.2,
-          "duration": 9.88,
+          "from": 21.76,
+          "to": 31.72,
+          "duration": 9.96,
           "beat": "the human-checkpoint queue - 16 of 82, each with its reason verbatim",
           "scroll_y": 13007,
-          "wall_clock_hold_s": 4.01
+          "wall_clock_hold_s": 4.006
         },
         {
           "text": "And the provenance footer: both commits, the arm, the model, and a hash for every input.",
           "words": 16,
-          "from": 31.2,
-          "to": 39.08,
-          "duration": 7.88,
+          "from": 31.72,
+          "to": 39.64,
+          "duration": 7.92,
           "beat": "the provenance footer - the three input hashes, both commits, arm and model",
-          "scroll_y": 13711,
-          "wall_clock_hold_s": 3.011
+          "scroll_y": 13871,
+          "wall_clock_hold_s": 3.014
         }
       ],
       "measured_windows": [
         [
-          1.44,
-          4.84
+          0.4,
+          3.84
         ],
         [
-          4.84,
-          13.8
+          3.84,
+          13.36
         ],
         [
-          13.8,
-          22.76
+          13.36,
+          22.16
         ],
         [
-          22.76,
-          32.64
+          22.16,
+          32.12
         ],
         [
-          32.64,
-          40.52
+          32.12,
+          40.04
         ]
       ],
-      "wall_clock_lead_in_s": 1.721,
-      "wall_clock_duration_s": 39.112,
-      "page_height_px": 14791,
-      "scrolled_px": 13711
+      "wall_clock_lead_in_s": 1.798,
+      "wall_clock_duration_s": 39.544,
+      "page_height_px": 14951,
+      "scrolled_px": 13871
     }
   },
   "caption_heights": {

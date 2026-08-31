@@ -66,7 +66,9 @@ td{padding:16px 34px 16px 0;border-bottom:1px solid var(--rule);vertical-align:t
    Off in the deck, on in the video. build_video.py adds body.cap and fills
    #caption before every screenshot, so the caption is rendered INTO the page
    and not burned on afterwards. The band never overlaps the slide: .page and
-   .centre give up 78px more than the band is tall. */
+   .centre stop at bottom:178px against a 150px band, so the content clears it by
+   28px. (An earlier version of this comment said 78px, which is the increase over
+   the 100px default, not the clearance over the band.) */
 #caption{position:absolute;left:0;right:0;bottom:0;height:150px;display:none;
   background:var(--ink);color:var(--paper);padding:26px 120px 0 120px;}
 #caption span{display:block;font-family:var(--serif);font-size:30px;
@@ -122,7 +124,7 @@ body.cap .centre{bottom:178px;}
    still opens from the file alone. docs/video/embed_worksheet_shot.py writes
    it between the markers; tests/test_slides.py decodes it and checks the
    pixel dimensions. */
-.shot{display:block;width:1030px;height:579px;border:1px solid var(--rule);}
+.shot{display:block;width:1027px;height:578px;border:1px solid var(--rule);}
 </style>
 </head>
 <body>
@@ -543,7 +545,7 @@ McNemar exact        p = 0.4421   <span class="muted">b = 11  c = 16</span></div
           <div class="gap12"></div>
 <div class="mono m18 muted">routed to the human-review queue, each with the reason it was flagged, verbatim from the artifact</div>
           <div class="gap32"></div>
-<div class="mono m16 muted">every item on the page carries its resolution trace, the normalisation level each anchor reached, and the SHA-256 of all three inputs &mdash; and the arm's 23 disagreements with gold are shown, not filtered</div>
+<div class="mono m16 muted">every item it renders carries its resolution trace and the normalisation level each anchor reached; the ten it renders are picked by a published deterministic rule, and all 82 rows ship in the artifacts file it names &mdash; the arm's 23 misses against gold are declared in its footer, not filtered away</div>
         </div>
         <div class="vr"></div>
         <div style="flex:1 1 auto;min-width:0;">

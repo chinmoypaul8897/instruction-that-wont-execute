@@ -1,0 +1,130 @@
+CH-13B adversarial audit - 53 agents, 6 dimensions + completeness critic
+
+raised 46   refuted 19   standing 27   critic 6
+
+STANDING FINDINGS (auditor -> refuter, refuter failed to kill it)
+
+ 1. [major   ] numbers          docs/slides/index.html  line 546
+    Slide 14 tells the viewer the worksheet shows all 23 disagreements; the page it screenshots shows 10 items, 4 of which disagree
+
+ 2. [major   ] numbers          docs/evidence/ch13b/timeline.json  line plan.screencast.captions[0]; reported at docs/evidence/ch13b/build-video.txt line 13 and line 17
+    First screencast caption holds 20 words for 3.40 s (353 wpm) - 2.1x faster than the duration rule the deck is built on, and build-video.txt certifies it "OK"
+
+ 3. [minor   ] numbers          docs/slides/index.html  line 546
+    Slide 14 says every item carries "the SHA-256 of all three inputs"; the three hashes appear once, in the page footer
+
+ 4. [minor   ] card-compliance  docs/progress/CH-13B.md  line 167
+    docs/progress/CH-13B.md reports the deck as 182,811 bytes; the file it names is 183,429 bytes and has not been written since 73 minutes before that claim (r14/r16)
+
+ 5. [minor   ] card-compliance  docs/evidence/ch13b/extract_frames.py  line 68 (output at docs/evidence/ch13b/frames-extracted.txt:13)
+    docs/evidence/ch13b/frames-extracted.txt records the screencast frame's caption as "(none)" when the committed PNG plainly carries a burned-in caption
+
+ 6. [minor   ] card-compliance  docs/video/endcard.html  line 53
+    The end card carries the deck title in addition to the repo URL and the name, against the card's "nothing else" — and the test that names the clause does not check it
+
+ 7. [minor   ] card-compliance  docs/slides/script.md  line 155 and 157
+    The bar-chart reveal captions assert measured harm that the caveat line printed on the same slide explicitly forbids
+
+ 8. [cosmetic] card-compliance  docs/progress/CH-13B.md  line 317
+    docs/progress/CH-13B.md §9 quotes a frame offset (217.48 s) that disagrees with the committed evidence file it cites, written two minutes earlier
+
+ 9. [blocker ] tests            tests/test_slides.py  line 155 (img dropped from the media ban) + 166 (replacement regex)
+    The <img> ban replacement is NOT strictly stronger: a single-quoted src escapes the new pair entirely (hard rule 5)
+
+10. [major   ] tests            tests/test_slides.py  line 155, 166
+    srcset bypasses both halves of the offline check; the old <img> ban caught it
+
+11. [major   ] tests            tests/test_slides.py  line 26-28
+    The docstring's stated warrant for weakening the rule is false and checkably so
+
+12. [minor   ] tests            tests/test_slides.py  line 425-430
+    test_caption_band_exists_and_is_off_by_default does not test off-by-default, nor the band's size, colours or margin
+
+13. [minor   ] tests            tests/test_slides.py  line 503-504
+    The 3.0 s floor assertion in the caption test is constant-true; the 22-word assertion re-asserts the code's own assert
+
+14. [minor   ] design-system    docs/slides/index.html  line 125 (.shot{display:block;width:1030px;...})
+    Slide 14 is the only slide in the deck whose content crosses the 120px margin — the screenshot overhangs the hairline by 3px
+
+15. [minor   ] design-system    docs/video/endcard.html  line 53 (<h1 class="title">) and 55 (<div class="hr">); test at tests/test_slides.py:460
+    The end card carries a 64px headline the card said must not be there, and the test rewrote 'nothing else' to permit it
+
+16. [cosmetic] design-system    docs/slides/script.md  line 123
+    A grammar error is burned into 6.4 seconds of the finished video
+
+17. [major   ] pipeline         docs/video/build_video.py  line 380 (enable clause); 284-285 (start/stop derivation)
+    drawtext `between()` is inclusive at both ends, so adjacent screencast captions are drawn on top of each other on the boundary frame — visible in the shipped MP4
+
+18. [major   ] pipeline         docs/video/build_video.py  line 284-285 (start/stop = windows[k]); 293-294 (wall_clock_hold_s computed and then unused); docs/video/record_worksheet.js:140-144
+    Screencast caption windows cover the scroll TOWARD each beat, not the hold on it — the caption is over the section it names only 34-44% of the time, and the exact symptom the probe claims to have fixed is still in the shipped file
+
+19. [major   ] pipeline         docs/video/build_video.py  line 413-418 (out.setdefault); 480-481 (the report line)
+    The audio stream is never measured — `probe()` drops the audio codec through a dict-key collision and the report prints a hard-coded "aac" even when the file has no audio at all
+
+20. [minor   ] pipeline         docs/video/build_video.py  line 65
+    TEXT_Y=959 does not match the browser's first-line box as its comment asserts; the caption jumps 6px when the video cuts to the screencast
+
+21. [major   ] fence-and-claims docs/slides/script.md  line 87-89
+    script.md tells the reader the screencast caption timings come out of worksheet.json; build_video.py deliberately ignores that file's offsets and reads them off the tape
+
+22. [major   ] fence-and-claims docs/video/record_worksheet.js  line 17-18
+    record_worksheet.js and build_video.py's own module docstring both claim the sidecar's measured offsets are what everything downstream uses — build_video.py says the opposite 265 lines later
+
+23. [major   ] fence-and-claims docs/video/build_video.py  line 480
+    The report line "audio stream aac" is a hardcoded literal, not a measurement — it would print "aac" for a file with no audio stream
+
+24. [major   ] fence-and-claims tests/test_slides.py  line 22-28
+    The test docstring justifies dropping the <img> ban with a false statement about what the old rule caught
+
+25. [cosmetic] fence-and-claims docs/slides/index.html  line 68-69
+    The deck's caption-band CSS comment states the wrong clearance arithmetic
+
+26. [cosmetic] fence-and-claims docs/slides/script.md  line 27
+    script.md says two frames carry no caption; three do, and the same file names the third nine lines later
+
+27. [cosmetic] fence-and-claims docs/video/build_video.py  line 440
+    Dead variable in build_video.py
+
+
+COMPLETENESS CRITIC - what nobody checked
+
+ 1. [major   ] docs/video/build_video.py
+    Nobody checked what the opaque caption band DESTROYS on the screencast: it covers page content on all five beats, and at the last beat it erases the worksheet's entire "What this page is not" limitations paragraph, which is never visible anywhere else in the video
+
+ 2. [major   ] docs/video/endcard.html
+    Nobody compared the first frame of the video with the last: the top third is pixel-identical, and the repo URL - the only actionable thing in the whole submission - is on screen for 4.0 s of 270.87 s and appears nowhere else
+
+ 3. [minor   ] docs/video/build_video.py
+    Nobody probed the source recording: it is 25 fps, pulled up to 30 fps by frame duplication, so ~1 frame in 6 repeats during every scroll - the judder is on 14% of the video and is undisclosed and unmeasured
+
+ 4. [minor   ] docs/slides/index.html
+    Nobody measured how much of the caption band is actually filled: every caption in the finished video is a single line, so 150 px of black bar carries 43.5 px of top-aligned text and ~86 px of empty ink under it, for the whole 4:31
+
+ 5. [minor   ] docs/slides/script.md
+    The video shows the worksheet twice and delivers "16 of 82" twice - a 39 s live screencast of the page at t=69-108, then a 12.8 s still screenshot of the same page at t=242-255 (the card's Standard question 5, answered wrongly)
+
+ 6. [cosmetic] dist/plan.json
+    The video's last 15.8 seconds carry no caption at all - 5.8% of the running time, all of it at the end, on frames the sound-off viewer has the least reason to keep watching
+
+
+REFUTED (raised, then killed by an independent verifier)
+
+ 1. Slide 11: "v1 missed by 9.1 pp" - the artifact gives 9.0 pp
+ 2. Bar chart: the "-9.8" value label is drawn entirely to the left of the -10 axis tick
+ 3. The screencast captions are anchored to the start of each SCROLL, not the hold — 55–67% of every screencast caption's screen time sits over the wrong section, which is the exact defect §2b of the progress file claims to have fixed
+ 4. Probe B samples only at `to - 1.0`, one second before each caption window ENDS — the single instant inside the hold where alignment is guaranteed by construction — so its "5 of 5 correct at every drift" cannot see the misalignment that shipped (r6)
+ 5. docs/progress/CH-13B.md §6.4 claims the screencast hold times are "as the storyboard asks"; the card's storyboard asks 2 s for beat 1, not 3.4 s
+ 6. Slide 14's embedded screenshot puts ~500 colours on screen, and the five-colour guard cannot see any of them
+ 7. The 39-second screencast — 14% of the running time — is shot in a design system the card bans: rounded cards, a box-shadow, four semantic colours, Palatino body text and bold weights
+ 8. The worksheet screenshot on slide 14 is illegible — 1920px of page crushed into 1030px, body text renders at ~8px
+ 9. Slide 14's screenshot shows the worksheet's front matter, not the trace or the review queue the slide's own copy claims it shows
+10. docs/progress/CH-13B.md was never created, so none of the design-system deviations above are recorded anywhere
+11. Probe A's OLD branch is a straw man: 100% of the measured "drift" comes from the tail-repeat line the probe itself adds, and the documented root cause ("the image demuxer carries a frame duration of its own") is a misdiagnosis
+12. The "re-runnable, deterministic" pipeline hard-codes C:/Windows/Fonts/georgia.ttf and never refreshes the cached copy
+13. Beat-marker classification has an overlapping tolerance band and hard-crashes on any intermediate grey; MARK_LEVELS is not tied to the storyboard length
+14. The band-overflow guard is vacuous on the real content and covers none of the ffmpeg-drawn captions, so the "no clipped word" promise holds only for the frames that never risked one
+15. The probe's headline drift figure contradicts its own worked numbers and its own measured output: 69.0s -> 74.7s is +8.3%, not 4.2%, and the probe measures +39.5%
+16. The suite's assertion of the 3.0s caption floor is a tautology that can never fail
+17. script.md points the reader at docs/progress/CH-13B.md for the measured total; that file does not exist
+18. Scope fence: docs/worksheet/index.html, a read-only path, was rewritten during the session (content unchanged)
+19. endcard.html claims the deck is asserted to carry no URL scheme anywhere; it ships a data: scheme and the assertion only covers three literals

@@ -12,13 +12,15 @@
 // so the recording can be checked against the page rather than described.
 // dist/ is git-ignored.
 //
-// The sidecar matters. Playwright starts recording when the context opens, which is
-// before the page has loaded, so the raw .webm carries several seconds of lead-in.
-// build_video.py trims with the MEASURED offset out of worksheet.json rather than a
-// hand-picked -ss, and the caption timings are shifted by the same number.
+// The sidecar records what the WALL CLOCK saw. build_video.py does NOT trim or time the
+// captions from it - an earlier version of this comment said it did, and that was the
+// bug. Playwright's capture drops frames under load, so wall-clock offsets do not map
+// onto video time; the tape's own beat stamp (see MARK below) is what the builder reads.
+// The sidecar survives so the report can print both clocks side by side.
 //
-// The page is 14,791px tall at this viewport, so the scrolling is real: the
-// recording covers about 13,700px of a document that does not fit on any screen.
+// The page is 14,791px tall at this viewport - 14,951 with the tail spacer below - so
+// the scrolling is real: the recording travels about 13,870px of a document that does
+// not fit on any screen. The script prints both figures; do not trust these.
 
 const path = require('path');
 const fs = require('fs');
@@ -44,6 +46,16 @@ const VIEW = { width: 1920, height: 1080 };
 const MARK = { x: 0, y: 1000, w: 120, h: 80 };
 const MARK_LEVELS = [20, 70, 120, 170, 220];
 const MARK_IDLE = 255;
+
+// The caption band is opaque and covers the bottom 150px of every recorded frame. At the
+// final scroll position that strip lands on page y 14641-14791, and the worksheet's LAST
+// paragraph - "What this page is not. It is not a filing, not a legal opinion, and not a
+// reviewed document." - sits at 14692-14734. The band was erasing the one paragraph in
+// the artifact that states its own limits, in a submission whose whole argument is that
+// limits get stated. So the page is given 160px of scrollable air at the foot; the
+// assertion below proves the paragraph then clears the band instead of assuming it.
+const BAND_H = 150;
+const TAIL_SPACER_PX = 160;
 
 // The storyboard. Each leg names what the viewer is meant to be reading, how long
 // the scroll to it takes, and how long the page then holds still.
@@ -117,13 +129,32 @@ async function glide(page, toY, ms) {
     // Kill smooth-scroll if the page ever asks for it: the glide below owns the
     // motion, and two easings fighting each other reads as a stutter.
     document.documentElement.style.scrollBehavior = 'auto';
+    const spacer = document.createElement('div');
+    spacer.id = '__bandspacer';
+    spacer.style.cssText = `height:${mark.tail}px`;
+    document.body.appendChild(spacer);
     const el = document.createElement('div');
     el.id = '__beatmark';
     el.style.cssText = `position:fixed;left:${mark.x}px;top:${mark.y}px;`
       + `width:${mark.w}px;height:${mark.h}px;z-index:2147483647;`
       + `background:rgb(${mark.idle},${mark.idle},${mark.idle})`;
     document.body.appendChild(el);
-  }, { ...MARK, idle: MARK_IDLE });
+  }, { ...MARK, idle: MARK_IDLE, tail: TAIL_SPACER_PX });
+
+  // measured, not assumed: the last footer paragraph must clear the band at max scroll
+  const tail = await page.evaluate((bandH) => {
+    const ps = [...document.querySelectorAll('footer p')];
+    const last = ps[ps.length - 1];
+    const bottom = last.getBoundingClientRect().bottom + window.scrollY;
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+    return { bottom, bandCoversFrom: maxY + (1080 - bandH),
+             text: last.textContent.trim().slice(0, 40) };
+  }, BAND_H);
+  if (tail.bottom >= tail.bandCoversFrom) {
+    throw new Error(`the caption band would cover the worksheet's last paragraph `
+      + `("${tail.text}...": ends at ${tail.bottom}, band starts at ${tail.bandCoversFrom}) `
+      + `- raise TAIL_SPACER_PX`);
+  }
 
   const height = await page.evaluate(() => document.documentElement.scrollHeight);
   await page.waitForTimeout(600);          // let the first paint settle before beat 1
@@ -175,6 +206,8 @@ async function glide(page, toY, ms) {
   fs.writeFileSync(path.join(OUT_DIR, 'worksheet.json'), JSON.stringify(sidecar, null, 2));
 
   console.log(`page height        ${height}px at ${VIEW.width}x${VIEW.height}`);
+  console.log(`tail spacer        ${TAIL_SPACER_PX}px, so the band clears the last `
+    + `paragraph by ${Math.round(tail.bandCoversFrom - tail.bottom)}px`);
   console.log(`lead-in measured   ${(leadInMs / 1000).toFixed(2)}s (trimmed off by build_video.py)`);
   console.log(`scrolled through   ${started[started.length - 1].y}px`);
   console.log(`measured duration  ${(elapsed - leadInMs / 1000).toFixed(2)}s after the trim`);
