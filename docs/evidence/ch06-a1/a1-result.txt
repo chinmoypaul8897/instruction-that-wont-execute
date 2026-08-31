@@ -25,7 +25,7 @@ THE ARMS
   arm              reps      acc    succ/n  false-def  missed-def  unparse
   B0                  3   0.4756   39/82       0.1220      0.9268        3
   B0-agent            3   0.6585   54/82       0.1951      0.4878        0
-  B0prime             1   0.6585   54/82       0.1951      0.4878        0
+  B0prime             1   0.6585   54/82       0.2195      0.4634        0
   A1-iter1            1   0.5610   46/82       0.4878      0.3902        2
   A1-minus-tool       1   0.6463   53/82       0.3415      0.3659        0
   A1                  3   0.7195   59/82       0.2195      0.3415        0
@@ -33,7 +33,7 @@ THE ARMS
   guards, per arm, NEVER blended - CONTEXT.md section 7, thresholds not moved:
     B0               false-defect 0.1220 <= 0.25 PASS   missed-defect 0.9268 <= 0.25 FAIL
     B0-agent         false-defect 0.1951 <= 0.25 PASS   missed-defect 0.4878 <= 0.25 FAIL
-    B0prime          false-defect 0.1951 <= 0.25 PASS   missed-defect 0.4878 <= 0.25 FAIL
+    B0prime          false-defect 0.2195 <= 0.25 PASS   missed-defect 0.4634 <= 0.25 FAIL
     A1-iter1         false-defect 0.4878 <= 0.25 FAIL   missed-defect 0.3902 <= 0.25 FAIL
     A1-minus-tool    false-defect 0.3415 <= 0.25 FAIL   missed-defect 0.3659 <= 0.25 FAIL
     A1               false-defect 0.2195 <= 0.25 PASS   missed-defect 0.3415 <= 0.25 FAIL
@@ -49,7 +49,7 @@ PER-CLASS RECALL - CONTEXT.md section 11: the average will lie to you
   arm                 WILL_FAIL   WILL_EXECUTE        delta vs B0-agent
   B0                     0.0732         0.8780     -43.9 pp /   +7.3 pp
   B0-agent               0.5122         0.8049                         
-  B0prime                0.5122         0.8049      +0.0 pp /   +0.0 pp
+  B0prime                0.5366         0.7805      +2.4 pp /   -2.4 pp
   A1-iter1               0.6098         0.5122      +9.8 pp /  -29.3 pp
   A1-minus-tool          0.6341         0.6585     +12.2 pp /  -14.6 pp
   A1                     0.6585         0.7805     +14.6 pp /   -2.4 pp
@@ -65,7 +65,7 @@ THE COMPARISON - each arm against B0-agent, PAIRED
 
   B0prime  vs  B0-agent 0.6585
     accuracy 0.6585   gap +0.0 pp
-    McNemar exact two-sided p = 1.0000   (b=0 c=0 discordant=0)
+    McNemar exact two-sided p = 1.0000   (b=1 c=1 discordant=2)
     95% CI on accuracy, bootstrap CLUSTERED BY FR DOCUMENT, seed 20260831: [0.5385, 0.7703]
 
   A1-iter1  vs  B0-agent 0.6585
@@ -193,16 +193,16 @@ PER-ARM TOKENS AND COST - docs/evidence/runs/cost_ledger.csv
   arm                 calls    input tok  output tok       USD  USD/item    wall s
   A1                    249    4,006,662     265,354    5.3334   0.02142    2516.1
   A1-iter1               82      944,767      67,840    1.2840   0.01566     763.9
-  A1-minus-tool          84      593,843      26,648    0.7271   0.00866     341.6
+  A1-minus-tool         164    1,158,758      51,746    1.4175   0.00864     665.0
   B0                    474      184,275       3,952    0.2040   0.00043     876.4
   B0-agent              474    1,453,863       3,816    1.4729   0.00311     475.2
   B0-agent-currenttext     82      259,727         656    0.2630   0.00321      81.5
   B0-agent-sonnet        40      100,784         584    0.2074   0.00519      70.0
   B0-sonnet              40       22,936         500    0.0509   0.00127      61.7
-  B0prime               246      688,701       2,160    0.6995   0.00284     252.4
+  B0prime               492    1,377,402       4,288    1.3988   0.00284     505.1
   probe-model-id         10          102          28    0.0003   0.00003      11.7
-  TOTAL                                                10.2425
-  ceiling USD 18.00, enforced in src/runlog.py. Remaining: 7.7575
+  TOTAL                                                11.6323
+  ceiling USD 18.00, enforced in src/runlog.py. Remaining: 6.3677
   ledger rows with an EMPTY cost cell: 3   (unknown is not the same claim as free)
 
 ==============================================================================

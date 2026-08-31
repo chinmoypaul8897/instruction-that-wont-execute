@@ -93,9 +93,9 @@
       },
       "gap_pp": 0.0,
       "mcnemar": {
-        "b_only_a_correct": 0,
-        "c_only_b_correct": 0,
-        "n_discordant": 0,
+        "b_only_a_correct": 1,
+        "c_only_b_correct": 1,
+        "n_discordant": 2,
         "p_value": 1.0,
         "test": "exact two-sided binomial (McNemar)"
       }
@@ -119,12 +119,12 @@
       "wall": 763.9499999999999
     },
     "A1-minus-tool": {
-      "in": 593843,
-      "out": 26648,
-      "rows": 84,
+      "in": 1158758,
+      "out": 51746,
+      "rows": 164,
       "unknown_cost": 0,
-      "usd": 0.727083,
-      "wall": 341.5900000000001
+      "usd": 1.417488,
+      "wall": 664.9779999999998
     },
     "B0": {
       "in": 184275,
@@ -167,12 +167,12 @@
       "wall": 61.70099999999998
     },
     "B0prime": {
-      "in": 688701,
-      "out": 2160,
-      "rows": 246,
+      "in": 1377402,
+      "out": 4288,
+      "rows": 492,
       "unknown_cost": 0,
-      "usd": 0.699501,
-      "wall": 252.3769999999998
+      "usd": 1.398842,
+      "wall": 505.1180000000003
     },
     "probe-model-id": {
       "in": 102,
@@ -247,14 +247,14 @@
     },
     "B0prime": {
       "WILL_EXECUTE": {
-        "correct": 33,
+        "correct": 32,
         "n": 41,
-        "recall": 0.8048780487804879
+        "recall": 0.7804878048780488
       },
       "WILL_FAIL": {
-        "correct": 21,
+        "correct": 22,
         "n": 41,
-        "recall": 0.5121951219512195
+        "recall": 0.5365853658536586
       }
     }
   },
@@ -347,14 +347,14 @@
     "B0prime": {
       "accuracy": 0.6585365853658537,
       "failure": 28,
-      "false_defect_count": 8,
-      "false_defect_rate": 0.1951219512195122,
+      "false_defect_count": 9,
+      "false_defect_rate": 0.21951219512195122,
       "guard_false_defect_max": 0.25,
       "guard_false_defect_pass": true,
       "guard_missed_defect_max": 0.25,
       "guard_missed_defect_pass": false,
-      "missed_defect_count": 20,
-      "missed_defect_rate": 0.4878048780487805,
+      "missed_defect_count": 19,
+      "missed_defect_rate": 0.4634146341463415,
       "n": 82,
       "n_negatives": 41,
       "n_positives": 41,

@@ -72,7 +72,7 @@
     "2025-00723|742.6": "WILL_FAIL",
     "2025-00723|758.1": "WILL_EXECUTE",
     "2025-17122|10.224": "WILL_FAIL",
-    "2025-17122|10.237": "WILL_EXECUTE",
+    "2025-17122|10.237": "WILL_FAIL",
     "2025-20831|886.12": "WILL_FAIL",
     "2025-20831|887.11": "WILL_EXECUTE",
     "2026-03157|1037.205": "WILL_EXECUTE",
@@ -82,7 +82,7 @@
     "2026-08556|682.405": "WILL_EXECUTE",
     "2026-08556|685.303": "WILL_EXECUTE",
     "2026-11140|149.140": "WILL_EXECUTE",
-    "2026-11140|149.510": "WILL_EXECUTE",
+    "2026-11140|149.510": "WILL_FAIL",
     "2026-11648|250.108": "WILL_FAIL",
     "2026-11648|250.1202": "WILL_EXECUTE",
     "E6-15282|180.207": "WILL_FAIL",
@@ -94,6 +94,6 @@
   "tie_break": "WILL_FAIL (published before the run; same rule as rep aggregation; conservative direction for a defect detector)",
   "usage": {
     "in": 688701,
-    "out": 2160
+    "out": 2128
   }
 }

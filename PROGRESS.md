@@ -86,9 +86,10 @@ argument. Instead the v2 skill compensates **in the open** — Step 2.5 tells th
 own tool has a measured blind spot and how to check around it.
 
 **3 · `B0′` is named and run, and it settles the first objection anyone will raise.**
-`0.6585` — **b = c = 0**, meaning it produced the **identical answer on all 82 items** as
-B0-agent, although 26 of them had samples that disagreed. Self-consistency converges to
-the greedy answer. **The gain is the capabilities, not the budget.** It runs at
+`0.6585` against B0-agent's `0.6585` — **b = 1, c = 1**: it differs on just **2 of 82
+items and the two flips cancel exactly**, while 26 items had samples that disagreed with
+each other. Self-consistency converges to the greedy answer. **The gain is the
+capabilities, not the budget.** It runs at
 temperature 1.0 because at 0 self-consistency is a no-op (Q22); it is the only arm not at
 t=0 and that is stated everywhere it appears.
 
@@ -109,7 +110,7 @@ re-bundled to 984 records, four regression tests added.
 binding, both reported · **Q21** Class A, the resolver defect, escalated · **Q22** `B0′`
 cannot exist at t=0 · **Q23** `CONTEXT.md` §6's `833/1,984 = 42.0%` **does not reproduce
 and sits above the ceiling of the loosest reading** · **Q24 RAISED AND RETRACTED SEVEN
-MINUTES LATER** — see below.
+MINUTES LATER** — see below · **Q25** the tracked tree is **59.4 MB against a 50 MB submission cap** and the guard built to prevent that has never checked total size · **Q26** two arms accidentally **run twice**, ~USD 1.43, 651 duplicated `run_id`s, no published number moved.
 
 ### The mistake this session made, and published
 
@@ -159,7 +160,13 @@ now carrying a measured — and non-reproducing — class size.
 - **CH-04 has one strike.** A second FAIL hits the limit and escalates, as CH-03 did.
 - **The blind human-time study is reserved and runnable** — 8 items, 4/4 balanced, blind
   brief and worksheet emitted, answers sealed. Operator task, ~30 minutes.
-- **Spend USD 10.24 of the 18.00 ceiling. USD 7.76 remains.**
+- **Spend USD 11.63 of the 18.00 ceiling; USD 6.37 remains.** That includes **~USD 1.43
+  wasted** — `A1-minus-tool` and `B0prime` were each run twice because I launched a
+  second job for work already queued in the first, acting on the false timing premise
+  that Q24 retracted. **`QUESTIONS.md` Q26.** No published number moved: the two runs
+  agree on every item for `A1-minus-tool` and on 80 of 82 for `B0prime`, with the two
+  differences cancelling. The ledger now carries **651 duplicated `run_id` values**, and
+  `src/runlog.py` should refuse or suffix a duplicate rather than overwrite a trajectory.
 
 ---
 

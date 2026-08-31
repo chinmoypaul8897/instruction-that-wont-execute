@@ -98,7 +98,7 @@ advanced solution."*
 
 | id | calls | USD | why |
 |---|---:|---:|---|
-| `claude-haiku-4-5-20251001` | 756 | 8.4120 | every A1 arm and both ablations, temperature 0 — the same model as every baseline (`CONTEXT.md` §4) |
+| `claude-haiku-4-5-20251001` | 1,069 | 9.6967 | every A1 arm and both ablations, temperature 0 — the same model as every baseline (`CONTEXT.md` §4) |
 
 **Arms run by this session, per-arm, from the ledger:**
 
@@ -106,10 +106,10 @@ advanced solution."*
 |---|---:|---:|---:|---:|---:|---:|
 | `A1` | 249 | 4,006,662 | 265,354 | 5.3334 | 2516 | 0 |
 | `A1-iter1` | 82 | 944,767 | 67,840 | 1.2840 | 764 | 0 |
-| `A1-minus-tool` | 97 | 671,332 | 32,157 | 0.8321 | 404 | 0 |
-| `B0prime` | 246 | 688,701 | 2,160 | 0.6995 | 252 | 0 |
+| `A1-minus-tool` | 164 | 1,158,758 | 51,746 | 1.4175 | 665 | 0 |
+| `B0prime` | 492 | 1,377,402 | 4,288 | 1.3988 | 505 | 0 |
 | `B0-agent-currenttext` | 82 | 259,727 | 656 | 0.2630 | 81 | 0 |
-| **this session** | | | | **8.4120** | | |
+| **this session** | | | | **9.6967** | | |
 
 **Subagents: one.** An independent adversarial **CH-04 gate reviewer**, `claude-opus-5`, spawned with zero shared context and given only `CLAUDE.md`, `CONTEXT.md` §7, `plan.md`'s CH-04 card and the diff — explicitly *not* this
 project's own account of its work. It returned **FAIL with 16 findings**, reimplemented the scorer from the specification prose alone, and mutation-tested `src/score.py` sixteen times, restoring it byte-for-byte after each. Its verdict is `docs/reviews/REVIEW_CH-04.md`; its probes are kept at `docs/reviews/ch04-probe/`. **Nothing it found was taken on trust** — finding F3 was independently checked against the repository before this session acted on it.
@@ -120,7 +120,7 @@ project's own account of its work. It returned **FAIL with 16 findings**, reimpl
 
 **One published number was retracted by this session, seven minutes after it was published.** `QUESTIONS.md` **Q24** asserted a run duration that had been estimated from a sense of how much work had happened rather than read from the ledger's own `wall_clock_s` column. It was wrong by a factor of eight and the scheduling contingency built on it was unnecessary. The entry is kept unedited with the retraction beside it.
 
-**Cost: USD 8.4120 for this session; USD 10.3476 committed in total against the 18.00 ceiling**, 1,794 logged runs, 3 of unknown cost carrying an empty cell rather than a zero.
+**Cost: USD 9.6967 for this session; USD 11.6323 committed in total against the 18.00 ceiling**, 2,107 logged runs, 3 of unknown cost carrying an empty cell rather than a zero.
 
 ### NIGHT-RUN · 2026-08-31 · Claude Code · `claude-opus-5` · BUILD, UNATTENDED · **CH-03 FAILED then FIXED · CHECKPOINT GREEN**
 

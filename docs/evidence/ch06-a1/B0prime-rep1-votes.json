@@ -5,7 +5,7 @@
     "WILL_EXECUTE"
   ],
   "05-8447|75.6": [
-    "WILL_EXECUTE",
+    "I need to check each amendatory instruction against the section text.\n\n**",
     "WILL_FAIL",
     "WILL_FAIL"
   ],
@@ -17,7 +17,7 @@
   "2011-27587|80.917": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "I need to analyze whether the amendatory instructions can be executed against the CFR"
+    "WILL_EXECUTE"
   ],
   "2015-01571|1942.3": [
     "WILL_FAIL",
@@ -27,7 +27,7 @@
   "2015-01571|1942.8": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "WILL_FAIL"
+    "WILL_EXECUTE"
   ],
   "2015-15249|87.305": [
     "WILL_EXECUTE",
@@ -60,13 +60,13 @@
     "WILL_EXECUTE"
   ],
   "2016-09949|1436.3": [
-    "WILL_FAIL",
+    "WILL_EXECUTE",
     "WILL_EXECUTE",
     "WILL_EXECUTE"
   ],
   "2016-09949|1436.8": [
-    "WILL_FAIL",
     "WILL_EXECUTE",
+    "WILL_FAIL",
     "WILL_EXECUTE"
   ],
   "2016-13651|425.606": [
@@ -85,19 +85,19 @@
     "WILL_EXECUTE"
   ],
   "2016-13983|165.518": [
-    "WILL_FAIL\n\nThe instruction attempts to remove \"Baltimore to\" from",
     "WILL_FAIL",
-    "WILL_FAIL\n\nThe instruction attempts to remove \"Baltimore to\" from"
+    "I need to check if both parts of this instruction can be executed.\n\n**",
+    "WILL_FAIL"
   ],
   "2016-16399|125.11": [
-    "WILL_EXECUTE",
+    "WILL_FAIL",
     "WILL_EXECUTE",
     "WILL_EXECUTE"
   ],
   "2016-16399|125.6": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "I need to check if the instructions can be executed against the section text."
+    "WILL_EXECUTE"
   ],
   "2016-18075|766.102": [
     "WILL_FAIL",
@@ -107,7 +107,7 @@
   "2016-18075|774.17": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "WILL_FAIL"
+    "WILL_EXECUTE"
   ],
   "2016-23968|236.2": [
     "WILL_EXECUTE",
@@ -115,8 +115,8 @@
     "WILL_EXECUTE"
   ],
   "2016-23968|236.4": [
-    "I need to check each instruction against the provided CFR text.\n\n1.",
-    "I need to check each instruction against the section text to see if they can all",
+    "WILL_FAIL",
+    "WILL_FAIL",
     "WILL_FAIL"
   ],
   "2017-23953|425.404": [
@@ -125,14 +125,14 @@
     "WILL_EXECUTE"
   ],
   "2017-23953|425.500": [
+    "WILL_FAIL\n\nThe second instruction (b) contains an error.",
     "WILL_FAIL",
-    "WILL_FAIL",
-    "WILL_FAIL"
+    "I need to check each amendatory instruction against the CFR section text."
   ],
   "2019-07652|1.199A-0": [
-    "I need to check if these two amendatory instructions can be executed against the section",
     "WILL_FAIL",
-    "WILL_FAIL"
+    "WILL_FAIL",
+    "I need to check if these amendatory instructions can be executed against the section text"
   ],
   "2019-07652|1.199A-1": [
     "WILL_EXECUTE",
@@ -146,7 +146,7 @@
   ],
   "2019-15131|217.22": [
     "WILL_FAIL",
-    "I need to check if the amendatory instruction can be executed. The instruction states",
+    "WILL_FAIL",
     "WILL_FAIL"
   ],
   "2020-04776|210.3-10": [
@@ -157,26 +157,26 @@
   "2020-04776|210.8-01": [
     "WILL_FAIL",
     "WILL_FAIL",
-    "WILL_FAIL\n\nThe instruction states \"by revising Note 3"
+    "WILL_FAIL"
   ],
   "2020-11897|90.205": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "I need to check whether the amendatory instruction to revise paragraph (k)"
+    "I need to check if the amendatory instruction can be executed against the current section"
   ],
   "2020-11897|90.209": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "WILL_FAIL"
+    "WILL_EXECUTE"
   ],
   "2020-11897|90.210": [
     "WILL_EXECUTE",
-    "WILL_EXECUTE",
+    "WILL_FAIL",
     "WILL_EXECUTE"
   ],
   "2020-11897|90.213": [
-    "I need to check whether the amendatory instruction can be executed against the CFR",
     "WILL_FAIL",
+    "WILL_EXECUTE",
     "WILL_FAIL"
   ],
   "2020-11897|90.601": [
@@ -190,9 +190,9 @@
     "WILL_EXECUTE"
   ],
   "2020-12588|63.7141": [
-    "I need to check whether the instruction to revise paragraph (c) can be",
+    "I need to check if the amendatory instruction can be executed against the section text",
     "WILL_EXECUTE",
-    "WILL_EXECUTE"
+    "I need to check if the amendatory instruction can be executed against the CFR"
   ],
   "2020-12588|63.7831": [
     "WILL_EXECUTE",
@@ -207,7 +207,7 @@
   "2020-17090|9.5": [
     "WILL_FAIL",
     "WILL_FAIL",
-    "I need to check each amendatory instruction against the section text provided.\n\n**"
+    "WILL_FAIL"
   ],
   "2020-21774|1324.11": [
     "WILL_EXECUTE",
@@ -216,8 +216,8 @@
   ],
   "2020-21774|1328.5": [
     "WILL_EXECUTE",
-    "I need to check each amendatory instruction against the section text to see if they",
-    "WILL_EXECUTE"
+    "I need to check each instruction against the section text to verify they can be executed",
+    "I need to check each amendatory instruction against the section text to see if they"
   ],
   "2020-25236|232.11": [
     "WILL_EXECUTE",
@@ -236,7 +236,7 @@
   ],
   "2021-04453|556.360": [
     "WILL_FAIL",
-    "WILL_FAIL",
+    "WILL_FAIL\n\nThe instruction attempts to add \"520.1265",
     "WILL_FAIL"
   ],
   "2022-10875|1653.1": [
@@ -275,12 +275,12 @@
     "WILL_EXECUTE"
   ],
   "2024-07002|63.485": [
-    "I need to check if each amendatory instruction can be executed against the section text",
     "WILL_EXECUTE",
-    "WILL_EXECUTE"
+    "WILL_EXECUTE",
+    "I need to verify that each amendatory instruction can be executed against the CFR"
   ],
   "2024-17239|76.500": [
-    "I need to check if the amendatory instructions can be executed against the section text",
+    "WILL_EXECUTE",
     "WILL_FAIL",
     "WILL_FAIL"
   ],
@@ -295,9 +295,9 @@
     "WILL_EXECUTE"
   ],
   "2024-21984|1321.9": [
+    "WILL_FAIL\n\nThe instruction contains multiple errors:\n\n1. The",
     "WILL_FAIL",
-    "WILL_FAIL",
-    "WILL_FAIL"
+    "I need to verify each instruction against the section text.\n\n**Instruction"
   ],
   "2024-30575|247.9": [
     "WILL_FAIL",
@@ -307,7 +307,7 @@
   "2024-30575|253.6": [
     "WILL_FAIL",
     "WILL_FAIL",
-    "I need to analyze whether the amendatory instructions can be executed against the section text"
+    "WILL_FAIL"
   ],
   "2025-00723|740.6": [
     "WILL_EXECUTE",
@@ -315,13 +315,13 @@
     "WILL_EXECUTE"
   ],
   "2025-00723|742.4": [
+    "WILL_FAIL\n\nThe instruction attempts to revise paragraph (b)(",
     "WILL_FAIL",
-    "WILL_FAIL",
-    "WILL_FAIL"
+    "WILL_FAIL\n\nThe instruction attempts to revise paragraph (b)("
   ],
   "2025-00723|742.6": [
     "WILL_FAIL",
-    "WILL_FAIL",
+    "WILL_FAIL\n\nThe instruction attempts to add paragraph (a)(13",
     "WILL_FAIL"
   ],
   "2025-00723|758.1": [
@@ -335,14 +335,14 @@
     "WILL_FAIL"
   ],
   "2025-17122|10.237": [
+    "WILL_FAIL",
     "WILL_EXECUTE",
-    "WILL_EXECUTE",
-    "WILL_EXECUTE"
+    "WILL_FAIL"
   ],
   "2025-20831|886.12": [
-    "I need to check if the amendatory instruction can be executed against the CFR",
+    "WILL_FAIL\n\nThe instruction to revise paragraph (c) is",
     "WILL_FAIL",
-    "I need to check if the amendatory instruction can be executed against the section text"
+    "WILL_FAIL"
   ],
   "2025-20831|887.11": [
     "WILL_EXECUTE",
@@ -350,14 +350,14 @@
     "WILL_EXECUTE"
   ],
   "2026-03157|1037.205": [
+    "I need to check each instruction against the section text to see if they can be",
     "WILL_EXECUTE",
-    "WILL_EXECUTE",
-    "WILL_EXECUTE"
+    "I need to check if each amendatory instruction can be executed against the section text"
   ],
   "2026-03157|1037.615": [
     "WILL_EXECUTE",
     "WILL_EXECUTE",
-    "I need to check if each amendatory instruction can be executed against the current CF"
+    "WILL_EXECUTE"
   ],
   "2026-06808|60.5417b": [
     "WILL_EXECUTE",
@@ -385,8 +385,8 @@
     "WILL_EXECUTE"
   ],
   "2026-11140|149.510": [
-    "WILL_EXECUTE",
-    "WILL_EXECUTE",
+    "WILL_FAIL",
+    "WILL_FAIL",
     "WILL_EXECUTE"
   ],
   "2026-11648|250.108": [
@@ -395,8 +395,8 @@
     "WILL_FAIL"
   ],
   "2026-11648|250.1202": [
-    "I need to check each amendatory instruction against the current CFR text to see",
-    "I need to check if each instruction can be executed against the section text provided.",
+    "WILL_EXECUTE",
+    "WILL_EXECUTE",
     "WILL_EXECUTE"
   ],
   "E6-15282|180.207": [
@@ -405,8 +405,8 @@
     "WILL_FAIL"
   ],
   "E6-15282|180.209": [
-    "I need to examine whether the amendatory instruction can be executed against the section text",
     "WILL_FAIL",
-    "WILL_FAIL\n\nThe instruction references \"the first and third entries in"
+    "WILL_FAIL",
+    "WILL_FAIL"
   ]
 }

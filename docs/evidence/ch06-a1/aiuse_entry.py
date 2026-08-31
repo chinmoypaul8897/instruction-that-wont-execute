@@ -146,9 +146,13 @@ def main() -> int:
               "refusing to guess where to splice.", file=sys.stderr)
         return 2
     if "### CH-06 → CH-08 → CH-09" in text:
-        print("ERROR: a CH-06 row is already present. Refusing to write a duplicate.",
-              file=sys.stderr)
-        return 3
+        # REPLACE the existing row rather than refuse. The ledger moved after this row
+        # was first written - two arms were accidentally run twice, QUESTIONS.md Q26 -
+        # and a DISCLOSURE row carrying a stale cost figure is worse than no row at all.
+        # The old block is cut at the next "### " heading so nothing else is disturbed.
+        start = text.index("### CH-06 → CH-08 → CH-09")
+        nxt = text.find(chr(10) + "### ", start + 1)
+        text = text[:start] + text[(nxt + 1 if nxt != -1 else len(text)):]
     out = text.replace(MARKER, MARKER + "\n" + entry, 1)
     AIUSE.write_text(out, encoding="utf-8", newline="\n")
     # hard rule 16

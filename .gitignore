@@ -56,3 +56,8 @@ dist/
 # uses. 496 individual files would blow the pre-commit tracked-file guard, and the
 # guard is right: the 50 MB submission cap is the one limit that must not move.
 docs/trajectories/*/per-item/
+
+# Q25: a blank regenerable form, untracked to make room for the CH-06 session
+# transcript under the 300-file guard. Regenerate with human_time_study.py.
+docs/evidence/ch09-removed/human-time-worksheet.csv
+docs/evidence/ch09-removed/human-time-blind.md
