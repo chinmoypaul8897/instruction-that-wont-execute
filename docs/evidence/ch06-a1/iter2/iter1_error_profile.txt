@@ -1,0 +1,87 @@
+==============================================================================
+ITERATION 1's ERRORS - measured, to fill the Iteration 2 card's open line
+==============================================================================
+
+  A1-iter1  accuracy 0.5610  (46/82)   1 rep, 367 tool calls
+  B0-agent  accuracy 0.6585  (54/82)   3 reps
+  gap       -9.8 pp
+
+  PREDICTION COMMITTED AT e12466c, BEFORE THE RUN:  +8 pp -> 0.74
+  MEASURED:                                         -9.8 pp -> 0.5610
+  THE PREDICTION MISSED, AND IT MISSED IN THE WRONG DIRECTION (-17.8 pp against the card).
+
+------------------------------------------------------------------------------
+WHICH DIRECTION DID IT MOVE? - the two guards, against B0-agent
+------------------------------------------------------------------------------
+
+                           B0-agent   A1-iter1      delta   guard
+  false-defect rate          0.1951     0.4878    +0.2927   <= 0.25  FAIL
+  missed-defect rate         0.4878     0.3902    -0.0976   <= 0.25  FAIL
+
+  THE TOOL DID EXACTLY WHAT IT WAS BUILT TO DO, AND IT COST ACCURACY.
+  The missed-defect rate FELL - the resolver does make the agent see defects it
+  was blind to. The false-defect rate ROSE FURTHER, through the pre-registered
+  0.25 guard, and the second effect is larger than the first.
+
+  This is QUESTIONS.md Q21's prediction, committed BEFORE this run:
+    "A1's false-defect rate rises against B0-agent's 0.1951, possibly through
+     the pre-registered 0.25 guard, at the same time as its missed-defect rate
+     falls. Both are reported. Neither guard is moved."
+  Both halves are confirmed. The guard is NOT moved.
+
+------------------------------------------------------------------------------
+WHAT THE TOOL BROKE, AND WHAT IT FIXED - item-level, against B0-agent
+------------------------------------------------------------------------------
+
+  B0-agent right -> A1-iter1 wrong    16   (15 clean, 1 defective)
+  B0-agent wrong -> A1-iter1 right     8   (3 clean, 5 defective)
+
+  The tool is not noise. It moves items in BOTH directions and the net is
+  negative because the breakage lands on the clean class.
+
+------------------------------------------------------------------------------
+IS Q21's NESTED-DESIGNATION CEILING THE MECHANISM? - the decisive split
+------------------------------------------------------------------------------
+
+  items TOUCHED by the ceiling     n= 33   B0-agent 0.6364   A1-iter1 0.4545    -18.2 pp
+  items NOT touched                n= 49   B0-agent 0.6735   A1-iter1 0.6327     -4.1 pp
+
+  CLEAN items touched by the ceiling   n= 13   A1-iter1 false-defect rate 0.8462
+  CLEAN items not touched              n= 28   A1-iter1 false-defect rate 0.3214
+
+------------------------------------------------------------------------------
+THE ITERATION 2 CARD's COMMITTED PRIOR, TESTED
+------------------------------------------------------------------------------
+
+  The card predicted at e12466c that errors would concentrate on sections with
+  >= 3 amendatory instructions, on the strength of B0-agent's 0.6875 vs 0.3600.
+
+  subset                                    n   B0-agent   A1-iter1
+  defective, >= 3 instructions             16     0.6875     0.5625   (error rates)
+  defective, < 3 instructions              25     0.3600     0.2800   (error rates)
+  clean, >= 3 instructions                 16     0.2500     0.6250   (error rates)
+  clean, < 3 instructions                  25     0.1600     0.4000   (error rates)
+
+------------------------------------------------------------------------------
+EMISSION HEALTH AND THE TOOL-USE GAP
+------------------------------------------------------------------------------
+
+  items with an INCOMPLETE emission (a targeted instruction unruled)   2 of 82
+  items where the model made ZERO tool calls despite having the tool   2 of 82
+  total tool calls 367   4.48 per item
+  items routed to the human checkpoint 17 of 82
+
+  failure_class emitted, across all items: {'target-already-exists': 3, 'quoted-text-not-present': 3, 'incomplete-set-out-text': 13, 'target-does-not-exist': 23, 'incorrect-citation-or-designation': 2}
+
+==============================================================================
+THE OBSERVED FAILURE, FOR THE ITERATION 2 CARD's OPEN LINE
+==============================================================================
+
+  A1-iter1 scores 0.5610, -9.8 pp against B0-agent, and its errors
+  have INVERTED. Missed defects fell 20 -> 16; false defects rose
+  8 -> 20, a rate of 0.4878 through the 0.25 guard. The agent
+  now over-flags: handed a resolver that says a paragraph is absent, it rules
+  the instruction defective and stops. It trusts the tool MORE than the tool
+  deserves, and it does not cross-check the tool's answer against the section
+  text it was also given.
+

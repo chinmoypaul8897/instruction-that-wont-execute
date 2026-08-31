@@ -20,7 +20,7 @@ quietly succeeded.
 | STAGE | WHAT YOU TRIED AND WHY | EVIDENCE | DECISION / LEARNING |
 |---|---|---|---|
 | Baseline | **B0** (one prompt, instruction only) vs **B0-agent** (same model + point-in-time CFR text). The project's headline claim is that an amendatory instruction carries no evidence of its own executability; B0 is that sentence turned into an experiment. | **B0 0.4756 · B0-agent 0.6585 · gap +18.3 pp · McNemar exact p = 0.0059 (b=21 c=6, 27 discordant) · n = 82, 41 pairs, 3 reps, `claude-haiku-4-5-20251001` @ t=0.** B-script **0.6098**, within-pair permutation **p = 0.2355**. `docs/evidence/checkpoint/` | **GREEN.** Phase 2 proceeds. B0 landed on its predicted 0.50; B0-agent came in **9 pp below** its predicted 0.75. **An earlier run of this row read AMBER and is WITHDRAWN** — it was computed on an eval set that the CH-03 adversarial review then failed, and which a label-blind script beat at 0.8158. The withdrawn figures are kept at `docs/evidence/checkpoint/withdrawn/`. The corrected eval set is **harder**, not easier: the same attack now scores 0.5610. |
-| Iteration 1 | **CH-05 `cfr_resolve`** — deterministic designation-state and quoted-anchor resolution, designation FIRST. **Observed failure it targets:** B0-agent's missed-defect rate is **0.4737** — it reads the text and still misses nearly half the defects, because reading is not checking. | *(card committed at `cb65539`, before the capability is wired into an arm; the measured result belongs to CH-08)* | **Prediction, fixed now: A1 moves the missed-defect rate below 0.25 and the gap above 20 pp.** If it does not, the card stays and says so. |
+| Iteration 1 | **CH-05 `cfr_resolve`** — deterministic designation-state and quoted-anchor resolution, designation FIRST. **Observed failure it targets:** B0-agent's missed-defect rate is **0.4737** — it reads the text and still misses nearly half the defects, because reading is not checking. | **A1-iter1 = 0.5610 (46/82), which is −9.8 pp BELOW B0-agent's 0.6585.** McNemar p = 0.1516 (b=8, c=16). Missed-defect 0.4878 → **0.3902**; false-defect 0.1951 → **0.4878**, through the 0.25 guard. 367 tool calls, 4.48/item — it was used, not ignored. `docs/evidence/ch06-a1/iter1/`, `iter2/iter1_error_profile.txt` | **REMOVED as a standalone capability — the prediction MISSED by 17.8 pp and missed in the wrong direction.** Predicted +8 pp; measured −9.8 pp. The missed-defect half of the `cb65539` prediction moved the right way and still did not clear 0.25. **Learning: a deterministic tool that is systematically wrong in one direction is worse than no tool, because the agent trusts it.** `cfr_resolve` cannot see a nested designation (Q21): 60/128 designations, 33/82 items, every misfire absent-when-present. On items it touches, −18.2 pp; on items it does not, −4.1 pp. **The tool is NOT fixed** — frozen at `cb65539`, outside scope, and found because it cost a point. |
 | Iteration 2 | **CH-06 `SKILL.md` + the note-emission contract** — the ordered OFR execution procedure, plus `CONTEXT.md` §5's output contract in which **`verdict` is DERIVED from `resolution_trace`**. **Observed failure it targets:** left open at commit time on purpose — it is measured from Iteration 1's errors, not guessed. The measured **prior**: on defective sections with ≥ 3 instructions B0-agent misses **11/16 = 0.6875**, against **9/25 = 0.3600** on shorter ones — `CONTEXT.md` §9's hard case as a number. | *(card committed at this SHA, before `agents/A1-SKILL.md` and `src/a1.py` exist and before any A1 call; measured result to follow)* `docs/evidence/ch06-a1/iter2/` | **Prediction, fixed now: +7 pp over Iteration 1 → A1 = 0.81, and missed-defect rate below the 0.25 guard.** If it does not move, the card stays and is marked REMOVED. |
 | Iteration 3 | *(pending — CH-07 ordered-state ledger, **pre-declared as not built**)* | | |
 | Final | *(pending — CH-08)* | | |
@@ -135,10 +135,37 @@ Evidence path    : docs/evidence/ch06-a1/iter1/
 
 ## Iteration 2 - Skill (SKILL.md)
 
-Observed failure : <TO BE MEASURED FROM ITERATION 1'S ERRORS, NOT GUESSED. This line is
-                   deliberately left open at commit time and is filled from
-                   docs/evidence/ch06-a1/iter2/iter1_error_profile.txt after Iteration 1
-                   runs and before Iteration 2 runs. Writing it now would be guessing.>
+Observed failure : FILLED FROM MEASUREMENT, 2026-08-31, after Iteration 1 ran and
+                   before Iteration 2 ran. Evidence:
+                   docs/evidence/ch06-a1/iter2/iter1_error_profile.txt
+
+                   A1-iter1 = 0.5610, -9.8 pp against B0-agent, and ITS ERRORS HAVE
+                   INVERTED. Missed defects 20 -> 16. False defects 8 -> 20, a rate of
+                   0.4878 straight through the pre-registered 0.25 guard. The agent
+                   OVER-FLAGS: handed a resolver that says a paragraph is absent, it
+                   rules the instruction defective and stops. It trusts the tool more
+                   than the tool deserves and never cross-checks the tool's answer
+                   against the section text it was also given.
+
+                   The mechanism is isolated, not inferred. Splitting the corpus by
+                   whether Q21's nested-designation ceiling touches the item:
+                     touched     n=33  B0-agent 0.6364 -> A1-iter1 0.4545  -18.2 pp
+                     not touched n=49  B0-agent 0.6735 -> A1-iter1 0.6327   -4.1 pp
+                   and on CLEAN items the ceiling touches, A1-iter1's false-defect rate
+                   is 0.8462 against 0.3214 where it does not. The damage is 4.4x
+                   larger where the tool is wrong. Errors also moved 16 items from
+                   right to wrong and 8 from wrong to right - the tool is not noise,
+                   it is a biased signal.
+
+                   THE CARD'S COMMITTED PRIOR IS FALSIFIED, and is reported as such.
+                   e12466c predicted the errors would concentrate on sections with >= 3
+                   instructions. They do not - they concentrate BY CLASS. Error rates:
+                     defective >=3 instr  0.6875 -> 0.5625   (IMPROVED)
+                     defective  <3 instr  0.3600 -> 0.2800   (IMPROVED)
+                     clean     >=3 instr  0.2500 -> 0.6250   (much worse)
+                     clean      <3 instr  0.1600 -> 0.4000   (much worse)
+                   Instruction count was the wrong axis. The prior was written down so
+                   that it could be wrong, and it was.
 
                    The PRIOR that motivated building the skill at all, measured on
                    B0-agent and committed here: on defective sections with >= 3
@@ -155,11 +182,61 @@ Hypothesis       : an explicit ordered procedure - parse EVERY AMDPAR into
                    tool makes each check possible; the skill makes the agent perform
                    all of them.
 
-Prediction       : +7 pp over Iteration 1, i.e. A1 = 0.81      <- COMMITTED BEFORE THE RUN
+Prediction, v1   : +7 pp over Iteration 1, i.e. A1 = 0.81      <- COMMITTED AT e12466c
                    Secondary: missed-defect rate below 0.25, clearing the guard.
+
+                   THE TWO HALVES OF THIS SENTENCE NOW DISAGREE, because Iteration 1
+                   landed at 0.5610 rather than the 0.74 the card assumed. Both
+                   readings are evaluated and neither is moved:
+                     absolute reading   A1 >= 0.81
+                     relative reading   A1 >= 0.5610 + 0.07 = 0.6310
+
+Prediction, v2   : A1 = 0.69, i.e. +13 pp over Iteration 1  <- COMMITTED BEFORE THE
+                   REVISED ARM RAN, and made WITH MORE INFORMATION than v1 had. That
+                   is stated rather than hidden: v2 is a second prediction by an author
+                   who has now seen Iteration 1's errors, and it is weaker evidence of
+                   method than v1 precisely for that reason. v1 is NOT deleted and NOT
+                   moved. Both are scored.
+
+                   The arithmetic behind 0.69, so it can be checked rather than
+                   trusted: 20 false defects, of which ~11 sit on the 13 clean items
+                   the ceiling touches (rate 0.8462). If Step 2.5 recovers most of
+                   those 11 and costs a couple of defect catches, that is roughly
+                   +13 pp on 82 items. 0.69 is +3.2 pp over B0-agent, which STILL
+                   FAILS GOOD.md's +8 pp clause. Predicting a number that fails the
+                   pre-registered criterion is the honest thing to do when that is
+                   what the evidence supports.
+                   Secondary: false-defect rate back under 0.25; missed-defect rate
+                   not worse than Iteration 1's 0.3902.
 
 Evidence path    : docs/evidence/ch06-a1/iter2/
 ```
+
+### What Iteration 2 actually CHANGED, and why that is iteration and not tuning
+
+`agents/A1-SKILL.md` goes to **version 2**. The change is a new **Step 2.5 —
+cross-check a `designation_exists: false` against the text you were given**, plus a
+fifth entry at the head of the prohibitions list. It tells the agent, in the open, that
+its own tool has a measured blind spot and how to check around it: look for the
+designation's last component under its parent, and use `siblings`, which frequently
+hands back the very paragraph the tool just denied.
+
+**Why this is legitimate iteration:**
+
+- it is driven by an **error mode** measured on Iteration 1 — over-trust of a
+  systematically biased signal — and **never by a per-item label**. No item id, gold
+  label, or per-item outcome appears anywhere in the skill;
+- the prediction for the revised arm is **committed in this file before the revised arm
+  runs**, which is the whole mechanism these cards exist for;
+- the change is **disclosed in the shipped instruction file itself**, which now carries
+  its own version note and the numbers that caused it.
+
+**Why the tool was not fixed instead**, which is the obvious engineering answer:
+`src/cfr_resolve.py` is outside this chunk's scope fence, CH-05 is gated and unreviewed,
+and — decisively — the defect was found *because it cost A1 a point*. See `QUESTIONS.md`
+Q21. Compensating in the procedure, with the compensation written down where a judge can
+read it, is honest; silently repairing the capability that the measurement just
+embarrassed is not.
 
 ### Two things these predictions are deliberately NOT
 

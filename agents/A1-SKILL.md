@@ -11,6 +11,12 @@ claim rather than an omission.
 **Arms that do not:** `A1-iter1`, which is the same tool with no procedure, and is
 therefore also the `A1-minus-skill` ablation.
 
+**Version 2, revised at Iteration 2 from Iteration 1's measured errors** — see Step 2.5.
+Version 1 was written before any A1 arm had run, because something had to run first;
+this version is written from what that run did. The revision is driven by an **error
+mode**, never by a per-item label, and the completed Iteration 2 card in `CHANGELOG.md`
+carries its prediction, committed before the revised arm ran.
+
 ---
 
 ## The failure this procedure exists to fix
@@ -86,6 +92,58 @@ What comes back:
 **`found` and `designation_exists` are independent.** Neither implies the other. An
 instruction can name a paragraph that exists and quote text that is not in it, and that
 instruction fails.
+
+### Step 2.5 — CROSS-CHECK a `designation_exists: false` AGAINST THE TEXT YOU WERE GIVEN
+
+**Added at Iteration 2, from Iteration 1's measured errors. This is the most important
+step on this page.**
+
+Iteration 1 gave the agent this tool and no procedure. It scored **0.5610**, which is
+**−9.8 pp *below* the no-tool baseline**. The tool did not fail to help by being
+ignored — it was called 367 times, 4.48 per item. It made things worse. Measured
+(`docs/evidence/ch06-a1/iter2/iter1_error_profile.txt`):
+
+| | B0-agent | A1-iter1 |
+|---|---|---|
+| missed-defect rate | 0.4878 | **0.3902** — the tool *does* find defects |
+| false-defect rate | 0.1951 | **0.4878** — and it invents far more |
+
+**Why.** `cfr_resolve` reports `designation_exists: false` for a paragraph that is
+plainly present, whenever the CFR codifies it **nested**. The CFR writes the children of
+`(b)` as bare `(1)`, `(2)` — it does not repeat the parent — and the resolver looks for
+the literal string `(b)(1)`. On this corpus that misfires on **60 of 128 designations**,
+touching **33 of 82 sections**, and **every single misfire runs in the same direction**:
+absent-when-present. On the sections it touches, accuracy fell **−18.2 pp**; on the ones
+it does not, **−4.1 pp**. The false-defect rate on clean sections it touches is
+**0.8462**. This is `QUESTIONS.md` **Q21**, and the tool is **not being fixed** — it is
+frozen at `cb65539`, it is outside this chunk's scope, and a capability changed because
+it cost the headline a point is a tuned capability.
+
+**So the procedure compensates instead, and does so in the open.**
+
+> **`designation_exists: false` is EVIDENCE, NOT A VERDICT.**
+
+When the tool says a designation is absent, do exactly this before ruling:
+
+1. **Look for the designation's LAST component in the section text you were shown.**
+   For `(b)(4)`, look for a bare `(4)`. For `(a)(38)(ii)`, look for a bare `(ii)`.
+2. **Check whether it sits under its parent.** Is there a `(b)` earlier in the text, with
+   your `(4)` after it and before the next top-level designation?
+3. **If it does — the paragraph EXISTS and the tool was wrong.** Rule on the text, not
+   on the tool. Say so in `why`: *"cfr_resolve reported designation_exists=false, but
+   (4) is declared under (b) in the section text; the tool cannot see nested
+   designations."*
+4. **Only if the last component is genuinely nowhere under its parent** is
+   `target-does-not-exist` the right ruling.
+
+Use `siblings` as your guide: it tells you what *does* exist at that level. If you asked
+for `(b)(4)` and `siblings` comes back `["(1)", "(2)", "(3)", "(4)"]`, the tool has just
+handed you the answer it failed to give — **`(4)` is right there**.
+
+**The tool cannot be wrong about characters. It can be wrong about hierarchy.** Trust it
+completely on `found`, `level` and `char_offset`, which are string facts. Verify it on
+`designation_exists`, which is a structural claim about a hierarchy the flattened text
+only implies.
 
 ### Step 3 — Rule on each instruction, one at a time
 
@@ -180,9 +238,11 @@ named human checkpoint with both readings and the paragraph trace."*
 
 ---
 
-## THE FOUR THINGS THAT MAKE THIS AGENT WRONG
+## THE FIVE THINGS THAT MAKE THIS AGENT WRONG
 
 Stated as prohibitions because each one is a measured failure mode, not a hypothetical.
+
+0. **Believing `designation_exists: false` without checking the text.** *The largest measured failure mode of Iteration 1*: false-defect rate **0.4878**, against **0.8462** on the clean sections where the tool's nested-designation ceiling bites. Do Step 2.5. **A false defect sends a drafter to chase something that is not there, on the word of a tool sold as deterministic** — it is the error this system can least afford.
 
 1. **Ruling from the first instruction.** Measured at 0.6875 miss-rate on the sections
    where it matters most. Resolve all of them.

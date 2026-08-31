@@ -260,6 +260,108 @@ def run_arm(key, items, model, rep, temperature, traj_dir, ledger_path,
             "n_items": len(items), "n_predicted": len(preds)}
 
 
+def run_b0prime(items, model, rep, traj_dir, ledger_path, out_dir,
+                samples: int = 3, temperature: float = 1.0) -> dict:
+    """**B0-prime** - the COMPUTE-MATCHED CONTROL. `CONTEXT.md` section 4, `plan.md` CH-08.
+
+    B0-agent at A1's token budget, spent on best-of-`samples` self-consistency rather
+    than on a tool and a procedure. It exists to answer one specific objection, which
+    would otherwise be the first thing a reader says: *"your agent just got more
+    compute."*
+
+    THE TIE-BREAK IS PUBLISHED, NOT CHOSEN LATER
+    --------------------------------------------
+    Majority over `samples` votes; **a tie resolves to `WILL_FAIL`**. That is the same
+    rule the CHECKPOINT already applied to aggregate its three reps, restated here
+    rather than re-decided, and it is the conservative direction for a defect detector:
+    a tie resolves toward flagging, not toward waving through. An unparseable vote is
+    NOT a vote and is dropped from the tally; an item where every vote is unparseable
+    gets no prediction and `score.py` charges it as a failure.
+
+    TEMPERATURE - A DECLARED, NECESSARY DEVIATION FROM `GOOD.md` section 8
+    ---------------------------------------------------------------------
+    `GOOD.md` section 8 fixes temperature 0 for every haiku arm. **Self-consistency at
+    temperature 0 is a no-op**: three deterministic samples are the same sample, and
+    the control would measure nothing while costing three times as much.
+
+    So the two readings are BOTH reported, and only one of them costs money:
+
+      * **B0-prime at temperature 0 IS B0-agent.** Three identical votes, majority
+        trivially that vote. Its number is therefore *already published* - 0.6585 - and
+        no call is made to re-measure a degeneracy.
+      * **B0-prime at temperature 1.0** is the control that can actually exist, and it
+        is what this function runs.
+
+    The deviation is disclosed in `QUESTIONS.md` Q22 and in every table B0-prime appears
+    in. It is the only arm in the packet not at temperature 0, and saying so is the
+    point: a control quietly run at a different temperature would be worse than none.
+    """
+    spec = ARMS["B0-agent"]
+    api_key = load_api_key()
+    preds, errors, votes_all = {}, [], {}
+    usage_total = {"in": 0, "out": 0}
+    for item in items:
+        prompt = user_prompt(item, spec["gets_text"])
+        votes = []
+        for s_i in range(1, samples + 1):
+            run_id = (f"B0prime__{item['item_id'].replace('|', '_').replace('/', '_')}"
+                      f"__rep{rep}__s{s_i}")
+            try:
+                with RunLogger(arm="B0prime", item_id=item["item_id"], model=model,
+                               agent_instructions=spec["system"], delivery="standard",
+                               est_usd="0.02", run_id=run_id, traj_dir=traj_dir,
+                               ledger_path=ledger_path) as log:
+                    log.action("message", "messages.create",
+                               input={"model": model, "temperature": temperature,
+                                      "max_tokens": MAX_TOKENS, "sample": s_i,
+                                      "of_samples": samples,
+                                      "self_consistency": True,
+                                      "user_prompt_chars": len(prompt),
+                                      "user_prompt": prompt})
+                    try:
+                        text, usage, attempts = call_messages(
+                            api_key, model=model, user=prompt, system=spec["system"],
+                            max_tokens=MAX_TOKENS, temperature=temperature)
+                    except ApiError as exc:
+                        log.tool_response("messages.create", error=str(exc))
+                        log.feedback("this SAMPLE failed; it is dropped from the tally "
+                                     "and the remaining samples still vote")
+                        errors.append({"item_id": item["item_id"], "sample": s_i,
+                                       "error": str(exc)[:200]})
+                        continue
+                    log.tool_response("messages.create", output={"text": text})
+                    votes.append(text.strip())
+                    usage_total["in"] += usage["input_tokens"]
+                    usage_total["out"] += usage["output_tokens"]
+                    log.finish(verdict=text.strip()[:32],
+                               input_tokens=usage["input_tokens"],
+                               output_tokens=usage["output_tokens"])
+            except SpendCeilingExceeded:
+                errors.append({"item_id": item["item_id"], "error": "SPEND CEILING"})
+                raise
+        votes_all[item["item_id"]] = votes
+        tally = {}
+        for v in votes:
+            key = v.strip().strip('"').strip("'").upper()
+            if key in ("WILL_FAIL", "WILL_EXECUTE"):   # an unparseable vote is not a vote
+                tally[key] = tally.get(key, 0) + 1
+        if tally:
+            top = max(tally.values())
+            winners = sorted(k for k, c in tally.items() if c == top)
+            preds[item["item_id"]] = ("WILL_FAIL" if len(winners) > 1 and
+                                      "WILL_FAIL" in winners else winners[0])
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"B0prime-rep{rep}-votes.json").write_text(
+        json.dumps(votes_all, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8", newline="\n")
+    return {"arm": "B0prime", "model": model, "rep": rep, "predictions": preds,
+            "errors": errors, "usage": usage_total, "samples_per_item": samples,
+            "temperature": temperature,
+            "tie_break": "WILL_FAIL (published before the run; same rule as rep "
+                         "aggregation; conservative direction for a defect detector)",
+            "n_items": len(items), "n_predicted": len(preds)}
+
+
 def bundle(arm_label: str, rep: int) -> int:
     """Concatenate one arm-rep's per-item trajectories into a single committed JSONL.
 
@@ -282,7 +384,7 @@ def bundle(arm_label: str, rep: int) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["run", "sensitivity", "check"])
+    ap.add_argument("cmd", choices=["run", "sensitivity", "check", "b0prime"])
     ap.add_argument("--arm", action="append", default=None)
     ap.add_argument("--reps", type=int, default=3)
     ap.add_argument("--model", default=HAIKU)
@@ -300,6 +402,22 @@ def main(argv=None) -> int:
     items = load_items(Path(args.evalset))
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+
+    if args.cmd == "b0prime":
+        out.mkdir(parents=True, exist_ok=True)
+        for rep in range(1, args.reps + 1):
+            print(f"  running B0prime rep {rep}/{args.reps} over {len(items)} items, "
+                  f"best-of-3 self-consistency at temperature 1.0 ...")
+            r = run_b0prime(items, args.model, rep, DEFAULT_TRAJ, DEFAULT_LEDGER, out)
+            print(f"    predicted {r['n_predicted']}/{r['n_items']}  "
+                  f"in={r['usage']['in']:,} out={r['usage']['out']:,}  "
+                  f"errors={len(r['errors'])}")
+            (out / f"B0prime-rep{rep}.json").write_text(
+                json.dumps(r, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8", newline="\n")
+            n = bundle("B0prime", rep)
+            print(f"    bundled B0prime-rep{rep}.jsonl  {n} records")
+        return 0
 
     if args.cmd == "sensitivity":
         items = sensitivity_subset(items)
