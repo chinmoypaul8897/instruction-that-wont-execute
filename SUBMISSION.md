@@ -37,8 +37,11 @@ genuinely more than doubled** — session transcripts and the video assets, not 
 the measurement. The current number is the one to quote and it names its commit.
 
 The tracked tree at `e01fdfd` is 63.62 MB uncompressed. That number is **not** the constraint and was
-mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): the archive deflates 6×
-overall, and the two largest tracked files deflate 21×. **Nothing is excluded from the
+mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): at that same commit the archive deflated
+**6×** overall and the two largest tracked files **21×**. *Both ratios are pinned to `e01fdfd` and are
+not current: at `0410843` the tracked tree is 88,874,287 B against a 22,417,985 B archive, which is
+**3.96×**. The deflation fell because what was added since is transcripts and video assets, which
+compress less well than XML. The conclusion is unchanged and has more headroom than it needs.* **Nothing is excluded from the
 archive.** The complete trajectory set, the complete frozen corpus and the complete
 evidence tree all ship.
 
