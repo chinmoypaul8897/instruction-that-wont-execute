@@ -3,7 +3,7 @@ CH-14a CLEAN-CLONE REHEARSAL
 ==============================================================================
 
 source repo   : C:\Users\chinm\micro1 engineering challenge
-commit        : 0f3f4fe8301f9bf9c112653c966cf4faaebbaf78
+commit        : 263ed2997b488432f91b09448ec755b45b6a24da
 interpreter   : C:/Users/chinm/AppData/Local/Temp/claude/c--Users-chinm-micro1-engineering-challenge/1636c57b-4ce6-4566-a8b8-11b7ab80a21d/scratchpad/ch14/venv/Scripts/python.exe
 python        : Python 3.12.2
 installed     : colorama==0.4.6, iniconfig==2.3.0, packaging==26.3, pip==24.0, pluggy==1.6.0, Pygments==2.21.0, pytest==9.1.1
@@ -23,14 +23,14 @@ NETWORK OFF - demonstrated, not asserted
 ENVIRONMENT 2 - a fresh `git clone`
 ------------------------------------------------------------------------------
   cloned to           C:\Users\chinm\AppData\Local\Temp\claude\c--Users-chinm-micro1-engineering-challenge\1636c57b-4ce6-4566-a8b8-11b7ab80a21d\scratchpad\ch14\rehearsal\clone
-  tracked files       315
+  tracked files       317
   data/raw present    False   (False is correct - it is git-ignored)
 
 ------------------------------------------------------------------------------
 ENVIRONMENT 3 - the EXTRACTED zip. THIS IS WHAT A JUDGE OPENS.
 ------------------------------------------------------------------------------
-  zip                 10,239,186 B = 10.24 MB (cap 50 MB, CH-14a limit 45 MB)
-  entries             365
+  zip                 10,613,737 B = 10.61 MB (cap 50 MB, CH-14a limit 45 MB)
+  entries             367
   extracted to        C:\Users\chinm\AppData\Local\Temp\claude\c--Users-chinm-micro1-engineering-challenge\1636c57b-4ce6-4566-a8b8-11b7ab80a21d\scratchpad\ch14\rehearsal\fromzip
   is a git repo       False   (False - a plain directory, as received)
 
@@ -53,7 +53,7 @@ REPLAY IN THE CLONE
     IDENTICAL  e0f0005885f513f3  docs/evidence/checkpoint/checkpoint-result.json
     IDENTICAL  3b293a57320ca190  docs/evidence/ch06-a1/a1-result.txt
     IDENTICAL  2daa3c17f71073d4  docs/evidence/ch06-a1/a1-result.json
-  pytest              316 passed, 26 skipped in 10.80s
+  pytest              316 passed, 26 skipped in 11.60s
 
 ==============================================================================
 REPLAY IN THE EXTRACTION
@@ -74,7 +74,7 @@ REPLAY IN THE EXTRACTION
     IDENTICAL  e0f0005885f513f3  docs/evidence/checkpoint/checkpoint-result.json
     IDENTICAL  3b293a57320ca190  docs/evidence/ch06-a1/a1-result.txt
     IDENTICAL  2daa3c17f71073d4  docs/evidence/ch06-a1/a1-result.json
-  pytest              314 passed, 28 skipped in 8.88s
+  pytest              314 passed, 28 skipped in 7.64s
 
 ==============================================================================
 VERDICT

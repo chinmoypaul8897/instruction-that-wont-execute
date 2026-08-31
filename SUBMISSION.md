@@ -14,21 +14,21 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 
 | # | FAQ item | Where it is | State |
 |---|---|---|---|
-| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ 315 tracked files, 82 commits |
-| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.24 MB** against a 50 MB cap | ✅ measured, `docs/evidence/ch14-size/inventory.md` |
+| 1 | **Repository** | https://github.com/chinmoypaul8897/instruction-that-wont-execute | ✅ 317 tracked files, 86 commits |
+| 2 | **Archive** (the uploaded zip) | `git archive --format=zip HEAD` → **10.61 MB** against a 50 MB cap | ✅ measured, `docs/evidence/ch14-size/inventory.md` |
 | 3 | **Tests** | [`tests/`](tests/) — 13 test modules, **316 passed / 26 skipped** in a clean clone | ✅ green from the extracted zip |
 | 4 | **README** | — | ❌ **MISSING — deliverable 1. `QUESTIONS.md` Q29.** |
-| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 33 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
+| 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — 34 JSONL trajectories + [`agents/`](agents/) + [`prompts/`](prompts/) | ✅ |
 | 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ not yet recorded |
 
 ---
 
 ## Item 2 — the archive, and why nothing was trimmed out of it
 
-The uploaded artifact is `git archive --format=zip HEAD`. **10,239,146 B = 10.24 MB
-against a 50 MB cap** — 4.9× under, with 39.8 MB of headroom.
+The uploaded artifact is `git archive --format=zip HEAD`. **10,613,737 B = 10.61 MB
+against a 50 MB cap** — 4.7× under, with 39.4 MB of headroom.
 
-The repository is 61.84 MB uncompressed. That number is **not** the constraint and was
+The repository is 63.50 MB uncompressed. That number is **not** the constraint and was
 mistaken for it once already (`QUESTIONS.md` Q25 → **Q27**): the archive deflates 6×
 overall, and the two largest tracked files deflate 21×. **Nothing is excluded from the
 archive.** The complete trajectory set, the complete frozen corpus and the complete
@@ -58,7 +58,7 @@ git-ignored, and is re-fetchable with `python refetch.py`. `python refetch.py
 | what | where |
 |---|---|
 | every model, tool and agent, with what each did | [`AI-USE.md`](AI-USE.md) |
-| one JSONL per agent run — 33 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
+| one JSONL per agent run — 34 files, complete, nothing sampled | [`docs/trajectories/`](docs/trajectories/) |
 | the exact instructions shaping each evaluation arm | [`agents/`](agents/) |
 | every chunk prompt, committed verbatim as issued | [`prompts/`](prompts/) |
 | per-call tokens, wall-clock and imputed USD | `docs/evidence/runs/cost_ledger.csv` |
@@ -87,7 +87,7 @@ it fails.
 | test suite | ✅ 316 passed | ✅ 314 passed |
 
 **Secret sweep:** `docs/evidence/secret-scan/scan.txt` — **PASS, 0 findings** across all
-450 text blobs of all 81 commits plus 37.7 MB of trajectories. `.env` is git-ignored,
+462 text blobs of all 84 commits plus 39.4 MB of trajectories. `.env` is git-ignored,
 never tracked, never committed on any ref.
 
 ---
