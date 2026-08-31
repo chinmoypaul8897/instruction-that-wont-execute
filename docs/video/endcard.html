@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instruction That Won't Execute &mdash; end card</title>
+<!--
+  CH-13B. The last four seconds of the video: repository, name, nothing else.
+
+  It is a separate file rather than a sixteenth slide because it is not part of the
+  deck - the deck ends on its hot take, and a 16th section would put an attribution
+  card into the folio run and into every assertion tests/test_slides.py makes about
+  slide numbering. The five colours and the two font stacks are copied from
+  docs/slides/index.html verbatim so the card is the same document as the rest.
+
+  No scheme on the URL. The deck and this card are both asserted to carry no URL
+  scheme anywhere, and a printed link does not need one to be read. (This comment
+  cannot spell the schemes out either - the assertion is on the bytes of the file,
+  and the first draft of this note failed its own test.)
+-->
+<style>
+:root{
+  --paper:#FBFAF7;
+  --ink:#1A1A18;
+  --ink-muted:#6B6862;
+  --rule:#D8D4CC;
+  --accent:#9B2226;
+  --serif:Georgia,'Times New Roman',serif;
+  --mono:Consolas,'SF Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:var(--ink);}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;
+  transform:translate(-50%,-50%) scale(1);transform-origin:50% 50%;
+  background:var(--paper);color:var(--ink);}
+.page{position:absolute;left:120px;right:120px;top:100px;bottom:100px;
+  display:flex;flex-direction:column;}
+.mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;}
+.foot{flex:none;}
+.hr{height:1px;background:var(--rule);}
+/* weight 400 to match .headline in the deck - an h1's default bold is the one thing
+   in this file that would not have come from docs/slides/index.html */
+.title{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1.15;}
+.repo{font-family:var(--mono);font-size:30px;line-height:1.4;}
+.who{font-family:var(--mono);font-size:15px;line-height:1.3;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--ink-muted);}
+.gap24{height:24px;}.gap40{height:40px;}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="page">
+    <div class="mid">
+      <h1 class="title">The Instruction<br>That Won't Execute</h1>
+      <div class="gap40"></div>
+      <div class="hr"></div>
+      <div class="gap24"></div>
+      <div class="repo">github.com/chinmoypaul8897/instruction-that-wont-execute</div>
+    </div>
+    <div class="foot"><div class="who">Chinmoy Paul &middot; IIT Guwahati</div></div>
+  </div>
+</div>
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  function fit(){
+    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+    stage.style.transform='translate(-50%,-50%) scale('+s+')';
+  }
+  window.addEventListener('resize',fit);fit();
+})();
+</script>
+</body>
+</html>

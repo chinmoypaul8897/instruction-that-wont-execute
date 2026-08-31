@@ -1,216 +1,199 @@
-# Read-aloud script — `docs/slides/index.html`
+# Caption script — `docs/slides/index.html`
 
-**Target 4:09. Hard cap 5:00.** Thirteen slides, thirteen lines, read word for word.
+**This file is the source the video is built from.** `docs/video/build_video.py` parses
+the `## The lines` section below, splits each block into caption segments, computes each
+segment's duration from its own word count, and renders one 1920×1080 frame per segment
+with the caption burned into the page. Nothing here is timed by hand.
 
-Open `index.html`, press `F` for fullscreen, and start recording. **Arrow key or space
-advances.** Slide 11 is the only slide with reveals inside it — four presses — and they
-are marked below.
-
----
-
-## How the duration was arrived at, and what it is not
-
-**No human has read this aloud with a timer yet.** The figures below are computed, not
-performed: **557 spoken words** at 140 words per minute, plus 9 seconds of deliberate
-silence budgeted at the three places marked `[PAUSE]`. That gives **4:07**; the clock
-table below sums the per-slide figures after rounding each to a whole second and comes
-to **4:09**. Both are stated rather than one of them quietly picked.
-
-140 wpm is the rate `docs/video-script.md` asks for — *"slow down; reading a script aloud
-always comes out faster than it reads."* The word count is reproducible from this file:
-count the words in every `>` line under `## The lines`.
-
-The margin is what matters, so here is the envelope rather than a single number:
-
-| delivery rate | duration |
-|---|---|
-| 120 wpm — very slow | **4:47** |
-| 130 wpm | **4:26** |
-| **140 wpm — the target** | **4:07** |
-| 150 wpm | **3:51** |
-
-**Every rate in that range lands under 5:00.** The operator still times the real read
-before recording, and if it comes back over 4:30, cut from slide 9 and slide 10 first —
-they carry the most words and the least that is irreplaceable.
+**The video is silent and captioned.** CH-13A wrote this file as a read-aloud script for
+a human narrator at 140 wpm. CH-13B changed the delivery: a judge watches with the sound
+off, every word is on the screen, and the operator does not have to record anything. The
+words are almost all CH-13A's — the change is who says them.
 
 ---
 
-## The clock
+## How a duration is arrived at
 
-| # | slide | duration | cumulative | beat (PDF §8 deliverable 03) |
-|---|---|---|---|---|
-| 1 | Title | 0:09 | **0:09** | — |
-| 2 | The defective instruction | 0:24 | **0:33** | the problem |
-| 3 | The NARA note | 0:11 | **0:44** | the problem |
-| 4 | The baseline B0 | 0:20 | **1:04** | the simple baseline |
-| 5 | What the agent receives | 0:13 | **1:17** | one realistic execution |
-| 6 | The tool call | 0:15 | **1:32** | one realistic execution |
-| 7 | The emitted note | 0:21 | **1:53** | one realistic execution |
-| 8 | The override | 0:20 | **2:13** | one realistic execution |
-| 9 | The comparison | 0:34 | **2:47** | the final comparison |
-| 10 | Predictions vs measurements | 0:26 | **3:13** | the changelog |
-| 11 | The composition | 0:28 | **3:41** | the change that contributed most |
-| 12 | The removed experiment | 0:15 | **3:56** | one experiment removed |
-| 13 | The hot take | 0:13 | **4:09** | — |
+Each segment is at most **22 words**, and
+
+```
+duration = max(3.0, words / 2.8)      # ~168 wpm reading speed, rounded to 0.1 s
+```
+
+**Nothing is ever under 3.0 seconds.** A caption that flashes is worse than no caption,
+so a six-word line still holds for three seconds even though nobody needs three seconds
+to read it. That floor is why the total is not simply `words / 2.8`.
+
+Two frames carry no caption at all, and both are deliberate:
+
+- **Slide 1**, the title card. Four seconds, the title, nothing else.
+- **Slide 15**, the hot take. The slide *is* one sentence set in 64px serif. A caption
+  band underneath repeating it in 30px would be the padding the brief warns about, so
+  the slide holds for `words-on-the-slide / 2.8` instead and the reader reads the slide.
+
+The **end card** — repo, name — is `docs/video/endcard.html`, four seconds, no caption.
+
+The measured total is printed by `build_video.py` and reported in
+`docs/progress/CH-13B.md`. **The hard cap is 5:00.** If a rebuild ever goes over, cut
+caption segments from slide 10 and slide 11 first: they carry the most words and the
+least that is irreplaceable. **Never speed the video up.**
 
 ---
 
 ## The lines
 
-### Slide 1 · Title · 0:09 · cumulative 0:09
+Each `>` block below is one caption *block*. The builder splits a block that runs over
+22 words at a sentence boundary, and only inside a sentence if a single sentence is
+itself over 22 words. One segment, one frame.
 
-> This is The Instruction That Won't Execute. It reads a Federal Register amendment and
-> decides whether it will actually codify.
+### Slide 1 · Title
 
-`→ ARROW`
+*No caption. Four seconds.*
 
-### Slide 2 · The defective instruction · 0:24 · cumulative 0:33
+### Slide 2 · The defective instruction
 
-> US agencies change the Code of Federal Regulations by publishing instructions like this
-> one. Remove this exact sentence. The Office of the Federal Register has to find that
-> sentence in the text. Look at the quoted words. The rule says notion of exemption. The
-> Code says notice. One word, and there is nothing to remove.
+> US agencies change the Code of Federal Regulations by publishing instructions like this one. Remove this exact sentence.
 
-`→ ARROW`
+> The Office of the Federal Register has to find that sentence in the text. Look at the quoted words.
 
-### Slide 3 · The NARA note · 0:11 · cumulative 0:44
+> The rule says notion of exemption. The Code says notice. One word, and there is nothing to remove.
+
+### Slide 3 · The editorial note
 
 > So the amendment could not go in. The National Archives publishes this note instead.
+
 > It is permanent, it is citable, and the text it targeted never changed.
 
-`→ ARROW`
+### Slide 4 · The baseline
 
-### Slide 4 · The baseline · 0:20 · cumulative 1:04
+> The simple baseline is one prompt. Give a model the instruction, ask whether it will execute. No Code text, no tools.
 
-> The simple baseline is one prompt. Give a model the instruction. Ask whether it will
-> execute. No Code text, no tools. On eighty-two items it scores forty-seven point six
-> percent. That is a coin flip, and it should be. The instruction alone does not contain
-> the answer.
+> On eighty-two items it scores forty-seven point six percent. That is a coin flip, and it should be.
 
-`→ ARROW`
+> The instruction alone does not contain the answer.
 
-### Slide 5 · What the agent receives · 0:13 · cumulative 1:17
+### Slide 5 · The pipeline
 
-> Here is the whole system on one case. Forty CFR seventy-five point six. The agent gets
-> four instructions, and the section text as it stood before the rule was published.
+> Here is the whole system. Two inputs: the amendatory instruction, and the CFR text as it stood the day before.
 
-`→ ARROW`
+> For every instruction a deterministic resolver answers two questions, and each answer is written to a trace.
 
-### Slide 6 · The tool call · 0:15 · cumulative 1:32
+> The verdict is computed from that trace in code. Anything contradictory is refused rather than guessed.
 
-> For each instruction it calls a deterministic resolver. Is this paragraph declared. Is
-> this quoted string present. Here is the real call and the real answer. The resolver
-> says paragraph a thirty-eight does not exist.
+### Screencast · the shipped worksheet
 
-`→ ARROW`
+**Five captions, one per storyboard beat.** These are not stills, so they are drawn onto
+the recording with ffmpeg `drawtext` in the same band, at the same size, in the same
+place. The builder reads the beat boundaries out of `dist/screencast/worksheet.json` —
+they are measured offsets into the recording, not planned ones — and holds caption *k*
+from the start of beat *k* to the start of beat *k+1*.
 
-### Slide 7 · The emitted note · 0:21 · cumulative 1:53
+> That system produces this. The real page, opened in a browser, scrolled — nothing here was drawn for the video.
+
+> Forty CFR seventy-five point six: the failing designation, and the class of failure.
+
+> The trace row where the resolver returned found equals false, and the page saying why.
+
+> The human-checkpoint queue. Sixteen of eighty-two, each with the reason it was flagged.
+
+> And the provenance footer: both commits, the arm, the model, and a hash for every input.
+
+### Slide 6 · What the agent receives
+
+> Now the same case, step by step. Forty CFR seventy-five point six.
+
+> The agent gets four instructions, and the section text as it stood before the rule was published.
+
+### Slide 7 · The tool call
+
+> For each instruction it calls the resolver. Is this paragraph declared? Is this quoted string present?
+
+> Here is the real call and the real answer. The resolver says paragraph a thirty-eight does not exist.
+
+### Slide 8 · The emitted note
 
 > Then it writes the editorial note the Archives would have to publish. Not a yes or no.
-> The failing designation, the failure class in NARA's own vocabulary, the full trace.
-> The verdict is derived in code from that trace, so it cannot be right for the wrong
-> reason.
 
-`→ ARROW`
+> The failing designation, the failure class in the Archives' own vocabulary, and the full trace.
 
-### Slide 8 · The override · 0:20 · cumulative 2:13
+> The verdict is derived in code from that trace, so it cannot be right for the wrong reason.
 
-> On this case, something I did not expect happened. The resolver was wrong. It cannot
-> see nested designations. The model read the section text, saw paragraph thirty-eight
-> sitting there, and overrode its own tool. It named the tool's limitation in the
-> published note. And it ruled correctly.
+### Slide 9 · The override
 
-`→ ARROW`
+> On this case, something I did not expect happened. The resolver was wrong: it cannot see nested designations.
 
-### Slide 9 · The comparison · 0:34 · cumulative 2:47
+> The model read the section text, saw paragraph thirty-eight sitting there, and overrode its own tool.
 
-> Two results. The second is a null. Giving the agent the Code text moves it from
-> forty-seven point six to sixty-five point nine percent. Plus eighteen point three
-> points, p equals zero point zero zero six. That is real. Adding our two capabilities
-> gets seventy-one point nine. Plus six point one points, p equals zero point four two.
-> That is not significant.
+> It named the tool's limitation in the published note. And it ruled correctly.
 
-**`[PAUSE — 2 seconds. Let it land. Do not soften it.]`**
+### Slide 10 · The comparison
 
-> Our pre-registered criterion had four clauses. We met none. It ships unmet.
+> Two results, and the second is a null. Giving the agent the Code text moves accuracy from forty-seven point six
 
-`→ ARROW`
+> to sixty-five point nine. Plus eighteen point three points, p equals zero point zero zero six. That is real.
 
-### Slide 10 · Predictions against measurements · 0:26 · cumulative 3:13
+> Adding our two capabilities gets seventy-one point nine five. Plus six point one points, p equals zero point four two.
 
-> Every iteration was predicted before it ran, and the predictions are timestamped in
-> git. Iteration one was the resolver. Predicted plus eight points, measured minus nine
-> point eight. Wrong direction. Removed. Iteration two was the written procedure.
-> Predicted zero point eight one, measured zero point seven two. That prediction was
-> committed seven hundred and sixty-four seconds before the arm ran.
+> That is not significant. Our pre-registered criterion had four clauses. We met none. It ships unmet.
 
-`→ ARROW` — **this lands on slide 11 empty. The three lines are not there yet.**
+### Slide 11 · Predictions against measurements
 
-### Slide 11 · The composition · 0:28 · cumulative 3:41
+> Every iteration was predicted before it ran, and the predictions are timestamped in git.
 
-**Four arrow presses inside this slide. Press first, then say the line.**
+> Iteration one was the resolver. Predicted plus eight points, measured minus nine point eight. Wrong direction. Removed.
 
-`→ ARROW` *(reveals `tool alone · A1-iter1 · −9.8`)*
+> Iteration two was the written procedure. Predicted zero point eight one, measured zero point seven two.
+
+> That prediction was committed seven hundred and sixty-four seconds before the arm ran.
+
+### Slide 12 · The composition
+
+**Exactly four blocks, one per reveal.** The builder asserts it: block *k* is rendered
+with bars 1 through *k* visible, so the chart is built in front of the viewer rather
+than arriving finished.
 
 > The tool alone made it worse.
 
-`→ ARROW` *(reveals `skill alone · A1-minus-tool · −1.2`)*
-
 > The procedure alone made it worse.
 
-`→ ARROW` *(reveals `together · A1 · +6.1`)*
+> Together, plus six point one points.
 
-> Together, plus six point one.
+> Neither helps on its own. It composes because the procedure repairs a defect in the tool that we left unfixed and documented.
 
-`→ ARROW` *(reveals the sentence beneath)* **`[PAUSE — 6 seconds across the four reveals]`**
+### Slide 13 · The removed experiment
 
-> Neither capability helps on its own. It composes because the procedure repairs a defect
-> in the tool. We found that defect because it cost us a point, and we left it unfixed
-> and documented.
+> One experiment we removed. We predicted the current Code text would raise accuracy, because it leaks the answer.
 
-`→ ARROW` — **the fifth press leaves slide 11 for slide 12.**
+> It fell six point one points. The prediction was wrong, and it is published as wrong.
 
-### Slide 12 · The removed experiment · 0:15 · cumulative 3:56
+### Slide 14 · The shipped worksheet
 
-> One experiment we removed. We predicted the current Code text would raise accuracy,
-> because it leaks the answer. It fell six point one points. The prediction was wrong,
-> and it is published as wrong.
+> That page is the deliverable. Every item carries its trace, and the level each anchor actually resolved at.
 
-`→ ARROW`
+> Sixteen of eighty-two are not decided by the tool. They go to a person, each with its reason.
 
-### Slide 13 · The hot take · 0:13 · cumulative 4:09
+### Slide 15 · The hot take
 
-**`[PAUSE — 1 second before you start. The slide is one sentence; let it be read.]`**
-
-> A grounding corpus is a precision instrument, not a recall instrument. If you hand an
-> agent the document, measure which class got better. The average will lie to you.
-
-*(End. Stop recording.)*
+*No caption. The slide is the sentence.*
 
 ---
 
-## Delivery
+## What the deck does not caption, and where it is written instead
 
-- **Say the null results in the same tone as the good ones.** Slides 9, 10, 11 and 12 all
-  report something that did not work. They are findings, not confessions. No apology in
-  the voice, no rising inflection at the end of "we met none".
-- **Read the numbers slowly.** "Forty-seven point six" and "zero point zero zero six" are
-  the two most easily fluffed lines in the deck.
-- **Do not narrate live.** Live narration runs long and rambles, and the brief names
-  seven specific beats. Every one of them is above, in order.
-- **Retakes are fine.** If a line is fluffed, stop and redo that slide. Do not repair it
-  in narration.
-- **Do the twenty-second audio test first.** A silent video is the single most common
-  failure here.
-
-## What the deck does not say out loud, and where it is written instead
-
-Two things the script deliberately does not spend words on, because they are on the
-slide in front of the viewer and reading them aloud would cost twenty seconds each:
+Two things the captions deliberately do not spend words on, because they are on the
+slide in front of the viewer and captioning them would cost twenty seconds each:
 
 - **The artifact path in the footer of every slide.** Every figure on the deck is
   reproduced from the file named in the bottom-left corner. Nothing is asserted.
-- **The caveat under slide 11.** The single-capability arms are one rep each, and A1's
-  own rep-to-rep spread is 4.9 pp — so "neither helps alone" is *not distinguishable from
-  no effect*, not measured harm. It is printed on the slide; if the read comes in short,
-  say it aloud.
+- **The caveat under slide 12.** The single-capability arms are one rep each, and A1's
+  own rep-to-rep spread is 4.9 pp — so "neither helps alone" is *not distinguishable
+  from no effect*, not measured harm. It is printed on the slide.
+
+## What was cut when the delivery changed
+
+CH-13A's script carried three `[PAUSE]` directions and a block of delivery notes for a
+human reader — *"say the null results in the same tone as the good ones"*, *"read the
+numbers slowly"*. A silent video has no tone and no reading speed to control, so those
+are gone rather than left in place to describe something the file no longer produces.
+The pauses became what they always were in a captioned cut: a segment boundary, and a
+minimum three seconds on every frame.
