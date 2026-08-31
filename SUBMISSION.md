@@ -22,7 +22,7 @@ so in bold rather than being quietly omitted** — see `QUESTIONS.md` Q29.
 | 3 | **Tests** | [`tests/`](tests/) — **400 passed / 0 skipped** on the build machine at `0410843`, where `data/raw/` is present so nothing skips; **353 / 26** in a clean clone at `7223552`; **351 / 28** from the extracted zip | ✅ green from the extracted zip. *Three numbers because they are three environments, and the one a judge gets is the third* |
 | 4 | **README** | [`README.md`](README.md) — user → bottleneck → what was built → results → embedded Improvement Changelog → failure mode → hot take → **LIMITATIONS** | ✅ written at CH-11, with [`REPRODUCE.md`](REPRODUCE.md), [`LICENSE`](LICENSE), [`THIRD-PARTY.md`](THIRD-PARTY.md), [`SAFETY.md`](SAFETY.md) and [`requirements.txt`](requirements.txt) |
 | 5 | **Agent-use evidence** | [`AI-USE.md`](AI-USE.md) + [`docs/trajectories/`](docs/trajectories/) — **39 JSONL trajectories at `0410843`** + [`agents/`](agents/) + [`prompts/`](prompts/), **now complete: the six untracked instruction files were committed at `b6d80a4`** (`QUESTIONS.md` Q41) | ✅ |
-| 6 | **Demo video** | **TBD** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ **the one row not satisfied.** CH-13B holds the recording; the URL lands here, in `README.md` and in the form. Everything else on this page is ✅ |
+| 6 | **Demo video** | **https://youtu.be/8qTa_TUd8F0** — unlisted YouTube URL, to be pasted into the submission form's Video URL field | ⏳ **the one row not satisfied.** CH-13B holds the recording; the URL lands here, in `README.md` and in the form. Everything else on this page is ✅ |
 
 ---
 

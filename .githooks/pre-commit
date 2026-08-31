@@ -70,7 +70,12 @@ MAX_BLOB_BYTES = 25 * 1024 * 1024
 # walking into the index.
 #
 # It is NOT set to "whatever makes this commit pass" (that would be 311).
-MAX_TRACKED    = 400
+MAX_TRACKED    = 500   # ARCHITECT RULING 2026-08-31 (Q28 ratified, Q48 closed):
+                       # 400 was a PROXY for the 50 MB submission cap, set at CH-00
+                       # before the archive could be measured directly. The archive
+                       # check below measures the real constraint and passes with
+                       # ~22 MB of headroom, so the proxy is superseded. Raised, not
+                       # removed, so a runaway commit still trips something.
 
 # The HackerEarth cap (QUESTIONS.md Q2, C1) is 50 MB on the UPLOADED ZIP.
 # 45 MB leaves 5 MB of headroom. CH-14a. Decimal MB, which is the conservative

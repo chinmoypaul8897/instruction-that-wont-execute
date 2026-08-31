@@ -1,0 +1,23 @@
+CH-14b - independent PII shape-check on the shipped transcript
+==========================================================================
+file : docs/trajectories/build/CH-14b.jsonl
+bytes: 1791149
+
+Every email-shaped string, masked, with its count and its disposition:
+   no***@anthropic.com          7   the Co-Authored-By trailer CLAUDE.md rule 13 requires. Public by design.
+   ye***@micro1.ai              2   the organiser's address, already published in PROCESS.md's trigger table.
+
+full addresses at the domain Q43 names        : 0
+bare mentions of that domain                  : 12
+   - all of them are the public repository name `nistula-assistance-`
+     or the `git grep` pattern Q43 itself publishes. A search term, not a
+     contact detail, and the thing a reader needs to reproduce Q43 at all.
+
+==========================================================================
+VERDICT: PASS - 0 unclassified addresses, 0 operator contact details
+
+This agrees with the exporter's own '0 operator contact detail' for this file.
+It is run anyway, because Q43's whole point is that the exporter's zero is a
+statement about its pattern file rather than about the bytes it shipped.
+Limitation, stated: this matches an address SHAPE. A contact detail written
+without an @ - a phone number, a handle - is not caught here either.

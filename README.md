@@ -4,6 +4,10 @@
 the Federal Register does — and writes the editorial note NARA will have to publish if
 the rule ships as drafted.**
 
+**Five-minute walkthrough:** https://youtu.be/8qTa_TUd8F0
+**Repository:** https://github.com/chinmoypaul8897/instruction-that-wont-execute
+
+
 The headline result is a null. A1 beats the strongest baseline by **+6.1 pp**, at
 **p = 0.4244**, on **n = 82**. That is **not significant**, and the pre-registered success
 criterion is **not met on any of its four clauses**. The criterion was written before
