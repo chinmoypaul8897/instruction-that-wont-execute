@@ -1,0 +1,167 @@
+CH-11c VERIFICATION -- every figure the five corrections rest on
+repository HEAD : a0432e7de0c5d829e52fee8cb6ff67b38fbc9165
+no network, no model call, no clock, no RNG in any number below
+
+==============================================================================
+1. Q35 - the model of every evaluation arm, from the ledger
+==============================================================================
+  ledger            : docs/evidence/runs/cost_ledger.csv
+  rows              : 2107
+
+  rows by (model, arm) -- every group printed, none collapsed:
+         3  claude-haiku-4-5             probe-model-id
+       249  claude-haiku-4-5-20251001    A1
+        82  claude-haiku-4-5-20251001    A1-iter1
+       164  claude-haiku-4-5-20251001    A1-minus-tool
+       474  claude-haiku-4-5-20251001    B0
+       474  claude-haiku-4-5-20251001    B0-agent
+        82  claude-haiku-4-5-20251001    B0-agent-currenttext
+       492  claude-haiku-4-5-20251001    B0prime
+         3  claude-haiku-4-5-20251001    probe-model-id
+        40  claude-sonnet-5              B0-agent-sonnet
+        40  claude-sonnet-5              B0-sonnet
+         4  claude-sonnet-5              probe-model-id
+
+  evaluation-arm rows by model:
+      2017  claude-haiku-4-5-20251001
+        80  claude-sonnet-5
+  arms on claude-haiku-4-5-20251001 : A1, A1-iter1, A1-minus-tool, B0, B0-agent, B0-agent-currenttext, B0prime
+  arms on claude-sonnet-5           : B0-agent-sonnet, B0-sonnet, probe-model-id
+
+  [PASS] every non-sonnet evaluation arm runs claude-haiku-4-5-20251001
+  [PASS] claude-sonnet-5 appears ONLY on the withdrawn subset and the model-id probe  -- arms = ['B0-agent-sonnet', 'B0-sonnet', 'probe-model-id']
+  [PASS] PROVENANCE.md no longer names sonnet as the model of every arm
+
+  PROVENANCE.md lines mentioning 'sonnet' : 5
+    | | Anthropic API — `claude-sonnet-5` | commercial, per terms | the model-sensitivity subset only, which was **W
+    | `claude-sonnet-5` as the model of *every evaluation arm*. **That was wrong.** It was
+    | `claude-haiku-4-5-20251001`, and the only `claude-sonnet-5` rows are the 80 rows of the
+    | withdrawn sensitivity subset (`B0-sonnet`, `B0-agent-sonnet`) plus 4 rows of
+    | **A second correction, to the first one, same day.** The corrected row above first read *"every evaluation arm
+
+  The chunk card claimed 19 haiku-naming / 4 sonnet-naming files
+  under docs/evidence/. Measured over TRACKED files:
+    tracked files naming claude-haiku-4-5-20251001 : 27 (card said 19)
+    tracked files naming claude-sonnet-5           : 13 (card said 4)
+    the sonnet-naming files:
+      docs/evidence/ch00-goldens.md
+      docs/evidence/ch03-model-id/model-id-probe.txt
+      docs/evidence/ch03-model-id/model_id_probe.py
+      docs/evidence/ch14-size/selection-applied.md
+      docs/evidence/checkpoint/B0-agent-sonnet-rep1.json
+      docs/evidence/checkpoint/B0-sonnet-rep1.json
+      docs/evidence/checkpoint/analyse_checkpoint.py
+      docs/evidence/checkpoint/checkpoint-result.txt
+      docs/evidence/checkpoint/withdrawn/B0-agent-sonnet-rep1.json
+      docs/evidence/checkpoint/withdrawn/B0-sonnet-rep1.json
+      docs/evidence/checkpoint/withdrawn/checkpoint-result.txt
+      docs/evidence/night-run/summary.md
+      docs/evidence/runs/cost_ledger.csv
+  [PASS] the card's file counts do NOT reproduce, so they are not repeated (QUESTIONS.md Q37)  -- measured 27 / 13
+
+==============================================================================
+2. Q34 - B0-prime against A1, in tokens and dollars
+==============================================================================
+  arm                          input_tok  output_tok        usd    rows
+  A1                             4006662      265354     5.3334     249
+  A1-iter1                        944767       67840     1.2840      82
+  A1-minus-tool                  1158758       51746     1.4175     164
+  B0                              184275        3952     0.2040     474
+  B0-agent                       1453863        3816     1.4729     474
+  B0-agent-currenttext            259727         656     0.2630      82
+  B0-agent-sonnet                 100784         584     0.2074      40
+  B0-sonnet                        22936         500     0.0509      40
+  B0prime                        1377402        4288     1.3988     492
+  probe-model-id                     102          28     0.0003      10
+
+  B0prime input / A1 input : 1377402 / 4006662 = 0.3438
+  B0prime usd   / A1 usd   : 1.3988 / 5.3334 = 0.2623
+  B0prime input / B0-agent input : 1377402 / 1453863 = 0.9474
+
+  [PASS] A1 input tokens == 4,006,662  -- 4006662
+  [PASS] B0prime input tokens == 1,377,402  -- 1377402
+  [PASS] B0prime is NOT token-matched to A1 (ratio < 0.5)  -- 0.3438
+  [PASS] B0prime IS close to B0-agent's own three-rep input (0.8 - 1.2x)  -- 0.9474
+
+  rows with an EMPTY cost cell (unknown != free) : 3
+  TOTAL imputed USD                              : 11.6323
+  [PASS] API spend unchanged at USD 11.6323  -- 11.6323
+  [PASS] spend is under the USD 18.00 ceiling
+
+  [PASS] README.md carries no surviving 'compute-matched' label  -- 0 line(s)
+  [PASS] CHANGELOG.md carries no surviving 'compute-matched' label  -- 0 line(s)
+
+==============================================================================
+3. Q33 - how many B0-prime items had samples that disagreed
+==============================================================================
+  artifact : docs/evidence/ch06-a1/B0prime-rep1-votes.json
+  items    : 82
+
+  reading                                                  count
+  raw sample strings not all equal                            22
+  same after src/score.py::normalise_verdict                  22
+  parseable votes disagree, non-answers dropped                8
+
+  [PASS] items == 82  -- 82
+  [PASS] raw reading == 22  -- 22
+  [PASS] normalised reading == 22  -- 22
+  [PASS] parseable-only reading == 8  -- 8
+  [PASS] no reading gives 26 -- the changelog's old figure
+  [PASS] CHANGELOG.md's Final row no longer asserts 26
+  [PASS] CHANGELOG.md's Final row cites the votes artifact
+
+==============================================================================
+4. Q31 - the secret sweep's scope, both committed versions
+==============================================================================
+  Every committed revision of docs/evidence/secret-scan/scan.txt,
+  newest first, with the scope each one printed:
+
+    commit 263ed29  repository 2453998f7544  commits 84  blobs 462
+    commit 0f3f4fe  repository f0a246b195b5  commits 81  blobs 450
+
+  The LIVE artifact says:
+    repository    : 2453998f75446b52cbeb07c908eec5dbf689b9dd
+    commits       : 84
+    blobs in history           462
+    VERDICT: PASS - 0 findings.
+
+  [PASS] the live artifact says 84 commits
+  [PASS] the live artifact says 462 blobs
+  [PASS] the verdict is PASS with 0 findings
+  [PASS] an EARLIER committed revision really printed 450 / 81 -- so the stale summaries were not invented  -- revisions seen: [('263ed29', '84', '462'), ('0f3f4fe', '81', '450')]
+  [PASS] STATUS.md states no un-annotated 450-blob scope  -- 0 line(s)
+  [PASS] AI-USE.md states no un-annotated 450-blob scope  -- 0 line(s)
+  [PASS] SUBMISSION.md states no un-annotated 450-blob scope  -- 0 line(s)
+  [PASS] SAFETY.md states no un-annotated 450-blob scope  -- 0 line(s)
+
+==============================================================================
+5. Q32 - GOOD.md section 11, quoted from the frozen file
+==============================================================================
+  | ## 11. Which eval set
+  | 
+  | **Primary: `data/evalset/` — 38 pairs, n = 76.** `QUESTIONS.md` Q16 records the
+  | contradiction between `plan.md`'s scoping of the per-document completeness floor and
+  | Q11's ruling, what each reading costs, and that the reading taken is also the one with
+  | the larger n. **`data/evalset-restricted/` (1 pair, n = 2) is committed**, so the
+  | architect can flip the primary with one flag and a reviewer can run either.
+  | 
+  | Both freezes verify from their SHA-256 manifests, and every CH-03 artefact rebuilds
+  | byte-for-byte.
+
+  [PASS] GOOD.md section 11 names data/evalset/ as Primary
+  [PASS] GOOD.md section 11 does NOT name the restricted set as primary
+  [PASS] GOOD.md section 11 mentions the restricted set only as committed and flippable
+  [PASS] the restricted-primary pre-registration is in docs/evidence/ch03-evalset/pre-registration.md section 2
+  [PASS] GOOD.md is unmodified in the working tree (it is frozen)  -- clean
+  [PASS] the Q19 ruling's original text survives verbatim and untouched
+  [PASS] a dated correction is appended beneath it
+
+  restricted    data/evalset-restricted/items.jsonl        items =   2  pairs =   1
+  unrestricted  data/evalset/items.jsonl                   items =  82  pairs =  41
+  [PASS] the restricted set yields ONE pair -- the fact the ruling's substance rests on  -- 1 pairs
+  [PASS] the unrestricted set yields 41 pairs / n = 82  -- 41 pairs / n = 82
+
+==============================================================================
+RESULT
+==============================================================================
+  ALL CHECKS PASS.

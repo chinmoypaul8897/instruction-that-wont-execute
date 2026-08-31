@@ -1,0 +1,190 @@
+CH-11c SHIPPING-SURFACE SWEEP -- the mechanical half
+files swept: README.md, REPRODUCE.md, PROVENANCE.md, SAFETY.md, THIRD-PARTY.md, SUBMISSION.md, CHANGELOG.md, STATUS.md, AI-USE.md, QUESTIONS.md
+no network, no model call, no clock, no RNG
+STRICT (line-scope) and SCOPED (+/-4 lines) readings are BOTH printed;
+verdicts are taken on SCOPED and every STRICT hit is dispositioned by name.
+
+==============================================================================
+A. every model name in the shipping surface, classified
+==============================================================================
+  README.md        haiku-dated   0   haiku-alias  0   sonnet   3
+  REPRODUCE.md     haiku-dated   1   haiku-alias  0   sonnet   2
+  PROVENANCE.md    haiku-dated   3   haiku-alias  0   sonnet   5
+  SAFETY.md        haiku-dated   0   haiku-alias  0   sonnet   0
+  THIRD-PARTY.md   haiku-dated   1   haiku-alias  0   sonnet   2
+  SUBMISSION.md    haiku-dated   0   haiku-alias  0   sonnet   0
+  CHANGELOG.md     haiku-dated   2   haiku-alias  0   sonnet   0
+  STATUS.md        haiku-dated   1   haiku-alias  0   sonnet   3
+  AI-USE.md        haiku-dated   3   haiku-alias  2   sonnet   4
+  QUESTIONS.md     haiku-dated  18   haiku-alias  4   sonnet  31
+
+  TOTAL            haiku-dated  29   haiku-alias  6   sonnet  50
+  (the haiku-alias column counts the floating alias `claude-haiku-4-5`;
+   GOOD.md section 8 records it works and is deliberately NOT used.)
+
+  Sonnet mentions unqualified on their OWN LINE (STRICT reading): 4
+  Each is printed with the disposition its SCOPED unit earned, so a
+  reviewer can disagree with any one of them by name:
+
+    QUESTIONS.md     :61    claude-sonnet-5 over 20 items turns the objection into a number: the gap
+        -> ACCOUNTED FOR: names the model-sensitivity subset
+    QUESTIONS.md     :79    | `claude-sonnet-5` | omitted | **HTTP 200**, `in=18 out=4`, USD 0.000076 |
+        -> ACCOUNTED FOR: the temperature-400 limitation
+    QUESTIONS.md     :2410  | Anthropic API (`claude-sonnet-5`) | commercial, per terms | every evaluation arm |
+        -> ACCOUNTED FOR: quoted verbatim under a heading that announces the correction -- ## Q35 - `PROVENANCE.md` section 5 names `claude-sonnet-5` as the model of "every evalua
+    QUESTIONS.md     :2431  value concludes the headline was measured on Sonnet, and then finds Haiku everywhere
+        -> ACCOUNTED FOR: names the subset as withdrawn
+
+  Unqualified under the SCOPED reading (+/- 4 lines): 0
+  [PASS] no shipping passage attributes an evaluation arm to sonnet  -- SCOPED 0 unaccounted / STRICT 4 line-level, all dispositioned
+  [PASS] PROVENANCE.md names the dated haiku id
+
+  Uses of the FLOATING alias `claude-haiku-4-5`, by reading.
+  GOOD.md section 8: the alias works and is deliberately NOT used,
+  because a reproducibility claim pinned by a floating alias is not
+  pinned. So a use is only a defect if NOTHING around it says so.
+    unmarked on its own line      (STRICT)  : 1
+    unmarked within +/-4 lines   (SCOPED)  : 1
+    unmarked anywhere in its `## ` section  : 0
+    QUESTIONS.md:20  Model: claude-haiku-4-5, THE SAME MODEL FOR EVERY ARM (fairness - CONTEXT.md
+        -> marked later in its own section
+  [PASS] no shipping file pins a result to the FLOATING haiku alias  -- STRICT 1 / SCOPED 1 / section 0
+
+==============================================================================
+B. headline figures - agreement across the shipping surface
+==============================================================================
+  figure                   files stating it
+  A1 accuracy              README, REPRODUCE, SUBMISSION, CHANGELOG, STATUS
+  B0-agent accuracy        README, REPRODUCE, SUBMISSION, CHANGELOG, STATUS, QUESTIONS
+  B0 accuracy              README, REPRODUCE, CHANGELOG, STATUS, QUESTIONS
+  total spend              README, REPRODUCE, SAFETY, THIRD-PARTY, SUBMISSION, CHANGELOG, STATUS, AI-USE, QUESTIONS
+  secret-sweep blobs       SAFETY, SUBMISSION, CHANGELOG, STATUS, AI-USE, QUESTIONS
+  eval-set n = 82          README, REPRODUCE, CHANGELOG, STATUS, QUESTIONS
+  eval-set pairs = 41      README, CHANGELOG, QUESTIONS
+  corpus gap pp            README, REPRODUCE, SUBMISSION, CHANGELOG, STATUS, QUESTIONS
+  A1 gap pp                README, REPRODUCE, SUBMISSION, CHANGELOG, STATUS
+  corpus p                 README, REPRODUCE, SUBMISSION, CHANGELOG, STATUS
+  A1 p                     README, REPRODUCE, SAFETY, SUBMISSION, CHANGELOG, STATUS
+  B0prime disagreements    README, CHANGELOG, STATUS, AI-USE, QUESTIONS
+  A1 input tokens          README, REPRODUCE, CHANGELOG, STATUS, AI-USE, QUESTIONS
+  B0prime input tokens     README, REPRODUCE, CHANGELOG, STATUS, AI-USE, QUESTIONS
+
+  B1. Every USD figure between 9 and 18 - the range a reader could
+      mistake for the project total (11.6323):
+    REPRODUCE.md:238  USD 11.11
+        | **The six arms in the primary matrix cost USD 11.11 and 5,802 seconds of measured
+        -> NOT the total: the six PRIMARY-MATRIX arms only, excluding the ablation A1-iter1? no - excluding the withdrawn sonnet subset, the B0-agent-currenttext removed experiment and the model-id probe
+    AI-USE.md:312  USD 9.6967
+        | **Cost: USD 9.6967 for this session; USD 11.6323 committed in total against the 18.00 ceiling**, 2,107 l
+        -> NOT the total: the CH-11 SESSION's own cost, stated beside the 11.6323 total on the same line
+    QUESTIONS.md:2652  USD 11.11
+        | - **`REPRODUCE.md`'s USD 11.11** looked like a rival project total. Re-summed from the
+        -> NOT the total: the six PRIMARY-MATRIX arms only, excluding the ablation A1-iter1? no - excluding the withdrawn sonnet subset, the B0-agent-currenttext removed experiment and the model-id probe
+  [PASS] no shipping file states a project total other than 11.6323  -- STRICT 3, all named subtotals
+
+  B2. REPRODUCE.md says the six primary-matrix arms cost USD 11.11.
+      Re-summed from the ledger over ['A1', 'A1-iter1', 'A1-minus-tool', 'B0', 'B0-agent', 'B0prime']:
+        six primary arms        USD 11.1107
+        everything in the ledger USD 11.6323
+        difference               USD 0.5216  (withdrawn sonnet subset + removed experiment + probe)
+  [PASS] REPRODUCE.md's 11.11 is the six-arm subtotal and reproduces  -- 11.1107
+
+  B3. Stale figures - asserted, or quoted in order to correct?
+    [quoted to correct] AI-USE.md:242  the pre-re-run secret-sweep scope
+        | **Correction, 2026-08-31 (CH-11c).** This row read *"all 450 blobs of history"* until
+    [quoted to correct] AI-USE.md:247  the pre-re-run secret-sweep scope
+        | `0f3f4fe` (repository `f0a246b1`, **450 blobs / 81 commits**) and then `263ed29`
+    [quoted to correct] QUESTIONS.md:2217  the pre-re-run secret-sweep scope
+        | ## Q31 - `STATUS.md`'s CH-14a row states the secret sweep's scope as 450 blobs / 81 commits; the com
+    [quoted to correct] QUESTIONS.md:2222  the pre-re-run secret-sweep scope
+        | `STATUS.md`, CH-14a row: *"Secret sweep **PASS, 0 findings** over 450 blobs / 81
+    [quoted to correct] QUESTIONS.md:2243  the pre-re-run secret-sweep scope
+        | `AI-USE.md`'s CH-14a entry carries the same stale figure - *"sweeping all 450 blobs of
+    [quoted to correct] QUESTIONS.md:2461  the pre-re-run secret-sweep scope
+        | | **Q31** | **CLOSED — confirmed, and the cause is now known** | `STATUS.md` and `AI-USE.md` correct
+    [quoted to correct] QUESTIONS.md:2564  the pre-re-run secret-sweep scope
+        | **Consequence to be aware of:** `PROGRESS.md` line 397 still reads *"over 450 text blobs of
+    [quoted to correct] CHANGELOG.md:31  the non-reproducing disagreement count
+        | 1. **"26 items had samples that disagreed with each other" → 22.** The earlier figure of
+    [quoted to correct] STATUS.md:42  the non-reproducing disagreement count
+        | | 4 | CH-11 · README + `REPRODUCE.md` + `THIRD-PARTY.md` + `LICENSE` | **built** | **`QUESTIONS.md` 
+    [quoted to correct] AI-USE.md:169  the non-reproducing disagreement count
+        | `QUESTIONS.md` entries rather than repeated: `CHANGELOG.md`'s *"26 items had samples
+    [quoted to correct] QUESTIONS.md:2322  the non-reproducing disagreement count
+        | ## Q33 - `CHANGELOG.md`'s "26 items had samples that disagreed with each other" does not reproduce; 
+  [PASS] every stale figure that survives is quoted in order to correct it  -- STRICT 11 occurrences, 0 asserted
+
+==============================================================================
+C. surviving 'compute-matched' labels, and gate-pass claims
+==============================================================================
+  Every 'compute-match' occurrence in the shipping surface:
+    [corrective] README.md:213  **A genuinely compute-matched control was not run at all** — building one means new paid
+    [corrective] README.md:262  | **Final** | **The full arm matrix, both ablations, and the control for extra compute.** Th
+    [corrective] CHANGELOG.md:26  | Final | **The full arm matrix, both ablations, and the repeated-sampling control.** The qu
+    [corrective] CHANGELOG.md:42  2. **"compute-matched control" → "repeated-sampling control".** B0′ spent about **34%**
+    [corrective] CHANGELOG.md:45  **A genuinely compute-matched control was not run** — building one means new paid arms
+    [corrective] STATUS.md:43  | 4b | CH-11c · five factual corrections in shipping files | **built** | **Five statements a
+    [corrective] QUESTIONS.md:1385  ## Q22 - B0′, the compute-matched control, CANNOT be built at the pre-registered temperature
+    [corrective] QUESTIONS.md:2360  ## Q34 - B0-prime is named the "compute-matched control" and it is not token-matched
+    [corrective] QUESTIONS.md:2464  | **Q34** | **CLOSED in every editable file; OPEN in the protected ones — see Q36** | `READM
+    [corrective] QUESTIONS.md:2469  ## Q36 - three PROTECTED files still call B0′ the "compute-matched control". Architect-only.
+    [corrective] QUESTIONS.md:2476  control*. **These three still say compute-matched and CH-11c did not touch them:**
+    [corrective] QUESTIONS.md:2480  | `CONTEXT.md` §4 | 63 | *"**B0′** \| compute-matched control \| B0-agent at A1's exact toke
+    [corrective] QUESTIONS.md:2481  | `src/arms.py` | 292 | *"**B0-prime** - the COMPUTE-MATCHED CONTROL. `CONTEXT.md` section 4
+    [corrective] QUESTIONS.md:2482  | `prompts/CH-06.md` | 139 | *"Name `B0′` explicitly — the compute-matched control: B0-agent
+    [corrective] QUESTIONS.md:2579  *compute-matched*, any claim a gate passed when it did not — and asks the session to
+  [PASS] no shipping file still LABELS B0-prime compute-matched  -- 0 surviving assertion(s)
+
+  PROTECTED files CH-11c may not edit that still say compute-matched:
+    CONTEXT.md           1 occurrence(s)  line [63]
+    src/arms.py          1 occurrence(s)  line [292]
+    prompts/CH-06.md     1 occurrence(s)  line [139]
+    plan.md              0 occurrence(s)
+    PROCESS.md           0 occurrence(s)
+    GOOD.md              0 occurrence(s)
+  -> recorded as QUESTIONS.md Q36 for the architect, NOT edited.
+  [PASS] the protected occurrences are declared in QUESTIONS.md Q36  -- 3 occurrence(s) across protected files
+
+  Gate-pass claims. PROCESS.md gates a chunk on review by a fresh
+  session with zero shared context. NO chunk passed its gate.
+    [definition/negation] STATUS.md:3  One line per chunk. States: `todo` · `built` · `reviewed-PASS` · `reviewed-FAIL`.
+    [definition/negation] STATUS.md:7  `built` is not `done`. A gated chunk is done only at `reviewed-PASS`, awarded by a
+    (no claim that any chunk passed)
+  [PASS] no shipping file claims a chunk reached reviewed-PASS  -- 0 claim(s)
+
+  And the guard that IS failed, stated where it is quoted:
+  [PASS] README.md states the 0.90 attributor guard is FAILED
+
+==============================================================================
+D. every docs/evidence/ path the shipping surface cites
+==============================================================================
+  distinct docs/evidence/ paths cited : 73
+  citations in total                  : 173
+  paths that do not exist on disk     : 2
+
+    ABSENT  docs/evidence/ch11-repro/
+            cited by QUESTIONS.md
+            -> NOT A CITATION: a HYPOTHETICAL path in QUESTIONS.md Q30's question TO the architect ('should a chunk be allowed a single evidence directory - this - as a named exception?'). It was never created; Q30 says so.
+    ABSENT  docs/evidence/iter-N/
+            cited by CHANGELOG.md, QUESTIONS.md  [inside a fenced block]
+            -> NOT A CITATION: a TEMPLATE placeholder inside CHANGELOG.md's fenced iteration-card shape - 'N' is the literal letter N
+  [PASS] every real docs/evidence/ citation resolves to a file on disk  -- 2 absent, 2 of them templates or proposals
+
+==============================================================================
+E. the cost ledger, re-summed
+==============================================================================
+  rows                    : 2107
+  rows with a cost cell   : 2104
+  rows with an EMPTY cell : 3   (unknown is not the same claim as free)
+  priced + empty == rows  : 2104 + 3 == 2107  -> True
+  input tokens            : 9509276
+  output tokens           : 398764
+  TOTAL imputed USD       : 11.6323
+  [PASS] priced + empty == rows
+  [PASS] API spend is 11.6323, unchanged by CH-11c  -- 11.6323
+  [PASS] spend is under the USD 18.00 ceiling  -- headroom USD 6.3677
+
+==============================================================================
+RESULT
+==============================================================================
+  ALL CHECKS PASS.
