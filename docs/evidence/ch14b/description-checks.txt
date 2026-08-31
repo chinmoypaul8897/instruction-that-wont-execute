@@ -1,0 +1,5 @@
+FULL  : 399 words / 2414 chars
+SHORT : 176 words / 1112 chars  (cap 1200)
+banned-word hits: 0   em dashes: 0   markdown headings in paste blocks: 0
+non-ASCII in paste blocks: 0
+written: docs/submission-description.md
